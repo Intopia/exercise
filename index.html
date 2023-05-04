@@ -122,7 +122,7 @@
           <input class="input" id="form-name" type="text">
         </div>
         <div class="form-container">
-          <label class="label" for="form-email">Email</label>
+          <label class="label" for="form-email">Email <span class="required">(Required)</span></label>
           <input class="input" id="form-email" type="email" required>
         </div>
         <div class="form-container">
@@ -131,12 +131,15 @@
           <input class="input" id="form-address" type="text" aria-describedby="form-address-help">
         </div>
         <div class="form-container">
-          <label class="label" for="one">Phone</label>
+          <label class="label" for="one">Phone <span class="required">(Required)</span></label>
           <span class="help-text" id="form-phone-help">Include area code</span>
-          <input class="input" id="one" type="text" aria-describedby="form-phone-help form-phone-error">
+          <input class="input" id="one" type="text" required aria-invalid="true" aria-describedby="form-phone-help form-phone-error">
           <span class="error-message" id="form-phone-error">Error: Number must include all 8 digits</span>
         </div>
-
+        <div class="form-container">
+          <label class="label" for="form-comment">Comment</label>
+          <textarea class="input" id="form-comment" rows="5"></textarea>
+        </div>
         <div class="form-container">
           <label class="label" for="three">Favourite mammal</label>
           <select class="input" id="three">
@@ -154,15 +157,19 @@
           </select>
         </div>
         <fieldset class="fieldset">
-          <legend>Subscribe to newsletter</legend>
+          <legend>Newsletter interests</legend>
           <ul class="radio-list">
             <li>
-              <input class="input-radio" id="yes" type="checkbox" name="subscribe">
-              <label for="yes">Yes</label>
+              <input class="input-radio" id="interests-bats" type="checkbox" name="subscribe">
+              <label for="interests-bats">Bats</label>
             </li>
             <li>
-              <input class="input-radio" id="no" type="checkbox" name="subscribe">
-              <label for="no">No</label>
+              <input class="input-radio" id="interests-kangaroos" type="checkbox" name="subscribe">
+              <label for="interests-kangaroos">Kangaroos</label>
+            </li>
+            <li>
+              <input class="input-radio" id="interests-possums" type="checkbox" name="subscribe">
+              <label for="interests-possums">Possums</label>
             </li>
           </ul>
         </fieldset>
