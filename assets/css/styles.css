@@ -241,3 +241,18 @@ th {
   font-size: .9em;
   color: red;
 }
+
+figure {
+  padding: 1em;
+  background: #eee;
+  margin: 1em 0;
+}
+
+figure img {
+  max-width: 100%;
+}
+
+figure p {
+  margin: .5em 0 0;
+}
+
