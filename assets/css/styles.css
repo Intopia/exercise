@@ -256,3 +256,20 @@ figure p {
   margin: .5em 0 0;
 }
 
+.skip-links {
+  margin: 0;
+  padding: 10px 30px;
+}
+
+.skip-links ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skip-links li {
+  display: inline-block;
+  margin: 0 1em 0 0;
+  padding: 0;
+}
+
