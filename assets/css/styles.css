@@ -10,6 +10,10 @@ body {
   line-height: 1.2;
 }
 
+/* ---------------------
+links
+----------------------*/
+
 a:link {
   color: blue;
 }
@@ -35,6 +39,10 @@ a:active {
   color: #fff;
   background: #EB0000;
 }
+
+/* ---------------------
+headings
+----------------------*/
 
 h1,
 h2,
@@ -71,6 +79,10 @@ p {
   margin: 0 0 1.5em;
   line-height: 1.5;
 }
+
+/* ---------------------
+containers
+----------------------*/
 
 .container {
   max-width: 60em;
@@ -153,6 +165,11 @@ p {
   margin: 0 0 1.5em;
 }
 
+/* ---------------------
+forms
+----------------------*/
+
+
 .label {
   display: block;
   margin: 0 0 .3em;
@@ -167,16 +184,23 @@ p {
   line-height: 1;
 }
 
-.input-error {
-  border: 1px solid red;
-}
-
 .input:focus {
   border: 1px solid #000;
   outline: 0;
   box-shadow:
     0 0 0 2px #fff,
     0 0 0 5px #000;
+}
+
+.input-error {
+  border: 1px solid #CC0000;
+}
+
+.input-error:focus {
+  border: 1px solid #CC0000;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 5px #CC0000;
 }
 
 .fieldset {
@@ -191,26 +215,6 @@ legend {
   font-weight: bold;
 }
 
-.radio-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.input-radio:focus {
-  outline: 3px solid #000;
-}
-
-.visuallyhidden {
-  position: absolute;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  width: 1px;
-  height: 1px;
-  border: 0;
-  margin: -1px;
-  padding: 0;
-}
 
 .button {
   border: 0;
@@ -238,8 +242,12 @@ legend {
 
 .button:active {
   color: #fff;
-  background: #EB0000;
+  background: #BB0000;
 }
+
+/* ---------------------
+table
+----------------------*/
 
 .table {
   width: 100%;
@@ -267,27 +275,9 @@ th {
   border-top: 1px solid #999;
 }
 
-.help-text {
-  display: block;
-  margin: -.3em 0 .3em;
-  font-style: italic;
-  font-size: .9em;
-  color: #555;
-}
-
-.error-message {
-  display: block;
-  margin: 0;
-  padding: .3em 0 0;
-  font-style: italic;
-  font-size: .9em;
-  color: #EB0000;
-}
-
-.required {
-  font-size: .9em;
-  color: #EB0000;
-}
+/* ---------------------
+figure
+----------------------*/
 
 figure {
   padding: 1em;
@@ -302,6 +292,10 @@ figure img {
 figure p {
   margin: .5em 0 0;
 }
+
+/* ---------------------
+skip links
+----------------------*/
 
 .skip-links {
   margin: 0;
@@ -319,4 +313,142 @@ figure p {
   margin: 0 1em 0 0;
   padding: 0;
 }
+
+/* ---------------------
+other styles
+----------------------*/
+
+.visuallyhidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  border: 0;
+  margin: -1px;
+  padding: 0;
+}
+
+.help-text {
+  display: block;
+  margin: -.3em 0 .3em;
+  font-style: italic;
+  font-size: .9em;
+  color: #555;
+}
+
+.error-message {
+  display: block;
+  margin: 0;
+  padding: .3em 0 0;
+  font-style: italic;
+  font-size: .9em;
+  color: #BB0000;
+}
+
+.required {
+  font-size: .9em;
+  color: #BB0000;
+}
+
+/* ---------------------
+fieldset-list
+----------------------*/
+
+.fieldset-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fieldset-list li {
+  position: relative;
+  margin: 0;
+  padding: 7px 0;
+}
+
+/* ---------------------
+radio
+----------------------*/
+
+.label-radio {
+  display: inline-block;
+  padding: 0 0 0 6px;
+  line-height: 1;
+}
+
+.input-radio:before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 10px;
+  width: 14px;
+  height: 14px;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 5px #666;
+}
+
+.input-radio:checked:before {
+  background: blue;
+}
+
+.input-radio:focus:before {
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 6px #000;
+}
+
+.input-radio:focus:checked:before {
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 6px #000;
+}
+
+/* ---------------------
+checkbox
+----------------------*/
+
+.label-checkbox {
+  display: inline-block;
+  padding: 0 0 0 6px;
+  line-height: 1;
+}
+
+.input-checkbox:before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 10px;
+  width: 14px;
+  height: 14px;
+  background-color: #fff;
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 5px #666;
+}
+
+.input-checkbox:checked:before {
+  background: blue;
+  background-image: url("https://assets.codepen.io/77005/checkbox-tick.svg");
+  background-size: 10px 10px;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.input-checkbox:focus:before {
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 6px #000;
+}
+
+.input-checkbox:focus:checked:before {
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 6px #000;
+}
+
+
 
