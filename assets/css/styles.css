@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 1em;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -27,8 +31,7 @@ a:focus {
   background: #000;
   outline: none;
   box-shadow:
-    0 0 0 2px #fff,
-    0 0 0 5px #000;
+    0 0 0 2px #000;
 }
 
 a:hover {
@@ -52,31 +55,31 @@ h4 {
 }
 
 h1 {
-  margin: 0 0 .5em;
+  margin: 0 0 .75rem;
   font-size: 2em; /* 32 */
 }
 
 h2 {
-  margin: 1.5em 0 .5em;
+  margin: 2rem 0 .75rem;
   font-size: 1.5em; /* 24 */
 }
 
 aside h2 {
-  margin: 0 0 .5em;
+  margin: 0 0 1rem;
 }
 
 h3 {
-  margin: 1.5em 0 .5em;
+  margin: 2rem 0 .75rem;
   font-size: 1.25em; /* 20 */
 }
 
 h4 {
-  margin: 1.5em 0 .5em;
+  margin: 2rem 0 .75rem;
   font-size: 1em; /* 16 */
 }
 
 p {
-  margin: 0 0 1.5em;
+  margin: 0 0 1.75rem;
   line-height: 1.5;
 }
 
@@ -132,8 +135,7 @@ containers
   background: #fff;
   outline: 0;
   box-shadow:
-    0 0 0 2px #000,
-    0 0 0 5px #fff;
+    0 0 0 2px #fff;
 }
 
 .nav a:active,
@@ -251,7 +253,7 @@ table
 
 .table {
   width: 100%;
-  margin: 0 0 1em;
+  margin: 0 0 1.5em;
   border-collapse: collapse;
 }
 
