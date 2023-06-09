@@ -22,6 +22,9 @@ a:focus {
   color: #fff;
   background: #000;
   outline: none;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 5px #000;
 }
 
 a:hover {
@@ -86,6 +89,10 @@ h2 {
 .footer a:hover {
   color: #000;
   background: #fff;
+  outline: 0;
+  box-shadow:
+    0 0 0 2px #000,
+    0 0 0 5px #fff;
 }
 
 .nav a:active,
@@ -124,7 +131,7 @@ h2 {
 
 .input {
   width: 100%;
-  border: 1px solid #aaa;
+  border: 1px solid #666;
   padding: .5em;
   font-family: helvetica, arial, sans-serif;
   font-size: 1em;
@@ -132,7 +139,11 @@ h2 {
 }
 
 .input:focus {
-  outline: 3px solid #000;
+  border: 1px solid #000;
+  outline: 0;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 5px #000;
 }
 
 .fieldset {
@@ -180,9 +191,11 @@ legend {
 }
 
 .button:focus {
-  background: #0000B3;
+  background: #000;
   outline: none;
-  outline: 3px solid #000;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 5px #000;
 }
 
 .button:hover {
