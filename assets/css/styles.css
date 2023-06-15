@@ -452,5 +452,28 @@ checkbox
     0 0 0 6px #000;
 }
 
+.form-error {
+  padding: 1em;
+  margin: 0 0 2em;
+  background: rgba(255,0,0,.1);
+}
+
+.form-error:focus {
+  outline: none;
+  border: 1px solid red;
+  box-shadow:
+  0 0 0 3px #fff,
+  0 0 0 6px #000;
+}
+
+.form-error p {
+  margin: 0 0 .5em;
+}
+
+.form-error ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
 
 
