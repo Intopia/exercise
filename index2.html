@@ -137,7 +137,7 @@
           <li><a href="#form-phone">Phone</a></li>
         </ul>
       </div>
-      <form method="POST" action="index2.html" id="form" autocomplete="off">
+      <form action="#" id="form" autocomplete="off">
         <div class="form-container">
           <label class="label" for="form-name">Full name</label>
           <input class="input input-error" id="form-name" type="text" aria-invalid="true" aria-describedby="form-name-error">
@@ -215,7 +215,12 @@
           </ul>
         </fieldset>
         <div class="form-container">
-          <button class="button">Submit</button>
+          <button class="button" onclick="redirectToPage()">Submit</button>
+          <script>
+            function redirectToPage() {
+              window.location.href = "index.html";
+            }
+          </script>
         </div>
       </form>
     </aside>
