@@ -112,6 +112,24 @@ hr {
 }
 
 /* ---------------------
+Horizontal rules
+----------------------*/
+
+figure {
+  margin: 2em 0;
+}
+
+figcaption {
+  margin: .5em 0 0;
+}
+
+summary {
+  margin-bottom: .5em;
+  cursor: pointer;
+}
+
+
+/* ---------------------
 Pre and code
 ----------------------*/
 
@@ -470,4 +488,12 @@ Testing states
     0 0 0 5px #666;
 }
 
+/* ---------------------
+Testing states
+----------------------*/
+
+.testing-images {
+  padding: 1em;
+  background: #eee;
+}
 
