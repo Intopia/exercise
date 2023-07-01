@@ -439,7 +439,7 @@ checkbox
 
 .input-checkbox:checked:before {
   background: blue;
-  background-image: url("https://assets.codepen.io/77005/checkbox-tick.svg");
+  background-image: url("../img/icon-tick.png");
   background-size: 10px 10px;
   background-position: center center;
   background-repeat: no-repeat;

@@ -393,9 +393,9 @@ Testing use of color
 .user-of-color-circle {
   display: block;
   margin: 0 auto;
-  width: 20px;
-  height: 20px;
-  border-radius: 20px;
+  width: 26px;
+  height: 26px;
+  border-radius: 26px;
 }
 
 .user-of-color-red {
@@ -408,16 +408,16 @@ Testing use of color
 
 .user-of-color-red2 {
   background: red;
-  background-image: url("../img/close-white.svg");
-  background-size: 16px 16px;
+  background-image: url("../img/icon-cross.png");
+  background-size: 14px 14px;
   background-repeat: no-repeat;
   background-position: center center;
 }
 
 .user-of-color-green2 {
   background: green;
-  background-image: url("../img/tick.svg");
-  background-size: 15px 15px;
+  background-image: url("../img/icon-tick.png");
+  background-size: 14px 14px;
   background-repeat: no-repeat;
   background-position: center center;
 }
