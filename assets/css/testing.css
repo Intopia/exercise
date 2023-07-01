@@ -283,38 +283,12 @@ Example
 }
 
 /* ---------------------
-Badge
+footer link
 ----------------------*/
 
-.badge {
-  display: inline;
-  color: #555;
-  background: #fff;
-  padding: 0;
-  margin: 0;
-  font-size: 16px;
-  font-weight: normal;
-  line-height: 1;
-}
-
-.badge:after {
-  content: "";
-  display:block;
-  height: 0;
-}
-
-/* ---------------------
-footer links
-----------------------*/
-
-.footer-links {
-  margin: 5em 0 1em;
+.footer-link {
+  margin: 3em 0;
   font-size: .8em;
-}
-
-.footer-links a {
-  display: inline-block;
-  margin: 0 .3em;
 }
 
 /* ---------------------
