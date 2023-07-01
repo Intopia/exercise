@@ -227,6 +227,7 @@ legend {
   font-family: helvetica, arial, sans-serif;
   font-size: 1em;
   line-height: 1;
+  cursor: pointer;
 }
 
 .button:focus {
@@ -377,6 +378,7 @@ radio
   display: inline-block;
   padding: 0 0 0 6px;
   line-height: 1;
+  cursor: pointer;
 }
 
 .input-radio:before {
@@ -387,6 +389,7 @@ radio
   width: 14px;
   height: 14px;
   border-radius: 14px;
+  cursor: pointer;
   background: #fff;
   box-shadow:
     0 0 0 3px #fff,
@@ -417,6 +420,7 @@ checkbox
   display: inline-block;
   padding: 0 0 0 6px;
   line-height: 1;
+  cursor: pointer;
 }
 
 .input-checkbox:before {
@@ -426,6 +430,7 @@ checkbox
   top: 10px;
   width: 14px;
   height: 14px;
+  cursor: pointer;
   background-color: #fff;
   box-shadow:
     0 0 0 3px #fff,
