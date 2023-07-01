@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing four image types</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<h1>Testing four image types</h1>
+
+
+<h2>Type 1: Decorative image</h2>
+
+<p>Decorating image using an empty <code>alt</code> attribute:</p>
+<div class="example">
+  <img src="assets/img/image-decorative-unsplash.jpg" alt="">
+</div>
+<pre><code>&lt;img src="decorative.jpg" alt=""&gt;</code></pre>
+
+
+<h2>Type 2: Informative images</h2>
+
+<p>Informative image with a non-empty <code>alt</code> attribute:</p>
+<div class="example">
+  <img width="600" src="assets/img/image-informative.png" alt="Sydney Opera House Environmental Sustainability Manager Emma Bombonato, with some of the 35 kilometres of pipes that heat and cool the building">
+</div>
+<pre><code>&lt;img src="informative.png"
+  alt="Sydney Opera House Environmental
+  Sustainability Manager Emma Bombonato,
+  with some of the 35 kilometres of pipes
+  that heat and cool the building"&gt;</code></pre>
+
+
+<h2>Type 3: Functional images</h2>
+
+<p>Functional image with <code>alt</code> attribute applied to the <code>&lt;img&gt;</code> element:</p>
+<div class="example">
+  <button>
+    <img src="assets/img/cross.png" alt="Close">    
+  </button>
+</div>
+<pre><code>&lt;button&gt;
+  &lt;img src="functional.png" alt="Close"&gt;
+&lt;/button&gt;</code></pre>
+
+<p>Functional image with <code>aria-label</code> attribute applied to the <code>&lt;button&gt;</code> element:</p>
+<div class="example">
+  <button aria-label="Close">
+    <img src="assets/img/cross.png" alt="">    
+  </button>
+</div>
+<pre><code>&lt;button aria-label="Close"&gt;
+  &lt;img src="functional.png" alt=""&gt;
+&lt;/button&gt;</code></pre>
+
+
+<h2>Type 4: Complex images</h2>
+
+<p>Complex image example with <code>alt</code> attribute and longer descrition below:</p>
+<figure>
+  <img src="assets/img/image-complex.png" alt="Venn diagram depicting content category relationships. Detailed description below" src="https://dev.w3.org/html5/spec/images/content-venn.png" aria-details="aaa">
+  <figcaption>
+    <details id="aaa">
+      <summary>Image description</summary>
+      <h4>Content categories include:</h4>
+      <ol>
+        <li>Flow content</li>
+        <li>Metadata content</li>
+        <li>Sectioning content</li>
+        <li>Heading content</li>
+        <li>Phrasing content</li>
+        <li>Interactive content</li>
+        <li>Embedded content</li>
+      </ol>
+    </details>
+  </figcaption>
+</figure>
+<pre><code>&lt;img src="complex.png"
+  alt="Venn diagram depicting content category
+  relationships. Detailed description below"&gt;</code></pre>
+
+</body>
+</html>

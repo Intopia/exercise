@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing required fields</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<h1>Testing required fields</h1>
+<p>Which fields below are programmatically defined as "required"?</p>
+
+<h2>Example form</h2>
+<p><b>All fields below are required</b></p>
+<form action="#">
+  <div class="form-group-spaced">
+    <label class="label" for="name">Name</label>
+    <input class="input" id="name" type="text" required>
+  </div>
+
+  <div class="form-group-spaced">
+    <label class="label" for="email">Email</label>
+    <input class="input" id="email" type="email">
+  </div>
+
+  <div class="form-group-spaced">
+    <label class="label" for="phone">Phone</label>
+    <input class="input" id="phone" type="tel" aria-required="true">
+  </div>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,499 @@
+/* ---------------------
+Gobal styles
+----------------------*/
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  max-width: 40em;
+  margin: 0;
+  padding: 1em 2em 1.5em;
+  font-size: 1.2em;
+  line-height: 1.4;
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, Frutiger, 'Frutiger Linotype', Univers, Calibri, 'Gill Sans', 'Gill Sans MT', 'Myriad Pro', Myriad, 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, sans-serif;
+
+}
+
+/* ---------------------
+Paragraphs
+----------------------*/
+
+p {
+  margin: 1em 0 1.5em;
+  line-height: 1.5;
+}
+
+/* ---------------------
+Headings
+----------------------*/
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  color: #d3420d;
+  font-weight: 600;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, Frutiger, 'Frutiger Linotype', Univers, Calibri, 'Gill Sans', 'Gill Sans MT', 'Myriad Pro', Myriad, 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, sans-serif;
+}
+
+h1 code,
+h2 code,
+h3 code {
+  color: #d3420d;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 2em;
+}
+
+h2 {
+  margin: 2em 0 .5em;
+  font-size: 1.5em;
+}
+
+h3 {
+  margin: 1em 0 .5em;
+  font-size: 1.1em;
+}
+
+h4 {
+  margin: 0 0 0.5em;
+  font-size: 1em;
+}
+
+
+/* ---------------------
+Lists
+----------------------*/
+
+ul li,
+ol li {
+  margin-bottom: .5em;
+}
+
+/* ---------------------
+Links
+----------------------*/
+
+a:link {
+  color: #0A7399;
+  background: transparent;
+}
+
+a:visited {
+  color: #086D91;
+  background: transparent;
+}
+
+a:hover {
+  color: #007700;
+  background: transparent;
+}
+
+a:focus {
+  color: #fff;
+  background: #000;
+}
+
+a:active {
+  color: #AA0000;
+  background: transparent;
+}
+
+/* ---------------------
+Horizontal rules
+----------------------*/
+
+hr {
+  margin: 1em 0 3em;
+}
+
+/* ---------------------
+Pre and code
+----------------------*/
+
+pre {
+  font-size: 1em;
+  display: block;
+  background: #000;
+  color: #fff;
+  padding: 1em;
+  margin: 1em 0 36px;
+}
+
+code {
+  font-size: 1em;
+  color: green;
+  font-family: monaco, courier, monospace;
+}
+
+pre code {
+  line-height: 1.5;
+  color: #fff;
+}
+
+/* ---------------------
+Tables
+----------------------*/
+
+table {
+  border-collapse: collapse;
+  margin: 0;
+  width: 100%;
+  background: #fff;
+}
+
+caption {
+  text-align: left;
+  font-weight: bold;
+  padding: 0 0 0.5em;
+  font-size: 1.1em;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.5em;
+  border: 1px solid #666;
+}
+
+/* ---------------------
+Forms
+----------------------*/
+
+form {
+  margin: 2em 0;
+  padding: 1em;
+  background: #eee;
+}
+
+fieldset {
+  margin: 0;
+  border: 1px solid #999;
+}
+
+legend {
+  font-weight: bold;
+}
+
+.form-group {
+  margin: 0;
+}
+
+.form-group-spaced {
+  margin: 0 0 2em;
+}
+
+.form-list {
+  margin: 0.5em 0;
+  padding: 0;
+  list-style: none;
+}
+
+.label {
+  display: block;
+  margin: 0 0 0.3em;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  padding: 0.5em;
+  border: 1px solid #999;
+  font-size: 1em;
+  line-height: 1;
+  font-family: helvetica, arial, sans-serif;
+}
+
+.input:focus {
+  outline: 2px solid #000;
+}
+
+.input:hover {
+  outline: 2px solid green;
+}
+
+.button,
+button {
+  display: inline-block;
+  padding: 0.75em 1em;
+  border: 0;
+  background: blue;
+  color: #fff !important;
+  text-decoration: none;
+  border-radius: 0.2em;
+  font-size: 1em;
+  line-height: 1;
+  font-family: helvetica, arial, sans-serif;
+}
+
+.button:focus,
+button:focus {
+  background: #000;
+  color: #fff;
+  outline: none;
+}
+
+.button:hover,
+button:hover {
+  background: green;
+  color: #fff;
+}
+
+.button:active,
+button:active {
+  background: red;
+  color: #fff;
+}
+
+/* ---------------------
+Help and errors
+----------------------*/
+
+.help-text {
+  display: block;
+  margin: 0 0 0.3em;
+  font-style: italic;
+  color: #555;
+}
+
+.error-message {
+  display: block;
+  margin: 0;
+  padding: 0.3em 0 0;
+  font-style: italic;
+  color: red;
+}
+
+/* ---------------------
+Example
+----------------------*/
+
+.example {
+  margin: 2em 0;
+  padding: 1em;
+  background: #EDEBEB;
+}
+
+.example h2 {
+  margin: 0;
+}
+
+/* ---------------------
+Badge
+----------------------*/
+
+.badge {
+  display: inline;
+  color: #555;
+  background: #fff;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 1;
+}
+
+.badge:after {
+  content: "";
+  display:block;
+  height: 0;
+}
+
+/* ---------------------
+footer links
+----------------------*/
+
+.footer-links {
+  margin: 5em 0 1em;
+  font-size: .8em;
+}
+
+.footer-links a {
+  display: inline-block;
+  margin: 0 .3em;
+}
+
+/* ---------------------
+Hidden
+----------------------*/
+
+.sr-only,
+.hidden {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  -webkit-clip-path: inset(50%) !important;
+    clip-path: inset(50%) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important;
+}
+
+/* ---------------------
+Testing text contrast
+----------------------*/
+
+.colour-example1,
+.colour-example2,
+.colour-example3,
+.colour-example4 {
+  margin-top: .5em;
+  padding: 1em;
+  background: #fff;
+  border: 1px solid #ddd;
+}
+
+.colour-example1 {
+  color: #777;
+  font-size: 17pt;
+}
+
+.colour-example2 {
+  color: orange;
+  font-size: 13pt;
+}
+
+.colour-example3 {
+  color: green;
+  font-size: 19pt;
+}
+
+.colour-example4 {
+  color: #B07BDB;
+  font-size: 15pt;
+}
+
+/* ---------------------
+Testing non-text-contrast
+----------------------*/
+
+.input1 {
+  border: 2px solid #878787;
+}
+
+.input2 {
+  border: 2px solid #1B9823;
+}
+
+.input3 {
+  border: 2px solid #1E9DC8;
+}
+
+.input4 {
+  border: 2px solid #DF58C6;
+}
+
+/* ---------------------
+Testing use of color
+----------------------*/
+
+.user-of-color1 a:link {
+  text-decoration: none;
+}
+
+.user-of-color-circle {
+  display: block;
+  margin: 0 auto;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+}
+
+.user-of-color-red {
+  background: red;
+}
+
+.user-of-color-green {
+  background: green;
+}
+
+.user-of-color-red2 {
+  background: red;
+  background-image: url("../img/close-white.svg");
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.user-of-color-green2 {
+  background: green;
+  background-image: url("../img/tick.svg");
+  background-size: 15px 15px;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* ---------------------
+Testing headings
+----------------------*/
+
+.h3 {
+  margin: 1em 0 0.5em;
+  font-size: 1.1em;
+}
+
+.h3 {
+  line-height: 1.2;
+  color: #d3420d;
+  font-weight: 600;
+  font-family: source sans pro,helvetica neue,Helvetica,Arial,Frutiger,frutiger linotype,Univers,Calibri,gill sans,gill sans mt,myriad pro,Myriad,dejavu sans condensed,liberation sans,nimbus sans l,Tahoma,Geneva,sans-serif;
+}
+
+/* ---------------------
+Testing landmarks
+----------------------*/
+
+header,
+footer,
+main,
+nav,
+aside,
+section,
+article,
+form[role="search"] {
+  padding: 1em;
+  border: 1px solid #ccc;
+  background: #efefef;
+  margin: 0 0 1em;
+}
+
+/* ---------------------
+Testing accessible names
+----------------------*/
+
+.testing-accessible-names-button {
+  margin-left: 1em;
+}
+
+/* ---------------------
+Testing states
+----------------------*/
+
+.testing-states-checkbox {
+  position: relative;
+  padding-left: 1.6em;
+}
+
+.testing-states-checkbox:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .2em;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  border-radius: .1em;
+  background-color: #fff;
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 5px #666;
+}
+
+

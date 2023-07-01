@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing states</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<h1>Testing states</h1>
+
+<h2>Example 1: Checkbox group</h2>
+<div class="example">
+  <fieldset class="fieldset">
+    <legend>Newsletter interests</legend>
+    <ul class="form-list">
+      <li>
+        <input class="input-checkbox" id="interests-bats" type="checkbox" name="newsletter" checked>
+        <label class="label-checkbox" for="interests-bats">Bats</label>
+      </li>
+      <li>
+        <input class="input-checkbox" id="interests-kangaroos" type="checkbox" name="newsletter">
+        <label class="label-checkbox" for="interests-kangaroos">Kangaroos</label>
+      </li>
+      <li>
+        <input class="input-checkbox" id="interests-possums" type="checkbox" name="newsletter">
+        <label class="label-checkbox" for="interests-possums">Possums</label>
+      </li>
+    </ul>
+  </fieldset>
+</div>
+
+<h2>Example 2: Radio group</h2>
+<div class="example">
+  <fieldset class="fieldset">
+    <legend>Subscription method</legend>
+    <ul class="form-list">
+      <li>
+        <input class="input-radio" id="weekly" type="radio" name="subscription" checked>
+        <label class="label-radio" for="weekly">Weekly</label>
+      </li>
+      <li>
+        <input class="input-radio" id="quarterly" type="radio" name="subscription">
+        <label class="label-radio" for="quarterly">Quarterly</label>
+      </li>
+      <li>
+        <input class="input-radio" id="yearly" type="radio" name="subscription">
+        <label class="label-radio" for="yearly">Yearly</label>
+      </li>
+    </ul>
+  </fieldset>
+</div>
+
+<h2>Example 3: Fake checkbox</h2>
+<div class="example">
+  <div class="testing-states-checkbox" role="checkbox" tabindex="0" aria-checked="true">I am a fake checkbox</div>
+</div>
+
+</body>
+</html>

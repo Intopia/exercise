@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing accessible names</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<h1>Testing accessible names</h1>
+
+<h2>Links and buttons</h2>
+
+<p>The contents can be used to generate the accessible name for the <code>&lt;a&gt;</code> and <code>&lt;button&gt;</code>  elements:</p>
+<div class="example">
+  <a href="#">More</a>
+  <button class="testing-accessible-names-button">Close</button>
+</div>
+
+<p>Hidden content can be used to generate a more detailed accessible name:</p>
+<div class="example">
+  <a href="#">
+    More
+    <span class="hidden">about fishes</span>
+  </a>
+  <button class="testing-accessible-names-button">
+    Close
+    <span class="hidden">modal</span>
+  </button>
+</div>
+
+<p>The <code>aria-label</code> attribute can be used to create an accessible name that is different to the visible text label:</p>
+<div class="example">
+  <a href="#" aria-label="More about birds">More</a>
+  <button class="testing-accessible-names-button" aria-label="Close and return to banking">Close</button>
+</div>
+
+<p>What about the <code>title</code> attribute? It may not create an accessible name as it is the weakest method. More importantly, this is a bad practice as the <code>title</code> is <a href="https://www.tpgi.com/using-the-html-title-attribute-updated/" target="_blank">not fully accessible</a>.</p>
+<div class="example">
+  <a href="#" title="More about trees">More</a>
+  <button class="testing-accessible-names-button" title="Close" class="close-button">
+    <img src="assets/img/cross.png" alt="" />
+  </button>
+</div>
+
+
+<h2>Inputs</h2>
+
+<p>The contents of the <code>label</code> attribute can be used to generate the accessible name for the <code>&lt;input&gt;</code>:</p>
+<div class="example">
+  <label class="label" for="address">Address</label>
+  <input class="input" id="address" type="text">
+</div>
+
+<p>The contents of the <code>aria-label</code> attribute can be used to generate the accessible name for the <code>&lt;input&gt;</code>:</p>
+<div class="example">
+  <input class="input" type="text" aria-label="Search the site">
+</div>
+
+<p>The contents of the <code>title</code> attribute can be used to generate the accessible name for the <code>&lt;input&gt;</code>. As mentioned above, this is a bad practice as the <code>title</code> is <a href="https://www.tpgi.com/using-the-html-title-attribute-updated/" target="_blank">not fully accessible</a>.</p>
+<div class="example">
+  <input class="input" type="text" title="Bank details">
+</div>
+
+<p>The contents of the <code>placeholder</code> attribute can be used to generate the accessible name for the <code>&lt;input&gt;</code>. This is also a bad practice as the <code>placeholder</code> is not fully accessible.</p>
+<div class="example">
+  <input class="input" type="text" placeholder="MM/DD/YYYY">
+</div>
+
+</body>
+</html>

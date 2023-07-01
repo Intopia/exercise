@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing roles</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<h1>Testing roles</h1>
+
+
+<h2>Button</h2>
+<div class="example">
+  <button>Save</button>
+</div>
+
+<h2>Input</h2>
+<div class="example">
+  <label class="label" for="address">Phone number</label>
+  <input class="input" id="address" type="text">
+</div>
+
+<h2>Select / dropdown</h2>
+<div class="example">
+  <label class="label" for="three">Favourite mammal</label>
+  <select class="input" id="three">
+    <option>Choose a mammal</option>
+    <option>Aardvark</option>
+    <option>African Elephant</option>
+    <option>African Wild Dog</option> 
+  </select>
+</div>
+
+<h2>Checkbox group</h2>
+<div class="example">
+  <fieldset class="fieldset">
+    <legend>Newsletter interests</legend>
+    <ul class="form-list">
+      <li>
+        <input class="input-checkbox" id="interests-bats" type="checkbox" name="subscribe">
+        <label class="label-checkbox" for="interests-bats">Bats</label>
+      </li>
+      <li>
+        <input class="input-checkbox" id="interests-kangaroos" type="checkbox" name="subscribe">
+        <label class="label-checkbox" for="interests-kangaroos">Kangaroos</label>
+      </li>
+      <li>
+        <input class="input-checkbox" id="interests-possums" type="checkbox" name="subscribe">
+        <label class="label-checkbox" for="interests-possums">Possums</label>
+      </li>
+    </ul>
+  </fieldset>
+</div>
+
+<h2>Radio group</h2>
+<div class="example">
+  <fieldset class="fieldset">
+    <legend>Subscription method</legend>
+    <ul class="form-list">
+      <li>
+        <input class="input-radio" id="weekly" type="radio" name="fruit">
+        <label class="label-radio" for="weekly">Weekly</label>
+      </li>
+      <li>
+        <input class="input-radio" id="quarterly" type="radio" name="fruit">
+        <label class="label-radio" for="quarterly">Quarterly</label>
+      </li>
+      <li>
+        <input class="input-radio" id="yearly" type="radio" name="fruit">
+        <label class="label-radio" for="yearly">Yearly</label>
+      </li>
+    </ul>
+  </fieldset>
+</div>
+
+<h2>Fake button</h2>
+<div class="example">
+  <div role="button" class="button" tabindex="0">I am a fake button</div>
+</div>
+
+</body>
+</html>

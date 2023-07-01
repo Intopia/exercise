@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing form labels</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<h1>Testing form labels</h1>
+
+<p>Check each form field below to determine:</p>
+<ol>
+  <li>Do they all have visible text labels?</li>
+  <li>Do they all have accessible names?</li>
+</ol>
+
+<h2>Example 1</h2>
+<form action="#">
+  <label class="label" for="full-name">Full name</label>
+  <input class="input" id="full-name" type="text">
+</form>
+
+<h2>Example 2</h2>
+<form action="#">
+  <label class="label">Email address</label>
+  <input class="input" type="email">
+</form>
+
+<h2>Example 3</h2>
+<form action="#">
+  <label class="label" for="phone">Phone number</label>
+  <input class="input" id="phone" type="text" placeholder="612 4444 4444">
+</form>
+
+<h2>Example 4</h2>
+<form action="#">
+  <input class="input" aria-label="Add your address" type="text">
+</form>
+
+<h2>Example 5</h2>
+<form action="#">
+  <fieldset class="form-group">
+    <legend>Choose your favourite fruits</legend>
+    <ul class="form-list">
+      <li>
+        <input id="apples" type="checkbox">
+        <label for="apples">Apples</label>
+      </li>
+      <li>
+        <input id="bananas" type="checkbox">
+        <label for="bananas">Bananas</label>
+      </li>
+      <li>
+        <input type="checkbox">
+        <label>Grapes</label>
+      </li>
+    </ul>
+  </fieldset>
+</form>
+
+</body>
+</html>
