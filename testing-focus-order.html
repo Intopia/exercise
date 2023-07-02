@@ -5,71 +5,32 @@
   <title>Testing focus order</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
-  <link href="assets/css/testing-focus-order.css" rel="stylesheet">
+  <link href="assets/css/testing.css" rel="stylesheet">
 </head>
 <body>
 
-<header class="top-container">
-  <h1>Testing focus order</h1>
-</header>
+<h1>Testing focus order</h1>
 
-<nav class="top-list" aria-label="Primary">
-  <ul>
-    <li><a tabindex="2" href="#">Home</a></li>
-    <li><a tabindex="7" href="#">Mammals</a></li>
-    <li><a tabindex="6" href="#">Wombats</a></li>
-    <li><a tabindex="5" href="#">Bandicoots</a></li>
-    <li><a tabindex="4" href="#">Koalas</a></li>
-    <li><a tabindex="3" href="#">Kangaroos</a></li>
-  </ul>
-</nav>
+<ul class="focus-order-nav">
+  <li><a tabindex="1" href="#" autofocus>Home</a></li>
+  <li><a tabindex="6" href="#">Wombats</a></li>
+  <li><a tabindex="5" href="#">Bandicoots</a></li>
+  <li><a tabindex="4" href="#">Koalas</a></li>
+  <li><a tabindex="3" href="#">Kangaroos</a></li>
+</ul>
 
-<main class="content-container" id="content">
-  <p>Wombats are short-legged, muscular quadrupedal marsupials that are native to Australia. They are adaptable and habitat tolerant, and are found in forested, mountainous, and heathland areas of southern and eastern Australia.</p>
+<h2>What are wombats?</h2>
+<p>Wombats are short-legged, muscular quadrupedal marsupials that are native to Australia. They are adaptable and habitat tolerant, and are found in forested, mountainous, and heathland areas of southern and eastern Australia.</p>
 
-  <section>
-    <h2>Evolution and taxonomy</h2>
-    <p>Though genetic studies of the <a href="https://inaturalist.ala.org.au/taxa/43001-Vombatidae"><i>Vombatidae</i></a> have been undertaken, evolution of the family is not well understood. Wombats are estimated to have diverged from other Australian marsupials relatively early, as long as 40 million years ago.</p>    
-  </section>
+<p>Though genetic studies of the <a href="https://inaturalist.ala.org.au/taxa/43001-Vombatidae"><i>Vombatidae</i></a> have been undertaken, evolution of the family is not well understood. Wombats are estimated to have diverged from other Australian marsupials relatively early, as long as 40 million years ago.</p>    
 
-  <section>
-    <h2>Characteristics</h2>
-    <p>Wombats dig extensive burrow systems with their rodent-like front teeth and powerful claws. One distinctive adaptation of wombats is their backward pouch. Some characteristics include:</p>
-    <ul>
-      <li>Backwards-facing pouch</li>
-      <li>About 1.3 metres in length</li>
-      <li>Weigh up to 36 kilograms</li>
-      <li>Large, blunt head</li>
-      <li>Short, muscular neck</li>
-      <li>Sharp claws</li>
-      <li>Stubby, powerful legs</li>
-    </ul>    
-  </section>
+<p>Wombats dig extensive burrow systems with their rodent-like front teeth and powerful claws. One distinctive adaptation of wombats is their backward pouch. Some characteristics include:</p>
 
-  <section>
-    <h2>Sources</h2>
-    <ul>
-      <li><a tabindex="12" href="https://en.wikipedia.org/wiki/Common_wombat" target="_blank">Common wombat - Wikipedia</a></li>
-      <li><a tabindex="13" href="https://www.livescience.com/52640-wombats.html" target="_blank">Facts About Wombats</a></li>
-    </ul>    
-  </section>
-</main>
-
-<aside class="sidebar">
-  <blockquote>
-    "The Wombat is a Joy, a Triumph, a Delight, a Madness!"
-  </blockquote>
-</aside>
-
-<nav class="bottom-list" aria-labelledby="bottom-list-heading">
-  <h2 id="bottom-list-heading">Our organisation</h2>
-  <ul>
-    <li><a tabindex="8" href="#">Contact us</a></li>
-    <li><a tabindex="9" href="#">Copyright information</a></li>
-    <li><a tabindex="10" href="#">Legal information</a></li>
-    <li><a tabindex="11" href="#">Terms and conditions</a></li>
-  </ul>
-</nav>
+<ul class="focus-order-nav">
+  <li><a tabindex="7" href="#">Contact us</a></li>
+  <li><a tabindex="8" href="#">Copyright</a></li>
+  <li><a tabindex="9" href="#">Legal</a></li>
+</ul>
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>

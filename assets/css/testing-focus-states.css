@@ -10,10 +10,9 @@ body {
   max-width: 40em;
   margin: 0;
   padding: 1em 2em 1.5em;
-  font-size: 1.2em;
-  line-height: 1.4;
+  font-size: 1.125em;
+  line-height: 1.5;
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, Frutiger, 'Frutiger Linotype', Univers, Calibri, 'Gill Sans', 'Gill Sans MT', 'Myriad Pro', Myriad, 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, sans-serif;
-
 }
 
 /* ---------------------
@@ -22,7 +21,6 @@ Paragraphs
 
 p {
   margin: 1em 0 1.5em;
-  line-height: 1.5;
 }
 
 /* ---------------------
@@ -32,7 +30,6 @@ Headings
 h1,
 h2,
 h3 {
-  line-height: 1.2;
   color: #C03C0C;
   font-weight: 600;
   font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, Frutiger, 'Frutiger Linotype', Univers, Calibri, 'Gill Sans', 'Gill Sans MT', 'Myriad Pro', Myriad, 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, sans-serif;
@@ -47,23 +44,32 @@ h3 code {
 h1 {
   margin-top: 0;
   font-size: 2em;
+  line-height: 1.22222222222222;
 }
 
 h2 {
   margin: 2em 0 .5em;
-  font-size: 1.5em;
+  font-size: 1.55555555555556em;
+  line-height: 1.21428571428571;
 }
 
 h3 {
   margin: 1em 0 .5em;
-  font-size: 1.1em;
+  font-size: 1.22222222222222em;
+  line-height: 1.18181818181818;
 }
 
 h4 {
   margin: 0 0 0.5em;
   font-size: 1em;
+  line-height: 1.22222222222222;
 }
 
+h5 {
+  margin: 0 0 0.5em;
+  font-size: 1em;
+  line-height: 1.22222222222222;
+}
 
 /* ---------------------
 Lists
@@ -88,20 +94,39 @@ hr {
 }
 
 /* ---------------------
+Horizontal rules
+----------------------*/
+
+figure {
+  margin: 2em 0;
+}
+
+figcaption {
+  margin: .5em 0 0;
+}
+
+summary {
+  margin-bottom: .5em;
+  cursor: pointer;
+}
+
+
+/* ---------------------
 Pre and code
 ----------------------*/
 
 pre {
   font-size: 1em;
   display: block;
-  background: #000;
+  background: #222;
   color: #fff;
   padding: 1em;
   margin: 1em 0 36px;
+  overflow: auto;
 }
 
 code {
-  font-size: 1em;
+  font-size: 0.944444444444444em;
   color: green;
   font-family: monaco, courier, monospace;
 }
@@ -206,6 +231,24 @@ button {
   font-family: helvetica, arial, sans-serif;
 }
 
+.button:focus,
+button:focus {
+  background: #000;
+  color: #fff;
+  outline: none;
+}
+
+.button:hover,
+button:hover {
+  background: green;
+  color: #fff;
+}
+
+.button:active,
+button:active {
+  background: red;
+  color: #fff;
+}
 
 /* ---------------------
 Help and errors
@@ -226,55 +269,65 @@ Help and errors
   color: red;
 }
 
+.codeHighlight,
+.highlight {
+  background: rgba(255, 255, 0, .3);
+  padding: .1em .3em;
+  border-radius: .2em;
+}
+
 /* ---------------------
 Example
 ----------------------*/
 
 .example {
-  margin: 0 0 2em 0;
+  margin: 2em 0;
   padding: 1em;
   background: #EDEBEB;
 }
 
-.example h2 {
+.example h2,
+.example h3,
+.example h4,
+.example h5,
+.example h6 {
   margin: 0;
 }
 
 /* ---------------------
-Badge
+footer link
 ----------------------*/
 
-.badge {
-  display: inline;
-  color: #555;
-  background: #fff;
-  padding: 0;
-  margin: 0;
-  font-size: 16px;
-  font-weight: normal;
+.footer-link {
+  margin: 5em 0 1em;
+  font-size: 0.777777777777778em;
   line-height: 1;
 }
 
-.badge:after {
-  content: "";
-  display:block;
-  height: 0;
-}
-
-
-/* ---------------------
-navigation
-----------------------*/
-
-.navigation {
-  margin: 2em 0;
-  padding: 0;
-  list-style: none;
-}
-
-.navigation li {
+.footer-link a {
   display: inline-block;
-  margin: 0 1em 0 0;
+  padding: 0.75em 1em;
+  border: 0;
+  background: blue !important;
+  color: #fff !important;
+  text-decoration: none;
+  border-radius: 0.2em;
+}
+
+.footer-link a:focus {
+  background: #000 !important;
+  color: #fff !importantv;
+  outline: none;
+}
+
+.footer-link a:hover {
+  background: green !important;
+  color: #fff !important;
+}
+
+.footer-link a:active {
+  background: red !important;
+  color: #fff !important;
 }
 
 /* ---------------------
@@ -297,63 +350,268 @@ Hidden
 }
 
 /* ---------------------
-Example-none
+Testing text contrast
 ----------------------*/
 
-.example-none a:focus {
-  outline: 0;
+.colour-example1,
+.colour-example2,
+.colour-example3,
+.colour-example4 {
+  margin-top: .5em;
+  padding: 1em;
+  background: #fff;
+  border: 1px solid #ddd;
 }
 
-.example-none button:focus {
-  outline: 0;
+.colour-example1 {
+  color: #777;
+  font-size: 17pt;
 }
 
+.colour-example2 {
+  color: orange;
+  font-size: 13pt;
+}
+
+.colour-example3 {
+  color: green;
+  font-size: 19pt;
+}
+
+.colour-example4 {
+  color: #B07BDB;
+  font-size: 15pt;
+}
 
 /* ---------------------
-Example-colour
+Testing non-text-contrast
 ----------------------*/
 
-.example-color a:focus {
-  outline: 0;
-  color: black;
+.input1 {
+  border: 2px solid #878787;
 }
 
-.example-color button:focus {
-  outline: 0;
-  background:  #000;
+.input2 {
+  border: 2px solid #1B9823;
 }
 
+.input3 {
+  border: 2px solid #1E9DC8;
+}
+
+.input4 {
+  border: 2px solid #DF58C6;
+}
 
 /* ---------------------
-Example-outline
+Testing use of color
 ----------------------*/
 
-.example-outline a:focus {
-  outline: 2px solid #000;
+.user-of-color1 a:link {
+  text-decoration: none;
 }
 
-.example-outline button:focus {
-  outline: 2px solid #000;
+.user-of-color-circle {
+  display: block;
+  margin: 0 auto;
+  width: 26px;
+  height: 26px;
+  border-radius: 26px;
 }
 
+.user-of-color-red {
+  background: red;
+}
+
+.user-of-color-green {
+  background: green;
+}
+
+.user-of-color-red2 {
+  background: red;
+  background-image: url("../img/icon-cross.png");
+  background-size: 14px 14px;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.user-of-color-green2 {
+  background: green;
+  background-image: url("../img/icon-tick.png");
+  background-size: 14px 14px;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
 
 /* ---------------------
-Example-shadow
+Testing headings
 ----------------------*/
 
-.example-shadow a:focus {
-  outline: 0;
-  color: #fff;
-  background: #000;
+.h3 {
+  margin: 1em 0 0.5em;
+  font-size: 1.1em;
+}
+
+.h3 {
+  line-height: 1.2;
+  color: #C03C0C;
+  font-weight: 600;
+  font-family: source sans pro,helvetica neue,Helvetica,Arial,Frutiger,frutiger linotype,Univers,Calibri,gill sans,gill sans mt,myriad pro,Myriad,dejavu sans condensed,liberation sans,nimbus sans l,Tahoma,Geneva,sans-serif;
+}
+
+/* ---------------------
+Testing landmarks
+----------------------*/
+
+header,
+footer,
+main,
+nav,
+aside,
+section,
+article,
+form[role="search"] {
+  padding: 1em;
+  border: 1px solid #ccc;
+  background: #efefef;
+  margin: 0 0 1em;
+}
+
+/* ---------------------
+Testing accessible names
+----------------------*/
+
+.testing-accessible-names-button {
+  margin-left: 1em;
+}
+
+/* ---------------------
+Testing states
+----------------------*/
+
+.testing-states-checkbox {
+  position: relative;
+  padding-left: 1.6em;
+}
+
+.testing-states-checkbox:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .2em;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  border-radius: .1em;
+  background-color: #fff;
   box-shadow:
-    0 0 0 2px #fff,
-    0 0 0 5px #000;
+    0 0 0 3px #fff,
+    0 0 0 5px #666;
 }
 
-.example-shadow button:focus {
-  outline: 0;
-  background: black;
-  box-shadow:
-    0 0 0 2px #fff,
-    0 0 0 5px #000;
+/* ---------------------
+Testing states
+----------------------*/
+
+.testing-images {
+  padding: 1em;
+  background: #eee;
+}
+
+/* ----------- 
+Card styles
+----------- */
+
+.card {
+  max-width: 20em;
+  border: 2px solid #aaa;
+  padding: 20px;
+  background: #fff;
+  margin: 1em 0;
+}
+
+.card-thumbnail {
+  display: block;
+  width: 100%;
+}
+
+.card-heading {
+  font-size: 1.3em;
+  margin: .5em 0;
+}
+
+.card p:last-of-type {
+  margin: 0;
+}
+
+/* ----------- 
+Card variations
+----------- */
+
+.card-link {
+  display: block;
+  max-width: 20em;
+}
+
+.card-link:link,
+.card-link:visited {
+  color: #333;
+  text-decoration: none;
+}
+
+.card-link:hover {
+  color: rgb(0,200,0);
+}
+
+.card-link:hover .card {
+  border: 2px solid rgb(0,200,0);
+}
+
+.card-css:hover,
+.card-special:hover {
+  cursor: pointer;
+  border: 2px solid rgb(0,200,0);
+}
+
+.card-css {
+  position: relative;
+}
+
+.card-css a:after {
+  position: absolute;
+  content: '';
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  bottom: 0;
+}
+
+.card-image-link {
+  display: block;
+}
+
+.card-image-link:hover {
+  outline: 2px solid rgb(0,200,0);
+}
+
+.card-special a {
+  position: relative;
+  left: -5px;
+  padding: 5px;
+}
+
+/* ----------- 
+Focus order nav
+----------- */
+
+.focus-order-nav {
+  margin: 1em 0;
+  padding: 0;
+  list-style: none;
+}
+
+.focus-order-nav li {
+  display: inline-block;
+  margin-right: 1em;
 }

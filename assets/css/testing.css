@@ -71,7 +71,6 @@ h5 {
   line-height: 1.22222222222222;
 }
 
-
 /* ---------------------
 Lists
 ----------------------*/
@@ -624,4 +623,19 @@ Card variations
   position: relative;
   left: -5px;
   padding: 5px;
+}
+
+/* ----------- 
+Focus order nav
+----------- */
+
+.focus-order-nav {
+  margin: 1em 0;
+  padding: 0;
+  list-style: none;
+}
+
+.focus-order-nav li {
+  display: inline-block;
+  margin-right: 1em;
 }
