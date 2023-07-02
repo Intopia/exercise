@@ -17,10 +17,21 @@
 <header>Site name</header>
 
 
+<p>A nested <code>&lt;header&gt;</code> element does not generate a <code>banner</code> landmark:</p>
+<section>
+  <header>News article header</header>
+</section>
+
+
 <h2><code>&lt;footer&gt;</code></h2>
 
 <p>A top level <code>&lt;footer&gt;</code> element generates a <code>contentinfo</code> landmark:</p>
 <footer>Footer region</footer>
+
+<p>A nested <code>&lt;footer&gt;</code> element does not generate a <code>contentinfo</code> landmark:</p>
+<section>
+  <footer>Footer inside another landmark element</footer>
+</section>
 
 
 <h2><code>&lt;main&gt;</code></h2>

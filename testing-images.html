@@ -18,7 +18,7 @@
 <div class="example">
   <img src="assets/img/image-decorative.jpg" alt="">
 </div>
-<pre><code>&lt;img src="decorative.jpg" alt=""&gt;</code></pre>
+<pre><code>&lt;img src="decorative.jpg" <span class="highlight">alt=""</span>&gt;</code></pre>
 
 
 <h2>Type 2: Informative images</h2>
@@ -27,11 +27,10 @@
 <div class="example">
   <img width="600" src="assets/img/image-informative.png" alt="Sydney Opera House Environmental Sustainability Manager Emma Bombonato, with some of the 35 kilometres of pipes that heat and cool the building">
 </div>
-<pre><code>&lt;img src="informative.png"
-  alt="Sydney Opera House Environmental
-  Sustainability Manager Emma Bombonato,
-  with some of the 35 kilometres of pipes
-  that heat and cool the building"&gt;</code></pre>
+<pre><code>&lt;img src="informative.png" <span class="highlight">alt="Sydney Opera
+House Environmental Sustainability Manager
+Emma Bombonato, with some of the 35 kilometres
+of pipes that heat and cool the building"</span>&gt;</code></pre>
 
 
 <h2>Type 3: Functional images</h2>
@@ -43,7 +42,7 @@
   </button>
 </div>
 <pre><code>&lt;button&gt;
-  &lt;img src="functional.png" alt="Close"&gt;
+  &lt;img src="functional.png" <span class="highlight">alt="Close"</span>&gt;
 &lt;/button&gt;</code></pre>
 
 <p>Functional image with <code>aria-label</code> attribute applied to the <code>&lt;button&gt;</code> element:</p>
@@ -52,7 +51,7 @@
     <img src="assets/img/icon-arrow-right.png" alt="">    
   </button>
 </div>
-<pre><code>&lt;button aria-label="Next"&gt;
+<pre><code>&lt;button <span class="highlight">aria-label="Next"</span>&gt;
   &lt;img src="functional.png" alt=""&gt;
 &lt;/button&gt;</code></pre>
 
@@ -63,7 +62,7 @@
   </button>
 </div>
 <pre><code>&lt;button&gt;
-  &lt;img src="functional.png" alt=""&gt; Dismiss
+  &lt;img src="functional.png" alt=""&gt; <span class="highlight">Dismiss</span>
 &lt;/button&gt;</code></pre>
 
 
@@ -90,11 +89,10 @@
     </details>
   </figcaption>
 </figure>
-<pre><code>&lt;img
-  src="complex.png"
-  alt="Venn diagram depicting content category
-  relationships. Detailed description below"
-  aria-details="aaa"&gt;</code></pre>
+<pre><code>&lt;img aria-details="aaa" src="complex.png"
+<span class="highlight">alt="Venn diagram depicting content category
+relationships. Detailed description below"</span>&gt;</code></pre>
+
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>

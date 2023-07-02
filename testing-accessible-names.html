@@ -18,9 +18,13 @@
   <a href="#">More</a>
   <button class="testing-accessible-names-button">Close</button>
 </div>
-<pre><code>&lt;a href="#"&gt;More&lt;/a&gt;
+<pre><code>&lt;a href="#"&gt;
+  <span class="highlight">More</span>
+&lt;/a&gt;
 
-&lt;button&gt;Close&lt;/button&gt;</code></pre>
+&lt;button&gt;
+  <span class="highlight">Close</span>
+&lt;/button&gt;</code></pre>
 
 <h2>Links and buttons using hidden content</h2>
 <p>Hidden content can be used to generate a more detailed accessible name:</p>
@@ -36,12 +40,12 @@
 </div>
 <pre><code>&lt;a href="#"&gt;
   More
-  &lt;span class="hidden"&gt;about fishes&lt;/span&gt;
+  <span class="highlight">&lt;span class="hidden"&gt;about fishes&lt;/span&gt;</span>
 &lt;/a&gt;
 
-&lt;button class="testing-accessible-names-button"&gt;
+&lt;button&gt;
   Close
-  &lt;span class="hidden"&gt;modal&lt;/span&gt;
+  <span class="highlight">&lt;span class="hidden"&gt;modal&lt;/span&gt;</span>
 &lt;/button&gt;</code></pre>
 
 
@@ -51,11 +55,11 @@
   <a href="#" aria-label="Next article">Next</a>
   <button class="testing-accessible-names-button" aria-label="Dismiss warning notification">Dismiss</button>
 </div>
-<pre><code>&lt;a href="#" aria-label="Next article"&gt;
+<pre><code>&lt;a href="#" <span class="highlight">aria-label="Next article"</span>&gt;
   Next
 &lt;/a&gt;
 
-&lt;button aria-label="Dismiss warning notification"&gt;
+&lt;button <span class="highlight">aria-label="Dismiss warning notification"</span>&gt;
   Dismiss
 &lt;/button&gt;</code></pre>
 
@@ -68,11 +72,11 @@
     <img src="assets/img/icon-cross.png" alt="">
   </button>
 </div>
-<pre><code>&lt;a href="#" title="Find out more about trees"&gt;
+<pre><code>&lt;a href="#" <span class="highlight">title="Find out more about trees"</span>&gt;
   Find out more
 &lt;/a&gt;
 
-&lt;button title="Exit"&gt;
+&lt;button <span class="highlight">title="Exit"</span>&gt;
   &lt;img src="cross.png" alt=""&gt;
 &lt;/button&gt;</code></pre>
 
@@ -83,7 +87,7 @@
   <label class="label" for="address">Address</label>
   <input class="input" id="address" type="text">
 </div>
-<pre><code>&lt;label for="address"&gt;Address&lt;/label&gt;
+<pre><code><span class="highlight">&lt;label for="address"&gt;Address&lt;/label&gt;</span>
 &lt;input id="address" type="text"&gt;</code></pre>
 
 
@@ -92,7 +96,7 @@
 <div class="example">
   <input class="input" type="text" aria-label="Search the site">
 </div>
-<pre><code>&lt;input type="text" aria-label="Search the site"&gt;</code></pre>
+<pre><code>&lt;input type="text" <span class="highlight">aria-label="Search the site"</span>&gt;</code></pre>
 
 
 <h2>Inputs using the <code>title</code></h2>
@@ -100,7 +104,7 @@
 <div class="example">
   <input class="input" type="text" title="Bank details">
 </div>
-<pre><code>&lt;input type="text" title="Bank details"&gt;</code></pre>
+<pre><code>&lt;input type="text" <span class="highlight">title="Bank details"</span>&gt;</code></pre>
 
 
 <h2>Inputs using the <code>placeholder</code></h2>
@@ -108,7 +112,7 @@
 <div class="example">
   <input class="input" type="text" placeholder="MM/DD/YYYY">
 </div>
-<pre><code>&lt;input type="text" placeholder="MM/DD/YYYY"&gt;</code></pre>
+<pre><code>&lt;input type="text" <span class="highlight">placeholder="MM/DD/YYYY"</span>&gt;</code></pre>
 
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
