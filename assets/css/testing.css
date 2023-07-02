@@ -140,6 +140,7 @@ pre {
   color: #fff;
   padding: 1em;
   margin: 1em 0 36px;
+  overflow: auto;
 }
 
 code {

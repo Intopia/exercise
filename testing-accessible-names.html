@@ -11,14 +11,18 @@
 
 <h1>Testing accessible names</h1>
 
-<h2>Links and buttons</h2>
 
+<h2>Links and buttons using content</h2>
 <p>The contents can be used to generate the accessible name for the <code>&lt;a&gt;</code> and <code>&lt;button&gt;</code>  elements:</p>
 <div class="example">
   <a href="#">More</a>
   <button class="testing-accessible-names-button">Close</button>
 </div>
+<pre><code>&lt;a href="#"&gt;More&lt;/a&gt;
 
+&lt;button&gt;Close&lt;/button&gt;</code></pre>
+
+<h2>Links and buttons using hidden content</h2>
 <p>Hidden content can be used to generate a more detailed accessible name:</p>
 <div class="example">
   <a href="#">
@@ -30,13 +34,33 @@
     <span class="hidden">modal</span>
   </button>
 </div>
+<pre><code>&lt;a href="#"&gt;
+  More
+  &lt;span class="hidden"&gt;about fishes&lt;/span&gt;
+&lt;/a&gt;
 
+&lt;button class="testing-accessible-names-button"&gt;
+  Close
+  &lt;span class="hidden"&gt;modal&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+
+
+<h2>Links and buttons using <code>aria-label</code></h2>
 <p>The <code>aria-label</code> attribute can be used to create an accessible name that is different to the visible text label:</p>
 <div class="example">
   <a href="#" aria-label="Next article">Next</a>
   <button class="testing-accessible-names-button" aria-label="Dismiss warning notification">Dismiss</button>
 </div>
+<pre><code>&lt;a href="#" aria-label="Next article"&gt;
+  Next
+&lt;/a&gt;
 
+&lt;button aria-label="Dismiss warning notification"&gt;
+  Dismiss
+&lt;/button&gt;</code></pre>
+
+
+<h2>Links and buttons using <code>title</code></h2>
 <p>What about the <code>title</code> attribute? It may not create an accessible name as it is the weakest method. More importantly, this is a bad practice as the <code>title</code> is <a href="https://www.tpgi.com/using-the-html-title-attribute-updated/" target="_blank">not fully accessible</a>.</p>
 <div class="example">
   <a href="#" title="Find out more about trees">Find out more</a>
@@ -44,30 +68,48 @@
     <img src="assets/img/icon-cross.png" alt="">
   </button>
 </div>
+<pre><code>&lt;a href="#" title="Find out more about trees"&gt;
+  Find out more
+&lt;/a&gt;
+
+&lt;button title="Exit"&gt;
+  &lt;img src="cross.png" alt=""&gt;
+&lt;/button&gt;</code></pre>
 
 
-<h2>Inputs</h2>
-
-<p>The contents of the <code>label</code> attribute can be used to generate the accessible name for the <code>&lt;input&gt;</code>:</p>
+<h2>Inputs using the <code>&lt;label&gt;</code></h2>
+<p>The contents of the <code>&lt;label&gt;</code> attribute can be used to generate the accessible name for the <code>&lt;input&gt;</code>:</p>
 <div class="example">
   <label class="label" for="address">Address</label>
   <input class="input" id="address" type="text">
 </div>
+<pre><code>&lt;label for="address"&gt;Address&lt;/label&gt;
+&lt;input id="address" type="text"&gt;</code></pre>
 
+
+<h2>Inputs using the <code>aria-label</code></h2>
 <p>The contents of the <code>aria-label</code> attribute can be used to generate the accessible name for the <code>&lt;input&gt;</code>:</p>
 <div class="example">
   <input class="input" type="text" aria-label="Search the site">
 </div>
+<pre><code>&lt;input type="text" aria-label="Search the site"&gt;</code></pre>
 
+
+<h2>Inputs using the <code>title</code></h2>
 <p>The contents of the <code>title</code> attribute can be used to generate the accessible name for the <code>&lt;input&gt;</code>. As mentioned above, this is a bad practice as the <code>title</code> is <a href="https://www.tpgi.com/using-the-html-title-attribute-updated/" target="_blank">not fully accessible</a>.</p>
 <div class="example">
   <input class="input" type="text" title="Bank details">
 </div>
+<pre><code>&lt;input type="text" title="Bank details"&gt;</code></pre>
 
+
+<h2>Inputs using the <code>placeholder</code></h2>
 <p>The contents of the <code>placeholder</code> attribute can be used to generate the accessible name for the <code>&lt;input&gt;</code>. This is also a bad practice as the <code>placeholder</code> is not fully accessible.</p>
 <div class="example">
   <input class="input" type="text" placeholder="MM/DD/YYYY">
 </div>
+<pre><code>&lt;input type="text" placeholder="MM/DD/YYYY"&gt;</code></pre>
+
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
