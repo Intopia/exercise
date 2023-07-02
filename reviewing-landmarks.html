@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Reviewing landmarks</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<h1>Reviewing landmarks</h1>
+
+<h2><code>&lt;header&gt;</code></h2>
+
+<p>A top level <code>&lt;header&gt;</code> element generates a <code>banner</code> landmark:</p>
+<header>Site name</header>
+
+
+<p>A nested <code>&lt;header&gt;</code> element does not generate a <code>banner</code> landmark:</p>
+<section>
+  <header>News article header</header>
+</section>
+
+
+<h2><code>&lt;footer&gt;</code></h2>
+
+<p>A top level <code>&lt;footer&gt;</code> element generates a <code>contentinfo</code> landmark:</p>
+<footer>Footer region</footer>
+
+<p>A nested <code>&lt;footer&gt;</code> element does not generate a <code>contentinfo</code> landmark:</p>
+<section>
+  <footer>Footer inside another landmark element</footer>
+</section>
+
+
+<h2><code>&lt;main&gt;</code></h2>
+
+<p>A <code>&lt;main&gt;</code> element generates a <code>main</code> landmark:</p>
+<main>Main region</main>
+
+
+<h2><code>&lt;nav&gt;</code></h2>
+
+<p>A <code>&lt;nav&gt;</code> element generates a <code>navigation</code> landmark:</p>
+<nav>Nav region</nav>
+
+<p>The <code>&lt;nav&gt;</code> element can be given a label via <code>aria-label</code>:</p>
+<nav aria-label="Primary">Nav region</nav>
+
+<p>Or via <code>aria-labelledby</code>:</p>
+<nav aria-labelledby="related-links">
+  <h4 id="related-links">Related links</h4>
+</nav>
+
+
+<h2><code>&lt;aside&gt;</code></h2>
+
+<p>An <code>&lt;aside&gt;</code> element generates a <code>complementary</code> landmark:</p>
+<aside>Aside region</aside>
+
+<p>The <code>&lt;aside&gt;</code> element can be given a label via <code>aria-label</code>:</p>
+<aside aria-label="Related articles">Aside region</aside>
+
+<p>Or via <code>aria-labelledby</code>:</p>
+<aside aria-labelledby="sidebar">
+  <h4 id="sidebar">Sidebar</h4>
+</aside>
+
+
+<h2><code>&lt;section&gt;</code></h2>
+
+<p>An <code>&lt;section&gt;</code> element generates a <code>section</code> or <code>region</code> landmark, but this is not used by most devices:</p>
+<section>
+  <h3>Heading for section region</h3>
+</section>
+
+
+<h2><code>&lt;article&gt;</code></h2>
+
+<p>An <code>&lt;article&gt;</code> element generates an <code>article</code> landmark, but this is not used by most devices:</p>
+<article>
+  <h3>Heading for article region</h3>
+</article>
+
+
+<h2><code>role=search</code></h2>  
+
+<p>The <code>role="search"</code> generates a <code>search</code> landmark:</p>
+<form action="#" role="search">
+  <div class="form-container">
+    <label class="label" for="search-this-site">Search this site</label>
+    <input class="input" type="search" id="search-this-site">
+  </div>
+  <button>Submit</button>
+</form>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>

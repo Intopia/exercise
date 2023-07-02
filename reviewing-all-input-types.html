@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Reviewing all input types</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<h1>Reviewing all input types</h1>
+
+
+<h2>1. <code>&lt;input type="button"&gt;</code></h2>
+<p>A push button with no default behavior displaying the value of the <code>value</code>  attribute, empty by default.</p>
+<div class="example">
+  <input class="button" type="button" value="Button">
+</div>
+
+
+<h2>2. <code>&lt;input type="checkbox"&gt;</code></h2>
+<p>A check box allowing single values to be selected/deselected.</p>
+<div class="example">
+  <input id="checkbox" type="checkbox">
+  <label for="checkbox">Subscribe</label>
+</div>
+
+
+<h2>3. <code>&lt;input type="file"&gt;</code></h2>
+<p>A control that lets the user select a file. The <code>accept</code> attribute defines the types of files that the control can select.</p>
+<div class="example">
+  <label class="label" for="file">Choose a file</label>
+  <input id="file" type="file">
+</div>
+
+
+<h2>4. <code>&lt;input type="hidden"&gt;</code></h2>
+<p>A control that is not displayed but whose value is submitted to the server. There is an example below, but it's hidden.</p>
+<div class="example">
+  <input type="hidden">
+</div>
+
+
+<h2>5. <code>&lt;input type="image"&gt;</code></h2>
+<p>A graphical submit button. Displays an image defined by the <code>src</code> attribute. The <code>alt</code> attribute presents an accessible name for the element.</p>
+<div class="example">
+  <input type="image" alt="Login" src="https://via.placeholder.com/100">
+</div>
+
+
+<h2>6. <code>&lt;input type="password"&gt;</code></h2>
+<p>A single-line text field whose value is obscured. Will alert user if site is not secure.</p>
+<div class="example">
+  <label class="label" for="password">Password</label>
+  <input class="input" id="password" type="password">
+</div>
+
+
+<h2>7. <code>&lt;input type="radio"&gt;</code></h2>
+<p>A radio button, allowing a single value to be selected out of multiple choices with the same <code>name</code> value.</p>
+<div class="example">
+  <input id="radio" type="radio">
+  <label for="radio">Yes</label>
+</div>
+
+
+<h2>8. <code>&lt;input type="reset"&gt;</code></h2>
+<p>A button that resets the contents of the form to default values. This presents a range of usability issues and should be avoided!</p>
+<div class="example">
+  <input class="button" type="reset" value="reset">
+</div>
+
+
+<h2>9. <code>&lt;input type="submit"&gt;</code></h2>
+<p>A button that submits the form.</p>
+<div class="example">
+  <input class="button" type="submit" value="Submit">
+</div>
+
+
+<h2>10. <code>&lt;input type="text"&gt;</code></h2>
+<p>The default value. A single-line text field. Line-breaks are automatically removed from the input value.</p>
+<div class="example">
+  <label class="label" for="text">Name</label>
+  <input class="input" id="text" type="text">
+</div>
+
+
+<h2>11. <code>&lt;input type="color"&gt;</code></h2>
+<p>A control for specifying a color; opening a color picker when active in supporting browsers.</p>
+<div class="example">
+  <label class="label" for="color">Pick a colour</label>
+  <input id="color" type="color">
+</div>
+
+
+<h2>12. <code>&lt;input type="date"&gt;</code></h2>
+<p>A control for entering a date (year, month, and day, with no time). Opens a date picker or numeric wheels for year, month, day when active in supporting browsers. 
+</p>
+<div class="example">
+  <label class="label" for="date">Choose a date</label>
+  <input class="input" id="date" type="date">
+</div>
+
+
+<h2>13. <code>&lt;input type="datetime-local"&gt;</code></h2>
+<p>A control for entering a date and time, with no time zone. Opens a date picker or numeric wheels for date- and time-components when active in supporting browsers.</p>
+<div class="example">
+  <label class="label" for="datetime">Choose a date and time</label>
+  <input class="input" id="datetime" type="datetime-local">
+</div>
+
+
+<h2>14. <code>&lt;input type="email"&gt;</code></h2>
+<p>A field for editing an email address. Looks like a text input, but has validation parameters and relevant keyboard in supporting browsers and devices with dynamic keyboards.</p>
+<div class="example">
+  <label class="label" for="email">Email address</label>
+  <input class="input" id="email" type="email">
+</div>
+
+
+<h2>15. <code>&lt;input type="month"&gt;</code></h2>
+<p>A control for entering a month and year, with no time zone.</p>
+<div class="example">
+  <label class="label" for="month">Choose a month</label>
+  <input class="input" id="month" type="month">
+</div>
+
+
+<h2>16. <code>&lt;input type="number"&gt;</code></h2>
+<p>A control for entering a number. Displays a spinner and adds default validation. Displays a numeric keypad in some devices with dynamic keypads.</p>
+<div class="example">
+  <label class="label" for="number">Choose a number</label>
+  <input class="input" id="number" type="number">
+</div>
+
+
+<h2>17. <code>&lt;input type="range"&gt;</code></h2>
+<p>A control for entering a number whose exact value is not important. Displays as a range widget defaulting to the middle value. Used in conjunction <code>min</code> and <code>max</code> to define the range of acceptable values.</p>
+<div class="example">
+  <label class="label" for="range">Choose a range</label>
+  <input id="range" type="range">
+</div>
+
+
+<h2>18. <code>&lt;input type="search"&gt;</code></h2>
+<p>A single-line text field for entering search strings. Line-breaks are automatically removed from the input value. May include a delete icon in supporting browsers that can be used to clear the field. Displays a search icon instead of enter key on some devices with dynamic keypads.</p>
+<div class="example">
+  <label class="label" for="search">Search the site</label>
+  <input class="input" id="search" type="search">
+</div>
+
+
+<h2>19. <code>&lt;input type="tel"&gt;</code></h2>
+<p>A control for entering a telephone number. Displays a telephone keypad in some devices with dynamic keypads.</p>
+<div class="example">
+  <label class="label" for="tel">Phone number</label>
+  <input class="input" id="tel" type="tel">
+</div>
+
+
+<h2>20. <code>&lt;input type="time"&gt;</code></h2>
+<p>A control for entering a time value with no time zone.</p>
+<div class="example">
+  <label class="label" for="time">Choose a time</label>
+  <input class="input" id="time" type="time">
+</div>
+
+
+<h2>21. <code>&lt;input type="url"&gt;</code></h2>
+<p>A field for entering a URL. Looks like a <code>text</code> input, but has validation parameters and relevant keyboard in supporting browsers and devices with dynamic keyboards.</p>
+<div class="example">
+  <label class="label" for="url">Web address</label>
+  <input class="input" id="url" type="url">
+</div>
+
+
+<h2>22. <code>&lt;input type="week"&gt;</code></h2>
+<p>A control for entering a date consisting of a week-year number and a week number with no time zone.</p>
+<div class="example">
+  <label class="label" for="week">Choose a week</label>
+  <input class="input" id="week" type="week">
+</div>
+
+
+<h2><code>&lt;input type="datetime"&gt;</code></h2>
+<p>The <code>datetime</code> type was dropped around 2014.</p>
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>

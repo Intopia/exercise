@@ -508,3 +508,85 @@ Testing states
   background: #eee;
 }
 
+/* ----------- 
+Card styles
+----------- */
+
+.card {
+  max-width: 20em;
+  border: 2px solid #aaa;
+  padding: 20px;
+  background: #fff;
+  margin: 1em 0;
+}
+
+.card-thumbnail {
+  display: block;
+  width: 100%;
+}
+
+.card-heading {
+  font-size: 1.3em;
+  margin: .5em 0;
+}
+
+.card p:last-of-type {
+  margin: 0;
+}
+
+/* ----------- 
+Card variations
+----------- */
+
+.card-link {
+  display: block;
+  max-width: 20em;
+}
+
+.card-link:link,
+.card-link:visited {
+  color: #333;
+  text-decoration: none;
+}
+
+.card-link:hover {
+  color: rgb(0,200,0);
+}
+
+.card-link:hover .card {
+  border: 2px solid rgb(0,200,0);
+}
+
+.card-css:hover,
+.card-special:hover {
+  cursor: pointer;
+  border: 2px solid rgb(0,200,0);
+}
+
+.card-css {
+  position: relative;
+}
+
+.card-css a:after {
+  position: absolute;
+  content: '';
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  bottom: 0;
+}
+
+.card-image-link {
+  display: block;
+}
+
+.card-image-link:hover {
+  outline: 2px solid rgb(0,200,0);
+}
+
+.card-special a {
+  position: relative;
+  left: -5px;
+  padding: 5px;
+}
