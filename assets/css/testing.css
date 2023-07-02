@@ -10,8 +10,8 @@ body {
   max-width: 40em;
   margin: 0;
   padding: 1em 2em 1.5em;
-  font-size: 1.2em;
-  line-height: 1.4;
+  font-size: 1.125em;
+  line-height: 1.5;
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, Frutiger, 'Frutiger Linotype', Univers, Calibri, 'Gill Sans', 'Gill Sans MT', 'Myriad Pro', Myriad, 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, sans-serif;
 }
 
@@ -21,7 +21,6 @@ Paragraphs
 
 p {
   margin: 1em 0 1.5em;
-  line-height: 1.5;
 }
 
 /* ---------------------
@@ -31,7 +30,6 @@ Headings
 h1,
 h2,
 h3 {
-  line-height: 1.2;
   color: #d3420d;
   font-weight: 600;
   font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, Frutiger, 'Frutiger Linotype', Univers, Calibri, 'Gill Sans', 'Gill Sans MT', 'Myriad Pro', Myriad, 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, sans-serif;
@@ -46,21 +44,31 @@ h3 code {
 h1 {
   margin-top: 0;
   font-size: 2em;
+  line-height: 1.22222222222222;
 }
 
 h2 {
   margin: 2em 0 .5em;
-  font-size: 1.5em;
+  font-size: 1.55555555555556em;
+  line-height: 1.21428571428571;
 }
 
 h3 {
   margin: 1em 0 .5em;
-  font-size: 1.1em;
+  font-size: 1.22222222222222em;
+  line-height: 1.18181818181818;
 }
 
 h4 {
   margin: 0 0 0.5em;
   font-size: 1em;
+  line-height: 1.22222222222222;
+}
+
+h5 {
+  margin: 0 0 0.5em;
+  font-size: 1em;
+  line-height: 1.22222222222222;
 }
 
 
@@ -143,7 +151,7 @@ pre {
 }
 
 code {
-  font-size: 1em;
+  font-size: 0.944444444444444em;
   color: green;
   font-family: monaco, courier, monospace;
 }
@@ -316,8 +324,35 @@ footer link
 ----------------------*/
 
 .footer-link {
-  margin: 3em 0;
-  font-size: .8em;
+  margin: 5em 0 1em;
+  font-size: 0.777777777777778em;
+  line-height: 1;
+}
+
+.footer-link a {
+  display: inline-block;
+  padding: 0.75em 1em;
+  border: 0;
+  background: blue !important;
+  color: #fff !important;
+  text-decoration: none;
+  border-radius: 0.2em;
+}
+
+.footer-link a:focus {
+  background: #000 !important;
+  color: #fff !importantv;
+  outline: none;
+}
+
+.footer-link a:hover {
+  background: green !important;
+  color: #fff !important;
+}
+
+.footer-link a:active {
+  background: red !important;
+  color: #fff !important;
 }
 
 /* ---------------------
