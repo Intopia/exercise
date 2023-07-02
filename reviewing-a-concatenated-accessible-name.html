@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Reviewing a concatenated accessible name</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<h1>Reviewing a concatenated accessible name</h1>
+
+<p>In the example below, the <code>&lt;button&gt;</code> element's accessible name is concatenated into a text string from the accessible names of all of it's descendant elements. The button below has an accessible name of:</p>
+<p><em>"Hello how are you doing today?"</em></p>
+
+<h2>Button example</h2>
+<div class="example">
+  <button>
+    <img src="assets/img/icon-cross.png" alt="Hello">
+    <span class="hidden">how are you</span>
+    <span aria-label="doing"></span>
+    <span aria-labelledby="aaa"></span>
+    <span title="?"></span>
+  </button>
+
+  <p id="aaa" style="display: none;">today</p>
+</div>
+
+<pre><code>&lt;button&gt;
+  &lt;img src="cross.png" alt="Hello"&gt;
+  &lt;span class="hidden"&gt;how are you&lt;/span&gt;
+  &lt;span aria-label="doing"&gt;&lt;/span&gt;
+  &lt;span aria-labelledby="aaa"&gt;&lt;/span&gt;
+  &lt;span title="?"&gt;&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;p id="aaa" style="display: none;"&gt;today&lt;/p&gt;</code></pre>
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>

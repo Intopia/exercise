@@ -13,7 +13,6 @@ body {
   font-size: 1.2em;
   line-height: 1.4;
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, Frutiger, 'Frutiger Linotype', Univers, Calibri, 'Gill Sans', 'Gill Sans MT', 'Myriad Pro', Myriad, 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, sans-serif;
-
 }
 
 /* ---------------------
@@ -304,7 +303,11 @@ Example
   background: #EDEBEB;
 }
 
-.example h2 {
+.example h2,
+.example h3,
+.example h4,
+.example h5,
+.example h6 {
   margin: 0;
 }
 
