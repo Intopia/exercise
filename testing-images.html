@@ -48,15 +48,15 @@
 
 <p>Functional image with <code>aria-label</code> attribute applied to the <code>&lt;button&gt;</code> element:</p>
 <div class="example">
-  <button aria-label="Expanded">
-    <img src="assets/img/icon-arrow.png" alt="">    
+  <button aria-label="Next">
+    <img src="assets/img/icon-arrow-right.png" alt="">    
   </button>
 </div>
-<pre><code>&lt;button aria-label="Close"&gt;
+<pre><code>&lt;button aria-label="Next"&gt;
   &lt;img src="functional.png" alt=""&gt;
 &lt;/button&gt;</code></pre>
 
-<p>This is not a functional image:</p>
+<p>This is not a functional image as there is text available that describes the function:</p>
 <div class="example">
   <button>
     <img src="assets/img/icon-cross.png" alt=""> Dismiss   
@@ -90,9 +90,11 @@
     </details>
   </figcaption>
 </figure>
-<pre><code>&lt;img src="complex.png"
+<pre><code>&lt;img
+  src="complex.png"
   alt="Venn diagram depicting content category
-  relationships. Detailed description below"&gt;</code></pre>
+  relationships. Detailed description below"
+  aria-details="aaa"&gt;</code></pre>
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
