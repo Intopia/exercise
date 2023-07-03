@@ -42,31 +42,31 @@ h3 code {
 }
 
 h1 {
-  margin-top: 0;
+  margin: 0 0 .5em;
   font-size: 2em;
   line-height: 1.22222222222222;
 }
 
 h2 {
-  margin: 2em 0 .5em;
+  margin: 2em 0 0.642857142857143em;
   font-size: 1.55555555555556em;
   line-height: 1.21428571428571;
 }
 
 h3 {
-  margin: 1em 0 .5em;
+  margin: 1em 0 0.818181818181818em;
   font-size: 1.22222222222222em;
   line-height: 1.18181818181818;
 }
 
 h4 {
-  margin: 0 0 0.5em;
+  margin: 0 0 1em;
   font-size: 1em;
   line-height: 1.22222222222222;
 }
 
 h5 {
-  margin: 0 0 0.5em;
+  margin: 0 0 1em;
   font-size: 1em;
   line-height: 1.22222222222222;
 }
@@ -74,6 +74,12 @@ h5 {
 /* ---------------------
 Lists
 ----------------------*/
+
+ul,
+ol {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
 
 ul li,
 ol li {
