@@ -30,6 +30,7 @@ Headings
 h1,
 h2,
 h3 {
+  line-height: 1.2;
   color: #C03C0C;
   font-weight: 600;
   font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, Frutiger, 'Frutiger Linotype', Univers, Calibri, 'Gill Sans', 'Gill Sans MT', 'Myriad Pro', Myriad, 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, sans-serif;
@@ -56,19 +57,17 @@ h2 {
 h3 {
   margin: 1em 0 0.818181818181818em;
   font-size: 1.22222222222222em;
-  line-height: 1.18181818181818;
+  line-height: 1.22727272727273;
 }
 
 h4 {
   margin: 0 0 1em;
   font-size: 1em;
-  line-height: 1.22222222222222;
 }
 
 h5 {
   margin: 0 0 1em;
   font-size: 1em;
-  line-height: 1.22222222222222;
 }
 
 /* ---------------------
@@ -154,6 +153,14 @@ pre {
   overflow: auto;
 }
 
+h1 code {
+  font-size: 0.888888888888889em;
+}
+
+h2 code {
+  font-size: 0.857142857142857em;
+}
+
 code {
   font-size: 0.944444444444444em;
   color: green;
@@ -198,6 +205,10 @@ form {
   margin: 2em 0;
   padding: 1em;
   background: #eee;
+}
+
+p + form {
+  margin: 1em 0 2em;
 }
 
 fieldset {
