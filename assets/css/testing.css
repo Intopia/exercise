@@ -140,7 +140,6 @@ summary {
   cursor: pointer;
 }
 
-
 /* ---------------------
 Pre and code
 ----------------------*/
@@ -287,15 +286,13 @@ Help and errors
 .help-text {
   display: block;
   margin: 0 0 0.3em;
-  font-style: italic;
-  color: #555;
+  color: #444;
 }
 
 .error-message {
   display: block;
   margin: 0;
   padding: 0.3em 0 0;
-  font-style: italic;
   color: red;
 }
 
@@ -322,6 +319,10 @@ Example
 .example h5,
 .example h6 {
   margin: 0;
+}
+
+p + .example {
+  margin: 1em 0 2em;
 }
 
 /* ---------------------
