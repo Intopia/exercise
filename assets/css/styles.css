@@ -272,7 +272,7 @@ td {
   vertical-align: top;
 }
 
-th {
+thead th {
   background: #EBFFEB;
   border-top: 1px solid #999;
 }
