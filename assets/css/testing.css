@@ -270,6 +270,7 @@ button {
   font-size: 1em;
   line-height: 1;
   font-family: helvetica, arial, sans-serif;
+  cursor: pointer;
 }
 
 .button:focus,
