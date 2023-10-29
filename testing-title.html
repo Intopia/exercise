@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the title attribute</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+<h1>Testing the <code>title</code> attribute</h1>
+
+
+<h2>Example 1</h2>
+<div class="example">
+  <input class="input" type="text" title="Add your name">
+</div>
+
+
+<h2>Example 2</h2>
+<div class="example">
+  <label for="name">Name</label>
+  <input id="name" class="input" type="text" title="Add your name">
+</div>
+
+
+<h2>Example 3</h2>
+<div class="example">
+  <label for="name">Name</label>
+  <span id="aaa" class="help-text">Make sure to include your full name</span>
+  <input id="name" class="input" type="text" title="Add your name" aria-describedby="aaa">
+</div>
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
