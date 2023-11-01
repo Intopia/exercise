@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the accessible name of an input</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<h1>Testing the accessible name of an <code>&lt;input&gt;</code></h1>
+
+
+<p>The purpose this test is to show the cascade order of how accessible names are applied in the accessibility tree. This example should not be considered proper practice. Where possible the contents of the <code>&lt;label&gt;</code> should be used to define the accessible name.</p>
+
+<h2>Example 1</h2>
+<p>The <code>&lt;input&gt;</code> element should have an accessible name of &lsquo;Cat&rsquo; via the <code>aria-labelledby</code> attribute.</p>
+<form action="#">
+  <div class="form-group">
+    <label class="label" for="aaa">Fish</label>
+    <input class="input" type="text" id="aaa" aria-labelledby="cat" aria-label="Dog" title="Rabbit" placeholder="Fox">
+    <div class="error-message" id="cat">Cat</div>
+  </div>
+</form>
+
+<h2>Example 2</h2>
+<p>The <code>&lt;input&gt;</code> element should have an accessible name of &lsquo;Dog&rsquo; via the <code>aria-label</code> attribute.</p>
+<form action="#">
+  <div class="form-group">
+    <label class="label" for="bbb">Fish</label>
+    <input class="input" type="text" id="bbb" aria-label="Dog" title="Rabbit" placeholder="Fox">
+  </div>
+</form>
+
+<h2>Example 3</h2>
+<p>The <code>&lt;input&gt;</code> element should have an accessible name of &lsquo;Fish&rsquo; via the <code>&lt;label&gt;</code> element.</p>
+<form action="#">
+  <div class="form-group">
+    <label class="label" for="ccc">Fish</label>
+    <input class="input" type="text" id="ccc" title="Rabbit" placeholder="Fox">
+  </div>
+</form>
+
+<h2>Example 4</h2>
+<p>The <code>&lt;input&gt;</code> element should have an accessible name of &lsquo;Rabbit&rsquo; via the <code>title</code> attribute.</p>
+<form action="#">
+  <div class="form-group">
+    <input class="input" type="text" title="Rabbit" placeholder="Fox">
+  </div>
+</form>
+
+<h2>Example 5</h2>
+<p>The <code>&lt;input&gt;</code> element should have an accessible name of &lsquo;Fox&rsquo; via the <code>placeholder</code> attribute.</p>
+<form action="#">
+  <div class="form-group">
+    <input class="input" type="text" placeholder="Fox">
+  </div>
+</form>
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
