@@ -316,6 +316,15 @@ Help and errors
   border-radius: .2em;
 }
 
+.fail {
+  color: #fff;
+  background: red;
+}
+
+.pass {
+  color: #fff;
+  background: green;
+}
 /* ---------------------
 Example
 ----------------------*/

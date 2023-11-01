@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the required attribute in Chrome</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<h1>Testing the <code>required</code> attribute in Chrome</h1>
+<p>All form controls are defined using the <code>required</code> attribute. In Chrome's accessibility tree, all form controls:</p>
+<ul>
+  <li>Should be defined as: <code>Required: true</code>.</li>
+  <li>Should be defined as: <code>Invalid user entry: false</code>.</li>
+</ul>
+
+
+<h2>The <code>&lt;input type="email"&gt;</code> element:</h2>
+<ul>
+  <li><span class="pass">PASS</span>: Registers the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span> Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
+<div class="example">
+  <label class="label" for="email">Email address</label>
+  <input class="input" id="email" type="email" required="">
+</div>
+
+<h2>The <code>&lt;input type="number"&gt;</code> element:</h2>
+<ul>
+  <li><span class="pass">PASS</span>: Registers the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span> Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
+<div class="example">
+  <label class="label" for="number">Choose a number</label>
+  <input class="input" id="number" type="number" required="">
+</div>
+
+<h2>The <code>&lt;input type="password"&gt;</code> element:</h2>
+<ul>
+  <li><span class="pass">PASS</span>: Registers the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span> Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
+<div class="example">
+  <label class="label" for="password">Choose a password</label>
+  <input class="input" id="password" type="password" required="">
+</div>
+
+<h2>The <code>&lt;input type="tel"&gt;</code> element:</h2>
+<ul>
+  <li><span class="pass">PASS</span>: Registers the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span> Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
+<div class="example">
+  <label class="label" for="tel">Phone number</label>
+  <input class="input" id="tel" type="tel" required="">
+</div>
+
+<h2>The <code>&lt;input type="text"&gt;</code> element:</h2>
+<ul>
+  <li><span class="pass">PASS</span>: Registers the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span> Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
+<div class="example">
+  <label class="label" for="text">Name</label>
+  <input class="input" id="text" type="text" required="">
+</div>
+
+<h2>The <code>&lt;input type="url"&gt;</code> element:</h2>
+<ul>
+  <li><span class="pass">PASS</span>: Registers the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span> Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
+<div class="example">
+  <label class="label" for="url">Web address</label>
+  <input class="input" id="url" type="url" required="">
+</div>
+
+<h2>The <code>&lt;textarea&gt;</code> element:</h2>
+<ul>
+  <li><span class="pass">PASS</span>: Registers the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span> Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
+<form action="#">
+  <label class="label" for="textarea">Add a comment</label>
+  <textarea class="input" id="textarea" rows="5" required=""></textarea>
+</form>
+
+<h2>The <code>&lt;input type="radio"&gt;</code> element:</h2>
+<ul>
+  <li><span class="fail">FAIL</span> Does not register the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span> Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
+<div class="example">
+  <input id="radio" type="radio" required="">
+  <label for="radio">Yes</label>
+</div>
+
+<h2>The <code>&lt;input type="search"&gt;</code> element:</h2>
+<ul>
+  <li><span class="fail">FAIL</span> Does not register the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span> Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
+<div class="example">
+  <label class="label" for="search">Search the site</label>
+  <input class="input" id="search" type="search" required="">
+</div>
+
+<h2>The <code>&lt;input type="checkbox"&gt;</code> element:</h2>
+<ul>
+  <li><span class="fail">FAIL</span> Does not register the <code>required</code> attribute.</li>
+  <li><span class="fail">FAIL</span> Incorrectly registers as <code>Invalid user entry: true</code>.</li>
+</ul>
+<div class="example">
+  <input id="checkbox" type="checkbox" required="">
+  <label for="checkbox">Subscribe</label>
+</div>
+
+<h2>The <code>&lt;input type="date"&gt;</code> element:</h2>
+<ul>
+  <li><span class="fail">FAIL</span> Does not register the <code>required</code> attribute.</li>
+  <li><span class="fail">FAIL</span> Incorrectly registers as <code>Invalid user entry: true</code>.</li>
+</ul>
+<div class="example">
+  <label class="label" for="date">Choose a date</label>
+  <input class="input" id="date" type="date" required="">
+</div>
+
+<h2>The <code>&lt;input type="datetime-local"&gt;</code> element</h2>
+<ul>
+  <li><span class="fail">FAIL</span> Does not register the <code>required</code> attribute.</li>
+  <li><span class="fail">FAIL</span> Incorrectly registers as <code>Invalid user entry: true</code>.</li>
+</ul>
+<div class="example">
+  <label class="label" for="datetime">Choose a date and time</label>
+  <input class="input" id="datetime" type="datetime-local" required="">
+</div>
+
+<h2>The <code>&lt;input type="file"&gt;</code> element:</h2>
+<ul>
+  <li><span class="fail">FAIL</span> Does not register the <code>required</code> attribute.</li>
+  <li><span class="fail">FAIL</span> Incorrectly registers as <code>Invalid user entry: true</code>.</li>
+</ul>
+<div class="example">
+  <label class="label" for="file">Choose a file</label>
+  <input id="file" type="file" required="">
+</div>
+
+<h2>The <code>&lt;input type="month"&gt;</code> element:</h2>
+<ul>
+  <li><span class="fail">FAIL</span> Does not register the <code>required</code> attribute.</li>
+  <li><span class="fail">FAIL</span> Incorrectly registers as <code>Invalid user entry: true</code>.</li>
+</ul>
+<div class="example">
+  <label class="label" for="month">Choose a month</label>
+  <input class="input" id="month" type="month" required="">
+</div>
+
+<h2>The <code>&lt;input type="time"&gt;</code> element:</h2>
+<ul>
+  <li><span class="fail">FAIL</span> Does not register the <code>required</code> attribute.</li>
+  <li><span class="fail">FAIL</span> Incorrectly registers as <code>Invalid user entry: true</code>.</li>
+</ul>
+<div class="example">
+  <label class="label" for="time">Choose a time</label>
+  <input class="input" id="time" type="time" required="">
+</div>
+
+<h2>The <code>&lt;input type="week"&gt;</code> element:</h2>
+<ul>
+  <li><span class="fail">FAIL</span> Does not register the <code>required</code> attribute.</li>
+  <li><span class="fail">FAIL</span> Incorrectly registers as <code>Invalid user entry: true</code>.</li>
+</ul>
+<div class="example">
+  <label class="label" for="week">Choose a week</label>
+  <input class="input" id="week" type="week" required="">
+</div>
+
+<h2>The <code>&lt;select&gt;</code> element:</h2>
+<ul>
+  <li><span class="fail">FAIL</span> Does not register the <code>required</code> attribute.</li>
+  <li><span class="fail">FAIL</span> Incorrectly registers as <code>Invalid user entry: true</code>.</li>
+</ul>
+<form action="#">
+  <label class="label" for="select">Choose a dinosaur:</label>
+  <select class="input" id="select" required="">
+    <option value="">Choose</option>
+    <option>Tyrannosaurus</option>
+    <option>Velociraptor</option>
+    <option>Deinonychus</option>
+    <option>Diplodocus</option>
+    <option>Saltasaurus</option>
+    <option>Apatosaurus</option>
+  </select>
+</form>
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
