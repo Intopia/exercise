@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>A sample form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<h1>Tell us about yourself</h1>
+
+
+<form action="testing-datalist2.html">
+  <div class="form-group-spaced">
+    <label class="label" for="full-name">Name</label>
+    <input class="input" id="full-name" type="text">
+  </div>
+
+  <div class="form-group-spaced">
+    <label class="label">Email address</label>
+    <input class="input" type="email">
+  </div>
+
+  <div class="form-group-spaced">
+    <label class="label" for="phone">Phone number</label>
+    <input class="input" id="phone" type="tel">
+  </div>
+
+  <div class="form-group-spaced">
+    <label class="label" for="flavour">What is your favourite colour?</label>
+    <input class="input" list="flavour-list" id="flavour">
+    <datalist id="flavour-list">
+      <option>Red</option>
+      <option>Orange</option>
+      <option>Yellow</option>
+      <option>Green</option>
+      <option>Blue</option>
+      <option>Purple</option>
+      <option>White</option>
+      <option>Black</option>
+      <option>Gray</option>
+      <option>Pink</option>
+    </datalist>
+  </div>
+
+  <div style="margin-top: 3em;">
+    <button>Submit</button>
+  </div>
+</form>
+
+</body>
+</html>
