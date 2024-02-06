@@ -30,6 +30,7 @@ Headings
 h1,
 h2,
 h3 {
+  line-height: 1.2;
   color: #C03C0C;
   font-weight: 600;
   font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, Frutiger, 'Frutiger Linotype', Univers, Calibri, 'Gill Sans', 'Gill Sans MT', 'Myriad Pro', Myriad, 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, sans-serif;
@@ -42,38 +43,42 @@ h3 code {
 }
 
 h1 {
-  margin-top: 0;
+  margin: 0 0 .5em;
   font-size: 2em;
   line-height: 1.22222222222222;
 }
 
 h2 {
-  margin: 2em 0 .5em;
+  margin: 2em 0 0.642857142857143em;
   font-size: 1.55555555555556em;
   line-height: 1.21428571428571;
 }
 
 h3 {
-  margin: 1em 0 .5em;
+  margin: 1em 0 0.818181818181818em;
   font-size: 1.22222222222222em;
-  line-height: 1.18181818181818;
+  line-height: 1.22727272727273;
 }
 
 h4 {
-  margin: 0 0 0.5em;
+  margin: 0 0 1em;
   font-size: 1em;
-  line-height: 1.22222222222222;
 }
 
 h5 {
-  margin: 0 0 0.5em;
+  margin: 0 0 1em;
   font-size: 1em;
-  line-height: 1.22222222222222;
 }
 
 /* ---------------------
 Lists
 ----------------------*/
+
+ul,
+ol {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
 
 ul li,
 ol li {
@@ -83,6 +88,28 @@ ol li {
 /* ---------------------
 Links
 ----------------------*/
+
+.example-none a:focus {
+  outline: 0;
+}
+
+.example-color a:focus {
+  color: black;
+  outline: 0;
+}
+
+.example-outline a:focus {
+  outline: 2px solid #000;
+}
+
+.example-shadow a:focus {
+  outline: 0;
+  color: #fff;
+  background: #000;
+  text-decoration: none;
+  box-shadow: 
+    0 0 0 2px black, 0 0 0 4px white, 0 0 0 6px black;
+}
 
 
 /* ---------------------
@@ -110,7 +137,6 @@ summary {
   cursor: pointer;
 }
 
-
 /* ---------------------
 Pre and code
 ----------------------*/
@@ -123,6 +149,14 @@ pre {
   padding: 1em;
   margin: 1em 0 36px;
   overflow: auto;
+}
+
+h1 code {
+  font-size: 0.888888888888889em;
+}
+
+h2 code {
+  font-size: 0.857142857142857em;
 }
 
 code {
@@ -171,8 +205,13 @@ form {
   background: #eee;
 }
 
+p + form {
+  margin: 1em 0 2em;
+}
+
 fieldset {
   margin: 0;
+  padding: 1em;
   border: 1px solid #999;
 }
 
@@ -229,13 +268,46 @@ button {
   font-size: 1em;
   line-height: 1;
   font-family: helvetica, arial, sans-serif;
+  cursor: pointer;
 }
 
 .button:focus,
 button:focus {
   background: #000;
   color: #fff;
+}
+
+.example-default .button:focus,
+.example-default button:focus {
+  background: blue;
+  color: #fff !important;
+
+}
+
+.example-none .button:focus,
+.example-none button:focus {
+  background: blue;
+  color: #fff !important;
   outline: none;
+}
+
+.example-color .button:focus,
+.example-color button:focus {
+  outline: none;
+}
+
+.example-outline .button:focus,
+.example-outline button:focus {
+  background: blue;
+  color: #fff !important;
+  outline: 2px solid #000;
+}
+
+.example-shadow .button:focus,
+.example-shadow button:focus {
+  outline: 0;
+  box-shadow: 
+    0 0 0 2px white, 0 0 0 4px black;
 }
 
 .button:hover,
@@ -257,15 +329,13 @@ Help and errors
 .help-text {
   display: block;
   margin: 0 0 0.3em;
-  font-style: italic;
-  color: #555;
+  color: #444;
 }
 
 .error-message {
   display: block;
   margin: 0;
   padding: 0.3em 0 0;
-  font-style: italic;
   color: red;
 }
 
@@ -276,6 +346,15 @@ Help and errors
   border-radius: .2em;
 }
 
+.fail {
+  color: #fff;
+  background: red;
+}
+
+.pass {
+  color: #fff;
+  background: green;
+}
 /* ---------------------
 Example
 ----------------------*/
@@ -292,6 +371,10 @@ Example
 .example h5,
 .example h6 {
   margin: 0;
+}
+
+p + .example {
+  margin: 1em 0 2em;
 }
 
 /* ---------------------
