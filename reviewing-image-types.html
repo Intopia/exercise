@@ -47,11 +47,11 @@ of pipes that heat and cool the building"</span>&gt;</code></pre>
 <h2>Type 3: Functional images</h2>
 <p>Functional image with <code>alt</code> attribute applied to the <code>&lt;img&gt;</code> element:</p>
 <div class="example">
-  <button aria-label="Close">
+  <button aria-label="Dismiss">
     <img src="assets/img/icon-cross.png">    
   </button>
 </div>
-<pre><code>&lt;button <span class="highlight">aria-label="Clode"</span>&gt;
+<pre><code>&lt;button <span class="highlight">aria-label="Dismiss"</span>&gt;
   &lt;img src="icon-cross.png" alt=""&gt;
 &lt;/button&gt;</code></pre>
 
@@ -74,15 +74,15 @@ of pipes that heat and cool the building"</span>&gt;</code></pre>
     <details id="complex-image-details">
       <summary>Image description</summary>
       <div class="testing-images">      
-        <h4>Content categories include:</h4>
+        <h4>HTML content categories include:</h4>
         <ol>
-          <li>Flow content</li>
-          <li>Metadata content</li>
-          <li>Sectioning content</li>
-          <li>Heading content</li>
-          <li>Phrasing content</li>
-          <li>Interactive content</li>
-          <li>Embedded content</li>
+          <li>Flow content - the base content type</li>
+          <li>Metadata content - slightly overlapping Flow</li>
+          <li>Sectioning content - within Flow</li>
+          <li>Heading content - within Flow</li>
+          <li>Phrasing content - within Flow, overlapping Interactice and Embedded</li>
+          <li>Interactive content - within flow, overlapping Phrasing and Embedded</li>
+          <li>Embedded content - within Flow, overlapping Phrasing and Embedded</li>
         </ol>
       </div>
     </details>
