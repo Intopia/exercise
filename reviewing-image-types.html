@@ -16,10 +16,23 @@
 <h2>Type 1: Decorative image</h2>
 <p>Decorating image using an empty <code>alt</code> attribute:</p>
 <div class="example">
-  <img src="assets/img/image-decorative.jpg" alt="">
+  <div style="position: relative;">
+    <span style="position: absolute; color: #fff; left: 0; right: 0; text-align: center; top: 30px; font-size: 50px;">The desert</span>
+    <img src="assets/img/image-decorative.jpg" alt="">
+  </div>
 </div>
 <pre><code>&lt;img src="decorative.jpg" <span class="highlight">alt=""</span>&gt;</code></pre>
 
+<h2>Decorative SVG</h2>
+<div style=" overflow: hidden; margin-bottom: 2em">
+  <svg width="220" height="230" style="float: right; margin: 0 0 0 1em;" aria-hidden="true">
+    <circle r="100" cx="110" cy="110" fill="crimson"/>    
+    <polygon points="100,220 110,210 120,220" fill="crimson"/>
+  </svg>
+  <p>Modern balloons are made from materials such as rubber, latex, polychloroprene, metalized plastic or a nylon fabric.</p>
+  <p>Long before there was something as stretchy as rubber, balloons existed. In the pre-rubber era, balloons came from animal bladders.</p>
+</div>
+<pre><code>&lt;svg <span class="highlight">aria-hidden="true"</span>&gt;</code></pre>
 
 <h2>Type 2: Informative images</h2>
 <p>Informative image with a non-empty <code>alt</code> attribute:</p>
@@ -31,26 +44,15 @@ House Environmental Sustainability Manager
 Emma Bombonato, with some of the 35 kilometres
 of pipes that heat and cool the building"</span>&gt;</code></pre>
 
-
 <h2>Type 3: Functional images</h2>
 <p>Functional image with <code>alt</code> attribute applied to the <code>&lt;img&gt;</code> element:</p>
 <div class="example">
-  <button>
-    <img src="assets/img/icon-cross.png" alt="Close">    
+  <button aria-label="Close">
+    <img src="assets/img/icon-cross.png">    
   </button>
 </div>
-<pre><code>&lt;button&gt;
-  &lt;img src="functional.png" <span class="highlight">alt="Close"</span>&gt;
-&lt;/button&gt;</code></pre>
-
-<p>Functional image with <code>aria-label</code> attribute applied to the <code>&lt;button&gt;</code> element:</p>
-<div class="example">
-  <button aria-label="Next">
-    <img src="assets/img/icon-arrow-right.png" alt="">    
-  </button>
-</div>
-<pre><code>&lt;button <span class="highlight">aria-label="Next"</span>&gt;
-  &lt;img src="functional.png" alt=""&gt;
+<pre><code>&lt;button <span class="highlight">aria-label="Clode"</span>&gt;
+  &lt;img src="icon-cross.png" alt=""&gt;
 &lt;/button&gt;</code></pre>
 
 <p>This is not a functional image as there is text available that describes the function:</p>
@@ -60,7 +62,7 @@ of pipes that heat and cool the building"</span>&gt;</code></pre>
   </button>
 </div>
 <pre><code>&lt;button&gt;
-  &lt;img src="functional.png" alt=""&gt; <span class="highlight">Dismiss</span>
+  &lt;img src="icon-cross.png" alt=""&gt; <span class="highlight">Dismiss</span>
 &lt;/button&gt;</code></pre>
 
 
