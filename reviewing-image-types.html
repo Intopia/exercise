@@ -23,6 +23,7 @@
 </div>
 <pre><code>&lt;img src="decorative.jpg" <span class="highlight">alt=""</span>&gt;</code></pre>
 
+
 <h2>Decorative SVG</h2>
 <div style=" overflow: hidden; margin-bottom: 2em">
   <svg width="220" height="230" style="float: right; margin: 0 0 0 1em;" aria-hidden="true">
@@ -34,6 +35,7 @@
 </div>
 <pre><code>&lt;svg <span class="highlight">aria-hidden="true"</span>&gt;&lt;/svg&gt;</code></pre>
 
+
 <h2>Type 2: Informative images</h2>
 <p>Informative image with a non-empty <code>alt</code> attribute:</p>
 <div class="example">
@@ -44,16 +46,29 @@ House Environmental Sustainability Manager
 Emma Bombonato, with some of the 35 kilometres
 of pipes that heat and cool the building"</span>&gt;</code></pre>
 
+
 <h2>Type 3: Functional images</h2>
 <p>Functional image with <code>alt</code> attribute applied to the <code>&lt;img&gt;</code> element:</p>
 <div class="example">
-  <button aria-label="Dismiss">
-    <img src="assets/img/icon-cross.png">    
+  <button>
+    <img src="assets/img/icon-cross.png" alt="Close">    
   </button>
 </div>
-<pre><code>&lt;button <span class="highlight">aria-label="Dismiss"</span>&gt;
-  &lt;img src="icon-cross.png" alt=""&gt;
+<pre><code>&lt;button&gt;
+  &lt;img src="functional.png" <span class="highlight">alt="Close"</span>&gt;
 &lt;/button&gt;</code></pre>
+
+
+<p>An <code>aria-label</code> attribute applied to the <code>&lt;a&gt;</code> element, and an informative image inside with an <code>alt</code> attribute.</p>
+<div class="example">
+  <a href="#" aria-label="myGov home">
+    <img style="width: 300px;" src="assets/img/mygov-logo.svg" alt="Australian Government and myGov logo">
+  </a>
+</div>
+<pre><code>&lt;a href="#" <span class="highlight">aria-label="myGov home"</span>&gt;
+  &lt;img src="#" <span class="highlight">alt="Australian Government and myGov logo"</span>&gt;
+&lt;/a&gt;</code></pre>
+
 
 <p>This is not a functional image as there is text available that describes the function:</p>
 <div class="example">
@@ -62,8 +77,7 @@ of pipes that heat and cool the building"</span>&gt;</code></pre>
   </button>
 </div>
 <pre><code>&lt;button&gt;
-  &lt;img src="icon-cross.png" alt=""&gt;
-  <span class="highlight">Dismiss</span>
+  &lt;img src="functional.png" alt=""&gt; <span class="highlight">Dismiss</span>
 &lt;/button&gt;</code></pre>
 
 

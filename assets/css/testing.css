@@ -668,3 +668,10 @@ Focus order nav
   display: inline-block;
   margin-right: 1em;
 }
+
+.external {
+  outline: 1px solid red;
+  background-color: yellow;
+  padding: 0 20px 0 0;
+  background-image: url("paper.svg");
+}

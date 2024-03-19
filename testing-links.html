@@ -12,6 +12,7 @@
 <h1>Testing links</h1>
 <p>Are all of the heagins below real?</p>
 
+
 <h2>1. A standard link</h2>
 <div class="example">
   <a href="#">Read more</a>
@@ -23,6 +24,7 @@
 <pre><code>&lt;a href="#"&gt;
   Read more
 &lt;/a&gt;</code></pre>
+
 
 <h2>2. A link with additional content hidden off-screen</h2>
 <div class="example">
@@ -40,6 +42,7 @@
   <span class="highlight">&lt;span class="hidden"&gt;about fishes&lt;/span&gt;</span>
 &lt;/a&gt;</code></pre>
 
+
 <h2>3. A link with additional information via <code>aria-label</code></h2>
 <div class="example">
   <a href="#" aria-label="Read more about wombats">
@@ -55,6 +58,34 @@
 &lt;/a&gt;</code></pre>
 
 
+<h2>4. A PDF link</h2>
+<div class="example">
+  <a href="#" aria-label="Read more about wombats">
+    Australian Government Annual report (52KB PDF)
+  </a>
+</div>
+<ul>
+  <li>Visible text: Australian Government Annual report (52KB PDF)</li>
+  <li>Accessible name: Australian Government Annual report (52KB PDF)</li>
+</ul>
+<pre><code>&lt;a href="#"&gt;
+  Australian Government Annual report <span class="highlight">(52KB PDF)</span>
+&lt;/a&gt;</code></pre>
+
+
+<h2>5. An external link</h2>
+<div class="example">
+  <div class="external">
+    Telecommunications Security page
+  </div>
+</div>
+<ul>
+  <li>Visible text: Australian Government Annual report (52KB PDF)</li>
+  <li>Accessible name: Australian Government Annual report (52KB PDF)</li>
+</ul>
+<pre><code>&lt;a href="#"&gt;
+  Australian Government Annual report <span class="highlight">(52KB PDF)</span>
+&lt;/a&gt;</code></pre>
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
