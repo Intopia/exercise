@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing links</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<h1>Testing links</h1>
+<p>Are all of the heagins below real?</p>
+
+<h2>1. A standard link</h2>
+<div class="example">
+  <a href="#">Read more</a>
+</div>
+<ul>
+  <li>Visible text: Read more</li>
+  <li>Accessible name: Read more</li>
+</ul>
+<pre><code>&lt;a href="#"&gt;
+  Read more
+&lt;/a&gt;</code></pre>
+
+<h2>2. A link with additional content hidden off-screen</h2>
+<div class="example">
+  <a href="#">
+    Read more
+    <span class="hidden">about fishes</span>
+  </a>
+</div>
+<ul>
+  <li>Visible text: Read more</li>
+  <li>Accessible name: Read more about fishes</li>
+</ul>
+<pre><code>&lt;a href="#"&gt;
+  Read more
+  <span class="highlight">&lt;span class="hidden"&gt;about fishes&lt;/span&gt;</span>
+&lt;/a&gt;</code></pre>
+
+<h2>3. A link with additional information via <code>aria-label</code></h2>
+<div class="example">
+  <a href="#" aria-label="Read more about fish">
+    Read more
+  </a>
+</div>
+<ul>
+  <li>Visible text: Read more</li>
+  <li>Accessible name: Read more about fishes</li>
+</ul>
+<pre><code>&lt;a href="#" <span class="highlight">aria-label="Read more about fish"</span>&gt;
+  Read more
+&lt;/a&gt;</code></pre>
+
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
