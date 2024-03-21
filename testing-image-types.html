@@ -59,17 +59,6 @@ of pipes that heat and cool the building"</span>&gt;</code></pre>
 &lt;/button&gt;</code></pre>
 
 
-<p>An <code>aria-label</code> attribute applied to the <code>&lt;a&gt;</code> element, and an informative image inside with an <code>alt</code> attribute.</p>
-<div class="example">
-  <a href="#" aria-label="myGov home">
-    <img style="width: 300px;" src="assets/img/mygov-logo.svg" alt="Australian Government and myGov logo">
-  </a>
-</div>
-<pre><code>&lt;a href="#" <span class="highlight">aria-label="myGov home"</span>&gt;
-  &lt;img src="#" <span class="highlight">alt="Australian Government and myGov logo"</span>&gt;
-&lt;/a&gt;</code></pre>
-
-
 <p>This is not a functional image as there is text available that describes the function:</p>
 <div class="example">
   <button>
@@ -106,6 +95,19 @@ of pipes that heat and cool the building"</span>&gt;</code></pre>
 <pre><code>&lt;img aria-details="aaa" src="complex.png"
 <span class="highlight">alt="Venn diagram depicting content category
 relationships. Detailed description below"</span>&gt;</code></pre>
+
+
+<h2>Images that are harder to categorise</h2>
+<p>Even though site logos are often placed inside links, they need to be treated as informative images. However, the link needs to describe it’s function - where it will take the user.</p>
+<p>An <code>aria-label</code> attribute applied to the <code>&lt;a&gt;</code> element, and an informative image inside with an <code>alt</code> attribute.</p>
+<div class="example">
+  <a href="#" aria-label="myGov home">
+    <img style="width: 300px;" src="assets/img/mygov-logo.svg" alt="Australian Government and myGov logo">
+  </a>
+</div>
+<pre><code>&lt;a href="#" <span class="highlight">aria-label="myGov home"</span>&gt;
+  &lt;img src="#" <span class="highlight">alt="Australian Government and myGov logo"</span>&gt;
+&lt;/a&gt;</code></pre>
 
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
