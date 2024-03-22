@@ -14,7 +14,7 @@
 
 
 <h2>Type 1: Decorative image</h2>
-<p>Decorating image using an empty <code>alt</code> attribute:</p>
+<p>Decorating example 1 (Image):</p>
 <div class="example">
   <div style="position: relative;">
     <span style="position: absolute; color: #fff; left: 0; right: 0; text-align: center; top: 30px; font-size: 50px;">The desert</span>
@@ -24,8 +24,8 @@
 <pre><code>&lt;img src="decorative.jpg" <span class="highlight">alt=""</span>&gt;</code></pre>
 
 
-<h2>Decorative SVG</h2>
-<div style=" overflow: hidden; margin-bottom: 2em">
+<p>Decorating example 2 (SVG):</p>
+<div class="example" style=" overflow: hidden;">
   <svg width="220" height="230" style="float: right; margin: 0 0 0 1em;" aria-hidden="true">
     <circle r="100" cx="110" cy="110" fill="crimson"/>    
     <polygon points="100,220 110,210 120,220" fill="crimson"/>
@@ -37,7 +37,7 @@
 
 
 <h2>Type 2: Informative images</h2>
-<p>Informative image with a non-empty <code>alt</code> attribute:</p>
+<p>Informative example 1:</p>
 <div class="example">
   <img width="600" src="assets/img/image-informative.png" alt="Sydney Opera House Environmental Sustainability Manager Emma Bombonato, with some of the 35 kilometres of pipes that heat and cool the building">
 </div>
@@ -48,30 +48,42 @@ of pipes that heat and cool the building"</span>&gt;</code></pre>
 
 
 <h2>Type 3: Functional images</h2>
-<p>Functional image with <code>alt</code> attribute applied to the <code>&lt;img&gt;</code> element:</p>
+<p>Functional example 1:</p>
 <div class="example">
   <button>
-    <img src="assets/img/icon-cross.png" alt="Close">    
+    <img src="assets/img/icon-cross.png" alt="Dismiss">    
   </button>
 </div>
 <pre><code>&lt;button&gt;
-  &lt;img src="functional.png" <span class="highlight">alt="Close"</span>&gt;
+  &lt;img src="functional.png" <span class="highlight">alt="Dismiss"</span>&gt;
 &lt;/button&gt;</code></pre>
 
+<p>Functional example 2:</p>
+<div class="example">
+  <a href="#">
+    <img style="width: 300px; display: block;" src="assets/img/logo.jpg" alt="Wayne Enterprises home">
+  </a>
+</div>
+<pre><code>&lt;a href="#"&gt;
+  &lt;img src="#" <span class="highlight">alt="Wayne Enterprises home"</span>&gt;
+&lt;/a&gt;</code></pre>
 
-<p>This is not a functional image as there is text available that describes the function:</p>
+
+<p>This does not need to be a functional image as there is text available that describes the function. So, it be be a decorative image instead:</p>
 <div class="example">
   <button>
-    <img src="assets/img/icon-cross.png" alt=""> Dismiss   
+    <img src="assets/img/icon-cross.png" alt="">
+    Dismiss   
   </button>
 </div>
 <pre><code>&lt;button&gt;
-  &lt;img src="functional.png" alt=""&gt; <span class="highlight">Dismiss</span>
+  &lt;img src="functional.png" <span class="highlight">alt=""</span>&gt;
+  <span class="highlight">Dismiss</span>
 &lt;/button&gt;</code></pre>
 
 
 <h2>Type 4: Complex images</h2>
-<p>Complex image example with <code>alt</code> attribute and longer descrition below:</p>
+<p>Complex example 1:</p>
 <figure class="example">
   <img src="assets/img/image-complex.png" alt="Venn diagram depicting content category relationships. Detailed description below" aria-details="complex-image-details">
   <figcaption>
@@ -95,19 +107,6 @@ of pipes that heat and cool the building"</span>&gt;</code></pre>
 <pre><code>&lt;img aria-details="aaa" src="complex.png"
 <span class="highlight">alt="Venn diagram depicting content category
 relationships. Detailed description below"</span>&gt;</code></pre>
-
-
-<h2>Images that are harder to categorise</h2>
-<p>Even though site logos are often placed inside links, they need to be treated as informative images. However, the link needs to describe it’s function - where it will take the user.</p>
-<p>An <code>aria-label</code> attribute applied to the <code>&lt;a&gt;</code> element, and an informative image inside with an <code>alt</code> attribute.</p>
-<div class="example">
-  <a href="#" aria-label="myGov home">
-    <img style="width: 300px;" src="assets/img/mygov-logo.svg" alt="Australian Government and myGov logo">
-  </a>
-</div>
-<pre><code>&lt;a href="#" <span class="highlight">aria-label="myGov home"</span>&gt;
-  &lt;img src="#" <span class="highlight">alt="Australian Government and myGov logo"</span>&gt;
-&lt;/a&gt;</code></pre>
 
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
