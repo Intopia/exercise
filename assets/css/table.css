@@ -1,0 +1,105 @@
+/* ---------------------
+Gobal styles
+----------------------*/
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  max-width: 50em;
+  margin: 0;
+  padding: 1em 2em 1.5em;
+  font-size: 1.2em;
+  line-height: 1.4;
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, Frutiger, 'Frutiger Linotype', Univers, Calibri, 'Gill Sans', 'Gill Sans MT', 'Myriad Pro', Myriad, 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, sans-serif;
+
+}
+
+/* ---------------------
+Paragraphs
+----------------------*/
+
+p {
+  margin: 1em 0 1.5em;
+  line-height: 1.5;
+}
+
+/* ---------------------
+Headings
+----------------------*/
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  color: #d3420d;
+  font-weight: 600;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, Frutiger, 'Frutiger Linotype', Univers, Calibri, 'Gill Sans', 'Gill Sans MT', 'Myriad Pro', Myriad, 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, sans-serif;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 2em;
+}
+
+/* ---------------------
+Tables
+----------------------*/
+
+table {
+  border-collapse: collapse;
+  margin: 0;
+  width: 100%;
+  background: #fff;
+}
+
+caption {
+  text-align: left;
+  font-weight: bold;
+  padding: 0 0 0.5em;
+  font-size: 1.1em;
+}
+
+th,
+td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.5em;
+  border: 1px solid #666;
+  font-weight: normal;
+}
+
+th.right,
+td {
+  text-align: right;
+}
+
+thead th {
+  font-weight: bold;
+}
+
+
+.totals th,
+.totals td {
+  border-top: 3px solid #000;
+}
+
+/* ---------------------
+Hidden
+----------------------*/
+
+.sr-only,
+.hidden {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  -webkit-clip-path: inset(50%) !important;
+    clip-path: inset(50%) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important;
+}

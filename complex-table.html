@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Complex table example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/table.css" rel="stylesheet">
+</head>
+<body>
+
+<h1>Complex table example</h1>
+<table>
+  <caption>Caption for table</caption>
+  <thead>
+    <tr>
+      <td rowspan="2"></td>
+      <th colspan="2" id="consolidated">Consolidated</th>
+      <th colspan="2" id="parent">Parent</th>
+    </tr>
+    <tr>
+      <th class="right" id="consolidated-2023">2023<br>$000</th>
+      <th class="right" id="consolidated-2022">2022<br>$000</th>
+      <th class="right" id="parent-2023">2023<br>$000</th>
+      <th class="right" id="parent-2022">2022<br>$000</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th colspan="5" id="revenue"><b>Revenue from contracts</b></th>
+    </tr>
+    <tr>
+      <th id="rail">Rail</th>
+      <td headers="consolidated consolidated-2023 revenue rail">$2,000,000</td>
+      <td headers="consolidated consolidated-2022 revenue rail">$1,900,000</td>
+      <td headers="parent parent-2023 revenue rail"><span class="sr-only">NA</span><span aria-hidden="true">-</span></td>
+      <td headers="parent parent-2022 revenue rail"><span class="sr-only">NA</span><span aria-hidden="true">-</span></td>
+    </tr>
+    <tr>
+      <th id="network">Network</th>
+      <td headers="consolidated consolidated-2023 revenue network">$182,000</td>
+      <td headers="consolidated consolidated-2022 revenue network">$170,000</td>
+      <td headers="parent parent-2023 revenue network"><span class="sr-only">NA</span><span aria-hidden="true">-</span></td>
+      <td headers="parent parent-2022 revenue network">$1,900</td>
+    </tr>
+
+    <tr>
+      <th colspan="5" id="other"><b>Other revenue</b></th>
+    </tr>
+    <tr>
+      <th id="something">Something</th>
+      <td headers="consolidated consolidated-2023 other something">$4,000</td>
+      <td headers="consolidated consolidated-2022 other something">$1,300</td>
+      <td headers="parent parent-2023 other something">$1.500</td>
+      <td headers="parent parent-2022 other something"><span class="sr-only">NA</span><span aria-hidden="true">-</span></td>
+    </tr>
+    <tr class="totals">
+      <th id="totals">Totals</th>
+      <td headers="consolidated consolidated-2022 totals">$2,186,000</td>
+      <td headers="consolidated consolidated-2022 totals">$2,071,300</td>
+      <td headers="parent parent-2023 totals">$1.500</td>
+      <td headers="parent parent-2022 totals">$1,900</td>
+    </tr>
+
+  </tbody>
+</table>
+
+</body>
+</html>
