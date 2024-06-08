@@ -6,13 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+.fake1 {
+  color: #000;
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, Frutiger, 'Frutiger Linotype', Univers, Calibri, 'Gill Sans', 'Gill Sans MT', 'Myriad Pro', Myriad, 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, sans-serif;
+}
+
+.fake2 {
+  font-weight: bold;
+}
+  </style>
 </head>
 <body>
 
 <h1>Testing tables</h1>
-<p>Are there any differences between these tables?</p>
+<p>Review the different HTML tables.</p>
 
-<h2>Example 1: Type a value</h2>
+<h2>Example 1</h2>
 <table class="table">
   <caption>Land mammals</caption>
   <thead>
@@ -33,33 +43,54 @@
       <td>Bactrian camel</td>
       <td>Cama camel</td>
     </tr>
+    <tr>
+      <td>Labrador</td>
+      <td>Rottweiler</td>
+      <td>Beagle</td>
+    </tr>
+    <tr>
+      <td>Siamese</td>
+      <td>Persian</td>
+      <td>Ragdoll</td>
+    </tr>
+    <tr>
+      <td>Panda bear</td>
+      <td>Brown bear</td>
+      <td>Polar bear</td>
+    </tr>
   </tbody>
 </table>
 
+<h2>Example 2</h2>
 
-<h2>Example 2: Choose an option</h2>
+<h3 class="fake1">Whales</h3>
 <table class="table">
-  <caption>Dogs</caption>
   <thead>
     <tr>
-      <th scope="col">Working</th>
-      <th scope="col">Hunting</th>
-      <th scope="col">Mutts</th>
+      <td class="fake2">Oceans</td>
+      <td class="fake2">Large</td>
+      <td class="fake2">Small</td>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Alaskan Malamute</td>
-      <td>Boerboel</td>
-      <td>Doberman Pinscher</td>
+      <th>Pacific Ocean</th>
+      <td>Right Whale</td>
+      <td>Pygmy Right Whale</td>
     </tr>
     <tr>
-      <td>American Foxhound</td>
-      <td>Bull Terrior</td>
-      <td>Beagle</td>
+      <th>Arctic Ocean</t>
+      <td>Blue Whale</td>
+      <td>Orca</td>
+    </tr>
+    <tr>
+      <th>Indian Ocean</th>
+      <td>Humpback whale</td>
+      <td>Beluga Whale</td>
     </tr>
   </tbody>
 </table>
+
 
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
