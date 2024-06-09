@@ -669,9 +669,10 @@ Focus order nav
   margin-right: 1em;
 }
 
-.external {
-  outline: 1px solid red;
-  background-color: yellow;
+a.external {
   padding: 0 20px 0 0;
-  background-image: url("paper.svg");
+  background-image: url("../img/external-link-20.png");
+  background-repeat: no-repeat;
+  background-position: center right;
+  padding: 0 26px 0 0;
 }

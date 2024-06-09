@@ -60,7 +60,7 @@
 
 <h2>4. A PDF link</h2>
 <div class="example">
-  <a href="#" aria-label="Read more about wombats">
+  <a href="#">
     Australian Government Annual report (52KB PDF)
   </a>
 </div>
@@ -73,18 +73,32 @@
 &lt;/a&gt;</code></pre>
 
 
-<h2>5. An external link</h2>
+<h2>5. An external link - option 1</h2>
 <div class="example">
-  <div class="external">
-    Telecommunications Security page
-  </div>
+  <a href="https://intopia.digital/" target="_blank">
+  Intopia (External link)
+  </a>
 </div>
 <ul>
-  <li>Visible text: Australian Government Annual report (52KB PDF)</li>
-  <li>Accessible name: Australian Government Annual report (52KB PDF)</li>
+  <li>Visible text: Intopia (External link)</li>
+  <li>Accessible name: Intopia (External link)</li>
 </ul>
 <pre><code>&lt;a href="#"&gt;
-  Australian Government Annual report <span class="highlight">(52KB PDF)</span>
+  Intopia (External link)
+&lt;/a&gt;</code></pre>
+
+<h2>6. An external link - option 2</h2>
+<div class="example">
+  <a href="https://intopia.digital/" target="_blank" class="external"  aria-label="Intopia. External link.">
+    Intopia
+  </a>
+</div>
+<ul>
+  <li>Visible text: Intopia</li>
+  <li>Accessible name: Intopia. External link</li>
+</ul>
+<pre><code>&lt;a href="#" <span class="highlight">aria-label="Intopia. External link"</span>&gt;
+  Intopia
 &lt;/a&gt;</code></pre>
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
