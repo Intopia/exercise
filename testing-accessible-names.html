@@ -28,7 +28,7 @@
 &lt;/button&gt;</code></pre>
 
 
-<h2>Links and buttons using hidden content</h2>
+<h2>Links and buttons using additional hidden content</h2>
 <p>Hidden content can be used to generate a more detailed accessible name:</p>
 <div class="example">
   <a href="#">
@@ -66,23 +66,6 @@
 &lt;/button&gt;</code></pre>
 
 
-<h2>Links and buttons using <code>title</code></h2>
-<p>What about the <code>title</code> attribute? It may not create an accessible name as it is the weakest method. More importantly, this is a bad practice as the <code>title</code> is <a href="https://www.tpgi.com/using-the-html-title-attribute-updated/" target="_blank">not fully accessible</a>.</p>
-<div class="example">
-  <a href="#" title="Find out more about trees">Find out more</a>
-  <button class="testing-accessible-names-button" title="Exit">
-    <img src="assets/img/icon-cross.png" alt="">
-  </button>
-</div>
-<pre><code>&lt;a href="#" <span class="highlight">title="Find out more about trees"</span>&gt;
-  Find out more
-&lt;/a&gt;
-
-&lt;button <span class="highlight">title="Exit"</span>&gt;
-  &lt;img src="cross.png" alt=""&gt;
-&lt;/button&gt;</code></pre>
-
-
 <h2>Inputs using the <code>&lt;label&gt;</code></h2>
 <p>The contents of the <code>&lt;label&gt;</code> attribute can be used to generate the accessible name for the <code>&lt;input&gt;</code>:</p>
 <div class="example">
@@ -99,14 +82,6 @@
   <input class="input" type="text" aria-label="Search the site">
 </div>
 <pre><code>&lt;input type="text" <span class="highlight">aria-label="Search the site"</span>&gt;</code></pre>
-
-
-<h2>Inputs using the <code>title</code></h2>
-<p>The contents of the <code>title</code> attribute can be used to generate the accessible name for the <code>&lt;input&gt;</code>. As mentioned above, this is a bad practice as the <code>title</code> is <a href="https://www.tpgi.com/using-the-html-title-attribute-updated/" target="_blank">not fully accessible</a>.</p>
-<div class="example">
-  <input class="input" type="text" title="Bank details">
-</div>
-<pre><code>&lt;input type="text" <span class="highlight">title="Bank details"</span>&gt;</code></pre>
 
 
 <h2>Inputs using the <code>placeholder</code></h2>
