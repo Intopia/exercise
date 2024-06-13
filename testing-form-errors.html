@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing form errors</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    .input {
+      border: 2px solid red;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Testing form errors</h1>
+<ul>
+  <li>Do all fields in error have visible error messages?</li>
+  <li>Are all error messages programatically associated with their field?</li>
+  <li>Are all error fields programmatically identifed as invalid?</li>
+</ul>
+
+<h2>Example 1</h2>
+<form action="#">
+  <label class="label" for="full-name">Full name</label>
+  <input class="input" id="full-name" type="text">
+  <span class="error-message">You must include a full name</span>
+</form>
+
+
+<h2>Example 2</h2>
+<form action="#">
+  <label class="label" for="email-address">Email address</label>
+  <input class="input" id="email-address" type="email" aria-describedby="error-email-address">
+  <span class="error-message" id="error-email-address">You must include a valid email address</span>
+</form>
+
+
+<h2>Example 3</h2>
+<form action="#">
+  <label class="label" for="phone-number">Phone number</label>
+  <input class="input" id="phone-number" type="text" aria-describedby="error-phone-number" aria-invalid="true">
+  <span class="error-message" id="error-phone-number">You must include a full phone number including area code</span>
+</form>
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
