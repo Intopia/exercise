@@ -28,29 +28,6 @@
 &lt;/button&gt;</code></pre>
 
 
-<h2>Links and buttons using additional hidden content</h2>
-<p>Hidden content can be used to generate a more detailed accessible name:</p>
-<div class="example">
-  <a href="#">
-    More
-    <span class="hidden">about fishes</span>
-  </a>
-  <button class="testing-accessible-names-button">
-    Close
-    <span class="hidden">modal</span>
-  </button>
-</div>
-<pre><code>&lt;a href="#"&gt;
-  More
-  <span class="highlight">&lt;span class="hidden"&gt;about fishes&lt;/span&gt;</span>
-&lt;/a&gt;
-
-&lt;button&gt;
-  Close
-  <span class="highlight">&lt;span class="hidden"&gt;modal&lt;/span&gt;</span>
-&lt;/button&gt;</code></pre>
-
-
 <h2>Links and buttons using <code>aria-label</code></h2>
 <p>The <code>aria-label</code> attribute can be used to create an accessible name that is different to the visible text label:</p>
 <div class="example">
