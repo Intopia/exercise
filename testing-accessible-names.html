@@ -43,7 +43,8 @@
 &lt;/button&gt;</code></pre>
 
 
-<h2>Inputs using the <code>&lt;label&gt;</code></h2>
+<h2>Form controls using the <code>&lt;label&gt;</code></h2>
+
 <p>The contents of the <code>&lt;label&gt;</code> attribute can be used to generate the accessible name for the <code>&lt;input&gt;</code>:</p>
 <div class="example">
   <label class="label" for="address">Address</label>
@@ -52,22 +53,30 @@
 <pre><code><span class="highlight">&lt;label for="address"&gt;Address&lt;/label&gt;</span>
 &lt;input id="address" type="text"&gt;</code></pre>
 
-
-<h2>Inputs using the <code>aria-label</code></h2>
-<p>The contents of the <code>aria-label</code> attribute can be used to generate the accessible name for the <code>&lt;input&gt;</code>:</p>
 <div class="example">
-  <input class="input" type="text" aria-label="Search the site">
+  <label class="label" for="colour">Choose a colour</label>
+  <select class="input" id="colour">
+    <option>Red</option>
+    <option>Green</option>
+    <option>Blue</option>
+    <option>Yellow</option>
+  </select>
 </div>
-<pre><code>&lt;input type="text" <span class="highlight">aria-label="Search the site"</span>&gt;</code></pre>
 
-
-<h2>Inputs using the <code>placeholder</code></h2>
-<p>The contents of the <code>placeholder</code> attribute can be used to generate the accessible name for the <code>&lt;input&gt;</code>. This is also a bad practice as the <code>placeholder</code> is not fully accessible.</p>
 <div class="example">
-  <input class="input" type="text" placeholder="MM/DD/YYYY">
+  <label class="label" for="comment">Add a comment</label>
+  <textarea class="input" id="comment"></textarea>
 </div>
-<pre><code>&lt;input type="text" <span class="highlight">placeholder="MM/DD/YYYY"</span>&gt;</code></pre>
 
+<div class="example">
+  <input id="subscribe" type="checkbox">
+  <label for="subscribe">Subscribe</label>
+</div>
+
+<div class="example">
+  <input id="choose" type="radio">
+  <label for="choose">Yes</label>
+</div>
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
