@@ -676,3 +676,47 @@ a.external {
   background-position: center right;
   padding: 0 26px 0 0;
 }
+
+a.bookmarklet {
+  background-image: url("../img/bookmark.png") !important;
+  background-repeat: no-repeat !important;
+  background-position: center left 10px !important;
+  padding: .5em 1em .5em 2em !important;
+  color: #000;
+}
+
+a.bookmarklet:link,
+a.bookmarklet:visited,
+a.bookmarklet:focus,
+a.bookmarklet:hover,
+a.bookmarklet:active {
+  display: inline-block;
+  text-decoration: none;
+}
+
+a.bookmarklet:link,
+a.bookmarklet:visited {
+  background-color: #eee;
+  padding: .5em 1em;
+  border: 1px solid #666;
+  border-radius: .3em;
+}
+
+a.bookmarklet:hover {
+  background-color: rgba(0, 255, 0, .5);
+}
+
+a.bookmarklet:focus {
+  background-color: rgba(0, 0, 0, .1);
+  outline: 2px solid #000;
+}
+
+a.bookmarklet:active {
+  background-color: rgba(255, 0, 0, .3);
+}
+
+.bookmarklet-credit {
+  display: inline-block;
+  margin: 0 0 0 .5em;
+  font-size: .9em;
+}
