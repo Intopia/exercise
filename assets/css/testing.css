@@ -300,6 +300,7 @@ Help and errors
   display: block;
   margin: 0 0 0.3em;
   color: #444;
+  font-style: italic;
 }
 
 .error-message {
