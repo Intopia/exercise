@@ -17,66 +17,68 @@
 <p>The contents can be used to generate the accessible name for the <code>&lt;a&gt;</code> and <code>&lt;button&gt;</code>  elements:</p>
 <div class="example">
   <a href="#">More</a>
-  <button class="testing-accessible-names-button">Close</button>
 </div>
-<pre><code>&lt;a href="#"&gt;
-  <span class="highlight">More</span>
-&lt;/a&gt;
+<pre><code>&lt;a href="#"&gt;<span class="highlight">More</span>&lt;/a&gt;</code></pre>
 
-&lt;button&gt;
-  <span class="highlight">Close</span>
+<div class="example">
+  <button>Close</button>
+</div>
+<pre><code>&lt;button&gt;<span class="highlight">Close</span>&lt;/button&gt;</code></pre>
+
+
+<h2>Button without an accessible name</h2>
+
+<div class="example">
+  <button style="margin-right: 3em;">
+    <img src="assets/img/icon-arrow-down.png">
+  </button>
+</div>
+<pre><code>&lt;button&gt;
+  &lt;img src="down.png" <span class="highlight">alt=""</span>&gt;
 &lt;/button&gt;</code></pre>
 
 
 <h2>Links and buttons using <code>aria-label</code></h2>
-<p>The <code>aria-label</code> attribute can be used to create an accessible name that is different to the visible text label. This is a bad practice as it does not produce a visible text label.</p>
+<p>The <code>aria-label</code> attribute can be used to create an accessible name that enhances the accessibility of elements.</p>
+
 <div class="example">
-  <a href="#" aria-label="Next article">Next</a>
-  <button class="testing-accessible-names-button" aria-label="Dismiss warning notification">Dismiss</button>
+  <a href="#" aria-label="More about wombats">More</a>
 </div>
-<pre><code>&lt;a href="#" <span class="highlight">aria-label="Next article"</span>&gt;
-  Next
-&lt;/a&gt;
+<pre><code>&lt;a href="#" <span class="highlight">aria-label="More about wombats"</span>&gt;
+  More
+&lt;/a&gt;</code></pre>
 
-&lt;button <span class="highlight">aria-label="Dismiss warning notification"</span>&gt;
-  Dismiss
-&lt;/button&gt;</code></pre>
+<div class="example">
+  <button aria-label="Open accordion">
+    <img src="assets/img/icon-arrow-down.png">
+  </button>
+</div>
+<pre><code>&lt;button <span class="highlight">aria-label="Open accordion"</span>&gt;
+  &lt;img src="down.png" alt=""&gt;
+&lt;/button&gt;
+</code></pre>
 
 
-<h2>Form controls using the <code>&lt;label&gt;</code></h2>
+<h2>Form controls without programmatically associated <code>&lt;label&gt;</code></h2>
+<div class="example">
+  <label class="label">Address</label>
+  <input class="input" type="text">
+</div>
+<pre><code><span class="highlight">&lt;label&gt;Address&lt;/label&gt;</span>
+&lt;input type="text"&gt;</code></pre>
 
-<p>The contents of the <code>&lt;label&gt;</code> attribute can be used to generate the accessible name for the <code>&lt;input&gt;</code>:</p>
+
+<h2>Form controls with programmatically associated <code>&lt;label&gt;</code></h2>
+
+<p>The contents of the <code>&lt;label&gt;</code> attribute can be used to generate the accessible name for the <code>&lt;input&gt;</code> - as long as it is programmatically associated using matching <code>for</code> and <code>id</code> attributes</p>
+
 <div class="example">
   <label class="label" for="address">Address</label>
   <input class="input" id="address" type="text">
 </div>
-<pre><code><span class="highlight">&lt;label for="address"&gt;Address&lt;/label&gt;</span>
-&lt;input id="address" type="text"&gt;</code></pre>
+<pre><code>&lt;label <span class="highlight">for="address"</span>&gt;Address&lt;/label&gt;
+&lt;input <span class="highlight">id="address"</span> type="text"&gt;</code></pre>
 
-<div class="example">
-  <label class="label" for="colour">Choose a colour</label>
-  <select class="input" id="colour">
-    <option>Red</option>
-    <option>Green</option>
-    <option>Blue</option>
-    <option>Yellow</option>
-  </select>
-</div>
-
-<div class="example">
-  <label class="label" for="comment">Add a comment</label>
-  <textarea class="input" id="comment"></textarea>
-</div>
-
-<div class="example">
-  <input id="subscribe" type="checkbox">
-  <label for="subscribe">Subscribe</label>
-</div>
-
-<div class="example">
-  <input id="choose" type="radio">
-  <label for="choose">Yes</label>
-</div>
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
