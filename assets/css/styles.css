@@ -12,6 +12,7 @@ body {
   font-family: helvetica, arial, sans-serif;
   font-size: 1em;
   line-height: 1.2;
+  color: #222;
 }
 
 /* ---------------------
@@ -470,8 +471,10 @@ checkbox
   0 0 0 6px #000;
 }
 
-.form-error p {
+.form-error-heading {
   margin: 0 0 .5em;
+  font-size: 1em;
+  color: #222;
 }
 
 .form-error ul {
@@ -480,4 +483,7 @@ checkbox
   list-style: none;
 }
 
+.form-error li {
+  margin: 0 0 .3em;
+}
 
