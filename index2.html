@@ -129,7 +129,18 @@
     <aside class="aside">
       <h2>Mammal news signup</h2>
       <div class="form-error">
-        <h3 id="form-error-heading" tabindex="0" autofocus class="form-error-heading">There are 3 errors in the form below:</h3>
+        <h3 id="targetH3" class="form-error-heading" tabindex="-1" autofocus>There are 3 errors in the form below:</h3>
+        <script>
+            window.addEventListener('DOMContentLoaded', (event) => {
+                if (window.location.hash) {
+                    const targetElement = document.querySelector(window.location.hash);
+                    if (targetElement) {
+                        targetElement.focus();
+                    }
+                }
+            });
+        </script>
+
         <ul>
           <li><a href="#form-name">Full name</a></li>
           <li><a href="#form-email">Email</a></li>

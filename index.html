@@ -202,11 +202,11 @@
           </ul>
         </fieldset>
         <div class="form-container">
-          <button class="button" onclick="redirectToPage()">Submit</button>
+          <button class="button" id="navigateButton">Submit</button>
           <script>
-            function redirectToPage() {
-              window.location.href = "index2.html#form-error-heading";
-            }
+            document.getElementById('navigateButton').addEventListener('click', function() {
+              window.location.href = 'index2.html#targetH3';
+            });
           </script>
         </div>
       </form>
