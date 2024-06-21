@@ -130,17 +130,17 @@
       <h2>Mammal news signup</h2>
       <form action="#" id="form" autocomplete="off">
         <div class="form-container">
-          <label class="label" for="form-name">Full name</label>
-          <input class="input" id="form-name" type="text">
+          <label class="label" for="form-name">Full name<span class="required" aria-hidden="true"> (Required)</span></label>
+          <input class="input" id="form-name" type="text" required>
         </div>
         <div class="form-container">
-          <label class="label" for="form-email">Email</label>
-          <input class="input" id="form-email" required type="email">
+          <label class="label" for="form-email">Email<span class="required" aria-hidden="true"> (Required)</span></label>
+          <input class="input" id="form-email" type="email" required >
         </div>
         <div class="form-container">
-          <label class="label" for="form-address">Address</label>
+          <label class="label" for="form-address">Address<span class="required" aria-hidden="true"> (Required)</span></label>
           <span class="help-text" id="form-address-help">Include full street address</span>
-          <input class="input" id="form-address" required type="text" aria-describedby="form-address-help">
+          <input class="input" id="form-address" type="text" required aria-describedby="form-address-help">
         </div>
         <div class="form-container">
           <label class="label" for="form-phone">Phone</label>

@@ -139,26 +139,25 @@
       </div>
       <form action="#" id="form" autocomplete="off">
         <div class="form-container">
-          <label class="label" for="form-name">Full name</label>
-          <input class="input input-error" id="form-name" type="text" aria-invalid="true" aria-describedby="form-name-error">
+          <label class="label" for="form-name">Full name<span class="required" aria-hidden="true"> (Required)</span></label>
+          <input class="input input-error" id="form-name" type="text" required aria-invalid="true" aria-describedby="form-name-error">
           <span class="error-message" id="form-name-error">Error: Add your full name</span>
         </div>
         <div class="form-container">
-          <label class="label" for="form-email">Email</label>
+          <label class="label" for="form-email">Email<span class="required" aria-hidden="true"> (Required)</span></label>
           <input class="input input-error" id="form-email" type="email" required aria-invalid="true" aria-describedby="form-email-error">
           <span class="error-message" id="form-email-error">Error: Add a valid email address</span>
         </div>
         <div class="form-container">
-          <label class="label" for="form-address">Address</label>
+          <label class="label" for="form-address">Address<span class="required" aria-hidden="true"> (Required)</span></label>
           <span class="help-text" id="form-address-help">Include full street address</span>
-          <input class="input input-error" id="form-address" required type="text" aria-invalid="true" aria-describedby="form-address-help form-address-error">
+          <input class="input input-error" id="form-address" type="text" required aria-invalid="true" aria-describedby="form-address-help form-address-error">
           <span class="error-message" id="form-address-error">Error: Add a valid address</span>
         </div>
         <div class="form-container">
           <label class="label" for="form-phone">Phone</label>
           <span class="help-text" id="form-phone-help">Include area code</span>
-          <input class="input input-error" id="form-phone" type="text" aria-invalid="true" aria-describedby="form-phone-help form-phone-error">
-          <span class="error-message" id="form-phone-error">Error: Number must include all 8 digits</span>
+          <input class="input" id="form-phone" type="text">
         </div>
         <div class="form-container">
           <label class="label" for="form-comment">Comment</label>
