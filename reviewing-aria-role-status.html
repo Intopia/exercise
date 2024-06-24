@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Reviewing role=status</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    #message.warning > p {
+      padding: 1em;
+      margin: 0;
+      outline: 2px solid rgba(255,170,0,1);
+      background: rgba(255,170,0,.1);
+    }
+  </style>
+</head>
+<body>
+
+<h1>Reviewing <code>role="status"</code></h1>
+
+<p><a href="">Dummy link before</a></p>
+
+<p>After 10 seconds, a message should appear below and should not interupt anything being announced on the page. However, the message should be announced at the next graceful opportunity. Any additional content inside the container should also be announced as it is also set to <code>aria-atomic="true"</code>.</p>
+
+<div class="example">
+  <div id="message" class="warning" role="status">
+    <div>This is some text already in the container.</div>
+  </div>
+</div>
+
+<p>Not all that Mrs. Bennet with the assistance of her five daughters could ask on the subject, was sufficient to draw from her husband any satisfactory description of Mr. Bingley. They attacked him in various ways with barefaced questions ingenious suppositions and distant surmises. But he eluded the skill of them all and they were at last obliged to accept the second-hand intelligence of their neighbour Lady Lucas.</p>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+
+
+<script>
+    // Function to inject a new paragraph into the element with id "message"
+    function injectParagraph() {
+        // Find the element with the id "message"
+        var messageElement = document.getElementById("message");
+
+        // Create a new paragraph element
+        var newParagraph = document.createElement("p");
+
+        // Set the text content of the new paragraph
+        newParagraph.textContent = "This is an warning notification.";
+
+        // Append the new paragraph to the message element
+        messageElement.appendChild(newParagraph);
+    }
+
+    // Set a timeout to execute the function after 10 seconds (10000 milliseconds)
+    setTimeout(injectParagraph, 10000);
+</script>
+
+</body>
+</html>
