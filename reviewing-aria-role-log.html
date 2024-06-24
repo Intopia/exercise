@@ -7,11 +7,14 @@
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
   <style>
-    #message.warning > p {
+    #message.info {
       padding: 1em;
+      outline: 2px solid rgba(0,0,255,1);
+      background: rgba(0,0,255,.1);
+    }
+
+    #message.info > p {
       margin: 0;
-      outline: 2px solid rgba(255,170,0,1);
-      background: rgba(255,170,0,.1);
     }
   </style>
 </head>
@@ -24,7 +27,7 @@
 <p>After 8 seconds, a message should appear below and should not interupt anything being announced on the page. However, the message should be announced at the next graceful opportunity. Any additional content inside the container should NOT be announced  as it is has implicit <code>aria-atomic="false"</code>.</p>
 
 <div class="example">
-  <div id="message" class="warning" role="log">
+  <div id="message" class="info" role="log">
     <div>This is some text already in the container.</div>
   </div>
 </div>
