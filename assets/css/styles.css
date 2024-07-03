@@ -88,19 +88,15 @@ p {
 containers
 ----------------------*/
 
-.container {
-  max-width: 60em;
-}
-
 .header {
-  padding: 30px;
+  padding: 20px;
   color: #004200;
   background: #EBFFEB;
   font-size: 2em;
 }
 
 .nav {
-  padding: 10px 30px;
+  padding: 10px 20px;
   background: #004200;
 }
 
@@ -146,15 +142,11 @@ containers
 }
 
 .main {
-  float: left;
-  width: 60%;
-  padding: 30px;
+  padding: 20px;
 }
 
 .aside {
-  float: right;
-  width: 38%;
-  padding: 30px;
+  padding: 20px;
 }
 
 .footer {
@@ -302,7 +294,7 @@ skip links
 
 .skip-links {
   margin: 0;
-  padding: 10px 30px;
+  padding: 10px 20px;
 }
 
 .skip-links ul {
@@ -482,4 +474,39 @@ checkbox
 .form-error li {
   margin: 0 0 .3em;
 }
+
+/* ---------------------
+wide
+----------------------*/
+
+@media (min-width: 600px) {
+  .container {
+    max-width: 60em;
+  }
+
+  .header {
+    padding:30px;
+  }
+
+  .nav {
+    padding: 10px 30px;
+  }
+
+  .main {
+    float: left;
+    width: 60%;
+    padding: 30px;
+  }
+
+  .aside {
+    float: right;
+    width: 38%;
+    padding: 30px;
+  }
+
+  .skip-links {
+    padding: 10px 30px;
+  }
+}
+
 
