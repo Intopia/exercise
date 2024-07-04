@@ -71,8 +71,9 @@
 </section>
 
 
-<h2><code>&lt;article&gt;</code></h2>
-<p>An <code>&lt;article&gt;</code> element generates an <code>article</code> landmark, but this is not used by most devices:</p>
+<h2><code>&lt;search&gt;</code></h2>
+<p>The <code>search</code> element is used to identify a set of form controls related to <b>performing a search or filtering operation</b>.</p>
+
 <article>
   <h3>Heading for article region</h3>
 </article>
@@ -80,14 +81,15 @@
 
 <h2><code>role=search</code></h2>  
 <p>The <code>role="search"</code> generates a <code>search</code> landmark:</p>
-<form action="#" role="search">
-  <div class="form-group-spaced">
-    <label class="label" for="search-this-site">Search this site</label>
-    <input class="input" type="search" id="search-this-site">
-  </div>
-  <div class="form-group">
-    <button>Submit</button>
-  </div>
+<search>
+  <form action="#">
+    <div class="form-group-spaced">
+      <label class="label" for="search-this-site">Search this site</label>
+      <input class="input" type="search" id="search-this-site">
+    </div>
+  </form>
+</search>
+
 </form>
 
 
