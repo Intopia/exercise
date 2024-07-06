@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the output element</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    .output1 {
+      display: inline-block;
+      width: 100px;
+      padding: 0.5em;
+      border: 1px solid #999;
+      font-size: 1em;
+      line-height: 1;
+      font-family: helvetica, arial, sans-serif;
+    }
+
+    .output2 {
+      display: inline-block;
+      width: 100px;
+      padding: 0.5em;
+      border: 1px dotted #999;
+      font-size: 1em;
+      line-height: 1;
+      font-family: helvetica, arial, sans-serif;      
+    }
+
+    .output3 {
+      display: inline-block;
+    }
+
+    .hidden2 {
+      position: absolute;
+      left: -500px;
+      top: 0;
+      width: 1px;
+      height: 1px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Testing the <code>output</code> element</h1>
+
+<p><a href="testing.html">Dummy link above</a></p>
+
+<h2>Example</h2>
+
+<p>Use the form below to add two values together and calculate the result:</p>
+<form>
+  <input class="output1" type="number" id="a" aria-label="Value 1" oninput="calculateSum()"> + 
+  <input class="output1" type="number" id="b" aria-label="Value 2" oninput="calculateSum()"> = 
+  <output class="output2" name="result" id="result">0</output>
+  <div class="announcement hidden2" aria-live="polite" tabindex="-1">
+    The total value is 0
+  </div>
+</form>
+
+<pre><code>&lt;input type="number" id="a" aria-label="Value 1"&gt; + 
+&lt;input type="number" id="b" aria-label="Value 2"&gt; = 
+&lt;output name="result" id="result"&gt;0&lt;/output&gt;</code></pre>
+
+    <script>
+        let timeout = null;
+
+        function calculateSum() {
+            const a = parseFloat(document.getElementById('a').value) || 0;
+            const b = parseFloat(document.getElementById('b').value) || 0;
+            const result = a + b;
+
+            // Update the output element
+            document.getElementById('result').value = result;
+
+            // Clear the previous timeout
+            clearTimeout(timeout);
+
+            // Set a new timeout to update the announcement after 0.5 seconds
+            timeout = setTimeout(() => {
+                document.querySelector('.announcement').textContent = `The total value is ${result}`;
+            }, 1200);
+        }
+    </script>
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>

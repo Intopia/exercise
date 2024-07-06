@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the menu element</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    menu {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    menu li {
+      display: inline-block;
+      margin: 0 1em 0 0;
+    }
+
+    .menu-example {
+      margin: 1em 0 0;
+      padding: 1em;
+      background: #ddd;
+    }
+
+    .menu-example:focus {
+      outline: 1px dotted black;
+    }
+
+    .hidden2 {
+      position: absolute;
+      left: -500px;
+      top: 0;
+      width: 1px;
+      height: 1px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Testing the <code>menu</code> element</h1>
+
+<p><a href="testing.html">Dummy link above</a></p>
+
+<h2>Example</h2>
+
+<div class="example">
+  <menu>
+    <li><button onclick="injectHelloText()">Inject Hello</button></li>
+    <li><button onclick="injectGoodbyeText()">Inject Goodbye</button></li>
+    <li><button onclick="clearText(this)">Clear</button></li>
+  </menu>
+  <div class="menu-example" aria-live="assertive" tabindex="-1"></div>
+  <div class="announcement hidden2" aria-live="assertive"></div>
+</div>
+
+<script>
+    function injectHelloText() {
+        const container = document.querySelector('.menu-example');
+        const announcement = document.querySelector('.announcement');
+        container.textContent = "Hello world";
+        container.focus();
+        announcement.textContent = ""; // Clear announcement text
+    }
+
+    function injectGoodbyeText() {
+        const container = document.querySelector('.menu-example');
+        const announcement = document.querySelector('.announcement');
+        container.textContent = "Goodbye world";
+        container.focus();
+        announcement.textContent = ""; // Clear announcement text
+    }
+
+    function clearText(button) {
+        const container = document.querySelector('.menu-example');
+        const announcement = document.querySelector('.announcement');
+        container.textContent = "";
+        announcement.textContent = "Your message has been cleared";
+        button.focus(); // Keep focus on the clear button
+    }
+</script>
+
+<pre><code>&lt;menu&gt;
+  &lt;li&gt;&lt;button&gt;Inject Hello&lt;/button&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;button&gt;Inject Goodbye&lt;/button&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;button&gt;Clear&lt;/button&gt;&lt;/li&gt;
+&lt;/menu&gt;</code></pre>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
