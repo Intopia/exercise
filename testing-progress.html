@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the progress element</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    .progress-container {
+      overflow: hidden;
+      margin: 0 0 1em;
+      outline: 1px solid #fff;
+    }
+
+    .progress-bar {
+      float: left;
+      outline: 1px solid #fff;
+    }
+
+    .progress-result {
+      float: left;
+      margin: 0 0 0 1em;
+      outline: 1px solid #fff;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Testing the <code>progress</code> element</h1>
+
+<p><a href="testing.html">Dummy link above</a></p>
+
+<h2>Example</h2>
+
+<div class="progress-container">
+  <div class="progress-bar">
+    <progress id="file" max="100" value="0">0%</progress>  
+  </div>
+  <div class="progress-result" id="result" aria-live="polite">
+    0%
+  </div>
+</div>
+<button id="resetBtn">Reset</button>
+
+<script>
+  let progressElement = document.getElementById('file');
+  let resultElement = document.getElementById('result');
+  let resetBtn = document.getElementById('resetBtn');
+  let value = 0;
+  let interval;
+
+  function updateProgress() {
+      if (value <= 100) {
+          progressElement.value = value;
+          progressElement.innerHTML = value + '%';
+          resultElement.textContent = value + '%';
+          value += 5;
+      }
+  }
+
+  function startProgress() {
+      value = 0;
+      clearInterval(interval);
+      interval = setInterval(updateProgress, 1000);
+  }
+
+  resetBtn.addEventListener('click', startProgress);
+
+  // Start the progress when the page loads
+  startProgress();
+</script>
+
+
+<pre><code>&lt;progress id="file" max="100" value="0"&gt;
+  0%
+&lt;/progress&gt;  
+&lt;div id="result" aria-live="polite"&gt;
+ 0%
+&lt;/div&gt;
+
+&lt;button id="resetBtn"&gt;Reset&lt;/button&gt;</code></pre>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>

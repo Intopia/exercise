@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the canvas element</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+      canvas {
+          border: 1px solid black;
+      }
+  </style>
+</head>
+<body>
+
+<h1>Testing the <code>canvas</code> element</h1>
+
+<p><a href="testing.html">Dummy link above</a></p>
+
+<h2>Example</h2>
+
+<canvas id="myCanvas" width="100" height="100">
+  This is some fallback text.
+</canvas>
+
+<script>
+  // Get the canvas element
+  var canvas = document.getElementById('myCanvas');
+  // Get the 2D rendering context
+  var ctx = canvas.getContext('2d');
+
+  // Render rectangle 1
+  ctx.fillStyle = '#00FF00';
+  ctx.fillRect(20, 20, 30, 40);
+
+  // Render rectangle 2
+  ctx.fillStyle = '#FF0000';
+  ctx.fillRect(40, 50, 50, 20);
+</script>
+
+
+<pre><code>&lt;canvas id="myCanvas" width="100" height="100"&gt;
+  This is some fallback text.
+&lt;/canvas&gt;</code></pre>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
