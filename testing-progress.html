@@ -44,32 +44,38 @@
 <button id="resetBtn">Reset</button>
 
 <script>
-  let progressElement = document.getElementById('file');
-  let resultElement = document.getElementById('result');
-  let resetBtn = document.getElementById('resetBtn');
-  let value = 0;
-  let interval;
+        let progressElement = document.getElementById('file');
+        let resultElement = document.getElementById('result');
+        let resetBtn = document.getElementById('resetBtn');
+        let value = 0;
+        let interval;
 
-  function updateProgress() {
-      if (value <= 100) {
-          progressElement.value = value;
-          progressElement.innerHTML = value + '%';
-          resultElement.textContent = value + '%';
-          value += 5;
-      }
-  }
+        function updateProgress() {
+            if (value <= 100) {
+                progressElement.value = value;
+                progressElement.innerHTML = value + '%';
+                if (value === 100) {
+                    resultElement.textContent = 'Your file download is complete';
+                } else {
+                    resultElement.textContent = value + '%';
+                }
+                value += 5;
+            } else {
+                clearInterval(interval);
+            }
+        }
 
-  function startProgress() {
-      value = 0;
-      clearInterval(interval);
-      interval = setInterval(updateProgress, 1000);
-  }
+        function startProgress() {
+            value = 0;
+            clearInterval(interval);
+            interval = setInterval(updateProgress, 1000);
+        }
 
-  resetBtn.addEventListener('click', startProgress);
+        resetBtn.addEventListener('click', startProgress);
 
-  // Start the progress when the page loads
-  startProgress();
-</script>
+        // Start the progress when the page loads
+        startProgress();
+    </script>
 
 
 <pre><code>&lt;progress id="file" max="100" value="0"&gt;

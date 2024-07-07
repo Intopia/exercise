@@ -8,7 +8,7 @@
   <link href="assets/css/testing.css" rel="stylesheet">
   <style>
     menu {
-      margin: 0;
+      margin: 0 0 1em;
       padding: 0;
       list-style: none;
     }
@@ -19,9 +19,7 @@
     }
 
     .menu-example {
-      margin: 1em 0 0;
-      padding: 1em;
-      background: #ddd;
+      margin: 0;
     }
 
     .menu-example:focus {
@@ -76,10 +74,21 @@
         const container = document.querySelector('.menu-example');
         const announcement = document.querySelector('.announcement');
         container.textContent = "";
-        announcement.textContent = "Your message has been cleared";
         button.focus(); // Keep focus on the clear button
+
+        // Set a timeout to inject the announcement text after 0.3 seconds
+        setTimeout(function() {
+            announcement.textContent = "Your message has been cleared";
+            
+            // Set another timeout to clear the announcement text after 1.5 seconds
+            setTimeout(function() {
+                announcement.textContent = "";
+            }, 1500);
+        }, 800);
     }
 </script>
+
+
 
 <pre><code>&lt;menu&gt;
   &lt;li&gt;&lt;button&gt;Inject Hello&lt;/button&gt;&lt;/li&gt;

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the timer element 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    #eggtimer {
+      margin: 1em 0;
+      padding: .5em;
+      background: #eee;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Testing the <code>timer</code> element 1</h1>
+
+<p><a href="testing.html">Dummy link above</a></p>
+
+<h2>Example</h2>
+
+<button id="startButton">Start timer</button>
+<div role="timer" id="eggtimer">20</div>
+<button id="resetButton">Reset timer</button>
+
+<script>
+    let initialTime = 20;
+    let currentTime = initialTime;
+    let countdown;
+
+    const eggtimer = document.getElementById('eggtimer');
+    const startButton = document.getElementById('startButton');
+    const resetButton = document.getElementById('resetButton');
+
+    function startTimer() {
+        if (countdown) clearInterval(countdown);
+        countdown = setInterval(() => {
+            if (currentTime > 0) {
+                currentTime--;
+                eggtimer.textContent = currentTime;
+            } else {
+                clearInterval(countdown);
+            }
+        }, 1000);
+    }
+
+    function resetTimer() {
+        clearInterval(countdown);
+        currentTime = initialTime;
+        eggtimer.textContent = currentTime;
+    }
+
+    startButton.addEventListener('click', startTimer);
+    resetButton.addEventListener('click', resetTimer);
+</script>
+
+
+<pre><code>&lt;button id="startButton"&gt;Start timer&lt;/button&gt;
+&lt;div <span class="highlight">role="timer"</span> id="eggtimer"&gt;20&lt;/div&gt;
+&lt;button id="resetButton"&gt;Reset timer&lt;/button&gt;</code></pre>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
