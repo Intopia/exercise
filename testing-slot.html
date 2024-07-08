@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the slot element</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<h1>Testing the <code>&lt;slot&gt;</code> element</h1>
+
+<p><a href="testing.html">Dummy link above</a></p>
+
+<h2>Example 1</h2>
+
+<my-component>
+  <h1 slot="title">Hello, World!</h1>
+  <p slot="content">This is a paragraph inside the custom component.</p>
+</my-component>
+
+<script src="assets/js/slot.js"></script>
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
