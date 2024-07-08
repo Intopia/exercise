@@ -179,6 +179,63 @@
   <span class="bookmarklet-credit">(via <a href="https://a11y-tools.com/bookmarklets/" target="_blank">A11y Tools</a>)</span>
 </p>
 
+<p>
+  <a class="bookmarklet" href="javascript:(function() { 
+  var requiredElements = document.querySelectorAll('[required], [aria-required=&quot;true&quot;]'); 
+  requiredElements.forEach(function(element) { 
+    element.style.outline = '5px dotted #0000ff'; 
+    var message = document.createElement('div'); 
+    if (element.hasAttribute('required')) { 
+      message.textContent = 'Required'; 
+    } else if (element.getAttribute('aria-required') === 'true') { 
+      message.textContent = 'aria-required=true'; 
+    } 
+    message.style.position = 'absolute'; 
+    message.style.background = '#0000ff'; 
+    message.style.color = '#ffffff'; 
+    message.style.padding = '2px 5px'; 
+    message.style.fontSize = '16px'; 
+    message.style.zIndex = '1000'; 
+    var rect = element.getBoundingClientRect(); 
+    message.style.top = (rect.top + window.scrollY - message.offsetHeight) + 'px'; 
+    message.style.left = (rect.left + window.scrollX) + 'px'; 
+    document.body.appendChild(message); 
+  }); 
+})();">
+    Required Fields
+  </a>
+</p>
+
+
+<p>
+  <a class="bookmarklet" href="javascript:(function() { 
+  var requiredElements = document.querySelectorAll('[aria-invalid=&quot;true&quot;]'); 
+  requiredElements.forEach(function(element) { 
+    element.style.outline = '5px dotted #0000ff'; 
+    var message = document.createElement('div'); 
+    if (element.hasAttribute('required')) { 
+      message.textContent = 'Required'; 
+    } else if (element.getAttribute('aria-invalid') === 'true') { 
+      message.textContent = 'aria-invalid=true'; 
+    } 
+    message.style.position = 'absolute'; 
+    message.style.background = '#0000ff'; 
+    message.style.color = '#ffffff'; 
+    message.style.padding = '2px 5px'; 
+    message.style.fontSize = '16px'; 
+    message.style.zIndex = '1000'; 
+    var rect = element.getBoundingClientRect(); 
+    message.style.top = (rect.top + window.scrollY - message.offsetHeight) + 'px'; 
+    message.style.left = (rect.left + window.scrollX) + 'px'; 
+    document.body.appendChild(message); 
+  }); 
+})();">
+    Invalid Fields
+  </a>
+</p>
+
+
+
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
