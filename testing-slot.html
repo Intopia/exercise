@@ -13,7 +13,7 @@
 
 <p><a href="testing.html">Dummy link above</a></p>
 
-<p>The Web Component &lt;slot&gt; element is a placeholder inside a web component that you can fill with your own markup, which lets you create separate DOM trees and present them together.</p>
+<p>The Web Component <code>&lt;slot&gt;</code> element is a placeholder inside a web component that you can fill with your own markup, which lets you create separate DOM trees and present them together.</p>
 
 <h2>Example 1</h2>
 
@@ -26,10 +26,14 @@
 
 <script src="assets/js/slot.js"></script>
 
+<h3>HTML markup:</h3>
+
 <pre><code>&lt;my-component&gt;
   &lt;h1 slot="title"&gt;Hello, World!&lt;/h1&gt;
   &lt;p slot="content"&gt;This is a paragraph...&lt;/p&gt;
 &lt;/my-component&gt;</code></pre>
+
+<h3>JavaScript:</h3>
 
 <pre><code>class MyComponent extends HTMLElement {
     constructor() {
