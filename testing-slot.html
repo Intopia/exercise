@@ -24,7 +24,7 @@
 
 <pre><code>&lt;my-component&gt;
   &lt;h1 slot="title"&gt;Hello, World!&lt;/h1&gt;
-  &lt;p slot="content"&gt;This is a paragraph inside the custom component.&lt;/p&gt;
+  &lt;p slot="content"&gt;This is a paragraph...&lt;/p&gt;
 &lt;/my-component&gt;</code></pre>
 
 <pre><code>class MyComponent extends HTMLElement {
@@ -34,7 +34,7 @@
         const shadow = this.attachShadow({ mode: 'open' });
 
         shadow.innerHTML = `
-            <style>
+            &lt;style&gt;
                 .container {
                     border: 2px solid #000;
                     padding: 10px;
@@ -47,11 +47,11 @@
                 ::slotted(p) {
                     color: green;
                 }
-            </style>
-            <div class="container">
-                <slot name="title"></slot>
-                <slot name="content"></slot>
-            </div>
+            &lt;/style&gt;
+            &lt;div class="container"&gt;
+                &lt;slot name="title"&gt;&lt;/slot&gt;
+                &lt;slot name="content"&gt;&lt;/slot&gt;
+            &lt;/div&gt;
         `;
     }
 }</code></pre>
