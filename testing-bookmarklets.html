@@ -183,7 +183,7 @@
   <a class="bookmarklet" href="javascript:(function() { 
   var requiredElements = document.querySelectorAll('[required], [aria-required=&quot;true&quot;]'); 
   requiredElements.forEach(function(element) { 
-    element.style.outline = '5px dotted #0000ff'; 
+    element.style.outline = '5px solid rgba(0,0,255,.3)'; 
     var message = document.createElement('div'); 
     if (element.hasAttribute('required')) { 
       message.textContent = 'Required'; 
@@ -202,7 +202,7 @@
     document.body.appendChild(message); 
   }); 
 })();">
-    Required Fields
+    Required
   </a>
 <span class="bookmarklet-credit">Intopia</span>
 </p>
@@ -211,7 +211,7 @@
   <a class="bookmarklet" href="javascript:(function() { 
   var requiredElements = document.querySelectorAll('[aria-invalid=&quot;true&quot;]'); 
   requiredElements.forEach(function(element) { 
-    element.style.outline = '5px dotted #0000ff'; 
+    element.style.outline = '5px solid rgba(0,0,255,.3)'; 
     var message = document.createElement('div'); 
     if (element.getAttribute('aria-invalid') === 'true') { 
       message.textContent = 'aria-invalid=true'; 
@@ -228,7 +228,7 @@
     document.body.appendChild(message); 
   }); 
 })();">
-    Invalid Fields
+    Aria Invalid
   </a>
 <span class="bookmarklet-credit">Intopia</span>
 </p>
@@ -237,11 +237,11 @@
 <a class="bookmarklet" href="javascript:(function() { 
   var requiredElements = document.querySelectorAll('[aria-describedby]'); 
   requiredElements.forEach(function(element) { 
-    element.style.outline = '5px dotted #0000ff'; 
+    element.style.outline = '5px solid rgba(0,0,255,.3)'; 
     var ariaDescribedByValue = element.getAttribute('aria-describedby'); 
     var describedElement = document.getElementById(ariaDescribedByValue); 
     if (describedElement) { 
-      describedElement.style.outline = '5px dotted green'; 
+      describedElement.style.outline = '5px solid rgba(0,200,0,.4)'; 
       var idMessage = document.createElement('div'); 
       idMessage.textContent = 'ID: ' + describedElement.id; 
       idMessage.style.position = 'absolute'; 
@@ -269,10 +269,53 @@
     document.body.appendChild(message); 
   }); 
 })();">
-    Described By Fields
+    Aria Describedby
 </a>
 <span class="bookmarklet-credit">Intopia</span>
 </p>
+
+<p>
+<a class="bookmarklet" href="javascript:(function() { 
+  var requiredElements = document.querySelectorAll('[for]'); 
+  requiredElements.forEach(function(element) { 
+    element.style.outline = '5px solid rgba(0,0,255,.3)'; 
+    var forValue = element.getAttribute('for'); 
+    var describedElement = document.getElementById(forValue); 
+    if (describedElement) { 
+      describedElement.style.outline = '5px solid rgba(0,200,0,.4)'; 
+      var idMessage = document.createElement('div'); 
+      idMessage.textContent = 'ID: ' + describedElement.id; 
+      idMessage.style.position = 'absolute'; 
+      idMessage.style.background = '#00ff00'; 
+      idMessage.style.color = '#000000'; 
+      idMessage.style.padding = '2px 5px'; 
+      idMessage.style.fontSize = '16px'; 
+      idMessage.style.zIndex = '1000'; 
+      var describedRect = describedElement.getBoundingClientRect(); 
+      idMessage.style.top = (describedRect.top + window.scrollY - idMessage.offsetHeight) + 'px'; 
+      idMessage.style.left = (describedRect.left + window.scrollX) + 'px'; 
+      document.body.appendChild(idMessage); 
+    } 
+    var message = document.createElement('div'); 
+    message.textContent = 'for: ' + forValue; 
+    message.style.position = 'absolute'; 
+    message.style.background = '#0000ff'; 
+    message.style.color = '#ffffff'; 
+    message.style.padding = '2px 5px'; 
+    message.style.fontSize = '16px'; 
+    message.style.zIndex = '1000'; 
+    var rect = element.getBoundingClientRect(); 
+    message.style.top = (rect.top + window.scrollY - message.offsetHeight) + 'px'; 
+    message.style.left = (rect.left + window.scrollX) + 'px'; 
+    document.body.appendChild(message); 
+  }); 
+})();">
+    For And ID
+</a>
+<span class="bookmarklet-credit">Intopia</span>
+</p>
+
+
 
 
 
