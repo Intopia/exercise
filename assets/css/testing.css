@@ -713,3 +713,12 @@ a.bookmarklet:active {
   margin: 0 0 0 .5em;
   font-size: .9em;
 }
+
+.intopia-home-link {
+  display: inline-block;
+  margin: 0 0 2em;
+}
+
+.intopia-logo {
+  width: 200px;
+}
