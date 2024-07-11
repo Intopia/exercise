@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Intopia bookmarklets</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<h1>Intopia bookmarklets</h1>
+<p>Drag the links below into your Browser Bookmarks Bar.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Bookmarklet</th>
+      <th>Test page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+<a class="bookmarklet" href="javascript:(function() { 
+  var requiredElements = document.querySelectorAll('[required], [aria-required=&quot;true&quot;]'); 
+  requiredElements.forEach(function(element) { 
+    element.style.outline = '5px solid rgba(0,0,255,.3)'; 
+    var message = document.createElement('div'); 
+    if (element.hasAttribute('required')) { 
+      message.textContent = 'Required'; 
+    } else if (element.getAttribute('aria-required') === 'true') { 
+      message.textContent = 'aria-required=true'; 
+    } 
+    message.style.position = 'absolute'; 
+    message.style.background = '#0000ff'; 
+    message.style.color = '#ffffff'; 
+    message.style.padding = '2px 5px'; 
+    message.style.fontSize = '16px'; 
+    message.style.zIndex = '1000'; 
+    var rect = element.getBoundingClientRect(); 
+    message.style.top = (rect.top + window.scrollY - message.offsetHeight) + 'px'; 
+    message.style.left = (rect.left + window.scrollX) + 'px'; 
+    document.body.appendChild(message); 
+  }); 
+})();">
+  Highlight required and aria-required
+</a>
+      </td>
+      <td><a href="https://intopia.github.io/exercise/testing-required-fields.html" target="_blank">Testing required fields</a></td>
+    </tr>
+    <tr>
+      <td>
+<a class="bookmarklet" href="javascript:(function() { 
+var requiredElements = document.querySelectorAll('[aria-invalid=&quot;true&quot;]'); 
+requiredElements.forEach(function(element) { 
+  element.style.outline = '5px solid rgba(0,0,255,.3)'; 
+  var message = document.createElement('div'); 
+  if (element.getAttribute('aria-invalid') === 'true') { 
+    message.textContent = 'aria-invalid=true'; 
+  } 
+  message.style.position = 'absolute'; 
+  message.style.background = '#0000ff'; 
+  message.style.color = '#ffffff'; 
+  message.style.padding = '2px 5px'; 
+  message.style.fontSize = '16px'; 
+  message.style.zIndex = '1000'; 
+  var rect = element.getBoundingClientRect(); 
+  message.style.top = (rect.top + window.scrollY - message.offsetHeight) + 'px'; 
+  message.style.left = (rect.left + window.scrollX) + 'px'; 
+  document.body.appendChild(message); 
+}); 
+})();">
+  Highlight aria-invalid
+</a>
+      </td>
+      <td><a href="https://intopia.github.io/exercise/testing-form-errors.html" target="_blank">Testing form field errors</a></td>
+    </tr>
+    <tr>
+      <td>
+<a class="bookmarklet" href="javascript:(function() { 
+  var requiredElements = document.querySelectorAll('[aria-describedby]'); 
+  requiredElements.forEach(function(element) { 
+    element.style.outline = '5px solid rgba(0,0,255,.3)'; 
+    var ariaDescribedByValue = element.getAttribute('aria-describedby'); 
+    var describedElement = document.getElementById(ariaDescribedByValue); 
+    if (describedElement) { 
+      describedElement.style.outline = '5px solid rgba(0,200,0,.4)'; 
+      var idMessage = document.createElement('div'); 
+      idMessage.textContent = 'ID: ' + describedElement.id; 
+      idMessage.style.position = 'absolute'; 
+      idMessage.style.background = '#00ff00'; 
+      idMessage.style.color = '#000000'; 
+      idMessage.style.padding = '2px 5px'; 
+      idMessage.style.fontSize = '16px'; 
+      idMessage.style.zIndex = '1000'; 
+      var describedRect = describedElement.getBoundingClientRect(); 
+      idMessage.style.top = (describedRect.top + window.scrollY - idMessage.offsetHeight) + 'px'; 
+      idMessage.style.left = (describedRect.left + window.scrollX) + 'px'; 
+      document.body.appendChild(idMessage); 
+    } 
+    var message = document.createElement('div'); 
+    message.textContent = 'aria-describedby: ' + ariaDescribedByValue; 
+    message.style.position = 'absolute'; 
+    message.style.background = '#0000ff'; 
+    message.style.color = '#ffffff'; 
+    message.style.padding = '2px 5px'; 
+    message.style.fontSize = '16px'; 
+    message.style.zIndex = '1000'; 
+    var rect = element.getBoundingClientRect(); 
+    message.style.top = (rect.top + window.scrollY - message.offsetHeight) + 'px'; 
+    message.style.left = (rect.left + window.scrollX) + 'px'; 
+    document.body.appendChild(message); 
+  }); 
+})();">
+    Highlight aria-describedby
+</a>
+      </td>
+      <td><a href="https://intopia.github.io/exercise/testing-form-instructions.html" target="_blank">Testing form field instructions</a></td>
+    </tr>
+    <tr>
+      <td>
+<a class="bookmarklet" href="javascript:(function() { 
+  var requiredElements = document.querySelectorAll('[for]'); 
+  requiredElements.forEach(function(element) { 
+    element.style.outline = '5px solid rgba(0,0,255,.3)'; 
+    var forValue = element.getAttribute('for'); 
+    var describedElement = document.getElementById(forValue); 
+    if (describedElement) { 
+      describedElement.style.outline = '5px solid rgba(0,200,0,.4)'; 
+      var idMessage = document.createElement('div'); 
+      idMessage.textContent = 'ID: ' + describedElement.id; 
+      idMessage.style.position = 'absolute'; 
+      idMessage.style.background = '#00ff00'; 
+      idMessage.style.color = '#000000'; 
+      idMessage.style.padding = '2px 5px'; 
+      idMessage.style.fontSize = '16px'; 
+      idMessage.style.zIndex = '1000'; 
+      var describedRect = describedElement.getBoundingClientRect(); 
+      idMessage.style.top = (describedRect.top + window.scrollY - idMessage.offsetHeight) + 'px'; 
+      idMessage.style.left = (describedRect.left + window.scrollX) + 'px'; 
+      document.body.appendChild(idMessage); 
+    } 
+    var message = document.createElement('div'); 
+    message.textContent = 'for: ' + forValue; 
+    message.style.position = 'absolute'; 
+    message.style.background = '#0000ff'; 
+    message.style.color = '#ffffff'; 
+    message.style.padding = '2px 5px'; 
+    message.style.fontSize = '16px'; 
+    message.style.zIndex = '1000'; 
+    var rect = element.getBoundingClientRect(); 
+    message.style.top = (rect.top + window.scrollY - message.offsetHeight) + 'px'; 
+    message.style.left = (rect.left + window.scrollX) + 'px'; 
+    document.body.appendChild(message); 
+  }); 
+})();">
+    Highlight for and ID
+</a>
+      </td>
+      <td><a href="https://intopia.github.io/exercise/testing-form-labels.html" target="_blank">Testing form labels</a></td>
+    </tr>
+    <tr>
+      <td>
+<a class="bookmarklet" href="javascript:(function() { 
+  var images = document.querySelectorAll('img'); 
+  images.forEach(function(image) { 
+    image.style.outline = '5px solid rgba(0,0,255,.3)'; 
+    var altText = image.getAttribute('alt'); 
+    if (altText) { 
+      var altMessage = document.createElement('div'); 
+      altMessage.textContent = 'Alt: ' + altText; 
+      altMessage.style.position = 'absolute'; 
+      altMessage.style.background = '#0000ff'; 
+      altMessage.style.color = '#ffffff'; 
+      altMessage.style.padding = '2px 5px'; 
+      altMessage.style.fontSize = '16px'; 
+      altMessage.style.zIndex = '1000'; 
+      var rect = image.getBoundingClientRect(); 
+      altMessage.style.top = (rect.top + window.scrollY) + 'px'; 
+      altMessage.style.left = (rect.left + window.scrollX) + 'px'; 
+      document.body.appendChild(altMessage); 
+    } 
+  }); 
+})();">
+    Highlight images alternatives
+</a>
+      </td>
+      <td><a href="https://intopia.github.io/exercise/testing-image-types.html" target="_blank">Testing image types</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
