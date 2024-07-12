@@ -28,7 +28,9 @@
 
 <p><a href="">Dummy link before</a></p>
 
-<p>After 8 seconds, a message should appear below and should not interupt anything being announced on the page. However, the message should be announced at the next graceful opportunity. Any additional content inside the container should not be announced as it is also set to <code>aria-atomic="false"</code>.</p>
+<p>After 8 seconds, a message should appear below and should not interupt anything being announced on the page. However, the message should be announced at the next graceful opportunity.</p>
+
+<p>Only newly injected content inside the container should be announced as it is also set to <code>aria-atomic="false"</code>.</p>
 
 <div class="example">
   <div id="message" class="warning" aria-live="polite" aria-atomic="false">
@@ -36,7 +38,7 @@
   </div>
 </div>
 
-<p>Not all that Mrs. Bennet with the assistance of her five daughters could ask on the subject, was sufficient to draw from her husband any satisfactory description of Mr. Bingley. They attacked him in various ways with barefaced questions ingenious suppositions and distant surmises.</p>
+<p>If a screen reader is focussed on announcing this paragraph, will the dymanically injected message above affect the announcement of this paragraph. This is how we can determine if dynamic information is announced immediately, at the next gracefull opportunity, or not at all.</p>
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 

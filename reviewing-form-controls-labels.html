@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Reviewing form controls and labels</title>
+  <title>Reviewing form controls that do not require labels</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
@@ -13,19 +13,20 @@
   <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
 </a>
 
-<h1>Reviewing form controls and labels</h1>
-<p>There are many form-based elements that do not require a <code>&lt;label&gt;</code>. In many of these cases, adding a <code>&lt;label&gt;</code> would either be invalid, or confusing for assistive technologies.</p>
+<h1>Reviewing form controls that do not require labels</h1>
+
+<p>There are many form-based elements that <b>do not require</b> a <code>&lt;label&gt;</code> element. In many of these cases, adding a <code>&lt;label&gt;</code> element would either be invalid, or confusing for assistive technologies.</p>
 
 
 <h2><code>type="button"</code>, <code>type="reset"</code> and <code>type="submit"</code></h2>
-<p>For the <code>&lt;input&gt;</code> elements with a type of <code>button</code>, <code>reset</code> and <code>submit</code>, the name is provided by the value attribute.</p>
+<p>For the <code>&lt;input&gt;</code> elements with a type of <code>button</code>, <code>reset</code> and <code>submit</code>, the name is provided by the value attribute, so these input types do not require associated <code>&lt;label&gt;</code> elements.</p>
 <pre><code>&lt;input type="button" value="Login"&gt;
 &lt;input type="reset" value="Reset form"&gt;
 &lt;input type="submit" value="Submit"&gt;  </code></pre>
 
 
 <h2><code>type="image"</code></h2>
-<p>For the <code>&lt;input&gt;</code> element with a type of <code>image</code>, the name is provided by the alt attribute.</p>
+<p>For the <code>&lt;input&gt;</code> element with a type of <code>image</code>, the name is provided by the alt attribute, so this input types do not require an associsted <code>&lt;label&gt;</code> element.</p>
 <pre><code>&lt;input type="image" src="ball.png" alt="Ball"&gt;</code></pre>
 
 
@@ -35,26 +36,26 @@
 
 
 <h2><code>&lt;button&gt;</code></h2>
-<p>The <code>&lt;button&gt;</code> does not require a <code>&lt;label&gt;</code> as its content acts as a <code>&lt;label&gt;</code>.</p>
+<p>The <code>&lt;button&gt;</code> does not require a <code>&lt;label&gt;</code> element as its content acts as a <code>&lt;label&gt;</code> element.</p>
 <pre><code>&lt;button&gt;Content&lt;/button&gt;</code></pre>
 
 
 <h2><code>&lt;fieldset&gt;</code></h2>
-<p>The <code>&lt;fieldset&gt;</code> does not require a <code>&lt;label&gt;</code> as the <code>&lt;legend&gt;</code> acts as a <code>&lt;label&gt;</code>.</p>
+<p>The <code>&lt;fieldset&gt;</code> does not require a <code>&lt;label&gt;</code> element as the <code>&lt;legend&gt;</code> acts as a <code>&lt;label&gt;</code> element.</p>
 <pre><code>&lt;fieldset&gt;
   &lt;legend&gt;Content&lt;/legend&gt;
 &lt;/fieldset&gt;</code></pre>
 
 
 <h2><code>&lt;legend&gt;</code></h2>
-<p>The <code>&lt;legend&gt;</code> does not require a <code>&lt;label&gt;</code>.</p>
+<p>The <code>&lt;legend&gt;</code> does not require a <code>&lt;label&gt;</code> element.</p>
 <pre><code>&lt;fieldset&gt;
   &lt;legend&gt;Content&lt;/legend&gt;
 &lt;/fieldset&gt;</code></pre>
 
 
 <h2><code>&lt;optgroup&gt;</code></h2>
-<p>The <code>&lt;optgroup&gt;</code> does not require a <code>&lt;label&gt;</code> as the label attribute provides a name.</p>
+<p>The <code>&lt;optgroup&gt;</code> does not require a <code>&lt;label&gt;</code> element as the label attribute provides a name.</p>
 <pre><code>&lt;label for="aaa"&gt;Choose a dinosaur:&lt;/label&gt;
 &lt;select id="aaa"&gt;
   &lt;optgroup label="Theropods"&gt;
@@ -65,7 +66,7 @@
 
 
 <h2><code>&lt;option&gt;</code></h2>
-<p>The <code>&lt;option&gt;</code> does not require a <code>&lt;label&gt;</code> as its content acts as a <code>&lt;label&gt;</code>.</p>
+<p>The <code>&lt;option&gt;</code> does not require a <code>&lt;label&gt;</code> element as its content acts as a <code>&lt;label&gt;</code> element.</p>
 <pre><code>&lt;label for="aaa"&gt;Choose a dinosaur:&lt;/label&gt;
 &lt;select id="aaa"&gt;
   &lt;optgroup label="Theropods"&gt;
@@ -76,7 +77,7 @@
 
 
 <h2><code>&lt;datalist&gt;</code></h2>
-<p>The <code>&lt;datalist&gt;</code> does not require a <code>&lt;label&gt;</code> as it is always associated with an <code>&lt;input&gt;</code>.</p>
+<p>The <code>&lt;datalist&gt;</code> does not require a <code>&lt;label&gt;</code> element as it is always associated with an <code>&lt;input&gt;</code>, which should have it&rsquo;s own label.</p>
 <pre><code>&lt;label for="aaa"&gt;Choose a flavor:&lt;/label&gt;
 &lt;input id="aaa" list="bbb"&gt;
 &lt;datalist id="bbb"&gt;
@@ -86,7 +87,7 @@
 
 
 <h2><code>&lt;form&gt;</code></h2>
-<p>The <code>&lt;form&gt;</code> does not require a <code>&lt;label&gt;</code>.</p>
+<p>The <code>&lt;form&gt;</code> does not require a <code>&lt;label&gt;</code> element.</p>
 <pre><code>&lt;form&gt;&lt;/form&gt;</code></pre>
 
 
