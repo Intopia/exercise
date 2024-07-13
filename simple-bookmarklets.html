@@ -56,6 +56,35 @@
     <tr>
       <td>
 <a class="bookmarklet" href="javascript:(function() { 
+  var labeledElements = document.querySelectorAll('[aria-label]'); 
+  labeledElements.forEach(function(element) { 
+    element.style.outline = '5px solid rgba(0,0,255,.3)'; 
+    var ariaLabelValue = element.getAttribute('aria-label'); 
+    if (ariaLabelValue) { 
+      var labelMessage = document.createElement('div'); 
+      labelMessage.textContent = 'aria-label: ' + ariaLabelValue; 
+      labelMessage.style.position = 'absolute'; 
+      labelMessage.style.background = '#0000ff'; 
+      labelMessage.style.color = '#ffffff'; 
+      labelMessage.style.padding = '2px 5px'; 
+      labelMessage.style.fontSize = '16px'; 
+      labelMessage.style.zIndex = '1000'; 
+      var rect = element.getBoundingClientRect(); 
+      labelMessage.style.top = (rect.top + window.scrollY - labelMessage.offsetHeight) + 'px'; 
+      labelMessage.style.left = (rect.left + window.scrollX) + 'px'; 
+      document.body.appendChild(labelMessage); 
+    } 
+  }); 
+})();">
+    Highlight aria-label
+</a>
+
+      </td>
+      <td><a href="https://intopia.github.io/exercise/testing-form-labels.html" target="_blank">Testing form labels</a></td>
+    </tr>
+    <tr>
+      <td>
+<a class="bookmarklet" href="javascript:(function() { 
 var requiredElements = document.querySelectorAll('[aria-invalid=&quot;true&quot;]'); 
 requiredElements.forEach(function(element) { 
   element.style.outline = '5px solid rgba(0,0,255,.3)'; 
