@@ -56,6 +56,48 @@
     <tr>
       <td>
 <a class="bookmarklet" href="javascript:(function() { 
+  var requiredElements = document.querySelectorAll('[for]'); 
+  requiredElements.forEach(function(element) { 
+    element.style.outline = '5px solid rgba(0,0,255,.3)'; 
+    var forValue = element.getAttribute('for'); 
+    var describedElement = document.getElementById(forValue); 
+    if (describedElement) { 
+      describedElement.style.outline = '5px solid rgba(0,200,0,.4)'; 
+      var idMessage = document.createElement('div'); 
+      idMessage.textContent = 'ID: ' + describedElement.id; 
+      idMessage.style.position = 'absolute'; 
+      idMessage.style.background = '#00ff00'; 
+      idMessage.style.color = '#000000'; 
+      idMessage.style.padding = '2px 5px'; 
+      idMessage.style.fontSize = '16px'; 
+      idMessage.style.zIndex = '1000'; 
+      var describedRect = describedElement.getBoundingClientRect(); 
+      idMessage.style.top = (describedRect.top + window.scrollY - idMessage.offsetHeight) + 'px'; 
+      idMessage.style.left = (describedRect.left + window.scrollX) + 'px'; 
+      document.body.appendChild(idMessage); 
+    } 
+    var message = document.createElement('div'); 
+    message.textContent = 'for: ' + forValue; 
+    message.style.position = 'absolute'; 
+    message.style.background = '#0000ff'; 
+    message.style.color = '#ffffff'; 
+    message.style.padding = '2px 5px'; 
+    message.style.fontSize = '16px'; 
+    message.style.zIndex = '1000'; 
+    var rect = element.getBoundingClientRect(); 
+    message.style.top = (rect.top + window.scrollY - message.offsetHeight) + 'px'; 
+    message.style.left = (rect.left + window.scrollX) + 'px'; 
+    document.body.appendChild(message); 
+  }); 
+})();">
+    Highlight for and ID
+</a>
+      </td>
+      <td><a href="https://intopia.github.io/exercise/testing-form-labels.html" target="_blank">Testing form labels</a></td>
+    </tr>
+    <tr>
+      <td>
+<a class="bookmarklet" href="javascript:(function() { 
   var labeledElements = document.querySelectorAll('[aria-label]'); 
   labeledElements.forEach(function(element) { 
     element.style.outline = '5px solid rgba(0,0,255,.3)'; 
@@ -154,11 +196,11 @@ requiredElements.forEach(function(element) {
     <tr>
       <td>
 <a class="bookmarklet" href="javascript:(function() { 
-  var requiredElements = document.querySelectorAll('[for]'); 
+  var requiredElements = document.querySelectorAll('[aria-labelledby]'); 
   requiredElements.forEach(function(element) { 
     element.style.outline = '5px solid rgba(0,0,255,.3)'; 
-    var forValue = element.getAttribute('for'); 
-    var describedElement = document.getElementById(forValue); 
+    var ariaDescribedByValue = element.getAttribute('aria-labelledby'); 
+    var describedElement = document.getElementById(ariaDescribedByValue); 
     if (describedElement) { 
       describedElement.style.outline = '5px solid rgba(0,200,0,.4)'; 
       var idMessage = document.createElement('div'); 
@@ -175,7 +217,7 @@ requiredElements.forEach(function(element) {
       document.body.appendChild(idMessage); 
     } 
     var message = document.createElement('div'); 
-    message.textContent = 'for: ' + forValue; 
+    message.textContent = 'aria-labelledby: ' + ariaDescribedByValue; 
     message.style.position = 'absolute'; 
     message.style.background = '#0000ff'; 
     message.style.color = '#ffffff'; 
@@ -188,11 +230,42 @@ requiredElements.forEach(function(element) {
     document.body.appendChild(message); 
   }); 
 })();">
-    Highlight for and ID
+    Highlight aria-labelledby
 </a>
       </td>
-      <td><a href="https://intopia.github.io/exercise/testing-form-labels.html" target="_blank">Testing form labels</a></td>
+      <td><a href="https://intopia.github.io/exercise/testing-landmarks.html" target="_blank">Testing landmarks</a></td>
     </tr>
+    <tr>
+      <td>
+<a class="bookmarklet" href="javascript:(function() { 
+  var images = document.querySelectorAll('img'); 
+  images.forEach(function(image) { 
+    image.style.outline = '5px solid rgba(0,0,255,.3)'; 
+    var altText = image.getAttribute('alt'); 
+    if (altText) { 
+      var altMessage = document.createElement('div'); 
+      altMessage.textContent = 'Alt: ' + altText; 
+      altMessage.style.position = 'absolute'; 
+      altMessage.style.background = '#0000ff'; 
+      altMessage.style.color = '#ffffff'; 
+      altMessage.style.padding = '2px 5px'; 
+      altMessage.style.fontSize = '16px'; 
+      altMessage.style.zIndex = '1000'; 
+      var rect = image.getBoundingClientRect(); 
+      altMessage.style.top = (rect.top + window.scrollY) + 'px'; 
+      altMessage.style.left = (rect.left + window.scrollX) + 'px'; 
+      document.body.appendChild(altMessage); 
+    } 
+  }); 
+})();">
+    Highlight image alternatives
+</a>
+      </td>
+      <td><a href="https://intopia.github.io/exercise/testing-image-types.html" target="_blank">Testing image types</a></td>
+    </tr>
+
+
+
     <tr>
       <td>
 <a class="bookmarklet" href="javascript:(function() { 
@@ -235,34 +308,7 @@ requiredElements.forEach(function(element) {
       </td>
       <td><a href="https://intopia.github.io/exercise/testing-aria-controls.html" target="_blank">Testing the aria-controls attribute</a></td>
     </tr>
-    <tr>
-      <td>
-<a class="bookmarklet" href="javascript:(function() { 
-  var images = document.querySelectorAll('img'); 
-  images.forEach(function(image) { 
-    image.style.outline = '5px solid rgba(0,0,255,.3)'; 
-    var altText = image.getAttribute('alt'); 
-    if (altText) { 
-      var altMessage = document.createElement('div'); 
-      altMessage.textContent = 'Alt: ' + altText; 
-      altMessage.style.position = 'absolute'; 
-      altMessage.style.background = '#0000ff'; 
-      altMessage.style.color = '#ffffff'; 
-      altMessage.style.padding = '2px 5px'; 
-      altMessage.style.fontSize = '16px'; 
-      altMessage.style.zIndex = '1000'; 
-      var rect = image.getBoundingClientRect(); 
-      altMessage.style.top = (rect.top + window.scrollY) + 'px'; 
-      altMessage.style.left = (rect.left + window.scrollX) + 'px'; 
-      document.body.appendChild(altMessage); 
-    } 
-  }); 
-})();">
-    Highlight image alternatives
-</a>
-      </td>
-      <td><a href="https://intopia.github.io/exercise/testing-image-types.html" target="_blank">Testing image types</a></td>
-    </tr>
+
   </tbody>
 </table>
 
