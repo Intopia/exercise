@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the aria-controls attribute</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
+<h1>Testing the <code>aria-controls</code> attribute</h1>
+
+<p><a href="testing.html">Dummy link above</a></p>
+
+<div class="tab-interface">
+  <div role="tablist" aria-label="Sample Tabs">
+    <span
+      role="tab"
+      aria-selected="true"
+      aria-controls="panel-1"
+      id="tab-1"
+      tabindex="0">
+      First Tab
+    </span>
+    <span
+      role="tab"
+      aria-selected="false"
+      aria-controls="panel-2"
+      id="tab-2"
+      tabindex="-1">
+      Second Tab
+    </span>
+    <span
+      role="tab"
+      aria-selected="false"
+      aria-controls="panel-3"
+      id="tab-3"
+      tabindex="-1">
+      Third Tab
+    </span>
+  </div>
+  <div id="panel-1" role="tabpanel" tabindex="0" aria-labelledby="tab-1">
+    <p>Content for the first panel</p>
+  </div>
+  <div
+    id="panel-2"
+    role="tabpanel"
+    tabindex="0"
+    aria-labelledby="tab-2"
+    class="display-none">
+    <p>Content for the second panel</p>
+  </div>
+  <div
+    id="panel-3"
+    role="tabpanel"
+    tabindex="0"
+    aria-labelledby="tab-3"
+    class="display-none">
+    <p>Content for the third panel</p>
+  </div>
+</div>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
