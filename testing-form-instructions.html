@@ -14,8 +14,7 @@
 </a>
 
 <h1>Testing form field instructions</h1>
-<p>Which of the fields below has programmatically associated form field instructions?</p>
-
+<p>Which of the form field below has programmatically associated form field instructions? (via <code>aria-describedby</code>)</p>
 
 <h2>Example 1</h2>
 <form action="#">
@@ -28,8 +27,8 @@
 <h2>Example 2</h2>
 <form action="#">
   <label class="label" for="email">Email</label>
-  <span class="help-text" id="aaa">Add you full and valid email address</span>
-  <input class="input" id="email" type="email" aria-describedby="aaa">
+  <span class="help-text" id="email">Add you full and valid email address</span>
+  <input class="input" id="email" type="email" aria-describedby="email">
 </form>
 
 
