@@ -524,12 +524,20 @@ nav,
 aside,
 section,
 article,
-form[role="search"] {
+search {
   padding: 1em;
   border: 1px solid #ccc;
   background: #efefef;
   margin: 0 0 1em;
 }
+
+
+search form {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+
 
 /* ---------------------
 Testing states
@@ -671,11 +679,13 @@ a.external {
 }
 
 a.bookmarklet {
+  display: inline-block;
   background-image: url("../img/bookmark.png") !important;
   background-repeat: no-repeat !important;
   background-position: center left 10px !important;
   padding: .5em 1em .5em 2em !important;
   color: #000;
+  box-shadow: 4px 4px 4px 0 #ccc;
 }
 
 a.bookmarklet:link,
@@ -683,7 +693,6 @@ a.bookmarklet:visited,
 a.bookmarklet:focus,
 a.bookmarklet:hover,
 a.bookmarklet:active {
-  display: inline-block;
   text-decoration: none;
 }
 
@@ -728,4 +737,3 @@ a.intopia-home-link:focus {
 .intopia-logo {
   width: 180px;
 }
-
