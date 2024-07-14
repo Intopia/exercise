@@ -719,6 +719,13 @@ a.bookmarklet:active {
   margin: 0 0 2em;
 }
 
-.intopia-logo {
-  width: 200px;
+a.intopia-home-link:focus {
+  color: #fff;
+  background: transparent;
+  outline: 2px solid #000;
 }
+
+.intopia-logo {
+  width: 180px;
+}
+
