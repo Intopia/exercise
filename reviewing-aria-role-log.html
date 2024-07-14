@@ -25,11 +25,12 @@
 </a>
 
 <h1>Reviewing <code>role="log"</code></h1>
+<ul>
+  <li>After 8 seconds, a message should be injected into the container below.</li>
+  <li>The injected content should be announce at the next graceful opportunity as this role has implicit <code>aria-live="polite"</code>.</li>
+  <li>Only newly injected content should also be announced as this role has implicit <code>aria-atomic="false"</code>.</li>
+</ul>
 
-
-<p>After 8 seconds, a message should appear below and should not interupt anything being announced on the page. However, the message should be announced at the next graceful opportunity.</p>
-
-<p>Only newly injected content should also be announced as <code>role="log"</code> has implicit <code>aria-atomic="false"</code>.</p>
 
 <div class="example">
   <div id="message" class="info" role="log">
