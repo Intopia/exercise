@@ -6,6 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    h2 {
+      margin-top: 3em;
+    }
+
+    p {
+      margin: 1em 0;
+    }
+
+    p + .example {
+      margin-bottom: 0;
+    }
+
+    pre {
+      margin: 0 0 3em;
+    }
+  </style>
 </head>
 <body>
 
@@ -16,54 +33,35 @@
 <h1>Reviewing methods of applying accessible names</h1>
 
 
-<h2>Method 1: Using the element's content</h2>
-<p>The contents of many HTML elements, such as the <code>&lt;h4&gt;</code>, <code>&lt;button&gt;</code> and <code>&lt;a&gt;</code> elements below, can generate an accessible name</p>
+<h2>Method 1: Using the element&rsquo;s content</h2>
+
+<p>The contents of a heading element:</p>
 <div class="example">
   <h4 style="margin: 0;">About our team</h4>
 </div>
 <pre><code>&lt;h4&gt;<span class="highlight">About our team</span>&lt;/h4&gt;</code></pre>
+
+<p>The contents of a <code>&lt;button&gt;</code> element:</p>
 <div class="example">
   <button class="button">Submit</button>
 </div>
 <pre><code>&lt;button class="button"&gt;<span class="highlight">Submit</span>&lt;/button&gt;</code></pre>
+
+<p>The content of a <code>&lt;a&gt;</code> element:</p>
 <div class="example">
   <a href="#">Contact us</a>
 </div>
 <pre><code>&lt;a href="#"&gt;<span class="highlight">Contact us</span>&lt;/a&gt;</code></pre>
 
 
-<h2>Method 2: Using the <code>alt</code> attribute</h2>
+<h2>Method 2: Using the contents of an attribute within the element</h2>
+
 <p>The contents of the <code>alt</code> attribute can generate an accessible name for the <code>&lt;img&gt;</code> element:</p>
 <div class="example">
   <img src="https://via.placeholder.com/100" alt="A dummy image">
 </div>
 <pre><code>&lt;img src="a.png" alt="<span class="highlight">A dummy image</span>"&gt;</code></pre>
 
-
-<h2>Method 3: Using the <code>placeholder</code> attribute</h2>
-<p>The contents of the <code>placeholder</code> attribute can generate an accessible name for the <code>&lt;input&gt;</code> element with a type of <code>text</code>, <code>search</code>, <code>url</code>, <code>tel</code>, <code>email</code>, <code>password</code>, or <code>number</code>. This attribute can also generate an accessible name for the <code>&lt;textarea&gt;</code> element.</p>
-<form action="#" class="example">
-  <input class="input" type="text" placeholder="Search">
-</form>
-<pre><code>&lt;input type="text" placeholder="<span class="highlight">Search</span>"&gt;</code></pre>
-<form action="#" class="example">
-  <textarea class="input" rows="5" placeholder="Comment"></textarea>
-</form>
-<pre><code>&lt;textarea placeholder="<span class="highlight">Comment</span>"&gt;&lt;/textarea&gt;</code></pre>
-
-
-<h2>Method 4: Using the <code>title</code> attribute</h2>
-<p>The contents of the <code>title</code> can generate an accessible name for many elements:</p>
-<div class="example">
-  <button class="button" title="Close">
-    <img src="assets/img/icon-cross.png" alt="">
-  </button>
-</div>
-<pre><code>&lt;button title="<span class="highlight">Close</span>"&gt;
-&lt;/button&gt;</code></pre>
-
-
-<h2>Method 5: Using the <code>aria-label</code> attribute</h2>
 <p>The contents of the <code>aria-label</code> can generate an accessible name for many elements:</p>
 <div class="example">
   <button class="button" aria-label="Close">
@@ -73,8 +71,21 @@
 <pre><code>&lt;button aria-label="<span class="highlight">Close</span>"&gt;
 &lt;/button&gt;</code></pre>
 
+<p>The contents of the <code>title</code> can generate an accessible name for many elements:</p>
+<div class="example">
+  <button class="button" title="Close">
+    <img src="assets/img/icon-cross.png" alt="">
+  </button>
+</div>
+<pre><code>&lt;button title="<span class="highlight">Close</span>"&gt;
+&lt;/button&gt;</code></pre>
 
-<h2>Method 6: Using the <code>aria-placeholder</code> attribute</h2>
+<p>The contents of the <code>placeholder</code> attribute can generate an accessible name for the <code>&lt;input&gt;</code> element with a type of <code>text</code>, <code>search</code>, <code>url</code>, <code>tel</code>, <code>email</code>, <code>password</code>, or <code>number</code>. This attribute can also generate an accessible name for the <code>&lt;textarea&gt;</code> element.</p>
+<form action="#" class="example">
+  <input class="input" type="text" placeholder="Search">
+</form>
+<pre><code>&lt;input type="text" placeholder="<span class="highlight">Search</span>"&gt;</code></pre>
+
 <p>The contents of the <code>aria-placeholder</code> attribute can generate an accessible name for non-form elements. Unlike the native <code>placeholder</code> attribute, this will not present information on-screen. It will only be available in the accessibility tree:</p>
 <form action="#" class="example">
   <div contenteditable="" class="input" role="textbox" aria-placeholder="Add a date"></div>
@@ -87,7 +98,8 @@
 &lt;/div&gt;</code></pre>
 
 
-<h2>Method 7: Using the <code>&lt;legend&gt;</code> element</h2>
+<h2>Method 3: Using the contents of a related element</h2>
+
 <p>The contents of the <code>&lt;legend&gt;</code> element can generate an accessible name for the <code>&lt;fieldset&gt;</code> element:</p>
 <div class="example">
   <fieldset>
@@ -98,8 +110,6 @@
   &lt;legend&gt;<span class="highlight">Billing information</span>&lt;/legend&gt;
 &lt;/fieldset&gt;</code></pre>
 
-
-<h2>Method 8: Using the <code>&lt;caption&gt;</code> element</h2>
 <p>The contents of the <code>&lt;caption&gt;</code> element can generate an accessible name for the <code>&lt;table&gt;</code> element:</p>
 <div class="example">
   <table style="margin: 0;">
@@ -122,8 +132,6 @@
   &lt;caption&gt;<span class="highlight">Average rainfall in Australia</span>&lt;/caption&gt;
 &lt;/table&gt;</code></pre>
 
-
-<h2>Method 9: Using the <code>&lt;label&gt;</code> element</h2>
 <p>The contents of the <code>&lt;label&gt;</code> element can generate an accessible name for the <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code>, <code>&lt;meter&gt;</code> and <code>&lt;progress&gt;</code>  elements:</p>
 <form action="#" class="example">
   <label class="label" for="name">Full name</label>
@@ -131,28 +139,7 @@
 </form>
 <pre><code>&lt;label for="name"&gt;<span class="highlight">Full name</span>&lt;/label&gt;
 &lt;input id="name" type="text"&gt;</code></pre>
-<form action="#" class="example">
-  <label class="label" for="comment">Add a comment</label>
-  <textarea class="input" rows="5" id="comment"></textarea>
-</form>
-<pre><code>&lt;label for="comment"&gt;<span class="highlight">Add a comment</span>&lt;/label&gt;
-&lt;textarea id="comment"&gt;&lt;/textarea&gt;</code></pre>
-<form action="#" class="example">
-  <label class="label" for="fuel">Fuel level</label>
-  <meter id="fuel" min="0" max="100" low="33" high="66" optimum="80" value="50">
-  </meter>
-</form>
-<pre><code>&lt;label for="fuel"&gt;<span class="highlight">Fuel level</span>&lt;/label&gt;
-&lt;meter id="fuel" value="50"&gt;&lt;/meter&gt;</code></pre>
-<form action="#" class="example">
-  <label class="label" for="file">Progress</label>
-  <progress id="file" max="100" value="70">70%</progress>
-</form>
-<pre><code>&lt;label for="file"&gt;<span class="highlight">Progress</span>&lt;/label&gt;
-&lt;progress id="file" value="70"&gt;&lt;/progress&gt;</code></pre>
 
-
-<h2>Method 10: Using the <code>aria-labelledby</code> attribute</h2>
 <p>The contents of one or more elements can generate an accessible name for another element - if there are matching <code>aria-labelledby</code> and <code>id</code> values:</p>
 <div class="example">
   <nav aria-labelledby="section-heading" style="padding: 0;">
