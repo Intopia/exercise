@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the :target CSS selector</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+
+.target2 {
+  margin: 2em 0;
+  padding: 1em;
+}
+
+:target {
+  outline: 2px solid #C87D00;
+  animation: fade 5s forwards;
+}
+
+@keyframes fade {
+  0% {
+    background-color: #FFFF00;
+    outline-color: #C87D00;
+  }
+  100% {
+    background-color: transparent;
+    outline-color: transparent;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
+<h1>Testing the <code>:target</code> CSS selector</h1>
+
+<p>The <code>:target</code> CSS pseudo-class represents a unique element (the target element) with an id matching the URL&rsquo;s fragment.</p>
+
+<p>Click the link below to see an example:</p>
+<p><a href="#target1"><b>Link to target</b></a></p>
+
+<p>Pri at epicurei convenire, ut oratio liberavisse est. Ex his dolorum concludaturque, et mel solet soleat accumsan. In mollis ancillae intellegebat has. Sea congue cetero cu, ut mnesarchum vituperatoribus mel. Ne vix solet dicant possit, eos solet dictas facilisi ei.</p>
+
+<p>Vel ei quaeque definiebas. Ius no assum impedit. Ipsum efficiendi usu ei. Prima electram principes in pro, id pro dolores appellantur, at causae admodum voluptatum eam. Accusam percipit erroribus pro et. Brute option usu cu, alia enim mutat eum cu.</p>
+
+<p>His vocent integre mnesarchum no, ex prompta sapientem nec, te complectitur disputationi nam. Per an laudem convenire instructior, est graece labore moderatius eu, te natum verterem nam. Soleat doming splendide et has. Usu in aperiam albucius expetendis, integre tacimates quo at. Ad quo iuvaret deleniti copiosae, in vix ipsum dicant, sint consequuntur eu has. Ex pri solum graecis deterruisset, qui enim saperet iracundia ei.</p>
+
+<p>Ut vix facete labitur deserunt, possim vocent debitis ex sed. An usu vidisse copiosae petentium. Debet virtute te vel. Mutat ullum molestie eos ex. Causae facilis oportere ius at, in sint ceteros vix. Ne brute convenire vituperata nec.</p>
+
+<p>Id his similique philosophia, ne exerci aliquando similique has. His id antiopam salutandi forensibus. Singulis intellegebat in pro, vim illud postulant constituam eu. Ad vim wisi inani commune.</p>
+
+<div class="target2" id="target1" tabindex="-1">
+  Hello world
+</div>
+
+<pre><code>:target {
+  outline: 2px solid #C87D00;
+  animation: fade 5s forwards;
+}
+
+@keyframes fade {
+  0% {
+    background-color: #FFFF00;
+    outline-color: #C87D00;
+  }
+  100% {
+    background-color: transparent;
+    outline-color: transparent;
+  }
+}</code></pre>
+
+<p>Pri at epicurei convenire, ut oratio liberavisse est. Ex his dolorum concludaturque, et mel solet soleat accumsan. In mollis ancillae intellegebat has. Sea congue cetero cu, ut mnesarchum vituperatoribus mel. Ne vix solet dicant possit, eos solet dictas facilisi ei.</p>
+
+<p>Vel ei quaeque definiebas. Ius no assum impedit. Ipsum efficiendi usu ei. Prima electram principes in pro, id pro dolores appellantur, at causae admodum voluptatum eam. Accusam percipit erroribus pro et. Brute option usu cu, alia enim mutat eum cu.</p>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
