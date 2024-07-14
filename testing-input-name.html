@@ -16,6 +16,16 @@
 <h1>Testing the accessible name of an <code>&lt;input&gt;</code></h1>
 <p>The purpose this test is to show the cascade order of how accessible names are applied in the accessibility tree. This example should not be considered proper practice. Where possible the contents of the <code>&lt;label&gt;</code> should be used to define the accessible name.</p>
 
+<p>The input element can be given an accessible name using the following methods, in order of priority:</p>
+<ul>
+  <li><code>aria-labelledby</code></li>
+  <li><code>aria-label</code></li>
+  <li>From <code>&lt;label&gt;</code> with <code>for</code></li>
+  <li><code>title</code></li>
+  <li><code>placeholder</code></li>
+  <li><code>aria-placeholder</code></li>
+</ul>
+
 <h2>Example 1</h2>
 <p>The <code>&lt;input&gt;</code> element should have an accessible name of &lsquo;Cat&rsquo; via the <code>aria-labelledby</code> attribute.</p>
 <form action="#">
