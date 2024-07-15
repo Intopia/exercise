@@ -21,13 +21,13 @@
 
 
 <h2>How do you use them?</h2>
-<ol>
+<ol style="margin-bottom: 3em;">
   <li>Drag the bookmarklet links below into your browser&rsquo;s Bookmarks Bar.</li>
   <li>When you are on the page you want to test, click on the bookmarklet.</li>
 </ol>
 
-<h2>Bookmarklets</h2>
-<table>
+<table style="margin: 2em 0;">
+  <caption>Form bookmarklets</caption>
   <thead>
     <tr>
       <th>Bookmarklet</th>
@@ -35,35 +35,6 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>
-<a class="bookmarklet" href="javascript:(function() { 
-  var requiredElements = document.querySelectorAll('[required], [aria-required=&quot;true&quot;]'); 
-  requiredElements.forEach(function(element) { 
-    element.style.outline = '5px solid rgba(0,0,255,.3)'; 
-    var message = document.createElement('div'); 
-    if (element.hasAttribute('required')) { 
-      message.textContent = 'Required'; 
-    } else if (element.getAttribute('aria-required') === 'true') { 
-      message.textContent = 'aria-required=true'; 
-    } 
-    message.style.position = 'absolute'; 
-    message.style.background = '#0000ff'; 
-    message.style.color = '#ffffff'; 
-    message.style.padding = '2px 5px'; 
-    message.style.fontSize = '16px'; 
-    message.style.zIndex = '1000'; 
-    var rect = element.getBoundingClientRect(); 
-    message.style.top = (rect.top + window.scrollY - message.offsetHeight) + 'px'; 
-    message.style.left = (rect.left + window.scrollX) + 'px'; 
-    document.body.appendChild(message); 
-  }); 
-})();">
-  Highlight required and aria-required
-</a>
-      </td>
-      <td><a href="https://intopia.github.io/exercise/testing-required-fields.html" target="_blank">Testing required fields</a></td>
-    </tr>
     <tr>
       <td>
 <a class="bookmarklet" href="javascript:(function() { 
@@ -106,6 +77,9 @@
       </td>
       <td><a href="https://intopia.github.io/exercise/testing-form-labels.html" target="_blank">Testing form labels</a></td>
     </tr>
+
+
+
     <tr>
       <td>
 <a class="bookmarklet" href="javascript:(function() { 
@@ -135,33 +109,10 @@
       </td>
       <td><a href="https://intopia.github.io/exercise/testing-form-labels.html" target="_blank">Testing form labels</a></td>
     </tr>
-    <tr>
-      <td>
-<a class="bookmarklet" href="javascript:(function() { 
-var requiredElements = document.querySelectorAll('[aria-invalid=&quot;true&quot;]'); 
-requiredElements.forEach(function(element) { 
-  element.style.outline = '5px solid rgba(0,0,255,.3)'; 
-  var message = document.createElement('div'); 
-  if (element.getAttribute('aria-invalid') === 'true') { 
-    message.textContent = 'aria-invalid=true'; 
-  } 
-  message.style.position = 'absolute'; 
-  message.style.background = '#0000ff'; 
-  message.style.color = '#ffffff'; 
-  message.style.padding = '2px 5px'; 
-  message.style.fontSize = '16px'; 
-  message.style.zIndex = '1000'; 
-  var rect = element.getBoundingClientRect(); 
-  message.style.top = (rect.top + window.scrollY - message.offsetHeight) + 'px'; 
-  message.style.left = (rect.left + window.scrollX) + 'px'; 
-  document.body.appendChild(message); 
-}); 
-})();">
-  Highlight aria-invalid
-</a>
-      </td>
-      <td><a href="https://intopia.github.io/exercise/testing-form-errors.html" target="_blank">Testing form field errors</a></td>
-    </tr>
+
+
+
+
     <tr>
       <td>
 <a class="bookmarklet" href="javascript:(function() { 
@@ -204,6 +155,81 @@ requiredElements.forEach(function(element) {
       </td>
       <td><a href="https://intopia.github.io/exercise/testing-form-instructions.html" target="_blank">Testing form field instructions</a></td>
     </tr>
+
+
+
+    <tr>
+      <td>
+<a class="bookmarklet" href="javascript:(function() { 
+  var requiredElements = document.querySelectorAll('[required], [aria-required=&quot;true&quot;]'); 
+  requiredElements.forEach(function(element) { 
+    element.style.outline = '5px solid rgba(0,0,255,.3)'; 
+    var message = document.createElement('div'); 
+    if (element.hasAttribute('required')) { 
+      message.textContent = 'Required'; 
+    } else if (element.getAttribute('aria-required') === 'true') { 
+      message.textContent = 'aria-required=true'; 
+    } 
+    message.style.position = 'absolute'; 
+    message.style.background = '#0000ff'; 
+    message.style.color = '#ffffff'; 
+    message.style.padding = '2px 5px'; 
+    message.style.fontSize = '16px'; 
+    message.style.zIndex = '1000'; 
+    var rect = element.getBoundingClientRect(); 
+    message.style.top = (rect.top + window.scrollY - message.offsetHeight) + 'px'; 
+    message.style.left = (rect.left + window.scrollX) + 'px'; 
+    document.body.appendChild(message); 
+  }); 
+})();">
+  Highlight required and aria-required
+</a>
+      </td>
+      <td><a href="https://intopia.github.io/exercise/testing-required-fields.html" target="_blank">Testing required fields</a></td>
+    </tr>
+
+
+
+    <tr>
+      <td>
+<a class="bookmarklet" href="javascript:(function() { 
+var requiredElements = document.querySelectorAll('[aria-invalid=&quot;true&quot;]'); 
+requiredElements.forEach(function(element) { 
+  element.style.outline = '5px solid rgba(0,0,255,.3)'; 
+  var message = document.createElement('div'); 
+  if (element.getAttribute('aria-invalid') === 'true') { 
+    message.textContent = 'aria-invalid=true'; 
+  } 
+  message.style.position = 'absolute'; 
+  message.style.background = '#0000ff'; 
+  message.style.color = '#ffffff'; 
+  message.style.padding = '2px 5px'; 
+  message.style.fontSize = '16px'; 
+  message.style.zIndex = '1000'; 
+  var rect = element.getBoundingClientRect(); 
+  message.style.top = (rect.top + window.scrollY - message.offsetHeight) + 'px'; 
+  message.style.left = (rect.left + window.scrollX) + 'px'; 
+  document.body.appendChild(message); 
+}); 
+})();">
+  Highlight aria-invalid
+</a>
+      </td>
+      <td><a href="https://intopia.github.io/exercise/testing-form-errors.html" target="_blank">Testing form field errors</a></td>
+    </tr>
+  </tbody>
+</table>
+
+
+<table style="margin: 2em 0;">
+  <caption>Other bookmarklets</caption>
+  <thead>
+    <tr>
+      <th>Bookmarklet</th>
+      <th>Test page</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>
 <a class="bookmarklet" href="javascript:(function() { 
@@ -246,6 +272,9 @@ requiredElements.forEach(function(element) {
       </td>
       <td><a href="https://intopia.github.io/exercise/testing-landmarks.html" target="_blank">Testing landmarks</a></td>
     </tr>
+
+
+
     <tr>
       <td>
 <a class="bookmarklet" href="javascript:(function() { 
