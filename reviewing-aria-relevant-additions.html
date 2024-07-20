@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Reviewing aria-relevant=additions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    #message.error > p {
+      padding: 1em;
+      margin: 0;
+      outline: 2px solid rgba(255,0,0,1);
+      background: rgba(255,0,0,.1);
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
+<h1>Reviewing <code>aria-relevant="additions"</code></h1>
+<ul>
+  <li>After 8 seconds, a message should be injected into the container below.</li>
+  <li>The injected content should be announce immediately.</li>
+</ul>
+
+<h2>Example</h2>
+
+<div class="example">
+  <div id="message" class="error" aria-live="assertive" aria-relevant="additions">
+    <p>Content that is already in the container</p>
+  </div>
+</div>
+
+<p>If a screen reader is focussed on announcing this paragraph, will the dynamically injected message above affect the announcement of this paragraph. This is how we can determine if dynamic information is announced immediately, at the next graceful opportunity, or not at all.</p>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+
+<script>
+  setTimeout(function() {
+    var messageContainer = document.getElementById('message');
+    var newContent = document.createElement('p');
+    newContent.textContent = 'Content that is newly added to the container';
+    messageContainer.appendChild(newContent);
+  }, 5000);
+
+  setTimeout(function() {
+    var messageContainer = document.getElementById('message');
+    var existingContent = messageContainer.querySelector('p');
+    if (existingContent) {
+      messageContainer.removeChild(existingContent);
+    }
+  }, 10000);
+</script>
+
+</body>
+</html>
