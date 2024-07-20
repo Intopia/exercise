@@ -23,15 +23,17 @@
 
 <h1>Reviewing <code>aria-relevant="additions"</code></h1>
 <ul>
-  <li>After 8 seconds, a message should be injected into the container below.</li>
-  <li>The injected content should be announce immediately.</li>
+  <li>After 8 seconds, a message will be removed from the container below.</li>
+  <li>The removed content should not be announce.</li>
+  <li>After 15 seconds, a message will be injected into the container below.</li>
+  <li>The removed content should be announce immediately.</li>
 </ul>
 
 <h2>Example</h2>
 
 <div class="example">
   <div id="message" class="error" aria-live="assertive" aria-relevant="additions">
-    <p>Content that is already in the container</p>
+    <p>Content to be removed from the container</p>
   </div>
 </div>
 
@@ -42,18 +44,18 @@
 <script>
   setTimeout(function() {
     var messageContainer = document.getElementById('message');
-    var newContent = document.createElement('p');
-    newContent.textContent = 'Content that is newly added to the container';
-    messageContainer.appendChild(newContent);
-  }, 5000);
-
-  setTimeout(function() {
-    var messageContainer = document.getElementById('message');
     var existingContent = messageContainer.querySelector('p');
     if (existingContent) {
       messageContainer.removeChild(existingContent);
     }
-  }, 10000);
+  }, 8000);
+
+  setTimeout(function() {
+    var messageContainer = document.getElementById('message');
+    var newContent = document.createElement('p');
+    newContent.textContent = 'Content that is newly added to the container';
+    messageContainer.appendChild(newContent);
+  }, 15000);
 </script>
 
 </body>

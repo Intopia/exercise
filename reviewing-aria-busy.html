@@ -24,10 +24,10 @@
 <h1>Reviewing <code>aria-busy</code></h1>
 <ul>
   <li>The container below is initially set with <code>aria-live="assertive"</code> and <code>aria-busy="true"</code>.</li>
-  <li>After 5 seconds, message 1 is injected into the container below. As the container is "busy", this dynamic change will not be announced.</li>
-  <li>After 5.5 seconds, the container is set with <code>aria-busy="false"</code>.</li>
-  <li>After 10 seconds, message 2 is injected into the container below. As the container is not busy, this dynamic change will be announced.</li>
-  <li>After 15 seconds, message 3 is injected into the container below. As the container is not busy, this dynamic change will be announced.</li>
+  <li>After 5 seconds, message 1 will be injected into the container below. As the container is "busy", this dynamic change should not be announced.</li>
+  <li>After 5.5 seconds, the container will be set with <code>aria-busy="false"</code>.</li>
+  <li>After 10 seconds, message 2 will be injected into the container below. As the container is not busy, this dynamic change should be announced.</li>
+  <li>After 15 seconds, message 3 will be injected into the container below. As the container is not busy, this dynamic change should be announced.</li>
 </ul>
 
 <h2>Example</h2>

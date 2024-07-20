@@ -23,8 +23,10 @@
 
 <h1>Reviewing <code>aria-relevant="all"</code></h1>
 <ul>
-  <li>After 8 seconds, a message should be injected into the container below.</li>
-  <li>The injected content should be announce immediately.</li>
+  <li>After 8 seconds, a message will be removed from the container below.</li>
+  <li>The removed content should be announce immediately.</li>
+  <li>After 15 seconds, a message will be injected into the container below.</li>
+  <li>The removed content should be announce immediately.</li>
 </ul>
 
 <h2>Example</h2>
@@ -46,14 +48,14 @@
     if (existingContent) {
       messageContainer.removeChild(existingContent);
     }
-  }, 5000);
+  }, 8000);
 
   setTimeout(function() {
     var messageContainer = document.getElementById('message');
     var newContent = document.createElement('p');
     newContent.textContent = 'Content that is newly added to the container';
     messageContainer.appendChild(newContent);
-  }, 10000);
+  }, 15000);
 </script>
 
 </body>
