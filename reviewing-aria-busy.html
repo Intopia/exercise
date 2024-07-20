@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reviewing aria-busy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    #message p {
+      padding: 1em;
+      margin: 0;
+      outline: 2px solid rgba(255, 0, 0, 1);
+      background: rgba(255, 0, 0, .1);
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
+<h1>Reviewing <code>aria-busy</code></h1>
+<ul>
+  <li>The container below is initially set with <code>aria-live="assertive"</code> and <code>aria-busy="true"</code>.</li>
+  <li>After 5 seconds, message 1 is injected into the container below. As the container is "busy", this dynamic change will not be announced.</li>
+  <li>After 5.5 seconds, the container is set with <code>aria-busy="false"</code>.</li>
+  <li>After 10 seconds, message 2 is injected into the container below. As the container is not busy, this dynamic change will be announced.</li>
+  <li>After 15 seconds, message 3 is injected into the container below. As the container is not busy, this dynamic change will be announced.</li>
+</ul>
+
+<h2>Example</h2>
+
+<div class="example">
+  <div id="message" aria-live="assertive" aria-busy="true"></div>
+</div>
+
+<p>If a screen reader is focussed on announcing this paragraph, will the dymanically injected message above affect the announcement of this paragraph. This is how we can determine if dynamic information is announced immediately, at the next gracefull opportunity, or not at all.</p>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+
+<script>
+    // Inject the first paragraph after 5 seconds
+    setTimeout(() => {
+        const messageContainer = document.getElementById('message');
+        messageContainer.innerHTML += '<p>Dynamic content 1</p>';
+        
+        // Change aria-busy to false after injecting the first paragraph
+        setTimeout(() => {
+            messageContainer.setAttribute('aria-busy', 'false');
+        }, 500); // 5.5 seconds in total
+    }, 5000); // 5 seconds
+
+    // Inject the second paragraph after 10 seconds
+    setTimeout(() => {
+        document.getElementById('message').innerHTML += '<p>Dynamic content 2</p>';
+    }, 10000); // 10 seconds
+
+    // Inject the third paragraph after 15 seconds
+    setTimeout(() => {
+        document.getElementById('message').innerHTML += '<p>Dynamic content 3</p>';
+    }, 15000); // 15 seconds
+</script>
+
+</body>
+</html>

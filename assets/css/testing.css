@@ -107,6 +107,8 @@ a:hover {
 a:focus {
   color: #fff;
   background: #000;
+  outline: none;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 5px #000;
 }
 
 a:active {
@@ -251,7 +253,9 @@ legend {
 }
 
 .input:focus {
-  outline: 2px solid #000;
+  border: 1px solid #000;
+  outline: 0;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 5px #000;
 }
 
 .input:hover {
@@ -278,6 +282,7 @@ button:focus {
   background: #000;
   color: #fff;
   outline: none;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 5px #000;
 }
 
 .button:hover,
@@ -372,6 +377,7 @@ footer link
   background: #000 !important;
   color: #fff !importantv;
   outline: none;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 5px #000;
 }
 
 .footer-link a:hover {
