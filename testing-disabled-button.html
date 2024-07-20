@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Testing a disabled button</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    #submit:disabled {
+      color: #666;
+      background: #aaa;
+    }
+
+    #message p {
+      padding: 1em;
+      background: rgba(0,255,0,.2);
+    }
+
+    #message:focus {
+      outline: none; /* Remove default outline */
+      box-shadow: 0 0 0 3px rgba(100,255,100,.7); /* Add a custom focus style */
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
+<h1>Testing a disabled button</h1>
+<p>When the &ldquo;Save&rdquo; button is activated:</p>
+<ul>
+  <li>The <code>disabled</code> attribute is added to the button.</li>
+  <li>The button text changes to &ldquo;Saving...&rdquo;.</li>
+</ul>
+
+<p>After 10 seconds:</p>
+<ul>
+  <li>The <code>disabled</code> attribute is removedc from the button.</li>
+  <li>The button text changes back to &ldquo;Save&rdquo;.</li>
+  <li>A message is added above the form.</li>
+  <li>Focus is sent to the message.</li>
+</ul>
+
+<h2>Example</h2>
+
+
+<div id="message" role="status"></div>
+
+
+<form onsubmit="handleSubmit(event)">
+  <div class="form-group-small">
+    <label class="label" for="phone">Phone number:</label>
+    <input class="input" type="tel" id="phone">
+  </div>
+  <div class="form-group">
+    <button type="submit" id="submit">Save</button>
+  </div>
+</form>
+
+
+<script>
+  function handleSubmit(event) {
+      event.preventDefault(); // Prevent the default form submission behavior
+
+      // Get the submit button
+      const submitButton = document.getElementById('submit');
+      // Get the message container
+      const messageContainer = document.getElementById('message');
+
+      // Disable the submit button and change its text
+      submitButton.disabled = true;
+      submitButton.textContent = 'Saving...';
+
+      // After 10 seconds, re-enable the button and change the text back
+      setTimeout(() => {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Save';
+
+          // Add the message to the message container
+          const messageParagraph = document.createElement('p');
+          messageParagraph.textContent = 'Phone number saved';
+          messageContainer.appendChild(messageParagraph);
+          
+          // Set focus to the message container
+          messageContainer.setAttribute('tabindex', '-1'); // Make it focusable
+          messageContainer.focus();
+      }, 10000);
+  }
+</script>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>

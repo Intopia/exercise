@@ -227,6 +227,10 @@ legend {
   margin: 0;
 }
 
+.form-group-small {
+  margin: 0 0 .5em;
+}
+
 .form-group-spaced {
   margin: 0 0 2em;
 }
