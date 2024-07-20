@@ -89,29 +89,34 @@ ol li {
 Links
 ----------------------*/
 
-a:link {
+a:link,
+a:link code {
   color: #0A7399;
   background: transparent;
 }
 
-a:visited {
+a:visited,
+a:visited code {
   color: #086D91;
   background: transparent;
 }
 
-a:hover {
+a:hover,
+a:hover code {
   color: #007700;
   background: transparent;
 }
 
-a:focus {
+a:focus,
+a:focus code {
   color: #fff;
   background: #000;
   outline: none;
   box-shadow: 0 0 0 2px #fff, 0 0 0 5px #000;
 }
 
-a:active {
+a:active,
+a:active code {
   color: #AA0000;
   background: transparent;
 }
