@@ -28,15 +28,17 @@
   <li><b>Result</b>: The injected content should be announce as it has received focus.</li>
 </ul>
 
+
 <h2>Example</h2>
+
 
 <div class="example">
   <div id="message" class="info"></div>
 </div>
 
+
 <p>If a screen reader is focused on announcing this paragraph, will the dynamically injected message above affect the announcement of this paragraph? This is how we can determine whether dynamic information is announced immediately, at the next graceful opportunity, or not at all.</p>
 
-<p class="footer-link"><a href="testing.html">Testing home</a></p>
 
 <script>
     // Function to inject a new paragraph into the element with id "message"
@@ -62,5 +64,44 @@
     setTimeout(injectParagraph, 8000);
 </script>
 
+
+<h2>Assistive technologies</h2>
+<div class="note">
+  <h3>VoiceOver</h3>
+  <ul class="browser-list">
+    <li><b>Chrome:</b><br>
+      When reading: <span class="green">Interrupts and announces message immediately</span>.<br>
+      When silent: <span class="green">Announces message immediately</span>.
+    </li>
+    <li><b>Firefox:</b><br>
+      When reading: <span class="green">Interrupts and announces message immediately</span>.<br>
+      When silent: <span class="green">Announces message immediately</span>.
+    </li>
+    <li><b>Safari:</b><br>
+      When reading: <span class="green">Interrupts and announces message immediately</span>.<br>
+      When silent: <span class="green">Announces message immediately</span>.
+    </li>
+  </ul>
+</div>
+<div class="note">
+  <h3>NVDA</h3>
+  <ul class="browser-list">
+    <li><b>Chrome:</b><br>
+      When reading: <span class="green">Announces message immediately</span>.<br>
+      When silent: <span class="green">Announces message immediately</span>.
+    </li>
+    <li><b>Firefox:</b><br>
+      When reading: <span class="green">Announces message immediately</span>.<br>
+      When silent: <span class="green">Announces message immediately</span>.
+    </li>
+    <li><b>Edge:</b><br>
+      When reading: <span class="green">Announces message immediately</span>.<br>
+      When silent: <span class="green">Announces message immediately</span>.
+    </li>
+  </ul>
+</div>
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
 </html>

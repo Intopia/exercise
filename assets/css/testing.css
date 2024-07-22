@@ -340,6 +340,15 @@ Help and errors
   color: #fff;
   background: green;
 }
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
 /* ---------------------
 Example
 ----------------------*/
@@ -751,4 +760,27 @@ a.intopia-home-link:focus {
 
 .intopia-logo {
   width: 180px;
+}
+
+.note {
+  background: #ffeeee;
+  padding: 1em;
+  margin: 1em 0;
+}
+
+.note h3 {
+  margin: 0 0 .5em;
+  color: black;
+}
+
+.note ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.note li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
