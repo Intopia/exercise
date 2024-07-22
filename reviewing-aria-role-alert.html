@@ -31,7 +31,9 @@
   <li><b>Result</b>: All content inside the container, including newly injected content should also be announced immediately.</li>
 </ul>
 
+
 <h2>Example</h2>
+
 
 <div class="example">
   <div id="message" class="error" role="alert">
@@ -40,8 +42,6 @@
 </div>
 
 <p>If a screen reader is focused on announcing this paragraph, will the dynamically injected message above affect the announcement of this paragraph? This is how we can determine whether dynamic information is announced immediately, at the next graceful opportunity, or not at all.</p>
-
-<p class="footer-link"><a href="testing.html">Testing home</a></p>
 
 
 <script>
@@ -64,5 +64,27 @@
     setTimeout(injectParagraph, 8000);
 </script>
 
+
+<h2>Assistive technologies</h2>
+<div class="note">
+  <h3>VoiceOver</h3>
+  <ul class="browser-list">
+    <li><b>Chrome:</b><br>
+      When reading: <span class="green">All content announced immediately</span>.<br>
+      When silent: <span class="green">All content announced immediately</span>.
+    </li>
+    <li><b>Firefox:</b><br>
+      When reading: <span class="red">Only newly added content announced immediately</span>.<br>
+      When silent: <span class="red">Only newly added content announced immediately</span>.
+    </li>
+    <li><b>Safari:</b><br>
+      When reading: <span class="green">All content announced immediately</span>.<br>
+      When silent: <span class="green">All content announced immediately</span>.
+    </li>
+  </ul>
+</div>
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
 </html>

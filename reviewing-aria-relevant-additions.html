@@ -30,7 +30,9 @@
   <li><b>Result</b>: The newly injected content should be announce immediately.</li>
 </ul>
 
+
 <h2>Example</h2>
+
 
 <div class="example">
   <div id="message" class="error" aria-live="assertive" aria-relevant="additions">
@@ -40,7 +42,6 @@
 
 <p>If a screen reader is focussed on announcing this paragraph, will the dynamically injected message above affect the announcement of this paragraph. This is how we can determine if dynamic information is announced immediately, at the next graceful opportunity, or not at all.</p>
 
-<p class="footer-link"><a href="testing.html">Testing home</a></p>
 
 <script>
   setTimeout(function() {
@@ -59,5 +60,27 @@
   }, 15000);
 </script>
 
+
+<h2>Assistive technologies</h2>
+<div class="note">
+  <h3>VoiceOver</h3>
+  <ul class="browser-list">
+    <li><b>Chrome:</b><br>
+      When reading: <span class="green">Deletion ignored, addition announced immediately</span>.<br>
+      When silent: <span class="green">Deletion ignored, addition announced immediately</span>.
+    </li>
+    <li><b>Firefox:</b><br>
+      When reading: <span class="green">Deletion ignored, addition announced immediately</span>.<br>
+      When silent: <span class="green">Deletion ignored, addition announced immediately</span>.
+    </li>
+    <li><b>Safari:</b><br>
+      When reading: <span class="green">Deletion ignored, addition announced immediately</span>.<br>
+      When silent: <span class="green">Deletion ignored, addition announced immediately</span>.
+    </li>
+  </ul>
+</div>
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
 </html>
