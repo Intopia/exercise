@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>An example form - bad</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
+<h1>An example form - bad</h1>
+
+<p>Will all of the information in the form be announced to screen readers as they attempt to fill in the form?</p>
+<ol>
+  <li>The labels associated with each form field?</li>
+  <li>The error message associated with the "Email" field?</li>
+  <li>The instructions associated with the "Comment" field?</li>
+  <li>The "Favourite mammal" label?</li>
+  <li>The "Subscription method" information?</li>
+</ol>
+
+
+<form action="#">
+  <p>All fields required unless marked optional.</p>
+
+  <div class="form-group-spaced">
+    <label class="label">Full name</label>
+    <input class="input" type="text">
+  </div>
+
+  <div class="form-group-spaced">
+    <label class="label">Email</label>
+    <input class="input" type="email" aria-invalid="true">
+    <div class="error-message">Must be a valid email address</div>
+  </div>
+
+  <div class="form-group-spaced">
+    <label class="label">Comment</label>
+    <div class="help-text">No more than 200 characters</div>
+    <textarea class="input" rows="4"></textarea>
+  </div>
+
+  <div class="form-group-spaced">
+    <label class="label">Favourite mammal</label>
+    <select class="input" id="mammal4">
+      <option></option>
+      <option>Aardvark</option>
+      <option>African Elephant</option>
+      <option>African Wild Dog</option>
+      <option>African Lion</option>
+      <option>Arctic Fox</option>
+      <option>Arctic Hare</option>
+      <option>Armadillo</option>
+      <option>Asian Elephant</option>
+      <option>Asian Lion</option>
+      <option>Aye-Aye</option>
+    </select>
+  </div>
+
+  <div class="form-group-spaced">
+    <h3>Subscription method</h3> 
+    <div class="radio-group">
+      <input class="input-radio" type="radio" name="sub">
+      <label>Weekly</label>
+    </div>
+    <div class="radio-group">
+      <input class="input-radio" type="radio" name="sub">
+      <label>Quarterly</label>
+    </div>
+    <div class="radio-group">
+      <input class="input-radio" type="radio" name="sub">
+      <label>Yearly</label>
+    </div>
+  </div>
+
+  <div class="form-group-spaced">
+    <button>Submit</button>
+  </div>
+</form>
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>

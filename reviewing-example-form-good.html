@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>An example form - good</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
+<h1>An example form - good</h1>
+
+<p>Will all of the information in the form be announced to screen readers as they attempt to fill in the form?</p>
+<ol>
+  <li>The labels associated with each form field?</li>
+  <li>The error message associated with the "Email" field?</li>
+  <li>The instructions associated with the "Comment" field?</li>
+  <li>The "Favourite mammal" label?</li>
+  <li>The "Subscription method" information?</li>
+</ol>
+
+
+
+<p>All fields required unless marked optional.</p>
+<form action="#">
+  <div class="form-group-spaced">
+    <label class="label" for="name">Full name</label>
+    <input class="input" id="name" type="text">
+  </div>
+
+  <div class="form-group-spaced">
+    <label class="label" for="email">Email</label>
+    <input class="input" id="email" type="email" aria-invalid="true" aria-describedby="email-error">
+    <div id="email-error" class="error-message">Must be a valid email address</div>
+  </div>
+
+  <div class="form-group-spaced">
+    <label class="label" for="comment">Comment</label>
+    <div class="help-text" id="comment-help">No more than 200 characters</div>
+    <textarea class="input" id="comment" rows="4" aria-describedby="comment-help"></textarea>
+  </div>
+
+  <div class="form-group-spaced">
+    <label class="label" for="favourite-mammal">Favourite mammal</label>
+    <select class="input" id="favourite-mammal">
+      <option></option>
+      <option>Aardvark</option>
+      <option>African Elephant</option>
+      <option>African Wild Dog</option>
+      <option>African Lion</option>
+      <option>Arctic Fox</option>
+      <option>Arctic Hare</option>
+      <option>Armadillo</option>
+      <option>Asian Elephant</option>
+      <option>Asian Lion</option>
+      <option>Aye-Aye</option>
+    </select>
+  </div>
+
+  <fieldset>
+    <legend>Subscription method</legend>
+    <div class="radio-group">
+      <input class="input-radio" id="we" type="radio" name="sub">
+      <label for="we">Weekly</label>
+    </div>
+    <div class="radio-group">
+      <input class="input-radio" id="qu" type="radio" name="sub">
+      <label for="qu">Quarterly</label>
+    </div>
+    <div class="radio-group">
+      <input class="input-radio" id="ye" type="radio" name="sub">
+      <label for="ye">Yearly</label>
+    </div>
+  </fieldset>
+
+  <div class="form-group-spaced">
+    <button>Submit</button>
+  </div>
+</form>
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
