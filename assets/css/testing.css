@@ -443,22 +443,43 @@ Testing text contrast
 
 .colour-example1 {
   color: #777;
-  font-size: 17pt;
+  font-size: 20px;
 }
 
 .colour-example2 {
-  color: orange;
-  font-size: 13pt;
+  color: #3EA83E;
+  font-size: 26px;
 }
 
 .colour-example3 {
-  color: green;
-  font-size: 19pt;
+  color: #DB8F00;
+  font-size: 17px;
 }
 
 .colour-example4 {
   color: #B07BDB;
-  font-size: 15pt;
+  font-size: 24px;
+}
+
+.colour-example-box {
+  width: 50px;
+  height: 50px;
+}
+
+.colour-example1-box {
+  background: #777;
+}
+
+.colour-example2-box {
+  background: #3EA83E;
+}
+
+.colour-example3-box {
+  background: #DB8F00;
+}
+
+.colour-example4-box {
+  background: #B07BDB;
 }
 
 /* ---------------------
