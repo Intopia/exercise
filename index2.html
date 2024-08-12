@@ -11,7 +11,7 @@
   <div class="skip-links">
     <ul>
       <li><a href="#main">Skip to content</a></li>
-      <li><a href="#form">Skip to signup form</a></li>
+      <li><a href="#signupForm">Skip to signup form</a></li>
     </ul>
   </div>
   <header class="header">
@@ -27,7 +27,7 @@
     </ul>
   </nav>
   <div class="container">
-    <main class="main" id="main">
+    <main class="main" id="main" tabindex="-1">
       <h1>What are mammals?</h1>
       <p>Mammals are any member of the group of vertebrate animals in which the young are nourished with milk from special mammary glands of the mother. In addition to milk glands, mammals are distinguished by several other unique features such as hair, the possession of a neocortex, and the presence of a chain of three tiny bones in the middle ear.</p>
       <p><a href="#">Find out more</a></p>
@@ -126,7 +126,7 @@
       </ul>
 
     </main>
-    <aside class="aside">
+    <aside class="aside" id="signupForm" tabindex="-1">
       <h2>Mammal news signup</h2>
       <div class="form-error">
         <h3 id="targetH3" class="form-error-heading" tabindex="-1" autofocus>There are 3 errors in the form below:</h3>
@@ -147,7 +147,7 @@
           <li><a href="#form-address">Address</a></li>
         </ul>
       </div>
-      <form action="#" id="form" autocomplete="off">
+      <form action="#" autocomplete="off">
         <div class="form-container">
           <label class="label" for="form-name">Full name<span class="required" aria-hidden="true"> (Required)</span></label>
           <input class="input input-error" id="form-name" type="text" required aria-invalid="true" aria-describedby="form-name-error">

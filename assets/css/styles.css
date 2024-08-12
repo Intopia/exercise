@@ -509,4 +509,19 @@ wide
   }
 }
 
+#main:focus,
+#signupForm:focus {
+  outline: 2px dotted black;
+  animation: fade 3s forwards;
+}
 
+@keyframes fade {
+  0% {
+    background-color: #FFFF00;
+    outline-color: black;
+  }
+  100% {
+    background-color: transparent;
+    outline-color: transparent;
+  }
+}
