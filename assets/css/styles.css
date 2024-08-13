@@ -71,12 +71,7 @@ aside h2 {
 
 h3 {
   margin: 2rem 0 .75rem;
-  font-size: 1.25em; /* 20 */
-}
-
-h4 {
-  margin: 2rem 0 .75rem;
-  font-size: 1em; /* 16 */
+  font-size: 1.1em;
 }
 
 p {
