@@ -10,11 +10,13 @@
 
 [role="table"] {
   display: table;
+  margin: 2em 0;
 }
 
 [role="table"] > div[id] {
   display: table-caption;
   font-style: italic;
+  padding: 0 0 .5em;
 }
 
 [role="table"] [role="row"] {
@@ -24,17 +26,20 @@
 [role="table"] [role="cell"],
 [role="table"] [role="columnheader"] {
   display: table-cell;
-  padding: 0.125em 0.25em;
-  width: 8em;
+  padding: 0.5em;
+  width: 7em;
+  border-bottom: 1px solid #aaa;
+}
+
+[role="table"] [role="cell"]:last-child,
+[role="table"] [role="columnheader"]:last-child {
+  width: 10em;
 }
 
 [role="table"] [role="columnheader"] {
   font-weight: bold;
-  border-bottom: thin solid #888;
-}
-
-[role="table"] [role="rowgroup"]:last-child [role="row"]:nth-child(odd) {
-  background-color: #ddd;
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
 }
 
   </style>
@@ -44,7 +49,7 @@
 <h1>ARIA table examples</h1>
 
 <div role="table" aria-label="Students" aria-describedby="students_table_desc">
-  <div id="students_table_desc">Students currently enrolled in WAI-ARIA 101 for the coming semester</div>
+  <div id="students_table_desc">Student enrolment</div>
   <div role="rowgroup">
     <div role="row">
       <span role="columnheader">First Name</span>
@@ -58,25 +63,25 @@
       <span role="cell">Fred</span>
       <span role="cell">Jackson</span>
       <span role="cell">Acme</span>
-      <span role="cell">123 Broad St.</span>
+      <span role="cell">123 Broad Close</span>
     </div>
     <div role="row">
       <span role="cell">Sara</span>
       <span role="cell">James</span>
       <span role="cell">Brother</span>
-      <span role="cell">123 Broad St.</span>
+      <span role="cell">17 Whay Street</span>
     </div>
     <div role="row">
       <span role="cell">Ralph</span>
       <span role="cell">Jefferson</span>
       <span role="cell">Muller</span>
-      <span role="cell">456 Main St.</span>
+      <span role="cell">8 Turner Ave</span>
     </div>
     <div role="row">
       <span role="cell">Nancy</span>
       <span role="cell">Jensen</span>
       <span role="cell">Zero</span>
-      <span role="cell">456 Main St.</span>
+      <span role="cell">111 Smith Rd</span>
     </div>
   </div>
 </div>
