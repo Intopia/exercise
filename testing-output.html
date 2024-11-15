@@ -56,14 +56,19 @@
   <input class="output1" type="number" id="a" aria-label="Value 1" oninput="calculateSum()"> + 
   <input class="output1" type="number" id="b" aria-label="Value 2" oninput="calculateSum()"> = 
   <output class="output2" name="result" id="result">0</output>
-  <div class="announcement hidden2" aria-live="polite" tabindex="-1">
+  <div class="announcement hidden2" aria-live="polite">
     The total value is 0
   </div>
 </form>
 
 <pre><code>&lt;input type="number" id="a" aria-label="Value 1"&gt; + 
 &lt;input type="number" id="b" aria-label="Value 2"&gt; = 
-&lt;output name="result" id="result"&gt;0&lt;/output&gt;</code></pre>
+&lt;output name="result" id="result"&gt;0&lt;/output&gt;
+
+&lt;div aria-live="polite"&gt;
+  &lt;!-- Dynamic message --&gt;
+  The total value is 0
+&lt;/div&gt;</code></pre>
 
     <script>
         let timeout = null;
