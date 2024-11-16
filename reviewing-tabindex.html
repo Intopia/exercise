@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Reviewing tabindex</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
+<h1>Tabindex</h1>
+
+<p>The tabindex attribute allows developers to:</p>
+
+<ol>
+  <li>Make HTML elements focusable</li>
+  <li>Allow or prevent HTML elements from being sequentially focusable</li>
+  <li>Determine HTML elements relative ordering for sequential focus navigation</li>
+</ol>
+
+<h2>A positive number</h2>
+
+<p>A positive value means the element should be focusable in sequential keyboard navigation, with its order defined by the value of the number. The maximum value for tabindex is 32767.</p>
+
+<div class="example">
+  <ul>
+    <li><a href="#">Link 1</a></li>
+    <li><a href="#" tabindex="1">Link 2</a> - with tabindex="1"</li>
+    <li><a href="#">Link 3</a></li>
+    <li><a href="#">Link 4</a></li>
+    <li><a href="#">Link 5</a></li>
+  </ul>
+</div>
+
+<h2>A "0" number</h2>
+
+<p><code>tabindex="0"</code> means that the element should be focusable in sequential keyboard navigation, after any positive tabindex values. The focus navigation order of these elements is defined by their order in the document source.</p>
+
+<div class="example">
+  <ul>
+    <li><a href="#">Link 6</a></li>
+    <li><a href="#" tabindex="0">Link 8</a> - with tabindex="0"</li>
+    <li><a href="#">Link 8</a></li>
+    <li><a href="#">Link 9</a></li>
+    <li><a href="#">Link 10</a></li>
+  </ul>
+</div>
+
+<h2>A "-1" number</h2>
+
+<p>A negative value means that the element is not reachable via sequential keyboard navigation. JavaScript can be used to send focus to the element.</p>
+
+<div class="example">
+  <ul>
+    <li><a href="#">Link 11</a></li>
+    <li><a href="#" tabindex="-1">Link 12</a> - with tabindex="-1"</li>
+    <li><a href="#">Link 13</a></li>
+    <li><a href="#">Link 14</a></li>
+    <li><a href="#">Link 15</a></li>
+  </ul>
+</div>
+  
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
