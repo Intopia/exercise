@@ -20,20 +20,22 @@
 
 <h2>Example 1 - instructions using the <code>placeholder</code></h2>
 <form action="#">
-  <div class="form-group-spaced">
-    <label class="label" for="choose-a-date1">Choose a date</label>
-    <input class="input" id="choose-a-date1" type="text" placeholder="DD/MM/YY">
-  </div>
+  <label class="label" for="choose-a-date1">Choose a date</label>
+  <input class="input" id="choose-a-date1" type="text" placeholder="DD/MM/YY">
 </form>
+<code><pre>&lt;label for="date1"&gt;Choose a date&lt;/label&gt;
+&lt;input id="date1" type="text" placeholder="DD/MM/YY"&gt;</pre></code>
+
 
 <h2>Example 2 - persistent instructions</h2>
 <form action="#">
-  <div class="form-group-spaced">
-    <label class="label" for="choose-a-date2">Choose a date</label>
-    <div class="help-text" id="comment-help">DD/MM/YY</div>
-    <input class="input" id="choose-a-date2" type="text" aria-describedby="comment-help">
-  </div>
+  <label class="label" for="choose-a-date2">Choose a date</label>
+  <div class="help-text" id="comment-help">DD/MM/YY</div>
+  <input class="input" id="choose-a-date2" type="text" aria-describedby="comment-help">
 </form>
+<pre><code>&lt;label for="date2"&gt;Choose a date&lt;/label&gt;
+&lt;div id="help"&gt;DD/MM/YY&lt;/div&gt;
+&lt;input id="date2" type="text" aria-describedby="help"&gt;</code></pre>
 
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
