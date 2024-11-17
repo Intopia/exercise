@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the placeholder attribute</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
+<h1>Testing the <code>placeholder</code> attribute</h1>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/placeholder" target="Intopia"><code>placeholder</code></a> attribute defines the text displayed in a form control when the control has no value. The placeholder text should provide a brief hint to the user as to the expected type of data that should be entered into the control.</p>
+
+<p>The <code>placeholder</code> attribute should not be used for labelling form controls, or to provide instructions as it is not persistent. It disappears as soon as the user begins typing.</p>
+
+<h2>Example 1 - instructions using the <code>placeholder</code></h2>
+<form action="#">
+  <div class="form-group-spaced">
+    <label class="label" for="choose-a-date1">Choose a date</label>
+    <input class="input" id="choose-a-date1" type="text" placeholder="DD/MM/YY">
+  </div>
+</form>
+
+<h2>Example 2 - persistent instructions</h2>
+<form action="#">
+  <div class="form-group-spaced">
+    <label class="label" for="choose-a-date2">Choose a date</label>
+    <div class="help-text" id="comment-help">DD/MM/YY</div>
+    <input class="input" id="choose-a-date2" type="text" aria-describedby="comment-help">
+  </div>
+</form>
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
