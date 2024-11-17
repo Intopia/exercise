@@ -16,26 +16,24 @@
 <h1>Reviewing all form elements</h1>
   
 
-<h2>1. <a href="https://html.spec.whatwg.org/#the-button-element" target="_blank"><code>&lt;button&gt;</code></a></h2>
+<h2>2. <a href="https://html.spec.whatwg.org/#the-form-element" target="_blank"><code>&lt;form&gt;</code></a></h2>
+<p>The <code>&lt;form&gt;</code> element represents a document section containing interactive controls for submitting information.</p>
+<form action="#">
+  This an empty form
+</form>
+
+
+<h2>2. <a href="https://html.spec.whatwg.org/#the-button-element" target="_blank"><code>&lt;button&gt;</code></a></h2>
 <p>The <code>&lt;button&gt;</code> element is an interactive element activated by a user with a mouse, keyboard, finger, voice command, or other assistive technology. Once activated, it then performs an action, such as submitting a form or opening a dialog.</p>
 <form action="#">
   <button class="button">Save</button>
 </form>
 
 
-<h2>2. <a href="https://html.spec.whatwg.org/#the-fieldset-element" target="_blank"><code>&lt;fieldset&gt;</code></a></h2>
-<p>The <code>&lt;fieldset&gt;</code> element is used to group several controls as well as labels within a form.</p>
+<h2>3. <a href="https://html.spec.whatwg.org/#the-label-element" target="_blank"><code>&lt;label&gt;</code></a></h2>
+<p>The <code>&lt;label&gt;</code> element represents a caption for an item in a user interface.</p>
 <form action="#">
-  <fieldset>
-    <legend>Fieldset legend</legend>
-  </fieldset>
-</form>
-
-
-<h2>3. <a href="https://html.spec.whatwg.org/#the-form-element" target="_blank"><code>&lt;form&gt;</code></a></h2>
-<p>The <code>&lt;form&gt;</code> element represents a document section containing interactive controls for submitting information.</p>
-<form action="#">
-  This an empty form
+  <label class="label">Label text</label>
 </form>
 
 
@@ -47,24 +45,45 @@
 </form>
 
 
-<h2>5. <a href="https://html.spec.whatwg.org/#the-label-element" target="_blank"><code>&lt;label&gt;</code></a></h2>
-<p>The <code>&lt;label&gt;</code> element represents a caption for an item in a user interface.</p>
+<h2>5. <a href="https://html.spec.whatwg.org/#the-textarea-element" target="_blank"><code>&lt;textarea&gt;</code></a></h2>
+<p>The <code>&lt;textarea&gt;</code> element represents a multi-line plain-text editing control.</p>
 <form action="#">
-  <label class="label">Label text</label>
+  <label class="label" for="comment">Comment</label>
+  <textarea class="input" id="comment" rows="5"></textarea>
 </form>
 
 
-<h2>6. <a href="https://html.spec.whatwg.org/#the-legend-element" target="_blank"><code>&lt;legend&gt;</code></a></h2>
-<p>The <code>&lt;legend&gt;</code> element represents a caption for the content of its parent <code>&lt;fieldset&gt;</code>.</p>
+<h2>6. <a href="https://html.spec.whatwg.org/#the-select-element" target="_blank"><code>&lt;select&gt;</code></a></h2>
+<p>The <code>&lt;select&gt;</code> element represents a control that provides a menu of options.</p>
 <form action="#">
-  <fieldset>
-    <legend>Legend text</legend>
-    <p>Form information</p>  
-  </fieldset>
+  <label class="label" for="select">Choose a dinosaur:</label>
+  <select class="input" id="select">
+    <option>Tyrannosaurus</option>
+    <option>Velociraptor</option>
+    <option>Deinonychus</option>
+    <option>Diplodocus</option>
+    <option>Saltasaurus</option>
+    <option>Apatosaurus</option>
+  </select>
 </form>
 
 
-<h2>7. <a href="https://html.spec.whatwg.org/#the-optgroup-element" target="_blank"><code>&lt;optgroup&gt;</code></a></h2>
+<h2>7. <a href="https://html.spec.whatwg.org/#the-option-element" target="_blank"><code>&lt;option&gt;</code></a></h2>
+<p>The <code>&lt;option&gt;</code> element is used to define an item contained in a <code>&lt;select&gt;</code>, an <code>&lt;optgroup&gt;</code>, or a <code>&lt;datalist&gt;</code> element.</p>
+<form action="#">
+  <label class="label" for="option">Choose a dinosaur:</label>
+  <select class="input" id="option">
+    <option>Tyrannosaurus</option>
+    <option>Velociraptor</option>
+    <option>Deinonychus</option>
+    <option>Diplodocus</option>
+    <option>Saltasaurus</option>
+    <option>Apatosaurus</option>
+  </select>
+</form>
+
+
+<h2>8. <a href="https://html.spec.whatwg.org/#the-optgroup-element" target="_blank"><code>&lt;optgroup&gt;</code></a></h2>
 <p>The <code>&lt;optgroup&gt;</code> HTML element creates a grouping of options within a <code>&lt;select&gt;</code> element.</p>
 <form action="#">
   <label class="label" for="optgroup">Choose a dinosaur:</label>
@@ -83,41 +102,22 @@
 </form>
 
 
-<h2>8. <a href="https://html.spec.whatwg.org/#the-option-element" target="_blank"><code>&lt;option&gt;</code></a></h2>
-<p>The <code>&lt;option&gt;</code> element is used to define an item contained in a <code>&lt;select&gt;</code>, an <code>&lt;optgroup&gt;</code>, or a <code>&lt;datalist&gt;</code> element.</p>
+<h2>9. <a href="https://html.spec.whatwg.org/#the-fieldset-element" target="_blank"><code>&lt;fieldset&gt;</code></a></h2>
+<p>The <code>&lt;fieldset&gt;</code> element is used to group several controls as well as labels within a form.</p>
 <form action="#">
-  <label class="label" for="option">Choose a dinosaur:</label>
-  <select class="input" id="option">
-    <option>Tyrannosaurus</option>
-    <option>Velociraptor</option>
-    <option>Deinonychus</option>
-    <option>Diplodocus</option>
-    <option>Saltasaurus</option>
-    <option>Apatosaurus</option>
-  </select>
+  <fieldset>
+    <legend>Fieldset legend</legend>
+  </fieldset>
 </form>
 
 
-<h2>9. <a href="https://html.spec.whatwg.org/#the-select-element" target="_blank"><code>&lt;select&gt;</code></a></h2>
-<p>The <code>&lt;select&gt;</code> element represents a control that provides a menu of options.</p>
+<h2>10. <a href="https://html.spec.whatwg.org/#the-legend-element" target="_blank"><code>&lt;legend&gt;</code></a></h2>
+<p>The <code>&lt;legend&gt;</code> element represents a caption for the content of its parent <code>&lt;fieldset&gt;</code>.</p>
 <form action="#">
-  <label class="label" for="select">Choose a dinosaur:</label>
-  <select class="input" id="select">
-    <option>Tyrannosaurus</option>
-    <option>Velociraptor</option>
-    <option>Deinonychus</option>
-    <option>Diplodocus</option>
-    <option>Saltasaurus</option>
-    <option>Apatosaurus</option>
-  </select>
-</form>
-
-
-<h2>10. <a href="https://html.spec.whatwg.org/#the-textarea-element" target="_blank"><code>&lt;textarea&gt;</code></a></h2>
-<p>The <code>&lt;textarea&gt;</code> element represents a multi-line plain-text editing control.</p>
-<form action="#">
-  <label class="label" for="comment">Comment</label>
-  <textarea class="input" id="comment" rows="5"></textarea>
+  <fieldset>
+    <legend>Legend text</legend>
+    <p>Form information</p>  
+  </fieldset>
 </form>
 
 
