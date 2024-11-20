@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing form field error messaging</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    .input {
+      border: 2px solid red;
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
+<h1>Testing form field error messaging</h1>
+<p>Error messages should be informative and contextual. Where possible, messages should:</p>
+<ul>
+  <li>Clearly explain what went wrong and how to fix it.</li>
+  <li>Relate directly to the specific field.</li>
+</ul>
+
+
+<h2>Example 1 - Simple message</h2>
+<form action="#">
+  <label class="label" for="phone-number1">Phone number</label>
+  <input class="input" id="phone-number1" type="text" aria-describedby="error-phone-number1" aria-invalid="true">
+  <span class="error-message" id="error-phone-number1">This input is required.</span>
+</form>
+
+
+<h2>Example 2 - Simple message</h2>
+<form action="#">
+  <label class="label" for="phone-number2">Phone number</label>
+  <input class="input" id="phone-number2" type="text" aria-describedby="error-phone-number2" aria-invalid="true">
+  <span class="error-message" id="error-phone-number2">Please provide a phone number.</span>
+</form>
+
+
+<h2>Example 3 - Contextual message</h2>
+<form action="#">
+  <label class="label" for="phone-number3">Phone number</label>
+  <input class="input" id="phone-number3" type="text" aria-describedby="error-phone-number3" aria-invalid="true">
+  <span class="error-message" id="error-phone-number3">Phone number must include area code.</span>
+</form>
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
