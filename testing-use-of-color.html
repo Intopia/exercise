@@ -6,6 +6,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    .input {
+      border-color: red;
+    }
+
+    .example h3 {
+      margin: 0 0 .5em;
+    }
+
+    .example p {
+      margin: 0;
+    }
+
+    .cross {
+      display: inline-block;
+      position: relative;
+      top: .15em;
+      width: 18px;
+      height: 18px;
+    }
+  </style>
 </head>
 <body>
 
@@ -15,74 +36,111 @@
 
 <h1>Testing use of color</h1>
 <p>Which of the examples below passes <a href="https://www.w3.org/TR/WCAG22/#use-of-color" target="_blank">Success Criterion 1.4.1 Use of Color</a>.</p>
+<hr>
 
 
 <h2>Test 1</h2>
 
-<h3>Example 1: Links with no underlines</h3>
+<h3>Example 1.1: Links with no underlines</h3>
 <div class="example user-of-color1">
   <p>This large, stocky mammal is a marsupial, or pouched animal, found in Australia and on scattered islands nearby. Like <a href="#">other marsupials</a>, the wombat gives birth to tiny, undeveloped young.</p>
 </div>
   
-<h3>Example 2: Links with underlines</h3>
+<h3>Example 1.2: Links with underlines</h3>
 <div class="example">
   <p>This large, stocky mammal is a marsupial, or pouched animal, found in Australia and on scattered islands nearby. Like <a href="#">other marsupials</a>, the wombat gives birth to tiny, undeveloped young.</p>
 </div>
+<hr>
 
 
 <h2>Test 2</h2>
 
-<h3>Example 3: Features table using colour-alone</h3>
-<table>
-  <thead>
-    <tr>
-      <td></td>
-      <th>Product 1</th>
-      <th>Product 2</th>
-      <th>Product 3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Feature 1</th>
-      <td><span class="user-of-color-circle user-of-color-red"></span></td>
-      <td><span class="user-of-color-circle user-of-color-red"></span></td>
-      <td><span class="user-of-color-circle user-of-color-green"></span></td>
-    </tr>
-    <tr>
-      <th>Feature 1</th>
-      <td><span class="user-of-color-circle user-of-color-red"></span></td>
-      <td><span class="user-of-color-circle user-of-color-green"></span></td>
-      <td><span class="user-of-color-circle user-of-color-green"></span></td>
-    </tr>
-  </tbody>
-</table>
+<h3>Example 2.1: Colour only for error</h3>
+<form action="#">
+  <label class="label" for="email1">Email address</label>
+  <input class="input" id="email1" type="email">
+</form>
 
-<h3>Example 4: Features table using colour and shape</h3>
-<table>
-  <thead>
-    <tr>
-      <td></td>
-      <th>Product 1</th>
-      <th>Product 2</th>
-      <th>Product 3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Feature 1</th>
-      <td><span class="user-of-color-circle user-of-color-red2"></span></td>
-      <td><span class="user-of-color-circle user-of-color-red2"></span></td>
-      <td><span class="user-of-color-circle user-of-color-green2"></span></td>
-    </tr>
-    <tr>
-      <th>Feature 1</th>
-      <td><span class="user-of-color-circle user-of-color-red2"></span></td>
-      <td><span class="user-of-color-circle user-of-color-green2"></span></td>
-      <td><span class="user-of-color-circle user-of-color-green2"></span></td>
-    </tr>
-  </tbody>
-</table>
+<h3>Example 2.2: Colour and text for error</h3>
+<form action="#">
+  <label class="label" for="email2">Email address</label>
+  <input class="input" id="email2" type="email" aria-describedby="error1">
+  <span class="error-message" id="error1">
+    Include a valid email address
+  </span>
+</form>
+
+<h3>Example 2.3: Colour, icon and text for error</h3>
+<form action="#">
+  <label class="label" for="email3">Email address</label>
+  <input class="input" id="email3" type="email" aria-describedby="error2">
+  <span class="error-message" id="error2">
+    <span class="cross">
+      <img src="assets/img/error_icon.png" alt="">
+    </span>
+    Include a valid email address
+  </span>
+</form>
+<hr>
+
+
+<h2>Test 3</h2>
+
+<div class="example">
+  <h3>Example 3.1: Features table using colour-alone</h3>
+  <table>
+    <thead>
+      <tr>
+        <td></td>
+        <th>Product 1</th>
+        <th>Product 2</th>
+        <th>Product 3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>Feature 1</th>
+        <td><span class="user-of-color-circle user-of-color-red"></span></td>
+        <td><span class="user-of-color-circle user-of-color-red"></span></td>
+        <td><span class="user-of-color-circle user-of-color-green"></span></td>
+      </tr>
+      <tr>
+        <th>Feature 1</th>
+        <td><span class="user-of-color-circle user-of-color-red"></span></td>
+        <td><span class="user-of-color-circle user-of-color-green"></span></td>
+        <td><span class="user-of-color-circle user-of-color-green"></span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="example">
+  <h3>Example 3.2: Features table using colour and shape</h3>
+  <table>
+    <thead>
+      <tr>
+        <td></td>
+        <th>Product 1</th>
+        <th>Product 2</th>
+        <th>Product 3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>Feature 1</th>
+        <td><span class="user-of-color-circle user-of-color-red2"></span></td>
+        <td><span class="user-of-color-circle user-of-color-red2"></span></td>
+        <td><span class="user-of-color-circle user-of-color-green2"></span></td>
+      </tr>
+      <tr>
+        <th>Feature 1</th>
+        <td><span class="user-of-color-circle user-of-color-red2"></span></td>
+        <td><span class="user-of-color-circle user-of-color-green2"></span></td>
+        <td><span class="user-of-color-circle user-of-color-green2"></span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
