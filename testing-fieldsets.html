@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing fieldsets and legends</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    .form-list {
+      margin: .5em 0;
+      padding: 0;
+      list-style: none;
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
+<h1>Testing fieldsets and legends</h1>
+<p>The <code>&lt;fieldset&gt;</code> HTML element is used to group more than one form field within a web form. The <code>&lt;legend&gt;</code> HTML element represents a label for the content of its parent <code>&lt;fieldset&gt;</code>.</p>
+
+<p>Which of the form groups below has:</p>
+<ol>
+  <li>Form group heading that is visible.</li>
+  <li>Form group heading that is programmatically available. </li>
+</ol>
+
+
+<h2>Example 1</h2>
+<form action="#">
+  <ul role="presentation" class="form-list">
+    <li>
+      <input type="checkbox" id="dog1">
+      <label for="dog1">Dog</label>
+    </li>
+    <li>
+      <input type="checkbox" id="cat1">
+      <label for="cat1">Cat</label>
+    </li>
+    <li>
+      <input type="checkbox" id="rabbit1">
+      <label for="rabbit1">Rabbit</label>
+    </li>
+  </ul>
+</form>
+
+
+<h2>Example 2</h2>
+<form action="#">
+  <h4>Favourite animal</h4>
+  <ul role="presentation" class="form-list">
+    <li>
+      <input type="checkbox" id="dog2">
+      <label for="dog2">Dog</label>
+    </li>
+    <li>
+      <input type="checkbox" id="cat2">
+      <label for="cat2">Cat</label>
+    </li>
+    <li>
+      <input type="checkbox" id="rabbit2">
+      <label for="rabbit2">Rabbit</label>
+    </li>
+  </ul>
+</form>
+
+
+
+<h2>Example 3</h2>
+<form action="#">
+  <fieldset>
+    <legend>Favourite animal</legend>
+    <ul role="presentation" class="form-list">
+      <li>
+        <input type="checkbox" id="dog3">
+        <label for="dog3">Dog</label>
+      </li>
+      <li>
+        <input type="checkbox" id="cat3">
+        <label for="cat3">Cat</label>
+      </li>
+      <li>
+        <input type="checkbox" id="rabbit3">
+        <label for="rabbit3">Rabbit</label>
+      </li>
+    </ul>
+  </fieldset>
+</form>
+
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
