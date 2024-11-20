@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing colour contrast in forms</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+
+    form {
+      background: #fff;
+      border: 2px solid #bbb;
+      box-shadow: 3px 3px 5px #ccc;
+    }
+    .large-form {
+      font-size: 150%;
+    }
+
+    .label {
+      margin-bottom: 0;
+    }
+
+    .help-text {
+      color: #777;
+    }
+
+    #full-name1 {
+      border-width: 3px;
+    }
+
+    #full-name2 {
+      margin-top: .2em;
+      border: 3px solid #FF6666;
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
+<h1>Testing colour contrast in forms</h1>
+<p>Which of the examples below has colour contrast that passes <a href="https://www.w3.org/TR/WCAG22/#contrast-minimum" target="_blank">Success Criterion 1.4.3: Contrast (Minimum)</a>.</p>
+<ol>
+  <li>The label, instructions and error messge must be at least 4.5:1.</li>
+  <li>The input borders must be at least 3:1.</li>
+</ol>
+
+<h2>Example 1</h2>
+<form action="#" class="large-form">
+  <label class="label" for="full-name1">Name</label>
+  <span class="help-text">Include your full name</span>
+  <input class="input" id="full-name1" type="text">
+</form>
+
+
+<h2>Example 2</h2>
+<form action="#" class="large-form">
+  <label class="label" for="full-name2">Email</label>
+  <input class="input" id="full-name2" type="text">
+  <span class="error-message">This field is required.</span>
+</form>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
