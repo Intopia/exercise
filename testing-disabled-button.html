@@ -14,13 +14,26 @@
 
     #message p {
       padding: 1em;
-      background: rgba(0,255,0,.2);
     }
 
     #message:focus {
-      outline: none; /* Remove default outline */
-      box-shadow: 0 0 0 3px rgba(100,255,100,.7); /* Add a custom focus style */
+      background-color: rgba(0,255,0,.2);
+      outline: 2px solid transparent;
+      animation: fade 3s forwards;
     }
+
+    @keyframes fade {
+      0% {
+        background-color: #FFFF00;
+        outline: 2px dotted black;
+      }
+      100% {
+        background-color: rgba(0,255,0,.2);
+        outline: 2px solid transparent;
+      }
+    }
+
+
   </style>
 </head>
 <body>
@@ -87,7 +100,7 @@
           // Set focus to the message container
           messageContainer.setAttribute('tabindex', '-1'); // Make it focusable
           messageContainer.focus();
-      }, 10000);
+      }, 5000);
   }
 </script>
 
