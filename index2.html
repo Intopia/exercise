@@ -165,9 +165,10 @@
           <span class="error-message" id="form-address-error">Error: Add a valid address</span>
         </div>
         <div class="form-container">
-          <label class="label" for="form-phone">Phone</label>
+          <label class="label" for="form-phone">Phone<span class="required" aria-hidden="true"> (Required)</span></label>
           <span class="help-text" id="form-phone-help">Include area code</span>
-          <input class="input" id="form-phone" type="text">
+          <input class="input input-error" id="form-phone" type="text" required aria-invalid="true" aria-describedby="form-phone-help form-phone-error">
+          <span class="error-message" id="form-phone-error">Error: Number must include all 8 digits</span>
         </div>
         <div class="form-container">
           <label class="label" for="form-comment">Comment</label>
