@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing movement</title>
+    <link href="assets/css/testing.css" rel="stylesheet">
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
+<h1>Testing movement</h1>
+<canvas id="canvas" width="600" height="400"></canvas>
+<button id="pauseButton">Pause</button>
+
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        let circles = [];
+        let isPaused = false;
+
+        function createCircle() {
+            return {
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 40 + 10,
+                color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+                dx: (Math.random() - 0.5) * 4,
+                dy: (Math.random() - 0.5) * 4,
+            };
+        }
+
+        for (let i = 0; i < 10; i++) {
+            circles.push(createCircle());
+        }
+
+        function animate() {
+            if (!isPaused) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                circles.forEach(circle => {
+                    circle.x += circle.dx;
+                    circle.y += circle.dy;
+
+                    if (circle.x - circle.radius < 0 || circle.x + circle.radius > canvas.width) {
+                        circle.dx *= -1;
+                    }
+                    if (circle.y - circle.radius < 0 || circle.y + circle.radius > canvas.height) {
+                        circle.dy *= -1;
+                    }
+
+                    ctx.beginPath();
+                    ctx.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = circle.color;
+                    ctx.fill();
+                    ctx.closePath();
+                });
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        document.getElementById("pauseButton").addEventListener("click", () => {
+            isPaused = !isPaused;
+            document.getElementById("pauseButton").textContent = isPaused ? "Resume" : "Pause";
+        });
+    </script>
+</body>
+</html>

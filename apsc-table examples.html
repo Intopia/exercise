@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>APSC table examples</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+
+body {
+  margin: 0;
+  width: 45rem;
+  padding: 1rem ;
+  font-size: 1rem;
+  line-height: 1.3;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  margin: 0 0 1rem;
+  font-size: 2.5rem;
+  line-height: 1.25;
+  color: #d3420d;
+}
+
+h2 {
+  margin: 4rem 0 1rem;
+  font-size: 1.8rem;
+  line-height: 1.25;
+  color: #d3420d;
+}
+
+p {
+  margin: 1rem 0 1.5rem;
+  line-height: 1.5;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 3em 0;
+  width: 100%;
+  background: #fff;
+}
+
+caption {
+  text-align: left;
+  font-weight: bold;
+  padding: 0 0 .5em;
+  font-size: 1.2em;
+}
+
+thead {
+  background-color: #F2F2F2;
+  border-bottom: .25rem solid #BBB;
+}
+
+th {
+  text-align: left;
+  padding: .75rem;
+  padding: 1rem .75rem;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+td {
+  padding: 12px;
+  padding: .75rem;
+  text-align: left;
+  border-bottom: 1px solid silver;
+}
+
+  </style>
+</head>
+<body>
+
+<h1>APSC table examples</h1>
+
+<h2>1. Simple table example</h2>
+
+<p>This is a simple table as it only has 1 table header cell associated with each data cell.</p>
+
+<table>
+  <caption>Meanings of common Latin shortened forms</caption>
+  <thead>
+    <tr>
+      <th>Shortened form</th>
+      <th>Complete Latin word</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>c.</td>
+      <td><em>circa</em></td>
+      <td>about, approximately</td>
+    </tr>
+    <tr>
+      <td>cf.</td>
+      <td><em>conferatur</em></td>
+      <td>compare</td>
+    </tr>
+    <tr>
+      <td>e.g.</td>
+      <td><em>exempli gratia</em></td>
+      <td>for example</td>
+    </tr>
+    <tr>
+      <td>et al.</td>
+      <td><em>et alii</em></td>
+      <td>and others</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+<h2>2. Complex table example</h2>
+
+<p>This is a complex table, as there are multiple table headers associated with each data cell.</p>
+<table>
+  <caption>Ranks and salutations (in order of precedence)</caption>
+  <thead>
+    <tr>
+      <th>Navy</th>
+      <th>Army</th>
+      <th>Air Force</th>
+      <th><em>Salutation rule</em></th>
+      <th>Salutation example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th colspan="5">Appointed by Governor-General of Australia</th>
+    </tr>
+    <tr>
+      <td>Admiral of the Fleet</td>
+      <td>Field Marshal</td>
+      <td>Marshal of the Royal Australian Air Force</td>
+      <td>No current appointments</td>
+      <td>No current appointments</td>
+    </tr>
+    <tr>
+      <th colspan="5">Commissioned officer ranks</th>
+    </tr>
+    <tr>
+      <td>Admiral (when Chief of the Defence Force)</td>
+      <td>General (when Chief of the Defence Force)</td>
+      <td>Air Chief Marshal (when Chief of the Defence Force)</td>
+      <td><em>Dear [Rank]</em></td>
+      <td>Dear Admiral</td>
+    </tr>
+    <tr>
+      <td>Vice Admiral</td>
+      <td>Lieutenant General</td>
+      <td>Air Marshal</td>
+      <td><em>Dear [Rank]</em></td>
+      <td>Dear Lieutenant General</td>
+    </tr>
+    <tr>
+      <td>Rear Admiral</td>
+      <td>Major General</td>
+      <td>Air Vice-Marshal</td>
+      <td><em>Dear [Rank]</em></td>
+      <td>Dear Air Vice-Marshal</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+<h2>3. Complex table (simplified) example</h2>
+
+<p>This solution breaks the single complex tables into a series of smaller, simpler tables. This means that each data cell has less related header cells.</p>
+<table>
+  <caption>Appointed by Governor-General of Australia</caption>
+  <thead>
+    <tr>
+      <th>Navy</th>
+      <th>Army</th>
+      <th>Air Force</th>
+      <th><em>Salutation rule</em></th>
+      <th>Salutation example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Admiral of the Fleet</td>
+      <td>Field Marshal</td>
+      <td>Marshal of the Royal Australian Air Force</td>
+      <td>No current appointments</td>
+      <td>No current appointments</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <caption>Commissioned officer ranks</caption>
+  <thead>
+    <tr>
+      <th>Navy</th>
+      <th>Army</th>
+      <th>Air Force</th>
+      <th><em>Salutation rule</em></th>
+      <th>Salutation example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Admiral (when Chief of the Defence Force)</td>
+      <td>General (when Chief of the Defence Force)</td>
+      <td>Air Chief Marshal (when Chief of the Defence Force)</td>
+      <td><em>Dear [Rank]</em></td>
+      <td>Dear Admiral</td>
+    </tr>
+    <tr>
+      <td>Vice Admiral</td>
+      <td>Lieutenant General</td>
+      <td>Air Marshal</td>
+      <td><em>Dear [Rank]</em></td>
+      <td>Dear Lieutenant General</td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
