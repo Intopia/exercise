@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing aria-invalid</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<form>
+  <label class="label" for="name">Name</label>
+  <input class="input" type="text" id="name" aria-invalid="true" aria-describedby="name-error">
+  <span id="name-error-container"><span class="error-message" id="name-error">You must include a full name</span></span>
+</form>
+
+
+</body>
+</html>
