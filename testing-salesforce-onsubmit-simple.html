@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing onsubmit - simple</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+form {
+  margin: 1em 0 0;
+  padding: 0;
+  background: none;
+}
+
+.input[aria-invalid="true"] {
+  border: 1px solid rgb(200, 0, 0);
+}
+
+.input[aria-invalid="true"]:focus {
+  border: 1px solid rgb(200, 0, 0);
+  outline: 0;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 5px red;
+}
+
+.error-message {
+  color: rgb(200, 0, 0);
+}
+  </style>
+
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
+<h1>Testing onsubmit - simple</h1>
+
+<div class="example">
+  <h3 class="contact-details-heading">Login</h3>
+
+  <form action="#" class="unstyled" id="login-form">
+    <div class="form-group-small">
+      <label class="label" for="name">Name</label>
+      <input class="input" type="text" id="name">
+      <span id="name-error-container"></span>
+    </div>
+    <div class="form-group-small">
+      <label class="label" for="email">Email</label>
+      <input class="input" type="email" id="email">
+      <span id="email-error-container"></span>
+    </div>
+    <button class="button" type="submit">Submit</button>  
+  </form>
+</div>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+
+<script>
+  document.getElementById('login-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form submission
+    
+    // Focus goes to the input with id="name"
+    const nameInput = document.getElementById('name');
+    nameInput.focus();
+    
+    // The input with id="name" receives aria-invalid="true"
+    nameInput.setAttribute('aria-invalid', 'true');
+    
+    // The input with id="name" receives aria-describedby="name-error"
+    nameInput.setAttribute('aria-describedby', 'name-error');
+    
+    // The element with id="name-error-container" receives the error message markup
+    const nameErrorContainer = document.getElementById('name-error-container');
+    nameErrorContainer.innerHTML = '<span class="error-message" id="name-error">You must include a full name</span>';
+    
+    // The input with id="email" receives aria-invalid="true"
+    const emailInput = document.getElementById('email');
+    emailInput.setAttribute('aria-invalid', 'true');
+    
+    // The input with id="email" receives aria-describedby="email-error"
+    emailInput.setAttribute('aria-describedby', 'email-error');
+    
+    // The element with id="email-error-container" receives the error message markup
+    const emailErrorContainer = document.getElementById('email-error-container');
+    emailErrorContainer.innerHTML = '<span class="error-message" id="email-error">You must use a valid email address</span>';
+  });
+</script>
+
+</body>
+</html>
