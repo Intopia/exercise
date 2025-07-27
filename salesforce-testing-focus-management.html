@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing focus management - Step 1: Login details</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+h1:focus {
+  outline: 2px dotted #000;
+  animation: fade 3s forwards;
+}
+
+@keyframes fade {
+  0% {
+    background-color: #FFFF00;
+    outline-color: #000;
+  }
+  100% {
+    background-color: transparent;
+    outline-color: transparent;
+  }
+}
+  </style>
+</head>
+<body>
+
+<div class="single-page">
+  <h1 tabindex="-1">Step 1: Login details</h1>
+  <p><b>Step 1</b> | Step 2 | Step 3</p>
+  <form id="step-form">
+    <div class="form-group-small">
+      <label class="label" for="name">Name</label>
+      <input class="input" type="text" id="name">
+    </div>
+    <div class="form-group-small">
+      <label class="label" for="email">Email</label>
+      <input class="input" type="email" id="email">
+    </div>
+    <button class="button" type="submit">Next</button>  
+  </form>
+</div>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+
+<script>
+  document.getElementById('step-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const currentStep = document.querySelector('h1').innerText;
+    if (currentStep.includes('Step 1')) {
+      // Update to Step 2
+      document.querySelector('title').innerText = 'Step 2: Address';
+      document.querySelector('.single-page').innerHTML = `
+        <h1 tabindex="-1">Step 2: Address</h1>
+        <p>Step 1 | <b>Step 2</b> | Step 3</p>
+        <form id="step-form">
+          <div class="form-group-small">
+            <label class="label" for="address1">Address line 1</label>
+            <input class="input" type="text" id="address1">
+          </div>
+          <div class="form-group-small">
+            <label class="label" for="address2">Address line 2</label>
+            <input class="input" type="text" id="address2">
+          </div>
+          <button class="button" type="submit">Next</button>  
+        </form>
+      `;
+    } else if (currentStep.includes('Step 2')) {
+      // Update to Step 3
+      document.querySelector('title').innerText = 'Step 3: Info about your pet';
+      document.querySelector('.single-page').innerHTML = `
+        <h1 tabindex="-1">Step 3: Info about your pet</h1>
+        <p>Step 1 | Step 2 | <b>Step 3</b></p>
+        <form id="step-form">
+          <div class="form-group-small">
+            <label class="label" for="pet-name">What is your pet’s name</label>
+            <input class="input" type="text" id="pet-name">
+          </div>
+          <div class="form-group-small">
+            <label class="label" for="describe-pet">Describe your pet</label>
+            <textarea class="input" id="describe-pet" rows="5"></textarea>
+          </div>
+          <button class="button" type="submit">Next</button>  
+        </form>
+      `;
+    } else if (currentStep.includes('Step 3')) {
+      // Update to Finished
+      document.querySelector('title').innerText = 'Finished';
+      document.querySelector('.single-page').innerHTML = `
+        <h1 tabindex="-1">Finished</h1>
+        <p>Well done, you have finished the process.</p>
+      `;
+    }
+
+    // Move focus to the new heading
+    const newHeading = document.querySelector('h1');
+    newHeading.focus();
+
+    // Reattach event listener for the new form (only if not finished)
+    if (currentStep.includes('Step 1') || currentStep.includes('Step 2') || currentStep.includes('Step 3')) {
+      document.getElementById('step-form').addEventListener('submit', arguments.callee);
+    }
+  });
+</script>
+
+</body>
+</html>
