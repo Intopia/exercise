@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Reviewing the three list types</title>
+  <title>Reviewing the list types</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
@@ -20,9 +20,9 @@
   <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
 </a>
 
-<h1>Reviewing the three list types</h1>
+<h1>Reviewing the list types</h1>
 
-<h2>Example 1 - unordered list</h2>
+<h2>Type 1: Unordered list</h2>
 <p>The <code>&lt;ul&gt;</code> element represents an unordered list of items, typically rendered as a bulleted list.
 
 </p>
@@ -42,7 +42,7 @@
 &lt;/ul&gt;</code></pre>
 
 
-<h2>Example 2 - ordered list</h2>
+<h2>Type 2 - Ordered list</h2>
 <p>The <code>&lt;ol&gt;</code> element represents an ordered list of items — typically rendered as a numbered list.</p>
 <div class="example">
   <ol>
@@ -59,7 +59,7 @@
   &lt;li&gt;Hang the washing&lt;/li&gt;
 &lt;/ol&gt;</code></pre>
 
-<h2>Example 3 - description list</h2>
+<h2>Type 3 - Description list</h2>
 <p>The <code>&lt;dl&gt;</code> element represents a description list. The element encloses a list of groups of terms (specified using the <code>&lt;dt&gt;</code> element) and descriptions (provided by <code>&lt;dd&gt;</code> elements).</p>
 <div class="example">
   <dl>
@@ -80,7 +80,7 @@
     &lt;dd&gt;Cold dry thing&lt;/dd&gt;
 &lt;/dl&gt;</code></pre>
 
-<h2>Example 4 - a styled unordered list</h2>
+<h2>Example: A styled unordered list</h2>
 <div class="example">
   <ul class="list">
     <li>Rabbits</li>
@@ -90,6 +90,34 @@
 </div>
 <pre><code>&lt;ul&gt;
   &lt;li&gt;Rabbits&lt;/li&gt;
+  &lt;li&gt;Foxes&lt;/li&gt;
+  &lt;li&gt;Birds&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+<h2>Example: A nested unordered list</h2>
+<div class="example">
+  <ul>
+    <li>Rabbits
+      <ul>
+        <li>Holland Lop</li>
+        <li>European rabbit</li>
+        <li>Rex rabbit</li>
+        <li>Pygmy rabbit</li>
+      </ul>
+    </li>
+    <li>Foxes</li>
+    <li>Birds</li>
+  </ul>
+</div>
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;Rabbits
+    &lt;ul&gt;
+      &lt;li&gt;Holland Lop&lt;/li&gt;
+      &lt;li&gt;European rabbit&lt;/li&gt;
+      &lt;li&gt;Rex rabbit&lt;/li&gt;
+      &lt;li&gt;Pygmy rabbit&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
   &lt;li&gt;Foxes&lt;/li&gt;
   &lt;li&gt;Birds&lt;/li&gt;
 &lt;/ul&gt;</code></pre>
