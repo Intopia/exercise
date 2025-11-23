@@ -6,6 +6,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+
+
+.js-clickable-card a,
+.js-clickable-card button {
+  cursor: auto;
+}
+
+.js-clickable-card {
+  cursor: pointer;
+  border: 2px solid #aaa;
+  transition: border-color 0.15s ease;
+}
+
+.js-clickable-card:hover {
+  border-color: rgb(0,200,0);
+}
+
+  </style>
 </head>
 <body>
 
@@ -19,7 +38,7 @@
 <h2>Example 1</h2>
 <p>This is a standard card, with multiple links inside. What are the possible issue with this card?</p>
 <div class="card">
-  <a class="card-image-link" href="https://www.nationalgeographic.com/animals/birds/facts/laughing-kookaburra" target="_blank"><img class="card-thumbnail" src="https://placehold.co/300x300" alt="Laughing kookaburra"></a>
+  <a class="card-image-link" href="https://www.nationalgeographic.com/animals/birds/facts/laughing-kookaburra" target="_blank"><img class="card-thumbnail" src="https://placehold.co/200x100" alt="Laughing kookaburra"></a>
   <h2 class="card-heading"><a href="https://www.nationalgeographic.com/animals/birds/facts/laughing-kookaburra" target="_blank">Laughing kookaburra</a></h2>
   <p>The laughing kookaburra is well known both as a symbol of Australia’s birdlife.</p>
   <p class="card-source"><a href="https://en.wikipedia.org/wiki/Kookaburra" target="_blank">Kookaburra - Wikipedia</a></p>
@@ -30,7 +49,7 @@
 <p>The <code>&lt;a&gt;</code> element has been wrapped around the card. What are the possible issues?</p>
 <a class="card-link" href="https://en.wikipedia.org/wiki/Kangaroo" target="_blank">
   <div class="card">
-    <img class="card-thumbnail" src="https://placehold.co/300x300" alt="">
+    <img class="card-thumbnail" src="https://placehold.co/200x100" alt="">
     <h2 class="card-heading">Kangaroo</h2>
     <p>Kangaroos possess powerful hind legs, a long, strong tail, and small front legs.</p>
   </div>
@@ -40,7 +59,7 @@
 <h2>Example 3</h2>
 <p>The <code>&lt;a&gt;</code> element has been positioned over the card using CSS. What are the possible issues?</p>
 <div class="card card-css">
-  <img class="card-thumbnail" src="https://placehold.co/300x300" alt="">
+  <img class="card-thumbnail" src="https://placehold.co/200x100" alt="">
   <h2 class="card-heading"><a href="https://en.wikipedia.org/wiki/Emu" target="_blank">Emu</a></h2>
   <p>The emu is the second-tallest living bird after its ratite relative the ostrich.</p>
 </div>
@@ -48,26 +67,62 @@
 
 <h2>Example 4</h2>
 <p>JavaScript has been used to create a click event on the card, taking the link from the <code>&lt;h2&gt;</code>. What are the possible issues?</p>
-<div class="card card-special" style="cursor: pointer;">
-  <img class="card-thumbnail" src="https://placehold.co/300x300" alt="">
-  <h2 class="card-heading"><a href="https://www.nationalgeographic.com/animals/mammals/facts/common-wombat">Common wombat</a></h2>
+
+<div class="card js-clickable-card">
+  <img class="card-thumbnail" src="https://placehold.co/200x100" alt="">
+  <h2><a href="https://en.wikipedia.org/wiki/Wombat">Wombats</a></h2>
   <p>This large, stocky mammal is a marsupial, or pouched animal, found in Australia and on scattered islands nearby.</p>
-  <p class="card-source"><a href="https://en.wikipedia.org/wiki/Wombat">Wombat - Wikipedia</a></p>
 </div>
 
+<h2>Features of the delegated-click JavaScript pattern</h2>
+<p>This JavaScript approach gives users the ability to click anywhere on the card, while still keeping the UI accessible and predictable. It includes several safeguards to make the pattern robust.</p>
+
+<h3>1. Uses the main link inside the <code>&lt;h2&gt;</code></h3>
+<p>The card is not made focusable. Instead, clicking the card triggers the real link inside the heading. This avoids creating multiple interactive elements with the same accessible name.</p>
+
+<h3>2. Allows normal behaviour for interactive children</h3>
+<p>If the user clicks a link, button or form control inside the card, the script does nothing and allows that element to behave normally.</p>
+
+<h3>3. Prevents accidental navigation during text selection</h3>
+<p>If the user is selecting text (for example, dragging a mouse or long-press selecting on mobile), the script detects this and prevents navigation.</p>
+
+<h3>4. Works for mouse, touch and stylus users</h3>
+<p>Pointer events anywhere on the card (except on interactive children or during text selection) activate the main link.</p>
+
+<h3>5. Keeps keyboard behaviour native</h3>
+<p>Keyboard users tab directly to the real link in the heading. The card itself is not turned into an extra focusable element, avoiding duplicate focus stops or confusing semantics.</p>
+
+<h3>6. Degrades safely if JavaScript is not available</h3>
+<p>If JavaScript fails or is disabled, the internal link still works normally. The card never becomes unusable.</p>
+
+<h3>7. Strictly limited to “single-primary-link” cards</h3>
+<p>The pattern is intentionally restricted to cards with one main link and optional text or images. It teaches developers that cards with multiple actions should not be made fully clickable.</p>
+
 <script>
-const cards = document.querySelectorAll('.card-special');
-Array.prototype.forEach.call(cards, card => {
-  card.style.cursor = 'pointer';
-  let down,up,link = card.querySelector('h2 a');
-  card.onmousedown = () => down = +new Date();
-  card.onmouseup = () => {
-    up = +new Date();
-    if (up - down < 200) {
-      link.click();
-    }
-  };
+document.querySelectorAll('.js-clickable-card').forEach(card => {
+  const link = card.querySelector('h2 a');
+  if (!link) return; // No main link = nothing to delegate to
+
+  // Main pointer click handler
+  card.addEventListener('click', event => {
+    const target = event.target;
+
+    // 1. If user clicked an actual interactive element, let that element behave normally
+    if (target.closest('a, button, input, select, textarea')) return;
+
+    // 2. If the user is selecting text, do NOT navigate  
+    const selection = window.getSelection();
+    if (selection && selection.toString().length > 0) return;
+
+    // 3. Otherwise, treat the card click as clicking the main link
+    link.click();
+  });
+
+  // 4. Keyboard support: let the link handle it  
+  // Do NOT make the card focusable, do NOT add role="link"
+  // This avoids creating “two links” from an accessibility perspective.
 });
+
 </script>
 
 
