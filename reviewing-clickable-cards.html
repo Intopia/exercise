@@ -37,6 +37,9 @@
 
 <h2>Example 1</h2>
 <p>This is a standard card, with multiple links inside. What are the possible issue with this card?</p>
+<ol>
+  <li>Multiple links with the same accessible name?</li>
+</ol>
 <div class="card">
   <a class="card-image-link" href="https://www.nationalgeographic.com/animals/birds/facts/laughing-kookaburra" target="_blank"><img class="card-thumbnail" src="https://placehold.co/200x100" alt="Laughing kookaburra"></a>
   <h2 class="card-heading"><a href="https://www.nationalgeographic.com/animals/birds/facts/laughing-kookaburra" target="_blank">Laughing kookaburra</a></h2>
@@ -47,6 +50,11 @@
 
 <h2>Example 2</h2>
 <p>The <code>&lt;a&gt;</code> element has been wrapped around the card. What are the possible issues?</p>
+<ol>
+  <li>Do you have to turn off default behaviours for the links?</li>
+  <li>Is the accessible name very verbose?</li>
+  <li>What if there are multiple interactive elements inside the card?</li>
+</ol>
 <a class="card-link" href="https://en.wikipedia.org/wiki/Kangaroo" target="_blank">
   <div class="card">
     <img class="card-thumbnail" src="https://placehold.co/200x100" alt="">
@@ -58,6 +66,10 @@
 
 <h2>Example 3</h2>
 <p>The <code>&lt;a&gt;</code> element has been positioned over the card using CSS. What are the possible issues?</p>
+<ol>
+  <li>Can you select any of the text inside the card?</li>
+  <li>What if there are multiple interactive elements inside the card?</li>
+</ol>
 <div class="card card-css">
   <img class="card-thumbnail" src="https://placehold.co/200x100" alt="">
   <h2 class="card-heading"><a href="https://en.wikipedia.org/wiki/Emu" target="_blank">Emu</a></h2>
@@ -67,7 +79,9 @@
 
 <h2>Example 4</h2>
 <p>JavaScript has been used to create a click event on the card, taking the link from the <code>&lt;h2&gt;</code>. What are the possible issues?</p>
-
+<ol>
+  <li>What if there are multiple interactive elements inside the card?</li>
+</ol>
 <div class="card js-clickable-card">
   <img class="card-thumbnail" src="https://placehold.co/200x100" alt="">
   <h2><a href="https://en.wikipedia.org/wiki/Wombat">Wombats</a></h2>
