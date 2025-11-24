@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>aria-label on heading</title>
-  <link rel="stylesheet" href="modal.css">
+  <title>Testing aria-label on heading</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
 </head>
 <body>
 
@@ -17,11 +19,24 @@
   <span aria-hidden="true">This is hidden 3</span>
 </h2>
 
+<pre><code>&lt;h2 aria-label="A new heading"&gt;
+  This is a heading
+  &lt;span aria-hidden="true"&gt;This is hidden 1&lt;/span&gt;
+  &lt;span aria-hidden="true"&gt;This is hidden 2&lt;/span&gt;
+  &lt;span aria-hidden="true"&gt;This is hidden 3&lt;/span&gt;
+&lt;/h2&gt;</code></pre>
+
 <h2 aria-label="A new heading">
   <span aria-hidden="true">This is hidden 1</span>
   <span aria-hidden="true">This is hidden 2</span>
   <span aria-hidden="true">This is hidden 3</span>
 </h2>
+
+<pre><code>&lt;h2 aria-label="A new heading"&gt;
+  &lt;span aria-hidden="true"&gt;This is hidden 1&lt;/span&gt;
+  &lt;span aria-hidden="true"&gt;This is hidden 2&lt;/span&gt;
+  &lt;span aria-hidden="true"&gt;This is hidden 3&lt;/span&gt;
+&lt;/h2&gt;</code></pre>
 
 </body>
 </html>
