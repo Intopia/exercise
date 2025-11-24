@@ -7,10 +7,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    h2 {
+      outline: 2px solid red;
+    }
+    [aria-hidden] {
+      margin: 0 1em 0 0;
+      color: blue;
+      outline: 2px dotted blue;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
 
 <h1>Testing aria-label on heading</h1>
+
+
+<p><a href="#">Dummy link above examples</a></p>
+
+<p>Test to determine if the <code>aria-label</code> is announced for the headings below:</p>
 
 <h2 aria-label="A new heading">
 	This is a heading
@@ -37,6 +53,8 @@
   &lt;span aria-hidden="true"&gt;This is hidden 2&lt;/span&gt;
   &lt;span aria-hidden="true"&gt;This is hidden 3&lt;/span&gt;
 &lt;/h2&gt;</code></pre>
+
+<p><a href="#">Dummy link above examples</a></p>
 
 </body>
 </html>
