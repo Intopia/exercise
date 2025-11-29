@@ -1,0 +1,531 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 1em;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: helvetica, arial, sans-serif;
+  font-size: 1em;
+  line-height: 1.2;
+  color: #222;
+}
+
+/* ---------------------
+links
+----------------------*/
+
+a:link {
+  color: blue;
+}
+
+a:visited {
+  color: blue;
+}
+
+a:focus {
+  color: #fff;
+  background: #000;
+  outline: none;
+  box-shadow:
+    0 0 0 2px #000;
+}
+
+a:hover {
+  color: green;
+}
+
+a:active {
+  color: #fff;
+  background: #EB0000;
+}
+
+/* ---------------------
+headings
+----------------------*/
+
+h1,
+h2,
+h3,
+h4 {
+  color: #008000;
+}
+
+h1 {
+  margin: 0 0 .75rem;
+  font-size: 2em; /* 32 */
+}
+
+h2 {
+  margin: 2rem 0 .75rem;
+  font-size: 1.5em; /* 24 */
+}
+
+aside h2 {
+  margin: 0 0 1rem;
+}
+
+h3 {
+  margin: 2rem 0 .75rem;
+  font-size: 1.1em;
+}
+
+p {
+  margin: 0 0 1.75rem;
+  line-height: 1.5;
+}
+
+/* ---------------------
+containers
+----------------------*/
+
+.header {
+  position: sticky;
+  top: 0;
+  height: 80px;              /* fixed pixel height */
+  overflow: hidden;          /* clips text at zoom */
+  z-index: 1000;
+  padding: 10px;
+  color: #004200;
+  background: #EBFFEB;
+  font-size: 2em;
+}
+
+.nav {
+  padding: 10px 20px;
+  background: #004200;
+  white-space: nowrap;       /* prevents wrapping */
+  overflow-x: auto;          /* forces scroll at zoom */
+}
+
+.nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav li {
+  display: inline-block;
+  margin: 0 40px 0 0;
+}
+
+.nav a,
+.footer a {
+  text-decoration: none;
+  outline: none;
+}
+
+.nav a:link,
+.nav a:visited,
+.footer a:link,
+.footer a:visited {
+  color: #fff;
+}
+
+.nav a:focus,
+.nav a:hover,
+.footer a:focus,
+.footer a:hover {
+  color: #000;
+  background: #fff;
+  outline: 0;
+  box-shadow:
+    0 0 0 2px #fff;
+}
+
+.nav a:active,
+.footer a:active {
+  color: #fff;
+  background: #EB0000;
+}
+
+.main {
+  padding: 20px;
+  width: 400px;            /* fixed width breaks at zoom */
+  overflow: hidden;        /* hides overflow text */
+}
+
+.aside {
+  padding: 20px;
+}
+
+.footer {
+  clear: both;
+  padding: 20px;
+  color: #fff;
+  background: #004200;
+}
+
+.form-container {
+  margin: 0 0 1.5em;
+}
+
+/* ---------------------
+forms
+----------------------*/
+
+
+.label {
+  display: block;
+  margin: 0 0 .3em;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid #666;
+  padding: .5em;
+  font-family: helvetica, arial, sans-serif;
+  font-size: 1em;
+  line-height: 1;
+}
+
+.input:focus {
+  border: 1px solid #000;
+  outline: 0;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 5px #000;
+}
+
+.input-error {
+  border: 1px solid #CC0000;
+}
+
+.input-error:focus {
+  border: 1px solid #CC0000;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 5px #CC0000;
+}
+
+.fieldset {
+  border: 0;
+  margin: 0 0 1.5em;
+  padding: 0;
+}
+
+legend {
+  margin: 0;
+  padding: 0 0 1em 0;
+  font-weight: bold;
+}
+
+.button {
+  border: 0;
+  border-radius: .3em;
+  padding: 1em 1.3em;
+  color: #fff;
+  background: blue;
+  font-family: helvetica, arial, sans-serif;
+  font-size: 1em;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.button:focus {
+  background: #000;
+  outline: none;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 5px #000;
+}
+
+.button:hover {
+  color: #fff;
+  background: green;
+}
+
+.button:active {
+  color: #fff;
+  background: #BB0000;
+}
+
+/* ---------------------
+table
+----------------------*/
+
+.table {
+  width: 100%;
+  margin: 0 0 1.5em;
+  border-collapse: collapse;
+}
+
+caption {
+  margin: 1em 0 .5em;
+  text-align: left;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+th,
+td {
+  border-bottom: 1px solid #aaa;
+  padding: .5em;
+  text-align: left;
+  vertical-align: top;
+}
+
+thead th {
+  background: #EBFFEB;
+  border-top: 1px solid #999;
+}
+
+/* ---------------------
+figure
+----------------------*/
+
+figure {
+  padding: 1em;
+  background: #EBFFEB;
+  margin: 1em 0;
+}
+
+figure img {
+  max-width: 100%;
+}
+
+figure p {
+  margin: .5em 0 0;
+}
+
+/* ---------------------
+skip links
+----------------------*/
+
+.skip-links {
+  margin: 0;
+  padding: 10px 20px;
+}
+
+.skip-links ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skip-links li {
+  display: inline-block;
+  margin: 0 1em 0 0;
+  padding: 0;
+}
+
+/* ---------------------
+other styles
+----------------------*/
+
+.visuallyhidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  border: 0;
+  margin: -1px;
+  padding: 0;
+}
+
+.help-text {
+  display: block;
+  margin: -.3em 0 .3em;
+  font-style: italic;
+  font-size: .9em;
+  color: #555;
+}
+
+.error-message {
+  display: block;
+  margin: 0;
+  padding: .3em 0 0;
+  font-style: italic;
+  font-size: .9em;
+  color: #BB0000;
+}
+
+.required {
+  font-size: .8em;
+  color: #BB0000;
+}
+
+/* ---------------------
+fieldset-list
+----------------------*/
+
+.fieldset-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fieldset-list li {
+  position: relative;
+  margin: 0;
+  padding: 7px 0;
+}
+
+/* ---------------------
+radio
+----------------------*/
+
+.label-radio {
+  display: inline-block;
+  padding: 0 0 0 6px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.input-radio:before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 10px;
+  width: 14px;
+  height: 14px;
+  border-radius: 14px;
+  cursor: pointer;
+  background: #fff;
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 5px #666;
+}
+
+.input-radio:checked:before {
+  background: blue;
+}
+
+.input-radio:focus:before {
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 6px #000;
+}
+
+.input-radio:focus:checked:before {
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 6px #000;
+}
+
+/* ---------------------
+checkbox
+----------------------*/
+
+.label-checkbox {
+  display: inline-block;
+  padding: 0 0 0 6px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.input-checkbox:before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 10px;
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+  background-color: #fff;
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 5px #666;
+}
+
+.input-checkbox:checked:before {
+  background: blue;
+  background-image: url("../img/icon-tick.png");
+  background-size: 10px 10px;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.input-checkbox:focus:before {
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 6px #000;
+}
+
+.input-checkbox:focus:checked:before {
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 6px #000;
+}
+
+.form-error {
+  padding: 1em;
+  margin: 0 0 2em;
+  background: rgba(255,0,0,.1);
+}
+
+.form-error-heading {
+  margin: 0 0 1em;
+  font-size: 1em;
+  color: #222;
+}
+
+.form-error-heading:focus {
+  outline: 2px dotted black;
+}
+
+.form-error ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.form-error li {
+  margin: 0 0 .3em;
+}
+
+/* ---------------------
+wide
+----------------------*/
+
+@media (min-width: 600px) {
+  .container {
+    max-width: 60em;
+  }
+
+  .header {
+    padding:30px;
+  }
+
+  .nav {
+    padding: 10px 30px;
+  }
+
+  .main {
+    float: left;
+    width: 60%;
+    padding: 30px;
+  }
+
+  .aside {
+    float: right;
+    width: 38%;
+    padding: 30px;
+  }
+
+  .skip-links {
+    padding: 10px 30px;
+  }
+}
+
+#main:target,
+#signupForm:target {
+  outline: 2px dotted black;
+  animation: fade 3s forwards;
+}
+
+@keyframes fade {
+  0% {
+    background-color: #FFFF00;
+    outline-color: black;
+  }
+  100% {
+    background-color: transparent;
+    outline-color: transparent;
+  }
+}
