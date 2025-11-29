@@ -349,6 +349,11 @@ Help and errors
   color: green;
 }
 
+.required {
+  font-size: .8em;
+  color: #BB0000;
+}
+
 /* ---------------------
 Example
 ----------------------*/
