@@ -321,7 +321,7 @@ Help and errors
   display: block;
   margin: 0;
   padding: 0.3em 0 0;
-  color: red;
+  color: #BB0000;
 }
 
 .codeHighlight,
