@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>aria-labelledby / aria-describedby tests</title>
+  <style>
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+
+<h1>aria-labelledby / aria-describedby test cases</h1>
+
+<!-- 1. Control (visible text) -->
+<section>
+  <h2>1. Control (visible)</h2>
+  <p id="l1">Visible label</p>
+  <p id="d1">Visible description</p>
+  <button aria-labelledby="l1" aria-describedby="d1">Button</button>
+</section>
+
+<!-- 2. aria-hidden -->
+<section>
+  <h2>2. aria-hidden</h2>
+  <p id="l2" aria-hidden="true">Hidden label</p>
+  <p id="d2" aria-hidden="true">Hidden description</p>
+  <button aria-labelledby="l2" aria-describedby="d2">Button</button>
+</section>
+
+<!-- 3. hidden attribute -->
+<section>
+  <h2>3. hidden attribute</h2>
+  <p id="l3" hidden>Hidden label</p>
+  <p id="d3" hidden>Hidden description</p>
+  <button aria-labelledby="l3" aria-describedby="d3">Button</button>
+</section>
+
+<!-- 4. display: none -->
+<section>
+  <h2>4. display: none</h2>
+  <p id="l4" style="display:none">Hidden label</p>
+  <p id="d4" style="display:none">Hidden description</p>
+  <button aria-labelledby="l4" aria-describedby="d4">Button</button>
+</section>
+
+<!-- 5. visibility: hidden -->
+<section>
+  <h2>5. visibility: hidden</h2>
+  <p id="l5" style="visibility:hidden">Hidden label</p>
+  <p id="d5" style="visibility:hidden">Hidden description</p>
+  <button aria-labelledby="l5" aria-describedby="d5">Button</button>
+</section>
+
+<!-- 6. Visually hidden (recommended pattern) -->
+<section>
+  <h2>6. Visually hidden</h2>
+  <p id="l6" class="visually-hidden">Visually hidden label</p>
+  <p id="d6" class="visually-hidden">Visually hidden description</p>
+  <button aria-labelledby="l6" aria-describedby="d6">Button</button>
+</section>
+
+<!-- 7. opacity: 0 -->
+<section>
+  <h2>7. opacity: 0</h2>
+  <p id="l7" style="opacity:0">Invisible label</p>
+  <p id="d7" style="opacity:0">Invisible description</p>
+  <button aria-labelledby="l7" aria-describedby="d7">Button</button>
+</section>
+
+<!-- 8. Removed from DOM (cannot be dereferenced) -->
+<section>
+  <h2>8. Removed from DOM</h2>
+  <!-- These elements never exist in the DOM -->
+  <button aria-labelledby="l8" aria-describedby="d8">Button</button>
+</section>
+
+<!-- 9. Multiple ID references -->
+<section>
+  <h2>9. Multiple IDREFs</h2>
+  <p id="l9a">First label</p>
+  <p id="l9b">Second label</p>
+  <p id="d9a">First description</p>
+  <p id="d9b">Second description</p>
+  <button
+    aria-labelledby="l9a l9b"
+    aria-describedby="d9a d9b">
+    Button
+  </button>
+</section>
+
+<!-- 10. aria-hidden ancestor -->
+<section>
+  <h2>10. aria-hidden ancestor</h2>
+  <div aria-hidden="true">
+    <p id="l10">Label inside aria-hidden ancestor</p>
+    <p id="d10">Description inside aria-hidden ancestor</p>
+  </div>
+  <button aria-labelledby="l10" aria-describedby="d10">Button</button>
+</section>
+
+</body>
+</html>
