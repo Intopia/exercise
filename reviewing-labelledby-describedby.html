@@ -51,9 +51,10 @@
 
 <p>This matrix covers desktop browsers on macOS and Windows. Mobile platforms (iOS VoiceOver, Android TalkBack) were not tested.</p>
 
+<hr>
+
 <h2>Test cases</h2>
 
-<!-- 1. Control (visible text) -->
 <h3>1. Control (visible)</h3>
 <div class="example">  
   <p id="l1">Visible label</p>
@@ -68,6 +69,12 @@
   Button
 &lt;/button&gt;</code></pre>
 
+<h4>Pass criteria:</h4>
+<ol>
+  <li>Name should be: <em>Visible label</em></li>
+  <li>Description should be: <em>Visible description</em></li>
+</ol>
+
 <table>
   <caption>Results</caption>
   <thead>
@@ -112,12 +119,12 @@
   </tbody>
 </table>
 
+<hr>
 
-<!-- 2. aria-hidden -->
 <h3>2. aria-hidden</h3>
 <div class="example">
-  <p id="l2" aria-hidden="true">aria-hidden label</p>
-  <p id="d2" aria-hidden="true">aria-hidden description</p>
+  <p id="l2" aria-hidden="true">ARIA-hidden label</p>
+  <p id="d2" aria-hidden="true">ARIA-hidden description</p>
   <button aria-labelledby="l2" aria-describedby="d2">Button</button>
 </div>
 
@@ -128,6 +135,12 @@
   Button
 &lt;/button&gt;</code></pre>
 
+<h4>Pass criteria:</h4>
+<ol>
+  <li>Name should be: <em>ARIA-hidden label</em></li>
+  <li>Description should be: <em>ARIA-hidden description</em></li>
+</ol>
+
 <table>
   <caption>Results</caption>
   <thead>
@@ -172,8 +185,8 @@
   </tbody>
 </table>
 
+<hr>
 
-<!-- 3. hidden attribute -->
 <h3>3. hidden attribute</h3>
 <div class="example">
   <p id="l3" hidden>Hidden attribute label</p>
@@ -188,6 +201,12 @@
   Button
 &lt;/button&gt;</code></pre>
 
+<h4>Pass criteria:</h4>
+<ol>
+  <li>Name should be: <em>Hidden attribute label</em></li>
+  <li>Description should be: <em>Hidden attribute description</em></li>
+</ol>
+
 <table>
   <caption>Results</caption>
   <thead>
@@ -232,8 +251,8 @@
   </tbody>
 </table>
 
+<hr>
 
-<!-- 4. display: none -->
 <h3>4. display: none</h3>
 <div class="example">
   <p id="l4" style="display:none">Display-none label</p>
@@ -248,6 +267,12 @@
   Button
 &lt;/button&gt;</code></pre>
 
+<h4>Pass criteria:</h4>
+<ol>
+  <li>Name should be: <em>Display-none label</em></li>
+  <li>Description should be: <em>Display-none description</em></li>
+</ol>
+
 <table>
   <caption>Results</caption>
   <thead>
@@ -292,8 +317,8 @@
   </tbody>
 </table>
 
+<hr>
 
-<!-- 5. visibility: hidden -->
 <h3>5. visibility: hidden</h3>
 <div class="example">
   <p id="l5" style="visibility:hidden">Visibility-hidden label</p>
@@ -308,6 +333,12 @@
   Button
 &lt;/button&gt;</code></pre>
 
+<h4>Pass criteria:</h4>
+<ol>
+  <li>Name should be: <em>Visibility-hidden label</em></li>
+  <li>Description should be: <em>Visibility-hidden description</em></li>
+</ol>
+
 <table>
   <caption>Results</caption>
   <thead>
@@ -352,12 +383,12 @@
   </tbody>
 </table>
 
+<hr>
 
-<!-- 6. Visually hidden (recommended pattern) -->
 <h3>6. Visually hidden</h3>
 <div class="example">
-  <p id="l6" class="visually-hidden">Visually-hidden label</p>
-  <p id="d6" class="visually-hidden">Visually-hidden description</p>
+  <p id="l6" class="visually-hidden">Visually hidden label</p>
+  <p id="d6" class="visually-hidden">Visually hidden description</p>
   <button aria-labelledby="l6" aria-describedby="d6">Button</button>
 </div>
 
@@ -368,6 +399,12 @@
   Button
 &lt;/button&gt;</code></pre>
 
+<h4>Pass criteria:</h4>
+<ol>
+  <li>Name should be: <em>Visually hidden label</em></li>
+  <li>Description should be: <em>Visually hidden description</em></li>
+</ol>
+
 <table>
   <caption>Results</caption>
   <thead>
@@ -412,8 +449,8 @@
   </tbody>
 </table>
 
+<hr>
 
-<!-- 7. opacity: 0 -->
 <h3>7. opacity: 0</h3>
 <div class="example">
   <p id="l7" style="opacity:0">Opacity-invisible label</p>
@@ -428,6 +465,12 @@
   Button
 &lt;/button&gt;</code></pre>
 
+<h4>Pass criteria:</h4>
+<ol>
+  <li>Name should be: <em>Opacity-invisible label</em></li>
+  <li>Description should be: <em>Opacity-invisible description</em></li>
+</ol>
+
 <table>
   <caption>Results</caption>
   <thead>
@@ -472,9 +515,10 @@
   </tbody>
 </table>
 
+<hr>
 
-<!-- 8. Removed from DOM (cannot be dereferenced) -->
 <h3>8. Removed from DOM</h3>
+
 <div class="example">
   <!-- These elements never exist in the DOM -->
   <button aria-labelledby="l8" aria-describedby="d8">Button</button>
@@ -485,6 +529,12 @@
   Button
 &lt;/button&gt;</code></pre>
 
+<h4>Pass criteria:</h4>
+<ol>
+  <li>Name should be: <em>Button</em></li>
+  <li>Description should be: [NONE]</li>
+</ol>
+
 <table>
   <caption>Results</caption>
   <thead>
@@ -499,38 +549,38 @@
     <tr>
       <td>macOS</td>
       <td>Chrome</td>
-      <td><span class="fail">FAIL</span></td>
-      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
     </tr>
     <tr>
       <td>macOS</td>
       <td>Firefox</td>
-      <td><span class="fail">FAIL</span></td>
-      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
     </tr>
     <tr>
       <td>macOS</td>
       <td>Safari</td>
-      <td><span class="fail">FAIL</span></td>
-      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
     </tr>
     <tr>
       <td>Windows</td>
       <td>Chrome</td>
-      <td><span class="fail">FAIL</span></td>
-      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
     </tr>
     <tr>
       <td>Windows</td>
       <td>Firefox</td>
-      <td><span class="fail">FAIL</span></td>
-      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
     </tr>
   </tbody>
 </table>
 
+<hr>
 
-<!-- 9. Multiple ID references -->
 <h3>9. Multiple IDREFs</h3>
 <div class="example">
   <p id="l9a">First label</p>
@@ -554,6 +604,12 @@
   Button
 &lt;/button&gt;</code></pre>
 
+<h4>Pass criteria:</h4>
+<ol>
+  <li>Name should be: <em>First label Second label</em></li>
+  <li>Description should be: <em>First description Second description</em></li>
+</ol>
+
 <table>
   <caption>Results</caption>
   <thead>
@@ -598,8 +654,8 @@
   </tbody>
 </table>
 
+<hr>
 
-<!-- 10. aria-hidden ancestor -->
 <h3>10. aria-hidden ancestor</h3>
 <div class="example">
   <div aria-hidden="true">
@@ -618,6 +674,12 @@
   Button
 &lt;/button&gt;</code></pre>
 
+<h4>Pass criteria:</h4>
+<ol>
+  <li>Name should be: <em>Label inside aria-hidden ancestor</em></li>
+  <li>Description should be: <em>Description inside aria-hidden ancestor</em></li>
+</ol>
+
 <table>
   <caption>Results</caption>
   <thead>
@@ -661,6 +723,212 @@
     </tr>
   </tbody>
 </table>
+
+<hr>
+
+<h3>11. Partial broken references (one exists, one missing)</h3>
+<div class="example">
+  <p id="l11a">First label</p>
+  <p id="d11a">First description</p>
+
+  <button
+    aria-labelledby="l11a l11b"
+    aria-describedby="d11a d11b">
+    Button
+  </button>
+</div>
+
+<pre><code>&lt;p id="l11a"&gt;First label&lt;/p&gt;
+&lt;p id="d11a"&gt;First description&lt;/p&gt;
+
+&lt;button
+  aria-labelledby="l11a l11b"
+  aria-describedby="d11a d11b"&gt;
+  Button
+&lt;/button&gt;</code></pre>
+
+<h4>Pass criteria:</h4>
+<ol>
+  <li>Name should be: <em>First label</em> (<code>l11b</code> does not exist)</li>
+  <li>Description should be: <em>First description</em> (<code>d11b</code> does not exist)</li>
+</ol>
+
+<table>
+  <caption>Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <td>macOS</td>
+      <td>Chrome</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>macOS</td>
+      <td>Firefox</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>macOS</td>
+      <td>Safari</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Firefox</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h3>12. Duplicate IDs</h3>
+<div class="example">  
+  <p id="l12">Visible label</p>
+  <p id="d12">Visible description</p>
+  <button aria-labelledby="l12 l12" aria-describedby="d12 d12">Button</button>
+</div>
+
+<pre><code>&lt;p id="l12"&gt;Visible label&lt;/p&gt;
+&lt;p id="d12"&gt;Visible description&lt;/p&gt;
+
+&lt;button aria-labelledby="l12 l12" aria-describedby="d12 d12"&gt;
+  Button
+&lt;/button&gt;</code></pre>
+
+<h4>Pass criteria:</h4>
+<ol>
+  <li>Name should be: <em>Visible label Visible label</em></li>
+  <li>Description should be: <em>Visible description Visible description</em></li>
+</ol>
+
+<table>
+  <caption>Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <td>macOS</td>
+      <td>Chrome</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>macOS</td>
+      <td>Firefox</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>macOS</td>
+      <td>Safari</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Firefox</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h3>13. Broken aria-labelledby and aria-describedby with implicit fallback</h3>
+<div class="example">
+  <button aria-labelledby="missing-label" aria-describedby="missing-desc">
+    Button
+  </button>
+</div>
+
+<pre><code>&lt;button
+  aria-labelledby="missing-label"
+  aria-describedby="missing-desc"&gt;
+  Button
+&lt;/button&gt;</code></pre>
+
+<h4>Pass criteria:</h4>
+<ol>
+  <li>Name should be: <em>Button</em></li>
+  <li>Description should be: [NONE]</li>
+</ol>
+
+<table>
+  <caption>Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <td>macOS</td>
+      <td>Chrome</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>macOS</td>
+      <td>Firefox</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>macOS</td>
+      <td>Safari</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Firefox</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
