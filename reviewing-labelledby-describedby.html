@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8">
   <title>aria-labelledby / aria-describedby tests</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
   <style>
     .visually-hidden {
       position: absolute;
@@ -15,78 +18,517 @@
       white-space: nowrap;
       border: 0;
     }
+
+    table {margin-bottom: 4em; }
+    .example { margin-top: .5em; }
+    .example p { margin: 0 0 .3em; }
+    pre code { font-size: .8em; }
   </style>
 </head>
 <body>
 
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
 <h1>aria-labelledby / aria-describedby test cases</h1>
 
+<h2>Test criteria:</h2>
+
+<h3>Test questions:</h3>
+<ol>  
+  <li>Does the accessibility tree <b>show the expected computed accessible name</b> for the button?</li>
+  <li>Does the accessibility tree <b>show the expected computed accessible description</b> for the button?</li>
+</ol>
+
+<h3>Pass or fail criteria:</h3>
+<ul>
+  <li><strong>Pass</strong> = The button has the expected accessible name or description in the accessibility tree.</li>
+  <li><strong>Fail</strong> = The expected accessible name or description is missing or incorrect.</li>
+</ul>
+
+<h2>Test cases</h2>
+
 <!-- 1. Control (visible text) -->
-<section>
-  <h2>1. Control (visible)</h2>
+<h3>1. Control (visible)</h3>
+<div class="example">  
   <p id="l1">Visible label</p>
   <p id="d1">Visible description</p>
   <button aria-labelledby="l1" aria-describedby="d1">Button</button>
-</section>
+</div>
+
+<pre><code>&lt;p id="l1"&gt;Visible label&lt;/p&gt;
+&lt;p id="d1"&gt;Visible description&lt;/p&gt;
+
+&lt;button aria-labelledby="l1" aria-describedby="d1"&gt;
+  Button
+&lt;/button&gt;</code></pre>
+
+<table>
+  <caption>Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <td>OSX</td>
+      <td>Chrome</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>OSX</td>
+      <td>Firefox</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>OSX</td>
+      <td>Safari</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Firefox</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
 
 <!-- 2. aria-hidden -->
-<section>
-  <h2>2. aria-hidden</h2>
-  <p id="l2" aria-hidden="true">Hidden label</p>
-  <p id="d2" aria-hidden="true">Hidden description</p>
+<h3>2. aria-hidden</h3>
+<div class="example">
+  <p id="l2" aria-hidden="true">aria-hidden label</p>
+  <p id="d2" aria-hidden="true">aria-hidden description</p>
   <button aria-labelledby="l2" aria-describedby="d2">Button</button>
-</section>
+</div>
+
+<pre><code>&lt;p id="l2" <span class="highlight">aria-hidden="true"</span>&gt;aria-hidden label&lt;/p&gt;
+&lt;p id="d2" <span class="highlight">aria-hidden="true"</span>&gt;aria-hidden description&lt;/p&gt;
+
+&lt;button aria-labelledby="l2" aria-describedby="d2"&gt;
+  Button
+&lt;/button&gt;</code></pre>
+
+<table>
+  <caption>Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <td>OSX</td>
+      <td>Chrome</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>OSX</td>
+      <td>Firefox</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>OSX</td>
+      <td>Safari</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Firefox</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
 
 <!-- 3. hidden attribute -->
-<section>
-  <h2>3. hidden attribute</h2>
-  <p id="l3" hidden>Hidden label</p>
-  <p id="d3" hidden>Hidden description</p>
+<h3>3. hidden attribute</h3>
+<div class="example">
+  <p id="l3" hidden>Hidden attribute label</p>
+  <p id="d3" hidden>Hidden attribute description</p>
   <button aria-labelledby="l3" aria-describedby="d3">Button</button>
-</section>
+</div>
+
+<pre><code>&lt;p id="l3" <span class="highlight">hidden</span>&gt;Hidden attribute label&lt;/p&gt;
+&lt;p id="d3" <span class="highlight">hidden</span>&gt;Hidden attribute description&lt;/p&gt;
+
+&lt;button aria-labelledby="l3" aria-describedby="d3"&gt;
+  Button
+&lt;/button&gt;</code></pre>
+
+<table>
+  <caption>Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <td>OSX</td>
+      <td>Chrome</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>OSX</td>
+      <td>Firefox</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>OSX</td>
+      <td>Safari</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Firefox</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
 
 <!-- 4. display: none -->
-<section>
-  <h2>4. display: none</h2>
-  <p id="l4" style="display:none">Hidden label</p>
-  <p id="d4" style="display:none">Hidden description</p>
+<h3>4. display: none</h3>
+<div class="example">
+  <p id="l4" style="display:none">Display-none label</p>
+  <p id="d4" style="display:none">Display-none description</p>
   <button aria-labelledby="l4" aria-describedby="d4">Button</button>
-</section>
+</div>
+
+<pre><code>&lt;p id="l4" <span class="highlight">style="display:none"</span>&gt;Display-none label&lt;/p&gt;
+&lt;p id="d4" <span class="highlight">style="display:none"</span>&gt;Display-none description&lt;/p&gt;
+
+&lt;button aria-labelledby="l4" aria-describedby="d4"&gt;
+  Button
+&lt;/button&gt;</code></pre>
+
+<table>
+  <caption>Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <td>OSX</td>
+      <td>Chrome</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>OSX</td>
+      <td>Firefox</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>OSX</td>
+      <td>Safari</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Firefox</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
 
 <!-- 5. visibility: hidden -->
-<section>
-  <h2>5. visibility: hidden</h2>
-  <p id="l5" style="visibility:hidden">Hidden label</p>
-  <p id="d5" style="visibility:hidden">Hidden description</p>
+<h3>5. visibility: hidden</h3>
+<div class="example">
+  <p id="l5" style="visibility:hidden">Visibility-hidden label</p>
+  <p id="d5" style="visibility:hidden">Visibility-hidden description</p>
   <button aria-labelledby="l5" aria-describedby="d5">Button</button>
-</section>
+</div>
+
+<pre><code>&lt;p id="l5" <span class="highlight">style="visibility:hidden"</span>&gt;Visibility-hidden label&lt;/p&gt;
+&lt;p id="d5" <span class="highlight">style="visibility:hidden"</span>&gt;Visibility-hidden description&lt;/p&gt;
+
+&lt;button aria-labelledby="l5" aria-describedby="d5"&gt;
+  Button
+&lt;/button&gt;</code></pre>
+
+<table>
+  <caption>Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <td>OSX</td>
+      <td>Chrome</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>OSX</td>
+      <td>Firefox</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>OSX</td>
+      <td>Safari</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Firefox</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
 
 <!-- 6. Visually hidden (recommended pattern) -->
-<section>
-  <h2>6. Visually hidden</h2>
-  <p id="l6" class="visually-hidden">Visually hidden label</p>
-  <p id="d6" class="visually-hidden">Visually hidden description</p>
+<h3>6. Visually hidden</h3>
+<div class="example">
+  <p id="l6" class="visually-hidden">Visually-hidden label</p>
+  <p id="d6" class="visually-hidden">Visually-hidden description</p>
   <button aria-labelledby="l6" aria-describedby="d6">Button</button>
-</section>
+</div>
+
+<pre><code>&lt;p id="l6" <span class="highlight">class="visually-hidden"</span>&gt;Visually-hidden label&lt;/p&gt;
+&lt;p id="d6" <span class="highlight">class="visually-hidden"</span>&gt;Visually-hidden description&lt;/p&gt;
+
+&lt;button aria-labelledby="l6" aria-describedby="d6"&gt;
+  Button
+&lt;/button&gt;</code></pre>
+
+<table>
+  <caption>Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <td>OSX</td>
+      <td>Chrome</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>OSX</td>
+      <td>Firefox</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>OSX</td>
+      <td>Safari</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Firefox</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
 
 <!-- 7. opacity: 0 -->
-<section>
-  <h2>7. opacity: 0</h2>
-  <p id="l7" style="opacity:0">Invisible label</p>
-  <p id="d7" style="opacity:0">Invisible description</p>
+<h3>7. opacity: 0</h3>
+<div class="example">
+  <p id="l7" style="opacity:0">Opacity-invisible label</p>
+  <p id="d7" style="opacity:0">Opacity-invisible description</p>
   <button aria-labelledby="l7" aria-describedby="d7">Button</button>
-</section>
+</div>
+
+<pre><code>&lt;p id="l7" <span class="highlight">style="opacity:0"</span>&gt;Opacity-invisible label&lt;/p&gt;
+&lt;p id="d7" <span class="highlight">style="opacity:0"</span>&gt;Opacity-invisible description&lt;/p&gt;
+
+&lt;button aria-labelledby="l7" aria-describedby="d7"&gt;
+  Button
+&lt;/button&gt;</code></pre>
+
+<table>
+  <caption>Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <td>OSX</td>
+      <td>Chrome</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>OSX</td>
+      <td>Firefox</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>OSX</td>
+      <td>Safari</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Firefox</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
 
 <!-- 8. Removed from DOM (cannot be dereferenced) -->
-<section>
-  <h2>8. Removed from DOM</h2>
+<h3>8. Removed from DOM</h3>
+<div class="example">
   <!-- These elements never exist in the DOM -->
   <button aria-labelledby="l8" aria-describedby="d8">Button</button>
-</section>
+</div>
+
+<pre><code>&lt;!-- These elements never exist in the DOM --&gt;
+&lt;button aria-labelledby="l8" aria-describedby="d8"&gt;
+  Button
+&lt;/button&gt;</code></pre>
+
+<table>
+  <caption>Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <td>OSX</td>
+      <td>Chrome</td>
+      <td><span class="fail">FAIL</span></td>
+      <td><span class="fail">FAIL</span></td>
+    </tr>
+    <tr>
+      <td>OSX</td>
+      <td>Firefox</td>
+      <td><span class="fail">FAIL</span></td>
+      <td><span class="fail">FAIL</span></td>
+    </tr>
+    <tr>
+      <td>OSX</td>
+      <td>Safari</td>
+      <td><span class="fail">FAIL</span></td>
+      <td><span class="fail">FAIL</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Firefox</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
 
 <!-- 9. Multiple ID references -->
-<section>
-  <h2>9. Multiple IDREFs</h2>
+<h3>9. Multiple IDREFs</h3>
+<div class="example">
   <p id="l9a">First label</p>
   <p id="l9b">Second label</p>
   <p id="d9a">First description</p>
@@ -96,17 +538,126 @@
     aria-describedby="d9a d9b">
     Button
   </button>
-</section>
+</div>
+
+<pre><code>&lt;p id="l9a"&gt;First label&lt;/p&gt;
+&lt;p id="l9b"&gt;Second label&lt;/p&gt;
+&lt;p id="d9a"&gt;First description&lt;/p&gt;
+&lt;p id="d9b"&gt;Second description&lt;/p&gt;
+&lt;button
+  aria-labelledby="l9a l9b"
+  aria-describedby="d9a d9b"&gt;
+  Button
+&lt;/button&gt;</code></pre>
+
+<table>
+  <caption>Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <td>OSX</td>
+      <td>Chrome</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>OSX</td>
+      <td>Firefox</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>OSX</td>
+      <td>Safari</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Firefox</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
 
 <!-- 10. aria-hidden ancestor -->
-<section>
-  <h2>10. aria-hidden ancestor</h2>
+<h3>10. aria-hidden ancestor</h3>
+<div class="example">
   <div aria-hidden="true">
     <p id="l10">Label inside aria-hidden ancestor</p>
     <p id="d10">Description inside aria-hidden ancestor</p>
   </div>
   <button aria-labelledby="l10" aria-describedby="d10">Button</button>
-</section>
+</div>
 
+<pre><code>&lt;div <span class="highlight">aria-hidden="true"</span>&gt;
+  &lt;p id="l10"&gt;Label inside aria-hidden ancestor&lt;/p&gt;
+  &lt;p id="d10"&gt;Description inside aria-hidden ancestor&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;button aria-labelledby="l10" aria-describedby="d10"&gt;
+  Button
+&lt;/button&gt;</code></pre>
+
+<table>
+  <caption>Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <td>OSX</td>
+      <td>Chrome</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>OSX</td>
+      <td>Firefox</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>OSX</td>
+      <td>Safari</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Firefox</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
 </html>
