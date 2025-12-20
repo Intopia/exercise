@@ -861,8 +861,8 @@
     <tr>
       <td>macOS</td>
       <td>Safari</td>
-      <td><span class="fail">FAIL</span><br><span style="font-size: .7em;">(only first instance announced)</td>
-            <td><span class="pass">PASS</span></td></span>
+      <td><span class="pass">PASS</span><br><span style="font-size: .7em;">(Note below)</td>
+      <td><span class="pass">PASS</span></td></span>
     </tr>
     <tr>
       <td>Windows</td>
@@ -878,6 +878,8 @@
     </tr>
   </tbody>
 </table>
+
+<p>Note: In the test above, VoiceOver on macOS announced only a single instance of the label. Inspection with Xcode’s Accessibility Inspector confirmed that Safari exposes the full duplicated accessible name via the accessibility API. This indicates that VoiceOver de-duplicates identical adjacent tokens during speech output, rather than Safari altering the computed accessible name.</p>
 
 <hr>
 
