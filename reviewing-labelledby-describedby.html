@@ -33,6 +33,20 @@
 
 <h1>aria-labelledby / aria-describedby test cases</h1>
 
+<p><code>aria-labelledby</code> and <code>aria-describedby</code> do not ask the browser to discover text automatically. Instead, the author explicitly tells the browser which elements to use by referencing their IDs.</p>
+
+<p>When these attributes are present, the browser:</p>
+
+<ul>
+  <li>Resolves the ID references</li>
+  <li>Finds the referenced elements</li>
+  <li>Extracts their text content</li>
+</ul>
+
+<p>This process happens even if the referenced elements are hidden, not rendered, or otherwise excluded from the accessibility tree.</p>
+
+<p>Because of this, the “hidden” rules described earlier do not apply in the same way. Those rules are about skipping hidden content during automatic traversal. <code>aria-labelledby</code> and <code>aria-describedby</code> intentionally bypass traversal altogether.</p>
+
 <h2>Test criteria:</h2>
 
 <h3>Test questions:</h3>
