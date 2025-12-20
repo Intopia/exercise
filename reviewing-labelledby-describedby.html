@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>aria-labelledby / aria-describedby tests</title>
+  <title>Tests for aria-labelledby and aria-describedby</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
@@ -31,7 +31,7 @@
   <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
 </a>
 
-<h1>aria-labelledby / aria-describedby test cases</h1>
+<h1>Tests for <code>aria-labelledby</code> and <code>aria-describedby</code></h1>
 
 <p><code>aria-labelledby</code> and <code>aria-describedby</code> do not ask the browser to discover text automatically. Instead, the author explicitly tells the browser which elements to use by referencing their IDs.</p>
 
@@ -46,6 +46,8 @@
 <p>This process happens even if the referenced elements are hidden, not rendered, or otherwise excluded from the accessibility tree.</p>
 
 <p>Because of this, the “hidden” rules described earlier do not apply in the same way. Those rules are about skipping hidden content during automatic traversal. <code>aria-labelledby</code> and <code>aria-describedby</code> intentionally bypass traversal altogether.</p>
+
+<hr>
 
 <h2>Test criteria:</h2>
 
