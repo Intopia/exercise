@@ -7,15 +7,9 @@
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
   <style>
-    #message.warning {
-      padding: 1em;
-      outline: 2px solid rgba(255,170,0,1);
-      background: rgba(255,170,0,.1);
-    }
-
-    #message.warning p {
-      margin: 0;
-    }
+    .example div { outline: 2px solid red; margin: 0 0 .5em; }
+    .example div p { outline: none; }
+    .example p { margin: 0; outline: 1px solid blue; }
 </style>
 </head>
 <body>
@@ -29,21 +23,35 @@
 <h2>Example</h2>
 
 <div class="example">
-  <ul>
+  <ul aria-owns="bbb aaa">
     <li>Fruit</li>
     <li>Vegetables</li>
-    <ul id="fruit_list" aria-owns="fruit_list_parent"></ul>
   </ul>
-
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing, elit. Non facilis pariatur voluptatibus praesentium illo, rem officiis, fuga qui perferendis? Vero, odio. Perferendis illum blanditiis dicta ducimus ex eius perspiciatis doloremque!</p>
-
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing, elit. Non facilis pariatur voluptatibus praesentium illo, rem officiis, fuga qui perferendis? Vero, odio. Perferendis illum blanditiis dicta ducimus ex eius perspiciatis doloremque!</p>
-
-  <ul id="fruit_list_parent">
-    <li>Apples</li>
-    <li>Bananas</li>
+  <p>Lorem ipsum dolor sit amet...</p>
+  <ul>
+    <li id="aaa">Apples</li>
+    <li id="bbb">Bananas</li>
   </ul>
 </div>
+
+<pre><code>&lt;ul aria-owns="bbb aaa"&gt;
+  &lt;li&gt;Fruit&lt;/li&gt;
+  &lt;li&gt;Vegetables&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet...&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li id="aaa"&gt;Apples&lt;/li&gt;
+  &lt;li id="bbb"&gt;Bananas&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+<pre><code>Accessibility tree result:
+
+- Fruit
+- Vegetables
+- Banana
+- Apple
+</code></pre>
+
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
