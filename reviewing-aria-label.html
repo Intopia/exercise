@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Reviewing aria-label</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+.menulist {
+  margin: 0;
+  list-style: none;
+  padding: 20px;
+  border: 2px solid red;
+}
+
+nav {
+  margin: 0;
+  border: 2px solid red;
+}
+
+table {
+margin: 1.5em 0 2em;
+}
+
+.example32 {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 2px solid red;
+}
+
+.example32:focus {
+  outline: 0;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 5px #000;
+}
+
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
+<h1>Reviewing <code>aria-label</code></h1>
+
+<h2>Test cases</h2>
+
+<h3>Group 1. Interactive element with aria-label</h3>
+
+<h4>1.1 No visible label - such as an icon inside a button</h4>
+
+<div class="example">
+  <button aria-label="Close"></button>
+</div>
+
+<pre><code>&lt;button <span class="highlight">aria-label="Close"</span>&gt;
+&lt;/button&gt;</code></pre>
+
+<p>Pass criteria: The <code>&lt;button&gt;</code> has a name of "Close" is presented in the accessibility tree.</p>
+
+<table>
+  <caption>1.1 Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MacOS</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>Safari</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>1.2 Different accessible name to visible text label</h4>
+
+<div class="example">
+  <button aria-label="Add to cart">Add</button>
+</div>
+
+<pre><code>&lt;button <span class="highlight">aria-label="Add to cart"</span>&gt;
+  Add
+&lt;/button&gt;</code></pre>
+
+<p>Pass criteria: The <code>&lt;button&gt;</code> has a name of "Add to cart" is presented in the accessibility tree.</p>
+
+<table>
+  <caption>1.2 Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MacOS</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>Safari</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+
+<h3>Group 2. Landmark element with aria-label</h3>
+
+<div class="example">
+  <nav aria-label="Primary">
+  </nav>
+</div>
+
+<pre><code>&lt;nav <span class="highlight">aria-label="Primary"</span>&gt;
+&lt;/nav&gt;</code></pre>
+
+<p>Pass criteria: The <code>&lt;nav&gt;</code> has a name "Primary" is presented in the accessibility tree.</p>
+
+<table>
+  <caption>2. Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MacOS</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>Safari</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+
+<h3>Group 3. Static element with a role and aria-label</h3>
+
+<h4>3.1. Role="menu"</h4>
+
+<div class="example">
+  <ul role="menu" aria-label="Actions" class="menulist">
+    <li role="menuitem">Item 1</li>
+    <li role="menuitem">Item 2</li>
+    <li role="menuitem">Item 3</li>
+  </ul>
+</div>
+
+<pre><code>&lt;ul <span class="highlight">role="menu"</span> <span class="highlight">aria-label="Actions"</span>&gt;
+  &lt;li role="menuitem"&gt;Item 1&lt;/li&gt;
+  &lt;li role="menuitem"&gt;Item 2&lt;/li&gt;
+  &lt;li role="menuitem"&gt;Item 3&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+<p>Pass criteria: The <code>&lt;ul&gt;</code> has a name "Actions" is presented in the accessibility tree.</p>
+
+<table>
+  <caption>3.1. Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MacOS</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>Safari</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>3.2. Role="img"</h4>
+
+<div class="example">
+  <span role="img" aria-label="Close" class="example32"></span>
+</div>
+
+<pre><code>&lt;span <span class="highlight">role="img"</span> <span class="highlight">aria-label="Close"</span>&gt;
+&lt;/span&gt;</code></pre>
+
+<p>Pass criteria: The <code>&lt;span&gt;</code> has a name "Close" is presented in the accessibility tree.</p>
+
+<table>
+  <caption>3.2. Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MacOS</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>Safari</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>3.3. Role="dialog"</h4>
+
+<div class="example">
+  <div role="dialog" aria-label="Settings" class="example32"></div>
+</div>
+
+<pre><code>&lt;div <span class="highlight">role="dialog"</span> <span class="highlight">aria-label="Settings"</span>&gt;
+&lt;/div&gt;</code></pre>
+
+<p>Pass criteria: The <code>&lt;div&gt;</code> has a name "Settings" is presented in the accessibility tree.</p>
+
+<table>
+  <caption>3.3. Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MacOS</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>Safari</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+
+<h3>Group 4. Static element with aria-label inside interactive element</h3>
+
+<div class="example">
+  <button>
+    <span aria-label="Close"></span>
+  </button>
+</div>
+
+<pre><code>&lt;button&gt;
+  &lt;span <span class="highlight">aria-label="Close"</span>&gt;&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+
+<p>Pass criteria: The <code>&lt;button&gt;</code> has a name "Close" is presented in the accessibility tree.</p>
+
+<table>
+  <caption>4. Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MacOS</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>Safari</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+
+<h3>Group 5. Non-interactive element with aria-label</h3>
+
+<h4>5.1 Non-interactive without role or focus:</h4>
+
+<div class="example">
+  <span aria-label="Close" class="example32"></span>
+</div>
+
+<pre><code>&lt;span <span class="highlight">aria-label="Close"</span>&gt;
+&lt;/span&gt;</code></pre>
+
+<p>Pass criteria: The <code>&lt;button&gt;</code> has a name "Close" is presented in the accessibility tree.</p>
+
+<table>
+  <caption>5.1. Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MacOS</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>Safari</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>5.2 Non-interactive that can receive focus</h4>
+
+<div class="example">
+  <div tabindex="0" aria-label="Settings" class="example32"></div>
+</div>
+
+<pre><code>&lt;div <span class="highlight">tabindex="0"</span> <span class="highlight">aria-label="Settings"</span>&gt;
+&lt;/div&gt;</code></pre>
+
+<p>Pass criteria: The <code>&lt;div&gt;</code> has a name "Settings" is presented in the accessibility tree.</p>
+
+<table>
+  <caption>5.2. Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MacOS</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>Safari</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+
+<h3>Group 6. Name explicitly suppressed</h3>
+
+<h4>6.1 Role suppresses semantics</h4>
+
+<div class="example">
+  <span role="presentation" aria-label="Close" class="example32"></span>
+</div>
+
+<pre><code>&lt;span <span class="highlight">role="presentation"</span> <span class="highlight">aria-label="Close"</span>&gt;
+&lt;/span&gt;</code></pre>
+
+<p>Pass criteria: The <code>&lt;span&gt;</code> has a name "Close" is presented in the accessibility tree.</p>
+
+<table>
+  <caption>6.1. Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MacOS</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>Safari</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>6.2 Element hidden</h4>
+
+<div class="example">
+  <span aria-hidden="true" aria-label="Close" class="example32"></span>
+</div>
+
+<pre><code>&lt;span <span class="highlight">aria-hidden="true"</span> <span class="highlight">aria-label="Close"</span>&gt;
+&lt;/span&gt;</code></pre>
+
+<p>Pass criteria: The element should have no name in the accessibility tree.</p>
+
+<table>
+  <caption>6.2. Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MacOS</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>Safari</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
