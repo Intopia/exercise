@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>A minimal viable modal - option 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+
+    /* Some basic page styling */
+
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      font-family: Helvetica, Arial, sans-serif;
+    }
+
+    h1,
+    h2 {
+      color: #C03C0C;
+    }
+
+    h1 {
+      margin: 0 0 .5rem;
+      font-size: 2rem;
+      line-height: 1.2;
+    }
+
+    h2 {
+      margin: 0 0 .5rem;
+      font-size: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .button,
+    button {
+      display: inline-block;
+      padding: 0.75em 1em;
+      border: 0;
+      background: blue;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 0.2em;
+      font-size: 1em;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .button:focus,
+    button:focus {
+      background: #000;
+      color: #fff;
+      outline: none;
+      box-shadow: 0 0 0 2px #fff, 0 0 0 5px #000;
+    }
+
+    .button:hover,
+    button:hover {
+      background: green;
+      color: #fff;
+    }
+
+    .button:active,
+    button:active {
+      background: red;
+      color: #fff;
+    }
+
+    /* Styling the dialog */
+
+    dialog {
+      border: 1px solid #000;
+      border-radius: 0.3em;
+      box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.3);
+      padding: 2.5rem 2rem 2rem;
+      max-width: 32rem;
+      width: calc(100% - 2rem);
+    }
+
+    /* Styling the dialog backdrop */
+
+    dialog::backdrop {
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+  </style>
+</head>
+<body>
+  <main id="page">
+    <h1>A minimal viable modal - option 1</h1>
+ 
+    <p>This content should become inert while the modal is open.</p>
+
+    <button type="button" commandfor="demo-dialog" command="show-modal">
+      Open modal
+    </button>
+
+    <p><a href="https://example.com">A link</a> (should not be focusable while modal is open)</p>
+
+  </main>
+
+  <!-- Dialog is closed by default (no "open" attribute). -->
+  <dialog id="demo-dialog" aria-labelledby="dialog-title">
+
+    <h2 id="dialog-title">Dialog heading</h2>
+
+    <p>This is the dialog content.</p>
+
+    <button type="button" commandfor="demo-dialog" command="close">
+      Close
+    </button>
+
+  </dialog>
+
+</body>
+</html>

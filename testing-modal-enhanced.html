@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>A minimal viable modal</title>
+  <title>A minimal viable modal - option 2</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
 
@@ -84,10 +84,6 @@
       background: rgba(0, 0, 0, 0.5);
     }
 
-    .actions {
-      margin-top: 1rem;
-    }
-
     /* Optional styling for the modal heading initial focus state */
 
     #dialog-title:focus,
@@ -110,7 +106,7 @@
 </head>
 <body>
   <main id="page">
-    <h1>A minimal viable modal</h1>
+    <h1>A minimal viable modal - option 2</h1>
  
     <p>This content should become inert while the modal is open.</p>
 
@@ -129,13 +125,22 @@
 
     <p>This is the dialog content.</p>
 
-    <div class="actions">
-      <button type="button" commandfor="demo-dialog" command="close">
-        Close
-      </button>
-    </div>
+    <button type="button" commandfor="demo-dialog" command="close">
+      Close
+    </button>
 
   </dialog>
+
+<script>
+  const dialog = document.getElementById('demo-dialog');
+  const title = document.getElementById('dialog-title');
+
+  dialog.addEventListener('toggle', () => {
+    if (dialog.open) {
+      title.focus();
+    }
+  });
+</script>
 
 </body>
 </html>
