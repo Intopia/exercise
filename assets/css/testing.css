@@ -332,21 +332,21 @@ Help and errors
 }
 
 .fail {
-  color: #fff;
-  background: red;
+  color: #CC0000;
+  font-weight: bold;
 }
 
 .pass {
-  color: #fff;
-  background: green;
+  color: #007700;
+  font-weight: bold;
 }
 
 .red {
-  color: red;
+  color: #CC0000;
 }
 
 .green {
-  color: green;
+  color: #007700;
 }
 
 .required {

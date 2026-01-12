@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Hover vs focus</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="stylesheet" href="styles.css">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+
+/* button styles */
+
+.button-secondary {
+  position: relative;
+  height: 2.2em;
+  padding: 0 1em;
+  border: 1px solid #ccc;
+  border-radius: .2em;
+  background: blue;
+  color: #fff;
+  font: inherit;
+  line-height: 2.2em;
+  cursor: pointer;
+}
+
+.button-secondary:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 5px #000;
+}
+
+/* Tooltips */
+
+.tooltip-name:hover::after,
+.tooltip-name:focus-visible::after,
+.tooltip-help:hover::after,
+.tooltip-help:focus-visible::after {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  bottom: calc(100% + .4rem);
+
+  padding: 0 .7em;
+
+  content: attr(data-tooltip);
+  background: #000;
+  color: #fff;
+  border-radius: .2em;
+
+  display: block;
+  width: max-content;
+  inline-size: max-content;
+  max-inline-size: 50ch;
+  min-inline-size: 16ch;
+
+  white-space: normal;
+  overflow-wrap: break-word;
+  line-height: 1.4;
+}
+
+/* Screen-reader-only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
+<h1>Testing a CSS-only tooltip</h1>
+
+<p>Additional information is available on hover and focus.</p>
+
+<ol>
+  <li>Is the tooltip in close proximity? <span class="pass">Pass</span></li>
+  <li>Is the tooltip persistent?  <span class="pass">Pass</span></li>
+  <li>Can the tooltip be accessed via keyboard only?  <span class="pass">Pass</span></li>
+  <li>Can the tooltip be closed via the <kbd>ESC</kbd> key? <span class="fail">Not relevant</span></li>
+  <li>Will the tooltip close if the user clicks elsewhere? <span class="pass">Pass</span></li>
+  <li>Will the tooltip close if focus moves? <span class="pass">Pass</span></li>
+  <li>Is the tooltip announced when activated? <span class="pass">Pass</span> - Announced or available on focus (screen reader dependent)</li>
+</ol>
+
+<h2>Example 1: using <code>aria-label</code></h2>
+
+<div class="example">
+  <button
+    type="button"
+    class="button-secondary tooltip-name"
+    aria-label="Close and return to Bank Balance information"
+    data-tooltip="Close and return to Bank Balance information"
+  >
+    X
+  </button>
+</div>
+
+<h2>Example 2: using <code>aria-describedby</code></h2>
+
+<div class="example">
+  <button
+    type="button"
+    class="button-secondary tooltip-help"
+    aria-label="Information"
+    aria-describedby="info-help"
+    data-tooltip="Find your account number on your recent utility bill"
+  >
+    &#8505;
+  </button>
+
+  <span id="info-help" class="sr-only">
+    Find your account number on your recent utility bill
+  </span>
+</div>
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
