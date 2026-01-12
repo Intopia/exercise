@@ -81,17 +81,13 @@
 
 <h1>Testing a CSS-only tooltip</h1>
 
-<p>Additional information is available on hover and focus.</p>
+<h2>What&rsquo;s this about?</h2>
+<p>Can a simple tooltip be delivered without using JavaScript? This page shows two simple examples:</p>
 
-<ol>
-  <li>Is the tooltip in close proximity? <span class="pass">Pass</span></li>
-  <li>Is the tooltip persistent?  <span class="pass">Pass</span></li>
-  <li>Can the tooltip be accessed via keyboard only?  <span class="pass">Pass</span></li>
-  <li>Can the tooltip be closed via the <kbd>ESC</kbd> key? <span class="fail">Not relevant</span></li>
-  <li>Will the tooltip close if the user clicks elsewhere? <span class="pass">Pass</span></li>
-  <li>Will the tooltip close if focus moves? <span class="pass">Pass</span></li>
-  <li>Is the tooltip announced when activated? <span class="pass">Pass</span> - Announced or available on focus (screen reader dependent)</li>
-</ol>
+<ul>
+  <li>Example 1: Extending the accessible name using aria-label</li>
+  <li>Example 2: Providing additional help text using aria-describedby</li>
+</ul>
 
 <h2>Example 1: using <code>aria-label</code></h2>
 
@@ -123,6 +119,25 @@
     Find your account number on your recent utility bill
   </span>
 </div>
+
+<h2>Some simple tests:</h2>
+
+<ol>
+  <li>Is the tooltip in close proximity?</li>
+  <li>Is the tooltip persistent? </li>
+  <li>Can the tooltip be accessed via keyboard only? </li>
+  <li>Can the tooltip be closed via the <kbd>ESC</kbd> key? (if relevant)</li>
+  <li>Will the tooltip close if the user clicks elsewhere?</li>
+  <li>Will the tooltip close if focus moves?</li>
+  <li>Is the tooltip announced when activated?</li>
+</ol>
+
+<h2>Important caveats:</h2>
+
+<ol>
+  <li>These examples are not intended for real production use. This is about exploring limits and trade-offs, not recommending a pattern.</li>
+  <li>The content shown is deliberately simple. Anything complex should not be a tooltip.</li>
+</ol>
 
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
