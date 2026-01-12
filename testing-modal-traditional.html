@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>An ARIA modal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <style>
+    /* Some basic page styling */
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      font-family: Helvetica, Arial, sans-serif;
+    }
+
+    h1, h2 { color: #C03C0C; }
+
+    h1 {
+      margin: 0 0 .5rem;
+      font-size: 2rem;
+      line-height: 1.2;
+    }
+
+    h2 {
+      margin: 0 0 .5rem;
+      font-size: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .button, button {
+      display: inline-block;
+      padding: 0.75em 1em;
+      border: 0;
+      background: blue;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 0.2em;
+      font-size: 1em;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .button:focus, button:focus {
+      background: #000;
+      color: #fff;
+      outline: none;
+      box-shadow: 0 0 0 2px #fff, 0 0 0 5px #000;
+    }
+
+    .button:hover, button:hover {
+      background: green;
+      color: #fff;
+    }
+
+    .button:active, button:active {
+      background: red;
+      color: #fff;
+    }
+
+    /* Modal surface */
+    #dialog {
+      border: 1px solid #000;
+      border-radius: 0.3em;
+      box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.3);
+      padding: 2.5rem 2rem 2rem;
+      max-width: 32rem;
+      width: calc(100% - 2rem);
+
+      /* positioning */
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      background: #fff;
+    }
+
+    /* Backdrop */
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    /* Hidden state for old-school modal */
+    [hidden] {
+      display: none !important;
+    }
+
+    /* Optional styling for the modal heading initial focus state */
+
+    #dialog-title:focus,
+    #dialog-title:focus-visible {
+      outline: 2px dotted #000;
+      animation: fade 3s forwards;
+    }
+
+    @keyframes fade {
+      0% {
+        background-color: #FFFF00;
+        outline-color: #000;
+      }
+      100% {
+        background-color: transparent;
+        outline-color: transparent;
+      }
+    }  </style>
+</head>
+<body>
+  <main id="page">
+    <h1>An ARIA modal - option 3 (old-school)</h1>
+
+    <p>This content should become inert while the modal is open.</p>
+
+    <button id="open-modal">
+      Open modal
+    </button>
+
+    <p>
+      <a href="https://example.com">A link</a>
+      (should not be focusable while modal is open)
+    </p>
+  </main>
+
+  <!-- Backdrop for click-to-dismiss and visual modality -->
+  <div id="backdrop" class="backdrop" hidden></div>
+
+  <!-- Old-school ARIA modal container -->
+  <div id="dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title" hidden>
+    <h2 id="dialog-title" tabindex="-1">Dialog heading</h2>
+
+    <p>This is the dialog content.</p>
+
+    <button id="close-modal">
+      Close
+    </button>
+  </div>
+
+  <script>
+    (function () {
+      const page = document.getElementById('page');
+      const dialog = document.getElementById('dialog');
+      const backdrop = document.getElementById('backdrop');
+
+      const openBtn = document.getElementById('open-modal');
+      const closeBtn = document.getElementById('close-modal');
+      const title = document.getElementById('dialog-title');
+
+      let lastActiveElement = null;
+
+      // Basic focusable selector for trapping focus inside the modal
+      const focusableSelector = [
+        'a[href]',
+        'button:not([disabled])',
+        'input:not([disabled])',
+        'select:not([disabled])',
+        'textarea:not([disabled])',
+        '[tabindex]:not([tabindex="-1"])'
+      ].join(',');
+
+      function setPageInert(isInert) {
+        // Prefer inert when available
+        if ('inert' in page) {
+          page.inert = isInert;
+        } else {
+          // Fallback: hide page from ATs while modal is open
+          // (Not perfect, but common for older patterns)
+          if (isInert) {
+            page.setAttribute('aria-hidden', 'true');
+          } else {
+            page.removeAttribute('aria-hidden');
+          }
+        }
+      }
+
+      function openModal() {
+        lastActiveElement = document.activeElement;
+
+        setPageInert(true);
+
+        backdrop.hidden = false;
+        dialog.hidden = false;
+
+        // Move focus to the heading for context
+        title.focus({ preventScroll: true });
+
+        // Start listening for key handling
+        document.addEventListener('keydown', onKeyDown, true);
+      }
+
+      function closeModal() {
+        dialog.hidden = true;
+        backdrop.hidden = true;
+
+        document.removeEventListener('keydown', onKeyDown, true);
+
+        setPageInert(false);
+
+        // Restore focus to the element that opened the modal
+        if (lastActiveElement && typeof lastActiveElement.focus === 'function') {
+          lastActiveElement.focus({ preventScroll: true });
+        } else {
+          openBtn.focus({ preventScroll: true });
+        }
+      }
+
+      function trapTab(event) {
+        if (event.key !== 'Tab') return;
+
+        const focusables = Array.from(dialog.querySelectorAll(focusableSelector))
+          // only visible/usable
+          .filter(el => !el.hasAttribute('hidden') && el.offsetParent !== null);
+
+        // If nothing focusable, keep focus on the dialog title (which is focusable via tabindex=-1)
+        if (focusables.length === 0) {
+          event.preventDefault();
+          title.focus({ preventScroll: true });
+          return;
+        }
+
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        const active = document.activeElement;
+
+        // If focus is currently on the title, treat it as before-first in the cycle.
+        const isOnTitle = active === title;
+
+        if (event.shiftKey) {
+          if (active === first || isOnTitle) {
+            event.preventDefault();
+            last.focus({ preventScroll: true });
+          }
+        } else {
+          if (active === last) {
+            event.preventDefault();
+            first.focus({ preventScroll: true });
+          }
+        }
+      }
+
+      function onKeyDown(event) {
+        // Escape closes
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          closeModal();
+          return;
+        }
+
+        // Trap Tab within the modal
+        trapTab(event);
+      }
+
+      // Click handlers
+      openBtn.addEventListener('click', openModal);
+      closeBtn.addEventListener('click', closeModal);
+
+      // Click on backdrop closes (common modal behaviour)
+      backdrop.addEventListener('click', closeModal);
+
+      // If someone clicks inside dialog, don’t let it bubble to backdrop
+      dialog.addEventListener('click', (e) => e.stopPropagation());
+    })();
+  </script>
+</body>
+</html>
