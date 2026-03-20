@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the table scope attribute</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
+<h1>Testing the table <code>scope</code> attribute</h1>
+
+<h2>Example 1: using <code>scope</code></h2>
+
+<table>
+  <caption>Greensprings Running Club Personal Bests</caption>
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">1 mile</th>
+      <th scope="col">5 km</th>
+      <th scope="col">10 km</th>
+    </tr>  
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Mary</th>
+      <td>8:32</td>
+      <td>28:04</td>
+      <td>1:01:16</td>
+    </tr>
+    <tr>
+      <th scope="row">Betsy</th>
+      <td>7:43</td>
+      <td>26:47</td>
+      <td>55:38</td>
+    </tr>
+    <tr>
+      <th scope="row">Matt</th>
+      <td>7:55</td>
+      <td>27:29</td>
+      <td>57:04</td>
+    </tr>
+    <tr>
+      <th scope="row">Todd</th>
+      <td>7:01</td>
+      <td>24:21</td>
+      <td>50:35</td>
+    </tr>
+  </tbody> 
+</table>
+
+<h2>Example 2: without <code>scope</code></h2>
+
+<table>
+  <caption>Greensprings Running Club Personal Bests</caption>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>1 mile</th>
+      <th>5 km</th>
+      <th>10 km</th>
+    </tr>  
+  </thead>
+  <tbody>
+    <tr>
+      <th>Mary</th>
+      <td>8:32</td>
+      <td>28:04</td>
+      <td>1:01:16</td>
+    </tr>
+    <tr>
+      <th>Betsy</th>
+      <td>7:43</td>
+      <td>26:47</td>
+      <td>55:38</td>
+    </tr>
+    <tr>
+      <th>Matt</th>
+      <td>7:55</td>
+      <td>27:29</td>
+      <td>57:04</td>
+    </tr>
+    <tr>
+      <th>Todd</th>
+      <td>7:01</td>
+      <td>24:21</td>
+      <td>50:35</td>
+    </tr>
+  </tbody> 
+</table>
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
