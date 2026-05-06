@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing SVG images inside links and buttons</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>h3 {margin-bottom: .5em; color: black;} .example {margin-top: .5em;}</style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
+<h1>Testing SVG images inside links and buttons</h1>
+
+<h2>Links</h2>
+
+<h3>Link example 1: no name from link or SVG</h3>
+<div class="example">
+  <a href="#">
+    <svg width="40" height="40">
+      <circle cx="20" cy="20" r="20" fill="red" />
+    </svg>
+  </a>
+</div>
+
+<h3>Link example 2: aria-label from SVG</h3>
+<div class="example">
+  <a href="#">
+    <svg width="40" height="40" aria-label="Hello">
+      <circle cx="20" cy="20" r="20" fill="red" />
+    </svg>
+  </a>
+</div>
+
+<h3>Link example 3: title from SVG</h3>
+<div class="example">
+  <a href="#">
+    <svg width="40" height="40">
+      <title>Hello</title>
+      <circle cx="20" cy="20" r="20" fill="red" />
+    </svg>
+  </a>
+</div>
+
+<h3>Link example 4: aria-label on link</h3>
+<div class="example">
+  <a href="#" aria-label="Goodbye">
+    <svg width="40" height="40" aria-label="Hello">
+      <circle cx="20" cy="20" r="20" fill="red" />
+    </svg>
+  </a>
+</div>
+
+<h3>Link example 5: aria-label on link</h3>
+<div class="example">
+  <a href="#" aria-label="Goodbye">
+    <svg width="40" height="40">
+      <title>Hello</title>
+      <circle cx="20" cy="20" r="20" fill="red" />
+    </svg>
+  </a>
+</div>
+
+<hr>
+
+<h2>Buttons</h2>
+
+<h3>Button example 1: no name from button or SVG</h3>
+<div class="example">
+  <button>
+    <svg width="40" height="40">
+      <circle cx="20" cy="20" r="20" fill="red" />
+    </svg>
+  </button>
+</div>
+
+<h3>Button example 2: aria-label from SVG</h3>
+<div class="example">
+  <button>
+    <svg width="40" height="40" aria-label="Hello">
+      <circle cx="20" cy="20" r="20" fill="red" />
+    </svg>
+  </button>
+</div>
+
+<h3>Button example 3: title from SVG</h3>
+<div class="example">
+  <button>
+    <svg width="40" height="40">
+      <title>Hello</title>
+      <circle cx="20" cy="20" r="20" fill="red" />
+    </svg>
+  </button>
+</div>
+
+<h3>Button example 4: aria-label on link</h3>
+<div class="example">
+  <button aria-label="Goodbye">
+    <svg width="40" height="40" aria-label="Hello">
+      <circle cx="20" cy="20" r="20" fill="red" />
+    </svg>
+  </a>
+</div>
+
+<h3>Button example 5: aria-label on link</h3>
+<div class="example">
+  <button aria-label="Goodbye">
+    <svg width="40" height="40">
+      <title>Hello</title>
+      <circle cx="20" cy="20" r="20" fill="red" />
+    </svg>
+  </a>
+</div>
+
+
+
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
