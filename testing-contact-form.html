@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact us</title>
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+      max-width: 42rem;
+      margin: 0 auto;
+      padding: 2rem;
+      color: #1f2937;
+      background: #ffffff;
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    form {
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .form-group {
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    label {
+      font-weight: 700;
+    }
+
+    input,
+    textarea,
+    button {
+      font: inherit;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.65rem;
+      border: 2px solid #6b7280;
+      border-radius: 0.25rem;
+    }
+
+    input[aria-invalid="true"],
+    textarea[aria-invalid="true"] {
+      border-color: #b91c1c;
+    }
+
+    textarea {
+      min-height: 8rem;
+      resize: vertical;
+    }
+
+    button {
+      justify-self: start;
+      padding: 0.7rem 1rem;
+      border: 0;
+      border-radius: 0.25rem;
+      background: #1f2937;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    button:hover,
+    button:focus {
+      background: #111827;
+    }
+
+    button:focus,
+    input:focus,
+    textarea:focus,
+    a:focus,
+    h1:focus,
+    h2:focus {
+      outline: 3px solid #2563eb;
+      outline-offset: 3px;
+    }
+
+    .error-summary {
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border: 3px solid #b91c1c;
+      background: #fef2f2;
+    }
+
+    .error-summary h2 {
+      margin-top: 0;
+    }
+
+    .field-error {
+      color: #b91c1c;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <main id="app"></main>
+
+  <script>
+    const app = document.getElementById("app");
+
+    function renderContactForm() {
+      app.innerHTML = `
+        <h1>Contact us</h1>
+
+        <div id="error-summary" class="error-summary hidden">
+          <h2 id="error-summary-heading" tabindex="-1">
+            The following fields must be completed
+          </h2>
+
+          <ul id="error-list"></ul>
+        </div>
+
+        <form id="contact-form" novalidate>
+          <div class="form-group">
+            <label for="name">Name (Required)</label>
+
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              autocomplete="name"
+            >
+
+            <p id="name-error" class="field-error hidden">
+              This field is required
+            </p>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email (Required)</label>
+
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              autocomplete="email"
+            >
+
+            <p id="email-error" class="field-error hidden">
+              This field is required
+            </p>
+          </div>
+
+          <div class="form-group">
+            <label for="comment">Comment</label>
+
+            <textarea
+              id="comment"
+              name="comment"
+            ></textarea>
+          </div>
+
+          <button type="submit">Submit</button>
+        </form>
+      `;
+
+      const form = document.getElementById("contact-form");
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const fields = [
+          {
+            id: "name",
+            label: "Name",
+            errorId: "name-error"
+          },
+          {
+            id: "email",
+            label: "Email",
+            errorId: "email-error"
+          }
+        ];
+
+        const invalidFields = fields.filter(function (field) {
+          const control = document.getElementById(field.id);
+          return control.value.trim() === "";
+        });
+
+        clearErrors(fields);
+
+        if (invalidFields.length > 0) {
+          showErrors(invalidFields);
+          return;
+        }
+
+        renderSuccessMessage();
+      });
+    }
+
+    function clearErrors(fields) {
+      const errorSummary = document.getElementById("error-summary");
+      const errorList = document.getElementById("error-list");
+
+      errorSummary.classList.add("hidden");
+      errorList.innerHTML = "";
+
+      fields.forEach(function (field) {
+        const control = document.getElementById(field.id);
+        const fieldError = document.getElementById(field.errorId);
+
+        control.removeAttribute("aria-invalid");
+        control.removeAttribute("aria-describedby");
+
+        fieldError.classList.add("hidden");
+      });
+    }
+
+    function showErrors(invalidFields) {
+      const errorSummary = document.getElementById("error-summary");
+      const errorHeading = document.getElementById("error-summary-heading");
+      const errorList = document.getElementById("error-list");
+
+      invalidFields.forEach(function (field) {
+        const control = document.getElementById(field.id);
+        const fieldError = document.getElementById(field.errorId);
+
+        control.setAttribute("aria-invalid", "true");
+        control.setAttribute("aria-describedby", field.errorId);
+
+        fieldError.classList.remove("hidden");
+
+        const listItem = document.createElement("li");
+        const link = document.createElement("a");
+
+        link.href = "#" + field.id;
+        link.textContent = field.label;
+
+        link.addEventListener("click", function (event) {
+          event.preventDefault();
+          control.focus();
+        });
+
+        listItem.appendChild(link);
+        errorList.appendChild(listItem);
+      });
+
+      errorSummary.classList.remove("hidden");
+
+      errorHeading.focus();
+    }
+
+    function renderSuccessMessage() {
+      app.innerHTML = `
+        <h1 id="success-heading" tabindex="-1">
+          Thank you
+        </h1>
+
+        <p>
+          Your form has been submitted. We will get back to you soon.
+        </p>
+
+        <button type="button" id="submit-another">
+          Submit another enquiry
+        </button>
+      `;
+
+      const successHeading = document.getElementById("success-heading");
+
+      successHeading.focus();
+
+      document
+        .getElementById("submit-another")
+        .addEventListener("click", renderContactForm);
+    }
+
+    renderContactForm();
+  </script>
+</body>
+</html>
