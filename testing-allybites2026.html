@@ -21,11 +21,25 @@
   <button></button>
 </div>
 
+<pre><code >&lt;button&gt;&lt;/button&gt;</code></pre>
+
+<p><b>Answer</b>: No accessible name</p>
+<p>The button has no content and no labelling attribute, so there's nothing to announce.</p>
+
+
+
 <h2>Example 2: what&rsquo;s the name of the button?</h2>
 
 <div class="example">
   <button>Submit</button>
 </div>
+
+<pre><code>&lt;button&gt;Submit&lt;/button&gt;</code></pre>
+
+<p><b>Answer</b>: Submit</p>
+<p>Visible text content inside a button is its accessible name by default.</p>
+
+
 
 <h2>Example 3: what&rsquo;s the name of the link?</h2>
 
@@ -33,17 +47,47 @@
   <a href="#"><svg><title>Hello</title></svg></a>
 </div>
 
+<pre><code>&lt;a href="#"&gt;
+  &lt;svg&gt;
+    &lt;title&gt;Hello&lt;/title&gt;
+  &lt;/svg&gt;
+&lt;/a&gt;</code></pre>
+
+<p><b>Answer</b>: Hello</p>
+<p>An SVG <code>&lt;title&gt;</code> acts as the text content of the SVG, so the browser treats it the same as visible text inside the link. The accessibility tree will show it as coming from <em>contents</em>.</p>
+
+
+
 <h2>Example 4: what&rsquo;s the name of the button?</h2>
 
 <div class="example">
   <button aria-label="Close"></button>
 </div>
 
+<pre><code>&lt;button aria-label="Close"&gt;
+&lt;/button&gt;</code></pre>
+
+<p><b>Answer</b>: Close</p>
+<p>The <code>aria-label</code> directly on the element sets the name, overriding the empty content.</p>
+
+
+
 <h2>Example 5: what&rsquo;s the name of the link?</h2>
 
 <div class="example">
   <a href="#" aria-label="Goodbye"><svg><title>Hello</title></svg></a>
 </div>
+
+<pre><code>&lt;a href="#" aria-label="Goodbye"&gt;
+  &lt;svg&gt;
+    &lt;title&gt;Hello&lt;/title&gt;
+  &lt;/svg&gt;
+&lt;/a&gt;</code></pre>
+
+<p><b>Answer</b>: Goodbye</p>
+<p>The <code>aria-label</code> outranks <code>&lt;title&gt;</code> inside a child SVG, so Goodbye beats Hello.</p>
+
+
 
 <h2>Example 6: what&rsquo;s the name of the input?</h2>
 
@@ -52,12 +96,31 @@
   <input placeholder="Search">
 </div>
 
+<pre><code>&lt;label&gt;Search the site&lt;/label&gt;
+&lt;input placeholder="Search"&gt;</code></pre>
+
+<p><b>Answer</b>: Search</p>
+<p>The <code>&lt;label&gt;</code> is not associated with the input (no for/id pairing), so it's ignored. The <code>placeholder</code> is the only thing left.</p>
+
+
+
+
 <h2>Example 7: what&rsquo;s the name of the button?</h2>
 
 <div class="example">
   <button aria-labelledby="x" aria-label="Close">Cancel</button>
   <span id="x">Delete</span>
 </div>
+
+<pre><code>&lt;button aria-labelledby="x" aria-label="Close"&gt;
+  Cancel
+&lt;/button&gt;
+&lt;span id="x"&gt;Delete&lt;/span&gt;</code></pre>
+
+<p><b>Answer</b>: Delete</p>
+<p>The <code>aria-labelledby</code> beats <code>aria-label</code> every time, and it points to the <code>&lt;span&gt;</code> containing "Delete".</p>
+
+
 
 <h2>Example 8: what&rsquo;s the name of the input?</h2>
 
@@ -72,6 +135,19 @@
   >
 </div>
 
+<pre><code>&lt;label for="fish"&gt;Fish&lt;/label&gt;
+&lt;input
+  type="text"
+  id="fish"
+  aria-label="dog"
+  title="rabbit"
+  placeholder="fox"
+&gt;</code></pre>
+
+<p><b>Answer</b>: dog</p>
+<p>The <code>&lt;label&gt;</code> is properly associated via for/id, but <code>aria-label</code> sits higher in the pecking order and wins.</p>
+
+
 <h2>Example 9: what&rsquo;s the name of the button?</h2>
 
 <div class="example">
@@ -85,6 +161,27 @@
   <p id="aaa" style="display: none;">today</p>
 </div>
 
+<pre><code>&lt;button&gt;
+  &lt;img src="cross.png" alt="Hello"&gt;
+  &lt;span class="hidden"&gt;how are you&lt;/span&gt;
+  &lt;span aria-label="doing"&gt;&lt;/span&gt;
+  &lt;span aria-labelledby="aaa"&gt;&lt;/span&gt;
+  &lt;span role="img" title="?"&gt;&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;p id="aaa" style="display: none;"&gt;today&lt;/p&gt;</code></pre>
+
+<p><b>Answer</b>: Hello how are you doing today ?</p>
+<p>Buttons compute their name from all their child content. Each child contributes:</p>
+<ul>
+  <li>The image provides <code>alt</code> text: "Hello"</li>
+  <li>Even though visually hidden, the first <code>&lt;span&gt;</code> provides text: "how are you"</li>
+  <li>The second <code>&lt;span&gt;</code> provides the name via <code>aria-label</code>: "doing"</li>
+  <li>The third <code>&lt;span&gt;</code> provides the name via <code>aria-labelledby</code>: "today"</li>
+  <li>The fourth <code>&lt;span&gt;</code> provides a name via the <code>title</code>, because it has a role of <code>img</code>: "?"</li>
+</ul>
+
+<p>The space before "?" comes from how the browser computes the accessible name. Each child element's contribution is separated by a space when they're concatenated together. So the <code>&lt;span role="img" title="?"&gt;</code> adds its piece as a separate token, giving "today ?" rather than "today?".</p>
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
