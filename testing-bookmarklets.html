@@ -387,6 +387,138 @@
 <a class="bookmarklet" href='javascript:(()=>{const existing=document.getElementById("button-highlight-overlay");if(existing)existing.remove();const overlay=document.createElement("div");overlay.id="button-highlight-overlay";overlay.style.position="absolute";overlay.style.top="0";overlay.style.left="0";overlay.style.width="100%";overlay.style.pointerEvents="none";overlay.style.zIndex="999999";document.body.appendChild(overlay);const buttons=document.querySelectorAll("button");buttons.forEach((button,index)=>{button.style.outline="3px solid #c60";const rect=button.getBoundingClientRect();const badge=document.createElement("div");badge.textContent="Button "+(index+1)+": "+(button.textContent.trim()||"No text");badge.style.position="absolute";badge.style.left=(rect.left+window.scrollX)+"px";badge.style.top=(rect.top+window.scrollY-28)+"px";badge.style.background="#c60";badge.style.color="white";badge.style.padding="4px 6px";badge.style.fontSize="16px";badge.style.borderRadius="4px";badge.style.whiteSpace="nowrap";badge.style.pointerEvents="none";badge.style.zIndex="999999";overlay.appendChild(badge);});})();'>Testing buttons</a>
 </p>
 
+<p>
+<a class="bookmarklet" href="javascript:(function() { 
+  var elements = document.querySelectorAll('[autocomplete]'); 
+  elements.forEach(function(element) { 
+    element.style.outline = '5px solid rgba(0,0,255,.3)'; 
+    var message = document.createElement('div'); 
+    var autocompleteValue = element.getAttribute('autocomplete'); 
+    if (autocompleteValue) { 
+      message.textContent = 'autocomplete: ' + autocompleteValue; 
+    } 
+    message.style.position = 'absolute'; 
+    message.style.background = '#0000ff'; 
+    message.style.color = '#ffffff'; 
+    message.style.padding = '2px 5px'; 
+    message.style.fontSize = '16px'; 
+    message.style.zIndex = '1000'; 
+    var rect = element.getBoundingClientRect(); 
+    message.style.top = (rect.top + window.scrollY - message.offsetHeight) + 'px'; 
+    message.style.left = (rect.left + window.scrollX) + 'px'; 
+    document.body.appendChild(message); 
+  }); 
+})();">
+  Highlight autocomplete
+</a>
+</p> 
+
+<p>
+<a class="bookmarklet" href="javascript:(function() { 
+  var requiredElements = document.querySelectorAll('[aria-labelledby]'); 
+  requiredElements.forEach(function(element) { 
+    element.style.outline = '5px solid rgba(0,0,255,.3)'; 
+    var ariaDescribedByValue = element.getAttribute('aria-labelledby'); 
+    var describedElement = document.getElementById(ariaDescribedByValue); 
+    if (describedElement) { 
+      describedElement.style.outline = '5px solid rgba(0,200,0,.4)'; 
+      var idMessage = document.createElement('div'); 
+      idMessage.textContent = 'ID: ' + describedElement.id; 
+      idMessage.style.position = 'absolute'; 
+      idMessage.style.background = '#00ff00'; 
+      idMessage.style.color = '#000000'; 
+      idMessage.style.padding = '2px 5px'; 
+      idMessage.style.fontSize = '16px'; 
+      idMessage.style.zIndex = '1000'; 
+      var describedRect = describedElement.getBoundingClientRect(); 
+      idMessage.style.top = (describedRect.top + window.scrollY - idMessage.offsetHeight) + 'px'; 
+      idMessage.style.left = (describedRect.left + window.scrollX) + 'px'; 
+      document.body.appendChild(idMessage); 
+    } 
+    var message = document.createElement('div'); 
+    message.textContent = 'aria-labelledby: ' + ariaDescribedByValue; 
+    message.style.position = 'absolute'; 
+    message.style.background = '#0000ff'; 
+    message.style.color = '#ffffff'; 
+    message.style.padding = '2px 5px'; 
+    message.style.fontSize = '16px'; 
+    message.style.zIndex = '1000'; 
+    var rect = element.getBoundingClientRect(); 
+    message.style.top = (rect.top + window.scrollY - message.offsetHeight) + 'px'; 
+    message.style.left = (rect.left + window.scrollX) + 'px'; 
+    document.body.appendChild(message); 
+  }); 
+})();">
+    Highlight aria-labelledby
+</a>
+</p>
+
+<p>
+<a class="bookmarklet" href="javascript:(function() { 
+  var images = document.querySelectorAll('img'); 
+  images.forEach(function(image) { 
+    image.style.outline = '5px solid rgba(0,0,255,.3)'; 
+    var altText = image.getAttribute('alt'); 
+    if (altText) { 
+      var altMessage = document.createElement('div'); 
+      altMessage.textContent = 'Alt: ' + altText; 
+      altMessage.style.position = 'absolute'; 
+      altMessage.style.background = '#0000ff'; 
+      altMessage.style.color = '#ffffff'; 
+      altMessage.style.padding = '2px 5px'; 
+      altMessage.style.fontSize = '16px'; 
+      altMessage.style.zIndex = '1000'; 
+      var rect = image.getBoundingClientRect(); 
+      altMessage.style.top = (rect.top + window.scrollY) + 'px'; 
+      altMessage.style.left = (rect.left + window.scrollX) + 'px'; 
+      document.body.appendChild(altMessage); 
+    } 
+  }); 
+})();">
+    Highlight image alternatives
+</a>
+</p>
+
+<p>
+<a class="bookmarklet" href="javascript:(function() { 
+  var requiredElements = document.querySelectorAll('[aria-controls]'); 
+  requiredElements.forEach(function(element) { 
+    element.style.outline = '5px solid rgba(0,0,255,.3)'; 
+    var forValue = element.getAttribute('aria-controls'); 
+    var describedElement = document.getElementById(forValue); 
+    if (describedElement) { 
+      describedElement.style.outline = '5px solid rgba(0,200,0,.4)'; 
+      var idMessage = document.createElement('div'); 
+      idMessage.textContent = 'ID: ' + describedElement.id; 
+      idMessage.style.position = 'absolute'; 
+      idMessage.style.background = '#00ff00'; 
+      idMessage.style.color = '#000000'; 
+      idMessage.style.padding = '2px 5px'; 
+      idMessage.style.fontSize = '16px'; 
+      idMessage.style.zIndex = '1000'; 
+      var describedRect = describedElement.getBoundingClientRect(); 
+      idMessage.style.top = (describedRect.top + window.scrollY - idMessage.offsetHeight) + 'px'; 
+      idMessage.style.left = (describedRect.left + window.scrollX) + 'px'; 
+      document.body.appendChild(idMessage); 
+    } 
+    var message = document.createElement('div'); 
+    message.textContent = 'aria-controls: ' + forValue; 
+    message.style.position = 'absolute'; 
+    message.style.background = '#0000ff'; 
+    message.style.color = '#ffffff'; 
+    message.style.padding = '2px 5px'; 
+    message.style.fontSize = '16px'; 
+    message.style.zIndex = '1000'; 
+    var rect = element.getBoundingClientRect(); 
+    message.style.top = (rect.top + window.scrollY - message.offsetHeight) + 'px'; 
+    message.style.left = (rect.left + window.scrollX) + 'px'; 
+    document.body.appendChild(message); 
+  }); 
+})();">
+    Highlight aria-controls and ID
+</a>
+</p>
+
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
 </html>
