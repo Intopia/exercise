@@ -17,43 +17,7 @@
 <p>A demonstration of the <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-controls" target="_blank"><code>aria-controls</code></a> attribute, using the &lsquo;Highlight aria-controls&rsquo; and ID bookmarklet.</p>
 
 <p>
-<a class="bookmarklet" href="javascript:(function() { 
-  var requiredElements = document.querySelectorAll('[aria-controls]'); 
-  requiredElements.forEach(function(element) { 
-    element.style.outline = '5px solid rgba(0,0,255,.3)'; 
-    var forValue = element.getAttribute('aria-controls'); 
-    var describedElement = document.getElementById(forValue); 
-    if (describedElement) { 
-      describedElement.style.outline = '5px solid rgba(0,200,0,.4)'; 
-      var idMessage = document.createElement('div'); 
-      idMessage.textContent = 'ID: ' + describedElement.id; 
-      idMessage.style.position = 'absolute'; 
-      idMessage.style.background = '#00ff00'; 
-      idMessage.style.color = '#000000'; 
-      idMessage.style.padding = '2px 5px'; 
-      idMessage.style.fontSize = '16px'; 
-      idMessage.style.zIndex = '1000'; 
-      var describedRect = describedElement.getBoundingClientRect(); 
-      idMessage.style.top = (describedRect.top + window.scrollY - idMessage.offsetHeight) + 'px'; 
-      idMessage.style.left = (describedRect.left + window.scrollX) + 'px'; 
-      document.body.appendChild(idMessage); 
-    } 
-    var message = document.createElement('div'); 
-    message.textContent = 'aria-controls: ' + forValue; 
-    message.style.position = 'absolute'; 
-    message.style.background = '#0000ff'; 
-    message.style.color = '#ffffff'; 
-    message.style.padding = '2px 5px'; 
-    message.style.fontSize = '16px'; 
-    message.style.zIndex = '1000'; 
-    var rect = element.getBoundingClientRect(); 
-    message.style.top = (rect.top + window.scrollY - message.offsetHeight) + 'px'; 
-    message.style.left = (rect.left + window.scrollX) + 'px'; 
-    document.body.appendChild(message); 
-  }); 
-})();">
-    Highlight aria-controls and ID
-</a>
+<a class="bookmarklet" href="javascript:!function()%7Bconst%20t%3Ddocument.getElementById(%22a11y-controls-overlay%22)%3Bt%26%26t.remove()%3Bconst%20e%3Ddocument.createElement(%22div%22)%3Be.id%3D%22a11y-controls-overlay%22%2Ce.style.position%3D%22absolute%22%2Ce.style.top%3D%220%22%2Ce.style.left%3D%220%22%2Ce.style.width%3D%22100%25%22%2Ce.style.pointerEvents%3D%22none%22%2Ce.style.zIndex%3D%22999999%22%2Cdocument.body.appendChild(e)%3Bconst%20o%3D%5B%5D%3Bdocument.querySelectorAll(%22%5Baria-controls%5D%22).forEach(function(t)%7Bt.style.outline%3D%225px%20solid%20rgba(0%2C0%2C255%2C.3)%22%2Co.push(t)%3Bconst%20n%3Dt.getAttribute(%22aria-controls%22)%2Cl%3Ddocument.getElementById(n)%3Bif(l)%7Bl.style.outline%3D%225px%20solid%20rgba(0%2C200%2C0%2C.4)%22%2Co.push(l)%3Bconst%20t%3Ddocument.createElement(%22div%22)%3Bt.textContent%3D%22ID%3A%20%22%2Bl.id%2Ct.style.position%3D%22absolute%22%2Ct.style.background%3D%22%2300ff00%22%2Ct.style.color%3D%22%23000000%22%2Ct.style.padding%3D%222px%205px%22%2Ct.style.fontSize%3D%2216px%22%2Ct.style.zIndex%3D%221000%22%3Bconst%20n%3Dl.getBoundingClientRect()%3Bt.style.top%3Dn.top%2Bwindow.scrollY-t.offsetHeight%2B%22px%22%2Ct.style.left%3Dn.left%2Bwindow.scrollX%2B%22px%22%2Ce.appendChild(t)%7Dconst%20s%3Ddocument.createElement(%22div%22)%3Bs.textContent%3D%22aria-controls%3A%20%22%2Bn%2Cs.style.position%3D%22absolute%22%2Cs.style.background%3D%22%230000ff%22%2Cs.style.color%3D%22%23ffffff%22%2Cs.style.padding%3D%222px%205px%22%2Cs.style.fontSize%3D%2216px%22%2Cs.style.zIndex%3D%221000%22%3Bconst%20i%3Dt.getBoundingClientRect()%3Bs.style.top%3Di.top%2Bwindow.scrollY-s.offsetHeight%2B%22px%22%2Cs.style.left%3Di.left%2Bwindow.scrollX%2B%22px%22%2Ce.appendChild(s)%7D)%2Cdocument.addEventListener(%22keydown%22%2Cfunction%20t(n)%7B%22Escape%22%3D%3D%3Dn.key%26%26(e.remove()%2Co.forEach(function(t)%7Bt.style.outline%3D%22%22%7D)%2Cdocument.removeEventListener(%22keydown%22%2Ct))%7D)%7D()%3B">Highlight aria-controls and ID</a>
 </p>
 
 <div class="tab-interface">
