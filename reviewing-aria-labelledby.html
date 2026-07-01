@@ -36,7 +36,7 @@
 
 <h1>Reviewing <code>aria-labelledby</code></h1>
 
-<h2>Example 1</h2>
+<h2>Example 1: Using a child element</h2>
 
 <nav aria-labelledby="aardvark">
   <h4 id="aardvark">About us</h4>
@@ -74,7 +74,7 @@
 
 <!-- Section -->
 
-<h2>Example 4 - Reference the element itself?</h2>
+<h2>Example 4 - Reference the element itself</h2>
 
 <div class="example">
   <p id="echidna">Lawn Mower</p>
@@ -88,75 +88,52 @@
 
 <!-- Section -->
 
-<h2>Example 5 - Hidden elements?</h2>
+<h2>Example 5 - Hidden elements via <code>display: none</code></h2>
 
 <div class="example">
-  <p id="gazelle" style="display: none">Buy now</p>
   <button aria-labelledby="gazelle">Buy</button>
+  <p id="gazelle" style="display: none">Buy now</p>
 </div>
 
-<pre><code>&lt;p id="gazelle" <span class="highlight">style="display: none"</span>&gt;Buy now&lt;/p&gt;
-&lt;button aria-labelledby="gazelle"&gt;Buy&lt;/button&gt;</code></pre>
+<pre><code>&lt;button aria-labelledby="gazelle"&gt;Buy&lt;/button&gt;
+&lt;p id="gazelle" <span class="highlight">style="display: none"</span>&gt;Buy now&lt;/p&gt;</code></pre>
 
 <!-- Section -->
 
-<h2>Example 6 - Hidden elements?</h2>
+<h2>Example 6 - Hidden elements via CSS</h2>
 
 <div class="example">
-  <p id="hamster" class="off-screen">Buy now</p>
   <button aria-labelledby="hamster">Buy</button>
+  <p id="hamster" class="off-screen">Buy now</p>
 </div>
 
-<pre><code>&lt;p id="hamster" <span class="highlight">class="off-screen"</span>&gt;Buy now&lt;/p&gt;
-&lt;button aria-labelledby="hamster"&gt;Buy&lt;/button&gt;</code></pre>
+<pre><code>&lt;button aria-labelledby="hamster"&gt;Buy&lt;/button&gt;
+&lt;p id="hamster" <span class="highlight">class="off-screen"</span>&gt;Buy now&lt;/p&gt;</code></pre>
 
 <!-- Section -->
 
-<h2>Example 7 - Empty strings?</h2>
+<h2>Example 7 - Hidden element via <code>aria-hidden="true"</code></h2>
 
 <div class="example">
-  <button aria-labelledby="ibex">Hello world</button>
-  <p id="ibex"></p>  
+  <nav aria-labelledby="ibex"></nav>
+  <p id="ibex" aria-hidden="true">Goodbye world</p>
 </div>
 
-<pre><code>&lt;button aria-labelledby="ibex"&gt;<span class="highlight">Hello world</span>&lt;/button&gt;
-<span class="highlight">&lt;p id="ibex"&gt;&lt;/p&gt;</span></code></pre>
+<pre><code>&lt;nav aria-labelledby="ibex"&gt;&lt;/nav&gt;
+&lt;p id="ibex" aria-hidden="true"&gt;Goodbye world&lt;/p&gt;</code></pre>
 
 <!-- Section -->
 
-<h2>Example 8 - Empty strings?</h2>
+<h2>Example 8 - Empty strings</h2>
 
 <div class="example">
-  <button aria-labelledby="jackal"></button>
-  <p id="jackal"></p>
+  <button aria-labelledby="jackal">Hello world</button>
+  <p id="jackal"></p>  
 </div>
 
-<pre><code>&lt;button aria-labelledby="jackal"&gt;&lt;/button&gt;
+<pre><code>&lt;button aria-labelledby="jackal"&gt;<span class="highlight">Hello world</span>&lt;/button&gt;
 <span class="highlight">&lt;p id="jackal"&gt;&lt;/p&gt;</span></code></pre>
 
-<!-- Section -->
-
-<h2>Example 9 - Hidden?</h2>
-
-<div class="example">
-  <nav aria-labelledby="kangaroo"></nav>
-  <p id="kangaroo" hidden>Hello world</p>
-</div>
-
-<pre><code>&lt;nav aria-labelledby="kangaroo"&gt;&lt;/nav&gt;
-&lt;p id="kangaroo" hidden&gt;Hello world&lt;/p&gt;</code></pre>
-
-<!-- Section -->
-
-<h2>Example 10 - aria-hidden?</h2>
-
-<div class="example">
-  <nav aria-labelledby="lion"></nav>
-  <p id="lion" aria-hidden="true">Goodbye world</p>
-</div>
-
-<pre><code>&lt;nav aria-labelledby="lion"&gt;&lt;/nav&gt;
-&lt;p id="lion" aria-hidden="true"&gt;Goodbye world&lt;/p&gt;</code></pre>
 
 <!-- Section -->
 
