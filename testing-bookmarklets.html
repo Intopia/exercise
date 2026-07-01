@@ -416,43 +416,7 @@
 </p> 
 
 <p>
-<a class="bookmarklet" href="javascript:(function() { 
-  var requiredElements = document.querySelectorAll('[aria-labelledby]'); 
-  requiredElements.forEach(function(element) { 
-    element.style.outline = '5px solid rgba(0,0,255,.3)'; 
-    var ariaDescribedByValue = element.getAttribute('aria-labelledby'); 
-    var describedElement = document.getElementById(ariaDescribedByValue); 
-    if (describedElement) { 
-      describedElement.style.outline = '5px solid rgba(0,200,0,.4)'; 
-      var idMessage = document.createElement('div'); 
-      idMessage.textContent = 'ID: ' + describedElement.id; 
-      idMessage.style.position = 'absolute'; 
-      idMessage.style.background = '#00ff00'; 
-      idMessage.style.color = '#000000'; 
-      idMessage.style.padding = '2px 5px'; 
-      idMessage.style.fontSize = '16px'; 
-      idMessage.style.zIndex = '1000'; 
-      var describedRect = describedElement.getBoundingClientRect(); 
-      idMessage.style.top = (describedRect.top + window.scrollY - idMessage.offsetHeight) + 'px'; 
-      idMessage.style.left = (describedRect.left + window.scrollX) + 'px'; 
-      document.body.appendChild(idMessage); 
-    } 
-    var message = document.createElement('div'); 
-    message.textContent = 'aria-labelledby: ' + ariaDescribedByValue; 
-    message.style.position = 'absolute'; 
-    message.style.background = '#0000ff'; 
-    message.style.color = '#ffffff'; 
-    message.style.padding = '2px 5px'; 
-    message.style.fontSize = '16px'; 
-    message.style.zIndex = '1000'; 
-    var rect = element.getBoundingClientRect(); 
-    message.style.top = (rect.top + window.scrollY - message.offsetHeight) + 'px'; 
-    message.style.left = (rect.left + window.scrollX) + 'px'; 
-    document.body.appendChild(message); 
-  }); 
-})();">
-    Highlight aria-labelledby
-</a>
+<a class="bookmarklet" href="javascript:!function()%7Bconst%20e%3Ddocument.getElementById(%22a11y-labelledby-overlay%22)%3Be%26%26e.remove()%3Bconst%20t%3Ddocument.createElement(%22div%22)%3Bt.id%3D%22a11y-labelledby-overlay%22%2Ct.style.position%3D%22absolute%22%2Ct.style.top%3D%220%22%2Ct.style.left%3D%220%22%2Ct.style.width%3D%22100%25%22%2Ct.style.pointerEvents%3D%22none%22%2Ct.style.zIndex%3D%22999999%22%2Cdocument.body.appendChild(t)%3Bconst%20l%3D%5B%5D%3Bdocument.querySelectorAll(%22%5Baria-labelledby%5D%22).forEach(function(e)%7Be.style.outline%3D%225px%20solid%20%230a558c%22%2Cl.push(e)%3Bconst%20n%3De.getAttribute(%22aria-labelledby%22).trim().split(%2F%5Cs%2B%2F)%2Co%3De.getBoundingClientRect()%2Cs%3Ddocument.createElement(%22div%22)%3Bs.textContent%3D%22aria-labelledby%3A%20%22%2Bn.join(%22%20%22)%2Cs.style.position%3D%22absolute%22%2Cs.style.background%3D%22%230a558c%22%2Cs.style.color%3D%22%23ffffff%22%2Cs.style.padding%3D%222px%205px%22%2Cs.style.fontSize%3D%2216px%22%2Cs.style.zIndex%3D%221000%22%2Cs.style.pointerEvents%3D%22none%22%2Cs.style.top%3Do.top%2Bwindow.scrollY%2B%22px%22%2Cs.style.left%3Do.left%2Bwindow.scrollX%2B%22px%22%2Ct.appendChild(s)%2Cn.forEach(function(e)%7Bconst%20n%3Ddocument.getElementById(e)%3Bif(n)%7Bn.style.outline%3D%225px%20solid%20%231b5e20%22%2Cl.push(n)%3Bconst%20o%3Dn.getBoundingClientRect()%2Cs%3Ddocument.createElement(%22div%22)%3Bs.textContent%3D%22ID%3A%20%22%2Be%2Cs.style.position%3D%22absolute%22%2Cs.style.background%3D%22%231b5e20%22%2Cs.style.color%3D%22%23ffffff%22%2Cs.style.padding%3D%222px%205px%22%2Cs.style.fontSize%3D%2216px%22%2Cs.style.zIndex%3D%221000%22%2Cs.style.pointerEvents%3D%22none%22%2Cs.style.top%3Do.top%2Bwindow.scrollY%2B%22px%22%2Cs.style.left%3Do.left%2Bwindow.scrollX%2B%22px%22%2Ct.appendChild(s)%7Delse%7Bconst%20l%3Ddocument.createElement(%22div%22)%3Bl.textContent%3D%22Missing%20ID%3A%20%22%2Be%2Cl.style.position%3D%22absolute%22%2Cl.style.background%3D%22%23b00020%22%2Cl.style.color%3D%22%23ffffff%22%2Cl.style.padding%3D%222px%205px%22%2Cl.style.fontSize%3D%2216px%22%2Cl.style.zIndex%3D%221000%22%2Cl.style.pointerEvents%3D%22none%22%2Cl.style.top%3Do.top%2Bwindow.scrollY%2B%22px%22%2Cl.style.left%3Do.left%2Bwindow.scrollX%2B300%2B%22px%22%2Ct.appendChild(l)%7D%7D)%7D)%2Cdocument.addEventListener(%22keydown%22%2Cfunction%20e(n)%7B%22Escape%22%3D%3D%3Dn.key%26%26(t.remove()%2Cl.forEach(function(e)%7Be.style.outline%3D%22%22%7D)%2Cdocument.removeEventListener(%22keydown%22%2Ce))%7D)%7D()%3B">Highlight aria-labelledby</a>
 <span class="bookmarklet-credit">Via Intopia</span>
 </p>
 
