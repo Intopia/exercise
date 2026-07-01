@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing buttons</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
+<h1>Testing buttons</h1>
+
+<h2>Name from content</h2>
+<div class="example">
+  <button>Hello world</button>
+</div>
+
+<h2>Name via <code>aria-labelledby</code></h2>
+<div class="example">
+  <button aria-labelledby="alpaca">Hello world</button>
+  <p id="alpaca">Goodbye world</p>
+</div>
+
+<h2>Name via <code>aria-label</code></h2>
+<div class="example">
+  <button aria-label="Goodbye world">Hello world</button>
+</div>
+
+<h2>Name via <code>title</code></h2>
+<div class="example">
+  <button title="Goodbye world"></button>
+</div>
+
+<h2>Name via <code>value</code></h2>
+<div class="example">
+  <input class="button" type="button" value="Hello world">
+</div>
+
+<h2>No accessible name</h2>
+<div class="example">
+  <button></button>
+</div>
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>

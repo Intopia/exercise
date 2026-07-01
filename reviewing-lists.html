@@ -7,11 +7,21 @@
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
   <style>
-    .list {
+    .styled-list {
       list-style: none;
       margin-left: 0;
-      padding: 0;
+      padding: .5em 0;
     }
+
+    .styled-list li {
+      margin: 1em 0;
+    }
+
+    .aria-list {
+      padding: 1.5em;
+    }
+
+    .aria-list div {margin: 0 0 1em;}
   </style>
 </head>
 <body>
@@ -91,9 +101,24 @@
     &lt;dd&gt;Cold dry thing&lt;/dd&gt;
 &lt;/dl&gt;</code></pre>
 
-<h2>Example: A styled unordered list</h2>
+<h2>Using role="list"</h2>
+<p>The <code>&lt;ol&gt;</code> element represents an ordered list of items — typically rendered as a numbered list.</p>
 <div class="example">
-  <ul class="list">
+  <div class="aria-list" role="list">
+    <div role="listitem">Item one</div>
+    <div role="listitem">Item two</div>
+    <div role="listitem">Item three</div>
+  </div>
+</div>
+<pre><code>&lt;div role="list"&gt;
+  &lt;div role="listitem"&gt;Item one&lt;/div&gt;
+  &lt;div role="listitem"&gt;Item two&lt;/div&gt;
+  &lt;div role="listitem"&gt;Item three&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+<h2>A styled unordered list</h2>
+<div class="example">
+  <ul class="styled-list">
     <li>Rabbits</li>
     <li>Foxes</li>
     <li>Birds</li>
@@ -105,7 +130,7 @@
   &lt;li&gt;Birds&lt;/li&gt;
 &lt;/ul&gt;</code></pre>
 
-<h2>Example: A nested unordered list</h2>
+<h2>A nested unordered list</h2>
 <div class="example">
   <ul>
     <li>Rabbits
