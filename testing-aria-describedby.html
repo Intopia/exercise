@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing aria-describedby</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    .off-screen {
+      clip-path: inset(100%);
+      clip: rect(1px, 1px, 1px, 1px);
+      height: 1px;
+      overflow: hidden;
+      position: absolute;
+      white-space: nowrap;
+      width: 1px;
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
+<h1>Testing <code>aria-describedby</code></h1>
+<p>Which of the examples below correctly reference a description element?</p>
+
+<h2>Example 1: Single visible reference</h2>
+<div class="example">
+  <label class="label" for="aaa">Password</label>
+  <input class="input" id="aaa" type="password" aria-describedby="aaa-hint">
+  <p id="aaa-hint">Must be at least 8 characters and include a number.</p>
+</div>
+
+<h2>Example 2: Multiple IDs</h2>
+<div class="example">
+  <label class="label" for="bbb">Password</label>
+  <input class="input" id="bbb" type="password" aria-describedby="bbb-hint bbb-error">
+  <p id="bbb-hint">Must be at least 8 characters and include a number.</p>
+  <p id="bbb-error">Error: Password is too short.</p>
+</div>
+
+<h2>Example 3: Reference to hidden element</h2>
+<div class="example">
+  <label class="label" for="ccc">Password</label>
+  <input class="input" id="ccc" type="password" aria-describedby="ccc-hint">
+  <p id="ccc-hint" hidden>Must be at least 8 characters and include a number.</p>
+</div>
+
+<h2>Example 4: Reference to off-screen element</h2>
+<div class="example">
+  <label class="label" for="ddd">Password</label>
+  <input class="input" id="ddd" type="password" aria-describedby="ddd-hint">
+  <p id="ddd-hint" class="off-screen">Must be at least 8 characters and include a number.</p>
+</div>
+
+<h2>Example 5: Missing ID reference</h2>
+<div class="example">
+  <label class="label" for="eee">Password</label>
+  <input class="input" id="eee" type="password" aria-describedby="eee-hint">
+</div>
+
+<h2>Example 6: Multiple IDs, one missing</h2>
+<div class="example">
+  <label class="label" for="fff">Password</label>
+  <input class="input" id="fff" type="password" aria-describedby="fff-hint fff-error">
+  <p id="fff-hint">Must be at least 8 characters and include a number.</p>
+</div>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>

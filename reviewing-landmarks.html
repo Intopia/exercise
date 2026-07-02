@@ -51,7 +51,7 @@
 
 <p>Or via <code>aria-labelledby</code>:</p>
 <nav aria-labelledby="related-links">
-  <h4 id="related-links">Related links</h4>
+  <h3 id="related-links">Related links</h3>
 </nav>
 
 
@@ -64,28 +64,43 @@
 
 <p>Or via <code>aria-labelledby</code>:</p>
 <aside aria-labelledby="sidebar">
-  <h4 id="sidebar">Sidebar</h4>
+  <h3 id="sidebar">Sidebar</h3>
 </aside>
 
 
 <h2><code>&lt;section&gt;</code></h2>
-<p>An <code>&lt;section&gt;</code> element generates a <code>section</code> or <code>region</code> landmark, but this is not announced by most assistive technologies:</p>
+<p>The <code>&lt;section&gt;</code> element without an accessible name is generally not exposed as a landmark:</p>
 <section>
   <h3>Heading for section region</h3>
 </section>
 
+<p>The <code>&lt;section&gt;</code> element is generally exposed as a region landmark only when it has an accessible name (typically via a heading or ARIA labelling). The example below uses <code>aria-labelledby</code> to associate the heading directly with the <code>&lt;section&gt;</code>.</p>
+<section aria-labelledby="section-name">
+  <h3 id="section-name">Heading and name for section region</h3>
+</section>
+
+
 
 <h2><code>&lt;search&gt;</code></h2>
-<p>The <code>search</code> element is used to identify a set of form controls related to performing a search or filtering operation.</p>
+<p>The <code>&lt;search&gt;</code> element generates a <code>search</code> landmark.</p>
 <search>
   <form action="#">
     <div class="form-group">
-      <label class="label" for="search-this-site">Search this site</label>
-      <input class="input" type="search" id="search-this-site">
+      <label class="label" for="search-this-site1">Search this site</label>
+      <input class="input" type="search" id="search-this-site1">
     </div>
   </form>
 </search>
 
+
+<h2><code>&lt;form&gt;</code></h2>
+<p>The <code>&lt;form&gt;</code> element generates a <code>form</code> landmark.</p>
+  <form action="#" aria-label="Site search">
+    <div class="form-group">
+      <label class="label" for="search-this-site2">Search this site</label>
+      <input class="input" type="search" id="search-this-site2">
+    </div>
+  </form>
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>

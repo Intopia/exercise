@@ -20,30 +20,57 @@
   <li>An accessible name?</li>
 </ol>
 
-
 <h2>Example 1</h2>
+<p>This example has no visible label and no accessible name.</p>
 <form action="#">
-  <label class="label" for="full-name">Full name</label>
-  <input class="input" id="full-name" type="text">
+  <input class="input" type="text">
 </form>
 
 
 <h2>Example 2</h2>
+<p>This example has no visible label, but an accessible name via <code>aria-label</code>.</p>
+<form action="#">
+  <input class="input" aria-label="Add your address" type="text">
+</form>
+
+
+<h2>Example 3</h2>
+<p>This example has no visible label, but an accessible name via <code>placeholder</code>. This is not a recommended approach. The label is not persistent (disappears when typing) and often fails colour contrast requirements.</p>
+<form action="#">
+  <input class="input" type="text" placeholder="Date of birth">
+</form>
+
+
+<h2>Example 4</h2>
+<p>This example has no visible label, but an accessible name via <code>title</code>. This is not a recommended approach. The label only appears on hover, and cannot be scaled to suit user needs.</p>
+<form action="#">
+  <input class="input" type="text" title="Mothers maiden name">
+</form>
+
+
+<h2>Example 5</h2>
+<p>This example has a visible label, but no accessible name.</p>
 <form action="#">
   <label class="label">Email address</label>
   <input class="input" type="email">
 </form>
 
 
-<h2>Example 3</h2>
+<h2>Example 6</h2>
+<p>This example has a visible label, and an accessible name via implicit association. The label is wrapped around the form field.</p>
 <form action="#">
-  <input class="input" aria-label="Add your address" type="text">
+  <label class="label">
+    Phone number
+    <input class="input" type="tel">
+  </label>
 </form>
 
 
-<h2>Example 4</h2>
+<h2>Example 6</h2>
+<p>This example has a visible label, and an accessible name via matching <code>for</code> and <code>id</code> values.</p>
 <form action="#">
-  <input class="input" type="text" placeholder="Date of birth">
+  <label class="label" for="full-name">Full name</label>
+  <input class="input" id="full-name" type="text">
 </form>
 
 

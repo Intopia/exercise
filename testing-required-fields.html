@@ -22,16 +22,17 @@
 
 
 <h2>Example 1</h2>
+<p>This example has no visual or programmatic identification.</p>
 <form action="#">
   <div class="form-group-spaced">
-    <label class="label" for="question1">What was the name of your first school? <span class="required">(Required)</span></label>
-    <input class="input" id="question1" type="text" required>
+    <label class="label" for="question1">What was the name of your first school? </label>
+    <input class="input" id="question1" type="text">
   </div>
 </form>
 
 
 <h2>Example 2</h2>
-<p><span class="required">*</span> Indicates required fields in the form below</p>
+<p>This example has visual identification via (*) symbol, but no programmatic identification.</p>
 <form action="#">
   <div class="form-group-spaced">
     <label class="label" for="question2">What is the name of your first pet? <span style="color: #CC0000;">*</span></label>
@@ -41,12 +42,64 @@
 
 
 <h2>Example 3</h2>
+<p>This example has visual identification via (Required), but no programmatic identification.</p>
 <form action="#">
   <div class="form-group-spaced">
-    <label class="label" for="question3">What is the title of your favorite song? </label>
-    <input class="input" id="question3" type="text" aria-required="true">
+    <label class="label" for="question3">What is the name of your street? <span class="required">(Required)</span></label>
+    <input class="input" id="question3" type="text">
   </div>
 </form>
+
+
+<h2>Example 4</h2>
+<p>This example has no visual identification, but programmatic identification via <code>aria-required="true"</code>.</p>
+<form action="#">
+  <div class="form-group-spaced">
+    <label class="label" for="question4">What is the title of your favourite song? </label>
+    <input class="input" id="question4" type="text" aria-required="true">
+  </div>
+</form>
+
+
+<h2>Example 5</h2>
+<p>This example has no visual identification, but programmatic identification via <code>required</code>.</p>
+<form action="#">
+  <div class="form-group-spaced">
+    <label class="label" for="question5">What is the title of your favourite movie? </label>
+    <input class="input" id="question5" type="text" required>
+  </div>
+</form>
+
+
+<h2>Example 6</h2>
+<p>This example has no visual identification, but programmatic identification via <code>required</code> and <code>aria-required="true"</code>. Avoid using both methods together as this is redundant.</p>
+<form action="#">
+  <div class="form-group-spaced">
+    <label class="label" for="question6">What is the title of your favourite video game? </label>
+    <input class="input" id="question6" type="text" required aria-required="true">
+  </div>
+</form>
+
+
+<h2>Example 7</h2>
+<p>This example has a field that is not required. So, there is no visual identifier and uses <code>aria-required="false"</code>.</p>
+<form action="#">
+  <div class="form-group-spaced">
+    <label class="label" for="question7">What is the title of your favourite season?</label>
+    <input class="input" id="question7" type="text" aria-required="false">
+  </div>
+</form>
+
+
+<h2>Example 8</h2>
+<p>This example has visual identification via (Required), and programmatic identification via <code>required</code>.</p>
+<form action="#">
+  <div class="form-group-spaced">
+    <label class="label" for="question8">What is your favourite ice cream flavour? <span class="required">(Required)</span></label>
+    <input class="input" id="question8" type="text" required>
+  </div>
+</form>
+
 
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>

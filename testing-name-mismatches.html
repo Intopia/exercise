@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing name mismatches</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
+<h1>Testing name mismatches</h1>
+
+<h2>Visible name and accessible name match</h2>
+<div class="example">
+  <button aria-label="Hello">Hello</button>
+</div>
+<pre><code>&lt;button <span class="highlight">aria-label="Hello"</span>&gt;Hello&lt;/button&gt;</code></pre>
+
+
+<h2>Visible name and accessible name partially match</h2>
+<div class="example">
+  <button aria-label="Hello world">Hello</button>
+</div>
+<pre><code>&lt;button <span class="highlight">aria-label="Hello world"</span>&gt;Hello&lt;/button&gt;</code></pre>
+
+
+<h2>Visible name and accessible name do not match</h2>
+<div class="example">
+  <button aria-label="Goodbye world">Hello</button>
+</div>
+<pre><code>&lt;button <span class="highlight">aria-label="Goodbye world"</span>&gt;Hello&lt;/button&gt;</code></pre>
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>

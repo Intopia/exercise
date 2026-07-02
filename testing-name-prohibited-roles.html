@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing name-prohibited roles</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
+<h1>Testing name-prohibited roles</h1>
+
+
+<p>The following are <a href="https://www.w3.org/TR/wai-aria-1.2/#namefromprohibited" target="_blank">roles that cannot be named in ARIA 1.2</a>.</p>
+
+
+<h2>caption</h2>
+<div style="margin-bottom: 2em;" role="caption" aria-label="Hello">This element has a role of <code>caption</code></div>
+<table>
+  <caption aria-label="Hello">This is the &lt;caption&gt; element</caption>
+  <thead>
+    <tr>
+      <th>TH2</th>
+      <th>TH2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Cell1</td>
+      <td>Cell2</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h2>code</h2>
+<div style="margin-bottom: 2em;"><span role="code" aria-label="Hello">This element has a role of <code>code</code></span></div>
+<div><code aria-label="Hello">This is the &lt;code&gt; element</code></div>
+
+
+<h2>deletion</h2>
+<div style="margin-bottom: 2em;"><span role="deletion" aria-label="Hello">This element has a role of <code>deletion</code></span></div>
+<div><del aria-label="Hello">This is the <code>&lt;del&gt;</code> element</del></div>
+
+
+<h2>emphasis</h2>
+<div style="margin-bottom: 2em;"><span role="emphasis" aria-label="Hello">This element has a role of <code>emphasis</code></span></div>
+<div><em aria-label="Hello">This is the <code>&lt;em&gt;</code> element</em></div>
+
+
+<h2>generic</h2>
+<div style="margin-bottom: 2em;"><span aria-label="Hello">This is the <code>&lt;span&gt;</code> element, a generic element</span></div>
+<div aria-label="Hello">This is the <code>&lt;div&gt;</code> element, a generic element</div>
+
+
+<h2>insertion</h2>
+<div style="margin-bottom: 2em;"><span role="insertion" aria-label="Hello">This element has a role of <code>insertion</code></span></div>
+<div><ins aria-label="Hello">This is the <code>&lt;ins&gt;</code> element</ins></div>
+
+
+<h2>paragraph</h2>
+<div style="margin-bottom: 2em;"><span role="paragraph" aria-label="Hello">This element has a role of <code>paragraph</code></span></div>
+<p aria-label="Hello">This is the <code>&lt;p&gt;</code> element</p>
+
+
+<h2>presentation</h2>
+<div><span role="presentation" aria-label="Hello">This element has a role of <code>presentation</code></span></div>
+
+
+<h2>strong</h2>
+<div style="margin-bottom: 2em;"><span role="strong" aria-label="Hello">This element has a role of <code>strong</code></span></div>
+<div><strong aria-label="Hello">This is the <code>&lt;strong&gt;</code> element</strong></div>
+
+
+<h2>subscript</h2>
+<div style="margin-bottom: 2em;"><span role="subscript" aria-label="Hello">This element has a role of <code>subscript</code></span></div>
+<div><sub aria-label="Hello">This is the <code>&lt;sub&gt;</code> element</sub></div>
+
+
+<h2>superscript</h2>
+<div style="margin-bottom: 2em;"><span role="superscript" aria-label="Hello">This element has a role of <code>superscript</code></span></div>
+<div><sup aria-label="Hello">This is the <code>&lt;sup&gt;</code> element</sup></div>
+
+<p>The following are <a href="https://www.w3.org/TR/wai-aria-1.3/#namefromprohibited" target="_blank">roles that cannot be named in ARIA 1.3</a>.</p>
+
+
+<h2>definition</h2>
+<div style="margin-bottom: 2em;"><span role="definition" aria-label="Hello">This element has a role of <code>definition</code></span></div>
+<div><dfn aria-label="Hello">This is the <code>&lt;dfn&gt;</code> element</dfn></div>
+
+
+<h2>mark</h2>
+<div style="margin-bottom: 2em;"><span role="mark" aria-label="Hello">This element has a role of <code>mark</code></span></div>
+<div><mark aria-label="Hello">This is the <code>&lt;mark&gt;</code> element</mark></div>
+
+
+<h2>none</h2>
+<div><span role="none" aria-label="Hello">This element has a role of <code>none</code></span></div>
+
+
+<h2>suggestion</h2>
+<div><span role="suggestion" aria-label="Hello">This element has a role of <code>suggestion</code></span></div>
+
+
+<h2>term</h2>
+<div><span role="term" aria-label="Hello">This element has a role of <code>term</code></span></div>
+
+
+<h2>time</h2>
+<div style="margin-bottom: 2em;"><span role="time" aria-label="Hello">This element has a role of <code>time</code></span></div>
+<div><time aria-label="Hello">This is the <code>&lt;time&gt;</code> element</time></div>
+
+
+<h2>tooltip</h2>
+<div><span role="tooltip" aria-label="Hello">This element has a role of <code>tooltip</code></span></div>
+
+
+<h2>invalid/made-up role</h2>
+<div role="fake" aria-label="Hello" style="margin-bottom: 2em;">This element has a made-up role of <code>fake</code></div>
+<div><span role="madeup" aria-label="Hello">This element has a made-up role of <code>madeup</code></span></div>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
