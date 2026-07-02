@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing image alternatives</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
+<h1>Testing image alternatives</h1>
+<p>Which of the images below have a meaningful, empty, or missing <code>alt</code> attribute?</p>
+
+<h2>Example 1: Meaningful alt text</h2>
+<p>This image has a meaningful <code>alt</code> attribute that describes the image content.</p>
+<div class="example">
+  <img src="assets/img/image-decorative.jpg" alt="A person stands on a wide, smooth sand dune with gentle curves. The sand is illuminated by warm light, contrasting with darker areas in the background, suggesting a vast, open desert landscape.">
+</div>
+
+<h2>Example 2: Empty alt — decorative image</h2>
+<p>This image is decorative. The <code>alt</code> attribute is present but empty, so assistive technologies will ignore it.</p>
+<div class="example">
+  <img src="assets/img/image-decorative.jpg" alt="">
+</div>
+
+<h2>Example 3: Empty alt — image inside a link</h2>
+<p>This image is inside a link that has visible text. The image is decorative in this context, so <code>alt=""</code> is correct — the link text provides the accessible name.</p>
+<div class="example">
+  <a href="#">
+    <img src="assets/img/external-link-20.png" alt="">
+    Visit our website
+  </a>
+</div>
+
+<h2>Example 4: Missing alt attribute</h2>
+<p>This image has no <code>alt</code> attribute at all. Assistive technologies may announce the filename instead.</p>
+<div class="example">
+  <img src="assets/img/image-decorative.jpg">
+</div>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
