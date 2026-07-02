@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing aria-label</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+</a>
+
+<h1>Testing <code>aria-label</code></h1>
+<p>Which of the examples below correctly use <code>aria-label</code>?</p>
+
+<h2>Example 1: Valid use on a button</h2>
+<div class="example">
+  <button aria-label="Close dialog">✕</button>
+</div>
+
+<h2>Example 2: Valid use on a landmark</h2>
+<div class="example">
+  <nav aria-label="Primary navigation">
+    <a href="#">Home</a>
+  </nav>
+</div>
+
+<h2>Example 3: Valid use on an input</h2>
+<div class="example">
+  <input type="search" aria-label="Search this site">
+</div>
+
+<h2>Example 4: Empty <code>aria-label</code></h2>
+<div class="example">
+  <button aria-label="">Submit</button>
+</div>
+
+<h2>Example 5: Whitespace-only <code>aria-label</code></h2>
+<div class="example">
+  <button aria-label="   ">Submit</button>
+</div>
+
+<h2>Example 6: Prohibited role — <code>&lt;p&gt;</code></h2>
+<div class="example">
+  <p aria-label="Important notice">This paragraph has an aria-label.</p>
+</div>
+
+<h2>Example 7: Prohibited role — <code>&lt;span&gt;</code></h2>
+<div class="example">
+  <span aria-label="Hello world">This span has an aria-label.</span>
+</div>
+
+<h2>Example 8: Prohibited role — <code>role="paragraph"</code></h2>
+<div class="example">
+  <div role="paragraph" aria-label="Hello world">This element has a role of paragraph.</div>
+</div>
+
+<h2>Example 9: Prohibited role — <code>role="none"</code></h2>
+<div class="example">
+  <div role="none" aria-label="Hello world">This element has a role of none.</div>
+</div>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
