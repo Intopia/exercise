@@ -22,7 +22,7 @@
 <h2>caption</h2>
 <div style="margin-bottom: 2em;" role="caption" aria-label="Hello">This element has a role of <code>caption</code></div>
 <table>
-  <caption aria-label="Hello">This is the &lt;caption&gt; element</caption>
+  <caption aria-label="Hello">This is a caption</caption>
   <thead>
     <tr>
       <th>TH2</th>
@@ -36,55 +36,109 @@
     </tr>
   </tbody>
 </table>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;caption aria-label="Hello"&gt;This is a caption&lt;/caption&gt;</code></pre>
+</details>
 
 
 <h2>code</h2>
 <div style="margin-bottom: 2em;"><span role="code" aria-label="Hello">This element has a role of <code>code</code></span></div>
 <div><code aria-label="Hello">This is the &lt;code&gt; element</code></div>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span role="code" aria-label="Hello"&gt;...&lt;/span&gt;
+&lt;code aria-label="Hello"&gt;...&lt;/code&gt;</code></pre>
+</details>
 
 
 <h2>deletion</h2>
 <div style="margin-bottom: 2em;"><span role="deletion" aria-label="Hello">This element has a role of <code>deletion</code></span></div>
 <div><del aria-label="Hello">This is the <code>&lt;del&gt;</code> element</del></div>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span role="deletion" aria-label="Hello"&gt;...&lt;/span&gt;
+&lt;del aria-label="Hello"&gt;...&lt;/del&gt;</code></pre>
+</details>
 
 
 <h2>emphasis</h2>
 <div style="margin-bottom: 2em;"><span role="emphasis" aria-label="Hello">This element has a role of <code>emphasis</code></span></div>
 <div><em aria-label="Hello">This is the <code>&lt;em&gt;</code> element</em></div>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span role="emphasis" aria-label="Hello"&gt;...&lt;/span&gt;
+&lt;em aria-label="Hello"&gt;...&lt;/em&gt;</code></pre>
+</details>
 
 
 <h2>generic</h2>
 <div style="margin-bottom: 2em;"><span aria-label="Hello">This is the <code>&lt;span&gt;</code> element, a generic element</span></div>
 <div aria-label="Hello">This is the <code>&lt;div&gt;</code> element, a generic element</div>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span aria-label="Hello"&gt;...&lt;/span&gt;
+&lt;div aria-label="Hello"&gt;...&lt;/div&gt;</code></pre>
+</details>
 
 
 <h2>insertion</h2>
 <div style="margin-bottom: 2em;"><span role="insertion" aria-label="Hello">This element has a role of <code>insertion</code></span></div>
 <div><ins aria-label="Hello">This is the <code>&lt;ins&gt;</code> element</ins></div>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span role="insertion" aria-label="Hello"&gt;...&lt;/span&gt;
+&lt;ins aria-label="Hello"&gt;...&lt;/ins&gt;</code></pre>
+</details>
 
 
 <h2>paragraph</h2>
 <div style="margin-bottom: 2em;"><span role="paragraph" aria-label="Hello">This element has a role of <code>paragraph</code></span></div>
 <p aria-label="Hello">This is the <code>&lt;p&gt;</code> element</p>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span role="paragraph" aria-label="Hello"&gt;...&lt;/span&gt;
+&lt;p aria-label="Hello"&gt;...&lt;/p&gt;</code></pre>
+</details>
 
 
 <h2>presentation</h2>
 <div><span role="presentation" aria-label="Hello">This element has a role of <code>presentation</code></span></div>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span role="presentation" aria-label="Hello"&gt;...&lt;/span&gt;</code></pre>
+</details>
 
 
 <h2>strong</h2>
 <div style="margin-bottom: 2em;"><span role="strong" aria-label="Hello">This element has a role of <code>strong</code></span></div>
 <div><strong aria-label="Hello">This is the <code>&lt;strong&gt;</code> element</strong></div>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span role="strong" aria-label="Hello"&gt;...&lt;/span&gt;
+&lt;strong aria-label="Hello"&gt;...&lt;/strong&gt;</code></pre>
+</details>
 
 
 <h2>subscript</h2>
 <div style="margin-bottom: 2em;"><span role="subscript" aria-label="Hello">This element has a role of <code>subscript</code></span></div>
 <div><sub aria-label="Hello">This is the <code>&lt;sub&gt;</code> element</sub></div>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span role="subscript" aria-label="Hello"&gt;...&lt;/span&gt;
+&lt;sub aria-label="Hello"&gt;...&lt;/sub&gt;</code></pre>
+</details>
 
 
 <h2>superscript</h2>
 <div style="margin-bottom: 2em;"><span role="superscript" aria-label="Hello">This element has a role of <code>superscript</code></span></div>
 <div><sup aria-label="Hello">This is the <code>&lt;sup&gt;</code> element</sup></div>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span role="superscript" aria-label="Hello"&gt;...&lt;/span&gt;
+&lt;sup aria-label="Hello"&gt;...&lt;/sup&gt;</code></pre>
+</details>
+
 
 <p>The following are <a href="https://www.w3.org/TR/wai-aria-1.3/#namefromprohibited" target="_blank">roles that cannot be named in ARIA 1.3</a>.</p>
 
@@ -92,37 +146,74 @@
 <h2>definition</h2>
 <div style="margin-bottom: 2em;"><span role="definition" aria-label="Hello">This element has a role of <code>definition</code></span></div>
 <div><dfn aria-label="Hello">This is the <code>&lt;dfn&gt;</code> element</dfn></div>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span role="definition" aria-label="Hello"&gt;...&lt;/span&gt;
+&lt;dfn aria-label="Hello"&gt;...&lt;/dfn&gt;</code></pre>
+</details>
 
 
 <h2>mark</h2>
 <div style="margin-bottom: 2em;"><span role="mark" aria-label="Hello">This element has a role of <code>mark</code></span></div>
 <div><mark aria-label="Hello">This is the <code>&lt;mark&gt;</code> element</mark></div>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span role="mark" aria-label="Hello"&gt;...&lt;/span&gt;
+&lt;mark aria-label="Hello"&gt;...&lt;/mark&gt;</code></pre>
+</details>
 
 
 <h2>none</h2>
 <div><span role="none" aria-label="Hello">This element has a role of <code>none</code></span></div>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span role="none" aria-label="Hello"&gt;...&lt;/span&gt;</code></pre>
+</details>
 
 
 <h2>suggestion</h2>
 <div><span role="suggestion" aria-label="Hello">This element has a role of <code>suggestion</code></span></div>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span role="suggestion" aria-label="Hello"&gt;...&lt;/span&gt;</code></pre>
+</details>
 
 
 <h2>term</h2>
 <div><span role="term" aria-label="Hello">This element has a role of <code>term</code></span></div>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span role="term" aria-label="Hello"&gt;...&lt;/span&gt;</code></pre>
+</details>
 
 
 <h2>time</h2>
 <div style="margin-bottom: 2em;"><span role="time" aria-label="Hello">This element has a role of <code>time</code></span></div>
 <div><time aria-label="Hello">This is the <code>&lt;time&gt;</code> element</time></div>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span role="time" aria-label="Hello"&gt;...&lt;/span&gt;
+&lt;time aria-label="Hello"&gt;...&lt;/time&gt;</code></pre>
+</details>
 
 
 <h2>tooltip</h2>
 <div><span role="tooltip" aria-label="Hello">This element has a role of <code>tooltip</code></span></div>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span role="tooltip" aria-label="Hello"&gt;...&lt;/span&gt;</code></pre>
+</details>
 
 
 <h2>invalid/made-up role</h2>
 <div role="fake" aria-label="Hello" style="margin-bottom: 2em;">This element has a made-up role of <code>fake</code></div>
 <div><span role="madeup" aria-label="Hello">This element has a made-up role of <code>madeup</code></span></div>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="fake" aria-label="Hello"&gt;...&lt;/div&gt;
+&lt;span role="madeup" aria-label="Hello"&gt;...&lt;/span&gt;</code></pre>
+</details>
+
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>

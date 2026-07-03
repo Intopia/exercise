@@ -16,52 +16,98 @@
 <h1>Testing <code>aria-label</code></h1>
 <p>Which of the examples below correctly use <code>aria-label</code>?</p>
 
+
 <h2>Example 1: Valid use on a button</h2>
 <div class="example">
   <button aria-label="Close dialog">✕</button>
 </div>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button <span class="highlight">aria-label="Close dialog"</span>&gt;✕&lt;/button&gt;</code></pre>
+</details>
+
 
 <h2>Example 2: Valid use on a landmark</h2>
 <div class="example">
   <nav aria-label="Primary navigation">
-    <a href="#">Home</a>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
   </nav>
 </div>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;nav <span class="highlight">aria-label="Primary navigation"</span>&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;About&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+</details>
+
 
 <h2>Example 3: Valid use on an input</h2>
 <div class="example">
-  <input type="search" aria-label="Search this site">
+  <input class="input" type="search" aria-label="Search this site">
 </div>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input type="search" <span class="highlight">aria-label="Search this site"</span>&gt;</code></pre>
+</details>
 
-<h2>Example 4: Empty <code>aria-label</code></h2>
+
+<h2>Example 4: Invalid empty <code>aria-label</code></h2>
 <div class="example">
   <button aria-label="">Submit</button>
 </div>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button <span class="highlight">aria-label=""</span>&gt;Submit&lt;/button&gt;</code></pre>
+</details>
 
-<h2>Example 5: Whitespace-only <code>aria-label</code></h2>
+
+<h2>Example 5: Invalid whitespace-only <code>aria-label</code></h2>
 <div class="example">
   <button aria-label="   ">Submit</button>
 </div>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button <span class="highlight">aria-label="   "</span>&gt;Submit&lt;/button&gt;</code></pre>
+</details>
+
 
 <h2>Example 6: Prohibited role — <code>&lt;p&gt;</code></h2>
 <div class="example">
   <p aria-label="Important notice">This paragraph has an aria-label.</p>
 </div>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;p <span class="highlight">aria-label="Important notice"</span>&gt;This paragraph has an aria-label.&lt;/p&gt;</code></pre>
+</details>
+
 
 <h2>Example 7: Prohibited role — <code>&lt;span&gt;</code></h2>
 <div class="example">
   <span aria-label="Hello world">This span has an aria-label.</span>
 </div>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span <span class="highlight">aria-label="Hello world"</span>&gt;This span has an aria-label.&lt;/span&gt;</code></pre>
+</details>
 
-<h2>Example 8: Prohibited role — <code>role="paragraph"</code></h2>
-<div class="example">
-  <div role="paragraph" aria-label="Hello world">This element has a role of paragraph.</div>
-</div>
-
-<h2>Example 9: Prohibited role — <code>role="none"</code></h2>
+<h2>Example 8: Prohibited role — <code>role="none"</code></h2>
 <div class="example">
   <div role="none" aria-label="Hello world">This element has a role of none.</div>
 </div>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="none" <span class="highlight">aria-label="Hello world"</span>&gt;This element
+has a role of none.&lt;/div&gt;</code></pre>
+</details>
+
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>

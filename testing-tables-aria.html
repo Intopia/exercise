@@ -8,13 +8,19 @@
   <link href="assets/css/testing.css" rel="stylesheet">
   <style>
 
-[role="table"] {
-  display: table;
-  margin: 2em 0;
-}
-
 h3 {
   margin: 2em 0 0;
+}
+
+[role="table"] {
+  display: table;
+  width: 100%;
+  margin: 1em 0;
+  table-layout: fixed;
+}
+
+[role="table"] [role="rowgroup"] {
+  display: table-row-group;
 }
 
 [role="table"] [role="row"] {
@@ -26,7 +32,7 @@ h3 {
 [role="table"] [role="rowheader"] {
   display: table-cell;
   padding: 0.5em;
-  width: 7em;
+  width: 25%;
 }
 
 [role="cell"],
@@ -42,12 +48,6 @@ h3 {
 
 [role="rowgroup"]:first-child [role="row"] > * {
   border-top: 1px solid #aaa;
-}
-
-[role="table"] [role="cell"]:last-child,
-[role="table"] [role="columnheader"]:last-child,
-[role="table"] [role="rowheader"]:last-child {
-  width: 10em;
 }
 
 [role="table"] [role="columnheader"],
@@ -83,7 +83,6 @@ h3 {
       <span role="columnheader">Reptile</span>
     </div>
   </div>
-
   <div role="rowgroup">
     <div role="row">
       <span role="rowheader">Forest</span>
@@ -111,6 +110,9 @@ h3 {
     </div>
   </div>
 </div>
+
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;h3 id="aaa"&gt;Animals found in different habitats&lt;/h3&gt;
 &lt;div <span class="highlight">role="table"</span> aria-labelledby="aaa"&gt;
   &lt;div <span class="highlight">role="rowgroup"</span>&gt;
@@ -149,6 +151,7 @@ h3 {
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
+</details>
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>

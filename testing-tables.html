@@ -7,15 +7,15 @@
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
   <style>
-.fake1 {
-  color: #000;
-  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, Frutiger, 'Frutiger Linotype', Univers, Calibri, 'Gill Sans', 'Gill Sans MT', 'Myriad Pro', Myriad, 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, sans-serif;
-}
-
-.fake2 {
+.fake-header {
   font-weight: bold;
 }
+
+table {
+  margin: 1em 0;
+}
   </style>
+}
 </head>
 <body>
 
@@ -38,7 +38,6 @@
   <caption>
     Animals found in different habitats
   </caption>
-
   <thead>
     <tr>
       <th>Habitat</th>
@@ -47,7 +46,6 @@
       <th>Reptile</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <th>Forest</th>
@@ -76,6 +74,48 @@
   </tbody>
 </table>
 
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;table&gt;
+  <span class="highlight">&lt;caption&gt;</span>
+    Animals found in different habitats
+  <span class="highlight">&lt;/caption&gt;</span>
+  &lt;thead&gt;
+    &lt;tr&gt;
+      <span class="highlight">&lt;th&gt;</span>Habitat<span class="highlight">&lt;/th&gt;</span>
+      <span class="highlight">&lt;th&gt;</span>Mammal<span class="highlight">&lt;/th&gt;</span>
+      <span class="highlight">&lt;th&gt;</span>Bird<span class="highlight">&lt;/th&gt;</span>
+      <span class="highlight">&lt;th&gt;</span>Reptile<span class="highlight">&lt;/th&gt;</span>
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      <span class="highlight">&lt;th&gt;</span>Forest<span class="highlight">&lt;/th&gt;</span>
+      &lt;td&gt;Deer&lt;/td&gt;
+      &lt;td&gt;Owl&lt;/td&gt;
+      &lt;td&gt;Lizard&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      <span class="highlight">&lt;th&gt;</span>Ocean<span class="highlight">&lt;/th&gt;</span>
+      &lt;td&gt;Dolphin&lt;/td&gt;
+      &lt;td&gt;Albatross&lt;/td&gt;
+      &lt;td&gt;Turtle&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      <span class="highlight">&lt;th&gt;</span>Desert<span class="highlight">&lt;/th&gt;</span>
+      &lt;td&gt;Camel&lt;/td&gt;
+      &lt;td&gt;Falcon&lt;/td&gt;
+      &lt;td&gt;Gecko&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      <span class="highlight">&lt;th&gt;</span>Wetland<span class="highlight">&lt;/th&gt;</span>
+      &lt;td&gt;Otter&lt;/td&gt;
+      &lt;td&gt;Heron&lt;/td&gt;
+      &lt;td&gt;Crocodile&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+</details>
 
 <h2>Example 2</h2>
 <p>This example uses a <code>&lt;caption&gt;</code> to label the <code>&lt;table&gt;</code> and <code>&lt;th&gt;</code> for column and row headers.</p>
@@ -124,49 +164,131 @@
   </tbody>
 </table>
 
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;table&gt;
+  &lt;caption&gt;
+    Plants found in different habitats
+  &lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th <span class="highlight">scope="col"</span>&gt;Habitat&lt;/th&gt;
+      &lt;th <span class="highlight">scope="col"</span>&gt;Tree&lt;/th&gt;
+      &lt;th <span class="highlight">scope="col"</span>&gt;Flower&lt;/th&gt;
+      &lt;th <span class="highlight">scope="col"</span>&gt;Grass&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th <span class="highlight">scope="row"</span>&gt;Forest&lt;/th&gt;
+      &lt;td&gt;Oak&lt;/td&gt;
+      &lt;td&gt;Bluebell&lt;/td&gt;
+      &lt;td&gt;Fescue&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th <span class="highlight">scope="row"</span>&gt;Desert&lt;/th&gt;
+      &lt;td&gt;Joshua&lt;/td&gt;
+      &lt;td&gt;Primrose&lt;/td&gt;
+      &lt;td&gt;Needlegrass&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th <span class="highlight">scope="row"</span>&gt;Wetland&lt;/th&gt;
+      &lt;td&gt;Willow&lt;/td&gt;
+      &lt;td&gt;Iris&lt;/td&gt;
+      &lt;td&gt;Reed&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th <span class="highlight">scope="row"</span>&gt;Coast&lt;/th&gt;
+      &lt;td&gt;Pine&lt;/td&gt;
+      &lt;td&gt;Sea thrift&lt;/td&gt;
+      &lt;td&gt;Marram&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+</details>
+
+
 <h2>Example 3</h2>
 <p>This third example uses only <code>&lt;td&gt;</code> elements. It does not include a <code>&lt;caption&gt;</code>, <code>&lt;th&gt;</code> header cells, or the <code>scope</code> attribute.</p>
 
-
-<h3 class="fake1">Birds found in different habitats</h3>
-
+<h3>Birds found in different habitats</h3>
 <table>
   <thead>
     <tr>
-      <td class="fake2">Habitat</td>
-      <td class="fake2">Small bird</td>
-      <td class="fake2">Water bird</td>
-      <td class="fake2">Bird of prey</td>
+      <td class="fake-header">Habitat</td>
+      <td class="fake-header">Small bird</td>
+      <td class="fake-header">Water bird</td>
+      <td class="fake-header">Bird of prey</td>
     </tr>
   </thead>
-
   <tbody>
     <tr>
-      <td class="fake2">Forest</td>
+      <td class="fake-header">Forest</td>
       <td>Robin</td>
       <td>Duck</td>
       <td>Owl</td>
     </tr>
     <tr>
-      <td class="fake2">Wetland</td>
+      <td class="fake-header">Wetland</td>
       <td>Wren</td>
       <td>Heron</td>
       <td>Kite</td>
     </tr>
     <tr>
-      <td class="fake2">Coast</td>
+      <td class="fake-header">Coast</td>
       <td>Swallow</td>
       <td>Pelican</td>
       <td>Osprey</td>
     </tr>
     <tr>
-      <td class="fake2">Grassland</td>
+      <td class="fake-header">Grassland</td>
       <td>Finch</td>
       <td>Swan</td>
       <td>Falcon</td>
     </tr>
   </tbody>
 </table>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;h3&gt;Birds found in different habitats&lt;/h3&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;td <span class="highlight">class="fake-header"</span>&gt;Habitat&lt;/td&gt;
+      &lt;td <span class="highlight">class="fake-header"</span>&gt;Small bird&lt;/td&gt;
+      &lt;td <span class="highlight">class="fake-header"</span>&gt;Water bird&lt;/td&gt;
+      &lt;td <span class="highlight">class="fake-header"</span>&gt;Bird of prey&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td <span class="highlight">class="fake-header"</span>&gt;Forest&lt;/td&gt;
+      &lt;td&gt;Robin&lt;/td&gt;
+      &lt;td&gt;Duck&lt;/td&gt;
+      &lt;td&gt;Owl&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td <span class="highlight">class="fake-header"</span>&gt;Wetland&lt;/td&gt;
+      &lt;td&gt;Wren&lt;/td&gt;
+      &lt;td&gt;Heron&lt;/td&gt;
+      &lt;td&gt;Kite&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td <span class="highlight">class="fake-header"</span>&gt;Coast&lt;/td&gt;
+      &lt;td&gt;Swallow&lt;/td&gt;
+      &lt;td&gt;Pelican&lt;/td&gt;
+      &lt;td&gt;Osprey&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td <span class="highlight">class="fake-header"</span>&gt;Grassland&lt;/td&gt;
+      &lt;td&gt;Finch&lt;/td&gt;
+      &lt;td&gt;Swan&lt;/td&gt;
+      &lt;td&gt;Falcon&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+</details>
 
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>

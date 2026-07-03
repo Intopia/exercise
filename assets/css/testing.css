@@ -720,6 +720,10 @@ Focus order nav
   margin-right: 1em;
 }
 
+/* ----------- 
+External
+----------- */
+
 a.external {
   padding: 0 20px 0 0;
   background-image: url("../img/external-link-20.png");
@@ -727,6 +731,10 @@ a.external {
   background-position: center right;
   padding: 0 26px 0 0;
 }
+
+/* ----------- 
+Bookmarklet
+----------- */
 
 a.bookmarklet {
   display: inline-block;
@@ -773,6 +781,33 @@ a.bookmarklet:active {
   font-size: .9em;
 }
 
+/* ----------- 
+Details
+----------- */
+
+details {
+  margin: 1em 0;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0.25em 0.25em 0.25em .5em;
+  border-radius: 0.2em;
+  background: #ddd;
+}
+
+summary:focus {
+  background: #000;
+  color: #fff;
+  outline: none;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 5px #000;
+}
+
+/* ----------- 
+Intopia logo
+----------- */
+
 .intopia-home-link {
   display: inline-block;
   margin: 0 0 2em;
@@ -787,6 +822,10 @@ a.intopia-home-link:focus {
 .intopia-logo {
   width: 180px;
 }
+
+/* ----------- 
+Note
+----------- */
 
 .note {
   background: #ffeeee;
