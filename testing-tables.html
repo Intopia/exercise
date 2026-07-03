@@ -24,128 +24,148 @@
 </a>
 
 <h1>Testing tables</h1>
-<p>Which of the <a href="https://html.spec.whatwg.org/#the-table-element" target="_blank">tables</a> below has both:</p>
+<p>Which of the <a href="https://html.spec.whatwg.org/#the-table-element" target="_blank">tables</a> below has both of the following:</p>
 <ul>
-  <li>An accessible name? (via <code>aria-labelledby</code>, <code>aria-label</code> or <code>&lt;caption&gt;</code>)</li>
-  <li>Table headers? (via <code>&lt;th&gt;</code>)</li>
+  <li>An accessible name? (Ideally provided by <code>&lt;caption&gt;</code>, but it can also come from <code>aria-labelledby</code> or <code>aria-label</code>.)</li>
+  <li>Programmatic table headers? (via <code>&lt;th&gt;</code>)</li>
 </ul>
 
 
 <h2>Example 1</h2>
-<table class="table">
-  <caption>Land mammals</caption>
+<p>This example uses a <code>&lt;caption&gt;</code> to label the <code>&lt;table&gt;</code> and <code>&lt;th&gt;</code> for column and row headers.</p>
+
+<table>
+  <caption>
+    Animals found in different habitats
+  </caption>
+
   <thead>
     <tr>
-      <td></td>
-      <th>Australia</th>
-      <th>Asia</th>
-      <th>America</th>
+      <th>Habitat</th>
+      <th>Mammal</th>
+      <th>Bird</th>
+      <th>Reptile</th>
     </tr>
   </thead>
+
   <tbody>
     <tr>
-      <th>Bats</th>
-      <td>Gould's Bat</td>
-      <td>Hairless bat</td>
-      <td>Canyon bat</td>
+      <th>Forest</th>
+      <td>Deer</td>
+      <td>Owl</td>
+      <td>Lizard</td>
     </tr>
     <tr>
-      <th>Camels</th>
-      <td>Dromedary camel</td>
-      <td>Bactrian camel</td>
-      <td>Cama camel</td>
+      <th>Ocean</th>
+      <td>Dolphin</td>
+      <td>Albatross</td>
+      <td>Turtle</td>
     </tr>
     <tr>
-      <th>Dogs</th>
-      <td>Labrador</td>
-      <td>Rottweiler</td>
-      <td>Beagle</td>
+      <th>Desert</th>
+      <td>Camel</td>
+      <td>Falcon</td>
+      <td>Gecko</td>
     </tr>
     <tr>
-      <th>Cats</th>
-      <td>Siamese</td>
-      <td>Persian</td>
-      <td>Ragdoll</td>
-    </tr>
-    <tr>
-      <th>Bears</th>
-      <td>Panda bear</td>
-      <td>Brown bear</td>
-      <td>Polar bear</td>
+      <th>Wetland</th>
+      <td>Otter</td>
+      <td>Heron</td>
+      <td>Crocodile</td>
     </tr>
   </tbody>
 </table>
 
 
 <h2>Example 2</h2>
+<p>This example uses a <code>&lt;caption&gt;</code> to label the <code>&lt;table&gt;</code> and <code>&lt;th&gt;</code> for column and row headers.</p>
 
-<h3 class="fake1">Whales</h3>
-<table class="table">
+<p><code>scope="col"</code> is used to associate header cells with the columns below them. <code>scope="row"</code> is used to associate header cells with the rows beside them.</p>
+
+<p><code>scope</code> explicitly identifies whether a header applies to a row or a column. For most simple tables, browsers can infer these relationships automatically, so they work correctly without <code>scope</code>. Adding <code>scope</code> simply makes the author's intent explicit.</p>
+
+<table>
+  <caption>
+    Plants found in different habitats
+  </caption>
   <thead>
     <tr>
-      <td></td>
-      <td class="fake2">Large</td>
-      <td class="fake2">Small</td>
+      <th scope="col">Habitat</th>
+      <th scope="col">Tree</th>
+      <th scope="col">Flower</th>
+      <th scope="col">Grass</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td class="fake2">Pacific Ocean</td>
-      <td>Right Whale</td>
-      <td>Pygmy Right Whale</td>
+      <th scope="row">Forest</th>
+      <td>Oak</td>
+      <td>Bluebell</td>
+      <td>Fescue</td>
     </tr>
     <tr>
-      <td class="fake2">Arctic Ocean</td>
-      <td>Blue Whale</td>
-      <td>Orca</td>
+      <th scope="row">Desert</th>
+      <td>Joshua</td>
+      <td>Primrose</td>
+      <td>Needlegrass</td>
     </tr>
     <tr>
-      <td class="fake2">Indian Ocean</td>
-      <td>Humpback whale</td>
-      <td>Beluga Whale</td>
+      <th scope="row">Wetland</th>
+      <td>Willow</td>
+      <td>Iris</td>
+      <td>Reed</td>
+    </tr>
+    <tr>
+      <th scope="row">Coast</th>
+      <td>Pine</td>
+      <td>Sea thrift</td>
+      <td>Marram</td>
     </tr>
   </tbody>
 </table>
 
+<h2>Example 3</h2>
+<p>This third example uses only <code>&lt;td&gt;</code> elements. It does not include a <code>&lt;caption&gt;</code>, <code>&lt;th&gt;</code> header cells, or the <code>scope</code> attribute.</p>
 
-<h2>Example 3: using <code>scope</code></h2>
+
+<h3 class="fake1">Birds found in different habitats</h3>
 
 <table>
-  <caption>Greensprings Running Club Personal Bests</caption>
   <thead>
     <tr>
-      <th scope="col">Name</th>
-      <th scope="col">1 mile</th>
-      <th scope="col">5 km</th>
-      <th scope="col">10 km</th>
-    </tr>  
+      <td class="fake2">Habitat</td>
+      <td class="fake2">Small bird</td>
+      <td class="fake2">Water bird</td>
+      <td class="fake2">Bird of prey</td>
+    </tr>
   </thead>
+
   <tbody>
     <tr>
-      <th scope="row">Mary</th>
-      <td>8:32</td>
-      <td>28:04</td>
-      <td>1:01:16</td>
+      <td class="fake2">Forest</td>
+      <td>Robin</td>
+      <td>Duck</td>
+      <td>Owl</td>
     </tr>
     <tr>
-      <th scope="row">Betsy</th>
-      <td>7:43</td>
-      <td>26:47</td>
-      <td>55:38</td>
+      <td class="fake2">Wetland</td>
+      <td>Wren</td>
+      <td>Heron</td>
+      <td>Kite</td>
     </tr>
     <tr>
-      <th scope="row">Matt</th>
-      <td>7:55</td>
-      <td>27:29</td>
-      <td>57:04</td>
+      <td class="fake2">Coast</td>
+      <td>Swallow</td>
+      <td>Pelican</td>
+      <td>Osprey</td>
     </tr>
     <tr>
-      <th scope="row">Todd</th>
-      <td>7:01</td>
-      <td>24:21</td>
-      <td>50:35</td>
+      <td class="fake2">Grassland</td>
+      <td>Finch</td>
+      <td>Swan</td>
+      <td>Falcon</td>
     </tr>
-  </tbody> 
+  </tbody>
 </table>
 
 

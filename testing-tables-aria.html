@@ -5,7 +5,7 @@
   <title>ARIA table examples</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
-  <link href="assets/css/table.css" rel="stylesheet">
+  <link href="assets/css/testing.css" rel="stylesheet">
   <style>
 
 [role="table"] {
@@ -13,10 +13,8 @@
   margin: 2em 0;
 }
 
-[role="table"] > div[id] {
-  display: table-caption;
-  font-style: italic;
-  padding: 0 0 .5em;
+h3 {
+  margin: 2em 0 0;
 }
 
 [role="table"] [role="row"] {
@@ -24,22 +22,37 @@
 }
 
 [role="table"] [role="cell"],
-[role="table"] [role="columnheader"] {
+[role="table"] [role="columnheader"],
+[role="table"] [role="rowheader"] {
   display: table-cell;
   padding: 0.5em;
   width: 7em;
+}
+
+[role="cell"],
+[role="columnheader"],
+[role="rowheader"] {
+  border-right: 1px solid #aaa;
   border-bottom: 1px solid #aaa;
+}
+
+[role="row"] > :first-child {
+  border-left: 1px solid #aaa;
+}
+
+[role="rowgroup"]:first-child [role="row"] > * {
+  border-top: 1px solid #aaa;
 }
 
 [role="table"] [role="cell"]:last-child,
-[role="table"] [role="columnheader"]:last-child {
+[role="table"] [role="columnheader"]:last-child,
+[role="table"] [role="rowheader"]:last-child {
   width: 10em;
 }
 
-[role="table"] [role="columnheader"] {
+[role="table"] [role="columnheader"],
+[role="table"] [role="rowheader"] {
   font-weight: bold;
-  border-top: 1px solid #aaa;
-  border-bottom: 1px solid #aaa;
 }
 
   </style>
@@ -48,44 +61,94 @@
 
 <h1>ARIA table examples</h1>
 
-<div role="table" aria-label="Students" aria-describedby="students_table_desc">
-  <div id="students_table_desc">Student enrolment</div>
+<h2>Example 1</h2>
+<p>This example uses a range of roles to define table structure.</p>
+
+<ul>
+  <li><code>role="table"</code>: to replicate the <code>&lt;table&gt;</code> element</li>
+  <li><code>role="rowgroup"</code>: to replicate the <code>&lt;thead&gt;</code> and <code>&lt;tbody&gt;</code> elements</li>
+  <li><code>role="row"</code>: to replicate the <code>&lt;tr&gt;</code> element</li>
+  <li><code>role="columnheader"</code>: to replicate the <code>&lt;th&gt;</code> element at the top of columns</li>
+  <li><code>role="rowheader"</code>: to replicate the <code>&lt;th&gt;</code> element at the start of rows</li>
+  <li><code>role="cell"</code>: to replicate the <code>&lt;td&gt;</code> element</li>
+</ul>
+
+<h3 id="aaa">Animals found in different habitats</h3>
+<div role="table" aria-labelledby="aaa">
   <div role="rowgroup">
     <div role="row">
-      <span role="columnheader">First Name</span>
-      <span role="columnheader">Last Name</span>
-      <span role="columnheader">Company</span>
-      <span role="columnheader">Address</span>
+      <span role="columnheader">Habitat</span>
+      <span role="columnheader">Mammal</span>
+      <span role="columnheader">Bird</span>
+      <span role="columnheader">Reptile</span>
     </div>
   </div>
+
   <div role="rowgroup">
     <div role="row">
-      <span role="cell">Fred</span>
-      <span role="cell">Jackson</span>
-      <span role="cell">Acme</span>
-      <span role="cell">123 Broad Close</span>
+      <span role="rowheader">Forest</span>
+      <span role="cell">Deer</span>
+      <span role="cell">Owl</span>
+      <span role="cell">Lizard</span>
     </div>
     <div role="row">
-      <span role="cell">Sara</span>
-      <span role="cell">James</span>
-      <span role="cell">Brother</span>
-      <span role="cell">17 Whay Street</span>
+      <span role="rowheader">Ocean</span>
+      <span role="cell">Dolphin</span>
+      <span role="cell">Albatross</span>
+      <span role="cell">Turtle</span>
     </div>
     <div role="row">
-      <span role="cell">Ralph</span>
-      <span role="cell">Jefferson</span>
-      <span role="cell">Muller</span>
-      <span role="cell">8 Turner Ave</span>
+      <span role="rowheader">Desert</span>
+      <span role="cell">Camel</span>
+      <span role="cell">Falcon</span>
+      <span role="cell">Gecko</span>
     </div>
     <div role="row">
-      <span role="cell">Nancy</span>
-      <span role="cell">Jensen</span>
-      <span role="cell">Zero</span>
-      <span role="cell">111 Smith Rd</span>
+      <span role="rowheader">Wetland</span>
+      <span role="cell">Otter</span>
+      <span role="cell">Heron</span>
+      <span role="cell">Crocodile</span>
     </div>
   </div>
 </div>
+<pre><code>&lt;h3 id="aaa"&gt;Animals found in different habitats&lt;/h3&gt;
+&lt;div <span class="highlight">role="table"</span> aria-labelledby="aaa"&gt;
+  &lt;div <span class="highlight">role="rowgroup"</span>&gt;
+    &lt;div <span class="highlight">role="row"</span>&gt;
+      &lt;span <span class="highlight">role="columnheader"</span>&gt;Habitat&lt;/span&gt;
+      &lt;span <span class="highlight">role="columnheader"</span>&gt;Mammal&lt;/span&gt;
+      &lt;span <span class="highlight">role="columnheader"</span>&gt;Bird&lt;/span&gt;
+      &lt;span <span class="highlight">role="columnheader"</span>&gt;Reptile&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
 
+  &lt;div <span class="highlight">role="rowgroup"</span>&gt;
+    &lt;div <span class="highlight">role="row"</span>&gt;
+      &lt;span <span class="highlight">role="rowheader"</span>&gt;Forest&lt;/span&gt;
+      &lt;span <span class="highlight">role="cell"</span>&gt;Deer&lt;/span&gt;
+      &lt;span <span class="highlight">role="cell"</span>&gt;Owl&lt;/span&gt;
+      &lt;span <span class="highlight">role="cell"</span>&gt;Lizard&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div <span class="highlight">role="row"</span>&gt;
+      &lt;span <span class="highlight">role="rowheader"</span>&gt;Ocean&lt;/span&gt;
+      &lt;span <span class="highlight">role="cell"</span>&gt;Dolphin&lt;/span&gt;
+      &lt;span <span class="highlight">role="cell"</span>&gt;Albatross&lt;/span&gt;
+      &lt;span <span class="highlight">role="cell"</span>&gt;Turtle&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div <span class="highlight">role="row"</span>&gt;
+      &lt;span <span class="highlight">role="rowheader"</span>&gt;Desert&lt;/span&gt;
+      &lt;span <span class="highlight">role="cell"</span>&gt;Camel&lt;/span&gt;
+      &lt;span <span class="highlight">role="cell"</span>&gt;Falcon&lt;/span&gt;
+      &lt;span <span class="highlight">role="cell"</span>&gt;Gecko&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div <span class="highlight">role="row"</span>&gt;
+      &lt;span <span class="highlight">role="rowheader"</span>&gt;Wetland&lt;/span&gt;
+      &lt;span <span class="highlight">role="cell"</span>&gt;Otter&lt;/span&gt;
+      &lt;span <span class="highlight">role="cell"</span>&gt;Heron&lt;/span&gt;
+      &lt;span <span class="highlight">role="cell"</span>&gt;Crocodile&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
