@@ -9,8 +9,8 @@
 </head>
 <body>
 
-<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
-  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia logo" class="intopia-logo">
 </a>
 
 <h1>Reviewing the different landmarks</h1>
@@ -66,6 +66,18 @@
 <aside aria-labelledby="sidebar">
   <h3 id="sidebar">Sidebar</h3>
 </aside>
+
+<p>A nested <code>&lt;aside&gt;</code> element without an accessible name does not generate a <code>complementary</code> landmark. Under the current HTML Accessibility API Mapping, a nested <code>&lt;aside&gt;</code> is only exposed as a landmark when it has an accessible name via <code>aria-label</code> or <code>aria-labelledby</code>.</p>
+
+<p>This is a nested <code>&lt;aside&gt;</code> element:</p>
+<section>
+  <aside>A nested aside region</aside>
+</section>
+
+<p>This is a nested <code>&lt;aside&gt;</code> element with a name:</p>
+<section>
+  <aside aria-label="Nested aside">A nested aside region</aside>
+</section>
 
 
 <h2><code>&lt;section&gt;</code></h2>

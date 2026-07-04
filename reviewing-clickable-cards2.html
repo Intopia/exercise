@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Reviewing different solutions for clickable cards</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+<style>
+
+
+  /* card base styles, shared by every example */
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 1rem;
+    max-width: 320px;
+    position: relative;
+  }
+
+  .card img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    display: block;
+  }
+
+  .card h3 {
+    margin: 0.75rem 0 0.3rem;
+    font-size: 1.2rem;
+  }
+
+  .card h3 a {
+    text-decoration: underline;
+  }
+
+  .card p {
+    margin: 0.3rem 0 0;
+    font-size: 0.95rem;
+    color: #444;
+  }
+
+  /* Method 2: <a> wrapped around the whole card */
+  .card-wrap-link {
+    display: block;
+    max-width: 320px;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* Method 3: CSS-expanded link, the "stretched link" pattern */
+  .card-css-expand {
+    overflow: hidden;
+  }
+
+  .card-css-expand h3 a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+
+  /* Method 4: JS hijacked card */
+  .card-js {
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+  }
+
+  .card-js:hover {
+    border-color: #0b4ea2;
+  }
+
+  /* Method 5: single link, no separate heading link */
+  .card-single-link {
+    display: block;
+    max-width: 320px;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .card-single-link h3 {
+    text-decoration: underline;
+  }
+
+  /* Method 6: fake button card */
+  .card-fake-button {
+    cursor: pointer;
+  }
+
+</style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<h1>Accessible Clickable Card options</h1>
+
+<p>Card components are one of the most common places where visual design and accessible markup pull in different directions. Designers want the whole card to feel clickable; accessibility and HTML semantics want one clear, single interactive element. Each method below uses the same basic card content, but changes how (and whether) the whole card responds to a click or tap.</p>
+
+<p>Every example card contains the same four things: a card container, an image, an <code>&lt;h3&gt;</code> heading, and a short paragraph.</p>
+
+
+<h2>Method 1: Just the default &ndash; users click the link in the heading</h2>
+<p>No extra markup or scripting. The only interactive element is the link inside the heading.</p>
+
+<div class="card">
+  <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='100'%3E%3Crect width='200' height='100' fill='%23cccccc'/%3E%3C/svg%3E" alt="">
+  <h3><a href="#">Laughing kookaburra</a></h3>
+  <p>Known for its distinctive call, this large kingfisher is native to eastern Australia.</p>
+</div>
+
+<h3 class="feature-heading">Accessibility features</h3>
+<ul>
+  <li>Only one interactive element on the card, so its accessible name is unambiguous.</li>
+  <li>Completely standard keyboard behaviour: Tab to focus, Enter to activate.</li>
+  <li>All native link behaviours work automatically &ndash; open in new tab, copy link address, drag to bookmark, browser status bar preview.</li>
+  <li>Nothing to build or maintain; works even if CSS or JavaScript fails to load.</li>
+</ul>
+
+<h3 class="issue-heading">Possible issues</h3>
+<ul>
+  <li>The clickable target is small &ndash; just the heading text &ndash; even though the whole card looks like a single unit.</li>
+  <li>Users may click the image or the paragraph expecting to navigate, and nothing happens.</li>
+  <li>On touch devices especially, a bigger hit target is usually expected for a "card" pattern.</li>
+</ul>
+
+
+<h2>Method 2: An <code>&lt;a&gt;</code> wrapped around the entire card</h2>
+<p>The whole card is placed inside one big link, and the heading still has its own link inside it.</p>
+
+<a class="card-wrap-link" href="#">
+  <div class="card">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='100'%3E%3Crect width='200' height='100' fill='%23cccccc'/%3E%3C/svg%3E" alt="">
+    <h3><a href="#">Kangaroo</a></h3>
+    <p>Kangaroos possess powerful hind legs, a long, strong tail, and small front legs.</p>
+  </div>
+</a>
+
+<h3 class="feature-heading">Accessibility features</h3>
+<ul>
+  <li>Large, obvious click/tap target covering the whole card.</li>
+  <li>Still uses a real <code>&lt;a&gt;</code>, so it is keyboard-focusable and works with assistive technology out of the box.</li>
+</ul>
+
+<h3 class="issue-heading">Possible issues</h3>
+<ul>
+  <li>A link inside another link (<code>&lt;a&gt;</code> nested in <code>&lt;a&gt;</code>) is invalid HTML. The content model does not allow interactive content inside a link.</li>
+  <li>Browsers don't reject this &ndash; they silently "fix" it during parsing, using the HTML parser's adoption agency algorithm. Inspect this card in devtools and the one outer link has been split into disconnected fragments: a clone wraps just the image, an empty clone sits next to the real heading link inside the <code>&lt;h3&gt;</code>, and the paragraph is left completely outside any link. The "click anywhere on the card" goal is silently broken by the browser itself, with no error or warning.</li>
+  <li>If the card contains any other interactive element (a second link, a button, a "read more"), it must sit outside the big link entirely, or it becomes unreachable/unusable.</li>
+  <li>The accessible name of the big link is the concatenation of everything inside it (image alt text, heading, paragraph), which can be a long, awkward announcement for screen reader users.</li>
+</ul>
+
+
+<h2>Method 3: CSS used to expand the link to cover the card</h2>
+<p>Only the heading has a real link. CSS uses an absolutely-positioned <code>::after</code> pseudo-element on that link to visually stretch it across the whole card (sometimes called the "stretched link" pattern).</p>
+
+<div class="card card-css-expand">
+  <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='100'%3E%3Crect width='200' height='100' fill='%23cccccc'/%3E%3C/svg%3E" alt="">
+  <h3><a href="#">Emu</a></h3>
+  <p>The emu is the second-tallest living bird after its ratite relative, the ostrich.</p>
+</div>
+
+<h3 class="feature-heading">Accessibility features</h3>
+<ul>
+  <li>Only one real link exists in the markup, so there is no nested-link problem and only one, clear accessible name.</li>
+  <li>Full native link behaviour (new tab, copy address, status bar preview) still works.</li>
+  <li>Large visual/click target without any JavaScript.</li>
+</ul>
+
+<h3 class="issue-heading">Possible issues</h3>
+<ul>
+  <li>The card container (or another ancestor of the link) needs <code>position: relative</code>, and the link itself needs an <code>::after</code> pseudo-element with <code>position: absolute</code> and <code>inset: 0</code>, which is easy to get wrong if the card is later restyled.</li>
+  <li>Any other interactive element added to the card later (a second link, a "share" button) will sit underneath the stretched pseudo-element and become unclickable unless it is explicitly given a higher <code>z-index</code>.</li>
+  <li>Text inside the card (other than the heading) cannot be selected with a mouse, because the invisible layer intercepts the click/drag.</li>
+</ul>
+
+
+<h2>Method 4: JavaScript finds the link and makes the whole card clickable</h2>
+<p>The heading keeps its own real link. A script listens for clicks anywhere on the card and, if the click didn't land on an interactive element, triggers the heading link instead.</p>
+
+<div class="card card-js" id="js-card-1">
+  <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='100'%3E%3Crect width='200' height='100' fill='%23cccccc'/%3E%3C/svg%3E" alt="">
+  <h3><a href="#">Wombat</a></h3>
+  <p>This large, stocky marsupial is found in Australia and on scattered nearby islands.</p>
+</div>
+
+<h3 class="feature-heading">Accessibility features</h3>
+<ul>
+  <li>Only one real link in the markup &ndash; the card itself is not made focusable, so there are no duplicate tab stops.</li>
+  <li>Keyboard users tab straight to the real link and use it normally; nothing custom to get wrong.</li>
+  <li>If JavaScript fails to load, the heading link still works &ndash; the card just loses the "click anywhere" enhancement.</li>
+  <li>Can be written to ignore clicks on other interactive children, and to ignore click-drag text selection so it doesn't misfire.</li>
+</ul>
+
+<h3 class="issue-heading">Possible issues</h3>
+<ul>
+  <li>Entirely dependent on correct, defensive JavaScript. It's easy to forget an edge case (text selection, middle-click, modifier-key click) and end up with confusing or broken behaviour.</li>
+  <li>Middle-click / ctrl-click / cmd-click "open in new tab" on the empty part of the card won't work, only a real click on the actual link supports that &ndash; this can surprise users who expect the whole card to behave like a link.</li>
+  <li>Adds maintenance cost and a script dependency for something CSS alone can usually do (see Method 3).</li>
+</ul>
+
+
+<h2>Method 5: A single link with no separate heading link</h2>
+<p>Instead of nesting a link inside a link (Method 2's problem), the whole card is the only interactive element. The heading is plain text, not a link.</p>
+
+<a class="card-single-link" href="#">
+  <div class="card">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='100'%3E%3Crect width='200' height='100' fill='%23cccccc'/%3E%3C/svg%3E" alt="">
+    <h3>Tasmanian devil</h3>
+    <p>The world's largest carnivorous marsupial, now found in the wild only on the island of Tasmania.</p>
+  </div>
+</a>
+
+<h3 class="feature-heading">Accessibility features</h3>
+<ul>
+  <li>Valid markup with no nested interactive elements, and a single, predictable accessible name and tab stop.</li>
+  <li>Large click/tap target, full native link behaviour, no JavaScript required.</li>
+  <li>Avoids Method 2's silent DOM breakage entirely, by design rather than by accident.</li>
+</ul>
+
+<h3 class="issue-heading">Possible issues</h3>
+<ul>
+  <li>Only works cleanly for cards with a single destination. As soon as a card needs a second link or a button (e.g. "add to favourites"), that control has to be pulled outside the big link, which changes the visual layout.</li>
+  <li>The heading is no longer a link in its own right, so it can't be usefully listed in a screen reader's "links list" independently of the rest of the card content.</li>
+  <li>The whole card's accessible name is built from all of its content (image alt, heading, paragraph), which can be long-winded unless it is trimmed with <code>aria-label</code>.</li>
+</ul>
+
+
+<h2>Method 6: A non-link element with a click handler (fake button/link)</h2>
+<p>The card container itself gets a click handler (and often <code>tabindex</code> and a keydown handler) so it behaves like a link, without ever using a real <code>&lt;a&gt;</code>.</p>
+
+<div class="card card-fake-button" id="js-card-2" tabindex="0" role="link">
+  <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='100'%3E%3Crect width='200' height='100' fill='%23cccccc'/%3E%3C/svg%3E" alt="">
+  <h3>Quokka</h3>
+  <p>A small wallaby often described as "the world's happiest animal" because of its friendly expression.</p>
+</div>
+
+<h3 class="feature-heading">Accessibility features</h3>
+<ul>
+  <li>Can be made to work with a screen reader if <code>role="link"</code> (or <code>role="button"</code>), <code>tabindex="0"</code>, and matching keydown handling are all added carefully.</li>
+  <li>Large click/tap target with full control over styling and behaviour.</li>
+</ul>
+
+<h3 class="issue-heading">Possible issues</h3>
+<ul>
+  <li>None of the native link behaviours exist unless you reimplement them yourself: no "open in new tab", no "copy link address", no status bar URL preview, no drag-to-bookmark, no middle-click.</li>
+  <li>Like Method 5, the accessible name is built from all of the card's content (image alt, heading, paragraph), which can be long-winded unless it is trimmed with <code>aria-label</code>.</li>
+  <li>Search engines and other automated tools that only follow real <code>&lt;a href&gt;</code> links won't discover the destination.</li>
+  <li>Every keyboard interaction (Enter <em>and</em> Space for a button role, Enter only for a link role) has to be coded and tested by hand &ndash; it is very easy to only handle click and forget keyboard users entirely.</li>
+  <li>If JavaScript fails to load, the card is completely non-functional &ndash; there is no underlying href to fall back on.</li>
+  <li>This pattern reinvents something the browser already provides for free with a plain <code>&lt;a&gt;</code>, for no real benefit &ndash; generally best avoided in favour of Methods 3 or 5.</li>
+</ul>
+
+<script>
+(function () {
+  function delegateCardClick(card) {
+    var link = card.querySelector('h3 a');
+    if (!link) return;
+
+    card.addEventListener('click', function (event) {
+      if (event.target.closest('a, button, input, select, textarea')) return;
+
+      var selection = window.getSelection();
+      if (selection && selection.toString().length > 0) return;
+
+      link.click();
+    });
+  }
+
+  delegateCardClick(document.getElementById('js-card-1'));
+
+  var fakeButtonCard = document.getElementById('js-card-2');
+  if (fakeButtonCard) {
+    var activate = function () {
+      window.location.href = '#';
+    };
+    fakeButtonCard.addEventListener('click', activate);
+    fakeButtonCard.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        activate();
+      }
+    });
+  }
+})();
+</script>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>

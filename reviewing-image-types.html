@@ -9,8 +9,8 @@
 </head>
 <body>
 
-<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
-  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia logo" class="intopia-logo">
 </a>
 
 <h1>Reviewing the four image types</h1>
@@ -18,7 +18,7 @@
 
 
 <h2>Type 1: Decorative image</h2>
-<p>Decorating example 1:</p>
+<p>Decorative example 1:</p>
 <div class="example">
   <div style="position: relative;">
     <span style="position: absolute; color: #fff; left: 0; right: 0; text-align: center; top: 30px; font-size: 50px;">The desert</span>
@@ -58,6 +58,7 @@ Bridge and city skyline in the background."</span>&gt;</code></pre>
 &lt;/button&gt;</code></pre>
 </details>
 
+
 <p>Functional example 2:</p>
 <div class="example">
   <a href="#">
@@ -72,7 +73,7 @@ Bridge and city skyline in the background."</span>&gt;</code></pre>
 </details>
 
 
-<p>This does not need to be a functional image as there is text available that describes the function. So, it be be a decorative image instead:</p>
+<p>This does not need to be a functional image as there is text available that describes the function. So, it is a decorative image instead:</p>
 <div class="example">
   <button>
     <img src="assets/img/icon-cross.png" alt="">
@@ -90,21 +91,24 @@ Bridge and city skyline in the background."</span>&gt;</code></pre>
 
 <h2>Type 4: Complex images</h2>
 <p>Complex example 1:</p>
+
+<p>Note: <code>aria-details</code> currently has poor assistive technology support and should not be relied upon as the sole way to provide additional detailed information. In this example, screen reader users can still navigate to the <strong>Image description</strong> disclosure and access the full description.</p>
+
 <figure class="example">
   <img src="assets/img/image-complex.png" alt="Venn diagram depicting content category relationships. Detailed description below" aria-details="complex-image-details">
   <figcaption>
     <details id="complex-image-details">
       <summary>Image description</summary>
       <div class="testing-images">      
-        <h4>HTML content categories include:</h4>
+        <h3>HTML content categories include:</h3>
         <ol>
           <li>Flow content - the base content type</li>
           <li>Metadata content - slightly overlapping Flow</li>
           <li>Sectioning content - within Flow</li>
           <li>Heading content - within Flow</li>
-          <li>Phrasing content - within Flow, overlapping Interactice and Embedded</li>
+          <li>Phrasing content - within Flow, overlapping Interactive and Embedded</li>
           <li>Interactive content - within flow, overlapping Phrasing and Embedded</li>
-          <li>Embedded content - within Flow, overlapping Phrasing and Embedded</li>
+          <li>Embedded content - within Flow, overlapping Phrasing and Interactive</li>
         </ol>
       </div>
     </details>
@@ -112,9 +116,22 @@ Bridge and city skyline in the background."</span>&gt;</code></pre>
 </figure>
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;img aria-details="aaa" src="complex.png"
-<span class="highlight">alt="Venn diagram depicting content category
-relationships. Detailed description below"</span>&gt;</code></pre>
+<pre><code>&lt;figure class="example"&gt;
+  &lt;img src="image-complex.png"
+    alt="Venn diagram depicting content category
+    relationships. Detailed description below"
+    aria-details="complex-image-details"
+  &gt;
+  &lt;figcaption&gt;
+    &lt;details id="complex-image-details"&gt;
+      &lt;summary&gt;Image description&lt;/summary&gt;
+      &lt;div class="testing-images"&gt;      
+        &lt;h3&gt;HTML content categories include:&lt;/h3&gt;
+        ...
+      &lt;/div&gt;
+    &lt;/details&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
 </details>
 
 

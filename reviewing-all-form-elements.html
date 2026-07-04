@@ -9,8 +9,8 @@
 </head>
 <body>
 
-<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
-  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia logo" class="intopia-logo">
 </a>
 
 <h1>Reviewing all form elements</h1>
@@ -19,11 +19,14 @@
 <h2>1. <a href="https://html.spec.whatwg.org/#the-form-element" target="_blank"><code>&lt;form&gt;</code></a></h2>
 <p>The <code>&lt;form&gt;</code> element represents a document section containing interactive controls for submitting information.</p>
 <form action="#">
-  This an empty form
+  This is an empty form
 </form>
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;form action="#"&gt;
-  This an empty form
+  This is an empty form
 &lt;/form&gt;</code></pre>
+</details>
 
 
 <h2>2. <a href="https://html.spec.whatwg.org/#the-button-element" target="_blank"><code>&lt;button&gt;</code></a></h2>
@@ -31,14 +34,23 @@
 <form action="#">
   <button class="button">Save</button>
 </form>
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;button&gt;Save&lt;/button&gt;</code></pre>
+</details>
+
 
 <h2>3. <a href="https://html.spec.whatwg.org/#the-label-element" target="_blank"><code>&lt;label&gt;</code></a></h2>
 <p>The <code>&lt;label&gt;</code> element represents a caption for an item in a user interface.</p>
 <form action="#">
-  <label class="label">Label text</label>
+  <label for="example3" class="label">Label text</label>
+  <input id="example3" class="input" type="text">
 </form>
-<pre><code>&lt;label&gt;Label text&lt;/label&gt;</code></pre>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="example3"&gt;Label text&lt;/label&gt;
+&lt;input id="example3" type="text"&gt;</code></pre>
+</details>
 
 
 <h2>4. <a href="https://html.spec.whatwg.org/#the-input-element" target="_blank"><code>&lt;input&gt;</code></a></h2>
@@ -47,7 +59,10 @@
   <label for="text">Name</label>
   <input id="text" class="input" type="text">
 </form>
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;input id="text" type="text"&gt;</code></pre>
+</details>
 
 
 <h2>5. <a href="https://html.spec.whatwg.org/#the-textarea-element" target="_blank"><code>&lt;textarea&gt;</code></a></h2>
@@ -56,8 +71,10 @@
   <label class="label" for="comment">Comment</label>
   <textarea class="input" id="comment" rows="5"></textarea>
 </form>
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;textarea rows="5"&gt;&lt;/textarea&gt;</code></pre>
-
+</details>
 
 <h2>6. <a href="https://html.spec.whatwg.org/#the-select-element" target="_blank"><code>&lt;select&gt;</code></a></h2>
 <p>The <code>&lt;select&gt;</code> element represents a control that provides a menu of options.</p>
@@ -72,10 +89,13 @@
     <option>Apatosaurus</option>
   </select>
 </form>
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;select id="select"&gt;
   &lt;option&gt;Tyrannosaurus&lt;/option&gt;
   &lt;option&gt;Velociraptor&lt;/option&gt;
 &lt;/select&gt;</code></pre>
+</details>
 
 
 <h2>7. <a href="https://html.spec.whatwg.org/#the-option-element" target="_blank"><code>&lt;option&gt;</code></a></h2>
@@ -91,10 +111,13 @@
     <option>Apatosaurus</option>
   </select>
 </form>
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;select&gt;
   &lt;option&gt;Tyrannosaurus&lt;/option&gt;
   &lt;option&gt;Velociraptor&lt;/option&gt;
 &lt;/select&gt;</code></pre>
+</details>
 
 
 <h2>8. <a href="https://html.spec.whatwg.org/#the-optgroup-element" target="_blank"><code>&lt;optgroup&gt;</code></a></h2>
@@ -114,12 +137,15 @@
     </optgroup>
   </select>
 </form>
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;select&gt;
   &lt;optgroup label="Theropods"&gt;
     &lt;option&gt;Tyrannosaurus&lt;/option&gt;
     &lt;option&gt;Velociraptor&lt;/option&gt;
   &lt;/optgroup&gt;
 &lt;/select&gt;</code></pre>
+</details>
 
 
 <h2>9. <a href="https://html.spec.whatwg.org/#the-fieldset-element" target="_blank"><code>&lt;fieldset&gt;</code></a></h2>
@@ -129,10 +155,13 @@
     <legend>Fieldset legend</legend>
   </fieldset>
 </form>
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;fieldset&gt;
   &lt;legend&gt;Fieldset legend&lt;/legend&gt;
   &lt;p&gt;Form information&lt;/p&gt;  
 &lt;/fieldset&gt;</code></pre>
+</details>
 
 
 <h2>10. <a href="https://html.spec.whatwg.org/#the-legend-element" target="_blank"><code>&lt;legend&gt;</code></a></h2>
@@ -143,10 +172,13 @@
     <p>Form information</p>  
   </fieldset>
 </form>
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;fieldset&gt;
   &lt;legend&gt;Legend text&lt;/legend&gt;
   &lt;p&gt;Form information&lt;/p&gt;  
 &lt;/fieldset&gt;</code></pre>
+</details>
 
 
 <h2>11. <a href="https://html.spec.whatwg.org/#the-datalist-element" target="_blank"><code>&lt;datalist&gt;</code></a></h2>
@@ -162,10 +194,13 @@
     <option>Vanilla</option>
   </datalist>
 </form>
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;datalist id="flavour-list"&gt;
   &lt;option&gt;Chocolate&lt;/option&gt;
   &lt;option&gt;Coconut&lt;/option&gt;
 &lt;/datalist&gt;</code></pre>
+</details>
 
 
 <h2>12. <a href="https://html.spec.whatwg.org/#the-meter-element" target="_blank"><code>&lt;meter&gt;</code></a></h2>
@@ -176,9 +211,12 @@
     at 50/100
   </meter>
 </form>
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;meter low="33" high="66" value="50"&gt;
   at 50/100
 &lt;/meter&gt;</code></pre>
+</details>
 
 
 <h2>13. <a href="https://html.spec.whatwg.org/#the-output-element" target="_blank"><code>&lt;output&gt;</code></a></h2>
@@ -186,10 +224,13 @@
 <form action="#">
   <output>60</output>
 </form>
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;output&gt;
   60
 &lt;/output&gt;</code></pre>
 <p><a href="testing-output.html" target="_blank">Testing the output element</a></p>
+</details>
 
 
 <h2>14. <a href="https://html.spec.whatwg.org/#the-progress-element" target="_blank"><code>&lt;progress&gt;</code></a></h2>
@@ -198,13 +239,16 @@
   <label class="label" for="progress">File progress:</label>
   <progress id="progress" max="100" value="70"> 70% </progress>
 </form>
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;progress value="70"&gt;
   70%
 &lt;/progress&gt;</code></pre>
 <p><a href="testing-progress.html" target="_blank">Testing the progress element</a></p>
+</details>
 
 
-<h2>The <a href="https://html.spec.whatwg.org/#non-conforming-features" target="_blank"><code>&lt;keygen&gt;</code></a></h2>
+<h2>15. The <a href="https://html.spec.whatwg.org/#non-conforming-features" target="_blank"><code>&lt;keygen&gt;</code></a></h2>
 <p>The <code>&lt;keygen&gt;</code> element is now considered obsolete. This element was used to specify a key pair generator field used for forms. When the form is submitted, the private key is stored locally, and the public key is sent to the server.</p>
 
 

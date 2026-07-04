@@ -17,15 +17,15 @@
 </head>
 <body>
 
-<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
-  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia logo" class="intopia-logo">
 </a>
 
 <h1>Reviewing <code>aria-live="polite"</code></h1>
 <p>The container below has been set with <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-live" target="_blank"><code>aria-live="polite"</code></a>.</p>
 <ul>
   <li><b>Action</b>: After 8 seconds, a message will be injected into the container below.</li>
-  <li><b>Result</b>: The injected content should be announce at the next graceful opportunity.</li>
+  <li><b>Result</b>: The injected content should be announced at the next graceful opportunity.</li>
 </ul>
 
 
@@ -50,7 +50,7 @@
         var newParagraph = document.createElement("p");
 
         // Set the text content of the new paragraph
-        newParagraph.textContent = "This is an warning notification";
+        newParagraph.textContent = "This is a warning notification";
 
         // Append the new paragraph to the message element
         messageElement.appendChild(newParagraph);

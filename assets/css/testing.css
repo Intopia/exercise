@@ -331,6 +331,10 @@ Help and errors
   border-radius: .2em;
 }
 
+.comment {
+  color: #999;
+}
+
 .fail {
   color: #CC0000;
   font-weight: bold;

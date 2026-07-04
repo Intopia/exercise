@@ -17,8 +17,8 @@
 </head>
 <body>
 
-<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
-  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia logo" class="intopia-logo">
 </a>
 
 <h1>Reviewing <code>aria-busy</code></h1>
@@ -49,8 +49,10 @@
     // Inject the first paragraph after 5 seconds
     setTimeout(() => {
         const messageContainer = document.getElementById('message');
-        messageContainer.innerHTML += '<p>Dynamic content 1</p>';
-        
+        const p1 = document.createElement('p');
+        p1.textContent = 'Dynamic content 1';
+        messageContainer.appendChild(p1);
+
         // Change aria-busy to false after injecting the first paragraph
         setTimeout(() => {
             messageContainer.setAttribute('aria-busy', 'false');
@@ -59,15 +61,20 @@
 
     // Inject the second paragraph after 10 seconds
     setTimeout(() => {
-        document.getElementById('message').innerHTML += '<p>Dynamic content 2</p>';
+        const messageContainer = document.getElementById('message');
+        const p2 = document.createElement('p');
+        p2.textContent = 'Dynamic content 2';
+        messageContainer.appendChild(p2);
     }, 10000); // 10 seconds
 
     // Inject the third paragraph after 15 seconds
     setTimeout(() => {
-        document.getElementById('message').innerHTML += '<p>Dynamic content 3</p>';
+        const messageContainer = document.getElementById('message');
+        const p3 = document.createElement('p');
+        p3.textContent = 'Dynamic content 3';
+        messageContainer.appendChild(p3);
     }, 15000); // 15 seconds
 </script>
-
 
 <h2>Assistive technologies</h2>
 <div class="note">

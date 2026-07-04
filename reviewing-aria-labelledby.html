@@ -27,110 +27,167 @@
 </head>
 <body>
 
-<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia website home">
-  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia" class="intopia-logo">
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia logo" class="intopia-logo">
 </a>
 
 <h1>Reviewing <code>aria-labelledby</code></h1>
 
 <h2>Example 1: Using a child element</h2>
-
 <nav aria-labelledby="aardvark">
   <h3 id="aardvark">About us</h3>
 </nav>
-
+<p>Accessible name for the <code>&lt;h3&gt;</code> should be: "About us"</p>
+<p>Source:</p>
+<ul>
+  <li>contents of the <code>&lt;h3&gt;</code></li>
+</ul>
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;nav <span class="highlight">aria-labelledby="aardvark"</span>&gt;
   &lt;h3 <span class="highlight">id="aardvark"</span>&gt;About us&lt;/h3&gt;
 &lt;/nav&gt;</code></pre>
+</details>
+
 
 <!-- Section -->
 
 <h2>Example 2: Anywhere in the DOM</h2>
-
 <div class="example">
   <p id="bat">Buy Lawn Mower</p>
   <button aria-labelledby="bat">Buy</button>
 </div>
-
+<p>Accessible name for the <code>&lt;button&gt;</code> should be: "Buy Lawn Mower"</p>
+<p>Source:</p>
+<ul>
+  <li>"Buy Lawn Mower": from contents of the <code>&lt;p&gt;</code> with an ID of "bat"</li>
+</ul>
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;p <span class="highlight">id="bat"</span>&gt;Buy Lawn Mower&lt;/p&gt;
 &lt;button <span class="highlight">aria-labelledby="bat"</span>&gt;Buy&lt;/button&gt;</code></pre>
+</details>
+
 
 <!-- Section -->
 
 <h2>Example 3: More than one source</h2>
-
 <div class="example">
   <p id="cheetah">Buy Lawn Mower</p>
   <button aria-labelledby="cheetah zebra">Buy</button>
   <p id="zebra">On special</p>
 </div>
-
+<p>Accessible name for the <code>&lt;button&gt;</code> should be: "Buy Lawn Mower On special"</p>
+<p>Source:</p>
+<ul>
+  <li>"Buy Lawn Mower": from contents of the <code>&lt;p&gt;</code> with an ID of "cheetah"</li>
+  <li>"On special": from contents of the <code>&lt;p&gt;</code> with an ID of "zebra"</li>
+</ul>
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;p <span class="highlight">id="cheetah"</span>&gt;Buy Lawn Mower&lt;/p&gt;
 &lt;button <span class="highlight">aria-labelledby="cheetah zebra"</span>&gt;Buy&lt;/button&gt;
 &lt;p <span class="highlight">id="zebra"</span>&gt;On special&lt;/p&gt;</code></pre>
+</details>
+
 
 <!-- Section -->
 
 <h2>Example 4: Reference the element itself</h2>
-
 <div class="example">
   <p id="echidna">Lawn Mower</p>
   <button id="dingo" aria-labelledby="dingo echidna ferret">Buy</button>
   <p id="ferret">On special</p>
 </div>
-
+<p>Accessible name for the <code>&lt;button&gt;</code> should be: "Buy Lawn Mower On special"</p>
+<p>Source:</p>
+<ul>
+  <li>"Buy": from contents of the <code>&lt;button&gt;</code> with an ID of "dingo"</li>
+  <li>"Lawn Mower": from contents of the <code>&lt;p&gt;</code> with an ID of "echidna"</li>
+  <li>"On special": from contents of the <code>&lt;p&gt;</code> with an ID of "ferret"</li>
+</ul>
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;p <span class="highlight">id="echidna"</span>&gt;Lawn Mower&lt;/p&gt;
 &lt;button <span class="highlight">id="dingo" aria-labelledby="dingo echidna ferret"</span>&gt;Buy&lt;/button&gt;
 &lt;p <span class="highlight">id="ferret"</span>&gt;On special&lt;/p&gt;</code></pre>
+</details>
+
 
 <!-- Section -->
 
 <h2>Example 5: Hidden elements via <code>display: none</code></h2>
-
 <div class="example">
   <button aria-labelledby="gazelle">Buy</button>
   <p id="gazelle" style="display: none">Buy now</p>
 </div>
-
+<p>Accessible name for the <code>&lt;button&gt;</code> should be: "Buy now"</p>
+<p>Source:</p>
+<ul>
+  <li>"Buy now": from contents of the hidden <code>&lt;p&gt;</code> with an ID of "gazelle"</li>
+</ul>
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;button aria-labelledby="gazelle"&gt;Buy&lt;/button&gt;
 &lt;p id="gazelle" <span class="highlight">style="display: none"</span>&gt;Buy now&lt;/p&gt;</code></pre>
+</details>
+
 
 <!-- Section -->
 
 <h2>Example 6: Hidden elements via CSS</h2>
-
 <div class="example">
   <button aria-labelledby="hamster">Buy</button>
   <p id="hamster" class="off-screen">Buy now</p>
 </div>
-
+<p>Accessible name for the <code>&lt;button&gt;</code> should be: "Buy now"</p>
+<p>Source:</p>
+<ul>
+  <li>"Buy now": from contents of the hidden <code>&lt;p&gt;</code> with an ID of "hamster"</li>
+</ul>
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;button aria-labelledby="hamster"&gt;Buy&lt;/button&gt;
 &lt;p id="hamster" <span class="highlight">class="off-screen"</span>&gt;Buy now&lt;/p&gt;</code></pre>
+</details>
+
 
 <!-- Section -->
 
 <h2>Example 7: Hidden element via <code>aria-hidden="true"</code></h2>
-
 <div class="example">
-  <nav aria-labelledby="ibex"></nav>
+  <button aria-labelledby="ibex"></button>
   <p id="ibex" aria-hidden="true">Goodbye world</p>
 </div>
+<p>Accessible name for the <code>&lt;button&gt;</code> should be: "Goodbye world"</p>
+<p>Source:</p>
+<ul>
+  <li>"Goodbye world": from contents of the <p> with an ID of "ibex", despite aria-hidden="true"</li>
+</ul>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button aria-labelledby="ibex"&gt;&lt;/button&gt;
+&lt;p id="ibex" <span class="highlight">aria-hidden="true"</span>&gt;Goodbye world&lt;/p&gt;</code></pre>
+</details>
 
-<pre><code>&lt;nav aria-labelledby="ibex"&gt;&lt;/nav&gt;
-&lt;p id="ibex" aria-hidden="true"&gt;Goodbye world&lt;/p&gt;</code></pre>
 
 <!-- Section -->
 
 <h2>Example 8: Empty strings</h2>
-
 <div class="example">
   <button aria-labelledby="jackal">Hello world</button>
   <p id="jackal"></p>  
 </div>
-
+<p>Accessible name should be: Empty</p>
+<p>Source:</p>
+<ul>
+  <li>"": from contents of the hidden <code>&lt;p&gt;</code> with an ID of "jackal"</li>
+</ul>
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;button aria-labelledby="jackal"&gt;<span class="highlight">Hello world</span>&lt;/button&gt;
 <span class="highlight">&lt;p id="jackal"&gt;&lt;/p&gt;</span></code></pre>
-
+</details>
 
 <!-- Section -->
 
