@@ -6,6 +6,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
+<style>
+
+.focus-container {
+  padding: 1em 0 0;
+}
+
+.focus-heading:focus {
+  color: #000;
+  outline: 0;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 5px #000;
+  animation: fade 5s forwards;
+}
+
+@keyframes fade {
+  0% {
+    background-color: #FFFF00;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+</style>
 </head>
 <body>
 
@@ -23,9 +46,12 @@
   <li>Determine HTML elements relative ordering for sequential focus navigation</li>
 </ol>
 
+
 <h2>A positive number</h2>
 
 <p>A positive value means the element should be focusable in sequential keyboard navigation, with its order defined by the value of the number. The maximum value for tabindex is 32767.</p>
+
+<p>Note: Positive <code>tabindex</code> values override the page&rsquo;s natural keyboard focus order. This can create a confusing navigation experience for keyboard users and make interfaces harder to maintain. Positive <code>tabindex</code> values <b>should be avoided</b>. Instead, arrange the HTML so the natural tab order is correct.</p>
 
 <div class="example">
   <ul>
@@ -37,35 +63,81 @@
   </ul>
 </div>
 
+
 <h2>A "0" number</h2>
 
 <p><code>tabindex="0"</code> means that the element should be focusable in sequential keyboard navigation, after any positive tabindex values. The focus navigation order of these elements is defined by their order in the document source.</p>
+
+<p>Unlike positive <code>tabindex</code> values, <code>tabindex="0"</code> does not override the page&rsquo;s natural keyboard tab order. When used appropriately, it does not introduce the focus order problems associated with positive <code>tabindex</code> values.</p>
 
 <div class="example">
   <ul>
     <li><a href="#">Link 6</a></li>
     <li><a href="#" tabindex="0">Link 8</a> - with tabindex="0"</li>
-    <li><a href="#">Link 8</a></li>
     <li><a href="#">Link 9</a></li>
     <li><a href="#">Link 10</a></li>
+    <li><a href="#">Link 11</a></li>
   </ul>
 </div>
 
+
 <h2>A "-1" number</h2>
 
-<p>A negative value means that the element is not reachable via sequential keyboard navigation. JavaScript can be used to send focus to the element.</p>
+<p><code>tabindex="-1"</code> means the element is not reachable via sequential keyboard navigation, but it can still receive focus programmatically.</p>
+
+<p><code>tabindex="-1"</code> removes an element from the normal keyboard tab order, so keyboard users cannot reach it by pressing <kbd>TAB</kbd>. However, the element can still receive focus programmatically, such as by calling element.focus() in JavaScript.</p>
+
+<p>Once focus has moved away, the element is no longer part of the normal tab sequence and won't receive focus again unless JavaScript moves focus back to it.</p>
+
+<p>This makes <code>tabindex="-1"</code> useful for accessibility patterns where focus needs to be managed, such as:</p>
+
+<ul>
+  <li>moving focus to an error summary after form submission</li>
+  <li>moving focus to a dialog or its heading when a modal opens</li>
+</ul>
+
+<p>Use the button below to add a new element to the page. When the element is added, JavaScript sends focus to it.</p>
 
 <div class="example">
-  <ul>
-    <li><a href="#">Link 11</a></li>
-    <li><a href="#" tabindex="-1">Link 12</a> - with tabindex="-1"</li>
-    <li><a href="#">Link 13</a></li>
-    <li><a href="#">Link 14</a></li>
-    <li><a href="#">Link 15</a></li>
-  </ul>
+
+  <button type="button" id="toggle-tabindex-example" aria-expanded="false" aria-controls="tabindex-minus-one-container">Add element</button>
+
+  <div id="tabindex-minus-one-container"></div>
+
+  <p><a href="#">Example link after the injected element</a></p>
 </div>
   
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
+
+<script>
+  const toggleButton = document.querySelector('#toggle-tabindex-example');
+  const container = document.querySelector('#tabindex-minus-one-container');
+
+  toggleButton.addEventListener('click', () => {
+    const injectedElement = document.querySelector('#injected-tabindex-example');
+
+    if (injectedElement) {
+      injectedElement.remove();
+      toggleButton.textContent = 'Add element';
+      toggleButton.setAttribute('aria-expanded', 'false');
+      return;
+    }
+
+    container.innerHTML = `
+      <div class="focus-container">
+        <h3 id="injected-tabindex-example" tabindex="-1" class="focus-heading">New heading with <code>tabindex="-1"</code></h3>
+        <p>This element has been added to the page and focus has been sent to it using JavaScript.</p>
+        <p>Press <kbd>TAB</kbd> to move away from this element. Then keep tabbing. This element will not receive focus again because it is not part of the normal tab order.</p>
+      </div>
+    `;
+
+    const newElement = document.querySelector('#injected-tabindex-example');
+    newElement.focus();
+
+    toggleButton.textContent = 'Remove element';
+    toggleButton.setAttribute('aria-expanded', 'true');
+  });
+</script>
 </body>
 </html>

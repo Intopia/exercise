@@ -55,7 +55,7 @@
 
 
 <h2>Type 2: Ordered list</h2>
-<p>The <code>&lt;ol&gt;</code> element represents an ordered list of items — typically rendered as a numbered list.</p>
+<p>The <code>&lt;ol&gt;</code> element represents an ordered list of items. Ordered lists are typically rendered as a numbered list.</p>
 <div class="example">
   <ol>
     <li>Make the bed</li>
@@ -120,6 +120,9 @@
 
 
 <h2>A styled unordered list</h2>
+
+<p>Note: If you remove the bullets from a list using <code>list-style: none</code>, Safari with VoiceOver may no longer recognise it as a list. It won&rsquo;t announce that it&rsquo;s a list or how many items it contains, even though the <code>&lt;ul&gt;</code> and <code>&lt;li&gt;</code> elements are still present. Other browser and screen reader combinations are not affected. If you need to remove the bullets while keeping the list semantics, add <code>role="list"</code> to the <code>&lt;ul&gt;</code> and <code>role="listitem"</code> to each <code>&lt;li&gt;</code>.</p>
+
 <div class="example">
   <ul class="styled-list">
     <li>Rabbits</li>

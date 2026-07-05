@@ -18,6 +18,7 @@
 
 
 <h2>1. A standard link</h2>
+<p>A link with text such as <q>Read more</q> provides little context on its own. If several links on a page use the same text, screen reader users may find it difficult to tell them apart.</p>
 <div class="example">
   <a href="#">Read more</a>
 </div>
@@ -25,12 +26,17 @@
   <li>Visible text: Read more</li>
   <li>Accessible name: Read more</li>
 </ul>
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;a href="#"&gt;
   Read more
 &lt;/a&gt;</code></pre>
+</details>
 
 
 <h2>2. A link with additional information via <code>aria-label</code></h2>
+<p>Using <code>aria-label</code> adds extra context to the accessible name while leaving the visible text unchanged. This creates a more meaningful and unique link for screen reader users.</p>
+<p>While <code>aria-label</code> can provide additional context for screen reader users, it is usually better to make link text descriptive for everyone. For example, <q>Read more about wombats</q> is generally preferable to a visible <q>Read more</q> link with an <code>aria-label</code>.</p>
 <div class="example">
   <a href="#" aria-label="Read more about wombats">
     Read more
@@ -40,12 +46,16 @@
   <li>Visible text: Read more</li>
   <li>Accessible name: Read more about wombats</li>
 </ul>
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;a href="#" <span class="highlight">aria-label="Read more about wombats"</span>&gt;
   Read more
 &lt;/a&gt;</code></pre>
+</details>
 
 
 <h2>3. A PDF link</h2>
+<p>Links to files such as PDFs should identify the file type and, where practical, the file size. This helps people understand what will happen when they activate the link and decide whether they want to download the file.</p>
 <div class="example">
   <a href="#">
     Australian Government Annual report (52KB PDF)
@@ -55,12 +65,19 @@
   <li>Visible text: Australian Government Annual report (52KB PDF)</li>
   <li>Accessible name: Australian Government Annual report (52KB PDF)</li>
 </ul>
-<pre><code>&lt;a href="#"&gt;
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;a href=""&gt;
   Australian Government Annual report <span class="highlight">(52KB PDF)</span>
 &lt;/a&gt;</code></pre>
+</details>
 
 
-<h2>4. An external link - option 1</h2>
+<h2>4. An external link</h2>
+<p>Indicating that a link leads to an external website helps people understand where they are going before activating the link, allowing them to decide whether they want to continue.</p>
+
+<h3>Option 1</h3>
+<p>This example includes this information directly in the visible text, so every visitor reads the same warning.</p>
 <div class="example">
   <a href="https://intopia.digital/" target="_blank">
   Intopia (External link)
@@ -70,13 +87,18 @@
   <li>Visible text: Intopia (External link)</li>
   <li>Accessible name: Intopia (External link)</li>
 </ul>
-<pre><code>&lt;a href="#"&gt;
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;a href="https://intopia.digital/" target="_blank"&gt;
   Intopia (External link)
 &lt;/a&gt;</code></pre>
+</details>
 
-<h2>5. An external link - option 2</h2>
+
+<h3>Option 2</h3>
+<p>This example conveys it two different ways at once: a visual icon signals it to sighted users, while <code>aria-label</code> provides the equivalent information to screen reader users.</p>
 <div class="example">
-  <a href="https://intopia.digital/" target="_blank" class="external"  aria-label="Intopia. External link.">
+  <a href="https://intopia.digital/" target="_blank" class="external" aria-label="Intopia. External link">
     Intopia
   </a>
 </div>
@@ -84,9 +106,15 @@
   <li>Visible text: Intopia</li>
   <li>Accessible name: Intopia. External link</li>
 </ul>
-<pre><code>&lt;a href="#" <span class="highlight">aria-label="Intopia. External link"</span>&gt;
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;a href="https://intopia.digital/" target="_blank"
+  <span class="highlight">aria-label="Intopia. External link"</span>
+&gt;
   Intopia
 &lt;/a&gt;</code></pre>
+</details>
+
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
