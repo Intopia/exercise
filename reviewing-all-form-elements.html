@@ -14,13 +14,19 @@
 </a>
 
 <h1>Reviewing all form elements</h1>
-  
+
+
+<!-- section -->
+
 
 <h2>1. <a href="https://html.spec.whatwg.org/#the-form-element" target="_blank"><code>&lt;form&gt;</code></a></h2>
+
 <p>The <code>&lt;form&gt;</code> element represents a document section containing interactive controls for submitting information.</p>
+
 <form action="#">
   This is an empty form
 </form>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;form action="#"&gt;
@@ -29,23 +35,35 @@
 </details>
 
 
+<!-- section -->
+
+
 <h2>2. <a href="https://html.spec.whatwg.org/#the-button-element" target="_blank"><code>&lt;button&gt;</code></a></h2>
+
 <p>The <code>&lt;button&gt;</code> element is an interactive element activated by a user with a mouse, keyboard, finger, voice command, or other assistive technology. Once activated, it then performs an action, such as submitting a form or opening a dialog.</p>
+
 <form action="#">
   <button class="button">Save</button>
 </form>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;button&gt;Save&lt;/button&gt;</code></pre>
 </details>
 
 
+<!-- section -->
+
+
 <h2>3. <a href="https://html.spec.whatwg.org/#the-label-element" target="_blank"><code>&lt;label&gt;</code></a></h2>
+
 <p>The <code>&lt;label&gt;</code> element represents a caption for an item in a user interface.</p>
+
 <form action="#">
   <label for="example3" class="label">Label text</label>
   <input id="example3" class="input" type="text">
 </form>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;label for="example3"&gt;Label text&lt;/label&gt;
@@ -53,31 +71,49 @@
 </details>
 
 
+<!-- section -->
+
+
 <h2>4. <a href="https://html.spec.whatwg.org/#the-input-element" target="_blank"><code>&lt;input&gt;</code></a></h2>
+
 <p>The <code>&lt;input&gt;</code> element is used to create interactive controls for web-based forms in order to accept data from the user.</p>
+
 <form action="#">
   <label for="text">Name</label>
   <input id="text" class="input" type="text">
 </form>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;input id="text" type="text"&gt;</code></pre>
 </details>
 
 
+<!-- section -->
+
+
 <h2>5. <a href="https://html.spec.whatwg.org/#the-textarea-element" target="_blank"><code>&lt;textarea&gt;</code></a></h2>
+
 <p>The <code>&lt;textarea&gt;</code> element represents a multi-line plain-text editing control.</p>
+
 <form action="#">
   <label class="label" for="comment">Comment</label>
   <textarea class="input" id="comment" rows="5"></textarea>
 </form>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;textarea rows="5"&gt;&lt;/textarea&gt;</code></pre>
 </details>
 
+
+<!-- section -->
+
+
 <h2>6. <a href="https://html.spec.whatwg.org/#the-select-element" target="_blank"><code>&lt;select&gt;</code></a></h2>
+
 <p>The <code>&lt;select&gt;</code> element represents a control that provides a menu of options.</p>
+
 <form action="#">
   <label class="label" for="select">Choose a dinosaur:</label>
   <select class="input" id="select">
@@ -89,6 +125,7 @@
     <option>Apatosaurus</option>
   </select>
 </form>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;select id="select"&gt;
@@ -98,8 +135,13 @@
 </details>
 
 
+<!-- section -->
+
+
 <h2>7. <a href="https://html.spec.whatwg.org/#the-option-element" target="_blank"><code>&lt;option&gt;</code></a></h2>
+
 <p>The <code>&lt;option&gt;</code> element is used to define an item contained in a <code>&lt;select&gt;</code>, an <code>&lt;optgroup&gt;</code>, or a <code>&lt;datalist&gt;</code> element.</p>
+
 <form action="#">
   <label class="label" for="option">Choose a dinosaur:</label>
   <select class="input" id="option">
@@ -111,6 +153,7 @@
     <option>Apatosaurus</option>
   </select>
 </form>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;select&gt;
@@ -120,8 +163,13 @@
 </details>
 
 
+<!-- section -->
+
+
 <h2>8. <a href="https://html.spec.whatwg.org/#the-optgroup-element" target="_blank"><code>&lt;optgroup&gt;</code></a></h2>
+
 <p>The <code>&lt;optgroup&gt;</code> HTML element creates a grouping of options within a <code>&lt;select&gt;</code> element.</p>
+
 <form action="#">
   <label class="label" for="optgroup">Choose a dinosaur:</label>
   <select class="input" id="optgroup">
@@ -137,6 +185,7 @@
     </optgroup>
   </select>
 </form>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;select&gt;
@@ -148,13 +197,19 @@
 </details>
 
 
+<!-- section -->
+
+
 <h2>9. <a href="https://html.spec.whatwg.org/#the-fieldset-element" target="_blank"><code>&lt;fieldset&gt;</code></a></h2>
+
 <p>The <code>&lt;fieldset&gt;</code> element is used to group several controls as well as labels within a form.</p>
+
 <form action="#">
   <fieldset>
     <legend>Fieldset legend</legend>
   </fieldset>
 </form>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;fieldset&gt;
@@ -164,14 +219,20 @@
 </details>
 
 
+<!-- section -->
+
+
 <h2>10. <a href="https://html.spec.whatwg.org/#the-legend-element" target="_blank"><code>&lt;legend&gt;</code></a></h2>
+
 <p>The <code>&lt;legend&gt;</code> element represents a caption for the content of its parent <code>&lt;fieldset&gt;</code>.</p>
+
 <form action="#">
   <fieldset>
     <legend>Legend text</legend>
     <p>Form information</p>  
   </fieldset>
 </form>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;fieldset&gt;
@@ -181,8 +242,13 @@
 </details>
 
 
+<!-- section -->
+
+
 <h2>11. <a href="https://html.spec.whatwg.org/#the-datalist-element" target="_blank"><code>&lt;datalist&gt;</code></a></h2>
+
 <p>The <code>&lt;datalist&gt;</code> element contains a set of <code>&lt;option&gt;</code> elements that represent the permissible or recommended options available to choose from within other controls.</p>
+
 <form action="#">
   <label class="label" for="flavour">Choose a flavor:</label>
   <input class="input" list="flavour-list" id="flavour">
@@ -194,6 +260,7 @@
     <option>Vanilla</option>
   </datalist>
 </form>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;datalist id="flavour-list"&gt;
@@ -203,14 +270,20 @@
 </details>
 
 
+<!-- section -->
+
+
 <h2>12. <a href="https://html.spec.whatwg.org/#the-meter-element" target="_blank"><code>&lt;meter&gt;</code></a></h2>
+
 <p>The <code>&lt;meter&gt;</code> element represents either a scalar value within a known range or a fractional value.</p>
+
 <form action="#">
   <label class="label" for="fuel">Fuel level:</label>
   <meter id="fuel" min="0" max="100" low="33" high="66" optimum="80" value="50">
     at 50/100
   </meter>
 </form>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;meter low="33" high="66" value="50"&gt;
@@ -219,11 +292,17 @@
 </details>
 
 
+<!-- section -->
+
+
 <h2>13. <a href="https://html.spec.whatwg.org/#the-output-element" target="_blank"><code>&lt;output&gt;</code></a></h2>
+
 <p>The <code>&lt;output&gt;</code> element is a container element into which a site or app can inject the results of a calculation or the outcome of a user action.</p>
+
 <form action="#">
   <output>60</output>
 </form>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;output&gt;
@@ -233,22 +312,28 @@
 </details>
 
 
+<!-- section -->
+
+
 <h2>14. <a href="https://html.spec.whatwg.org/#the-progress-element" target="_blank"><code>&lt;progress&gt;</code></a></h2>
+
 <p>The <code>&lt;progress&gt;</code> element displays an indicator showing the completion progress of a task, typically displayed as a progress bar.</p>
 <form action="#">
   <label class="label" for="progress">File progress:</label>
   <progress id="progress" max="100" value="70"> 70% </progress>
 </form>
+
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;progress value="70"&gt;
-  70%
-&lt;/progress&gt;</code></pre>
-<p><a href="testing-progress.html" target="_blank">Testing the progress element</a></p>
+<pre><code>&lt;progress value="70"&gt;70%&lt;/progress&gt;</code></pre>
 </details>
 
 
+<!-- section -->
+
+
 <h2>15. The <a href="https://html.spec.whatwg.org/#non-conforming-features" target="_blank"><code>&lt;keygen&gt;</code></a></h2>
+
 <p>The <code>&lt;keygen&gt;</code> element is now considered obsolete. This element was used to specify a key pair generator field used for forms. When the form is submitted, the private key is stored locally, and the public key is sent to the server.</p>
 
 

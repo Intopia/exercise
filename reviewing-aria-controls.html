@@ -6,6 +6,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
+<style>
+
+.focus-container {
+  padding: 1em 0 0;
+}
+
+.focus-heading:focus {
+  color: #000;
+  outline: 0;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 5px #000;
+  animation: fade 5s forwards;
+}
+
+@keyframes fade {
+  0% {
+    background-color: #FFFF00;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+</style>
 </head>
 <body>
 
@@ -14,6 +37,7 @@
 </a>
 
 <h1>Reviewing <code>aria-controls</code></h1>
+
 <p>The button below uses <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-controls">aria-controls</a> to create a relationship between the controller (the button) and the controlled element (the content panel).
 </p>
 
@@ -27,7 +51,6 @@
   </button>
   <div id="extra-info" hidden></div>
 </div>
-
 
 <details>
   <summary>HTML markup</summary>
@@ -43,7 +66,6 @@
 <span class="comment">&lt;!-- "hidden" removed when button activated --&gt;</span></code></pre>
 </details>
 
-
 <script>
 const button = document.getElementById('toggle');
 const panel = document.getElementById('extra-info');
@@ -54,21 +76,35 @@ button.addEventListener('click', () => {
   if (expanded) {
     button.setAttribute('aria-expanded', 'false');
     button.textContent = 'Show extra information';
+
     panel.hidden = true;
     panel.innerHTML = '';
-  } else {
-    button.setAttribute('aria-expanded', 'true');
-    button.textContent = 'Hide extra information';
-    panel.hidden = false;
-    panel.innerHTML = `
-      <p>This content was added by JavaScript.</p>
-    `;
+    return;
   }
+
+  button.setAttribute('aria-expanded', 'true');
+  button.textContent = 'Hide extra information';
+
+  panel.hidden = false;
+  panel.innerHTML = `
+    <div class="focus-container">
+      <h2 id="extra-info-heading" tabindex="-1" class="focus-heading">
+        Extra information
+      </h2>
+
+      <p>
+        This content was added by JavaScript. Focus was then moved to the heading,
+        which has <code>tabindex="-1"</code>.
+      </p>
+    </div>
+  `;
+
+  document.getElementById('extra-info-heading').focus();
 });
 </script>
 
-
 <p>Note: <code>aria-controls</code> has inconsistent support across browser and screen reader combinations. Many screen readers do not announce the relationship during normal navigation. It is still worth using because some assistive technologies and accessibility tools expose these relationships.</p>
+
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>

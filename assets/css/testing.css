@@ -354,7 +354,6 @@ Help and errors
 }
 
 .required {
-  font-size: .9em;
   color: #BB0000;
 }
 
@@ -423,17 +422,16 @@ Hidden
 
 .sr-only,
 .hidden {
-  border: 0 !important;
-  clip: rect(1px, 1px, 1px, 1px) !important;
-  -webkit-clip-path: inset(50%) !important;
-    clip-path: inset(50%) !important;
-  height: 1px !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-  padding: 0 !important;
   position: absolute !important;
   width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
   white-space: nowrap !important;
+  clip: rect(0 0 0 0) !important; /* legacy fallback, safe to keep */
+  clip-path: inset(50%) !important;
+  border: 0 !important;
 }
 
 /* ---------------------
@@ -584,7 +582,6 @@ search {
   background: #efefef;
   margin: 0 0 1em;
 }
-
 
 search form {
   margin: 0;

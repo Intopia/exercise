@@ -45,18 +45,23 @@ margin: 1.5em 0 2em;
 
 <h1>Reviewing <code>aria-label</code></h1>
 
-<h2>Test cases</h2>
 
-<h3>Group 1. Interactive element with aria-label</h3>
+<!-- section -->
 
-<h4>1.1 No visible label - such as an icon inside a button</h4>
+
+<h2>Group 1. Interactive element with aria-label</h2>
+
+<h3>1.1 No visible label - such as an icon inside a button</h3>
 
 <div class="example">
   <button aria-label="Buy"></button>
 </div>
 
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;button <span class="highlight">aria-label="Buy"</span>&gt;
 &lt;/button&gt;</code></pre>
+</details>
 
 <p>Pass criteria: The <code>&lt;button&gt;</code> has a name of "Buy" that is presented in the accessibility tree.</p>
 
@@ -98,15 +103,18 @@ margin: 1.5em 0 2em;
   </tbody>
 </table>
 
-<h4>1.2 Different accessible name to visible text label</h4>
+<h3>1.2 Different accessible name to visible text label</h3>
 
 <div class="example">
   <button aria-label="Add to cart">Add</button>
 </div>
 
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;button <span class="highlight">aria-label="Add to cart"</span>&gt;
   Add
 &lt;/button&gt;</code></pre>
+</details>
 
 <p>Pass criteria: The <code>&lt;button&gt;</code> has a name of "Add to cart" that is presented in the accessibility tree.</p>
 
@@ -148,18 +156,22 @@ margin: 1.5em 0 2em;
   </tbody>
 </table>
 
-<hr>
+
+<!-- section -->
 
 
-<h3>Group 2. Landmark element with aria-label</h3>
+<h2>Group 2. Landmark element with aria-label</h2>
 
 <div class="example">
   <nav aria-label="Primary">
   </nav>
 </div>
 
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;nav <span class="highlight">aria-label="Primary"</span>&gt;
 &lt;/nav&gt;</code></pre>
+</details>
 
 <p>Pass criteria: The <code>&lt;nav&gt;</code> has a name "Primary" that is presented in the accessibility tree.</p>
 
@@ -201,12 +213,13 @@ margin: 1.5em 0 2em;
   </tbody>
 </table>
 
-<hr>
+
+<!-- section -->
 
 
-<h3>Group 3. Static element with a role and aria-label</h3>
+<h2>Group 3. Static element with a role and aria-label</h2>
 
-<h4>3.1. Role="menu"</h4>
+<h3>3.1. Role="menu"</h3>
 
 <div class="example">
   <ul role="menu" aria-label="Actions" class="menulist">
@@ -220,11 +233,14 @@ margin: 1.5em 0 2em;
 
 <p>However, it is a valid use-case where <code>aria-label</code> can be applied to a static element, because an ARIA <code>role</code> is present.</p>
 
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;ul <span class="highlight">role="menu"</span> <span class="highlight">aria-label="Actions"</span>&gt;
   &lt;li role="menuitem"&gt;Item 1&lt;/li&gt;
   &lt;li role="menuitem"&gt;Item 2&lt;/li&gt;
   &lt;li role="menuitem"&gt;Item 3&lt;/li&gt;
 &lt;/ul&gt;</code></pre>
+</details>
 
 <p>Pass criteria: The <code>&lt;ul&gt;</code> has a name "Actions" that is presented in the accessibility tree.</p>
 
@@ -266,7 +282,7 @@ margin: 1.5em 0 2em;
   </tbody>
 </table>
 
-<h4>3.2. Role="img"</h4>
+<h3>3.2. Role="img"</h3>
 
 <div class="example">
   <span role="img" aria-label="Rating: 4 out of 5 stars">
@@ -282,6 +298,8 @@ margin: 1.5em 0 2em;
 
 <p>This is another valid use-case where <code>aria-label</code> can be applied to a static element, because an ARIA role is present.</p>
 
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;span role="img" <span class="highlight">aria-label="Rating: 4 out of 5 stars"</span>&gt;
   &lt;span&gt;★&lt;/span&gt;
   &lt;span&gt;★&lt;/span&gt;
@@ -289,6 +307,7 @@ margin: 1.5em 0 2em;
   &lt;span&gt;★&lt;/span&gt;
   &lt;span&gt;☆&lt;/span&gt;
 &lt;/span&gt;</code></pre>
+</details>
 
 <p>Pass criteria: The <code>&lt;span&gt;</code> has a name "Rating: 4 out of 5 stars" that is presented in the accessibility tree.</p>
 
@@ -330,62 +349,11 @@ margin: 1.5em 0 2em;
   </tbody>
 </table>
 
-<!--
-<h4>3.3. Role="dialog"</h4>
 
-<div class="example">
-  <div role="dialog" aria-label="Settings" class="example32"></div>
-</div>
-
-<p>This pattern is shown for demonstration purposes only and is not recommended in production without additional work.</p>
-
-<pre><code>&lt;div <span class="highlight">role="dialog"</span> <span class="highlight">aria-label="Settings"</span>&gt;
-&lt;/div&gt;</code></pre>
-
-<p>Pass criteria: The <code>&lt;div&gt;</code> has a name "Settings" that is presented in the accessibility tree.</p>
-
-<table>
-  <caption>3.3. Results</caption>
-  <thead>
-    <tr>
-      <th>OS</th>
-      <th>Browser</th>
-      <th>Result</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>MacOS</td>
-      <td>Chrome</td>
-      <td><span class="pass">Pass</span></td>
-    </tr>
-    <tr>
-      <td>MacOS</td>
-      <td>Firefox</td>
-      <td><span class="pass">Pass</span></td>
-    </tr>
-    <tr>
-      <td>MacOS</td>
-      <td>Safari</td>
-      <td><span class="pass">Pass</span></td>
-    </tr>
-    <tr>
-      <td>Windows</td>
-      <td>Chrome</td>
-      <td><span class="pass">Pass</span></td>
-    </tr>
-    <tr>
-      <td>Windows</td>
-      <td>Firefox</td>
-      <td><span class="pass">Pass</span></td>
-    </tr>
-  </tbody>
-</table>
--->
-<hr>
+<!-- section -->
 
 
-<h3>Group 4. Static element with aria-label inside interactive element</h3>
+<h2>Group 4. Static element with aria-label inside interactive element</h2>
 
 <div class="example">
   <button>
@@ -393,9 +361,12 @@ margin: 1.5em 0 2em;
   </button>
 </div>
 
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;button&gt;
   &lt;span <span class="highlight">aria-label="Close"</span>&gt;&lt;/span&gt;
 &lt;/button&gt;</code></pre>
+</details>
 
 <p>Pass criteria: The <code>&lt;button&gt;</code> has a name "Close" that is presented in the accessibility tree.</p>
 
@@ -439,12 +410,13 @@ margin: 1.5em 0 2em;
 
 <p>This is invalid HTML. The element's role, explicit or implicit, is on the list of roles that must not be given an accessible name (generic, presentation, etc. per the current ARIA-in-HTML spec). Browsers may still expose a name in practice, but this pattern should not be used in production.</p>
 
-<hr>
+
+<!-- section -->
 
 
-<h3>Group 5. Non-interactive element with aria-label</h3>
+<h2>Group 5. Non-interactive element with aria-label</h2>
 
-<h4>5.1 Non-interactive without role or focus:</h4>
+<h3>5.1 Non-interactive without role or focus:</h3>
 
 <div class="example">
   <span aria-label="Contact" class="example32"></span>
@@ -452,8 +424,11 @@ margin: 1.5em 0 2em;
 
 <p>This pattern is shown for demonstration purposes only and is not recommended in production.</p>
 
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;span <span class="highlight">aria-label="Contact"</span>&gt;
 &lt;/span&gt;</code></pre>
+</details>
 
 <p>Pass criteria: The <code>&lt;span&gt;</code> has a name "Contact" that is presented in the accessibility tree.</p>
 
@@ -497,7 +472,7 @@ margin: 1.5em 0 2em;
 
 <p>This is invalid HTML. The element's role, explicit or implicit, is on the list of roles that must not be given an accessible name (generic, presentation, etc. per the current ARIA-in-HTML spec). Browsers may still expose a name in practice, but this pattern should not be used in production.</p>
 
-<h4>5.2 Non-interactive that can receive focus</h4>
+<h3>5.2 Non-interactive that can receive focus</h3>
 
 <div class="example">
   <div tabindex="0" aria-label="Card" class="example32"></div>
@@ -505,8 +480,11 @@ margin: 1.5em 0 2em;
 
 <p>This pattern is shown for demonstration purposes only and is not recommended in production without additional work.</p>
 
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;div <span class="highlight">tabindex="0"</span> <span class="highlight">aria-label="Card"</span>&gt;
 &lt;/div&gt;</code></pre>
+</details>
 
 <p>Pass criteria: The <code>&lt;div&gt;</code> has a name "Card" that is presented in the accessibility tree.</p>
 
@@ -550,12 +528,13 @@ margin: 1.5em 0 2em;
 
 <p>This is invalid HTML. The element's role, explicit or implicit, is on the list of roles that must not be given an accessible name (generic, presentation, etc. per the current ARIA-in-HTML spec). Browsers may still expose a name in practice, but this pattern should not be used in production.</p>
 
-<hr>
+
+<!-- section -->
 
 
-<h3>Group 6. Name explicitly suppressed</h3>
+<h2>Group 6. Name explicitly suppressed</h2>
 
-<h4>6.1 Role suppresses semantics</h4>
+<h3>6.1 Role suppresses semantics</h3>
 
 <div class="example">
   <span role="presentation" aria-label="Help" class="example32"></span>
@@ -563,8 +542,11 @@ margin: 1.5em 0 2em;
 
 <p>This pattern is shown for demonstration purposes only and is not recommended in production.</p>
 
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;span <span class="highlight">role="presentation"</span> <span class="highlight">aria-label="Help"</span>&gt;
 &lt;/span&gt;</code></pre>
+</details>
 
 <p>Pass criteria: The <code>&lt;span&gt;</code> has a name "Help" that is presented in the accessibility tree.</p>
 
@@ -608,7 +590,7 @@ margin: 1.5em 0 2em;
 
 <p>This is invalid HTML. The element's role, explicit or implicit, is on the list of roles that must not be given an accessible name (generic, presentation, etc. per the current ARIA-in-HTML spec). Browsers may still expose a name in practice, but this pattern should not be used in production.</p>
 
-<h4>6.2 Element hidden</h4>
+<h3>6.2 Element hidden</h3>
 
 <div class="example">
   <span aria-hidden="true" aria-label="Delete" class="example32"></span>
@@ -616,8 +598,11 @@ margin: 1.5em 0 2em;
 
 <p>This pattern is shown for demonstration purposes only and is not recommended in production.</p>
 
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;span <span class="highlight">aria-hidden="true"</span> <span class="highlight">aria-label="Delete"</span>&gt;
 &lt;/span&gt;</code></pre>
+</details>
 
 <p>Pass criteria: The element should have no name in the accessibility tree.</p>
 

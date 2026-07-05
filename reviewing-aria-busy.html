@@ -22,7 +22,9 @@
 </a>
 
 <h1>Reviewing <code>aria-busy</code></h1>
+
 <p>The container below has been set with <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-live" target="_blank"><code>aria-live="assertive"</code></a> and <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-busy" target="_blank"><code>aria-busy="true"</code></a>.</p>
+
 <ul>
   <li><b>Action</b>: After 5 seconds, message 1 will be injected into the container below.</li>
   <li><b>Result</b>: As the container is &lsquo;busy&rsquo;, this dynamic change should not be announced.</li>
@@ -34,16 +36,16 @@
 </ul>
 
 
-<h2>Example</h2>
+<!-- section -->
 
+
+<h2>Example</h2>
 
 <div class="example">
   <div id="message" aria-live="assertive" aria-busy="true"></div>
 </div>
 
-
 <p>If a screen reader is focused on announcing this paragraph, will the dynamically injected message above affect the announcement of this paragraph? This is how we can determine whether dynamic information is announced immediately, at the next graceful opportunity, or not at all.</p>
-
 
 <script>
     // Inject the first paragraph after 5 seconds
@@ -75,6 +77,10 @@
         messageContainer.appendChild(p3);
     }, 15000); // 15 seconds
 </script>
+
+
+<!-- section -->
+
 
 <h2>Assistive technologies</h2>
 <div class="note">

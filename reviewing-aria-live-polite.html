@@ -22,23 +22,25 @@
 </a>
 
 <h1>Reviewing <code>aria-live="polite"</code></h1>
+
 <p>The container below has been set with <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-live" target="_blank"><code>aria-live="polite"</code></a>.</p>
+
 <ul>
   <li><b>Action</b>: After 8 seconds, a message will be injected into the container below.</li>
   <li><b>Result</b>: The injected content should be announced at the next graceful opportunity.</li>
 </ul>
 
 
-<h2>Example</h2>
+<!-- section -->
 
+
+<h2>Example</h2>
 
 <div class="example">
   <div id="message" class="warning" aria-live="polite"></div>
 </div>
 
-
 <p>If a screen reader is focused on announcing this paragraph, will the dynamically injected message above affect the announcement of this paragraph? This is how we can determine whether dynamic information is announced immediately, at the next graceful opportunity, or not at all.</p>
-
 
 <script>
     // Function to inject a new paragraph into the element with id "message"
@@ -59,6 +61,9 @@
     // Set a timeout to execute the function after 8 seconds (8000 milliseconds)
     setTimeout(injectParagraph, 8000);
 </script>
+
+
+<!-- section -->
 
 
 <h2>Assistive technologies</h2>

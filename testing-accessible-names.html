@@ -14,70 +14,153 @@
 </a>
 
 <h1>Testing accessible names</h1>
+
 <p>Which of the examples below have descriptive accessible names?</p>
 
 
-<h2>Links and buttons using content</h2>
-<p>The contents can be used to generate the accessible name for the <code>&lt;a&gt;</code> and <code>&lt;button&gt;</code>  elements:</p>
+<!-- section -->
+
+
+<h2>Button without an accessible name</h2>
+
+<p>In this example, the button has no accessible name. Screen reader users will hear it announced only as a <q>button</q>, with no indication of what it does.</p>
+
+<div class="example">
+  <button style="margin-right: 3em;">
+    <img src="assets/img/icon-arrow-down.png" alt="">
+  </button>
+</div>
+
+<ul>
+  <li>Visible text: None, but icon present</li>
+  <li>Accessible name: None</li>
+</ul>
+
+<pre><code>&lt;button&gt;
+  &lt;img src="down.png" alt=""&gt;
+&lt;/button&gt;</code></pre>
+
+
+<!-- section -->
+
+
+<h2>Link using content</h2>
+
+<p>In this example, the content of the <code>&lt;a&gt;</code> element provides its accessible name.</p>
+
 <div class="example">
   <a href="#">More</a>
 </div>
+
+<ul>
+  <li>Visible text: <q>More</q></li>
+  <li>Accessible name: <q>More</q></li>
+</ul>
+
 <pre><code>&lt;a href="#"&gt;<span class="highlight">More</span>&lt;/a&gt;</code></pre>
+
+
+<!-- section -->
+
+
+<h2>Button using content</h2>
+
+<p>In this example, the content of the <code>&lt;button&gt;</code> element provides its accessible name.</p>
 
 <div class="example">
   <button>Close</button>
 </div>
+
+<ul>
+  <li>Visible text: <q>Close</q></li>
+  <li>Accessible name: <q>Close</q></li>
+</ul>
+
 <pre><code>&lt;button&gt;<span class="highlight">Close</span>&lt;/button&gt;</code></pre>
 
 
-<h2>Button without an accessible name</h2>
-<div class="example">
-  <button style="margin-right: 3em;">
-    <img src="assets/img/icon-arrow-down.png">
-  </button>
-</div>
-<pre><code>&lt;button&gt;
-  &lt;img src="down.png" <span class="highlight">alt=""</span>&gt;
-&lt;/button&gt;</code></pre>
+<!-- section -->
 
 
-<h2>Links and buttons using <code>aria-label</code></h2>
-<p>The <code>aria-label</code> attribute can be used to create an accessible name that enhances the accessibility of elements.</p>
+<h2>Link using <code>aria-label</code></h2>
+
+<p>In this example, <code>aria-label</code> provides a more descriptive accessible name than the visible link text.</p>
 
 <div class="example">
   <a href="#" aria-label="More about wombats">More</a>
 </div>
+
+<ul>
+  <li>Visible text: <q>More</q></li>
+  <li>Accessible name: <q>More about wombats</q></li>
+</ul>
+
 <pre><code>&lt;a href="#" <span class="highlight">aria-label="More about wombats"</span>&gt;
   More
 &lt;/a&gt;</code></pre>
 
+
+<!-- section -->
+
+
+<h2>Button using <code>aria-label</code></h2>
+
+<p>In this example, the button contains only an icon, so <code>aria-label</code> provides its accessible name.</p>
+
 <div class="example">
   <button aria-label="Expand accordion">
-    <img src="assets/img/icon-arrow-down.png">
+    <img src="assets/img/icon-arrow-down.png" alt="">
   </button>
 </div>
+
+<ul>
+  <li>Visible text: None, but icon present</li>
+  <li>Accessible name: <q>Expand accordion</q></li>
+</ul>
+
 <pre><code>&lt;button <span class="highlight">aria-label="Expand accordion"</span>&gt;
   &lt;img src="down.png" alt=""&gt;
-&lt;/button&gt;
-</code></pre>
+&lt;/button&gt;</code></pre>
 
 
-<h2>Form controls without programmatically associated <code>&lt;label&gt;</code></h2>
+<!-- section -->
+
+
+<h2><code>&lt;input&gt;</code> without an accessible name</h2>
+
+<p>In this example, the <code>&lt;input&gt;</code> has no accessible name. Screen reader users will hear it announced only as a form field, with no indication of its purpose.</p>
+
 <div class="example">
   <label class="label">Address</label>
   <input class="input" type="text">
 </div>
+
+<ul>
+  <li>Visible label: <q>Address</q></li>
+  <li>Accessible name: None</li>
+</ul>
+
 <pre><code><span class="highlight">&lt;label&gt;Address&lt;/label&gt;</span>
 &lt;input type="text"&gt;</code></pre>
 
 
-<h2>Form controls with programmatically associated <code>&lt;label&gt;</code></h2>
-<p>The contents of the <code>&lt;label&gt;</code> attribute can be used to generate the accessible name for the <code>&lt;input&gt;</code> - as long as it is programmatically associated using matching <code>for</code> and <code>id</code> attributes</p>
+<!-- section -->
+
+
+<h2><code>&lt;input&gt;</code> with programmatically associated <code>&lt;label&gt;</code></h2>
+
+<p>In this example, the content of the <code>&lt;label&gt;</code> element provides the accessible name for the <code>&lt;input&gt;</code>. This works because the <code>for</code> and <code>id</code> attributes programmatically associate the label with the input.</p>
 
 <div class="example">
   <label class="label" for="address">Address</label>
   <input class="input" id="address" type="text">
 </div>
+
+<ul>
+  <li>Visible label: <q>Address</q></li>
+  <li>Accessible name: <q>Address</q></li>
+</ul>
+
 <pre><code>&lt;label <span class="highlight">for="address"</span>&gt;Address&lt;/label&gt;
 &lt;input <span class="highlight">id="address"</span> type="text"&gt;</code></pre>
 

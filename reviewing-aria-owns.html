@@ -7,9 +7,9 @@
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
   <style>
-    .example div { outline: 2px solid red; margin: 0 0 .5em; }
-    .example div p { outline: none; }
-    .example p { margin: 0; outline: 1px solid blue; }
+    .example ul {
+      outline: 2px solid red; 
+    }
 </style>
 </head>
 <body>
@@ -20,7 +20,19 @@
 
 <h1>Reviewing <code>aria-owns</code></h1>
 
+
+<!-- section -->
+
+
 <h2>Example</h2>
+
+<p>The <code>aria-owns</code> attribute identifies an element (or elements) in order to define a visual, functional, or contextual relationship between a parent and its child elements when the DOM hierarchy cannot be used to represent the relationship.</p>
+
+<p>In this example, the first list owns two other elements: <q>aaa</q> and <q>bbb</q>. This means <q>Bananas</q> and <q>Apples</q> would be appended to the first list.</p>
+
+<p>When more than one element is referenced, they are added to the accessibility tree in the order they appear in the <code>aria-owns</code> attribute, not their order in the DOM. In this example, <code>bbb</code> appears before <code>aaa</code>, so <q>Bananas</q> comes before <q>Apples</q>.</p>
+
+<p>Note: <code>aria-owns</code> has inconsistent support across browser and screen reader combinations and should be avoided where possible. It is generally better to organise related elements in the correct DOM order rather than relying on <code>aria-owns</code> to change the accessibility tree.</p>
 
 <div class="example">
   <ul aria-owns="bbb aaa">
@@ -34,17 +46,17 @@
   </ul>
 </div>
 
-<pre><code>&lt;ul aria-owns="bbb aaa"&gt;
+<pre><code>&lt;ul <span class="highlight">aria-owns="bbb aaa"</span>&gt;
   &lt;li&gt;Fruit&lt;/li&gt;
   &lt;li&gt;Vegetables&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Lorem ipsum dolor sit amet...&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li id="aaa"&gt;Apples&lt;/li&gt;
-  &lt;li id="bbb"&gt;Bananas&lt;/li&gt;
+  &lt;li <code class="highlight">id="aaa"</code>&gt;Apples&lt;/li&gt;
+  &lt;li <code class="highlight">id="bbb"</code>&gt;Bananas&lt;/li&gt;
 &lt;/ul&gt;</code></pre>
 
-<pre><code>Accessibility tree result:
+<pre><code>Possible accessibility tree result:
 
 - Fruit
 - Vegetables

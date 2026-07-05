@@ -34,14 +34,22 @@
 
 <p>The following are simplified steps that determine how elements aere named. The full details are available via the <a href="https://www.w3.org/TR/accname-1.2/" target="_blank">Accessible Name and Description Computation 1.2</a></p>
 
+
+<!-- section -->
+
+
 <h2>Step 1: If present, use <code>aria-labelledby</code></h2>
+
 <p>The contents of one or more elements can generate an accessible name for another element - if there are matching <code>aria-labelledby</code> and <code>id</code> values.</p>
+
 <p>In this example, the <code>&lt;nav&gt;</code> element is being labelled by the contents of the <code>&lt;h4&gt;</code> element:</p>
+
 <div class="example">
   <nav aria-labelledby="section-heading" style="padding: 0;">
-    <h4 id="section-heading" style="margin: 0;">About us section</h4>
+    <h3 id="section-heading" style="margin: 0;">About us section</h3>
   </nav>
 </div>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;nav aria-labelledby="section-heading"&gt;
@@ -50,87 +58,124 @@
 </details>
 
 
+<!-- section -->
+
+
 <h2>Step 2: Otherwise, if present, use <code>aria-label</code></h2>
+
 <p>The contents of the <code>aria-label</code> can generate an accessible name for many elements.</p>
+
 <p>In this example, the <code>&lt;button&gt;</code> element has a label of "Close":</p>
+
 <div class="example">
   <button class="button" aria-label="Close">
     <img src="assets/img/icon-cross.png" alt="">
   </button>
 </div>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;button aria-label="<span class="highlight">Close</span>"&gt;
 &lt;/button&gt;</code></pre>
 </details>
 
+
+<!-- section -->
+
+
 <h2>Step 3: Otherwise, if present, use one of the following:</h2>
 
-
 <h3>Name from visible text content</h3>
+
+<!-- subsection -->
+
 <p>This could be the contents of a heading element:</p>
+
 <div class="example">
   <h4 style="margin: 0;">About our team</h4>
 </div>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;h4&gt;<span class="highlight">About our team</span>&lt;/h4&gt;</code></pre>
 </details>
 
+<!-- subsection -->
 
 <p>Or, the contents of a <code>&lt;button&gt;</code> element:</p>
+
 <div class="example">
   <button class="button">Submit</button>
 </div>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;button&gt;<span class="highlight">Submit</span>&lt;/button&gt;</code></pre>
 </details>
 
+<!-- subsection -->
+
 <p>Or, the content of a <code>&lt;a&gt;</code> element:</p>
+
 <div class="example">
   <a href="#">Contact us</a>
 </div>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;a href="#"&gt;<span class="highlight">Contact us</span>&lt;/a&gt;</code></pre>
 </details>
-</body>
+
+<!-- subsection -->
 
 <h3>Name from <code>&lt;label&gt;</code></h3>
+
 <p>The contents of the <code>&lt;label&gt;</code> element can generate an accessible name for the <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code>, <code>&lt;meter&gt;</code> and <code>&lt;progress&gt;</code> elements.</p>
+
 <p>In this example, the <code>&lt;input&gt;</code> element has a label via the contents of the <code>&lt;label&gt;</code> element:</p>
+
 <form action="#" class="example">
   <label class="label" for="name">Full name</label>
   <input class="input" type="text" id="name">
 </form>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;label for="name"&gt;<span class="highlight">Full name</span>&lt;/label&gt;
 &lt;input id="name" type="text"&gt;</code></pre>
 </details>
 
+<!-- subsection -->
 
 <h3>Name from <code>alt</code> attribute</h3>
+
 <p>The contents of the <code>alt</code> attribute can generate an accessible name for the <code>&lt;img&gt;</code> element.</p>
+
 <p>In this example, the <code>&lt;img&gt;</code> element has a label via the <code>alt</code> attribute:</p>
+
 <div class="example">
   <img src="https://placehold.co/100x100" alt="A dummy image">
 </div>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;img src="a.png" alt="<span class="highlight">A dummy image</span>"&gt;</code></pre>
 </details>
 
+<!-- subsection -->
 
 <h3>Name from <code>&lt;legend&gt;</code></h3>
+
 <p>The contents of the <code>&lt;legend&gt;</code> element can generate an accessible name for the <code>&lt;fieldset&gt;</code> element.</p>
+
 <p>In this example, the <code>&lt;fieldset&gt;</code> element has a label via the contents of the <code>&lt;legend&gt;</code> element:</p>
+
 <div class="example">
   <fieldset>
     <legend>Billing information</legend>
   </fieldset>
 </div>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;fieldset&gt;
@@ -138,10 +183,14 @@
 &lt;/fieldset&gt;</code></pre>
 </details>
 
+<!-- subsection -->
 
 <h3>Name from <code>&lt;caption&gt;</code></h3>
+
 <p>The contents of the <code>&lt;caption&gt;</code> element can generate an accessible name for the <code>&lt;table&gt;</code> element.</p>
+
 <p>In this example, the <code>&lt;table&gt;</code> element has a label via the contents of the <code>&lt;caption&gt;</code> element:</p>
+
 <div class="example">
   <table style="margin: 0;">
     <caption>Average rainfall in Australia</caption>
@@ -159,6 +208,7 @@
     </tbody>
   </table>
 </div>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;table&gt;
@@ -167,20 +217,29 @@
 </details>
 
 
+<!-- section -->
+
+
 <h2>Step 4: Otherwise, and if no other name was found, use <code>title</code>.</h2>
+
 <p>The contents of the <code>title</code> can generate an accessible name for many elements:</p>
+
 <div class="example">
   <button class="button" title="Close">
     <img src="assets/img/icon-cross.png" alt="">
   </button>
 </div>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;button title="<span class="highlight">Close</span>"&gt;
 &lt;/button&gt;</code></pre>
 </details>
-<code>title</code> is only used as the name if nothing else provides one. But if another name source is present, the <code>title</code> content isn't discarded, it becomes the accessible description instead.</html>
+
+<p><code>title</code> is only used as the name if nothing else provides one. But if another name source is present, the <code>title</code> content isn&rsquo;t discarded, it becomes the accessible description instead.</p>
+
 <p>In the following example, "Close" would be announced twice:</p>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;button aria-label="<span class="highlight">Close</span>" title="<span class="highlight">Close</span>"&gt;
@@ -188,21 +247,34 @@
 </details>
 
 
+<!-- section -->
+
+
 <h2>Step 5: Otherwise, if relevant and present, use <code>placeholder</code>.</h2>
+
 <p>The contents of the <code>placeholder</code> attribute can generate an accessible name for the <code>&lt;input&gt;</code> element with a type of <code>text</code>, <code>search</code>, <code>url</code>, <code>tel</code>, <code>email</code>, <code>password</code>, or <code>number</code>. This attribute can also generate an accessible name for the <code>&lt;textarea&gt;</code> element.</p>
+
 <form action="#" class="example">
   <input class="input" type="text" placeholder="Search">
 </form>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;input type="text" placeholder="<span class="highlight">Search</span>"&gt;</code></pre>
 </details>
+
 <p><code>placeholder</code> is often announced by screen readers even when a valid accessible name already exists from another source (labelledby, <code>aria-label</code>, or label content).</p>
+
 <p>In testing across multiple screen reader and browser combinations, an input's <code>placeholder</code> text was announced in addition to the correct accessible name in almost every case. This causes verbosity and can confuse users about what the actual field label is.</p>
+
 <p>This is less consistent when the accessible name comes from the <code>title</code> attribute, where the same behaviour was only observed in Safari with VoiceOver.</p>
 
 
+<!-- section -->
+
+
 <h2>Step 6: Otherwise, there is no accessible name.</h2>
+
 <p>If none of the above apply, the element has no accessible name, and assistive technology users won't know its purpose. Always check that interactive elements have a name from one of the methods above.</p>
 
 

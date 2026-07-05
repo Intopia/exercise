@@ -47,6 +47,9 @@
 </ol>
 
 
+<!-- section -->
+
+
 <h2>A positive number</h2>
 
 <p>A positive value means the element should be focusable in sequential keyboard navigation, with its order defined by the value of the number. The maximum value for tabindex is 32767.</p>
@@ -64,6 +67,9 @@
 </div>
 
 
+<!-- section -->
+
+
 <h2>A "0" number</h2>
 
 <p><code>tabindex="0"</code> means that the element should be focusable in sequential keyboard navigation, after any positive tabindex values. The focus navigation order of these elements is defined by their order in the document source.</p>
@@ -79,6 +85,9 @@
     <li><a href="#">Link 11</a></li>
   </ul>
 </div>
+
+
+<!-- section -->
 
 
 <h2>A "-1" number</h2>
@@ -106,9 +115,6 @@
 
   <p><a href="#">Example link after the injected element</a></p>
 </div>
-  
-
-<p class="footer-link"><a href="testing.html">Testing home</a></p>
 
 <script>
   const toggleButton = document.querySelector('#toggle-tabindex-example');
@@ -139,5 +145,8 @@
     toggleButton.setAttribute('aria-expanded', 'true');
   });
 </script>
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
 </html>

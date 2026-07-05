@@ -7,24 +7,8 @@
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
   <style>
-    .off-screen {
-      clip-path: inset(100%);
-      clip: rect(1px, 1px, 1px, 1px);
-      height: 1px;
-      overflow: hidden;
-      position: absolute;
-      white-space: nowrap;
-      width: 1px;
-    }
-
-.card-css {
-  position: relative;
-}
-
-.card-css .card-heading a::after {
-  content: "";
-  position: absolute;
-  inset: 0;
+label {
+  font-weight: bold;
 }
   </style>
 </head>
@@ -35,49 +19,113 @@
 </a>
 
 <h1>Testing <code>aria-describedby</code></h1>
+
 <p>Which of the examples below correctly reference a description element?</p>
 
+
+<!-- section -->
+
+
 <h2>Example 1: Single visible reference</h2>
+
 <div class="example">
-  <label class="label" for="aaa">Password</label>
-  <input class="input" id="aaa" type="password" aria-describedby="aaa-hint">
-  <p id="aaa-hint">Must be at least 8 characters and include a number.</p>
+  <label class="label" for="aaa">Name</label>
+  <p class="help-text" id="aaa-hint">Must be your full name</p>
+  <input class="input" id="aaa" aria-describedby="aaa-hint">
 </div>
 
-<h2>Example 2: Multiple IDs</h2>
+<p>Accessible description for the <code>&lt;input&gt;</code> should be: <q>Must be your full name</q></p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="aaa"&gt;Name&lt;/label&gt;
+&lt;p id="aaa-hint"&gt;Must be your full name&lt;/p&gt;
+&lt;input id="aaa" <span class="highlight">aria-describedby="aaa-hint"</span>&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 2: Reference to more than one source</h2>
+
 <div class="example">
-  <label class="label" for="bbb">Password</label>
-  <input class="input" id="bbb" type="password" aria-describedby="bbb-hint bbb-error">
-  <p id="bbb-hint">Must be at least 8 characters and include a number.</p>
-  <p id="bbb-error">Error: Password is too short.</p>
+  <label class="label" for="bbb">Name</label>
+  <p class="help-text" id="bbb-hint">Must be your full name</p>
+  <input class="input" id="bbb" aria-describedby="bbb-hint bbb-error">
+  <p class="error-message" id="bbb-error">Error: This field is required</p>
 </div>
 
-<h2>Example 3: Reference to hidden element</h2>
+<p>Accessible description for the <code>&lt;input&gt;</code> should be: <q>Must be your full name Error: This field is required</q></p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="bbb"&gt;Name&lt;/label&gt;
+&lt;p id="bbb-hint"&gt;Must be your full name&lt;/p&gt;
+&lt;input id="bbb" <span class="highlight">aria-describedby="bbb-hint bbb-error"</span>&gt;
+&lt;p id="bbb-error"&gt;Error: This field is required&lt;/p&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 3: Reference to element hidden with <code>display: none</code></h2>
+
 <div class="example">
-  <label class="label" for="ccc">Password</label>
-  <input class="input" id="ccc" type="password" aria-describedby="ccc-hint">
-  <p id="ccc-hint" hidden>Must be at least 8 characters and include a number.</p>
+  <label class="label" for="ccc">Name</label>
+  <p style="display: none;" id="ccc-hint">Must be your full name</p>
+  <input class="input" id="ccc" aria-describedby="ccc-hint">
 </div>
 
-<h2>Example 4: Reference to off-screen element</h2>
+<p>Accessible description for the <code>&lt;input&gt;</code> should be: <q>Must be your full name</q></p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="ccc"&gt;Name&lt;/label&gt;
+&lt;p <span class="highlight">style="display: none;"</span> id="ccc-hint"&gt;Must be your full name&lt;/p&gt;
+&lt;input id="ccc" <span class="highlight">aria-describedby="ccc-hint"</span>&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 4: Reference to element hidden with CSS</h2>
+
 <div class="example">
-  <label class="label" for="ddd">Password</label>
-  <input class="input" id="ddd" type="password" aria-describedby="ddd-hint">
-  <p id="ddd-hint" class="off-screen">Must be at least 8 characters and include a number.</p>
+  <label class="label" for="ddd">Name</label>
+  <p class="help-text hidden" id="ddd-hint">Must be your full name</p>
+  <input class="input" id="ddd" aria-describedby="ddd-hint">
 </div>
+
+<p>Accessible description for the <code>&lt;input&gt;</code> should be: <q>Must be your full name</q></p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label class="label" for="ddd"&gt;Name&lt;/label&gt;
+&lt;p <span class="highlight">class="hidden"</span> id="ddd-hint"&gt;Must be your full name&lt;/p&gt;
+&lt;input class="input" id="ddd" <span class="highlight">aria-describedby="ddd-hint"</span>&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
 
 <h2>Example 5: Missing ID reference</h2>
+
 <div class="example">
-  <label class="label" for="eee">Password</label>
-  <input class="input" id="eee" type="password" aria-describedby="eee-hint">
+  <label class="label" for="eee">Name</label>
+  <input class="input" id="eee" aria-describedby="eee-hint">
 </div>
 
-<h2>Example 6: Multiple IDs, one missing</h2>
-<div class="example">
-  <label class="label" for="fff">Password</label>
-  <input class="input" id="fff" type="password" aria-describedby="fff-hint fff-error">
-  <p id="fff-hint">Must be at least 8 characters and include a number.</p>
-</div>
+<p>There should be no accessible description for the <code>&lt;input&gt;</code>.</p>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label class="label" for="eee"&gt;Name&lt;/label&gt;
+&lt;input class="input" id="eee" <span class="highlight">aria-describedby="eee-hint"</span>&gt;</code></pre>
+</details>
+
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
