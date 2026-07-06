@@ -19,34 +19,48 @@
 </a>
 
 <h1>Testing form field error messaging</h1>
+
 <p>Error messages should be informative and contextual. Where possible, messages should:</p>
+
 <ul>
   <li>Clearly explain what went wrong and how to fix it.</li>
   <li>Relate directly to the specific field.</li>
 </ul>
 
 
+<!-- section -->
+
+
 <h2>Example 1 - Simple message</h2>
+
 <form action="#">
-  <label class="label" for="phone-number1">Phone number</label>
-  <input class="input" id="phone-number1" type="text" aria-describedby="error-phone-number1" aria-invalid="true">
-  <span class="error-message" id="error-phone-number1">This input is required.</span>
+  <label class="label" for="name">Name</label>
+  <input class="input" id="name" type="text" aria-describedby="error-name" aria-invalid="true">
+  <span class="error-message" id="error-name">Please provide your name.</span>
 </form>
+
+
+<!-- section -->
 
 
 <h2>Example 2 - Simple message</h2>
+
 <form action="#">
-  <label class="label" for="phone-number2">Phone number</label>
-  <input class="input" id="phone-number2" type="text" aria-describedby="error-phone-number2" aria-invalid="true">
-  <span class="error-message" id="error-phone-number2">Please provide a phone number.</span>
+  <label class="label" for="address">Address</label>
+  <input class="input" id="address" type="text" aria-describedby="error-address" aria-invalid="true">
+  <span class="error-message" id="error-address">This field is required.</span>
 </form>
 
 
+<!-- section -->
+
+
 <h2>Example 3 - Contextual message</h2>
+
 <form action="#">
-  <label class="label" for="phone-number3">Phone number</label>
-  <input class="input" id="phone-number3" type="text" aria-describedby="error-phone-number3" aria-invalid="true">
-  <span class="error-message" id="error-phone-number3">Phone number must include area code.</span>
+  <label class="label" for="phone-number">Phone number</label>
+  <input class="input" id="phone-number" type="text" aria-describedby="error-phone-number" aria-invalid="true">
+  <span class="error-message" id="error-address">Phone number must include area code.</span>
 </form>
 
 

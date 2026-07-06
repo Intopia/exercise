@@ -14,201 +14,261 @@
 </a>
 
 <h1>Testing the <code>autocomplete</code> attribute</h1>
+
 <p>The <a href="https://html.spec.whatwg.org/#autofilling-form-controls:-the-autocomplete-attribute" target="_blank">autocomplete</a> attribute lets web developers specify what if any permission the user agent has to provide automated assistance in filling out form field values, as well as guidance to the browser as to the type of information expected in the field.</p>
 
 
-<h2>Example - <code>autocomplete="on"</code></h2>
+<!-- section -->
+
+
+<h2>Example 1. <code>autocomplete="on"</code></h2>
+
 <form action="#" class="example">
-  <!-- Full name -->
   <label class="label" for="name1">Full name</label>
   <input class="input" id="name1" type="text" autocomplete="on">
 </form>
+
 <details>
   <summary>HTML markup</summary>
-<pre><code>
-</code></pre>
+<pre><code>&lt;label for="name1"&gt;Full name&lt;/label&gt;
+&lt;input id="name1" <span class="highlight">autocomplete="on"</span>&gt;</code></pre>
 </details>
 
 
-<h2>Example - <code>autocomplete="off"</code></h2>
+<!-- section -->
+
+
+<h2>Example 2. <code>autocomplete="off"</code></h2>
+
 <form action="#" class="example">
-  <!-- Full name -->
   <label class="label" for="name2">Full name</label>
   <input class="input" id="name2" type="text" autocomplete="off">
 </form>
+
 <details>
   <summary>HTML markup</summary>
-<pre><code>
-</code></pre>
+<pre><code>&lt;label for="name2"&gt;Full name&lt;/label&gt;
+&lt;input id="name2" <span class="highlight">autocomplete="off"</span>&gt;</code></pre>
 </details>
 
 
-<h2>Example - <code>autocomplete="name"</code></h2>
+<!-- section -->
+
+
+<h2>Example 3. <code>autocomplete="name"</code></h2>
+
 <form action="#" class="example">
-  <!-- Full name -->
   <label class="label" for="name3">Full name</label>
   <input class="input" id="name3" type="text" autocomplete="name">
 </form>
+
 <details>
   <summary>HTML markup</summary>
-<pre><code>
-</code></pre>
+<pre><code>&lt;label for="name3"&gt;Full name&lt;/label&gt;
+&lt;input id="name3" <span class="highlight">autocomplete="name"</span>&gt;</code></pre>
 </details>
 
 
-<h2>Example - <code>autocomplete="given-name"</code></h2>
+<!-- section -->
+
+
+<h2>Example 4. <code>autocomplete="given-name"</code></h2>
+
 <form action="#" class="example">
-  <!-- First name -->
   <label class="label" for="given-name">First name</label>
   <input class="input" id="given-name" type="text" autocomplete="given-name">
 </form>
 <details>
   <summary>HTML markup</summary>
-<pre><code>
-</code></pre>
+<pre><code>&lt;label for="given-name"&gt;First name&lt;/label&gt;
+&lt;input id="given-name" <span class="highlight">autocomplete="given-name"</span>&gt;</code></pre>
 </details>
 
 
-<h2>Example - <code>autocomplete="family-name"</code></h2>
+<!-- section -->
+
+
+<h2>Example 5. <code>autocomplete="family-name"</code></h2>
+
 <form action="#" class="example">
-  <!-- Last name -->
   <label class="label" for="family-name">Last name</label>
   <input class="input" id="family-name" type="text" autocomplete="family-name">
 </form>
+
 <details>
   <summary>HTML markup</summary>
-<pre><code>
-</code></pre>
+<pre><code>&lt;label for="family-name"&gt;Last name&lt;/label&gt;
+&lt;input id="family-name" <span class="highlight">autocomplete="family-name"</span>&gt;</code></pre>
 </details>
 
 
-<h2>Example - <code>autocomplete="email"</code></h2>
+<!-- section -->
+
+
+<h2>Example 6. <code>autocomplete="email"</code></h2>
+
 <form action="#" class="example">
-  <!-- Email -->
   <label class="label" for="email">Email address</label>
   <input class="input" id="email" type="email" autocomplete="email">
 </form>
+
 <details>
   <summary>HTML markup</summary>
-<pre><code>
-</code></pre>
+<pre><code>&lt;label for="email"&gt;Email address&lt;/label&gt;
+&lt;input id="email" type="email" <span class="highlight">autocomplete="email"</span>&gt;</code></pre>
 </details>
 
 
-<h2>Example - <code>autocomplete="tel"</code></h2>
+<!-- section -->
+
+
+<h2>Example 7. <code>autocomplete="tel"</code></h2>
+
 <form action="#" class="example">
-  <!-- Phone number -->
   <label class="label" for="phone">Phone number</label>
   <input class="input" id="phone" type="tel" autocomplete="tel">
 </form>
+
 <details>
   <summary>HTML markup</summary>
-<pre><code>
-</code></pre>
+<pre><code>&lt;label for="phone"&gt;Phone number&lt;/label&gt;
+&lt;input id="phone" type="tel" <span class="highlight">autocomplete="tel"</span>&gt;</code></pre>
 </details>
 
 
-<h2>Example - <code>autocomplete="address-line1"</code></h2>
+<!-- section -->
+
+
+<h2>Example 8. <code>autocomplete="address-line1"</code></h2>
+
 <form action="#" class="example">
-  <!-- Address Line 1 -->
   <label class="label" for="address-line1">Street address</label>
   <input class="input" id="address-line1" type="text" autocomplete="address-line1">
 </form>
+
 <details>
   <summary>HTML markup</summary>
-<pre><code>
-</code></pre>
+<pre><code>&lt;label for="address-line1"&gt;Street address&lt;/label&gt;
+&lt;input id="address-line1" <span class="highlight">autocomplete="address-line1"</span>&gt;</code></pre>
 </details>
 
 
-<h2>Example - <code>autocomplete="address-line2"</code></h2>
+<!-- section -->
+
+
+<h2>Example 9. <code>autocomplete="address-line2"</code></h2>
+
 <form action="#" class="example">
-  <!-- Address Line 2 -->
   <label class="label" for="address-line2">Apartment, suite, unit, etc. (optional)</label>
   <input class="input" id="address-line2" type="text" autocomplete="address-line2">
 </form>
+
 <details>
   <summary>HTML markup</summary>
-<pre><code>
-</code></pre>
+<pre><code>&lt;label for="address-line2"&gt;Apartment, suite, unit, etc. (optional)&lt;/label&gt;
+&lt;input id="address-line2" <span class="highlight">autocomplete="address-line2"</span>&gt;</code></pre>
 </details>
 
 
-<h2>Example - <code>autocomplete="postal-code"</code></h2>
+<!-- section -->
+
+
+<h2>Example 10. <code>autocomplete="postal-code"</code></h2>
+
 <form action="#" class="example">
-  <!-- Postal Code -->
   <label class="label" for="postal-code">Postal code</label>
   <input class="input" id="postal-code" type="text" autocomplete="postal-code">
 </form>
+
 <details>
   <summary>HTML markup</summary>
-<pre><code>
-</code></pre>
+<pre><code>&lt;label for="postal-code"&gt;Postal code&lt;/label&gt;
+&lt;input id="postal-code" <span class="highlight">autocomplete="postal-code"</span>&gt;</code></pre>
 </details>
 
 
-<h2>Example - <code>autocomplete="country"</code></h2>
+<!-- section -->
+
+
+<h2>Example 11. <code>autocomplete="country"</code></h2>
+
 <form action="#" class="example">
-  <!-- Country -->
   <label class="label" for="country">Country</label>
   <input class="input" id="country" type="text" autocomplete="country">
 </form>
+
 <details>
   <summary>HTML markup</summary>
-<pre><code>
-</code></pre>
+<pre><code>&lt;label for="country"&gt;Country&lt;/label&gt;
+&lt;input id="country" <span class="highlight">autocomplete="country"</span>&gt;</code></pre>
 </details>
 
 
-<h2>Example - <code>autocomplete="cc-number"</code></h2>
+<!-- section -->
+
+
+<h2>Example 12. <code>autocomplete="cc-number"</code></h2>
+
 <form action="#" class="example">
-  <!-- Credit card number -->
   <label class="label" for="cc-number">Credit card number</label>
   <input class="input" id="cc-number" type="text" inputmode="numeric" autocomplete="cc-number">
 </form>
+
 <details>
   <summary>HTML markup</summary>
-<pre><code>
-</code></pre>
+<pre><code>&lt;label for="cc-number"&gt;Credit card number&lt;/label&gt;
+&lt;input id="cc-number" inputmode="numeric" <span class="highlight">autocomplete="cc-number"</span>&gt;</code></pre>
 </details>
 
 
-<h2>Example - <code>autocomplete="cc-exp"</code></h2>
+<!-- section -->
+
+
+<h2>Example 13. <code>autocomplete="cc-exp"</code></h2>
+
 <form action="#" class="example">
-  <!-- Credit card expiration date -->
   <label class="label" for="cc-exp">Expiration date (MM/YY)</label>
   <input class="input" id="cc-exp" type="text" inputmode="numeric" autocomplete="cc-exp">
 </form>
+
 <details>
   <summary>HTML markup</summary>
-<pre><code>
-</code></pre>
+<pre><code>&lt;label for="cc-exp"&gt;Expiration date (MM/YY)&lt;/label&gt;
+&lt;input id="cc-exp" inputmode="numeric" <span class="highlight">autocomplete="cc-exp"</span>&gt;</code></pre>
 </details>
 
 
-<h2>Example - <code>autocomplete="cc-csc"</code></h2>
+<!-- section -->
+
+
+<h2>Example 14. <code>autocomplete="cc-csc"</code></h2>
+
 <form action="#" class="example">
-  <!-- Credit card CVC -->
   <label class="label" for="cc-csc">CVC</label>
   <input class="input" id="cc-csc" type="text" inputmode="numeric" autocomplete="cc-csc">
 </form>
+
 <details>
   <summary>HTML markup</summary>
-<pre><code>
-</code></pre>
+<pre><code>&lt;label for="cc-csc"&gt;CVC&lt;/label&gt;
+&lt;input id="cc-csc" inputmode="numeric" <span class="highlight">autocomplete="cc-csc"</span>&gt;</code></pre>
 </details>
 
 
-<h2>Example - <code>autocomplete="fake"</code></h2>
+<!-- section -->
+
+
+<h2>Example 15. <code>autocomplete="fake"</code></h2>
+
 <form action="#" class="example">
-  <!-- Credit card CVC -->
   <label class="label" for="cc-fake">Fake</label>
-  <input class="input" id="cc-fake" type="text" inputmode="numeric" autocomplete="fake">
+  <input class="input" id="cc-fake" type="text" inputmode="fake" autocomplete="fake">
 </form>
+
 <details>
   <summary>HTML markup</summary>
-<pre><code>
-</code></pre>
+<pre><code>&lt;label for="cc-fake"&gt;Fake&lt;/label&gt;
+&lt;input id="cc-fake" inputmode="fake" <span class="highlight">autocomplete="fake"</span>&gt;</code></pre>
 </details>
 
 

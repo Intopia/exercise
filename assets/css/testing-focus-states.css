@@ -85,32 +85,6 @@ ol li {
   margin-bottom: .5em;
 }
 
-/* ---------------------
-Links
-----------------------*/
-
-.example-none a:focus {
-  outline: 0;
-}
-
-.example-color a:focus {
-  color: black;
-  outline: 0;
-}
-
-.example-outline a:focus {
-  outline: 2px solid #000;
-}
-
-.example-shadow a:focus {
-  outline: 0;
-  color: #fff;
-  background: #000;
-  text-decoration: none;
-  box-shadow: 
-    0 0 0 2px black, 0 0 0 4px white, 0 0 0 6px black;
-}
-
 
 /* ---------------------
 Horizontal rules
@@ -275,39 +249,6 @@ button {
 button:focus {
   background: #000;
   color: #fff;
-}
-
-.example-default .button:focus,
-.example-default button:focus {
-  background: blue;
-  color: #fff !important;
-
-}
-
-.example-none .button:focus,
-.example-none button:focus {
-  background: blue;
-  color: #fff !important;
-  outline: none;
-}
-
-.example-color .button:focus,
-.example-color button:focus {
-  outline: none;
-}
-
-.example-outline .button:focus,
-.example-outline button:focus {
-  background: blue;
-  color: #fff !important;
-  outline: 2px solid #000;
-}
-
-.example-shadow .button:focus,
-.example-shadow button:focus {
-  outline: 0;
-  box-shadow: 
-    0 0 0 2px white, 0 0 0 4px black;
 }
 
 .button:hover,
@@ -706,4 +647,77 @@ Focus order nav
 
 .intopia-logo {
   width: 200px;
+}
+
+/* ---------------------
+Focus rules
+----------------------*/
+
+/* Example 1: Default focus rings */
+/* Delivers default blue focus rings around links and buttons on focus */
+
+.example-default .button:focus,
+.example-default button:focus {
+  background: blue;
+  color: #fff !important;
+}
+
+/* Example 2: No focus state */
+/* Deliberately turns off all focus states - bad practice example only */
+
+.example-none a:focus {
+  outline: 0;
+}
+
+.example-none .button:focus,
+.example-none button:focus {
+  background: blue;
+  color: #fff !important;
+  outline: none;
+}
+
+/* Example 3: Color for focus states */
+/* Delivers color-only change on focus - black links and buttons */
+
+.example-color a:focus {
+  color: black;
+  outline: 0;
+}
+
+.example-color .button:focus,
+.example-color button:focus {
+  outline: none;
+}
+
+/* Example 4: Outline for focus states */
+/* Delivers outline-only change on focus - black outlines around links and buttons */
+
+.example-outline a:focus {
+  outline: 2px solid #000;
+}
+
+.example-outline .button:focus,
+.example-outline button:focus {
+  background: blue;
+  color: #fff !important;
+  outline: 2px solid #000;
+}
+
+/* Example 5: Color and box-shadow for focus states */
+/* Delivers color and outer border change on focus - black background and outer border around links and buttons */
+
+.example-shadow a:focus {
+  outline: 0;
+  color: #fff;
+  background: #000;
+  text-decoration: none;
+  box-shadow: 
+    0 0 0 2px black, 0 0 0 4px white, 0 0 0 6px black;
+}
+
+.example-shadow .button:focus,
+.example-shadow button:focus {
+  outline: 0;
+  box-shadow: 
+    0 0 0 2px white, 0 0 0 4px black;
 }

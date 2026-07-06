@@ -16,40 +16,89 @@
 <h1>Testing <code>aria-invalid</code></h1>
 
 
+<!-- section -->
+
+
 <h2><code>aria-invalid="false"</code></h2>
+
+<p>Used when the there are no detected errors in the value. This is the default.</p>
+
 <div class="example">
   <label class="label" for="aaa">Name</label>
-  <input class="input" id="aaa" type="text" aria-invalid="false">
+  <input class="input" id="aaa" aria-invalid="false">
 </div>
+
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;label for="aaa"&gt;Name&lt;/label&gt;
-&lt;input id="aaa" type="text" <span class="highlight">aria-invalid="false"</span>&gt;</code></pre>
+&lt;input id="aaa" <span class="highlight">aria-invalid="false"</span>&gt;</code></pre>
+</details>
+
+
+<!-- section -->
 
 
 <h2><code>aria-invalid="true"</code></h2>
+
+<p>Used when the value entered by the user has failed validation.</p>
+
 <div class="example">
-  <label class="label" for="bbb">Email</label>
-  <input class="input" id="bbb" type="email" aria-invalid="true">
+  <label class="label" for="bbb">Name</label>
+  <input class="input" id="bbb" aria-invalid="true">
 </div>
-<pre><code>&lt;label for="bbb"&gt;Email&lt;/label&gt;
-&lt;input id="bbb" type="email" <span class="highlight">aria-invalid="true"</span>&gt;</code></pre>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="bbb"&gt;Name&lt;/label&gt;
+&lt;input id="bbb" <span class="highlight">aria-invalid="true"</span>&gt;</code></pre>
+</details>
+
+
+<!-- section -->
 
 
 <h2><code>aria-invalid="grammar"</code></h2>
+
+<p>Used when a grammatical error was detected.</p>
+
 <div class="example">
-  <label class="label" for="ccc">Phone</label>
-  <input class="input" id="ccc" type="tel" aria-invalid="grammar">
+  <label class="label" for="ccc">Name</label>
+  <input class="input" id="ccc" aria-invalid="grammar">
 </div>
-<pre><code>&lt;label for="ccc"&gt;Phone&lt;/label&gt;
-&lt;input id="ccc" type="tel" <span class="highlight">aria-invalid="grammar"</span>&gt;</code></pre>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="ccc"&gt;Name&lt;/label&gt;
+&lt;input id="ccc" <span class="highlight">aria-invalid="grammar"</span>&gt;</code></pre>
+</details>
+
+
+<!-- section -->
 
 
 <h2><code>aria-invalid="spelling"</code></h2>
+
+<p>Used when a spelling error was detected.</p>
+
 <div class="example">
-  <label class="label" for="ddd">Password</label>
-  <input class="input" id="ddd" type="password" aria-invalid="spelling">
+  <label class="label" for="ddd">Name</label>
+  <input class="input" id="ddd" aria-invalid="spelling">
 </div>
-<pre><code>&lt;label for="ddd"&gt;Password&lt;/label&gt;
-&lt;input id="ddd" type="password" <span class="highlight">aria-invalid="spelling"</span>&gt;</code></pre>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="ddd"&gt;Name&lt;/label&gt;
+&lt;input id="ddd" <span class="highlight">aria-invalid="spelling"</span>&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>A note on <code>grammar</code> and <code>spelling</code></h2>
+
+<p>Current support: <code>aria-invalid="grammar"</code> and <code>aria-invalid="spelling"</code> are recognised by modern browsers and assistive technologies. However, support is inconsistent: VoiceOver and NVDA announce the specific error type, while JAWS announces only a generic invalid state and does not distinguish between grammar, spelling and other validation errors.</p>
+
 
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>

@@ -14,28 +14,89 @@
 </a>
 
 <h1>Testing form field instructions</h1>
+
 <p>Which of the form fields below has both:</p>
+
 <ol>
-  <li>Persistant, visible instructions?</li>
+  <li>Persistent, visible instructions?</li>
   <li>Instructions that are programmatically associated with their form field? (via <code>aria-describedby</code>)</li>
 </ol>
 
 
+<!-- section -->
+
+
 <h2>Example 1</h2>
+
+<ul>
+  <li>The instructions are not persistent.</li>
+  <li>The instructions are not programmatically associated with the form control.</li>
+</ul>
+
+<p><b>Strongly discouraged</b>. Placeholder text disappears when users begin typing and is not announced as instructions when screen reader users move to the field.</p>
+
 <form action="#">
-  <label class="label" for="namefield">Phone</label>
-  <span class="help-text">Include your area code</span>
-  <input class="input" id="namefield" type="text">
+  <label class="label" for="na">Name</label>
+  <input class="input" id="na" placeholder="Include full name">
 </form>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="na"&gt;Name&lt;/label&gt;
+&lt;input id="na" placeholder="Include full name"&gt;</code></pre>
+</details>
+
+
+<!-- section -->
 
 
 <h2>Example 2</h2>
+
+<ul>
+  <li>The instructions are persistent.</li>
+  <li>The instructions are not programmatically associated with the form control.</li>
+</ul>
+
+<p><b>Not recommended</b>. Sighted users can see the instructions, but screen reader users may not hear them when they move to the form field.</p>
+
 <form action="#">
-  <label class="label" for="emailfield">Email</label>
-  <span class="help-text" id="emailhelp">Add you full and valid email address</span>
-  <input class="input" id="emailfield" type="email" aria-describedby="emailhelp">
+  <label class="label" for="ph">Phone</label>
+  <span class="help-text">Include your area code</span>
+  <input class="input" id="ph" type="tel">
 </form>
 
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="ph"&gt;Phone&lt;/label&gt;
+&lt;span&gt;Include your area code&lt;/span&gt;
+&lt;input id="ph" type="tel"&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 3</h2>
+
+<ul>
+  <li>The instructions are persistent.</li>
+  <li>The instructions are programmatically associated with the form control.</li>
+</ul>
+
+<p><b>Recommended</b>. Sighted users can always see the instructions, and screen reader users hear them announced when the form field receives focus.</p>
+
+<form action="#">
+  <label class="label" for="ccc">Email</label>
+  <span class="help-text" id="ccc-h">Add your full and valid email address</span>
+  <input class="input" id="ccc" type="email" aria-describedby="ccc-h">
+</form>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="ccc"&gt;Email&lt;/label&gt;
+&lt;span id="ccc-h"&gt;Add your full and valid email address&lt;/span&gt;
+&lt;input id="ccc" type="email" aria-describedby="ccc-h"&gt;</code></pre>
+</details>
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>

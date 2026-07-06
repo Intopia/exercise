@@ -14,20 +14,33 @@
 </a>
 
 <h1>Testing <code>aria-label</code></h1>
+
 <p>Which of the examples below correctly use <code>aria-label</code>?</p>
 
 
+<!-- section -->
+
+
 <h2>Example 1: Valid use on a button</h2>
+
 <div class="example">
   <button aria-label="Close dialog">✕</button>
 </div>
+
+<p>Accessible name for the <code>&lt;button&gt;</code> should be: <q>Close dialog</q></p>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;button <span class="highlight">aria-label="Close dialog"</span>&gt;✕&lt;/button&gt;</code></pre>
 </details>
 
 
+
+<!-- section -->
+
+
 <h2>Example 2: Valid use on a landmark</h2>
+
 <div class="example">
   <nav aria-label="Primary navigation">
     <ul>
@@ -37,6 +50,9 @@
     </ul>
   </nav>
 </div>
+
+<p>Accessible name for the <code>&lt;nav&gt;</code> should be: <q>Primary navigation</q></p>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;nav <span class="highlight">aria-label="Primary navigation"</span>&gt;
@@ -49,59 +65,102 @@
 </details>
 
 
+<!-- section -->
+
+
 <h2>Example 3: Valid use on an input</h2>
+
 <div class="example">
   <input class="input" type="search" aria-label="Search this site">
 </div>
+
+<p>Accessible name for the <code>&lt;input&gt;</code> should be: <q>Search this site</q></p>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;input type="search" <span class="highlight">aria-label="Search this site"</span>&gt;</code></pre>
 </details>
 
 
-<h2>Example 4: Invalid empty <code>aria-label</code></h2>
+<!-- section -->
+
+
+<h2>Example 4: Empty <code>aria-label</code></h2>
+
 <div class="example">
   <button aria-label="">Submit</button>
 </div>
+
+<p>Accessible name for the <code>&lt;button&gt;</code> should be: <q>Submit</q>. The empty <code>aria-label</code> will be ignored.</p>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;button <span class="highlight">aria-label=""</span>&gt;Submit&lt;/button&gt;</code></pre>
 </details>
 
 
-<h2>Example 5: Invalid whitespace-only <code>aria-label</code></h2>
+<!-- section -->
+
+
+<h2>Example 5: Whitespace-only <code>aria-label</code></h2>
+
 <div class="example">
   <button aria-label="   ">Submit</button>
 </div>
+
+<p>Accessible name for the <code>&lt;button&gt;</code> should be: <q>Submit</q>. The <code>aria-label</code> containing only whitespace will be ignored.</p>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;button <span class="highlight">aria-label="   "</span>&gt;Submit&lt;/button&gt;</code></pre>
 </details>
 
 
+<!-- section -->
+
+
 <h2>Example 6: Prohibited role — <code>&lt;p&gt;</code></h2>
+
 <div class="example">
   <p aria-label="Important notice">This paragraph has an aria-label.</p>
 </div>
+
+<p>There will be no accessible name for the <code>&lt;p&gt;</code> as this role does not allow naming.</p>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;p <span class="highlight">aria-label="Important notice"</span>&gt;This paragraph has an aria-label.&lt;/p&gt;</code></pre>
 </details>
 
 
+<!-- section -->
+
+
 <h2>Example 7: Prohibited role — <code>&lt;span&gt;</code></h2>
+
 <div class="example">
   <span aria-label="Hello world">This span has an aria-label.</span>
 </div>
+
+<p>There will be no accessible name for the <code>&lt;span&gt;</code> as this role does not allow naming.</p>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;span <span class="highlight">aria-label="Hello world"</span>&gt;This span has an aria-label.&lt;/span&gt;</code></pre>
 </details>
 
+
+<!-- section -->
+
+
 <h2>Example 8: Prohibited role — <code>role="none"</code></h2>
+
 <div class="example">
   <div role="none" aria-label="Hello world">This element has a role of none.</div>
 </div>
+
+<p>There will be no accessible name for the <code>&lt;div&gt;</code> as this role does not allow naming.</p>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;div role="none" <span class="highlight">aria-label="Hello world"</span>&gt;This element

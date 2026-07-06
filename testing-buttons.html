@@ -15,55 +15,145 @@
 
 <h1>Testing buttons</h1>
 
+<p>While all of these examples demonstrate how an accessible name can be calculated, they are not all examples of good practice. Some techniques override visible text, rely on attributes that are poorly supported or undiscoverable, or recreate native functionality unnecessarily. Whenever possible, use native HTML buttons with visible text, and only use ARIA when there is no suitable native solution.</p>
+
+<!-- section -->
+
+
 <h2>Name from content</h2>
+
+<p><b>Recommended</b>. The visible button text becomes the accessible name, making it simple, reliable and consistent for everyone.</p>
+
 <div class="example">
   <button>Hello world</button>
 </div>
+
+<p>The accessible name for this <code>&lt;button&gt;</code> should be: <q>Hello world</q></p>
+
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;button&gt;Hello world&lt;/button&gt;</code></pre>
+</details>
+
+
+<!-- section -->
 
 
 <h2>Name via <code>aria-labelledby</code></h2>
+
+<p><b>Use with care</b>. This overrides the button's own text and should only be used when another visible label needs to provide the accessible name.</p>
+
+<p>This example fails <q>WCAG 2.5.3 Label in Name</q> because the visible text ("Close") does not match the accessible name ("Dismiss").</p>
+
 <div class="example">
-  <button aria-labelledby="aaa">Hello world</button>
-  <p id="aaa">Goodbye world</p>
+  <button aria-labelledby="aaa">Close</button>
+  <p id="aaa">Dismiss</p>
 </div>
-<pre><code>&lt;button <span class="highlight">aria-labelledby="aaa"</span>&gt;Hello world&lt;/button&gt;
-&lt;p <span class="highlight">id="aaa"</span>&gt;Goodbye world&lt;/p&gt;</code></pre>
+
+<p>The accessible name for this <code>&lt;button&gt;</code> should be: <q>Dismiss</q></p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button <span class="highlight">aria-labelledby="aaa"</span>&gt;Close&lt;/button&gt;
+&lt;p <span class="highlight">id="aaa"</span>&gt;Dismiss&lt;/p&gt;</code></pre>
+</details>
+
+
+<!-- section -->
 
 
 <h2>Name via <code>aria-label</code></h2>
+
+<p><b>Avoid when visible text exists</b>. This replaces the visible text as the accessible name, which can create inconsistencies for screen reader and voice control users. Use it only when the visible text needs additional context that is not appropriate to display on screen.</p>
+
+<p>This example fails <q>WCAG 2.5.3 Label in Name</q> because the visible text ("Add to cart") does not match the accessible name ("Save this item").</p>
+
 <div class="example">
-  <button aria-label="Goodbye world">Hello world</button>
+  <button aria-label="Save this item">Add to cart</button>
 </div>
-<pre><code>&lt;button <span class="highlight">aria-label="Goodbye world"</span>&gt;Hello world&lt;/button&gt;</code></pre>
+
+<p>The accessible name for this <code>&lt;button&gt;</code> should be: <q>Save this item</q></p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button <span class="highlight">aria-label="Save this item"</span>&gt;Add to cart&lt;/button&gt;</code></pre>
+</details>
+
+
+<!-- section -->
 
 
 <h2>Name via <code>title</code></h2>
+
+<p><b>Avoid</b>. The <code>title</code> attribute is not reliably exposed or discoverable and should not be relied upon to provide the accessible name for a button.</p>
+
 <div class="example">
-  <button title="Goodbye world"></button>
+  <button title="Continue"></button>
 </div>
-<pre><code>&lt;button <span class="highlight">title="Goodbye world"</span>&gt;&lt;/button&gt;</code></pre>
+
+<p>The accessible name for this <code>&lt;button&gt;</code> should be: <q>Continue</q></p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button <span class="highlight">title="Continue"</span>&gt;&lt;/button&gt;</code></pre>
+</details>
+
+
+<!-- section -->
 
 
 <h2>Name via <code>value</code></h2>
+
+<p><b>Recommended for</b> <code>&lt;input type="button"&gt;</code>. The value attribute provides both the visible label and the accessible name.</p>
+
 <div class="example">
-  <input class="button" type="button" value="Hello world">
+  <input class="button" type="button" value="Create account">
 </div>
-<pre><code>&lt;input type="button" <span class="highlight">value="Hello world"</span>&gt;</code></pre>
+
+<p>The accessible name for this <code>&lt;button&gt;</code> should be: <q>Create account</q></p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input type="button" <span class="highlight">value="Create account"</span>&gt;</code></pre>
+</details>
+
+
+<!-- section -->
 
 
 <h2>Name via <code>role="button"</code></h2>
+
+<p><b>Avoid where possible</b>. Use a native <code>&lt;button&gt;</code> instead, as custom buttons require additional keyboard interaction, focus management and state handling.</p>
+
 <div class="example">
   <div role="button" class="button" tabindex="0">Submit</div>
 </div>
+
+<p>The accessible name for this <code>&lt;button&gt;</code> should be: <q>Submit</q></p>
+
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;div role="button" tabindex="0"&gt;Submit&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
 
 
 <h2>No accessible name</h2>
+
+<p><b>Never do this</b>. Buttons without an accessible name cannot be identified by assistive technologies, making them unusable for many people.</p>
+
 <div class="example">
   <button></button>
 </div>
+
+<p>There is no accessible name for this <code>&lt;button&gt;</code>.</p>
+
+<details>
+  <summary>HTML markup</summary>
 <pre><code>&lt;button&gt;&lt;/button&gt;</code></pre>
+</details>
 
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>

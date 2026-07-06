@@ -19,35 +19,91 @@
 </a>
 
 <h1>Testing form field errors</h1>
+
 <p>Which of the form fields below has:</p>
+
 <ul>
   <li>An error message that is programmatically associated with the field? (via <code>aria-describedby</code>)</li>
   <li>A programmatically identified invalid state? (via <code>aria-invalid="true"</code>)</li>
 </ul>
 
 
+<!-- section -->
+
+
 <h2>Example 1</h2>
+
+<ul>
+  <li>The error message is not associated with the form control.</li>
+  <li>The form control is not defined as <q>invalid</q>. </li>
+</ul>
+
+<p><b>Not recommended</b>. Screen reader users may not be told that the field has an error or hear the error message when they move to the field.</p>
+
 <form action="#">
-  <label class="label" for="full-name">Full name</label>
-  <input class="input" id="full-name" type="text">
+  <label class="label" for="na">Full name</label>
+  <input class="input" id="na">
   <span class="error-message">You must include a full name</span>
 </form>
 
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="na"&gt;Full name&lt;/label&gt;
+&lt;input id="na"&gt;
+&lt;span&gt;You must include a full name&lt;/span&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
 
 <h2>Example 2</h2>
+
+<ul>
+  <li>The error message is associated with the form control.</li>
+  <li>The form control is not defined as <q>invalid</q>.</li>
+</ul>
+
+<p><b>Not recommended</b>. Screen reader users may hear the error message when they move to the field, but may not be told that the field is currently invalid.</p>
+
 <form action="#">
-  <label class="label" for="email-address">Email address</label>
-  <input class="input" id="email-address" type="email" aria-describedby="error-email-address">
-  <span class="error-message" id="error-email-address">You must include a valid email address</span>
+  <label class="label" for="em">Email address</label>
+  <input class="input" id="em" type="email" aria-describedby="bbb">
+  <span class="error-message" id="bbb">You must include a valid email address</span>
 </form>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="em"&gt;Email address&lt;/label&gt;
+&lt;input id="em" type="email" aria-describedby="bbb"&gt;
+&lt;span id="bbb"&gt;You must include a valid email address&lt;/span&gt;</code></pre>
+</details>
+
+
+<!-- section -->
 
 
 <h2>Example 3</h2>
+
+<ul>
+  <li>The error message is associated with the form control.</li>
+  <li>The form control is defined as <q>invalid</q>.</li>
+</ul>
+
+<p><b>Recommended</b>. Screen reader users can be told that the field is invalid and hear the error message when they move to the field.</p>
+
 <form action="#">
-  <label class="label" for="phone-number">Phone number</label>
-  <input class="input" id="phone-number" type="text" aria-describedby="error-phone-number" aria-invalid="true">
-  <span class="error-message" id="error-phone-number">You must include a full phone number including area code</span>
+  <label class="label" for="ph">Phone number</label>
+  <input class="input" id="ph" aria-describedby="ccc" aria-invalid="true">
+  <span class="error-message" id="ccc">Include your area code</span>
 </form>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="ph"&gt;Phone number&lt;/label&gt;
+&lt;input id="ph" aria-describedby="ccc" aria-invalid="true"&gt;
+&lt;span id="ccc"&gt;Include your area code&lt;/span&gt;</code></pre>
+</details>
 
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>

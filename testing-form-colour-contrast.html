@@ -13,10 +13,7 @@
       border: 2px solid #bbb;
       box-shadow: 3px 3px 5px #ccc;
     }
-    .large-form {
-      font-size: 150%;
-    }
-
+    
     .label {
       margin-bottom: 0;
     }
@@ -42,26 +39,38 @@
 </a>
 
 <h1>Testing colour contrast in forms</h1>
-<p>Which of the examples below has colour contrast that passes <a href="https://www.w3.org/TR/WCAG22/#contrast-minimum" target="_blank">Success Criterion 1.4.3: Contrast (Minimum)</a>.</p>
+
+<p>Review the examples below:</p>
+
 <ol>
-  <li>The label, instructions and error messge must be at least 4.5:1.</li>
-  <li>The input borders must be at least 3:1.</li>
+  <li>The label, instructions and error message must be at least 4.5:1. <a href="https://www.w3.org/TR/WCAG22/#contrast-minimum" target="_blank">SC 1.4.3: Contrast (Minimum)</a></li>
+  <li>The input borders must be at least 3:1. <a href="https://www.w3.org/TR/WCAG21/#non-text-contrast" target="_blank">SC 1.4.11 Non-text Contrast</a></li>
 </ol>
 
+
+<!-- section -->
+
+
 <h2>Example 1</h2>
-<form action="#" class="large-form">
+
+<form action="#">
   <label class="label" for="full-name1">Name</label>
   <span class="help-text">Include your full name</span>
   <input class="input" id="full-name1" type="text">
 </form>
 
 
+<!-- section -->
+
+
 <h2>Example 2</h2>
-<form action="#" class="large-form">
+
+<form action="#">
   <label class="label" for="full-name2">Email</label>
   <input class="input" id="full-name2" type="text">
   <span class="error-message">This field is required.</span>
 </form>
+
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>

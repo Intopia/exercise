@@ -21,11 +21,19 @@
 </a>
 
 <h1>Testing fieldsets and legends</h1>
+
 <p>The <code>&lt;fieldset&gt;</code> HTML element is used to group more than one form field within a web form. The <code>&lt;legend&gt;</code> HTML element represents a label for the content of its parent <code>&lt;fieldset&gt;</code>.</p>
 
 
+<!-- section -->
+
+
 <h2>Example 1</h2>
-<p>This example has no group role or name.</p>
+
+<p>This radio group has no <q>group</q> <code>role</code> or name.</p>
+
+<p><b>This is a serious accessibility issue</b>. Screen reader users have no way of knowing that these radio buttons form a group or what question they are intended to answer.</p>
+
 <form action="#">
   <ul class="form-list">
     <li>
@@ -43,9 +51,34 @@
   </ul>
 </form>
 
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;ul class="form-list"&gt;
+  &lt;li&gt;
+    &lt;input type="radio" id="dog1" name="example1"&gt;
+    &lt;label for="dog1"&gt;Dog&lt;/label&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;input type="radio" id="cat1" name="example1"&gt;
+    &lt;label for="cat1"&gt;Cat&lt;/label&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;input type="radio" id="rabbit1" name="example1"&gt;
+    &lt;label for="rabbit1"&gt;Rabbit&lt;/label&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
 
 <h2>Example 2</h2>
-<p>This example has no group role and the name is not programmatically associated with the radios.</p>
+
+<p>This radio group has no <q>group</q> <code>role</code> and the name is not programmatically associated with the radios.</p>
+
+<p><b>This is an accessibility issue</b>. Screen reader users may need to leave forms mode and navigate around the page to discover the nearby heading that describes the radio group.</p>
+
 <form action="#">
   <h3>Favourite animal</h3>
   <ul class="form-list">
@@ -64,9 +97,35 @@
   </ul>
 </form>
 
+<details>
+  <summary>HTML markup</summary>
+<pre><code><span class="highlight">&lt;h3&gt;Favourite animal&lt;/h3&gt;</span>
+&lt;ul class="form-list"&gt;
+  &lt;li&gt;
+    &lt;input type="radio" id="dog2" name="example2"&gt;
+    &lt;label for="dog2"&gt;Dog&lt;/label&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;input type="radio" id="cat2" name="example2"&gt;
+    &lt;label for="cat2"&gt;Cat&lt;/label&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;input type="radio" id="rabbit2" name="example2"&gt;
+    &lt;label for="rabbit2"&gt;Rabbit&lt;/label&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
 
 <h2>Example 3</h2>
-<p>This example has a group role via <code>&lt;fieldset&gt;</code> but no name.</p>
+
+<p>This radio group has <q>group</q> <code>role</code> via <code>&lt;fieldset&gt;</code> but no name.</p>
+
+<p><b>This is an accessibility issue</b>. Although the radios are grouped, screen reader users may still need to leave forms mode to discover the question or heading that describes the group.</p>
+
 <form action="#">
   <fieldset>
     <ul class="form-list">
@@ -86,9 +145,36 @@
   </fieldset>
 </form>
 
+<details>
+  <summary>HTML markup</summary>
+<pre><code><span class="highlight">&lt;fieldset&gt;</span>
+  &lt;ul class="form-list"&gt;
+    &lt;li&gt;
+      &lt;input type="radio" id="dog3" name="example3"&gt;
+      &lt;label for="dog3"&gt;Dog&lt;/label&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;input type="radio" id="cat3" name="example3"&gt;
+      &lt;label for="cat3"&gt;Cat&lt;/label&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;input type="radio" id="rabbit3" name="example3"&gt;
+      &lt;label for="rabbit3"&gt;Rabbit&lt;/label&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+<span class="highlight">&lt;/fieldset&gt;</span></code></pre>
+</details>
+
+
+<!-- section -->
+
 
 <h2>Example 4</h2>
-<p>This example has a group role via <code>&lt;fieldset&gt;</code> and name via <code>&lt;legend&gt;</code></p>
+
+<p>This radio group has <q>group</q> <code>role</code> via <code>&lt;fieldset&gt;</code> and name via <code>&lt;legend&gt;</code></p>
+
+<p><b>Recommended</b>. The radio group has both a programmatic group and an accessible name, allowing screen reader users to understand the question while navigating the form.</p>
+
 <form action="#">
   <fieldset>
     <legend>Favourite animal</legend>
@@ -109,12 +195,40 @@
   </fieldset>
 </form>
 
+<details>
+  <summary>HTML markup</summary>
+<pre><code><span class="highlight">&lt;fieldset&gt;</span>
+  <span class="highlight">&lt;legend&gt;Favourite animal&lt;/legend&gt;</span>
+  &lt;ul class="form-list"&gt;
+    &lt;li&gt;
+      &lt;input type="radio" id="dog4" name="example4"&gt;
+      &lt;label for="dog4"&gt;Dog&lt;/label&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;input type="radio" id="cat4" name="example4"&gt;
+      &lt;label for="cat4"&gt;Cat&lt;/label&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;input type="radio" id="rabbit4" name="example4"&gt;
+      &lt;label for="rabbit4"&gt;Rabbit&lt;/label&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+<span class="highlight">&lt;/fieldset&gt;</span></code></pre>
+</details>
+
+
+<!-- section -->
+
 
 <h2>Example 5</h2>
-<p>This example has a group role via <code>radiogroup</code> and name via <code>aria-labelledby</code></p>
+
+<p>This radio group has <q>group</q> <code>role</code> via <code>radiogroup</code> and name via <code>aria-labelledby</code></p>
+
+<p><b>Acceptable when needed</b>. This provides an accessible group and name, but a native <code>&lt;fieldset&gt;</code> and <code>&lt;legend&gt;</code> should be preferred whenever possible.</p>
+
 <form action="#">
-  <div role="radiogroup" aria-labelledby="group-heading">
-    <h3 id="group-heading">Favourite animal</h3>
+  <div role="radiogroup" aria-labelledby="aaa">
+    <h3 id="aaa">Favourite animal</h3>
     <ul class="form-list">
       <li>
         <input type="radio" id="dog5" name="example5">
@@ -131,6 +245,27 @@
     </ul>
   </div>
 </form>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div <span class="highlight">role="radiogroup"</span> <span class="highlight">aria-labelledby="aaa"</span>&gt;
+  &lt;h3 <span class="highlight">id="aaa"</span>&gt;Favourite animal&lt;/h3&gt;
+  &lt;ul class="form-list"&gt;
+    &lt;li&gt;
+      &lt;input type="radio" id="dog5" name="example5"&gt;
+      &lt;label for="dog5"&gt;Dog&lt;/label&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;input type="radio" id="cat5" name="example5"&gt;
+      &lt;label for="cat5"&gt;Cat&lt;/label&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;input type="radio" id="rabbit5" name="example5"&gt;
+      &lt;label for="rabbit5"&gt;Rabbit&lt;/label&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+</details>
 
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
