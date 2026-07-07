@@ -47,11 +47,17 @@
 </a>
 
 <h1>Testing the <code>output</code> element</h1>
+
 <p>The <a href="https://html.spec.whatwg.org/#the-output-element" target="_blank"><code>&lt;output&gt;</code></a> element is a container element into which the results of a calculation or the outcome of a user action can be injected.</p>
+
+
+<!-- section -->
+
 
 <h2>Example</h2>
 
 <p>Use the form below to add two values together and calculate the result:</p>
+
 <form>
   <input class="output1" type="number" id="a" aria-label="Value 1" oninput="calculateSum()"> + 
   <input class="output1" type="number" id="b" aria-label="Value 2" oninput="calculateSum()"> = 
@@ -71,26 +77,26 @@
   &lt;!-- Dynamic message --&gt;
 &lt;/div&gt;</code></pre>
 
-    <script>
-        let timeout = null;
+<script>
+    let timeout = null;
 
-        function calculateSum() {
-            const a = parseFloat(document.getElementById('a').value) || 0;
-            const b = parseFloat(document.getElementById('b').value) || 0;
-            const result = a + b;
+    function calculateSum() {
+        const a = parseFloat(document.getElementById('a').value) || 0;
+        const b = parseFloat(document.getElementById('b').value) || 0;
+        const result = a + b;
 
-            // Update the output element
-            document.getElementById('result').value = result;
+        // Update the output element
+        document.getElementById('result').value = result;
 
-            // Clear the previous timeout
-            clearTimeout(timeout);
+        // Clear the previous timeout
+        clearTimeout(timeout);
 
-            // Set a new timeout to update the announcement after 0.5 seconds
-            timeout = setTimeout(() => {
-                document.querySelector('.announcement').textContent = `The total value is ${result}`;
-            }, 1200);
-        }
-    </script>
+        // Set a new timeout to update the announcement after 0.5 seconds
+        timeout = setTimeout(() => {
+            document.querySelector('.announcement').textContent = `The total value is ${result}`;
+        }, 1200);
+    }
+</script>
 
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>

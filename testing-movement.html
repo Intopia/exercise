@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testing movement</title>
-    <link href="assets/css/testing.css" rel="stylesheet">
-    <style>
-        canvas {
-            border: 1px solid black;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Testing movement</title>
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    canvas {
+      border: 1px solid black;
+    }
+  </style>
 </head>
 <body>
 <a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
@@ -17,59 +17,87 @@
 </a>
 
 <h1>Testing movement</h1>
-<canvas id="canvas" width="600" height="400"></canvas>
-<button id="pauseButton">Pause</button>
 
-    <script>
-        const canvas = document.getElementById("canvas");
-        const ctx = canvas.getContext("2d");
-        let circles = [];
-        let isPaused = false;
+<canvas id="canvas" width="600" height="400" aria-hidden="true"></canvas>
 
-        function createCircle() {
-            return {
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                radius: Math.random() * 40 + 10,
-                color: `hsl(${Math.random() * 360}, 100%, 50%)`,
-                dx: (Math.random() - 0.5) * 4,
-                dy: (Math.random() - 0.5) * 4,
-            };
-        }
+<button id="pauseButton" aria-pressed="false">Pause animation</button>
 
-        for (let i = 0; i < 10; i++) {
-            circles.push(createCircle());
-        }
+<script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const pauseButton = document.getElementById("pauseButton");
+    let circles = [];
 
-        function animate() {
-            if (!isPaused) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                circles.forEach(circle => {
-                    circle.x += circle.dx;
-                    circle.y += circle.dy;
+    // Respect the user's OS-level reduced motion setting. If they've asked
+    // for reduced motion, start paused rather than auto-playing and making
+    // them find and hit the pause button themselves.
+    const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+    let isPaused = prefersReducedMotion;
 
-                    if (circle.x - circle.radius < 0 || circle.x + circle.radius > canvas.width) {
-                        circle.dx *= -1;
-                    }
-                    if (circle.y - circle.radius < 0 || circle.y + circle.radius > canvas.height) {
-                        circle.dy *= -1;
-                    }
+    function createCircle() {
+        return {
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 40 + 10,
+            color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+            dx: (Math.random() - 0.5) * 4,
+            dy: (Math.random() - 0.5) * 4,
+        };
+    }
 
-                    ctx.beginPath();
-                    ctx.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = circle.color;
-                    ctx.fill();
-                    ctx.closePath();
-                });
-            }
-            requestAnimationFrame(animate);
-        }
-        animate();
+    for (let i = 0; i < 10; i++) {
+        circles.push(createCircle());
+    }
 
-        document.getElementById("pauseButton").addEventListener("click", () => {
-            isPaused = !isPaused;
-            document.getElementById("pauseButton").textContent = isPaused ? "Resume" : "Pause";
+    function drawCircles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        circles.forEach(circle => {
+            ctx.beginPath();
+            ctx.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2);
+            ctx.fillStyle = circle.color;
+            ctx.fill();
+            ctx.closePath();
         });
-    </script>
+    }
+
+    function animate() {
+        if (!isPaused) {
+            circles.forEach(circle => {
+                circle.x += circle.dx;
+                circle.y += circle.dy;
+
+                if (circle.x - circle.radius < 0 || circle.x + circle.radius > canvas.width) {
+                    circle.dx *= -1;
+                }
+                if (circle.y - circle.radius < 0 || circle.y + circle.radius > canvas.height) {
+                    circle.dy *= -1;
+                }
+            });
+            drawCircles();
+        }
+        requestAnimationFrame(animate);
+    }
+
+    // Draw the initial frame even if starting paused, so reduced-motion
+    // users still see the circles rather than a blank canvas.
+    drawCircles();
+    animate();
+
+    function updatePauseButton() {
+        pauseButton.textContent = isPaused ? "Resume animation" : "Pause animation";
+        pauseButton.setAttribute("aria-pressed", String(isPaused));
+    }
+    updatePauseButton();
+
+    pauseButton.addEventListener("click", () => {
+        isPaused = !isPaused;
+        updatePauseButton();
+    });
+</script>
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
 </html>

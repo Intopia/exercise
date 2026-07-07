@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the menu element</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    menu {
+      margin: 0 0 1em;
+      padding: 0;
+      list-style: none;
+    }
+
+    menu li {
+      display: inline-block;
+      margin: 0 1em 0 0;
+    }
+
+    .menu-example {
+      margin: 0;
+    }
+
+    .menu-example:focus {
+      outline: 1px dotted black;
+    }
+
+    .hidden2 {
+      position: absolute;
+      left: -500px;
+      top: 0;
+      width: 1px;
+      height: 1px;
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<h1>Testing the <code>menu</code> element</h1>
+
+<p><a href="testing.html">Dummy link above</a></p>
+
+<p>The <a href="https://html.spec.whatwg.org/#the-menu-element" target="_blank"><code>&lt;menu&gt;</code></a> element is described in the HTML specification as a semantic alternative to <code>&lt;ul&gt;</code>, but treated by browsers (and exposed through the accessibility tree) as no different than <code>&lt;ul&gt;</code>. It represents an unordered list of items (which are represented by <code>&lt;li&gt;</code> elements).</p>
+
+<p>The key difference is that <code>&lt;ul&gt;</code> primarily contains items for display, while <code>&lt;menu&gt;</code>was intended for interactive items.</p>
+
+<p>The related <code>&lt;menuitem&gt;</code> element has been <a href="https://html.spec.whatwg.org/#non-conforming-features" target="_blank">deprecated</a>.</p>
+
+<h2>Example</h2>
+
+<div class="example">
+  <menu>
+    <li><button onclick="injectHelloText()">Inject Hello</button></li>
+    <li><button onclick="injectGoodbyeText()">Inject Goodbye</button></li>
+    <li><button onclick="clearText(this)">Clear</button></li>
+  </menu>
+  <div class="menu-example" aria-live="polite" tabindex="-1"></div>
+  <div class="announcement hidden2" aria-live="polite"></div>
+</div>
+
+<script>
+    function injectHelloText() {
+        const container = document.querySelector('.menu-example');
+        const announcement = document.querySelector('.announcement');
+        container.textContent = "Hello world";
+        container.focus();
+        announcement.textContent = "";
+    }
+
+    function injectGoodbyeText() {
+        const container = document.querySelector('.menu-example');
+        const announcement = document.querySelector('.announcement');
+        container.textContent = "Goodbye world";
+        container.focus();
+        announcement.textContent = "";
+    }
+
+    function clearText(button) {
+        const container = document.querySelector('.menu-example');
+        const announcement = document.querySelector('.announcement');
+        container.textContent = "";
+        button.focus();
+
+        // aria-live="polite" already queues this behind the button's own
+        // accessible name announcement, so no artificial delay is needed.
+        announcement.textContent = "Your message has been cleared";
+    }
+</script>
+
+<pre><code>&lt;menu&gt;
+  &lt;li&gt;&lt;button&gt;Inject Hello&lt;/button&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;button&gt;Inject Goodbye&lt;/button&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;button&gt;Clear&lt;/button&gt;&lt;/li&gt;
+&lt;/menu&gt;
+
+&lt;div class="menu-example" aria-live="polite"&gt;
+  &lt;!-- Visible message --&gt;
+&lt;/div&gt;
+
+&lt;div class="announcement" aria-live="polite"&gt;
+  &lt;!-- Message for screen readers --&gt;
+&lt;/div&gt;</code></pre>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>

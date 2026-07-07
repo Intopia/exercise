@@ -15,25 +15,55 @@
 
 <h1>Testing name mismatches</h1>
 
-<h2>Visible name and accessible name match</h2>
-<div class="example">
-  <button aria-label="Hello">Hello</button>
-</div>
-<pre><code>&lt;button <span class="highlight">aria-label="Hello"</span>&gt;Hello&lt;/button&gt;</code></pre>
+
+<!-- section -->
 
 
-<h2>Visible name and accessible name partially match</h2>
-<div class="example">
-  <button aria-label="Hello world">Hello</button>
-</div>
-<pre><code>&lt;button <span class="highlight">aria-label="Hello world"</span>&gt;Hello&lt;/button&gt;</code></pre>
+<h2>Example 1: Visible name and accessible name do not match</h2>
 
+<p>The accessible name for this <code>&lt;button&gt;</code> should be: <q>Goodbye world</q></p>
 
-<h2>Visible name and accessible name do not match</h2>
+<p><b>Not recommended</b>. The accessible name does not match the visible text, which can cause problems for screen reader and voice control users.</p>
+
 <div class="example">
   <button aria-label="Goodbye world">Hello</button>
 </div>
+
 <pre><code>&lt;button <span class="highlight">aria-label="Goodbye world"</span>&gt;Hello&lt;/button&gt;</code></pre>
+
+
+<!-- section -->
+
+
+<h2>Example 2. Visible name and accessible name partially match</h2>
+
+<p>The accessible name for this <code>&lt;button&gt;</code> should be: <q>Close dialog</q></p>
+
+<p><b>Recommended</b>. The accessible name begins with the visible text and provides additional context, making it easier for screen reader and voice control users.</p>
+
+<div class="example">
+  <button aria-label="Close dialog">Close</button>
+</div>
+
+<pre><code>&lt;button <span class="highlight">aria-label="Close dialog"</span>&gt;Close&lt;/button&gt;</code></pre>
+
+
+
+<!-- section -->
+
+
+<h2>Example 3: Accessible name from button content</h2>
+
+<p>The accessible name for this <code>&lt;button&gt;</code> should be: <q>Submit</q></p>
+
+<p><b>Recommended</b>. The visible text provides the accessible name, so screen reader and voice control users receive the same label that appears on screen.</p>
+
+<div class="example">
+  <button>Submit</button>
+</div>
+
+<pre><code>&lt;button&gt;Submit&lt;/button&gt;</code></pre>
+
 
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>

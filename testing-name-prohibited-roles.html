@@ -15,12 +15,16 @@
 
 <h1>Testing name-prohibited roles</h1>
 
-
 <p>The following are <a href="https://www.w3.org/TR/wai-aria-1.2/#namefromprohibited" target="_blank">roles that cannot be named in ARIA 1.2</a>.</p>
 
 
+<!-- section -->
+
+
 <h2>caption</h2>
+
 <div style="margin-bottom: 2em;" role="caption" aria-label="Hello">This element has a role of <code>caption</code></div>
+
 <table>
   <caption aria-label="Hello">This is a caption</caption>
   <thead>
@@ -36,15 +40,22 @@
     </tr>
   </tbody>
 </table>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;caption aria-label="Hello"&gt;This is a caption&lt;/caption&gt;</code></pre>
 </details>
 
 
+<!-- section -->
+
+
 <h2>code</h2>
+
 <div style="margin-bottom: 2em;"><span role="code" aria-label="Hello">This element has a role of <code>code</code></span></div>
+
 <div><code aria-label="Hello">This is the &lt;code&gt; element</code></div>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;span role="code" aria-label="Hello"&gt;...&lt;/span&gt;
@@ -52,9 +63,15 @@
 </details>
 
 
+<!-- section -->
+
+
 <h2>deletion</h2>
+
 <div style="margin-bottom: 2em;"><span role="deletion" aria-label="Hello">This element has a role of <code>deletion</code></span></div>
+
 <div><del aria-label="Hello">This is the <code>&lt;del&gt;</code> element</del></div>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;span role="deletion" aria-label="Hello"&gt;...&lt;/span&gt;
@@ -62,8 +79,13 @@
 </details>
 
 
+<!-- section -->
+
+
 <h2>emphasis</h2>
+
 <div style="margin-bottom: 2em;"><span role="emphasis" aria-label="Hello">This element has a role of <code>emphasis</code></span></div>
+
 <div><em aria-label="Hello">This is the <code>&lt;em&gt;</code> element</em></div>
 <details>
   <summary>HTML markup</summary>

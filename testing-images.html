@@ -14,13 +14,21 @@
 </a>
 
 <h1>Testing image alternatives</h1>
+
 <p>Which of the images below have a meaningful, empty, or missing <code>alt</code> attribute?</p>
 
+
+<!-- section -->
+
+
 <h2>Example 1: Meaningful alt text</h2>
+
 <p>This image has a meaningful <code>alt</code> attribute that describes the image content.</p>
+
 <div class="example">
   <img src="assets/img/image-decorative.jpg" alt="A person stands on a wide, smooth sand dune with gentle curves. The sand is illuminated by warm light, contrasting with darker areas in the background, suggesting a vast, open desert landscape.">
 </div>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;img src="image.jpg" <span class="highlight">alt="A person stands on a wide,
@@ -31,11 +39,17 @@ desert landscape."</span>&gt;</code></pre>
 </details>
 
 
+<!-- section -->
+
+
 <h2>Example 2: Empty alt — decorative image</h2>
+
 <p>This image is decorative. The <code>alt</code> attribute is present but empty, so assistive technologies will ignore it.</p>
+
 <div class="example">
   <img src="assets/img/image-decorative.jpg" alt="">
 </div>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;img src="image.jpg" <span class="highlight">alt=""</span>&gt;
@@ -43,14 +57,20 @@ desert landscape."</span>&gt;</code></pre>
 </details>
 
 
+<!-- section -->
+
+
 <h2>Example 3: Empty alt — image inside a link</h2>
+
 <p>This image is inside a link that has visible text. The image is decorative in this context, so <code>alt=""</code> is correct — the link text provides the accessible name.</p>
+
 <div class="example">
   <a href="#">
     <img src="assets/img/external-link-20.png" alt="">
     Visit our website
   </a>
 </div>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;a href="#"&gt;
@@ -59,8 +79,14 @@ desert landscape."</span>&gt;</code></pre>
 &lt;/a&gt;</code></pre>
 </details>
 
+
+<!-- section -->
+
+
 <h2>Example 4: Missing alt attribute</h2>
+
 <p>This image has no <code>alt</code> attribute at all. Assistive technologies may announce the filename instead.</p>
+
 <div class="example">
   <img src="assets/img/image-decorative.jpg">
 </div>
@@ -68,6 +94,7 @@ desert landscape."</span>&gt;</code></pre>
   <summary>HTML markup</summary>
 <pre><code>&lt;img src="image.jpg"&gt;</code></pre>
 </details>
+
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>

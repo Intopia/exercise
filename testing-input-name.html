@@ -14,61 +14,148 @@
 </a>
 
 <h1>Testing the accessible name of an <code>&lt;input&gt;</code></h1>
+
 <p>The purpose this test is to show the cascade order of how accessible names are applied in the accessibility tree. This example should not be considered proper practice. Where possible the contents of the <code>&lt;label&gt;</code> should be used to define the accessible name.</p>
 
 <p>The input element can be given an accessible name using the following methods, in order of priority:</p>
-<ul>
+
+<ol>
   <li><code>aria-labelledby</code></li>
   <li><code>aria-label</code></li>
   <li>From <code>&lt;label&gt;</code> with <code>for</code></li>
   <li><code>title</code></li>
   <li><code>placeholder</code></li>
-  <li><code>aria-placeholder</code></li>
-</ul>
+</ol>
+
+
+<!-- section -->
+
 
 <h2>Example 1</h2>
+
 <p>The <code>&lt;input&gt;</code> element should have an accessible name of &lsquo;Cat&rsquo; via the <code>aria-labelledby</code> attribute.</p>
+
 <form action="#">
   <div class="form-group">
     <label class="label" for="aaa">Fish</label>
-    <input class="input" type="text" id="aaa" aria-labelledby="cat" aria-label="Dog" title="Rabbit" placeholder="Fox">
+    <input class="input" id="aaa" aria-labelledby="cat" aria-label="Dog" title="Rabbit" placeholder="Fox">
     <div class="error-message" id="cat">Cat</div>
   </div>
 </form>
 
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="aaa"&gt;Fish&lt;/label&gt;
+&lt;input
+  id="aaa"
+  <span class="highlight">aria-labelledby="cat"</span>
+  aria-label="Dog"
+  title="Rabbit"
+  placeholder="Fox"
+&gt;
+&lt;div class="error-message" <span class="highlight">id="cat"</span>&gt;Cat&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
 <h2>Example 2</h2>
+
 <p>The <code>&lt;input&gt;</code> element should have an accessible name of &lsquo;Dog&rsquo; via the <code>aria-label</code> attribute.</p>
+
 <form action="#">
   <div class="form-group">
     <label class="label" for="bbb">Fish</label>
-    <input class="input" type="text" id="bbb" aria-label="Dog" title="Rabbit" placeholder="Fox">
+    <input class="input" id="bbb" aria-label="Dog" title="Rabbit" placeholder="Fox">
   </div>
 </form>
 
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="bbb"&gt;Fish&lt;/label&gt;
+&lt;input
+  id="bbb"
+  <span class="highlight">aria-label="Dog"</span>
+  title="Rabbit"
+  placeholder="Fox"
+&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
 <h2>Example 3</h2>
+
 <p>The <code>&lt;input&gt;</code> element should have an accessible name of &lsquo;Fish&rsquo; via the <code>&lt;label&gt;</code> element.</p>
+
 <form action="#">
   <div class="form-group">
     <label class="label" for="ccc">Fish</label>
-    <input class="input" type="text" id="ccc" title="Rabbit" placeholder="Fox">
+    <input class="input" id="ccc" title="Rabbit" placeholder="Fox">
   </div>
 </form>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label <span class="highlight">for="ccc"</span>&gt;Fish&lt;/label&gt;
+&lt;input
+  <span class="highlight">id="ccc"</span>
+  title="Rabbit" 
+  placeholder="Fox"
+&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
 
 <h2>Example 4</h2>
+
 <p>The <code>&lt;input&gt;</code> element should have an accessible name of &lsquo;Rabbit&rsquo; via the <code>title</code> attribute.</p>
+
 <form action="#">
   <div class="form-group">
-    <input class="input" type="text" title="Rabbit" placeholder="Fox">
+    <input class="input" title="Rabbit" placeholder="Fox">
   </div>
 </form>
 
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input <span class="highlight">title="Rabbit"</span> placeholder="Fox"&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
 <h2>Example 5</h2>
+
 <p>The <code>&lt;input&gt;</code> element should have an accessible name of &lsquo;Fox&rsquo; via the <code>placeholder</code> attribute.</p>
+
 <form action="#">
   <div class="form-group">
-    <input class="input" type="text" placeholder="Fox">
+    <input class="input" placeholder="Fox">
   </div>
 </form>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input <span class="highlight">placeholder="Fox"</span>&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Note</h2>
+
+<p>Even though the accessible name is computed as described above, testing shows that most screen reader and browser combinations also announce the <code>placeholder</code> value ("Fox") alongside the correct name. For Examples 1–3. </p>
+
+<p>This extraneous announcement was only observed in Safari with VoiceOver for Example 4. </p>
+
+<p>This is a separate quirk from the accessible name computation itself, testers should expect to hear the placeholder value announced in addition to the stated name in most cases.</p>
 
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
