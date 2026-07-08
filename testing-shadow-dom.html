@@ -14,34 +14,200 @@
 </a>
 
 <h1>Testing shadow DOM</h1>
+
 <p>Which of the examples below use shadow DOM, and can JavaScript detect them?</p>
 
-<h2>Example 1 - Open shadow DOM</h2>
+<p><b>Important note for auditors:</b> shadow DOM is not limited to custom elements (hyphenated tag names). A fixed set of standard elements — including <code>&lt;div&gt;</code>, <code>&lt;span&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>, and several others — can also host a shadow root via <code>attachShadow()</code>. A detection method that only checks for hyphenated tag names will miss shadow DOM attached to standard elements entirely. A more reliable check tests <code>element.shadowRoot !== null</code> across <em>all</em> elements on the page, not just custom ones, though this still cannot detect a closed shadow root, only that an open one exists.</p>
+
+
+<!-- section -->
+
+
+<h2>Example 1: Open shadow DOM (custom element)</h2>
+
 <p>This web component uses <code>attachShadow({ mode: 'open' })</code>. Its shadow root is accessible via JavaScript.</p>
+
 <div class="example">
   <open-component></open-component>
 </div>
 
-<h2>Example 2 - Closed shadow DOM</h2>
-<p>This web component uses <code>attachShadow({ mode: 'closed' })</code>. Its shadow root is intentionally hidden from JavaScript. The bookmarklet can see the custom element but cannot confirm or access the shadow DOM.</p>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;open-component&gt;&lt;/open-component&gt;
+
+&lt;script&gt;
+  class OpenComponent extends HTMLElement {
+    constructor() {
+      super();
+      const shadow = this.attachShadow({ mode: 'open' });
+      shadow.innerHTML = `
+        &lt;p&gt;I am inside an &lt;strong&gt;open&lt;/strong&gt; shadow DOM.
+        JavaScript can access my shadow root.&lt;/p&gt;
+      `;
+    }
+  }
+  customElements.define('open-component', OpenComponent);
+&lt;/script&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 2: Closed shadow DOM (custom element)</h2>
+
+<p>This web component uses <code>attachShadow({ mode: 'closed' })</code>. Its shadow root is intentionally hidden from JavaScript. A bookmarklet can see the custom element but cannot confirm or access the shadow DOM.</p>
+
 <div class="example">
   <closed-component></closed-component>
 </div>
 
-<h2>Example 3 - Custom element, no shadow DOM</h2>
-<p>This is a custom element (hyphenated tag name) with no shadow DOM attached at all. The bookmarklet flags it the same way as a closed shadow DOM — it can see the element but cannot confirm what's inside.</p>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;closed-component&gt;&lt;/closed-component&gt;
+
+&lt;script&gt;
+  class ClosedComponent extends HTMLElement {
+    constructor() {
+      super();
+      const shadow = this.attachShadow({ mode: 'closed' });
+      shadow.innerHTML = `
+        &lt;p&gt;I am inside a &lt;strong&gt;closed&lt;/strong&gt; shadow DOM.
+        JavaScript cannot access my shadow root.&lt;/p&gt;
+      `;
+    }
+  }
+  customElements.define('closed-component', ClosedComponent);
+&lt;/script&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 3: Custom element, no shadow DOM</h2>
+
+<p>This is a custom element (hyphenated tag name) with no shadow DOM attached at all. A bookmarklet relying only on <code>element.shadowRoot</code> flags it the same way as closed shadow DOM — it can see the element but cannot confirm what's inside.</p>
+
 <div class="example">
   <no-shadow-component></no-shadow-component>
 </div>
 
-<h2>Example 4 - Regular HTML</h2>
-<p>This is a standard HTML element with no shadow DOM and no custom element. The bookmarklet will not flag it.</p>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;no-shadow-component&gt;&lt;/no-shadow-component&gt;
+
+&lt;script&gt;
+  class NoShadowComponent extends HTMLElement {
+    constructor() {
+      super();
+      this.innerHTML = `&lt;p&gt;I am a custom element with no shadow DOM at all.&lt;/p&gt;`;
+    }
+  }
+  customElements.define('no-shadow-component', NoShadowComponent);
+&lt;/script&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 4: Open shadow DOM on a standard element</h2>
+
+<p>This is a plain <code>&lt;div&gt;</code>, not a custom element, with <code>attachShadow({ mode: 'open' })</code> called on it directly. <code>&lt;div&gt;</code> is one of a fixed set of standard elements that support shadow DOM. A bookmarklet that only checks for hyphenated tag names will miss this entirely. One that checks <code>element.shadowRoot !== null</code> on every element will correctly detect it.</p>
+
+<div class="example">
+  <div id="standard-open-host"></div>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div id="standard-open-host"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+  const host = document.getElementById('standard-open-host');
+  const shadow = host.attachShadow({ mode: 'open' });
+  shadow.innerHTML = `
+    &lt;p&gt;I am inside an &lt;strong&gt;open&lt;/strong&gt; shadow DOM attached
+    to a plain &amp;lt;div&amp;gt;. No custom element was used.&lt;/p&gt;
+  `;
+&lt;/script&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 5: Closed shadow DOM on a standard element</h2>
+
+<p>Same idea as Example 4, but closed. This is the hardest case for a bookmarklet: no hyphenated tag name to spot, and no accessible shadow root to confirm. There is currently no reliable way for page-level JavaScript to detect this case from the outside.</p>
+
+<div class="example">
+  <div id="standard-closed-host"></div>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div id="standard-closed-host"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+  const host = document.getElementById('standard-closed-host');
+  const shadow = host.attachShadow({ mode: 'closed' });
+  shadow.innerHTML = `
+    &lt;p&gt;I am inside a &lt;strong&gt;closed&lt;/strong&gt; shadow DOM attached
+    to a plain &amp;lt;div&amp;gt;. No custom element was used.&lt;/p&gt;
+  `;
+&lt;/script&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 6: Declarative shadow DOM</h2>
+
+<p>This shadow root is created by the HTML parser itself, using a <code>&lt;template shadowrootmode="open"&gt;</code>, with no JavaScript involved at all. After parsing, the <code>&lt;template&gt;</code> is replaced by an actual shadow root attached to its parent. This is increasingly used in server-rendered web components. Support for this pattern is relatively recent (Chrome 111+, Firefox 123+, Safari 16.4+), so worth confirming current browser support before relying on it for testing.</p>
+
+<div class="example">
+  <div id="declarative-host">
+    <template shadowrootmode="open">
+      <style>
+        p { color: #4527a0; border: 2px solid #4527a0; padding: 8px; border-radius: 4px; }
+      </style>
+      <p>I am inside a <strong>declarative</strong> shadow DOM. No JavaScript created me.</p>
+    </template>
+  </div>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div id="declarative-host"&gt;
+  &lt;template shadowrootmode="open"&gt;
+    &lt;p&gt;I am inside a declarative shadow DOM.&lt;/p&gt;
+  &lt;/template&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 7: Regular HTML, no shadow DOM</h2>
+
+<p>This is a standard HTML element with no shadow DOM and no custom element. Any reliable detection method, hyphenated-tag-based or shadowRoot-based, will correctly not flag it.</p>
+
 <div class="example">
   <div class="regular">I am a regular div element.</div>
 </div>
 
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div class="regular"&gt;I am a regular div element.&lt;/div&gt;</code></pre>
+</details>
+
+
 <script>
-  // Example 1: open shadow DOM
+  // Example 1: open shadow DOM (custom element)
   class OpenComponent extends HTMLElement {
     constructor() {
       super();
@@ -56,7 +222,7 @@
   }
   customElements.define('open-component', OpenComponent);
 
-  // Example 2: closed shadow DOM
+  // Example 2: closed shadow DOM (custom element)
   class ClosedComponent extends HTMLElement {
     constructor() {
       super();
@@ -79,7 +245,28 @@
     }
   }
   customElements.define('no-shadow-component', NoShadowComponent);
+
+  // Example 4: open shadow DOM on a standard <div>, no custom element involved
+  const openStandardHost = document.getElementById('standard-open-host');
+  const openStandardShadow = openStandardHost.attachShadow({ mode: 'open' });
+  openStandardShadow.innerHTML = `
+    <style>
+      p { color: #00695c; border: 2px solid #00695c; padding: 8px; border-radius: 4px; }
+    </style>
+    <p>I am inside an <strong>open</strong> shadow DOM attached to a plain &lt;div&gt;. No custom element was used.</p>
+  `;
+
+  // Example 5: closed shadow DOM on a standard <div>, no custom element involved
+  const closedStandardHost = document.getElementById('standard-closed-host');
+  const closedStandardShadow = closedStandardHost.attachShadow({ mode: 'closed' });
+  closedStandardShadow.innerHTML = `
+    <style>
+      p { color: #ad1457; border: 2px solid #ad1457; padding: 8px; border-radius: 4px; }
+    </style>
+    <p>I am inside a <strong>closed</strong> shadow DOM attached to a plain &lt;div&gt;. No custom element was used.</p>
+  `;
 </script>
+
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>

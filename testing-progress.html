@@ -32,10 +32,18 @@
 </a>
 
 <h1>Testing the <code>progress</code> element</h1>
+
 <p>The <a href="https://html.spec.whatwg.org/#the-progress-element" target="_blank"><code>&lt;progress&gt;</code></a> element displays an indicator showing the completion progress of a task, typically displayed as a progress bar.</p>
+
+<p>The <code>progressbar</code> role requires an accessible name, so the <code>&lt;progress&gt;</code> below is given one via an associated <code>&lt;label&gt;</code>. The paired live region only announces at meaningful checkpoints (0%, 25%, 50%, 75%, complete) rather than on every increment, announcing every single step quickly becomes noise a screen reader user has to sit through rather than useful information.</p>
+
+
+<!-- section -->
+
 
 <h2>Example</h2>
 
+<label class="label" for="file">File download progress</label>
 <div class="progress-container">
   <div class="progress-bar">
     <progress id="file" max="100" value="0">0%</progress>  
@@ -53,15 +61,28 @@
         let value = 0;
         let interval;
 
+        // Only announce at these checkpoints. Announcing every single
+        // increment (every second, in this demo) overwhelms screen reader
+        // users with noise rather than giving them useful information.
+        const checkpoints = [0, 25, 50, 75, 100];
+
         function updateProgress() {
             if (value <= 100) {
                 progressElement.value = value;
+
+                // This sets the element's fallback content, which is only
+                // ever read by browsers old enough not to support <progress>
+                // natively. In every modern browser the accessible value
+                // comes from the value/max attributes, not from this text,
+                // so it has no effect on what a screen reader announces.
                 progressElement.innerHTML = value + '%';
-                if (value === 100) {
-                    resultElement.textContent = 'Your file download is complete';
-                } else {
-                    resultElement.textContent = value + '%';
+
+                if (checkpoints.includes(value)) {
+                    resultElement.textContent = value === 100
+                        ? 'Your file download is complete'
+                        : value + '%';
                 }
+
                 value += 5;
             } else {
                 clearInterval(interval);
@@ -81,12 +102,13 @@
     </script>
 
 
-<pre><code>&lt;progress id="file" max="100" value="0"&gt;
+<pre><code>&lt;label for="file"&gt;File download progress&lt;/label&gt;
+&lt;progress id="file" max="100" value="0"&gt;
   0%
 &lt;/progress&gt;
 
 &lt;div id="result" aria-live="polite"&gt;
-  &lt;!-- Dynamic message --&gt;
+  &lt;!-- Dynamic message, only updated at 0%, 25%, 50%, 75%, complete --&gt;
 &lt;/div&gt;
 
 &lt;button&gt;Reset&lt;/button&gt;</code></pre>

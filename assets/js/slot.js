@@ -12,7 +12,7 @@ class MyComponent extends HTMLElement {
                     border-radius: 5px;
                     width: 300px;
                 }
-                ::slotted(h1) {
+                ::slotted(h2) {
                     color: blue;
                 }
                 ::slotted(p) {

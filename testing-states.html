@@ -6,6 +6,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
+
+<style>
+
+.testing-states-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  cursor: pointer;
+  user-select: none;
+}
+
+.testing-states-checkbox::before {
+  content: "";
+  display: inline-block;
+  width: 1.2em;
+  height: 1.2em;
+  border: 2px solid #333;
+  border-radius: 3px;
+  background-color: #fff;
+  flex-shrink: 0;
+}
+
+.testing-states-checkbox[aria-checked="true"]::before {
+  background-color: #1b5e20;
+  border-color: #1b5e20;
+  /* simple checkmark using a CSS-only tick shape */
+  background-image: linear-gradient(45deg, transparent 40%, #fff 40%, #fff 55%, transparent 55%),
+                     linear-gradient(-45deg, transparent 55%, #fff 55%, #fff 70%, transparent 70%);
+}
+
+.testing-states-checkbox:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+</style>
 </head>
 <body>
 
@@ -14,10 +50,15 @@
 </a>
 
 <h1>Testing states</h1>
+
 <p>Review all focusable elements to determine their states.</p>
 
 
+<!-- section -->
+
+
 <h2>Example 1: <code>checked/unchecked</code></h2>
+
 <div class="example">
   <fieldset class="fieldset">
     <legend>Newsletter interests</legend>
@@ -39,7 +80,11 @@
 </div>
 
 
+<!-- section -->
+
+
 <h2>Example 2: <code>checked/unchecked</code></h2>
+
 <div class="example">
   <fieldset class="fieldset">
     <legend>Subscription method</legend>
@@ -61,18 +106,74 @@
 </div>
 
 
-<h2>Example 3: <code>expanded/contracted</code></h2>
+<!-- section -->
+
+
+<h2>Example 3: <code>expanded/collapsed</code></h2>
+
+<p>This example starts collapsed. Activate the button to see the expanded state, and to see the accessible name change along with it.</p>
+
 <div class="example">
-  <button aria-expanded="true">
-    <img src="assets/img/icon-arrow-down.png" alt="Expand">
+  <button id="expand-button" aria-expanded="false" aria-controls="expand-content" aria-label="Show more information">
+    <img src="assets/img/icon-arrow-down.png" alt="">
   </button>
+  <div id="expand-content" hidden>
+    <p>This content is only shown once the button above is expanded.</p>
+  </div>
 </div>
+
+
+<!-- section -->
 
 
 <h2>Example 4: <code>checked/unchecked</code></h2>
+
+<p>This example starts unchecked. Activate it with a click, or with the keyboard using Space, to see the checked state.</p>
+
 <div class="example">
-  <div class="testing-states-checkbox" role="checkbox" tabindex="0" aria-checked="true">I am a fake checkbox</div>
+  <div
+    id="fake-checkbox"
+    class="testing-states-checkbox"
+    role="checkbox"
+    tabindex="0"
+    aria-checked="false">
+    I am a fake checkbox
+  </div>
 </div>
+
+<script>
+  // Example 3: expand/collapse button
+  const expandButton = document.getElementById('expand-button');
+  const expandContent = document.getElementById('expand-content');
+
+  expandButton.addEventListener('click', () => {
+    const isExpanded = expandButton.getAttribute('aria-expanded') === 'true';
+
+    expandButton.setAttribute('aria-expanded', String(!isExpanded));
+    expandButton.setAttribute('aria-label', isExpanded ? 'Show more information' : 'Hide more information');
+    expandContent.hidden = isExpanded;
+  });
+
+  // Example 4: fake checkbox
+  const fakeCheckbox = document.getElementById('fake-checkbox');
+
+  function toggleFakeCheckbox() {
+    const isChecked = fakeCheckbox.getAttribute('aria-checked') === 'true';
+    fakeCheckbox.setAttribute('aria-checked', String(!isChecked));
+  }
+
+  fakeCheckbox.addEventListener('click', toggleFakeCheckbox);
+
+  fakeCheckbox.addEventListener('keydown', (event) => {
+    // Native checkboxes toggle on Space, not Enter.
+    // role="checkbox" gets no native key handling at all, so this
+    // has to be implemented manually to match expected behaviour.
+    if (event.key === ' ') {
+      event.preventDefault(); // stop the page from scrolling
+      toggleFakeCheckbox();
+    }
+  });
+</script>
 
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>

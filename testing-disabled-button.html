@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Testing a disabled button</title>
+  <title>Testing an aria-disabled button</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
   <style>
-    #submit:disabled {
-      color: #666;
-      background: #aaa;
+    #submit[aria-disabled="true"] {
+      color: #444;
+      background: #ccc;
+      cursor: not-allowed;
     }
 
     #message p {
@@ -33,7 +34,13 @@
       }
     }
 
-
+    .note {
+      background: #fff3cd;
+      border: 1px solid #ffe69c;
+      padding: 0.75em 1em;
+      border-radius: 4px;
+      margin: 1.5em 0;
+    }
   </style>
 </head>
 <body>
@@ -42,26 +49,32 @@
   <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia logo" class="intopia-logo">
 </a>
 
-<h1>Testing a disabled button</h1>
+<h1>Testing an <code>aria-disabled</code> button</h1>
+
+<p>This example uses <code>aria-disabled</code> instead of the native <code>disabled</code> attribute to temporarily prevent the "Save" button from being activated during processing.</p>
+
+<div class="note">
+  <p><b>Why aria-disabled instead of disabled?</b> The native <code>disabled</code> attribute removes a button from the tab order, and if the button has keyboard focus at the moment it becomes disabled, focus is forced away, typically to the document body, leaving a keyboard user without a clear sense of where they are until focus is later redirected elsewhere. <code>aria-disabled="true"</code> keeps the button focusable and in place throughout, so a keyboard or screen reader user never loses their position. The trade-off: <code>aria-disabled</code> does not stop the button from being activated. Unlike <code>disabled</code>, which blocks form submission automatically, <code>aria-disabled</code> requires the developer to manually check its state and block the action in JavaScript, which this example does.</p>
+</div>
+
 <p>When the &ldquo;Save&rdquo; button is activated:</p>
 <ul>
-  <li>The <a href="https://html.spec.whatwg.org/#enabling-and-disabling-form-controls:-the-disabled-attribute" target="_blank"><code>disabled</code></a> attribute will be added to the button.</li>
+  <li>The button will be given <code>aria-disabled="true"</code>, and styled to look unavailable, but remains focusable.</li>
   <li>The button text will change to &ldquo;Saving...&rdquo;.</li>
+  <li>Activating the button again while <code>aria-disabled="true"</code> will have no effect, this is checked and blocked in JavaScript.</li>
 </ul>
 
-<p>After 10 seconds:</p>
+<p>After 5 seconds:</p>
 <ul>
-  <li>The <code>disabled</code> attribute will be removed from the button.</li>
-  <li>The button text will changes back to &ldquo;Save&rdquo;.</li>
+  <li>The <code>aria-disabled</code> attribute will be set back to <code>"false"</code>.</li>
+  <li>The button text will change back to &ldquo;Save&rdquo;.</li>
   <li>A message will be added above the form.</li>
   <li>Focus will be sent to the message.</li>
 </ul>
 
 <h2>Example</h2>
 
-
 <div id="message" role="status"></div>
-
 
 <form onsubmit="handleSubmit(event)">
   <div class="form-group-small">
@@ -69,38 +82,39 @@
     <input class="input" type="tel" id="phone">
   </div>
   <div class="form-group" aria-live="polite">
-    <button type="submit" id="submit">Save</button>
+    <button type="submit" id="submit" aria-disabled="false">Save</button>
   </div>
 </form>
 
-
 <script>
   function handleSubmit(event) {
-      event.preventDefault(); // Prevent the default form submission behavior
+    event.preventDefault(); // Prevent the default form submission behavior
 
-      // Get the submit button
-      const submitButton = document.getElementById('submit');
-      // Get the message container
-      const messageContainer = document.getElementById('message');
+    const submitButton = document.getElementById('submit');
+    const messageContainer = document.getElementById('message');
 
-      // Disable the submit button and change its text
-      submitButton.disabled = true;
-      submitButton.textContent = 'Saving...';
+    // aria-disabled does not block activation on its own, this check
+    // is what actually prevents the button doing anything while "Saving..."
+    if (submitButton.getAttribute('aria-disabled') === 'true') {
+      return;
+    }
 
-      // After 10 seconds, re-enable the button and change the text back
-      setTimeout(() => {
-          submitButton.disabled = false;
-          submitButton.textContent = 'Save';
+    // Mark as disabled and change the text. The button stays focusable
+    // and in the tab order throughout, unlike the native disabled attribute.
+    submitButton.setAttribute('aria-disabled', 'true');
+    submitButton.textContent = 'Saving...';
 
-          // Add the message to the message container
-          const messageParagraph = document.createElement('p');
-          messageParagraph.textContent = 'Phone number saved';
-          messageContainer.appendChild(messageParagraph);
-          
-          // Set focus to the message container
-          messageContainer.setAttribute('tabindex', '-1'); // Make it focusable
-          messageContainer.focus();
-      }, 5000);
+    setTimeout(() => {
+      submitButton.setAttribute('aria-disabled', 'false');
+      submitButton.textContent = 'Save';
+
+      const messageParagraph = document.createElement('p');
+      messageParagraph.textContent = 'Phone number saved';
+      messageContainer.appendChild(messageParagraph);
+
+      messageContainer.setAttribute('tabindex', '-1'); // Make it focusable
+      messageContainer.focus();
+    }, 5000);
   }
 </script>
 

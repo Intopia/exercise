@@ -6,7 +6,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
-  <style>h3 {margin: 3em 0 1em; color: black;} .example {margin: 1em 0;}</style>
+  <style>
+    h3 {margin: 3em 0 1em; color: black;}
+    .example {margin: 1em 0;}
+    .test-note {
+      background: #fff3cd;
+      border: 1px solid #ffe69c;
+      padding: 0.75em 1em;
+      border-radius: 4px;
+    }
+    .sr-only,
+    .hidden {
+      border: 0 !important;
+      clip: rect(0 0 0 0) !important;
+      -webkit-clip-path: inset(50%) !important;
+      clip-path: inset(50%) !important;
+      height: 1px !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      padding: 0 !important;
+      position: absolute !important;
+      width: 1px !important;
+      white-space: nowrap !important;
+    }
+  </style>
 </head>
 <body>
 
@@ -16,7 +39,15 @@
 
 <h1>Testing SVG images inside links and buttons</h1>
 
+<p>Note: examples 1 and 6 in each section (no accessible name) demonstrate a computation baseline only. A link or button with no accessible name is a real accessibility failure and should never appear in production code.</p>
+
+
+<!-- section -->
+
+
 <h2>Links</h2>
+
+<!-- subsection -->
 
 <h3>Link example 1: no name from link or SVG</h3>
 <div class="example">
@@ -26,12 +57,17 @@
     </svg>
   </a>
 </div>
+
 <pre><code>&lt;a href="#"&gt;
   &lt;svg&gt;&lt;/svg&gt;
 &lt;/a&gt;</code></pre>
+
 <p>Pass = No accessible name</p>
 
+<!-- subsection -->
+
 <h3>Link example 2: <code>aria-label</code> from SVG</h3>
+
 <div class="example">
   <a href="#">
     <svg width="40" height="40" aria-label="Hello">
@@ -39,12 +75,15 @@
     </svg>
   </a>
 </div>
+
 <pre><code>&lt;a href="#"&gt;
   &lt;svg aria-label="Hello"&gt;&lt;/svg&gt;
 &lt;/a&gt;</code></pre>
+
 <p>Pass = Accessible name must be <em>"Hello"</em> from link content</p>
 
 <h3>Link example 3: title from SVG</h3>
+
 <div class="example">
   <a href="#">
     <svg width="40" height="40">
@@ -53,14 +92,19 @@
     </svg>
   </a>
 </div>
+
 <pre><code>&lt;a href="#"&gt;
   &lt;svg&gt;
     &lt;title&gt;Hello&lt;/title&gt;
   &lt;/svg&gt;
 &lt;/a&gt;</code></pre>
+
 <p>Pass = Accessible name must be <em>"Hello"</em> from link content</p>
 
+<!-- subsection -->
+
 <h3>Link example 4: <code>aria-label</code> on link</h3>
+
 <div class="example">
   <a href="#" aria-label="Goodbye">
     <svg width="40" height="40" aria-label="Hello">
@@ -68,12 +112,17 @@
     </svg>
   </a>
 </div>
+
 <pre><code>&lt;a href="#" aria-label="Goodbye"&gt;
   &lt;svg aria-label="Hello"&gt;&lt;/svg&gt;
 &lt;/a&gt;</code></pre>
+
 <p>Pass = Accessible name must be <em>"Goodbye"</em> from <code>aria-label</code></p>
 
+<!-- subsection -->
+
 <h3>Link example 5: <code>aria-label</code> on link</h3>
+
 <div class="example">
   <a href="#" aria-label="Goodbye">
     <svg width="40" height="40">
@@ -82,18 +131,83 @@
     </svg>
   </a>
 </div>
+
 <pre><code>&lt;a href="#" aria-label="Goodbye"&gt;
   &lt;svg&gt;
     &lt;title&gt;Hello&lt;/title&gt;
   &lt;/svg&gt;
 &lt;/a&gt;</code></pre>
+
 <p>Pass = Accessible name must be <em>"Goodbye"</em> from aria-label</p>
 
-<hr>
+<!-- subsection -->
+
+<h3>Link example 6: <code>role="img"</code> plus <code>aria-label</code> on SVG</h3>
+
+<div class="example">
+  <a href="#">
+    <svg width="40" height="40" role="img" aria-label="Hello">
+      <circle cx="20" cy="20" r="20" fill="red" />
+    </svg>
+  </a>
+</div>
+
+<pre><code>&lt;a href="#"&gt;
+  &lt;svg role="img" aria-label="Hello"&gt;&lt;/svg&gt;
+&lt;/a&gt;</code></pre>
+
+<p class="test-note">Note for testing: does adding <code>role="img"</code> change real-world AT exposure compared to Link example 2, which has no explicit role? Spec computation should produce the same accessible name either way, this tests whether current browser/AT combinations actually agree.</p>
+
+<!-- subsection -->
+
+<h3>Link example 7: decorative SVG (<code>aria-hidden</code>) with visible text</h3>
+
+<div class="example">
+  <a href="#">
+    <svg width="40" height="40" aria-hidden="true">
+      <circle cx="20" cy="20" r="20" fill="red" />
+    </svg>
+    Visit our site
+  </a>
+</div>
+
+<pre><code>&lt;a href="#"&gt;
+  &lt;svg aria-hidden="true"&gt;&lt;/svg&gt;
+  Visit our site
+&lt;/a&gt;</code></pre>
+
+<p class="test-note">Note for testing: does the link's accessible name come from "Visit our site" only, with the SVG fully excluded from the computation?</p>
+
+<!-- subsection -->
+
+<h3>Link example 8: <code>aria-labelledby</code> on SVG, referencing hidden text</h3>
+
+<div class="example">
+  <a href="#">
+    <svg width="40" height="40" aria-labelledby="link-svg-label">
+      <circle cx="20" cy="20" r="20" fill="red" />
+    </svg>
+  </a>
+  <p id="link-svg-label" class="hidden">Hello</p>
+</div>
+
+<pre><code>&lt;a href="#"&gt;
+  &lt;svg aria-labelledby="link-svg-label"&gt;&lt;/svg&gt;
+&lt;/a&gt;
+
+&lt;p id="link-svg-label" class="hidden"&gt;Hello&lt;/p&gt;</code></pre>
+<p class="test-note">Note for testing: does <code>aria-labelledby</code> on an SVG behave the same way it does on other elements, including reaching through visually hidden text?</p>
+
+
+<!-- section -->
+
 
 <h2>Buttons</h2>
 
+<!-- subsection -->
+
 <h3>Button example 1: no name from button or SVG</h3>
+
 <div class="example">
   <button>
     <svg width="40" height="40">
@@ -101,12 +215,17 @@
     </svg>
   </button>
 </div>
+
 <pre><code>&lt;button&gt;
   &lt;svg&gt;&lt;/svg&gt;
 &lt;/button&gt;</code></pre>
+
 <p>Pass = No accessible name</p>
 
+<!-- subsection -->
+
 <h3>Button example 2: <code>aria-label</code> from SVG</h3>
+
 <div class="example">
   <button>
     <svg width="40" height="40" aria-label="Hello">
@@ -114,13 +233,18 @@
     </svg>
   </button>
 </div>
+
 <pre><code>&lt;button&gt;
   &lt;svg aria-label="Hello"&gt;
   &lt;/svg&gt;
 &lt;/button&gt;</code></pre>
+
 <p>Pass = Accessible name must be <em>"Hello"</em> from button content</p>
 
-<h3>Button example 3: <code>title</code> from SVG</h3>
+<!-- subsection -->
+
+<h3>Button example 3: title from SVG</h3>
+
 <div class="example">
   <button>
     <svg width="40" height="40">
@@ -129,14 +253,19 @@
     </svg>
   </button>
 </div>
+
 <pre><code>&lt;button&gt;
   &lt;svg&gt;
     &lt;title&gt;Hello&lt;/title&gt;
   &lt;/svg&gt;
 &lt;/button&gt;</code></pre>
+
 <p>Pass = Accessible name must be <em>"Hello"</em> from button content</p>
 
-<h3>Button example 4: <code>aria-label</code> on link</h3>
+<!-- subsection -->
+
+<h3>Button example 4: <code>aria-label</code> on button</h3>
+
 <div class="example">
   <button aria-label="Goodbye">
     <svg width="40" height="40" aria-label="Hello">
@@ -144,13 +273,18 @@
     </svg>
   </button>
 </div>
+
 <pre><code>&lt;button aria-label="Goodbye"&gt;
   &lt;svg aria-label="Hello"&gt;
   &lt;/svg&gt;
 &lt;/button&gt;</code></pre>
+
 <p>Pass = Accessible name must be <em>"Goodbye"</em> from <code>aria-label</code></p>
 
-<h3>Button example 5: <code>aria-label</code> on link</h3>
+<!-- subsection -->
+
+<h3>Button example 5: <code>aria-label</code> on button</h3>
+
 <div class="example">
   <button aria-label="Goodbye">
     <svg width="40" height="40">
@@ -159,15 +293,72 @@
     </svg>
   </button>
 </div>
+
 <pre><code>&lt;button aria-label="Goodbye"&gt;
   &lt;svg&gt;
     &lt;title&gt;Hello&lt;/title&gt;
   &lt;/svg&gt;
 &lt;/button&gt;</code></pre>
+
 <p>Pass = Accessible name must be <em>"Goodbye"</em> from <code>aria-label</code></p>
 
+<!-- subsection -->
 
+<h3>Button example 6: <code>role="img"</code> plus <code>aria-label</code> on SVG</h3>
 
+<div class="example">
+  <button>
+    <svg width="40" height="40" role="img" aria-label="Hello">
+      <circle cx="20" cy="20" r="20" fill="red" />
+    </svg>
+  </button>
+</div>
+
+<pre><code>&lt;button&gt;
+  &lt;svg role="img" aria-label="Hello"&gt;&lt;/svg&gt;
+&lt;/button&gt;</code></pre>
+
+<p class="test-note">Note for testing: does adding <code>role="img"</code> change real-world AT exposure compared to Button example 2, which has no explicit role?</p>
+
+<!-- subsection -->
+
+<h3>Button example 7: decorative SVG (<code>aria-hidden</code>) with visible text</h3>
+
+<div class="example">
+  <button>
+    <svg width="40" height="40" aria-hidden="true">
+      <circle cx="20" cy="20" r="20" fill="red" />
+    </svg>
+    Save
+  </button>
+</div>
+
+<pre><code>&lt;button&gt;
+  &lt;svg aria-hidden="true"&gt;&lt;/svg&gt;
+  Save
+&lt;/button&gt;</code></pre>
+
+<p class="test-note">Note for testing: does the button's accessible name come from "Save" only, with the SVG fully excluded from the computation?</p>
+
+<!-- subsection -->
+
+<h3>Button example 8: <code>aria-labelledby</code> on SVG, referencing hidden text</h3>
+
+<div class="example">
+  <button>
+    <svg width="40" height="40" aria-labelledby="button-svg-label">
+      <circle cx="20" cy="20" r="20" fill="red" />
+    </svg>
+  </button>
+  <p id="button-svg-label" class="hidden">Hello</p>
+</div>
+
+<pre><code>&lt;button&gt;
+  &lt;svg aria-labelledby="button-svg-label"&gt;&lt;/svg&gt;
+&lt;/button&gt;
+
+&lt;p id="button-svg-label" class="hidden"&gt;Hello&lt;/p&gt;</code></pre>
+<p class="test-note">Note for testing: does <code>aria-labelledby</code> on an SVG behave the same way it does on other elements, including reaching through visually hidden text?</p>
 
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>

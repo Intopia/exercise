@@ -50,6 +50,12 @@
 
 <p>The <a href="https://html.spec.whatwg.org/#the-output-element" target="_blank"><code>&lt;output&gt;</code></a> element is a container element into which the results of a calculation or the outcome of a user action can be injected.</p>
 
+<p><code>&lt;output&gt;</code> has an implicit ARIA role of <code>status</code>, which itself carries an implicit <code>aria-live="polite"</code> and <code>aria-atomic="true"</code>. In other words, updating its content is supposed to trigger a screen reader announcement automatically, with no extra ARIA needed.</p>
+
+<p>In practice, real-world support has known gaps and quirks across browser and screen reader combinations, some worse than others. Because of this, many teams pair <code>&lt;output&gt;</code> with a manual, hand-built announcement as a pragmatic backup, rather than relying on the implicit role alone. That's what this demo does below, and it's worth testing with your own browser and screen reader combination to see whether you get one announcement, two, or none at all from the native element by itself.</p>
+
+<p>Further reading: <a href="https://www.scottohara.me/blog/2019/07/10/the-output-element.html" target="_blank">Scott O'Hara's rundown of output's real-world quirks</a>.</p>
+
 
 <!-- section -->
 
@@ -61,7 +67,7 @@
 <form>
   <input class="output1" type="number" id="a" aria-label="Value 1" oninput="calculateSum()"> + 
   <input class="output1" type="number" id="b" aria-label="Value 2" oninput="calculateSum()"> = 
-  <output class="output2" name="result" id="result">0</output>
+  <output class="output2" for="a b" name="result" id="result">0</output>
   <div class="announcement hidden2" aria-live="polite">
     The total value is 0
   </div>
@@ -71,10 +77,11 @@
 
 &lt;input type="number" id="b" aria-label="Value 2"&gt; =
 
-&lt;output name="result" id="result"&gt;0&lt;/output&gt;
+&lt;output for="a b" name="result" id="result"&gt;0&lt;/output&gt;
 
 &lt;div aria-live="polite"&gt;
-  &lt;!-- Dynamic message --&gt;
+  &lt;!-- Dynamic message, a manual backup alongside output's own
+       implicit status role --&gt;
 &lt;/div&gt;</code></pre>
 
 <script>
@@ -91,7 +98,9 @@
         // Clear the previous timeout
         clearTimeout(timeout);
 
-        // Set a new timeout to update the announcement after 0.5 seconds
+        // Debounce the announcement so rapid typing (e.g. entering "123"
+        // digit by digit) settles into a single announcement rather than
+        // firing one per keystroke.
         timeout = setTimeout(() => {
             document.querySelector('.announcement').textContent = `The total value is ${result}`;
         }, 1200);

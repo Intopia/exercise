@@ -591,31 +591,7 @@ search form {
 
 
 /* ---------------------
-Testing states
-----------------------*/
-
-.testing-states-checkbox {
-  position: relative;
-  padding-left: 1.6em;
-}
-
-.testing-states-checkbox:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: .2em;
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-  border-radius: .1em;
-  background-color: #fff;
-  box-shadow:
-    0 0 0 3px #fff,
-    0 0 0 5px #666;
-}
-
-/* ---------------------
-Testing states
+Testing images
 ----------------------*/
 
 .testing-images {

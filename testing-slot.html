@@ -14,23 +14,28 @@
 </a>
 
 <h1>Testing the <code>&lt;slot&gt;</code> element</h1>
+
 <p>The Web Component <a href="https://html.spec.whatwg.org/#the-slot-element" target="_blank"><code>&lt;slot&gt;</code></a> element is a placeholder inside a web component that you can fill with your own markup, which lets you create separate DOM trees and present them together.</p>
 
+<p><b>Important for auditors:</b> slotted content is not hidden from assistive technology or from testing tools. The elements you place inside <code>&lt;my-component&gt;</code> below remain regular, fully inspectable light DOM, their tags, attributes, and accessible names are completely intact. The <code>&lt;slot&gt;</code> mechanism only changes where content is rendered visually; it does not affect accessibility exposure or auditability the way a closed shadow root does.</p>
 
-<h2>Example 1</h2>
-<p>In this example, a <code>&lt;my-component&gt;</code> web component is added to the page, and it can be treated like a separate document, with it's own styles. The slots are defined in JavaSCript.</p>
+
+<!-- section -->
+
+
+<h2>Example</h2>
+
+<p>In this example, a <code>&lt;my-component&gt;</code> web component is added to the page, and it can be treated like a separate document, with its own styles. The slots are defined in JavaScript.</p>
 
 <my-component>
-  <h1 slot="title">Hello, World!</h1>
+  <h2 slot="title">Hello, World!</h2>
   <p slot="content">This is a paragraph inside the custom component.</p>
 </my-component>
-
-<script src="assets/js/slot.js"></script>
 
 <h3>HTML markup:</h3>
 
 <pre><code>&lt;my-component&gt;
-  &lt;h1 slot="title"&gt;Hello, World!&lt;/h1&gt;
+  &lt;h2 slot="title"&gt;Hello, World!&lt;/h2&gt;
   &lt;p slot="content"&gt;This is a paragraph...&lt;/p&gt;
 &lt;/my-component&gt;</code></pre>
 
@@ -50,7 +55,7 @@
                     border-radius: 5px;
                     width: 300px;
                 }
-                ::slotted(h1) {
+                ::slotted(h2) {
                     color: blue;
                 }
                 ::slotted(p) {
@@ -63,7 +68,43 @@
             &lt;/div&gt;
         `;
     }
-}</code></pre>
+}
+
+customElements.define('my-component', MyComponent);</code></pre>
+
+<script>
+  class MyComponent extends HTMLElement {
+      constructor() {
+          super();
+
+          const shadow = this.attachShadow({ mode: 'open' });
+
+          shadow.innerHTML = `
+              <style>
+                  .container {
+                      border: 2px solid #000;
+                      padding: 10px;
+                      border-radius: 5px;
+                      width: 300px;
+                  }
+                  ::slotted(h2) {
+                      color: blue;
+                  }
+                  ::slotted(p) {
+                      color: green;
+                  }
+              </style>
+              <div class="container">
+                  <slot name="title"></slot>
+                  <slot name="content"></slot>
+              </div>
+          `;
+      }
+  }
+
+  customElements.define('my-component', MyComponent);
+</script>
+
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
 </html>

@@ -14,92 +14,195 @@
 </a>
 
 <h1>Testing required fields</h1>
-<p>Which of the form fields below has required fields that are both:</p>
-<ul>
-  <li>Visually identifiable?</li>
-  <li>Programmatically identifiable? (via <code>required</code> or <code>aria-required="true"</code>)</li>
-</ul>
+
+<p>Required fields should be identifiable in two ways. Sighted users need a clear visual indication that a field is required, while screen reader users need a programmatic indication that assistive technologies can detect.</p>
+
+<p>The examples below explore each of these requirements separately.</p>
 
 
-<h2>Example 1</h2>
-<p>This example has no visual or programmatic identification.</p>
+<!-- section -->
+
+
+<h2>1. Visual identification</h2>
+
+<p>In this section, focus on whether sighted users can visually identify which fields are required.</p>
+
+<!-- subsection -->
+
+<h3>Example 1.1</h3>
+
+<p>This example has no visual identification.</p>
+
+<p><b>Not recommended</b>. Sighted users have no visual indication that the field is required.</p>
+
 <form action="#">
-  <div class="form-group-spaced">
-    <label class="label" for="question1">What was the name of your first school? </label>
-    <input class="input" id="question1" type="text">
+  <div class="form-group">
+    <label class="label" for="q1">What is your family name?</label>
+    <input class="input" id="q1" required>
   </div>
 </form>
 
+<details open>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="q1"&gt;What is your family name?&lt;/label&gt;
+&lt;input id="q1" required&gt;</code></pre>
+</details>
 
-<h2>Example 2</h2>
-<p>This example has visual identification via (*) symbol, but no programmatic identification.</p>
+<!-- subsection -->
+
+<h3>Example 1.2</h3>
+
+<p>This example has visual identification via (*) symbol.</p>
+
+<p><b>Acceptable</b>. Sighted users can identify the field as required. However, some users may not notice or understand the asterisk.</p>
+
 <form action="#">
-  <div class="form-group-spaced">
-    <label class="label" for="question2">What is the name of your first pet? <span style="color: #CC0000;">*</span></label>
-    <input class="input" id="question2" type="text">
+  <div class="form-group">
+    <label class="label" for="q2">What is the name of your first pet? <span style="color: #CC0000;">*</span></label>
+    <input class="input" id="q2" required>
   </div>
 </form>
 
+<details open>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="q2"&gt;What is the name of your first pet? <span class="highlight">*</span>&lt;/label&gt;
+&lt;input id="q2" required&gt;</code></pre>
+</details>
 
-<h2>Example 3</h2>
-<p>This example has visual identification via (Required), but no programmatic identification.</p>
+<!-- subsection -->
+
+<h3>Example 1.3</h3>
+
+<p>This example has visual identification via (Required).</p>
+
+<p><b>Recommended</b>. Sighted users can clearly identify that the field is required.</p>
+
 <form action="#">
-  <div class="form-group-spaced">
-    <label class="label" for="question3">What is the name of your street? <span class="required">(Required)</span></label>
-    <input class="input" id="question3" type="text">
+  <div class="form-group">
+    <label class="label" for="q3">What is your favourite colour? <span class="required">(Required)</span></label>
+    <input class="input" id="q3" required>
   </div>
 </form>
 
+<details open>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="q3"&gt;What is your favourite colour?
+  <span class="highlight">(Required)</span>&lt;/label&gt;
+&lt;input id="q3" required&gt;</code></pre>
+</details>
 
-<h2>Example 4</h2>
-<p>This example has no visual identification, but programmatic identification via <code>aria-required="true"</code>.</p>
+
+<!-- section -->
+
+
+<h2>2. Programmatic identification</h2>
+
+<p>In this section, focus on whether screen reader users can programmatically determine which fields are required.</p>
+
+<!-- subsection -->
+
+<h3>Example 2.1</h3>
+
+<p>This example has no programmatic identification.</p>
+
+<p><b>Not recommended</b>. Screen reader users receive no programmatic indication that it is required.</p>
+
 <form action="#">
-  <div class="form-group-spaced">
-    <label class="label" for="question4">What is the title of your favourite song? </label>
-    <input class="input" id="question4" type="text" aria-required="true">
+  <div class="form-group">
+    <label class="label" for="q4">What is your favourite song?</label>
+    <input class="input" id="q4">
   </div>
 </form>
 
+<details open>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="q4"&gt;What is your favourite song?&lt;/label&gt;
+&lt;input id="q4"&gt;</code></pre>
+</details>
 
-<h2>Example 5</h2>
-<p>This example has no visual identification, but programmatic identification via <code>required</code>.</p>
+<!-- subsection -->
+
+<h3>Example 2.2</h3>
+
+<p>This example has programmatic identification via <code>aria-required="true"</code>.</p>
+
+<p><b>Acceptable</b>. Screen reader users can determine that the field is required.</p>
+
 <form action="#">
-  <div class="form-group-spaced">
-    <label class="label" for="question5">What is the title of your favourite movie? </label>
-    <input class="input" id="question5" type="text" required>
+  <div class="form-group">
+    <label class="label" for="q5">What is your favourite movie? </label>
+    <input class="input" id="q5" aria-required="true">
   </div>
 </form>
 
+<details open>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="q5"&gt;What is your favourite movie?&lt;/label&gt;
+&lt;input id="q5" <span class="highlight">aria-required="true"</span>&gt;</code></pre>
+</details>
 
-<h2>Example 6</h2>
-<p>This example has no visual identification, but programmatic identification via <code>required</code> and <code>aria-required="true"</code>. Avoid using both methods together as this is redundant.</p>
+<!-- subsection -->
+
+<h3>Example 2.3</h3>
+
+<p>This example has programmatic identification via <code>required</code>.</p>
+
+<p><b>Acceptable</b>. Screen reader users can determine that the field is required.</p>
+
 <form action="#">
-  <div class="form-group-spaced">
-    <label class="label" for="question6">What is the title of your favourite video game? </label>
-    <input class="input" id="question6" type="text" required aria-required="true">
+  <div class="form-group">
+    <label class="label" for="q6">What is your favourite soft drink? </label>
+    <input class="input" id="q6" required>
   </div>
 </form>
 
+<details open>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="q6"&gt;What is your favourite soft drink?&lt;/label&gt;
+&lt;input id="q6" <span class="highlight">required</span>&gt;</code></pre>
+</details>
 
-<h2>Example 7</h2>
-<p>This example has a field that is not required. So, there is no visual identifier and uses <code>aria-required="false"</code>.</p>
+<!-- subsection -->
+
+<h3>Example 2.4</h3>
+
+<p>This example has programmatic identification via <code>required</code> and <code>aria-required="true"</code>.</p>
+
+<p><b>Not recommended</b>. Screen reader users can determine that the field is required. However, using both <code>required</code> and <code>aria-required="true"</code> is redundant.</p>
+
 <form action="#">
-  <div class="form-group-spaced">
-    <label class="label" for="question7">What is the title of your favourite season?</label>
-    <input class="input" id="question7" type="text" aria-required="false">
+  <div class="form-group">
+    <label class="label" for="q7">What is your favourite video game? </label>
+    <input class="input" id="q7" required aria-required="true">
   </div>
 </form>
 
+<details open>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="q7"&gt;What is your favourite video game? &lt;/label&gt;
+&lt;input id="q7" <span class="highlight">required</span> <span class="highlight">aria-required="true"</span>&gt;</code></pre>
+</details>
 
-<h2>Example 8</h2>
-<p>This example has visual identification via (Required), and programmatic identification via <code>required</code>.</p>
+<!-- subsection -->
+
+<h3>Example 2.5</h3>
+
+<p>This example has a field that is not required and uses <code>aria-required="false"</code>.</p>
+
+<p><b>Not recommended</b>. Form fields are optional by default, so adding <code>aria-required="false"</code> provides no benefit.</p>
+
 <form action="#">
-  <div class="form-group-spaced">
-    <label class="label" for="question8">What is your favourite ice cream flavour? <span class="required">(Required)</span></label>
-    <input class="input" id="question8" type="text" required>
+  <div class="form-group">
+    <label class="label" for="q8">What is your favourite season?</label>
+    <input class="input" id="q8" aria-required="false">
   </div>
 </form>
 
+<details open>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="q8"&gt;What is your favourite season?&lt;/label&gt;
+&lt;input id="q8" <span class="highlight">aria-required="false"</span>&gt;</code></pre>
+</details>
 
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
