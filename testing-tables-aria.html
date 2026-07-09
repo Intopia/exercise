@@ -55,13 +55,85 @@ h3 {
   font-weight: bold;
 }
 
+[role="grid"] {
+  display: table;
+  width: 100%;
+  margin: 1em 0;
+  table-layout: fixed;
+}
+
+[role="grid"] [role="rowgroup"] {
+  display: table-row-group;
+}
+
+[role="grid"] [role="row"] {
+  display: table-row;
+}
+
+[role="grid"] [role="gridcell"],
+[role="grid"] [role="columnheader"],
+[role="grid"] [role="rowheader"] {
+  display: table-cell;
+  padding: 0.5em;
+  width: 33%;
+  border-right: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
+}
+
+[role="grid"] [role="row"] > :first-child {
+  border-left: 1px solid #aaa;
+}
+
+[role="grid"] [role="rowgroup"]:first-child [role="row"] > * {
+  border-top: 1px solid #aaa;
+}
+
+[role="grid"] [role="rowheader"] {
+  font-weight: bold;
+}
+
+[role="columnheader"] button {
+  font: inherit;
+  font-weight: bold;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  color: #000 !important;
+}
+
+[role="columnheader"] button:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+.sort-icon::after {
+  content: "";
+}
+
+[role="columnheader"][aria-sort="ascending"] .sort-icon::after {
+  content: "▲";
+}
+
+[role="columnheader"][aria-sort="descending"] .sort-icon::after {
+  content: "▼";
+}
+
   </style>
 </head>
 <body>
 
 <h1>ARIA table examples</h1>
 
+
+<!-- section -->
+
+
 <h2>Example 1</h2>
+
 <p>This example uses a range of roles to define table structure.</p>
 
 <ul>
@@ -74,6 +146,7 @@ h3 {
 </ul>
 
 <h3 id="aaa">Animals found in different habitats</h3>
+
 <div role="table" aria-labelledby="aaa">
   <div role="rowgroup">
     <div role="row">
@@ -152,6 +225,168 @@ h3 {
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
 </details>
+
+
+<!-- section -->
+
+
+<h2>Example 2: Sortable table (<code>role="grid"</code>)</h2>
+
+<p>This example uses <code>role="grid"</code> instead of <code>role="table"</code>, since the columns can be sorted, an interactive behaviour static tables don't have. Activate a column header to sort by that column. <code>aria-sort</code> is updated on the active <code>columnheader</code> to reflect the current sort direction.</p>
+
+<p><b>Note:</b> a fully spec-complete grid also supports arrow-key navigation between individual cells. That behaviour is not implemented in this simplified example, keyboard interaction here is limited to activating the sort buttons in the header row.</p>
+
+<h3 id="bbb">Estimated animal population by habitat</h3>
+
+<div id="sort-announcer" class="hidden" role="status"></div>
+
+<div role="grid" aria-labelledby="bbb" id="sortable-grid">
+  <div role="rowgroup">
+    <div role="row">
+      <span role="columnheader" aria-sort="none" data-column="habitat" data-type="text">
+        <button type="button">Habitat <span class="sort-icon" aria-hidden="true"></span></button>
+      </span>
+      <span role="columnheader" aria-sort="none" data-column="species" data-type="number">
+        <button type="button">Number of species <span class="sort-icon" aria-hidden="true"></span></button>
+      </span>
+      <span role="columnheader" aria-sort="none" data-column="temperature" data-type="number">
+        <button type="button">Average temp <span class="sort-icon" aria-hidden="true"></span></button>
+      </span>
+    </div>
+  </div>
+  <div role="rowgroup" id="sortable-grid-body">
+    <div role="row">
+      <span role="rowheader">Forest</span>
+      <span role="gridcell">120</span>
+      <span role="gridcell">12</span>
+    </div>
+    <div role="row">
+      <span role="rowheader">Ocean</span>
+      <span role="gridcell">230</span>
+      <span role="gridcell">17</span>
+    </div>
+    <div role="row">
+      <span role="rowheader">Desert</span>
+      <span role="gridcell">45</span>
+      <span role="gridcell">38</span>
+    </div>
+    <div role="row">
+      <span role="rowheader">Wetland</span>
+      <span role="gridcell">88</span>
+      <span role="gridcell">22</span>
+    </div>
+  </div>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div <span class="highlight">role="grid"</span> aria-labelledby="bbb"&gt;
+  &lt;div role="rowgroup"&gt;
+    &lt;div role="row"&gt;
+      &lt;span <span class="highlight">role="columnheader"</span> <span class="highlight">aria-sort="none"</span>&gt;
+        &lt;button type="button"&gt;Habitat&lt;/button&gt;
+      &lt;/span&gt;
+      &lt;span <span class="highlight">role="columnheader"</span> <span class="highlight">aria-sort="none"</span>&gt;
+        &lt;button type="button"&gt;Number of species&lt;/button&gt;
+      &lt;/span&gt;
+      &lt;span <span class="highlight">role="columnheader"</span> <span class="highlight">aria-sort="none"</span>&gt;
+        &lt;button type="button"&gt;Average temperature (&amp;deg;C)&lt;/button&gt;
+      &lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div role="rowgroup"&gt;
+    &lt;div role="row"&gt;
+      &lt;span role="rowheader"&gt;Forest&lt;/span&gt;
+      &lt;span <span class="highlight">role="gridcell"</span>&gt;120&lt;/span&gt;
+      &lt;span <span class="highlight">role="gridcell"</span>&gt;12&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;!-- remaining rows follow the same pattern --&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+<!-- subsection -->
+
+<h3>Features demonstrated in this example</h3>
+
+<ul>
+  <li>
+    <p><b><code>role="grid"</code> instead of <code>role="table"</code></b>. A grid is used when a table contains interactive elements, such as sortable column headers. It tells assistive technologies that users can interact with the table, rather than simply read it.</p>
+  </li>
+  <li>
+    <p><b><code>aria-sort</code></b>. Each sortable column header exposes its current sort state. Headers start with <code>aria-sort="none"</code>. When a column is sorted, its value changes to <code>"ascending"</code> or <code>"descending"</code>, while all other columns return to <code>"none"</code>. This allows assistive technologies to identify which column is currently sorted.</p>
+  </li>
+  <li>
+    <p><b><code>role="gridcell"</code> instead of <code>role="cell"</code></b>. Once a table becomes a grid, its cells should use the corresponding <code>gridcell</code> role so the accessibility semantics remain consistent.</p>
+  </li>
+  <li>
+    <p><b><code>data-*</code> attributes for JavaScript</b>. The <code>data-column</code> and <code>data-type</code> attributes are used only by the JavaScript to determine which column to sort and how to sort it. They provide no accessibility information and are never exposed to assistive technologies.</p>
+  </li>
+  <li>
+    <p><b>A live region <code>role="status"</code></b>. When the sort order changes, a live region announces the result, such as <q>Sorted by Name, ascending</q>. This provides immediate feedback without relying solely on changes to <code>aria-sort</code>.</p>
+  </li>
+  <li>
+    <p><b>Reordering the DOM, not just the display</b>. The table rows are physically reordered in the document, so the reading order for screen reader users matches the visual order seen by sighted users.</p>
+  </li>
+</ul>
+
+<!-- subsection -->
+
+<h3>Why this example uses an ARIA grid instead of a native <code>&lt;table&gt;</code></h3>
+
+<p>A native <code>&lt;table&gt;</code> provides built-in structure, relationships and behaviour. This makes it the best choice for displaying static tabular data. However, once a table becomes highly interactive, such as supporting sortable columns, developers often need greater control over its behaviour and presentation.</p>
+
+<p>An ARIA grid is built from generic elements, such as <code>&lt;div&gt;</code> and <code>&lt;span&gt;</code>, with ARIA roles providing the semantics. This makes it easier to add interactive features such as sorting, update states like <code>aria-sort</code>, and reorder rows using JavaScript without working against native table behaviour.</p>
+
+<p>The trade-off is that none of the accessibility provided by a native table comes for free. Developers must correctly recreate the table structure, relationships and states using ARIA. While ARIA grids offer greater flexibility, they also require much more care to implement and test correctly.</p>
+
+<script>
+(function () {
+  const grid = document.getElementById('sortable-grid');
+  const body = document.getElementById('sortable-grid-body');
+  const announcer = document.getElementById('sort-announcer');
+  const headers = grid.querySelectorAll('[role="columnheader"]');
+
+  headers.forEach((header, columnIndex) => {
+    const button = header.querySelector('button');
+
+    button.addEventListener('click', () => {
+      const currentSort = header.getAttribute('aria-sort');
+      const newSort = currentSort === 'ascending' ? 'descending' : 'ascending';
+      const type = header.dataset.type;
+      const columnLabel = button.textContent.trim();
+
+      // Reset every header to "none" before setting the active one,
+      // aria-sort should only ever be present on the currently sorted column
+      headers.forEach(h => h.setAttribute('aria-sort', 'none'));
+      header.setAttribute('aria-sort', newSort);
+
+      // Sort the actual DOM rows, not just the visual display,
+      // so reading order matches visual order for all users
+      const rows = Array.from(body.querySelectorAll('[role="row"]'));
+
+      rows.sort((rowA, rowB) => {
+        const cellA = rowA.children[columnIndex].textContent.trim();
+        const cellB = rowB.children[columnIndex].textContent.trim();
+
+        let comparison;
+        if (type === 'number') {
+          comparison = parseFloat(cellA) - parseFloat(cellB);
+        } else {
+          comparison = cellA.localeCompare(cellB);
+        }
+
+        return newSort === 'ascending' ? comparison : -comparison;
+      });
+
+      rows.forEach(row => body.appendChild(row));
+
+      announcer.textContent = `Table sorted by ${columnLabel}, ${newSort}`;
+    });
+  });
+})();
+</script>
+
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
