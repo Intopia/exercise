@@ -126,6 +126,10 @@ h3 {
 </head>
 <body>
 
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
 <h1>ARIA table examples</h1>
 
 
@@ -143,7 +147,9 @@ h3 {
   <li><code>role="columnheader"</code>: to replicate the <code>&lt;th&gt;</code> element at the top of columns</li>
   <li><code>role="rowheader"</code>: to replicate the <code>&lt;th&gt;</code> element at the start of rows</li>
   <li><code>role="cell"</code>: to replicate the <code>&lt;td&gt;</code> element</li>
+  <li>The heading is used to give the ARIA table a label via <code>aria-labelledby</code></li>
 </ul>
+
 
 <h3 id="aaa">Animals found in different habitats</h3>
 
@@ -236,7 +242,7 @@ h3 {
 
 <p><b>Note:</b> a fully spec-complete grid also supports arrow-key navigation between individual cells. That behaviour is not implemented in this simplified example, keyboard interaction here is limited to activating the sort buttons in the header row.</p>
 
-<h3 id="bbb">Estimated animal population by habitat</h3>
+<h3 id="bbb">Species count and average temperature by habitat</h3>
 
 <div id="sort-announcer" class="hidden" role="status"></div>
 
@@ -244,13 +250,13 @@ h3 {
   <div role="rowgroup">
     <div role="row">
       <span role="columnheader" aria-sort="none" data-column="habitat" data-type="text">
-        <button type="button">Habitat <span class="sort-icon" aria-hidden="true"></span></button>
+        <button aria-label="Habitat - activate to sort">Habitat <span class="sort-icon" aria-hidden="true"></span></button>
       </span>
       <span role="columnheader" aria-sort="none" data-column="species" data-type="number">
-        <button type="button">Number of species <span class="sort-icon" aria-hidden="true"></span></button>
+        <button aria-label="Number of species - activate to sort">Number of species <span class="sort-icon" aria-hidden="true"></span></button>
       </span>
       <span role="columnheader" aria-sort="none" data-column="temperature" data-type="number">
-        <button type="button">Average temp <span class="sort-icon" aria-hidden="true"></span></button>
+        <button aria-label="Average temp - activate to sort">Average temp <span class="sort-icon" aria-hidden="true"></span></button>
       </span>
     </div>
   </div>
@@ -280,27 +286,56 @@ h3 {
 
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;div <span class="highlight">role="grid"</span> aria-labelledby="bbb"&gt;
+<pre><code>&lt;h3 id="bbb"&gt;Species count...&lt;/h3&gt;
+
+&lt;div id="sort-announcer" class="hidden" role="status"&gt;&lt;/div&gt;
+
+&lt;div <span class="highlight">role="grid"</span> aria-labelledby="bbb" id="sortable-grid"&gt;
   &lt;div role="rowgroup"&gt;
     &lt;div role="row"&gt;
-      &lt;span <span class="highlight">role="columnheader"</span> <span class="highlight">aria-sort="none"</span>&gt;
-        &lt;button type="button"&gt;Habitat&lt;/button&gt;
+      &lt;span
+        <span class="highlight">role="columnheader"</span>
+        <span class="highlight">aria-sort="none"</span>
+        <span class="highlight">data-column="habitat"</span>
+        data-type="text"
+      &gt;
+        &lt;button aria-label="Habitat - activate to sort"&gt;
+          Habitat
+          &lt;span aria-hidden="true"&gt;&lt;/span&gt;
+        &lt;/button&gt;
       &lt;/span&gt;
-      &lt;span <span class="highlight">role="columnheader"</span> <span class="highlight">aria-sort="none"</span>&gt;
-        &lt;button type="button"&gt;Number of species&lt;/button&gt;
+      &lt;span
+        <span class="highlight">role="columnheader"</span> 
+        <span class="highlight">aria-sort="none"</span> 
+        <span class="highlight">data-column="species"</span> 
+        data-type="number"
+      &gt;
+        &lt;button aria-label="Number of species - activate to sort"&gt;
+          Number of species 
+          &lt;span aria-hidden="true"&gt;&lt;/span&gt;
+        &lt;/button&gt;
       &lt;/span&gt;
-      &lt;span <span class="highlight">role="columnheader"</span> <span class="highlight">aria-sort="none"</span>&gt;
-        &lt;button type="button"&gt;Average temperature (&amp;deg;C)&lt;/button&gt;
+      &lt;span 
+        <span class="highlight">role="columnheader"</span> 
+        <span class="highlight">aria-sort="none"</span> 
+        <span class="highlight">data-column="temperature"</span> 
+        data-type="number"
+      &gt;
+        &lt;button aria-label="Average temp - activate to sort"&gt;
+          Average temp
+          &lt;span aria-hidden="true"&gt;&lt;/span&gt;
+        &lt;/button&gt;
       &lt;/span&gt;
     &lt;/div&gt;
   &lt;/div&gt;
-  &lt;div role="rowgroup"&gt;
+  &lt;div role="rowgroup" id="sortable-grid-body"&gt;
     &lt;div role="row"&gt;
       &lt;span role="rowheader"&gt;Forest&lt;/span&gt;
       &lt;span <span class="highlight">role="gridcell"</span>&gt;120&lt;/span&gt;
       &lt;span <span class="highlight">role="gridcell"</span>&gt;12&lt;/span&gt;
     &lt;/div&gt;
-    &lt;!-- remaining rows follow the same pattern --&gt;
+
+    <span class="comment">&lt;!-- remaining rows follow the same pattern --&gt;</span>
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
 </details>
@@ -310,6 +345,12 @@ h3 {
 <h3>Features demonstrated in this example</h3>
 
 <ul>
+
+
+
+  <li>
+    <p><b><code>aria-label</code> on the sort buttons</b>. The buttons used to sort rows include <code>aria-label</code> to provide additional context for screen reader users, for example <q>Habitat - activate to sort</q>. The visible text remains concise, while the accessible name explains that each button can be activated to sort the table.</p>
+  </li>
   <li>
     <p><b><code>role="grid"</code> instead of <code>role="table"</code></b>. A grid is used when a table contains interactive elements, such as sortable column headers. It tells assistive technologies that users can interact with the table, rather than simply read it.</p>
   </li>

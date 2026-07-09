@@ -10,11 +10,11 @@ body {
   max-width: 50em;
   margin: 0;
   padding: 1em 2em 1.5em;
-  font-size: 1.2em;
-  line-height: 1.4;
+  font-size: 1.125em;
+  line-height: 1.5;
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, Frutiger, 'Frutiger Linotype', Univers, Calibri, 'Gill Sans', 'Gill Sans MT', 'Myriad Pro', Myriad, 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, sans-serif;
-
 }
+
 
 /* ---------------------
 Paragraphs
@@ -84,6 +84,62 @@ thead th {
 .totals th,
 .totals td {
   border-top: 3px solid #000;
+}
+
+/* ----------- 
+Intopia logo
+----------- */
+
+.intopia-home-link {
+  display: inline-block;
+  margin: 0 0 2em;
+}
+
+a.intopia-home-link:focus {
+  color: #fff;
+  background: transparent;
+  outline: 2px solid #000;
+}
+
+.intopia-logo {
+  width: 180px;
+}
+
+/* ---------------------
+footer link
+----------------------*/
+
+.footer-link {
+  margin: 5em 0 1em;
+  font-size: 0.777777777777778em;
+  line-height: 1;
+}
+
+.footer-link a {
+  display: inline-block;
+  padding: 0.75em 1em;
+  border: 0;
+  background: blue !important;
+  color: #fff !important;
+  text-decoration: none;
+  border-radius: 0.2em;
+}
+
+.footer-link a:focus {
+  background: #000 !important;
+  color: #fff !importantv;
+  outline: none;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 5px #000;
+}
+
+.footer-link a:hover {
+  background: green !important;
+  color: #fff !important;
+}
+
+.footer-link a:active {
+  background: red !important;
+  color: #fff !important;
 }
 
 /* ---------------------

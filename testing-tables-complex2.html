@@ -70,14 +70,14 @@
       <th id="something">Something</th>
       <td headers="consolidated consolidated-2023 other something">$4,000</td>
       <td headers="consolidated consolidated-2022 other something">$1,300</td>
-      <td headers="parent parent-2023 other something">$1.500</td>
+      <td headers="parent parent-2023 other something">$1,500</td>
       <td headers="parent parent-2022 other something"><span class="sr-only">NA</span><span aria-hidden="true">-</span></td>
     </tr>
     <tr class="totals">
       <th id="totals">Totals</th>
-      <td headers="consolidated consolidated-2022 totals">$2,186,000</td>
+      <td headers="consolidated consolidated-2023 totals">$2,186,000</td>
       <td headers="consolidated consolidated-2022 totals">$2,071,300</td>
-      <td headers="parent parent-2023 totals">$1.500</td>
+      <td headers="parent parent-2023 totals">$1,500</td>
       <td headers="parent parent-2022 totals">$1,900</td>
     </tr>
   </tbody>
@@ -87,7 +87,7 @@
 <!-- section -->
 
 
-<h2>Example 2: Simplifed table</h2>
+<h2>Example 2: Simplified table</h2>
 
 <p>This table is considered simple because each data cell is associated with only a column header and a row header. This reduces the amount of contextual information users need to understand and remember while navigating the table.</p>
 
@@ -98,39 +98,39 @@
   <thead>
     <tr>
       <td></td>
-      <th class="right">Consolidated<br>2023<br>$000</th>
-      <th class="right">Consolidated<br>2022<br>$000</th>
-      <th class="right">Parent<br>2023<br>$000</th>
-      <th class="right">Parent<br>2022<br>$000</th>
+      <th class="right" scope="col">Consolidated<br>2023<br>$000</th>
+      <th class="right" scope="col">Consolidated<br>2022<br>$000</th>
+      <th class="right" scope="col">Parent<br>2023<br>$000</th>
+      <th class="right" scope="col">Parent<br>2022<br>$000</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>Revenue from contracts - Rail</th>
+      <th scope="row">Revenue from contracts - Rail</th>
       <td>$2,000,000</td>
       <td>$1,900,000</td>
       <td><span class="sr-only">NA</span><span aria-hidden="true">-</span></td>
       <td><span class="sr-only">NA</span><span aria-hidden="true">-</span></td>
     </tr>
     <tr>
-      <th>Revenue from contracts - Network</th>
+      <th scope="row">Revenue from contracts - Network</th>
       <td>$182,000</td>
       <td>$170,000</td>
       <td><span class="sr-only">NA</span><span aria-hidden="true">-</span></td>
       <td>$1,900</td>
     </tr>
     <tr>
-      <th>Other revenue - Something</th>
+      <th scope="row">Other revenue - Something</th>
       <td>$4,000</td>
       <td>$1,300</td>
-      <td>$1.500</td>
+      <td>$1,500</td>
       <td><span class="sr-only">NA</span><span aria-hidden="true">-</span></td>
     </tr>
     <tr class="totals">
-      <th>Totals</th>
+      <th scope="row">Totals</th>
       <td>$2,186,000</td>
       <td>$2,071,300</td>
-      <td>$1.500</td>
+      <td>$1,500</td>
       <td>$1,900</td>
     </tr>
   </tbody>
