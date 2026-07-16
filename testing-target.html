@@ -2,18 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Testing the :target CSS selector</title>
+  <title>Targeting specific areas of a page</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
   <style>
 
-.target2 {
+.target-box {
   margin: 2em 0;
   padding: 1em;
 }
 
 :target {
+  outline: 2px solid #C87D00;
+  animation: fade 5s forwards;
+}
+
+.js-target:focus {
   outline: 2px solid #C87D00;
   animation: fade 5s forwards;
 }
@@ -37,12 +42,24 @@
   <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia logo" class="intopia-logo">
 </a>
 
-<h1>Testing the <code>:target</code> CSS selector</h1>
+<h1>Targeting specific areas of a page</h1>
 
-<p>The <a href="https://drafts.csswg.org/selectors/#the-target-pseudo" target="_blank"><code>:target</code></a> CSS pseudo-class represents a unique element (the target element) with an id matching the URL&rsquo;s fragment.</p>
+<p>This page compares two ways of jumping to a specific area further down a page: the CSS <a href="https://drafts.csswg.org/selectors/#the-target-pseudo" target="_blank"><code>:target</code></a> pseudo-class on its own, and the same pattern enhanced with JavaScript.</p>
+
+<p>The key difference is not visual, both examples scroll the target into view and apply the same highlight. The difference is whether keyboard focus actually moves to the target, or only the scroll position changes.</p>
+
+
+<!-- section -->
+
+
+<h2>Example 1: CSS <code>:target</code> only</h2>
+
+<p>This example relies entirely on native browser fragment navigation and the <code>:target</code> pseudo-class. No JavaScript is involved.</p>
+
+<p><b>Important:</b> native fragment navigation scrolls the target into view, but it does not move keyboard focus there. After activating the link below, pressing Tab will move focus to whatever is next in the document after the link, not to the target area itself. This is a common misconception, adding <code>tabindex="-1"</code> to a target on its own does not fix this either, focus only moves if something explicitly calls <code>.focus()</code> on the target.</p>
 
 <p>Click the link below to see an example:</p>
-<p><a href="#target1"><b>Link to target</b></a></p>
+<p><a href="#target1"><b>Link to target (CSS only)</b></a></p>
 
 <p>Pri at epicurei convenire, ut oratio liberavisse est. Ex his dolorum concludaturque, et mel solet soleat accumsan. In mollis ancillae intellegebat has. Sea congue cetero cu, ut mnesarchum vituperatoribus mel. Ne vix solet dicant possit, eos solet dictas facilisi ei.</p>
 
@@ -54,29 +71,125 @@
 
 <p>Id his similique philosophia, ne exerci aliquando similique has. His id antiopam salutandi forensibus. Singulis intellegebat in pro, vim illud postulant constituam eu. Ad vim wisi inani commune.</p>
 
-<div class="target2" id="target1" tabindex="-1">
-  Hello world
+<p><a href="#">Dummy link above target</a></p>
+
+<div class="target-box" id="target1">
+  Hello world (CSS-only target, receives no keyboard focus)
 </div>
 
-<pre><code>:target {
+<pre><code>&lt;a href="#target1"&gt;Link to target&lt;/a&gt;
+
+...
+
+&lt;div id="target1"&gt;
+  Hello world
+&lt;/div&gt;
+
+&lt;style&gt;
+:target {
   outline: 2px solid #C87D00;
   animation: fade 5s forwards;
 }
+&lt;/style&gt;</code></pre>
 
-@keyframes fade {
-  0% {
-    background-color: #FFFF00;
-    outline-color: #C87D00;
-  }
-  100% {
-    background-color: transparent;
-    outline-color: transparent;
-  }
-}</code></pre>
+<p><a href="#">Dummy link below target</a></p>
 
 <p>Pri at epicurei convenire, ut oratio liberavisse est. Ex his dolorum concludaturque, et mel solet soleat accumsan. In mollis ancillae intellegebat has. Sea congue cetero cu, ut mnesarchum vituperatoribus mel. Ne vix solet dicant possit, eos solet dictas facilisi ei.</p>
 
 <p>Vel ei quaeque definiebas. Ius no assum impedit. Ipsum efficiendi usu ei. Prima electram principes in pro, id pro dolores appellantur, at causae admodum voluptatum eam. Accusam percipit erroribus pro et. Brute option usu cu, alia enim mutat eum cu.</p>
+
+
+<!-- section -->
+
+
+<h2>Example 2: CSS <code>:target</code> plus JavaScript</h2>
+
+<p>This example uses the same visual highlight, but adds JavaScript to explicitly move keyboard focus to the target as well, not just scroll to it.</p>
+
+<h3>What the JavaScript does</h3>
+
+<ul>
+  <li>The target element has <code>tabindex="-1"</code>, making it programmatically focusable without adding it to the normal tab order.</li>
+  <li>A script listens for the page's <code>hashchange</code> event. When the fragment changes to <code>#target2</code>, it finds that element and calls <code>.focus()</code> on it directly.</li>
+  <li>The script also checks the URL on page load, in case someone arrives directly at a link containing <code>#target2</code> (for example, from a bookmark or another page), rather than only reacting to a click during the current visit.</li>
+  <li>A visible focus outline and the same yellow flash animation used in Example 1 confirm where focus has landed, so the effect is not purely functional, it is also visually confirmable.</li>
+</ul>
+
+<h3>Why this matters for accessibility</h3>
+
+<p>Without this script, a keyboard user who activates the link would have their view scrolled to the target, but their actual keyboard focus would remain on the link, or jump to whatever happens to be next in the document. Pressing Tab afterwards would not continue naturally from the target area, it would continue from wherever focus was actually left, which can feel disorienting and unpredictable. Moving real focus to the target keeps the visual scroll position and the keyboard user's actual position in the document in sync.</p>
+
+<p><b>Note:</b> this is the same underlying technique demonstrated on <a href="testing-focus-management.html">the focus management testing page</a>, applied here to in-page fragment links rather than a multi-step single page app.</p>
+
+<p>Click the link below to see an example:</p>
+<p><a href="#target2" id="js-target-link"><b>Link to target (CSS + JavaScript)</b></a></p>
+
+<p>Pri at epicurei convenire, ut oratio liberavisse est. Ex his dolorum concludaturque, et mel solet soleat accumsan. In mollis ancillae intellegebat has. Sea congue cetero cu, ut mnesarchum vituperatoribus mel. Ne vix solet dicant possit, eos solet dictas facilisi ei.</p>
+
+<p>Vel ei quaeque definiebas. Ius no assum impedit. Ipsum efficiendi usu ei. Prima electram principes in pro, id pro dolores appellantur, at causae admodum voluptatum eam. Accusam percipit erroribus pro et. Brute option usu cu, alia enim mutat eum cu.</p>
+
+<p>His vocent integre mnesarchum no, ex prompta sapientem nec, te complectitur disputationi nam. Per an laudem convenire instructior, est graece labore moderatius eu, te natum verterem nam. Soleat doming splendide et has. Usu in aperiam albucius expetendis, integre tacimates quo at. Ad quo iuvaret deleniti copiosae, in vix ipsum dicant, sint consequuntur eu has. Ex pri solum graecis deterruisset, qui enim saperet iracundia ei.</p>
+
+<p>Ut vix facete labitur deserunt, possim vocent debitis ex sed. An usu vidisse copiosae petentium. Debet virtute te vel. Mutat ullum molestie eos ex. Causae facilis oportere ius at, in sint ceteros vix. Ne brute convenire vituperata nec.</p>
+
+<p>Id his similique philosophia, ne exerci aliquando similique has. His id antiopam salutandi forensibus. Singulis intellegebat in pro, vim illud postulant constituam eu. Ad vim wisi inani commune.</p>
+
+<p>Vel ei quaeque definiebas. Ius no assum impedit. Ipsum efficiendi usu ei. Prima electram principes in pro, id pro dolores appellantur, at causae admodum voluptatum eam. Accusam percipit erroribus pro et. Brute option usu cu, alia enim mutat eum cu.</p>
+
+<p><a href="#">Dummy link above target</a></p>
+
+<div class="target-box js-target" id="target2" tabindex="-1">
+  Hello world (JS target, receives real keyboard focus)
+</div>
+
+<pre><code>&lt;a href="#target2" id="js-target-link"&gt;Link to target&lt;/a&gt;
+
+...
+
+&lt;div id="target2" tabindex="-1"&gt;
+  Hello world
+&lt;/div&gt;
+
+&lt;script&gt;
+  function focusTarget2() {
+    if (window.location.hash === '#target2') {
+      var target = document.getElementById('target2');
+      if (target) {
+        target.focus();
+      }
+    }
+  }
+
+  // Handle direct arrival at #target2 (bookmark, external link, page load)
+  focusTarget2();
+
+  // Handle activation of the link during the current page visit
+  window.addEventListener('hashchange', focusTarget2);
+&lt;/script&gt;</code></pre>
+
+<p><a href="#">Dummy link below target</a></p>
+
+<p>Pri at epicurei convenire, ut oratio liberavisse est. Ex his dolorum concludaturque, et mel solet soleat accumsan. In mollis ancillae intellegebat has. Sea congue cetero cu, ut mnesarchum vituperatoribus mel. Ne vix solet dicant possit, eos solet dictas facilisi ei.</p>
+
+<p>Vel ei quaeque definiebas. Ius no assum impedit. Ipsum efficiendi usu ei. Prima electram principes in pro, id pro dolores appellantur, at causae admodum voluptatum eam. Accusam percipit erroribus pro et. Brute option usu cu, alia enim mutat eum cu.</p>
+
+
+<script>
+  function focusTarget2() {
+    if (window.location.hash === '#target2') {
+      var target = document.getElementById('target2');
+      if (target) {
+        target.focus();
+      }
+    }
+  }
+
+  // Handle direct arrival at #target2 (bookmark, external link, page load)
+  focusTarget2();
+
+  // Handle activation of the link during the current page visit
+  window.addEventListener('hashchange', focusTarget2);
+</script>
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>

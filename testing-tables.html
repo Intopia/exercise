@@ -14,8 +14,8 @@
 table {
   margin: 1em 0;
 }
+
   </style>
-}
 </head>
 <body>
 
@@ -24,14 +24,20 @@ table {
 </a>
 
 <h1>Testing tables</h1>
+
 <p>Which of the <a href="https://html.spec.whatwg.org/#the-table-element" target="_blank">tables</a> below has both of the following:</p>
+
 <ul>
   <li>An accessible name? (Ideally provided by <code>&lt;caption&gt;</code>, but it can also come from <code>aria-labelledby</code> or <code>aria-label</code>.)</li>
   <li>Programmatic table headers? (via <code>&lt;th&gt;</code>)</li>
 </ul>
 
 
+<!-- section -->
+
+
 <h2>Example 1</h2>
+
 <p>This example uses a <code>&lt;caption&gt;</code> to label the <code>&lt;table&gt;</code> and <code>&lt;th&gt;</code> for column and row headers.</p>
 
 <table>
@@ -117,99 +123,13 @@ table {
 &lt;/table&gt;</code></pre>
 </details>
 
+
+<!-- section -->
+
+
 <h2>Example 2</h2>
-<p>This example uses a <code>&lt;caption&gt;</code> to label the <code>&lt;table&gt;</code> and <code>&lt;th&gt;</code> for column and row headers.</p>
 
-<p><code>scope="col"</code> is used to associate header cells with the columns below them. <code>scope="row"</code> is used to associate header cells with the rows beside them.</p>
-
-<p><code>scope</code> explicitly identifies whether a header applies to a row or a column. For most simple tables, browsers can infer these relationships automatically, so they work correctly without <code>scope</code>. Adding <code>scope</code> simply makes the author's intent explicit.</p>
-
-<table>
-  <caption>
-    Plants found in different habitats
-  </caption>
-  <thead>
-    <tr>
-      <th scope="col">Habitat</th>
-      <th scope="col">Tree</th>
-      <th scope="col">Flower</th>
-      <th scope="col">Grass</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">Forest</th>
-      <td>Oak</td>
-      <td>Bluebell</td>
-      <td>Fescue</td>
-    </tr>
-    <tr>
-      <th scope="row">Desert</th>
-      <td>Joshua</td>
-      <td>Primrose</td>
-      <td>Needlegrass</td>
-    </tr>
-    <tr>
-      <th scope="row">Wetland</th>
-      <td>Willow</td>
-      <td>Iris</td>
-      <td>Reed</td>
-    </tr>
-    <tr>
-      <th scope="row">Coast</th>
-      <td>Pine</td>
-      <td>Sea thrift</td>
-      <td>Marram</td>
-    </tr>
-  </tbody>
-</table>
-
-<details>
-  <summary>HTML markup</summary>
-<pre><code>&lt;table&gt;
-  &lt;caption&gt;
-    Plants found in different habitats
-  &lt;/caption&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th <span class="highlight">scope="col"</span>&gt;Habitat&lt;/th&gt;
-      &lt;th <span class="highlight">scope="col"</span>&gt;Tree&lt;/th&gt;
-      &lt;th <span class="highlight">scope="col"</span>&gt;Flower&lt;/th&gt;
-      &lt;th <span class="highlight">scope="col"</span>&gt;Grass&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th <span class="highlight">scope="row"</span>&gt;Forest&lt;/th&gt;
-      &lt;td&gt;Oak&lt;/td&gt;
-      &lt;td&gt;Bluebell&lt;/td&gt;
-      &lt;td&gt;Fescue&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th <span class="highlight">scope="row"</span>&gt;Desert&lt;/th&gt;
-      &lt;td&gt;Joshua&lt;/td&gt;
-      &lt;td&gt;Primrose&lt;/td&gt;
-      &lt;td&gt;Needlegrass&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th <span class="highlight">scope="row"</span>&gt;Wetland&lt;/th&gt;
-      &lt;td&gt;Willow&lt;/td&gt;
-      &lt;td&gt;Iris&lt;/td&gt;
-      &lt;td&gt;Reed&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th <span class="highlight">scope="row"</span>&gt;Coast&lt;/th&gt;
-      &lt;td&gt;Pine&lt;/td&gt;
-      &lt;td&gt;Sea thrift&lt;/td&gt;
-      &lt;td&gt;Marram&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;</code></pre>
-</details>
-
-
-<h2>Example 3</h2>
-<p>This third example uses only <code>&lt;td&gt;</code> elements. It does not include a <code>&lt;caption&gt;</code>, <code>&lt;th&gt;</code> header cells, or the <code>scope</code> attribute.</p>
+<p>This example uses only <code>&lt;td&gt;</code> elements. It does not include a <code>&lt;caption&gt;</code> or <code>&lt;th&gt;</code> header cells.</p>
 
 <h3>Birds found in different habitats</h3>
 <table>

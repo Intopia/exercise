@@ -13,11 +13,15 @@
   <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia logo" class="intopia-logo">
 </a>
 
-<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
-  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia logo" class="intopia-logo">
-</a>
-
 <h1>Testing the table <code>scope</code> attribute</h1>
+
+<p>This page explores whether the <code>scope</code> attribute makes any difference when used in a simple table. The two tables below contain identical data and structure. The only difference is that the first table uses the <code>scope</code> attribute and the second does not.</p>
+
+<p>As you test each table, listen to what is announced for each data cell and compare the results.</p>
+
+
+<!-- section -->
+
 
 <h2>Example 1: using <code>scope</code></h2>
 
@@ -59,6 +63,10 @@
   </tbody> 
 </table>
 
+
+<!-- section -->
+
+
 <h2>Example 2: without <code>scope</code></h2>
 
 <table>
@@ -98,6 +106,28 @@
     </tr>
   </tbody> 
 </table>
+
+
+<!-- section -->
+
+
+<h2>What we found</h2>
+
+<p>In our testing, the <code>scope</code> attribute made no observable difference to how modern screen readers announced this simple table. The row and column headers were correctly associated with each data cell in both examples.</p>
+
+<p>This doesn't mean the <code>scope</code> attribute is never useful. However, for simple tables like these, modern browsers and assistive technologies generally infer the relationships between header and data cells without it.</p>
+
+
+<!-- section -->
+
+
+<h2>Further reading</h2>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/table" target="_blank">MDN: &lt;table&gt; HTML table element</a></li>
+  <li><a href="https://vispero.com/resources/short-note-on-scoping-mechanisms/" target="_blank">Short note on scoping mechanisms</a></li>
+  <li><a href="https://adrianroselli.com/2023/02/avoid-spanning-table-headers.html" target="_blank">Avoid Spanning Table Headers</a></li>
+</ul>
 
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
