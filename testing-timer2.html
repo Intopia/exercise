@@ -21,13 +21,18 @@
 </a>
 
 <h1>Testing the <code>timer</code> element - version 2</h1>
-<p>This test uses the <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-live" target="_blank"><code>aria-live="polite"</code></a> instead of <a href="https://www.w3.org/TR/wai-aria-1.2/#timer" target="_blank"><code>role="timer"</code></a> so the information is announced at the next graceful opportunity.</p>
 
+<p>This test uses <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-live" target="_blank"><code>aria-live="polite"</code></a> instead of <a href="https://www.w3.org/TR/wai-aria-1.2/#timer" target="_blank"><code>role="timer"</code></a>, so the timer's value can be announced.</p>
+
+<p><b>Caution:</b> a naive version of this technique updates the live region every second, causing the screen reader to announce every single number change, effectively reading the countdown aloud non-stop. This is highly disruptive and should be avoided in production.</p>
+
+<p>This example demonstrates a more usable approach instead: the visible number still updates every second for sighted users, but the <code>aria-live</code> region is only updated at meaningful milestones, every 5 seconds, and once more when the timer finishes. Screen reader users hear periodic progress updates rather than a constant, unbroken stream of numbers.</p>
 
 <h2>Example</h2>
 
 <button id="startButton">Start timer</button>
-<div aria-live="polite" id="eggtimer">20</div>
+<div id="eggtimer" aria-hidden="true">20</div>
+<div id="eggtimer-announcer" aria-live="polite" class="hidden"></div>
 <button id="resetButton">Reset timer</button>
 
 <script>
@@ -36,17 +41,28 @@
     let countdown;
 
     const eggtimer = document.getElementById('eggtimer');
+    const announcer = document.getElementById('eggtimer-announcer');
     const startButton = document.getElementById('startButton');
     const resetButton = document.getElementById('resetButton');
 
     function startTimer() {
         if (countdown) clearInterval(countdown);
+
         countdown = setInterval(() => {
             if (currentTime > 0) {
                 currentTime--;
+
+                // The visible number updates every second for sighted users
                 eggtimer.textContent = currentTime;
-            } else {
-                clearInterval(countdown);
+
+                // The announced value only updates at 5-second milestones,
+                // or when the timer reaches zero, not on every tick
+                if (currentTime === 0) {
+                    announcer.textContent = 'Time is up';
+                    clearInterval(countdown);
+                } else if (currentTime % 5 === 0) {
+                    announcer.textContent = `${currentTime} seconds remaining`;
+                }
             }
         }, 1000);
     }
@@ -55,6 +71,7 @@
         clearInterval(countdown);
         currentTime = initialTime;
         eggtimer.textContent = currentTime;
+        announcer.textContent = '';
     }
 
     startButton.addEventListener('click', startTimer);
@@ -63,7 +80,13 @@
 
 
 <pre><code>&lt;button id="startButton"&gt;Start timer&lt;/button&gt;
-&lt;div <span class="highlight">aria-live="polite"</span> id="eggtimer"&gt;20&lt;/div&gt;
+
+&lt;!-- Visible countdown, updates every second, hidden from AT --&gt;
+&lt;div id="eggtimer" <span class="highlight">aria-hidden="true"</span>&gt;20&lt;/div&gt;
+
+&lt;!-- Announced only at 5-second milestones and on completion --&gt;
+&lt;div id="eggtimer-announcer" <span class="highlight">aria-live="polite"</span> class="hidden"&gt;&lt;/div&gt;
+
 &lt;button id="resetButton"&gt;Reset timer&lt;/button&gt;</code></pre>
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>

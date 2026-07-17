@@ -111,7 +111,17 @@ h3 {
 }
 
 .sort-icon::after {
-  content: "";
+  content: "▲▼";
+  color: #707070;
+  font-size: 0.7em;
+  letter-spacing: -0.15em;
+}
+
+[role="columnheader"][aria-sort="ascending"] .sort-icon::after,
+[role="columnheader"][aria-sort="descending"] .sort-icon::after {
+  color: #000;
+  font-size: 1em;
+  letter-spacing: normal;
 }
 
 [role="columnheader"][aria-sort="ascending"] .sort-icon::after {
