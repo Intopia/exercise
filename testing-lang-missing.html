@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Testing lang attribute - missing document lang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<h1>Testing <code>lang</code> attribute: missing document lang</h1>
+
+<p>This page's <code>&lt;html&gt;</code> element has no <code>lang</code> attribute at all.</p>
+
+<p><b>Expected result, document level:</b> Red banner, "NO DOCUMENT LANG, lang attribute missing from &lt;html&gt;."</p>
+
+<details>
+  <summary>HTML markup (document level)</summary>
+<pre><code>&lt;html&gt;
+  ...
+&lt;/html&gt;</code></pre>
+</details>
+
+<h2>Inline example 1: valid language switch</h2>
+
+<p>This paragraph contains a French phrase, correctly marked with <code>lang="fr"</code>: <span lang="fr">Bonjour, comment allez-vous?</span></p>
+
+<p><b>Expected result:</b> Blue badge, "lang: fr" (valid inline switch).</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span <span class="highlight">lang="fr"</span>&gt;Bonjour, comment allez-vous?&lt;/span&gt;</code></pre>
+</details>
+
+<h2>Inline example 2: full-word mistake</h2>
+
+<p>This paragraph contains a French phrase, but the language is written as a full word instead of a code: <span lang="french">Ça va bien, merci.</span></p>
+
+<p><b>Expected result:</b> Red badge, invalid format, "did you mean 'fr'?"</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span <span class="highlight">lang="french"</span>&gt;Ça va bien, merci.&lt;/span&gt;</code></pre>
+</details>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>

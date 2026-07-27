@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="english">
+<head>
+  <meta charset="utf-8">
+  <title>Testing lang attribute - invalid document lang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<h1>Testing <code>lang</code> attribute: invalid document lang</h1>
+
+<p>This page's <code>&lt;html&gt;</code> element uses the full word <code>"english"</code> instead of a valid language code.</p>
+
+<p><b>Expected result, document level:</b> Red banner, <code>Document lang: "english", did you mean "en"?</code></p>
+
+<details>
+  <summary>HTML markup (document level)</summary>
+<pre><code>&lt;html <span class="highlight">lang="english"</span>&gt;
+  ...
+&lt;/html&gt;</code></pre>
+</details>
+
+<h2>Inline example 1: valid language switch</h2>
+
+<p>This paragraph contains a Spanish phrase, correctly marked with <code>lang="es"</code>: <span lang="es">Hola, ¿cómo estás?</span></p>
+
+<p><b>Expected result:</b> Blue badge, "lang: es" (valid inline switch).</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span <span class="highlight">lang="es"</span>&gt;Hola, ¿cómo estás?&lt;/span&gt;</code></pre>
+</details>
+
+<h2>Inline example 2: unrecognised code</h2>
+
+<p>This paragraph uses a made-up, unrecognised language code: <span lang="xyz">This text has an unrecognised lang code.</span></p>
+
+<p><b>Expected result:</b> Amber badge, unrecognised code, no confident suggestion available.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span <span class="highlight">lang="xyz"</span>&gt;This text has an unrecognised lang code.&lt;/span&gt;</code></pre>
+</details>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
