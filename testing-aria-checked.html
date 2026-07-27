@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing aria-checked</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    .testing-checked-checkbox {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .testing-checked-checkbox::before {
+      content: "";
+      display: inline-block;
+      width: 1.2em;
+      height: 1.2em;
+      border: 2px solid #333;
+      border-radius: 3px;
+      background-color: #fff;
+      flex-shrink: 0;
+    }
+
+    .testing-checked-checkbox[aria-checked="true"]::before {
+      background-color: #1b5e20;
+      border-color: #1b5e20;
+      background-image: linear-gradient(45deg, transparent 40%, #fff 40%, #fff 55%, transparent 55%),
+                         linear-gradient(-45deg, transparent 55%, #fff 55%, #fff 70%, transparent 70%);
+    }
+
+    .testing-checked-checkbox:focus-visible {
+      outline: 2px solid #000;
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<h1>Testing <code>aria-checked</code></h1>
+
+
+<!-- section -->
+
+
+<h2>Example 1: Static</h2>
+
+<p>This fake checkbox does not respond to interaction. It is included to let you inspect a fixed <code>aria-checked="true"</code> state.</p>
+
+<div class="example">
+  <div class="testing-checked-checkbox" role="checkbox" tabindex="0" aria-checked="true">
+    Subscribe to newsletter
+  </div>
+</div>
+
+<p><b>Expected result:</b> the accessibility tree should show <code>checked: true</code> for this element, and this never changes.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div
+  role="checkbox"
+  tabindex="0"
+  <span class="highlight">aria-checked="true"</span>
+&gt;
+  Subscribe to newsletter
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 2: Interactive</h2>
+
+<p>This fake checkbox starts unchecked. Activate it with a click, or with the keyboard using Space, to toggle <code>aria-checked</code> between <code>false</code> and <code>true</code>.</p>
+
+<div class="example">
+  <div
+    id="fake-checkbox"
+    class="testing-checked-checkbox"
+    role="checkbox"
+    tabindex="0"
+    aria-checked="false">
+    Subscribe to newsletter
+  </div>
+</div>
+
+<p><b>Expected result:</b> the accessibility tree should show <code>checked: false</code> initially, and <code>checked: true</code> once activated. This should toggle back and forth each time the element is activated.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div
+  id="fake-checkbox"
+  role="checkbox"
+  tabindex="0"
+  <span class="highlight">aria-checked="false"</span>
+&gt;
+  Subscribe to newsletter
+&lt;/div&gt;</code></pre>
+</details>
+
+<script>
+  const fakeCheckbox = document.getElementById('fake-checkbox');
+
+  function toggleFakeCheckbox() {
+    const isChecked = fakeCheckbox.getAttribute('aria-checked') === 'true';
+    fakeCheckbox.setAttribute('aria-checked', String(!isChecked));
+  }
+
+  fakeCheckbox.addEventListener('click', toggleFakeCheckbox);
+
+  fakeCheckbox.addEventListener('keydown', (event) => {
+    // Native checkboxes toggle on Space, not Enter.
+    // role="checkbox" gets no native key handling at all, so this
+    // has to be implemented manually to match expected behaviour.
+    if (event.key === ' ') {
+      event.preventDefault(); // stop the page from scrolling
+      toggleFakeCheckbox();
+    }
+  });
+</script>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing aria-expanded</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<h1>Testing <code>aria-expanded</code></h1>
+
+
+<!-- section -->
+
+
+<h2>Example 1: Static</h2>
+
+<p>This button does not respond to interaction. It is included to let you inspect a fixed <code>aria-expanded="true"</code> state.</p>
+
+<div class="example">
+  <button aria-expanded="true">
+    Filters
+  </button>
+</div>
+
+<p><b>Expected result:</b> the accessibility tree should show <code>expanded: true</code> for this button, and this never changes.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button <span class="highlight">aria-expanded="true"</span>&gt;
+  Filters
+&lt;/button&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 2: Interactive</h2>
+
+<p>This button starts collapsed. Activate it to toggle <code>aria-expanded</code> between <code>false</code> and <code>true</code>, and to show or hide the content below it.</p>
+
+<div class="example">
+  <button id="expand-button" aria-expanded="false" aria-controls="expand-content">
+    Filters
+  </button>
+  <div id="expand-content" hidden>
+    <p>This content is only shown once the button above is expanded.</p>
+  </div>
+</div>
+
+<p><b>Expected result:</b> the accessibility tree should show <code>expanded: false</code> initially, and <code>expanded: true</code> once activated. This should toggle back and forth each time the button is activated.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button
+  id="expand-button"
+  <span class="highlight">aria-expanded="false"</span>
+  aria-controls="expand-content"
+&gt;
+  Filters
+&lt;/button&gt;
+&lt;div id="expand-content" hidden&gt;
+  &lt;p&gt;This content is only shown once the button above is expanded.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+<script>
+  const expandButton = document.getElementById('expand-button');
+  const expandContent = document.getElementById('expand-content');
+
+  expandButton.addEventListener('click', () => {
+    const isExpanded = expandButton.getAttribute('aria-expanded') === 'true';
+
+    expandButton.setAttribute('aria-expanded', String(!isExpanded));
+    expandContent.hidden = isExpanded;
+  });
+</script>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
