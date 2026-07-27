@@ -26,6 +26,10 @@
 &lt;/html&gt;</code></pre>
 </details>
 
+
+<!-- section -->
+
+
 <h2>Inline example 1: valid language switch</h2>
 
 <p>This paragraph contains a German phrase, correctly marked with <code>lang="de"</code>: <span lang="de">Guten Tag, wie geht es Ihnen?</span></p>
@@ -37,6 +41,10 @@
 <pre><code>&lt;span <span class="highlight">lang="de"</span>&gt;Guten Tag, wie geht es Ihnen?&lt;/span&gt;</code></pre>
 </details>
 
+
+<!-- section -->
+
+
 <h2>Inline example 2: empty lang attribute</h2>
 
 <p>This paragraph has a <code>lang</code> attribute present but with no value: <span lang="">This text has an empty lang attribute.</span></p>
@@ -47,6 +55,22 @@
   <summary>HTML markup</summary>
 <pre><code>&lt;span <span class="highlight">lang=""</span>&gt;This text has an empty lang attribute.&lt;/span&gt;</code></pre>
 </details>
+
+
+<!-- section -->
+
+
+<h2>Inline example 3: unrecognised code</h2>
+
+<p>This paragraph uses a made-up, unrecognised language code: <span lang="xyz">This text has an unrecognised lang code.</span></p>
+
+<p><b>Expected result:</b> Amber badge, unrecognised code, no confident suggestion available.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span <span class="highlight">lang="xyz"</span>&gt;This text has an unrecognised lang code.&lt;/span&gt;</code></pre>
+</details>
+
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
