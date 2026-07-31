@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing capitalisation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+<style>
+  .visual-caps {
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<h1>Testing capitalisation</h1>
+
+<ol>
+  <li>Aim 1: To determine if screen readers (with default settings) announce capitalised words.</li>
+  <li>Aim 2: To determine if <code>text-transform: uppercase</code> has any impact on screen reader announcements.</li>
+</ol>
+
+<p>In short: capitalisation, whether typed directly or applied visually with CSS, made no difference to how any of the three screen readers pronounced the word. Full results below.</p>
+
+
+<!-- section -->
+
+
+<h2>Example 1: Caps</h2>
+
+<div class="example">
+  Only those with an existing Negative Vetting 1 security clearance are considered for supervised temporary access to TOP SECRET information.
+</div>
+
+<p><b>Result</b>: JAWS, NVDA and VoiceOver announced "TOP SECRET" exactly as other words in the sentence.</p>
+
+<p>None of the three screen readers spelled the word out letter by letter, added emphasis, or changed their tone for the capitalised text. It was pronounced as an ordinary word, no different from the lowercase text around it.</p>
+
+
+<!-- section -->
+
+
+<h2>Example 2: CSS solution</h2>
+
+<div class="example">
+  Only those with an existing Negative Vetting 1 security clearance are considered for supervised temporary access to <span class="visual-caps">top secret</span> information.
+</div>
+
+<p><b>Result</b>: JAWS, NVDA and VoiceOver announced "TOP SECRET" exactly as other words in the sentence. The CSS made no difference.</p>
+
+<p>Even though this version only <em>looks</em> capitalised (the underlying text is lowercase, CSS just displays it in capitals), the result was identical to Example 1. This confirms the outcome is the same whether the capitalisation exists in the actual text or is applied purely visually.</p>
+
+
+<!-- section -->
+
+
+<h2>What this means</h2>
+
+<p>Capitalising a word, either by typing it in capitals or styling it with CSS, does not change how a screen reader pronounces it, at least with JAWS, NVDA, and VoiceOver in their default configuration. If a design decision relies on capitalisation to signal something (for example, urgency or importance), that signal will not reach screen reader users through pronunciation alone. Other methods, such as clear wording, context, or appropriate use of emphasis, should be used to convey that meaning for everyone.</p>
+
+<p>Note: this reflects default screen reader settings. Some screen readers offer optional settings that can change how acronyms or capitalised text are announced, so results could differ for a user who has changed those settings.</p>
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>

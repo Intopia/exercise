@@ -32,7 +32,9 @@
 
 <h2>Inline example 1: valid language switch</h2>
 
-<p>This paragraph contains a German phrase, correctly marked with <code>lang="de"</code>: <span lang="de">Guten Tag, wie geht es Ihnen?</span></p>
+<p>The next paragraph contains a German phrase, correctly marked with <code>lang="de"</code>:</p>
+
+<p><span lang="de">Guten Tag, wie geht es Ihnen?</span></p>
 
 <p><b>Expected result:</b> Blue badge, "lang: de" (valid inline switch).</p>
 
@@ -47,7 +49,9 @@
 
 <h2>Inline example 2: empty lang attribute</h2>
 
-<p>This paragraph has a <code>lang</code> attribute present but with no value: <span lang="">This text has an empty lang attribute.</span></p>
+<p>The next paragraph has a <code>lang</code> attribute present but with no value:</p>
+
+<p><span lang="">This text has an empty lang attribute.</span></p>
 
 <p><b>Expected result:</b> Amber badge, lang attribute present but has no value.</p>
 
@@ -62,7 +66,9 @@
 
 <h2>Inline example 3: unrecognised code</h2>
 
-<p>This paragraph uses a made-up, unrecognised language code: <span lang="xyz">This text has an unrecognised lang code.</span></p>
+<p>The next paragraph uses a made-up, unrecognised language code:</p>
+
+<p><span lang="xyz">This text has an unrecognised lang code.</span></p>
 
 <p><b>Expected result:</b> Amber badge, unrecognised code, no confident suggestion available.</p>
 
