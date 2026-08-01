@@ -100,16 +100,16 @@
 
 <p>A nested <code>&lt;aside&gt;</code> element without an accessible name does not generate a <code>complementary</code> landmark. Under the current HTML Accessibility API Mapping, a nested <code>&lt;aside&gt;</code> is only exposed as a landmark when it has an accessible name via <code>aria-label</code> or <code>aria-labelledby</code>.</p>
 
-<p>This is a nested <code>&lt;aside&gt;</code> element:</p>
-
-<section>
-  <aside>A nested aside region</aside>
-</section>
-
 <p>This is a nested <code>&lt;aside&gt;</code> element with a name:</p>
 
 <section>
   <aside aria-label="Nested aside">A nested aside region</aside>
+</section>
+
+<p>This is a nested <code>&lt;aside&gt;</code> element:</p>
+
+<section>
+  <aside>A nested aside region</aside>
 </section>
 
 
