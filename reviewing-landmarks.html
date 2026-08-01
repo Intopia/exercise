@@ -118,16 +118,16 @@
 
 <h2><code>&lt;section&gt;</code></h2>
 
-<p>The <code>&lt;section&gt;</code> element without an accessible name is generally not exposed as a landmark:</p>
-
-<section>
-  <h3>Heading for section region</h3>
-</section>
-
 <p>The <code>&lt;section&gt;</code> element is generally exposed as a region landmark only when it has an accessible name (typically via a heading or ARIA labelling). The example below uses <code>aria-labelledby</code> to associate the heading directly with the <code>&lt;section&gt;</code>.</p>
 
 <section aria-labelledby="section-name">
   <h3 id="section-name">Heading and name for section region</h3>
+</section>
+
+<p>The <code>&lt;section&gt;</code> element without an accessible name is generally not exposed as a landmark:</p>
+
+<section>
+  <h3>Heading for section region</h3>
 </section>
 
 
@@ -139,12 +139,7 @@
 <p>The <code>&lt;search&gt;</code> element generates a <code>search</code> landmark.</p>
 
 <search>
-  <form action="#">
-    <div class="form-group">
-      <label class="label" for="search-this-site1">Search this site</label>
-      <input class="input" type="search" id="search-this-site1">
-    </div>
-  </form>
+  Search form here.
 </search>
 
 
