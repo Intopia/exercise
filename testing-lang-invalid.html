@@ -64,7 +64,7 @@
 <!-- section -->
 
 
-<h2>Inline example 3: unrecognised code</h2>
+<h2>Inline example 3: unrecognised value</h2>
 
 <p>The next paragraph uses a made-up, unrecognised language code:</p>
 
@@ -75,6 +75,23 @@
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;span <span class="highlight">lang="xyz"</span>&gt;This text has an unrecognised lang code.&lt;/span&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Inline example 4: invalid value</h2>
+
+<p>The next paragraph uses an invalid language code:</p>
+
+<p><span lang="English">This text has an invalid lang code.</span></p>
+
+<p><b>Expected result:</b> Amber badge, unrecognised code, no confident suggestion available.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span <span class="highlight">lang="English"</span>&gt;This text has an invalid lang code.&lt;/span&gt;</code></pre>
 </details>
 
 
