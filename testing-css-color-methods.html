@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Testing CSS colour methods</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+<style>
+  /* Styling limited to the colour example swatches only.
+     All other elements are left unstyled. */
+
+  .swatch {
+    width: 200px;
+    height: 100px;
+    border: 1px solid #000;
+  }
+
+  .example1 { background-color: #2764d7; }        /* Hex */
+  .example2 { background-color: rgb(39, 100, 215); }   /* RGB */
+  .example3 { background-color: rgba(39, 100, 215, 0.7); } /* RGBA */
+  .example4 { background-color: hsl(217, 69%, 50%); }  /* HSL */
+  .example5 { background-color: hsla(217, 69%, 50%, 0.7); } /* HSLA */
+  .example6 { background-color: hwb(217 15% 16%); }  /* HWB */
+  .example7 { background-color: royalblue; }          /* Named colour */
+  .example8 { background-color: lab(48% -4 -45); }    /* LAB */
+  .example9 { background-color: lch(48% 45 264); }    /* LCH */
+  .example10 { background-color: oklab(50% -0.03 -0.14); } /* Oklab */
+  .example11 { background-color: oklch(50% 0.14 264); } /* OKLCH */
+  .example12 { background-color: oklch(50% 0.14 264 / 50%); } /* OKLCH with alpha */
+</style>
+</head>
+<body>
+  
+<h1>Testing CSS colour methods</h1>
+
+<p>Here are some of the ways you can apply CSS to create colours:</p>
+
+  <h2>Hex</h2>
+  <div class="example1 swatch"></div>
+  <pre><code>background-color: #2764d7;</code></pre>
+
+  <h2>RGB</h2>
+  <div class="example2 swatch"></div>
+  <pre><code>background-color: rgb(39, 100, 215);</code></pre>
+
+  <h2>RGBA</h2>
+  <div class="example3 swatch"></div>
+  <pre><code>background-color: rgba(39, 100, 215, 0.7);</code></pre>
+
+  <h2>HSL</h2>
+  <div class="example4 swatch"></div>
+  <pre><code>background-color: hsl(217, 69%, 50%);</code></pre>
+
+  <h2>HSLA</h2>
+  <div class="example5 swatch"></div>
+  <pre><code>background-color: hsla(217, 69%, 50%, 0.7);</code></pre>
+
+  <h2>HWB</h2>
+  <div class="example6 swatch"></div>
+  <pre><code>background-color: hwb(217 15% 16%);</code></pre>
+
+  <h2>Named colour</h2>
+  <div class="example7 swatch"></div>
+  <pre><code>background-color: royalblue;</code></pre>
+
+  <h2>LAB</h2>
+  <div class="example8 swatch"></div>
+  <pre><code>background-color: lab(48% -4 -45);</code></pre>
+
+  <h2>LCH</h2>
+  <div class="example9 swatch"></div>
+  <pre><code>background-color: lch(48% 45 264);</code></pre>
+
+  <h2>Oklab</h2>
+  <div class="example10 swatch"></div>
+  <pre><code>background-color: oklab(50% -0.03 -0.14);</code></pre>
+
+  <h2>OKLCH</h2>
+  <div class="example11 swatch"></div>
+  <pre><code>background-color: oklch(50% 0.14 264);</code></pre>
+
+  <h2>OKLCH with alpha</h2>
+  <div class="example12 swatch"></div>
+  <pre><code>background-color: oklch(50% 0.14 264 / 50%);</code></pre>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
