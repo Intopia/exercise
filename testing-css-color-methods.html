@@ -40,52 +40,150 @@
 
 <p>Here are some of the ways you can apply CSS to create colours:</p>
 
-<h2>Hex</h2>
-<div class="example1 swatch"></div>
-<pre><code>background-color: #2764d7;</code></pre>
 
-<h2>RGB</h2>
-<div class="example2 swatch"></div>
-<pre><code>background-color: rgb(39, 100, 215);</code></pre>
+<!-- section -->
 
-<h2>RGBA</h2>
-<div class="example3 swatch"></div>
-<pre><code>background-color: rgba(39, 100, 215, 0.7);</code></pre>
-
-<h2>HSL</h2>
-<div class="example4 swatch"></div>
-<pre><code>background-color: hsl(217, 69%, 50%);</code></pre>
-
-<h2>HSLA</h2>
-<div class="example5 swatch"></div>
-<pre><code>background-color: hsla(217, 69%, 50%, 0.7);</code></pre>
-
-<h2>HWB</h2>
-<div class="example6 swatch"></div>
-<pre><code>background-color: hwb(217 15% 16%);</code></pre>
 
 <h2>Named colour</h2>
+
+<p>A set of predefined keywords, like white, red or royalblue. The most common way beginners give an element colour, but limited to a fixed list of names.</p>
+
 <div class="example7 swatch"></div>
+
 <pre><code>background-color: royalblue;</code></pre>
+<p>See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/named-color">full list of colour names</a>.</p>
+
+
+<!-- section -->
+
+
+<h2>Hex</h2>
+
+<p>A hexadecimal value representing red, green and blue. Compact and everywhere, but not easy to read or adjust by eye.</p>
+
+<div class="example1 swatch"></div>
+
+<pre><code>background-color: #2764d7;</code></pre>
+<p>Hex can also be written as a 3-character shorthand. Each character is doubled to make the full 6-digit value, so <code>#06f</code> expands to <code>#0066ff</code>.</p>
+
+
+<!-- section -->
+
+
+<h2>RGB</h2>
+
+<p>Red, green and blue written out as separate numbers. Easier to reason about than hex, though it still doesn't match how we perceive colour.</p>
+
+<div class="example2 swatch"></div>
+
+<pre><code>background-color: rgb(39, 100, 215);</code></pre>
+
+
+<!-- section -->
+
+
+<h2>RGBA</h2>
+
+<p>The same as RGB, with an added alpha value for transparency.</p>
+
+<div class="example3 swatch"></div>
+
+<pre><code>background-color: rgba(39, 100, 215, 0.7);</code></pre>
+
+
+<!-- section -->
+
+
+<h2>HSL</h2>
+
+<p>Hue, saturation and lightness. More intuitive to adjust than RGB, but its lightness value doesn't line up with how bright a colour actually looks.</p>
+
+<div class="example4 swatch"></div>
+
+<pre><code>background-color: hsl(217, 69%, 50%);</code></pre>
+
+
+<!-- section -->
+
+
+<h2>HSLA</h2>
+
+<p>The same as HSL, with an added alpha value for transparency.</p>
+
+<div class="example5 swatch"></div>
+
+<pre><code>background-color: hsla(217, 69%, 50%, 0.7);</code></pre>
+
+
+<!-- section -->
+
+
+<h2>HWB</h2>
+
+<p>Hue, whiteness and blackness. Built by mixing a hue with white and black, which some people find a more natural way to think about colour.</p>
+
+<div class="example6 swatch"></div>
+
+<pre><code>background-color: hwb(217 15% 16%);</code></pre>
+
+
+<!-- section -->
+
 
 <h2>LAB</h2>
+
+<p>Based on the CIE Lab colour space. Designed for perceptual uniformity, but predates modern wide-gamut displays.</p>
+
 <div class="example8 swatch"></div>
+
 <pre><code>background-color: lab(48% -4 -45);</code></pre>
 
+
+<!-- section -->
+
+
 <h2>LCH</h2>
+
+<p>The cylindrical form of LAB, using lightness, chroma and hue instead of LAB's harder-to-read coordinates.</p>
+
 <div class="example9 swatch"></div>
+
 <pre><code>background-color: lch(48% 45 264);</code></pre>
 
+
+<!-- section -->
+
+
 <h2>Oklab</h2>
+
+<p>A newer, more accurate take on perceptual uniformity than LAB. It's the colour space that OKLCH is built on.</p>
+
 <div class="example10 swatch"></div>
+
 <pre><code>background-color: oklab(50% -0.03 -0.14);</code></pre>
 
+
+<!-- section -->
+
+
 <h2>OKLCH</h2>
+
+<p>The cylindrical form of Oklab. More perceptually accurate than HSL, and able to describe colours beyond the sRGB gamut.</p>
+
 <div class="example11 swatch"></div>
+
 <pre><code>background-color: oklch(50% 0.14 264);</code></pre>
 
+
+<!-- section -->
+
+
 <h2>OKLCH with alpha</h2>
+
+<p>The same as OKLCH, with an added alpha value for transparency.</p>
+
 <div class="example12 swatch"></div>
+
 <pre><code>background-color: oklch(50% 0.14 264 / 50%);</code></pre>
 
 
