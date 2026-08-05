@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Accessibility bookmarklets: Page structure</title>
+  <title>Intopia's accessibility testing bookmarklets - explained</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    hr {
+      margin: 3.5em 0;
+    }
+  </style>
 </head>
 <body>
 
@@ -13,15 +18,23 @@
   <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
 </a>
 
-<h1>Accessibility bookmarklets: Page structure</h1>
+<h1>Intopia's accessibility testing bookmarklets - explained</h1>
 
-<p>This article explores five bookmarklets that help you inspect the structure of a web page. Together, they make it easier to understand how content has been organised and identify common structural accessibility issues.</p>
+<p>This page provides details on all of Intopia&rsquo;s quick test bookmarklets.</p>
 
+<ul>
+  <li><a href="#bookmarklet01">Bookmarklet 1. Highlight headings</a></li>
+  <li><a href="#bookmarklet02">Bookmarklet 2. Highlight image alternatives</a></li>
+  <li><a href="#bookmarklet03">Bookmarklet 3. Highlight lists</a></li>
+  <li><a href="#bookmarklet04">Bookmarklet 4. Highlight landmarks</a></li>
+  <li><a href="#bookmarklet05">Bookmarklet 5. Highlight page language</a></li>
+</ul>
 
 <!-- section -->
 
 
-<h2>Bookmarklet 1. Highlight headings</h2>
+<hr>
+<h2 id="bookmarklet01">Bookmarklet 1. Highlight headings</h2>
 
 <p>Highlights all HTML headings (<code>h1</code> to <code>h6</code>) using different colours so you can quickly see the page's heading structure. Each heading is labelled with its level and text. The bookmarklet also flags empty headings and pages with more than one <code>h1</code> element.</p>
 
@@ -81,7 +94,8 @@
 <!-- section -->
 
 
-<h2>Bookmarklet 2. Highlight image alternatives</h2>
+<hr>
+<h2 id="bookmarklet02">Bookmarklet 2. Highlight image alternatives</h2>
 
 <p>Highlights all images on a page and identifies how their alternative text has been provided. Each image is labelled with one of three states:</p>
 
@@ -150,7 +164,8 @@
 <!-- section -->
 
 
-<h2>Bookmarklet 3. Highlight lists</h2>
+<hr>
+<h2 id="bookmarklet03">Bookmarklet 3. Highlight lists</h2>
 
 <p>Highlights lists on a page, including both native HTML list elements and ARIA list roles. Different colours are used to distinguish each type, making it easy to see how lists have been created.</p>
 
@@ -214,7 +229,8 @@
 <!-- section -->
 
 
-<h2>Bookmarklet 4. Highlight landmarks</h2>
+<hr>
+<h2 id="bookmarklet04">Bookmarklet 4. Highlight landmarks</h2>
 
 <p>Highlights all page landmarks using distinct colours for each landmark role. Where a landmark has an accessible name, the name is also displayed, making it easy to identify and distinguish between landmarks of the same type.</p>
 
@@ -289,7 +305,8 @@
 <!-- section -->
 
 
-<h2>Bookmarklet 5. Highlight page language</h2>
+<hr>
+<h2 id="bookmarklet05">Bookmarklet 5. Highlight page language</h2>
 
 <p>Highlights the language of the page by checking both the document language and any inline language changes.</p>
 
