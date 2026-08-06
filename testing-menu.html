@@ -59,8 +59,8 @@
     <li><button onclick="injectGoodbyeText()">Inject Goodbye</button></li>
     <li><button onclick="clearText(this)">Clear</button></li>
   </menu>
-  <div class="menu-example" aria-live="assertive" tabindex="-1"></div>
-  <div class="announcement hidden2" aria-live="assertive"></div>
+  <div class="menu-example" aria-live="polite" tabindex="-1"></div>
+  <div class="announcement hidden2" aria-live="polite"></div>
 </div>
 
 <script>
@@ -69,7 +69,7 @@
         const announcement = document.querySelector('.announcement');
         container.textContent = "Hello world";
         container.focus();
-        announcement.textContent = ""; // Clear announcement text
+        announcement.textContent = "";
     }
 
     function injectGoodbyeText() {
@@ -77,24 +77,18 @@
         const announcement = document.querySelector('.announcement');
         container.textContent = "Goodbye world";
         container.focus();
-        announcement.textContent = ""; // Clear announcement text
+        announcement.textContent = "";
     }
 
     function clearText(button) {
         const container = document.querySelector('.menu-example');
         const announcement = document.querySelector('.announcement');
         container.textContent = "";
-        button.focus(); // Keep focus on the clear button
+        button.focus();
 
-        // Set a timeout to inject the announcement text after 0.3 seconds
-        setTimeout(function() {
-            announcement.textContent = "Your message has been cleared";
-            
-            // Set another timeout to clear the announcement text after 1.5 seconds
-            setTimeout(function() {
-                announcement.textContent = "";
-            }, 1620);
-        }, 1600);
+        // aria-live="polite" already queues this behind the button's own
+        // accessible name announcement, so no artificial delay is needed.
+        announcement.textContent = "Your message has been cleared";
     }
 </script>
 
@@ -104,11 +98,11 @@
   &lt;li&gt;&lt;button&gt;Clear&lt;/button&gt;&lt;/li&gt;
 &lt;/menu&gt;
 
-&lt;div class="menu-example" aria-live="assertive"&gt;
+&lt;div class="menu-example" aria-live="polite"&gt;
   &lt;!-- Visible message --&gt;
 &lt;/div&gt;
 
-&lt;div class="announcement" aria-live="assertive"&gt;
+&lt;div class="announcement" aria-live="polite"&gt;
   &lt;!-- Message for screen readers --&gt;
 &lt;/div&gt;</code></pre>
 

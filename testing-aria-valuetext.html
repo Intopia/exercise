@@ -89,7 +89,42 @@
 <!-- section -->
 
 
-<p><b>Note for testing:</b> initial testing found <code>aria-valuetext</code> does not fully replace the numeric announcement as the spec describes, both the number and the custom text were announced together. This is worth confirming across your full standard testing set, browser/screen reader combination, since it may not be consistent everywhere.</p>
+<h2>Example 3: custom <code>role="progressbar"</code> with <code>aria-valuenow</code></h2>
+
+<p>Examples 1 and 2 use the native <code>&lt;progress&gt;</code> element, where the browser computes the accessible value from the <code>value</code> and <code>max</code> attributes. This example instead uses a custom widget built from a <code>&lt;div&gt;</code> with <code>role="progressbar"</code>, where <code>aria-valuenow</code>, <code>aria-valuemin</code>, and <code>aria-valuemax</code> are authored directly. This isolates whether assistive technology handles <code>aria-valuetext</code> differently for native elements versus custom ARIA widgets.</p>
+
+<div class="example">
+  <span class="label" id="volume3-label">Volume level</span>
+  <div
+    role="progressbar"
+    aria-labelledby="volume3-label"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="75"
+    aria-valuetext="Loud"
+  ></div>
+</div>
+
+<p><b>Expected result:</b> as with Example 2, the accessible value should be presented as “Loud” instead of the number or percentage value. Comparing results here against Example 2 shows whether a valuetext bug is specific to native elements, or applies to ARIA valuetext handling more broadly.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span id="volume3-label"&gt;Volume level&lt;/span&gt;
+&lt;div
+  role="progressbar"
+  aria-labelledby="volume3-label"
+  aria-valuemin="0"
+  aria-valuemax="100"
+  aria-valuenow="75"
+  <span class="highlight">aria-valuetext="Loud"</span>
+&gt;&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<p><b>Note for testing:</b> initial testing found <code>aria-valuetext</code> does not fully replace the numeric announcement as the spec describes, both the number and the custom text were announced together. This is worth confirming across your full standard testing set, browser/screen reader combination, since it may not be consistent everywhere. Testing Example 3 alongside Example 2 also helps determine whether any inconsistency is specific to native <code>&lt;progress&gt;</code> elements, or applies to <code>aria-valuetext</code> handling on custom ARIA widgets as well.</p>
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
