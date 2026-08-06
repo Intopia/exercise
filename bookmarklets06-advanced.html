@@ -1,158 +1,182 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Article 6: Additional accessibility bookmarklets</title>
-</head>
-<body>
-<h1>Article 6: Additional accessibility bookmarklets</h1>
-<p>This article introduces six bookmarklets that help you inspect accessible forms. Together, they make it easier to review labels, grouped controls, validation and autocomplete without inspecting the page's source code.</p>
-<p>Bookmarklets are small browser tools that inspect or highlight different aspects of a web page. If you haven't used bookmarklets before, read our introduction first.</p>
-<p>All bookmarklets featured in this article are available on the <a href="https://intopia.github.io/exercise/testing-bookmarklets.html">Accessibility testing bookmarklets</a> page.</p>
-<hr />
-<h2>22. Highlight <code>aria-expanded</code></h2>
+
+
+
+<hr>
+<h2 id="bookmarklet22">Bookmarklet 22. Highlight <code>aria-expanded</code></h2>
+
 <h3>What it does</h3>
+
 <p>Highlights elements that use the <code>aria-expanded</code> attribute. It distinguishes between expanded and collapsed states, making it easy to inspect controls that show or hide content.</p>
+
 <p>It also flags invalid <code>aria-expanded</code> values.</p>
-<h3>When to use it</h3>
-<p>Use this bookmarklet when you want to:</p>
+
+<h3>Use this bookmarklet when you want to:</h3>
+
 <ul>
-<li>identify elements that use <code>aria-expanded</code></li>
-<li>inspect the current expanded or collapsed state of interactive controls</li>
-<li>check that <code>aria-expanded</code> has been applied correctly</li>
-<li>identify invalid <code>aria-expanded</code> values</li>
+  <li>identify elements that use <code>aria-expanded</code></li>
+  <li>inspect the current expanded or collapsed state of interactive controls</li>
+  <li>check that <code>aria-expanded</code> has been applied correctly</li>
+  <li>identify invalid <code>aria-expanded</code> values</li>
 </ul>
+
 <h3>How to use it</h3>
+
 <ol>
-<li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
-<li>Open the page you want to inspect.</li>
-<li>Click the <strong>Highlight <code>aria-expanded</code></strong> bookmarklet.</li>
-<li>Scroll through the page to review the highlighted elements.</li>
-<li>If you expand or collapse a control, run the bookmarklet again to refresh the displayed values.</li>
-<li>Press <code>Esc</code> to remove the overlay.</li>
+  <li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
+  <li>Open the page you want to inspect.</li>
+  <li>Click the <strong>Highlight <code>aria-expanded</code></strong> bookmarklet.</li>
+  <li>Scroll through the page to review the highlighted elements.</li>
+  <li>If you expand or collapse a control, run the bookmarklet again to refresh the displayed values.</li>
+  <li>Press <code>Esc</code> to remove the overlay.</li>
 </ol>
+
 <h3>Video demonstration</h3>
-<p>Watch how to add the bookmarklet to your browser, activate it on a web page, and inspect the expanded and collapsed states of interactive controls.</p>
-<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/aria-expanded.mp4"><track kind="captions" src="../assets/vtt/aria-expanded-en.vtt" srclang="en" label="English" default></video>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/aria-expanded.mp4"></video>
 
 <details>
-<summary>Transcript</summary>
-<p>[Transcript to be added]</p>
+  <summary>Transcript</summary>
+  <p>[Transcript to be added]</p>
 </details>
 
-<h3>What to look for</h3>
-<p>When reviewing the page, check for:</p>
+<h3>When reviewing the page, check for:</h3>
+
 <ul>
-<li><strong>Elements with <code>aria-expanded="true"</code></strong>, indicating that the associated content is currently expanded.</li>
-<li><strong>Elements with <code>aria-expanded="false"</code></strong>, indicating that the associated content is currently collapsed.</li>
-<li><strong>Controls that update their <code>aria-expanded</code> value</strong> when activated.</li>
-<li><strong>Invalid <code>aria-expanded</code> values</strong>, which are not recognised by the ARIA specification.</li>
+  <li><strong>Elements with <code>aria-expanded="true"</code></strong>, indicating that the associated content is currently expanded.</li>
+  <li><strong>Elements with <code>aria-expanded="false"</code></strong>, indicating that the associated content is currently collapsed.</li>
+  <li><strong>Controls that update their <code>aria-expanded</code> value</strong> when activated.</li>
+  <li><strong>Invalid <code>aria-expanded</code> values</strong>, which are not recognised by the ARIA specification.</li>
 </ul>
+
 <h3>Things to be aware of</h3>
+
 <p>This bookmarklet shows the current value of the <code>aria-expanded</code> attribute, but it can't determine whether the control behaves correctly or whether the expanded content is accessible.</p>
+
 <p>If you interact with a control after running the bookmarklet, run it again to refresh the displayed values.</p>
-<h3>Remember</h3>
-<p>Use <code>aria-expanded</code> to communicate whether expandable content is currently expanded or collapsed. Whenever the state changes, the value of <code>aria-expanded</code> should be updated to reflect the current state.</p>
-<hr />
-<h2>23. Highlight <code>aria-checked</code></h2>
+
+
+
+<hr>
+<h2 id="bookmarklet23">Bookmarklet 23. Highlight <code>aria-checked</code></h2>
+
 <h3>What it does</h3>
+
 <p>Highlights elements that use the <code>aria-checked</code> attribute. It distinguishes between the supported checked states:</p>
+
 <ul>
-<li><code>true</code></li>
-<li><code>false</code></li>
-<li><code>mixed</code></li>
+  <li><code>true</code></li>
+  <li><code>false</code></li>
+  <li><code>mixed</code></li>
 </ul>
+
 <p>It also flags invalid <code>aria-checked</code> values.</p>
+
 <p>This makes it easy to inspect the current state of checkboxes, switches and other checkable widgets.</p>
-<h3>When to use it</h3>
-<p>Use this bookmarklet when you want to:</p>
+
+<h3>Use this bookmarklet when you want to:</h3>
+
 <ul>
-<li>identify elements that use <code>aria-checked</code></li>
-<li>inspect the current checked state of interactive widgets</li>
-<li>distinguish between checked, unchecked and mixed states</li>
-<li>identify invalid <code>aria-checked</code> values</li>
+  <li>identify elements that use <code>aria-checked</code></li>
+  <li>inspect the current checked state of interactive widgets</li>
+  <li>distinguish between checked, unchecked and mixed states</li>
+  <li>identify invalid <code>aria-checked</code> values</li>
 </ul>
+
 <h3>How to use it</h3>
+
 <ol>
-<li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
-<li>Open the page you want to inspect.</li>
-<li>Click the <strong>Highlight <code>aria-checked</code></strong> bookmarklet.</li>
-<li>Scroll through the page to review the highlighted elements.</li>
-<li>If you interact with a widget, run the bookmarklet again to refresh the displayed values.</li>
-<li>Press <code>Esc</code> to remove the overlay.</li>
+  <li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
+  <li>Open the page you want to inspect.</li>
+  <li>Click the <strong>Highlight <code>aria-checked</code></strong> bookmarklet.</li>
+  <li>Scroll through the page to review the highlighted elements.</li>
+  <li>If you interact with a widget, run the bookmarklet again to refresh the displayed values.</li>
+  <li>Press <code>Esc</code> to remove the overlay.</li>
 </ol>
+
 <h3>Video demonstration</h3>
-<p>Watch how to add the bookmarklet to your browser, activate it on a web page, and inspect the checked states of interactive widgets.</p>
-<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/aria-checked.mp4"><track kind="captions" src="../assets/vtt/aria-checked-en.vtt" srclang="en" label="English" default></video>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/aria-checked.mp4"></video>
 
 <details>
-<summary>Transcript</summary>
-<p>[Transcript to be added]</p>
+  <summary>Transcript</summary>
+  <p>[Transcript to be added]</p>
 </details>
 
-<h3>What to look for</h3>
-<p>When reviewing the page, check for:</p>
+<h3>When reviewing the page, check for:</h3>
+
 <ul>
-<li><strong>Elements with <code>aria-checked="true"</code></strong>, indicating they are currently checked.</li>
-<li><strong>Elements with <code>aria-checked="false"</code></strong>, indicating they are currently unchecked.</li>
-<li><strong>Elements with <code>aria-checked="mixed"</code></strong>, indicating a partially selected or indeterminate state.</li>
-<li><strong>Invalid <code>aria-checked</code> values</strong>, which are not recognised by the ARIA specification.</li>
-<li><strong>Widgets that update their <code>aria-checked</code> value</strong> when their state changes.</li>
+  <li><strong>Elements with <code>aria-checked="true"</code></strong>, indicating they are currently checked.</li>
+  <li><strong>Elements with <code>aria-checked="false"</code></strong>, indicating they are currently unchecked.</li>
+  <li><strong>Elements with <code>aria-checked="mixed"</code></strong>, indicating a partially selected or indeterminate state.</li>
+  <li><strong>Invalid <code>aria-checked</code> values</strong>, which are not recognised by the ARIA specification.</li>
+  <li><strong>Widgets that update their <code>aria-checked</code> value</strong> when their state changes.</li>
 </ul>
+
 <h3>Things to be aware of</h3>
+
 <p>This bookmarklet shows the current value of the <code>aria-checked</code> attribute, but it can't determine whether the widget behaves correctly or whether the chosen state is appropriate.</p>
+
 <p>If you interact with a widget after running the bookmarklet, run it again to refresh the displayed values.</p>
-<h3>Remember</h3>
-<p>Use <code>aria-checked</code> to communicate the current state of checkable widgets. Whenever the state changes, the value of <code>aria-checked</code> should be updated so that assistive technologies receive accurate information.</p>
-<hr />
-<h2>24. Highlight Shadow DOM</h2>
+
+
+
+<hr>
+<h2 id="bookmarklet24">Bookmarklet 24. Highlight Shadow DOM</h2>
+
 <h3>What it does</h3>
+
 <p>Highlights elements that use <strong>open Shadow DOM</strong> and identifies custom elements that may use Shadow DOM but cannot be confirmed.</p>
+
 <p>It distinguishes between:</p>
+
 <ul>
-<li><strong>Open Shadow DOM hosts</strong>, where the shadow tree can be inspected.</li>
-<li><strong>Custom elements</strong>, which may or may not use Shadow DOM.</li>
+  <li><strong>Open Shadow DOM hosts</strong>, where the shadow tree can be inspected.</li>
+  <li><strong>Custom elements</strong>, which may or may not use Shadow DOM.</li>
 </ul>
+
 <p>A fixed summary banner at the bottom of the page displays the total number of open Shadow DOM hosts and custom elements found.</p>
-<h3>When to use it</h3>
-<p>Use this bookmarklet when you want to:</p>
+
+<h3>Use this bookmarklet when you want to:</h3>
+
 <ul>
-<li>identify components that use Shadow DOM</li>
-<li>inspect pages built with Web Components</li>
-<li>distinguish between open Shadow DOM and custom elements</li>
-<li>understand why other bookmarklets may not detect some page content</li>
+  <li>identify components that use Shadow DOM</li>
+  <li>inspect pages built with Web Components</li>
+  <li>distinguish between open Shadow DOM and custom elements</li>
+  <li>understand why other bookmarklets may not detect some page content</li>
 </ul>
+
 <h3>How to use it</h3>
+
 <ol>
-<li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
-<li>Open the page you want to inspect.</li>
-<li>Click the <strong>Highlight Shadow DOM</strong> bookmarklet.</li>
-<li>Scroll through the page to review the highlighted components.</li>
-<li>Check the summary banner at the bottom of the page for the total counts.</li>
-<li>Press <code>Esc</code> to remove the overlay.</li>
+  <li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
+  <li>Open the page you want to inspect.</li>
+  <li>Click the <strong>Highlight Shadow DOM</strong> bookmarklet.</li>
+  <li>Scroll through the page to review the highlighted components.</li>
+  <li>Check the summary banner at the bottom of the page for the total counts.</li>
+  <li>Press <code>Esc</code> to remove the overlay.</li>
 </ol>
+
 <h3>Video demonstration</h3>
-<p>Watch how to add the bookmarklet to your browser, activate it on a page that uses Web Components, and inspect the highlighted Shadow DOM hosts and custom elements.</p>
-<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/shadow-dom.mp4"><track kind="captions" src="../assets/vtt/shadow-dom-en.vtt" srclang="en" label="English" default></video>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/shadow-dom.mp4"></video>
 
 <details>
-<summary>Transcript</summary>
-<p>[Transcript to be added]</p>
+  <summary>Transcript</summary>
+  <p>[Transcript to be added]</p>
 </details>
 
-<h3>What to look for</h3>
-<p>When reviewing the page, check for:</p>
+<h3>When reviewing the page, check for:</h3>
+
 <ul>
-<li><strong>Open Shadow DOM hosts</strong>, which can be inspected by bookmarklets and browser developer tools.</li>
-<li><strong>Custom elements</strong>, which may or may not contain a Shadow DOM.</li>
-<li><strong>Pages that make extensive use of Web Components</strong>, as these may affect how other accessibility testing tools behave.</li>
-<li><strong>The summary banner</strong>, which provides a quick overview of the number of components identified.</li>
+  <li><strong>Open Shadow DOM hosts</strong>, which can be inspected by bookmarklets and browser developer tools.</li>
+  <li><strong>Custom elements</strong>, which may or may not contain a Shadow DOM.</li>
+  <li><strong>Pages that make extensive use of Web Components</strong>, as these may affect how other accessibility testing tools behave.</li>
+  <li><strong>The summary banner</strong>, which provides a quick overview of the number of components identified.</li>
 </ul>
+
 <h3>Things to be aware of</h3>
+
 <p>This bookmarklet can only identify <strong>open Shadow DOM</strong>. It can't detect or inspect <strong>closed Shadow DOM</strong>, as browsers intentionally prevent scripts from accessing it.</p>
+
 <p>Similarly, finding a custom element doesn't necessarily mean it contains a Shadow DOM. Some custom elements don't use Shadow DOM at all, while others use a closed Shadow DOM that cannot be inspected.</p>
-<h3>Remember</h3>
-<p>Shadow DOM changes how parts of a page are exposed to browser tools. Understanding where Shadow DOM is used can help explain why some accessibility testing tools and bookmarklets can't inspect every part of a page.</p>
-<hr />
-</body>
-</html>
+
