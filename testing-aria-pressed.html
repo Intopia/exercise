@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing aria-pressed</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    button[aria-pressed="true"] {
+      background: #1b5e20;
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="https://intopia.digital/wp-content/themes/intopia-refresh/assets/images/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<h1>Testing <code>aria-pressed</code></h1>
+
+<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-pressed" target="_blank"><code>aria-pressed</code></a> indicates the current "pressed" state of a toggle button, for example, a bold or italic button in a text editor toolbar that stays visually active once selected. It is intended for use on a real <code>&lt;button&gt;</code> element, or an element with <code>role="button"</code>.</p>
+
+
+<!-- section -->
+
+
+<h2>Example 1: Static</h2>
+
+<p>This button does not respond to interaction. It is included to let you inspect a fixed <code>aria-pressed="true"</code> state.</p>
+
+<div class="example">
+  <button aria-pressed="true">
+    Bold
+  </button>
+</div>
+
+<p><b>Expected result:</b> the accessibility tree should show <code>pressed: true</code> for this button, and this never changes.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button <span class="highlight">aria-pressed="true"</span>&gt;
+  Bold
+&lt;/button&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 2: Interactive</h2>
+
+<p>This button starts unpressed. Activate it to toggle <code>aria-pressed</code> between <code>false</code> and <code>true</code>, and to bold or unbold the sample sentence below it.</p>
+
+<div class="example">
+  <button id="toggle-button" aria-pressed="false">
+    Bold
+  </button>
+  <p id="toggle-sample">The quick brown fox jumps over the lazy dog.</p>
+</div>
+
+<p><b>Expected result:</b> the accessibility tree should show <code>pressed: false</code> initially, and <code>pressed: true</code> once activated. This should toggle back and forth each time the button is activated, in sync with the sample sentence becoming bold or returning to normal weight.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button id="toggle-button" <span class="highlight">aria-pressed="false"</span>&gt;
+  Bold
+&lt;/button&gt;
+&lt;p id="toggle-sample"&gt;The quick brown fox jumps over the lazy dog.&lt;/p&gt;</code></pre>
+</details>
+
+<script>
+  const toggleButton = document.getElementById('toggle-button');
+  const toggleSample = document.getElementById('toggle-sample');
+
+  toggleButton.addEventListener('click', () => {
+    const isPressed = toggleButton.getAttribute('aria-pressed') === 'true';
+    toggleButton.setAttribute('aria-pressed', String(!isPressed));
+    toggleSample.style.fontWeight = isPressed ? 'normal' : 'bold';
+  });
+</script>
+
+
+<!-- section -->
+
+
+<h2>Example 3: Mixed state</h2>
+
+<p><code>aria-pressed</code> supports a third value, <code>"mixed"</code>, distinct from both <code>true</code> and <code>false</code>. This is used when the pressed state is genuinely ambiguous, for example, a Bold button in a toolbar when the current text selection contains a mix of bold and non-bold text.</p>
+
+<p>The sentence below starts with a mix of bold and non-bold words, standing in for a selection with mixed formatting. Activating the button resolves that ambiguity: the first click makes everything bold and sets <code>aria-pressed="true"</code>, matching how most real editors handle clicking a control while its state is mixed. After that, it behaves as a normal two-state toggle, matching Example 2.</p>
+
+<div class="example">
+  <button id="mixed-button" aria-pressed="mixed">
+    Bold
+  </button>
+  <p id="mixed-sample">The <b>quick brown</b> fox jumps over the lazy dog.</p>
+</div>
+
+<p><b>Expected result:</b> worth confirming directly, whether <code>"mixed"</code> is announced distinctly from <code>true</code> or <code>false</code> (for example, as "bold, mixed" rather than "bold, pressed") is not something to assume, this has historically varied across screen reader and browser combinations.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button id="mixed-button" <span class="highlight">aria-pressed="mixed"</span>&gt;
+  Bold
+&lt;/button&gt;
+&lt;p id="mixed-sample"&gt;The &lt;b&gt;quick brown&lt;/b&gt; fox jumps over the lazy dog.&lt;/p&gt;</code></pre>
+</details>
+
+<script>
+  const mixedButton = document.getElementById('mixed-button');
+  const mixedSample = document.getElementById('mixed-sample');
+
+  mixedButton.addEventListener('click', () => {
+    const currentState = mixedButton.getAttribute('aria-pressed');
+
+    if (currentState === 'mixed') {
+      // Resolve the ambiguity: clicking while mixed makes everything bold,
+      // matching how most real editors handle this exact situation
+      mixedButton.setAttribute('aria-pressed', 'true');
+      mixedSample.innerHTML = '<b>The quick brown fox jumps over the lazy dog.</b>';
+    } else {
+      // After the first click, behave as a normal true/false toggle
+      const isPressed = currentState === 'true';
+      mixedButton.setAttribute('aria-pressed', String(!isPressed));
+      mixedSample.innerHTML = isPressed
+        ? 'The quick brown fox jumps over the lazy dog.'
+        : '<b>The quick brown fox jumps over the lazy dog.</b>';
+    }
+  });
+</script>
+
+
+<!-- section -->
+
+
+<h2>Example 4: misuse, no button role</h2>
+
+<p>This element has <code>aria-pressed</code> but no button semantics at all, it is a plain <code>&lt;div&gt;</code> with no role. This is a common real-world mistake, toggle-style controls are sometimes built as styled links or bare elements without the underlying role needed to support a pressed state correctly.</p>
+
+<div class="example">
+  <div class="button" aria-pressed="false">
+    Bold
+  </div>
+</div>
+
+<p><b>Expected result:</b> worth confirming directly, since this element has no role at all, <code>aria-pressed</code> may not be exposed or announced consistently. The correct fix is adding <code>role="button"</code> and <code>tabindex="0"</code>, or using a real <code>&lt;button&gt;</code> element instead.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div <span class="highlight">aria-pressed="false"</span>&gt;
+  Bold
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<p><b>Note for testing:</b> confirm all four results above with your standard browser and screen reader combinations before treating them as settled. The mixed state (Example 3) and the misuse case (Example 4) are both areas where behaviour has not been verified here and may not be consistent.</p>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>

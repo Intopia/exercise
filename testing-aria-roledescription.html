@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing aria-roledescription</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<h1>Testing <code>aria-roledescription</code></h1>
+
+<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-roledescription" target="_blank"><code>aria-roledescription</code></a> defines a human-readable, author-supplied description that replaces the announced role of an element, without changing the element's actual role, behaviour, or keyboard support. It is typically used to give a more specific or meaningful name to a generic or repeated pattern, for example, announcing "slide" instead of "group" for one panel in a carousel.</p>
+
+
+<!-- section -->
+
+
+<h2>Example 1: without <code>aria-roledescription</code></h2>
+
+<p>This element has <code>role="group"</code> and no <code>aria-roledescription</code>, so its role should be announced normally.</p>
+
+<div class="example">
+  <div role="group" aria-label="Photo of a mountain lake at sunrise">
+    Slide 1 of 3
+  </div>
+</div>
+
+<p><b>Expected result:</b> the role should be announced as "group".</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="group" aria-label="Photo of a mountain lake at sunrise"&gt;
+  Slide 1 of 3
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 2: with <code>aria-roledescription</code></h2>
+
+<p>This element has the same underlying <code>role="group"</code>, but adds <code>aria-roledescription</code>. The element's actual role, and how assistive technology interacts with it, does not change, only the word announced for its type should change.</p>
+
+<div class="example">
+  <div role="group" aria-roledescription="slide" aria-label="Photo of a mountain lake at sunrise">
+    Slide 1 of 3
+  </div>
+</div>
+
+<p><b>Expected result:</b> the role should be announced as "slide" instead of "group", while the element continues to behave as a group in every other respect.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div
+  role="group"
+  <span class="highlight">aria-roledescription="slide"</span>
+  aria-label="Photo of a mountain lake at sunrise"
+&gt;
+  Slide 1 of 3
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 3: real-world use, filling a gap in the role vocabulary</h2>
+
+<p>ARIA defines <code>role="radiogroup"</code> as a real, dedicated role for grouping radio buttons. There is no equivalent role for checkboxes, a <code>&lt;fieldset&gt;</code> containing checkboxes only ever exposes the generic <code>group</code> role, regardless of what it contains. <code>aria-roledescription</code> can fill that gap by supplying a more specific, meaningful label where ARIA itself doesn't provide one.</p>
+
+<div class="example">
+  <fieldset class="fieldset" aria-roledescription="checkboxgroup">
+    <legend>Newsletter interests</legend>
+    <ul class="form-list">
+      <li>
+        <input class="input-checkbox" id="interests-bats" type="checkbox" name="subscribe">
+        <label class="label-checkbox" for="interests-bats">Bats</label>
+      </li>
+      <li>
+        <input class="input-checkbox" id="interests-kangaroos" type="checkbox" name="subscribe">
+        <label class="label-checkbox" for="interests-kangaroos">Kangaroos</label>
+      </li>
+      <li>
+        <input class="input-checkbox" id="interests-possums" type="checkbox" name="subscribe">
+        <label class="label-checkbox" for="interests-possums">Possums</label>
+      </li>
+    </ul>
+  </fieldset>
+</div>
+
+<p><b>Expected result:</b> without <code>aria-roledescription</code>, this fieldset would be announced only as "group". With it, the role should be announced as "checkboxgroup" instead, giving screen reader users more specific context than ARIA's role vocabulary alone can provide, without changing how the individual checkboxes behave or are navigated.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset <span class="highlight">aria-roledescription="checkboxgroup"</span>&gt;
+  &lt;legend&gt;Newsletter interests&lt;/legend&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;input type="checkbox" id="interests-bats" name="subscribe"&gt;
+      &lt;label for="interests-bats"&gt;Bats&lt;/label&gt;
+    &lt;/li&gt;
+    &lt;!-- remaining checkboxes follow the same pattern --&gt;
+  &lt;/ul&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 4: misuse, no underlying role</h2>
+
+<p>This element has <code>aria-roledescription</code> but no role at all, explicit or implicit. This is a misuse of the attribute, <code>aria-roledescription</code> is intended to relabel an existing role, not create one from nothing.</p>
+
+<div class="example">
+  <div aria-roledescription="slide">
+    Slide 1 of 3
+  </div>
+</div>
+
+<p><b>Expected result:</b> worth confirming directly, spec guidance advises against this pattern, but what different screen readers actually do with a roledescription on a roleless element (ignore it, announce it anyway, or something else) is worth testing rather than assuming.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div <span class="highlight">aria-roledescription="slide"</span>&gt;
+  Slide 1 of 3
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<p><b>Note for testing:</b> confirm all four results above with your standard browser and screen reader combinations before treating them as settled. <code>aria-roledescription</code> support, and behaviour for the misuse case in Example 4 specifically, has not been verified here.</p>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
