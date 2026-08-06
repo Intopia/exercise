@@ -51,7 +51,7 @@
   <progress id="volume2" value="75" max="100" aria-valuetext="Loud">75%</progress>
 </div>
 
-<p><b>Expected result:</b> the accessible value should be announced as "Loud", not as a number or percentage, even though the underlying <code>value</code> and <code>max</code> are identical to Example 1.</p>
+<p><b>Expected result:</b> according to the ARIA specification, the accessible value should be presented as “Loud” instead of the number or percentage value.</p>
 
 <details>
   <summary>HTML markup</summary>
@@ -68,7 +68,7 @@
 <!-- section -->
 
 
-<p><b>Note for testing:</b> <code>aria-valuetext</code> support has historically been inconsistent across screen reader and browser combinations. Confirm actual behaviour with your standard testing set before treating the expected results above as settled.</p>
+<p><b>Note for testing:</b> initial testing found <code>aria-valuetext</code> does not fully replace the numeric announcement as the spec describes, both the number and the custom text were announced together. This is worth confirming across your full standard testing set, browser/screen reader combination, since it may not be consistent everywhere.</p>
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
