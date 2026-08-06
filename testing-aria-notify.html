@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Testing ariaNotify</title>
+<style>
+  :root {
+    --ink: #1b1f23;
+    --paper: #faf9f6;
+    --line: #d8d4cc;
+    --accent: #2f5d50;
+    --accent-soft: #e4efeb;
+    --warn: #8a3b12;
+    --warn-soft: #f6e9df;
+    --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  header h1 {
+    font-size: 1.6rem;
+    margin: 0 0 0.25rem;
+  }
+
+  header p {
+    margin: 0 0 1.5rem;
+    color: #555;
+  }
+
+  .status-banner {
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+    background: var(--accent-soft);
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+
+  .status-banner.unsupported {
+    border-left-color: var(--warn);
+    background: var(--warn-soft);
+  }
+
+  code {
+    font-family: var(--mono);
+    background: rgba(0,0,0,0.06);
+    padding: 0.1rem 0.35rem;
+    border-radius: 3px;
+    font-size: 0.9em;
+  }
+
+  section {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem 1.5rem;
+    margin-bottom: 1.5rem;
+    background: #fff;
+  }
+
+  section h2 {
+    font-size: 1.1rem;
+    margin-top: 0;
+  }
+
+  section p.desc {
+    color: #555;
+    margin-top: 0;
+    font-size: 0.95rem;
+  }
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  button {
+    font: inherit;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+  }
+
+  button:hover { filter: brightness(1.08); }
+  button:focus-visible {
+    outline: 3px solid #1b1f23;
+    outline-offset: 2px;
+  }
+
+  button.secondary {
+    background: #fff;
+    color: var(--accent);
+  }
+
+  select, input[type="text"] {
+    font: inherit;
+    padding: 0.4rem 0.6rem;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+  }
+
+  .log {
+    margin-top: 1rem;
+    border-top: 1px dashed var(--line);
+    padding-top: 0.75rem;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: #444;
+    max-height: 160px;
+    overflow-y: auto;
+  }
+
+  .log div { padding: 0.15rem 0; }
+  .log span.time { color: #999; margin-right: 0.5rem; }
+
+  .visible-live-region {
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    background: #f0f0ee;
+    border-radius: 6px;
+    min-height: 2.5rem;
+    font-size: 0.95rem;
+  }
+
+  footer {
+    font-size: 0.85rem;
+    color: #777;
+    margin-top: 2rem;
+  }
+
+  footer a { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <h1>Testing <code>ariaNotify()</code></h1>
+    <p>A small test page for the WAI-ARIA 1.3 <code>ariaNotify</code> method: an imperative way to tell a screen reader what to announce, without the guesswork of live regions.</p>
+  </header>
+
+  <div id="support-banner" class="status-banner">Checking for support…</div>
+
+  <section aria-labelledby="basic-h">
+    <h2 id="basic-h">1. Basic call</h2>
+    <p class="desc"><code>element.ariaNotify(message)</code>. No visible region required, the browser routes it straight to the accessibility API.</p>
+    <div class="controls">
+      <button id="btn-basic">Send a plain announcement</button>
+    </div>
+  </section>
+
+  <section aria-labelledby="priority-h">
+    <h2 id="priority-h">2. Priority option</h2>
+    <p class="desc">Pass <code>{ priority: "high" }</code> or <code>{ priority: "normal" }</code> to hint how it should be queued relative to other pending notifications. Support for the priority hint varies by screen reader.</p>
+    <div class="controls">
+      <select id="priority-select" aria-label="Priority">
+        <option value="normal">normal</option>
+        <option value="high">high</option>
+      </select>
+      <input type="text" id="priority-text" value="Item added to cart." aria-label="Message to announce">
+      <button id="btn-priority">Announce with priority</button>
+    </div>
+  </section>
+
+  <section aria-labelledby="compare-h">
+    <h2 id="compare-h">3. ariaNotify vs a live region</h2>
+    <p class="desc">Same action, two mechanisms. The live region below needs a visible, pre-rendered empty container that gets its text swapped in. ariaNotify needs neither.</p>
+    <div class="controls">
+      <button id="btn-compare-live" class="secondary">Update via aria-live region</button>
+      <button id="btn-compare-notify">Send via ariaNotify</button>
+    </div>
+    <div class="visible-live-region" id="live-region" aria-live="polite" aria-atomic="true"></div>
+  </section>
+
+  <section aria-labelledby="log-h">
+    <h2 id="log-h">Call log</h2>
+    <p class="desc">Every ariaNotify call this page makes, for sighted debugging. This log itself is just a plain div, it plays no part in the announcement.</p>
+    <div class="log" id="call-log"></div>
+  </section>
+
+  <footer>
+    Spec: <a href="https://w3c.github.io/aria/#ARIANotifyMixin">ARIANotifyMixin, WAI-ARIA 1.3</a>.
+    If your browser doesn't support <code>ariaNotify</code> yet, the buttons above fall back to updating the log only, turn on a screen reader and a supporting browser to hear the difference.
+  </footer>
+
+</div>
+
+<script>
+  const supportBanner = document.getElementById('support-banner');
+  const callLog = document.getElementById('call-log');
+  const isSupported = typeof document.ariaNotify === 'function';
+
+  if (isSupported) {
+    supportBanner.textContent = 'ariaNotify is supported in this browser. Turn on a screen reader to hear the announcements below.';
+  } else {
+    supportBanner.textContent = 'ariaNotify is not supported in this browser. Calls will be logged below but nothing will be announced. Try a recent Chromium build with the flag enabled, or check caniuse for current status.';
+    supportBanner.classList.add('unsupported');
+  }
+
+  function logCall(message, options) {
+    const time = new Date().toLocaleTimeString();
+    const entry = document.createElement('div');
+    const optText = options ? ' ' + JSON.stringify(options) : '';
+    entry.innerHTML = '<span class="time">' + time + '</span>ariaNotify("' + message + '"' + optText + ')';
+    callLog.prepend(entry);
+  }
+
+  function notify(message, options) {
+    logCall(message, options);
+    if (isSupported) {
+      if (options) {
+        document.ariaNotify(message, options);
+      } else {
+        document.ariaNotify(message);
+      }
+    }
+  }
+
+  document.getElementById('btn-basic').addEventListener('click', () => {
+    notify('This is a basic ariaNotify announcement.');
+  });
+
+  document.getElementById('btn-priority').addEventListener('click', () => {
+    const priority = document.getElementById('priority-select').value;
+    const text = document.getElementById('priority-text').value || 'Announcement.';
+    notify(text, { priority });
+  });
+
+  document.getElementById('btn-compare-live').addEventListener('click', () => {
+    const region = document.getElementById('live-region');
+    region.textContent = 'Updated at ' + new Date().toLocaleTimeString() + ' via aria-live region.';
+  });
+
+  document.getElementById('btn-compare-notify').addEventListener('click', () => {
+    notify('Updated via ariaNotify at ' + new Date().toLocaleTimeString() + '.');
+  });
+</script>
+
+</body>
+</html>
