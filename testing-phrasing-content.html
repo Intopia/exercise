@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing phrasing content</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    .note {
+      background: #fff3cd;
+      border: 1px solid #ffe69c;
+      padding: 0.75em 1em;
+      border-radius: 4px;
+      margin: 1.5em 0;
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<h1>Testing phrasing content</h1>
+
+<p>This page covers common inline/phrasing elements, listen with a screen reader to hear whether each one changes what's actually announced, or only how it looks.</p>
+
+<p>Where two elements share the same default visual rendering but carry different semantic meaning, they're paired directly, so you can compare them back to back rather than trying to remember what the first one sounded like several examples later.</p>
+
+
+<!-- section -->
+
+
+<h2>Bold vs strong</h2>
+
+<p><code>&lt;b&gt;</code> and <code>&lt;strong&gt;</code> both render bold by default. <code>&lt;b&gt;</code> carries no semantic weight, it's for stylistic bold text with no special importance. <code>&lt;strong&gt;</code> indicates strong importance, seriousness, or urgency.</p>
+
+<div class="example">
+  <p>Please read the <b>terms and conditions</b> before continuing.</p>
+</div>
+
+<div class="example">
+  <p>Warning: <strong>do not disconnect the power supply</strong> during installation.</p>
+</div>
+
+<p><b>Expected result:</b> worth confirming directly, whether <code>&lt;strong&gt;</code> receives any distinct vocal treatment (a change in pitch, emphasis, or an announced label) compared with <code>&lt;b&gt;</code>, or whether both are read identically.</p>
+
+
+<!-- section -->
+
+
+<h2>Italic vs emphasis</h2>
+
+<p><code>&lt;i&gt;</code> and <code>&lt;em&gt;</code> both render italic by default. <code>&lt;i&gt;</code> is for text set off in an alternate voice or mood, such as a technical term or foreign phrase, with no added stress. <code>&lt;em&gt;</code> indicates stress emphasis that would change the meaning of the sentence if spoken aloud.</p>
+
+<div class="example">
+  <p>The term <i>homo sapiens</i> refers to modern humans.</p>
+</div>
+
+<div class="example">
+  <p>I <em>did</em> send the email yesterday.</p>
+</div>
+
+<p><b>Expected result:</b> worth confirming directly, whether <code>&lt;em&gt;</code> is read with any actual vocal stress, or whether it's read identically to plain text and <code>&lt;i&gt;</code>.</p>
+
+
+<!-- section -->
+
+
+<h2>Strikethrough vs deletion</h2>
+
+<p><code>&lt;s&gt;</code> and <code>&lt;del&gt;</code> both render with a line through the text by default. <code>&lt;s&gt;</code> marks text that is no longer accurate or relevant, without implying an edit took place. <code>&lt;del&gt;</code> specifically marks content that has been removed, the tracked-changes sense.</p>
+
+<div class="example">
+  <p>Regular price: <s>$120</s> $89</p>
+</div>
+
+<div class="example">
+  <p>The event was <del>cancelled</del> postponed.</p>
+</div>
+
+<p><b>Expected result:</b> worth confirming directly, whether <code>&lt;del&gt;</code> is announced as a deletion (for example, "deletion, cancelled") or read with no indication anything was removed, identically to <code>&lt;s&gt;</code>.</p>
+
+
+<!-- section -->
+
+
+<h2>Underline vs insertion</h2>
+
+<p><code>&lt;u&gt;</code> and <code>&lt;ins&gt;</code> both render underlined by default. <code>&lt;u&gt;</code> is a non-semantic, presentational underline, for example, flagging a misspelling. <code>&lt;ins&gt;</code> specifically marks content that has been inserted or added.</p>
+
+<div class="example">
+  <p>The word <u>seperate</u> is misspelled.</p>
+</div>
+
+<div class="example">
+  <p>The meeting is now scheduled for <ins>Wednesday</ins> at 3pm.</p>
+</div>
+
+<p><b>Expected result:</b> worth confirming directly, whether <code>&lt;ins&gt;</code> is announced as an insertion, or read identically to <code>&lt;u&gt;</code> with no indication anything was added.</p>
+
+
+<!-- section -->
+
+
+<h2>Abbreviation</h2>
+
+<p><code>&lt;abbr&gt;</code> marks an abbreviation or acronym. Its <code>title</code> attribute can provide the expanded form.</p>
+
+<div class="example">
+  <p>The <abbr title="World Health Organization">WHO</abbr> issued new guidelines today.</p>
+</div>
+
+<p><b>Expected result:</b> worth confirming directly, whether the <code>title</code> is announced at all, and if so, whether "WHO" is spelled out letter by letter, read as a word, or the expanded title is read instead or in addition.</p>
+
+
+<!-- section -->
+
+
+<h2>Quotation</h2>
+
+<p><code>&lt;q&gt;</code> marks a short, inline quotation. Browsers automatically generate the surrounding quotation marks via CSS, they aren't typed in the content.</p>
+
+<div class="example">
+  <p>As the saying goes, <q>actions speak louder than words</q>.</p>
+</div>
+
+<p><b>Expected result:</b> worth confirming directly, whether this is announced as a quotation (for example, "quote... end quote"), or whether only the browser-generated punctuation characters are read as plain text, or neither.</p>
+
+
+<!-- section -->
+
+
+<h2>Highlight</h2>
+
+<p><code>&lt;mark&gt;</code> marks text highlighted for reference purposes, such as a search term matched within a larger passage.</p>
+
+<div class="example">
+  <p>Please review the <mark>highlighted</mark> section before submitting.</p>
+</div>
+
+<p><b>Expected result:</b> worth confirming directly, whether this is announced as highlighted content, or read with no indication at all.</p>
+
+
+<!-- section -->
+
+
+<h2>Subscript and superscript</h2>
+
+<p><code>&lt;sub&gt;</code> and <code>&lt;sup&gt;</code> position text below or above the baseline. Common real-world uses include chemical formulas and ordinal suffixes.</p>
+
+<div class="example">
+  <p>The chemical formula for water is H<sub>2</sub>O.</p>
+</div>
+
+<div class="example">
+  <p>The deadline is March 3<sup>rd</sup>.</p>
+</div>
+
+<p><b>Expected result:</b> worth confirming directly, whether the subscript/superscript positioning is conveyed in any way, or whether the text is simply read in line with no indication of its position.</p>
+
+
+<!-- section -->
+
+
+<h2>Citation and definition</h2>
+
+<p><code>&lt;cite&gt;</code> marks the title of a creative work. <code>&lt;dfn&gt;</code> marks the defining instance of a term.</p>
+
+<div class="example">
+  <p>As explained in <cite>The Elements of Style</cite>, brevity is essential.</p>
+</div>
+
+<div class="example">
+  <p><dfn>Accessibility</dfn> refers to the practice of making content usable by people with disabilities.</p>
+</div>
+
+<p><b>Expected result:</b> worth confirming directly, whether either is announced with any distinct role or label, or read as plain text.</p>
+
+
+<!-- section -->
+
+
+<h2>Other presentational and technical elements</h2>
+
+<p><code>&lt;small&gt;</code>, <code>&lt;kbd&gt;</code>, and <code>&lt;var&gt;</code> are all visually or contextually distinct, but none carry inherent semantic weight the way <code>&lt;strong&gt;</code> or <code>&lt;em&gt;</code> do.</p>
+
+<div class="example">
+  <p>Terms apply. <small>See website for full details.</small></p>
+</div>
+
+<div class="example">
+  <p>Press <kbd>Ctrl</kbd> + <kbd>S</kbd> to save.</p>
+</div>
+
+<div class="example">
+  <p>The formula is <var>x</var> = <var>y</var> + 2.</p>
+</div>
+
+<p><b>Expected result:</b> no distinct announcement is expected for any of these three, they should be read as plain text. This is the deliberate control group for this page, if any of these do produce a distinct announcement, that would be a genuinely notable finding worth recording.</p>
+
+
+<!-- section -->
+
+
+<div class="note">
+  <p><b>Why some of this page says "worth confirming directly" rather than a definite expected outcome:</b> phrasing element announcement is one of the more inconsistently implemented areas across screen readers, several depend on verbosity settings the user controls, and behaviour has been known to change between versions. Rather than guess, this page states what's being tested and leaves the actual result for you to confirm and record.</p>
+</div>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
