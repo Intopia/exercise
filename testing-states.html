@@ -6,42 +6,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    .testing-states-checkbox {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      cursor: pointer;
+      user-select: none;
+    }
 
-<style>
+    .testing-states-checkbox::before {
+      content: "";
+      display: inline-block;
+      width: 1.2em;
+      height: 1.2em;
+      border: 2px solid #333;
+      border-radius: 3px;
+      background-color: #fff;
+      flex-shrink: 0;
+    }
 
-.testing-states-checkbox {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5em;
-  cursor: pointer;
-  user-select: none;
-}
+    .testing-states-checkbox[aria-checked="true"]::before {
+      background-color: #1b5e20;
+      border-color: #1b5e20;
+      background-image: linear-gradient(45deg, transparent 40%, #fff 40%, #fff 55%, transparent 55%),
+                         linear-gradient(-45deg, transparent 55%, #fff 55%, #fff 70%, transparent 70%);
+    }
 
-.testing-states-checkbox::before {
-  content: "";
-  display: inline-block;
-  width: 1.2em;
-  height: 1.2em;
-  border: 2px solid #333;
-  border-radius: 3px;
-  background-color: #fff;
-  flex-shrink: 0;
-}
+    .testing-states-checkbox:focus-visible {
+      outline: 2px solid #000;
+      outline-offset: 2px;
+    }
 
-.testing-states-checkbox[aria-checked="true"]::before {
-  background-color: #1b5e20;
-  border-color: #1b5e20;
-  /* simple checkmark using a CSS-only tick shape */
-  background-image: linear-gradient(45deg, transparent 40%, #fff 40%, #fff 55%, transparent 55%),
-                     linear-gradient(-45deg, transparent 55%, #fff 55%, #fff 70%, transparent 70%);
-}
+    #pressed-button[aria-pressed="true"] {
+      background: #1b5e20;
+    }
 
-.testing-states-checkbox:focus-visible {
-  outline: 2px solid #000;
-  outline-offset: 2px;
-}
+    [role="listbox"] {
+      border: 1px solid #999;
+      max-width: 15em;
+      padding: 0.25em;
+    }
 
-</style>
+    [role="option"] {
+      padding: 0.5em;
+      cursor: pointer;
+      border-radius: 0.2em;
+    }
+
+    [role="option"][aria-selected="true"] {
+      background: #1b5e20;
+      color: #fff;
+    }
+
+    [role="option"]:focus {
+      outline: 2px solid #000;
+      outline-offset: -2px;
+    }
+
+    .states-nav {
+      list-style: none;
+      margin: 0.5em 0;
+      padding: 0;
+      display: flex;
+      gap: 1em;
+    }
+
+    .states-nav a[aria-current="page"] {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
 
@@ -83,33 +118,7 @@
 <!-- section -->
 
 
-<h2>Example 2: <code>checked/unchecked</code></h2>
-
-<div class="example">
-  <fieldset class="fieldset">
-    <legend>Subscription method</legend>
-    <ul class="form-list">
-      <li>
-        <input class="input-radio" id="weekly" type="radio" name="subscription" checked>
-        <label class="label-radio" for="weekly">Weekly</label>
-      </li>
-      <li>
-        <input class="input-radio" id="quarterly" type="radio" name="subscription">
-        <label class="label-radio" for="quarterly">Quarterly</label>
-      </li>
-      <li>
-        <input class="input-radio" id="yearly" type="radio" name="subscription">
-        <label class="label-radio" for="yearly">Yearly</label>
-      </li>
-    </ul>
-  </fieldset>
-</div>
-
-
-<!-- section -->
-
-
-<h2>Example 3: <code>expanded/collapsed</code></h2>
+<h2>Example 2: <code>expanded/collapsed</code></h2>
 
 <p>This example starts collapsed. Activate the button to see the expanded state, and to see the accessible name change along with it.</p>
 
@@ -126,7 +135,7 @@
 <!-- section -->
 
 
-<h2>Example 4: <code>checked/unchecked</code></h2>
+<h2>Example 3: <code>checked/unchecked</code></h2>
 
 <p>This example starts unchecked. Activate it with a click, or with the keyboard using Space, to see the checked state.</p>
 
@@ -140,6 +149,55 @@
     I am a fake checkbox
   </div>
 </div>
+
+
+<!-- section -->
+
+
+<h2>Example 4: <code>pressed/not pressed</code></h2>
+
+<p>This example starts not pressed. Activate the button with a click, or with the keyboard using Enter or Space, to see the pressed state.</p>
+
+<div class="example">
+  <button id="pressed-button" aria-pressed="false">
+    Bold
+  </button>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Example 5: <code>selected/not selected</code></h2>
+
+<p>Use Arrow Up / Arrow Down to move between options, the selected option moves with focus.</p>
+
+<div class="example">
+  <div id="listbox-states" role="listbox" aria-label="Choose a fruit">
+    <div role="option" id="states-option-apple" aria-selected="false" tabindex="-1">Apple</div>
+    <div role="option" id="states-option-banana" aria-selected="true" tabindex="0">Banana</div>
+    <div role="option" id="states-option-cherry" aria-selected="false" tabindex="-1">Cherry</div>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Example 6: <code>current</code></h2>
+
+<p>This example is static. "Home" is marked as the current page in the navigation below.</p>
+
+<div class="example">
+  <nav aria-label="Example navigation">
+    <ul class="states-nav">
+      <li><a href="#" aria-current="page">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+</div>
+
 
 <script>
   // Example 3: expand/collapse button
@@ -173,6 +231,60 @@
       toggleFakeCheckbox();
     }
   });
+
+  // Example 5: pressed button
+  const pressedButton = document.getElementById('pressed-button');
+
+  pressedButton.addEventListener('click', () => {
+    const isPressed = pressedButton.getAttribute('aria-pressed') === 'true';
+    pressedButton.setAttribute('aria-pressed', String(!isPressed));
+  });
+
+  // Example 6: single-select listbox, select follows focus
+  (function () {
+    const listbox = document.getElementById('listbox-states');
+    const options = Array.from(listbox.querySelectorAll('[role="option"]'));
+
+    function selectOption(option) {
+      options.forEach(o => {
+        o.setAttribute('aria-selected', 'false');
+        o.setAttribute('tabindex', '-1');
+      });
+      option.setAttribute('aria-selected', 'true');
+      option.setAttribute('tabindex', '0');
+      option.focus();
+    }
+
+    listbox.addEventListener('click', (event) => {
+      const option = event.target.closest('[role="option"]');
+      if (option) selectOption(option);
+    });
+
+    listbox.addEventListener('keydown', (event) => {
+      const currentIndex = options.findIndex(o => o.getAttribute('tabindex') === '0');
+      let newIndex = currentIndex;
+
+      switch (event.key) {
+        case 'ArrowDown':
+          newIndex = Math.min(currentIndex + 1, options.length - 1);
+          break;
+        case 'ArrowUp':
+          newIndex = Math.max(currentIndex - 1, 0);
+          break;
+        case 'Home':
+          newIndex = 0;
+          break;
+        case 'End':
+          newIndex = options.length - 1;
+          break;
+        default:
+          return;
+      }
+
+      event.preventDefault();
+      selectOption(options[newIndex]);
+    });
+  })();
 </script>
 
 
