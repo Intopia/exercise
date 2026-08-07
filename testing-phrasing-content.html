@@ -6,15 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
-  <style>
-    .note {
-      background: #fff3cd;
-      border: 1px solid #ffe69c;
-      padding: 0.75em 1em;
-      border-radius: 4px;
-      margin: 1.5em 0;
-    }
-  </style>
 </head>
 <body>
 
@@ -204,9 +195,13 @@
 <!-- section -->
 
 
-<div class="note">
-  <p><b>Why some of this page says "worth confirming directly" rather than a definite expected outcome:</b> phrasing element announcement is one of the more inconsistently implemented areas across screen readers, several depend on verbosity settings the user controls, and behaviour has been known to change between versions. Rather than guess, this page states what's being tested and leaves the actual result for you to confirm and record.</p>
-</div>
+<h2>Notes</h2>
+
+<p>Most screen readers include features to adjust the announcement or verbosity of content. The tests above assume default settings, with verbosity set to low.</p>
+
+<p>Based on experience, JAWS and NVDA are expected to announce almost none of the phrasing elements on this page at default, low-verbosity settings. This is an expectation going into testing, not a confirmed result, record what's actually found against each example above.</p>
+
+<p>Phrasing element announcement is one of the more inconsistently implemented areas across screen readers, several depend on verbosity settings the user controls, and behaviour has been known to change between versions. Rather than guess, this page states what's being tested and leaves the actual result for you to confirm and record.</p>
 
 <p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
