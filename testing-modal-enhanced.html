@@ -5,67 +5,19 @@
   <title>A minimal viable modal - option 2</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
   <style>
 
     /* Some basic page styling */
-
-    body {
-      margin: 0;
-      padding: 2rem;
-      font-size: 1rem;
-      line-height: 1.5;
-      font-family: Helvetica, Arial, sans-serif;
-    }
-
-    h1,
-    h2 {
-      color: #C03C0C;
-    }
-
-    h1 {
-      margin: 0 0 .5rem;
-      font-size: 2rem;
-      line-height: 1.2;
-    }
-
-    h2 {
-      margin: 0 0 .5rem;
-      font-size: 1.5rem;
-      line-height: 1.2;
-    }
-
-    .button,
-    button {
-      display: inline-block;
-      padding: 0.75em 1em;
+    main {
+      padding: 0;
       border: 0;
-      background: blue;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 0.2em;
-      font-size: 1em;
-      line-height: 1;
-      cursor: pointer;
+      background: none;
+      margin: 0;
     }
 
-    .button:focus,
-    button:focus {
-      background: #000;
-      color: #fff;
-      outline: none;
-      box-shadow: 0 0 0 2px #fff, 0 0 0 5px #000;
-    }
-
-    .button:hover,
-    button:hover {
-      background: green;
-      color: #fff;
-    }
-
-    .button:active,
-    button:active {
-      background: red;
-      color: #fff;
+    dialog h2 {
+      margin: 0 0 .5em;
     }
 
     /* Styling the dialog */
@@ -103,12 +55,27 @@
         outline-color: transparent;
       }
     }
+
+    .note {
+      background: #fff3cd;
+      border: 1px solid #ffe69c;
+      padding: 0.75em 1em;
+      border-radius: 4px;
+      margin: 1.5em 0;
+    }
+
   </style>
 </head>
 <body>
   <main id="page">
+    <a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+      <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+    </a>
+
     <h1>A minimal viable modal - option 2</h1>
- 
+
+    <p>This builds on <a href="testing-modal-minimal.html">option 1</a> by adding two small, deliberate enhancements: focus is sent to the dialog's heading specifically (rather than left to the browser's default), and clicking the backdrop closes the dialog.</p>
+
     <p>This content should become inert while the modal is open.</p>
 
     <button commandfor="demo-dialog" command="show-modal">
@@ -117,14 +84,28 @@
 
     <p><a href="https://example.com">A link</a> (should not be focusable while modal is open)</p>
 
+
+    <!-- section -->
+
+
     <h2>Expected results:</h2>
 
     <ol>
-      <li>Focus should go to the modal - either container, heading, first focusable element inside</li>
+      <li>Focus should go to the dialog's heading specifically.</li>
       <li>The role should be announced e.g. <code>dialog</code>.</li>
-      <li>The current element should be announced if not the container.</li>
+      <li>The heading should be announced, since it is the focused element.</li>
+      <li>Clicking the backdrop (outside the dialog box) should close the dialog.</li>
     </ol>
 
+
+    <!-- section -->
+
+
+    <h2>Notes</h2>
+
+    <p><b>What this requires to function:</b> like option 1, this uses the <code>command</code>/<code>commandfor</code> Invoker Commands API for opening and closing the dialog (Baseline: Chrome 135+, Firefox 144+, Safari 26.2+). The additional JavaScript below only handles focus and backdrop-click, opening and closing the dialog itself still needs no JavaScript at all.</p>
+
+    <p>Because this uses a native <code>&lt;dialog&gt;</code> shown via <code>show-modal</code>, <code>role="dialog"</code> and <code>aria-modal="true"</code> are applied automatically by the browser. Compare this with the <a href="testing-modal-traditional.html">traditional (old-school) version</a>, where both had to be written by hand. Escape also closes the dialog automatically, no JavaScript needed for that either.</p>
   </main>
 
   <!-- Dialog is closed by default (no "open" attribute). -->
@@ -147,6 +128,15 @@
   dialog.addEventListener('toggle', () => {
     if (dialog.open) {
       title.focus();
+    }
+  });
+
+  // Close when the backdrop is clicked. When a click lands on the backdrop
+  // rather than any content inside the dialog, event.target is the dialog
+  // element itself, since nothing else was there to receive the click.
+  dialog.addEventListener('click', (event) => {
+    if (event.target === dialog) {
+      dialog.close();
     }
   });
 </script>

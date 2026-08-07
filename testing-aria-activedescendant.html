@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing aria-activedescendant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    .combo-wrapper {
+      position: relative;
+      max-width: 20em;
+    }
+
+    [role="listbox"] {
+      list-style: none;
+      margin: 0.2em 0 0;
+      padding: 0.25em;
+      border: 1px solid #999;
+      background: #fff;
+    }
+
+    [role="option"] {
+      padding: 0.5em;
+      border-radius: 0.2em;
+    }
+
+    [role="option"].active {
+      background: #1b5e20;
+      color: #fff;
+    }
+
+    .note {
+      background: #fff3cd;
+      border: 1px solid #ffe69c;
+      padding: 0.75em 1em;
+      border-radius: 4px;
+      margin: 1.5em 0;
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<h1>Testing <code>aria-activedescendant</code></h1>
+
+<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-activedescendant" target="_blank"><code>aria-activedescendant</code></a> identifies the currently "active" element within a composite widget, without moving real DOM focus to it. This is often called virtual focus. The classic example is a combobox: a text input keeps real keyboard focus at all times, while <code>aria-activedescendant</code> tracks which option in a separate listbox is currently highlighted.</p>
+
+<p>This page deliberately does not filter the list as you type, to keep the example focused on <code>aria-activedescendant</code> itself, rather than building a full autocomplete pattern.</p>
+
+
+<!-- section -->
+
+
+<h2>Example 1: without <code>aria-activedescendant</code></h2>
+
+<p>This combobox visually highlights options as you arrow through them, but never sets <code>aria-activedescendant</code>. The visual highlight and the accessibility tree are out of sync.</p>
+
+<div class="example">
+  <label class="label" for="combo-input-1">Choose a fruit (no aria-activedescendant)</label>
+  <div class="combo-wrapper">
+    <input
+      type="text"
+      id="combo-input-1"
+      class="input"
+      role="combobox"
+      aria-expanded="false"
+      aria-controls="listbox-1"
+      aria-autocomplete="list"
+      autocomplete="off"
+      readonly
+    >
+    <ul role="listbox" id="listbox-1" aria-label="Fruit options" hidden>
+      <li role="option" id="listbox-1-option-0">Apple</li>
+      <li role="option" id="listbox-1-option-1">Banana</li>
+      <li role="option" id="listbox-1-option-2">Cherry</li>
+    </ul>
+  </div>
+</div>
+
+<p><b>Expected result:</b> arrow keys should move the visible highlight between options, but nothing should identify which option is active in the accessibility tree, a screen reader user arrowing through this would not know which option is currently highlighted.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input
+  role="combobox"
+  aria-expanded="false"
+  aria-controls="listbox-1"
+  aria-autocomplete="list"
+&gt;
+&lt;ul role="listbox" id="listbox-1"&gt;
+  &lt;li role="option" id="listbox-1-option-0"&gt;Apple&lt;/li>
+  &lt;li role="option" id="listbox-1-option-1"&gt;Banana&lt;/li&gt;
+  &lt;li role="option" id="listbox-1-option-2"&gt;Cherry&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</details>
+
+<script>
+(function () {
+  const input = document.getElementById('combo-input-1');
+  const listbox = document.getElementById('listbox-1');
+  const options = Array.from(listbox.querySelectorAll('[role="option"]'));
+  let activeIndex = -1;
+
+  function open() {
+    input.setAttribute('aria-expanded', 'true');
+    listbox.hidden = false;
+  }
+
+  function close() {
+    input.setAttribute('aria-expanded', 'false');
+    listbox.hidden = true;
+    activeIndex = -1;
+    options.forEach(o => o.classList.remove('active'));
+  }
+
+  function setActive(index) {
+    activeIndex = index;
+    options.forEach((o, i) => o.classList.toggle('active', i === index));
+    // Deliberately no aria-activedescendant set here, this is the baseline
+  }
+
+  input.addEventListener('focus', open);
+
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      if (listbox.hidden) open();
+      setActive(Math.min(activeIndex + 1, options.length - 1));
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      if (listbox.hidden) open();
+      setActive(Math.max(activeIndex - 1, 0));
+    } else if (event.key === 'Escape') {
+      close();
+    } else if (event.key === 'Enter' && activeIndex > -1) {
+      input.value = options[activeIndex].textContent;
+      close();
+    }
+  });
+})();
+</script>
+
+
+<!-- section -->
+
+
+<h2>Example 2: with <code>aria-activedescendant</code></h2>
+
+<p>The same combobox, but each time the active option changes, <code>aria-activedescendant</code> on the input is updated to that option's <code>id</code>. Real keyboard focus should stay on the input the entire time, it should never move to any option.</p>
+
+<div class="example">
+  <label class="label" for="combo-input-2">Choose a fruit (with aria-activedescendant)</label>
+  <div class="combo-wrapper">
+    <input
+      type="text"
+      id="combo-input-2"
+      class="input"
+      role="combobox"
+      aria-expanded="false"
+      aria-controls="listbox-2"
+      aria-autocomplete="list"
+      autocomplete="off"
+      readonly
+    >
+    <ul role="listbox" id="listbox-2" aria-label="Fruit options" hidden>
+      <li role="option" id="listbox-2-option-0">Apple</li>
+      <li role="option" id="listbox-2-option-1">Banana</li>
+      <li role="option" id="listbox-2-option-2">Cherry</li>
+    </ul>
+  </div>
+</div>
+
+<p><b>Expected result:</b> the active option should be identified in the accessibility tree via <code>aria-activedescendant</code>, updating as arrow keys move between options. Worth confirming directly with your standard screen readers whether this is actually announced when it changes, this is exactly the kind of behaviour worth testing rather than assuming. Critically: check with devtools (or by watching the visible focus outline) that real keyboard focus never leaves the input, not on arrow key presses, and not on clicking an option with the mouse.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input
+  role="combobox"
+  aria-expanded="false"
+  aria-controls="listbox-2"
+  aria-autocomplete="list"
+  <span class="highlight">aria-activedescendant="listbox-2-option-1"</span>
+&gt;
+&lt;ul role="listbox" id="listbox-2"&gt;
+  &lt;li role="option" id="listbox-2-option-0"&gt;Apple&lt;/li&gt;
+  &lt;li role="option" id="listbox-2-option-1"&gt;Banana&lt;/li&gt;
+  &lt;li role="option" id="listbox-2-option-2"&gt;Cherry&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</details>
+
+<script>
+(function () {
+  const input = document.getElementById('combo-input-2');
+  const listbox = document.getElementById('listbox-2');
+  const options = Array.from(listbox.querySelectorAll('[role="option"]'));
+  let activeIndex = -1;
+
+  function open() {
+    input.setAttribute('aria-expanded', 'true');
+    listbox.hidden = false;
+  }
+
+  function close() {
+    input.setAttribute('aria-expanded', 'false');
+    listbox.hidden = true;
+    activeIndex = -1;
+    options.forEach(o => o.classList.remove('active'));
+    // Removed entirely, not set to an empty string, when nothing is active
+    input.removeAttribute('aria-activedescendant');
+  }
+
+  function setActive(index) {
+    activeIndex = index;
+    options.forEach((o, i) => o.classList.toggle('active', i === index));
+    // The input keeps real focus throughout, this line never calls .focus()
+    // on the option itself, only updates which id is referenced
+    input.setAttribute('aria-activedescendant', options[index].id);
+  }
+
+  function selectActive() {
+    if (activeIndex === -1) return;
+    input.value = options[activeIndex].textContent;
+    close();
+  }
+
+  input.addEventListener('focus', open);
+
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      if (listbox.hidden) open();
+      setActive(Math.min(activeIndex + 1, options.length - 1));
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      if (listbox.hidden) open();
+      setActive(Math.max(activeIndex - 1, 0));
+    } else if (event.key === 'Escape') {
+      close();
+    } else if (event.key === 'Enter') {
+      selectActive();
+    }
+  });
+
+  // Options are not focusable (no tabindex), so a mouse click on one does
+  // not move focus away from the input. preventDefault on mousedown is an
+  // extra safeguard against any default browser focus-shifting behaviour.
+  options.forEach((option, index) => {
+    option.addEventListener('mousedown', (event) => event.preventDefault());
+    option.addEventListener('click', () => {
+      setActive(index);
+      selectActive();
+    });
+  });
+})();
+</script>
+
+
+<!-- section -->
+
+
+<p><b>Note for testing:</b> this is one of the more implementation-sensitive ARIA patterns on this site. Confirm with your standard browser and screen reader combinations that: the active option is actually announced as it changes, the input's own accessible name and role are still announced correctly alongside the active option, and that nothing about this pattern causes real focus to visibly or programmatically leave the input at any point.</p>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>

@@ -5,67 +5,15 @@
   <title>A minimal viable modal - option 1</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
   <style>
 
     /* Some basic page styling */
-
-    body {
-      margin: 0;
-      padding: 2rem;
-      font-size: 1rem;
-      line-height: 1.5;
-      font-family: Helvetica, Arial, sans-serif;
-    }
-
-    h1,
-    h2 {
-      color: #C03C0C;
-    }
-
-    h1 {
-      margin: 0 0 .5rem;
-      font-size: 2rem;
-      line-height: 1.2;
-    }
-
-    h2 {
-      margin: 0 0 .5rem;
-      font-size: 1.5rem;
-      line-height: 1.2;
-    }
-
-    .button,
-    button {
-      display: inline-block;
-      padding: 0.75em 1em;
+    main {
+      padding: 0;
       border: 0;
-      background: blue;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 0.2em;
-      font-size: 1em;
-      line-height: 1;
-      cursor: pointer;
-    }
-
-    .button:focus,
-    button:focus {
-      background: #000;
-      color: #fff;
-      outline: none;
-      box-shadow: 0 0 0 2px #fff, 0 0 0 5px #000;
-    }
-
-    .button:hover,
-    button:hover {
-      background: green;
-      color: #fff;
-    }
-
-    .button:active,
-    button:active {
-      background: red;
-      color: #fff;
+      background: none;
+      margin: 0;
     }
 
     /* Styling the dialog */
@@ -79,18 +27,36 @@
       width: calc(100% - 2rem);
     }
 
+    dialog h2 {
+      margin: 0 0 .5em;
+    }
+
     /* Styling the dialog backdrop */
 
     dialog::backdrop {
       background: rgba(0, 0, 0, 0.5);
     }
 
+    .note {
+      background: #fff3cd;
+      border: 1px solid #ffe69c;
+      padding: 0.75em 1em;
+      border-radius: 4px;
+      margin: 1.5em 0;
+    }
+
   </style>
 </head>
 <body>
   <main id="page">
+    <a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+      <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+    </a>
+
     <h1>A minimal viable modal - option 1</h1>
- 
+
+    <p>This is an experiment: what is the absolute minimum markup and JavaScript needed today to produce a working, accessible modal? The answer, as of this page, is zero JavaScript.</p>
+
     <p>This content should become inert while the modal is open.</p>
 
     <button commandfor="demo-dialog" command="show-modal">
@@ -98,6 +64,10 @@
     </button>
 
     <p><a href="https://example.com">A link</a> (should not be focusable while modal is open)</p>
+
+
+    <!-- section -->
+
 
     <h2>Expected results:</h2>
 
@@ -107,6 +77,11 @@
       <li>The current element should be announced if not the container.</li>
     </ol>
 
+    <h2>Notes</h2>
+
+    <p><b>What this requires to function:</b> this page uses the <code>command</code>/<code>commandfor</code> Invoker Commands API, which reached Baseline support (Chrome 135+, Firefox 144+, Safari 26.2+) very recently. There is no JavaScript fallback here, on an older browser, the "Open modal" button will do nothing at all. That absence of a fallback is deliberate, this page is testing the true minimum, not a production-ready pattern.</p>
+
+    <p>Because this uses a native <code>&lt;dialog&gt;</code> shown via <code>show-modal</code>, <code>role="dialog"</code> and <code>aria-modal="true"</code> are applied automatically by the browser, no ARIA attributes are written in the markup below. Escape also closes the dialog automatically, no JavaScript needed. Clicking the backdrop does <b>not</b> close the dialog, that is correct native behaviour, not a bug, and would need extra JavaScript to add.</p>
   </main>
 
   <!-- Dialog is closed by default (no "open" attribute). -->

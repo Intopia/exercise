@@ -2,61 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>An ARIA modal</title>
+  <title>An ARIA modal - option 3 (old-school)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
   <style>
+
     /* Some basic page styling */
-    body {
-      margin: 0;
-      padding: 2rem;
-      font-size: 1rem;
-      line-height: 1.5;
-      font-family: Helvetica, Arial, sans-serif;
-    }
-
-    h1, h2 { color: #C03C0C; }
-
-    h1 {
-      margin: 0 0 .5rem;
-      font-size: 2rem;
-      line-height: 1.2;
-    }
-
-    h2 {
-      margin: 0 0 .5rem;
-      font-size: 1.5rem;
-      line-height: 1.2;
-    }
-
-    .button, button {
-      display: inline-block;
-      padding: 0.75em 1em;
+    main {
+      padding: 0;
       border: 0;
-      background: blue;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 0.2em;
-      font-size: 1em;
-      line-height: 1;
-      cursor: pointer;
+      background: none;
+      margin: 0;
     }
 
-    .button:focus, button:focus {
-      background: #000;
-      color: #fff;
-      outline: none;
-      box-shadow: 0 0 0 2px #fff, 0 0 0 5px #000;
-    }
-
-    .button:hover, button:hover {
-      background: green;
-      color: #fff;
-    }
-
-    .button:active, button:active {
-      background: red;
-      color: #fff;
+    #dialog h2 {
+      margin: 0 0 .5em;
     }
 
     /* Modal surface */
@@ -107,11 +67,18 @@
         background-color: transparent;
         outline-color: transparent;
       }
-    }  </style>
+    }
+  </style>
 </head>
 <body>
   <main id="page">
+    <a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+      <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+    </a>
+
     <h1>An ARIA modal - option 3 (old-school)</h1>
+
+    <p>This is how a modal had to be built before the native <code>&lt;dialog&gt;</code> element was a viable option: everything native browsers now provide for free (the <code>dialog</code> role, <code>aria-modal="true"</code>, Escape to close, background inertness, focus trapping) is written by hand below. Compare with <a href="testing-modal-minimal.html">option 1</a> and <a href="testing-modal-enhanced.html">option 2</a>.</p>
 
     <p>This content should become inert while the modal is open.</p>
 
@@ -124,6 +91,10 @@
       (should not be focusable while modal is open)
     </p>
 
+
+    <!-- section -->
+
+
     <h2>Expected results:</h2>
 
     <ol>
@@ -132,6 +103,20 @@
       <li>The current element should be announced if not the container.</li>
     </ol>
 
+
+    <!-- section -->
+
+
+    <h2>Notes</h2>
+
+    <p><b>Where this differs from options 1 and 2:</b></p>
+
+    <ul>
+      <li><code>role="dialog"</code> and <code>aria-modal="true"</code> are set explicitly in the markup below. In options 1 and 2, the browser applies both automatically when a native <code>&lt;dialog&gt;</code> is shown modally.</li>
+      <li>Escape-to-close, background inertness, and Tab-trapping are all implemented manually in the script below. Native <code>&lt;dialog&gt;</code> provides Escape-to-close and background inertness automatically, and does not need a hand-written Tab trap at all.</li>
+      <li>The Tab-trap logic below is written for, and only verified against, this specific dialog's content (one focusable element, the Close button). Adding further focusable content, form fields, a second button, would need the trap logic re-checked. This fragility is itself one of the main practical arguments for using native <code>&lt;dialog&gt;</code> instead.</li>
+      <li>The <code>inert</code> fallback for older browsers (see <code>setPageInert()</code> below) only hides background content from assistive technology, via <code>aria-hidden</code>. It does <b>not</b> prevent a sighted keyboard user from tabbing into that background content on a browser old enough to lack <code>inert</code> support. This is a real, known limitation of the fallback, not a complete substitute for it.</li>
+    </ul>
   </main>
 
   <!-- Backdrop for click-to-dismiss and visual modality -->
@@ -175,8 +160,9 @@
         if ('inert' in page) {
           page.inert = isInert;
         } else {
-          // Fallback: hide page from ATs while modal is open
-          // (Not perfect, but common for older patterns)
+          // Fallback: hides page from assistive technology only.
+          // Does NOT prevent keyboard focus reaching background content
+          // on browsers old enough to lack the inert property.
           if (isInert) {
             page.setAttribute('aria-hidden', 'true');
           } else {
