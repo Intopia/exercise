@@ -117,6 +117,14 @@
 
     <p><a href="https://example.com">A link</a> (should not be focusable while modal is open)</p>
 
+    <h2>Expected results:</h2>
+
+    <ol>
+      <li>Focus should go to the modal - either container, heading, first focusable element inside</li>
+      <li>The role should be announced e.g. <code>dialog</code>.</li>
+      <li>The current element should be announced if not the container.</li>
+    </ol>
+
   </main>
 
   <!-- Dialog is closed by default (no "open" attribute). -->
