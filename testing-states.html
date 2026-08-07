@@ -92,7 +92,12 @@
 <!-- section -->
 
 
-<h2>Example 1: <code>checked/unchecked</code></h2>
+<h2>Example 1: <code>checked/unchecked</code> (native checkbox)</h2>
+
+<p>This is a real HTML checkbox. The browser handles its checked state automatically, no ARIA is needed.</p>
+
+<p><b>Action:</b> Inspect the "Bats" checkbox. What is its state in the "Computed Properties" panel?</p>
+<p><b>Answer:</b> <code>Checked: true</code></p>
 
 <div class="example">
   <fieldset class="fieldset">
@@ -118,26 +123,15 @@
 <!-- section -->
 
 
-<h2>Example 2: <code>expanded/collapsed</code></h2>
+<h2>Example 2: <code>checked/unchecked</code> (custom checkbox using <code>aria-checked</code>)</h2>
 
-<p>This example starts collapsed. Activate the button to see the expanded state, and to see the accessible name change along with it.</p>
+<p>Unlike Example 1, this is not a real HTML checkbox, it's a plain element styled to look like one. Because it isn't a native checkbox, the browser has no built-in way to expose whether it's checked. The <code>aria-checked</code> attribute is added by hand instead, and JavaScript is responsible for updating it whenever the state changes.</p>
 
-<div class="example">
-  <button id="expand-button" aria-expanded="false" aria-controls="expand-content" aria-label="Show more information">
-    <img src="assets/img/icon-arrow-down.png" alt="">
-  </button>
-  <div id="expand-content" hidden>
-    <p>This content is only shown once the button above is expanded.</p>
-  </div>
-</div>
+<p><b>Action 1:</b> This example starts unchecked. What is its state in the "Computed Properties" panel?</p>
+<p><b>Answer:</b> <code>Checked: false</code></p>
 
-
-<!-- section -->
-
-
-<h2>Example 3: <code>checked/unchecked</code></h2>
-
-<p>This example starts unchecked. Activate it with a click, or with the keyboard using Space, to see the checked state.</p>
+<p><b>Action 2:</b> Activate it with a click, or with the keyboard using Space. What is its state in the "Computed Properties" panel now?</p>
+<p><b>Answer:</b> <code>Checked: true</code></p>
 
 <div class="example">
   <div
@@ -154,14 +148,42 @@
 <!-- section -->
 
 
+<h2>Example 3: <code>expanded/collapsed</code></h2>
+
+<p>Activating this button also changes its accessible name, worth checking alongside the state.</p>
+
+<p><b>Action 1:</b> This example starts collapsed. What is its state in the "Computed Properties" panel?</p>
+<p><b>Answer:</b> <code>Expanded: false</code></p>
+
+<p><b>Action 2:</b> Activate the button with a click, or with the keyboard using Enter or Space. What is its state in the "Computed Properties" panel now?</p>
+<p><b>Answer:</b> <code>Expanded: true</code></p>
+
+<div class="example">
+  <button id="expand-button" aria-expanded="false" aria-controls="expand-content" aria-label="Show more information">
+    <img src="assets/img/icon-arrow-down.png" alt="">
+  </button>
+  <div id="expand-content" hidden>
+    <p>This content is only shown once the button above is expanded.</p>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
 <h2>Example 4: <code>pressed/not pressed</code></h2>
 
-<p>This example starts not pressed. Activate the button with a click, or with the keyboard using Enter or Space, to see the pressed state.</p>
+<p><b>Action 1:</b> This example starts not pressed. What is its state in the "Computed Properties" panel?</p>
+<p><b>Answer:</b> <code>Pressed: false</code></p>
+
+<p><b>Action 2:</b> Activate it with a click, or with the keyboard using Enter or Space. What is its state in the "Computed Properties" panel now?</p>
+<p><b>Answer:</b> <code>Pressed: true</code></p>
 
 <div class="example">
   <button id="pressed-button" aria-pressed="false">
     Bold
   </button>
+  <p id="pressed-sample">The quick brown fox jumps over the lazy dog.</p>
 </div>
 
 
@@ -170,7 +192,11 @@
 
 <h2>Example 5: <code>selected/not selected</code></h2>
 
-<p>Use Arrow Up / Arrow Down to move between options, the selected option moves with focus.</p>
+<p><b>Action 1:</b> The "Apple" option starts not selected. What is its state in the "Computed Properties" panel?</p>
+<p><b>Answer:</b> <code>Selected: false</code></p>
+
+<p><b>Action 2:</b> Activate it with a click, or arrow up to the option. What is its state in the "Computed Properties" panel now?</p>
+<p><b>Answer:</b> <code>Selected: true</code></p>
 
 <div class="example">
   <div id="listbox-states" role="listbox" aria-label="Choose a fruit">
@@ -186,7 +212,10 @@
 
 <h2>Example 6: <code>current</code></h2>
 
-<p>This example is static. "Home" is marked as the current page in the navigation below.</p>
+<p>This example is static.</p>
+
+<p><b>Action:</b> Inspect the "Home" link. What is its state in the "Computed Properties" panel?</p>
+<p><b>Answer:</b> <code>Current: page</code></p>
 
 <div class="example">
   <nav aria-label="Example navigation">
@@ -232,12 +261,14 @@
     }
   });
 
-  // Example 5: pressed button
+  // Example 4: pressed button
   const pressedButton = document.getElementById('pressed-button');
+  const pressedSample = document.getElementById('pressed-sample');
 
   pressedButton.addEventListener('click', () => {
     const isPressed = pressedButton.getAttribute('aria-pressed') === 'true';
     pressedButton.setAttribute('aria-pressed', String(!isPressed));
+    pressedSample.style.fontWeight = isPressed ? 'normal' : 'bold';
   });
 
   // Example 6: single-select listbox, select follows focus
