@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing aria-current</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    .current-nav {
+      list-style: none;
+      margin: 0.5em 0;
+      padding: 0;
+      display: flex;
+      gap: 1em;
+    }
+
+    .current-nav a[aria-current="page"] {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .step-list {
+      list-style: none;
+      margin: 0.5em 0;
+      padding: 0;
+      display: flex;
+      gap: 1.5em;
+    }
+
+    .step-list li {
+      padding: 0.5em 0.75em;
+      border: 2px solid #999;
+      border-radius: 0.3em;
+    }
+
+    .step-list li[aria-current="step"] {
+      border-color: #1b5e20;
+      background: #1b5e20;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .step-controls {
+      display: flex;
+      gap: 0.75em;
+      margin: 1em 0;
+    }
+
+    table {
+      max-width: 20em;
+    }
+
+    td[aria-current="date"] {
+      background: #1b5e20;
+      color: #fff;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<h1>Testing <code>aria-current</code></h1>
+
+<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-current" target="_blank"><code>aria-current</code></a> indicates the element within a set that represents the current item. It supports several specific values: <code>page</code>, <code>step</code>, <code>location</code>, <code>date</code>, <code>time</code>, and a generic <code>true</code>, plus <code>false</code> (the default).</p>
+
+
+<!-- section -->
+
+
+<h2>Example 1: without <code>aria-current</code></h2>
+
+<p>This navigation menu visually highlights the current page with bold, underlined text, but has no <code>aria-current</code> anywhere. The visual signal exists, but there is no programmatic equivalent.</p>
+
+<div class="example">
+  <nav aria-label="Example navigation, no aria-current">
+    <ul class="current-nav">
+      <li><a href="#" style="font-weight: bold; text-decoration: underline;">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+</div>
+
+<p><b>Expected result:</b> nothing should identify "Home" as the current page programmatically, a screen reader user has no way to know which link represents the page they are already on.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;nav aria-label="Example navigation"&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;About&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 2: <code>aria-current="page"</code></h2>
+
+<p>The most common use of <code>aria-current</code>, marking the current page within a navigation menu.</p>
+
+<div class="example">
+  <nav aria-label="Example navigation, with aria-current">
+    <ul class="current-nav">
+      <li><a href="#" aria-current="page">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+</div>
+
+<p><b>Expected result:</b> "Home" should be announced as the current page, in addition to being a link.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;nav aria-label="Example navigation"&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="#" <span class="highlight">aria-current="page"</span>&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;About&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 3: <code>aria-current="step"</code>, interactive</h2>
+
+<p>This step indicator is fully interactive. Use the Back and Next buttons to move <code>aria-current="step"</code> between steps, only one step should be marked current at a time.</p>
+
+<div class="example">
+  <ol class="step-list" id="step-list" aria-label="Checkout steps">
+    <li aria-current="step">1. Cart</li>
+    <li>2. Delivery</li>
+    <li>3. Payment</li>
+    <li>4. Confirmation</li>
+  </ol>
+  <div class="step-controls">
+    <button type="button" id="step-back">Back</button>
+    <button type="button" id="step-next">Next</button>
+  </div>
+</div>
+
+<p><b>Expected result:</b> the step marked <code>aria-current="step"</code> should move with each click, and exactly one step should carry the attribute at all times. The Back and Next buttons should stop at the first and last steps rather than wrapping around.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;ol aria-label="Checkout steps"&gt;
+  &lt;li <span class="highlight">aria-current="step"</span>&gt;1. Cart&lt;/li&gt;
+  &lt;li&gt;2. Delivery&lt;/li&gt;
+  &lt;li&gt;3. Payment&lt;/li&gt;
+  &lt;li&gt;4. Confirmation&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+</details>
+
+<script>
+(function () {
+  const steps = Array.from(document.querySelectorAll('#step-list li'));
+  let currentIndex = 0;
+
+  function render() {
+    steps.forEach((step, index) => {
+      if (index === currentIndex) {
+        step.setAttribute('aria-current', 'step');
+      } else {
+        step.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  document.getElementById('step-next').addEventListener('click', () => {
+    currentIndex = Math.min(currentIndex + 1, steps.length - 1);
+    render();
+  });
+
+  document.getElementById('step-back').addEventListener('click', () => {
+    currentIndex = Math.max(currentIndex - 1, 0);
+    render();
+  });
+})();
+</script>
+
+
+<!-- section -->
+
+
+<h2>Example 4: <code>aria-current="date"</code></h2>
+
+<p>A simple calendar table, with today's date marked using <code>aria-current="date"</code>. This uses a native <code>&lt;table&gt;</code> rather than an ARIA grid, since this display is static, not interactive, and <code>aria-current</code> does not require any particular container role to function.</p>
+
+<div class="example">
+  <table>
+    <caption>March 2026</caption>
+    <thead>
+      <tr>
+        <th>Su</th>
+        <th>Mo</th>
+        <th>Tu</th>
+        <th>We</th>
+        <th>Th</th>
+        <th>Fr</th>
+        <th>Sa</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td aria-current="date">5</td>
+        <td>6</td>
+        <td>7</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p><b>Expected result:</b> the 5th should be announced as the current date, in addition to its position in the table.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;td <span class="highlight">aria-current="date"</span>&gt;5&lt;/td&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<p><b>Note for testing:</b> unlike some other ARIA attributes covered on this site, <code>aria-current</code> is not deprecated in any current version of the spec, and published support data (a11ysupport.io) shows a comparatively strong pass rate. Still worth confirming with your own standard browser and screen reader combinations, particularly the <code>step</code> value, which has not been verified here.</p>
+
+<p><b>A lesson from testing this page:</b> the original version of Example 4 used <code>role="grid"</code> for a static calendar display, without the required <code>role="row"</code> structure and without any keyboard interactivity. VoiceOver could not navigate into it at all, treating the whole thing as a single unstructured block. This has been corrected by using a plain, native <code>&lt;table&gt;</code> instead, since <code>aria-current</code> does not need a grid role to work, and a static display should not be given an interactive composite role like <code>grid</code> in the first place.</p>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>

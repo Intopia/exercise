@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing aria-details</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<h1>Testing <code>aria-details</code></h1>
+
+<p><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-details" target="_blank"><code>aria-details</code></a> identifies the element that provides a detailed, extended description for an object, commonly used to link an image to a longer description available elsewhere on the same page, such as inside a <code>&lt;details&gt;</code> disclosure.</p>
+
+
+<!-- section -->
+
+
+<h2>Example 1: without <code>aria-details</code></h2>
+
+<p>The image below is followed by a <code>&lt;details&gt;</code> disclosure containing an extended description, but there is no programmatic relationship between the two, they are only related by visual proximity and reading order.</p>
+
+<figure class="example">
+  <img src="assets/img/image-complex.png" alt="Venn diagram depicting content category relationships. Detailed description below">
+  <figcaption>
+    <details id="complex-image-details-1">
+      <summary>Image description</summary>
+      <div class="testing-images">
+        <h3>HTML content categories include:</h3>
+        <ol>
+          <li>Flow content, the base content type</li>
+          <li>Metadata content, slightly overlapping Flow</li>
+          <li>Sectioning content, within Flow</li>
+          <li>Heading content, within Flow</li>
+          <li>Phrasing content, within Flow, overlapping Interactive and Embedded</li>
+          <li>Interactive content, within Flow, overlapping Phrasing and Embedded</li>
+          <li>Embedded content, within Flow, overlapping Phrasing and Interactive</li>
+        </ol>
+      </div>
+    </details>
+  </figcaption>
+</figure>
+
+<p><b>Expected result:</b> the disclosure should still be discoverable and usable, since it is real, visible content in normal reading order, but there is no programmatic link telling a screen reader user that this specific disclosure is the image's extended description.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;figure&gt;
+  &lt;img src="image-complex.png"
+    alt="Venn diagram depicting content category
+    relationships. Detailed description below"
+  &gt;
+  &lt;figcaption&gt;
+    &lt;details id="complex-image-details-1"&gt;
+      &lt;summary&gt;Image description&lt;/summary&gt;
+      ...
+    &lt;/details&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 2: with <code>aria-details</code></h2>
+
+<p>This is the same pattern, but the image now uses <code>aria-details</code> to explicitly point to the disclosure containing its extended description.</p>
+
+<figure class="example">
+  <img src="assets/img/image-complex.png" alt="Venn diagram depicting content category relationships. Detailed description below" aria-details="complex-image-details-2">
+  <figcaption>
+    <details id="complex-image-details-2">
+      <summary>Image description</summary>
+      <div class="testing-images">
+        <h3>HTML content categories include:</h3>
+        <ol>
+          <li>Flow content, the base content type</li>
+          <li>Metadata content, slightly overlapping Flow</li>
+          <li>Sectioning content, within Flow</li>
+          <li>Heading content, within Flow</li>
+          <li>Phrasing content, within Flow, overlapping Interactive and Embedded</li>
+          <li>Interactive content, within Flow, overlapping Phrasing and Embedded</li>
+          <li>Embedded content, within Flow, overlapping Phrasing and Interactive</li>
+        </ol>
+      </div>
+    </details>
+  </figcaption>
+</figure>
+
+<p><b>Expected result:</b> worth confirming directly, per spec this should let a screen reader user discover that a detailed description exists for this specific image, and support jumping to or conveying that content, but real support for each part of this behaviour varies significantly, see the note below.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;figure&gt;
+  &lt;img src="image-complex.png"
+    alt="Venn diagram depicting content category
+    relationships. Detailed description below"
+    <span class="highlight">aria-details="complex-image-details-2"</span>
+  &gt;
+  &lt;figcaption&gt;
+    &lt;details <span class="highlight">id="complex-image-details-2"</span>&gt;
+      &lt;summary&gt;Image description&lt;/summary&gt;
+      ...
+    &lt;/details&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Note for testing</h2>
+
+<p>Published support data for <code>aria-details</code> is mixed and conflicting, and worth re-testing directly rather than relying on either source below:</p>
+
+<ul>
+  <li><a href="https://a11ysupport.io/tech/aria/aria-details_attribute" target="_blank">a11ysupport.io</a> (tests dated 2022, applied to an <code>&lt;img&gt;</code>) splits support into three separate behaviours, each with different results:
+    <ul>
+      <li>Presence of the relationship being conveyed at all: supported in JAWS and NVDA, not supported in VoiceOver or TalkBack.</li>
+      <li>Jumping to or conveying the referenced content: supported in NVDA only, not JAWS.</li>
+      <li>Conveying the start/end boundaries of the details: supported in JAWS only, not NVDA.</li>
+    </ul>
+    a11ysupport.io itself cautions that these results are 4 to 7 years old and may be out of date.
+  </li>
+  <li>A <a href="https://lists.w3.org/Archives/Public/w3c-wai-ig/2023JulSep/0186.html" target="_blank">DAISY Consortium report from 2023</a> found <code>aria-details</code> pointing specifically at a <code>&lt;details&gt;</code> element, the same pattern used above, worked effectively across JAWS, NVDA, VoiceOver, and TalkBack, with NVDA needing an add-on for full functionality. This directly contradicts a11ysupport.io's results for VoiceOver and TalkBack.</li>
+</ul>
+
+<p>Given the age and conflict between these sources, and that support for this attribute has historically been patchy, this is worth testing fresh against current browser and screen reader versions before drawing conclusions.</p>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing aria-valuemin and aria-valuemax</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    .value-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      margin: 0.5em 0;
+    }
+
+    [role="slider"] {
+      display: inline-block;
+      min-width: 3em;
+      padding: 0.5em 1em;
+      border: 2px solid #333;
+      border-radius: 0.3em;
+      text-align: center;
+      cursor: default;
+    }
+
+    [role="slider"]:focus {
+      outline: 2px solid #000;
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<h1>Testing <code>aria-valuemin</code> and <code>aria-valuemax</code></h1>
+
+<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-valuemin" target="_blank"><code>aria-valuemin</code></a> and <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-valuemax" target="_blank"><code>aria-valuemax</code></a> define the lower and upper bounds of a range widget's value.</p>
+
+
+<!-- section -->
+
+
+<h2>Example 1: Native <code>&lt;progress&gt;</code></h2>
+
+<p>A native <code>&lt;progress&gt;</code> element has no <code>min</code> attribute at all, only <code>value</code> and <code>max</code>. Its minimum is always implicitly 0. This is a real, structural limitation, native <code>&lt;progress&gt;</code> cannot represent a range that doesn't start at zero.</p>
+
+<div class="example">
+  <label class="label" for="native-progress">Marathon distance completed (miles)</label>
+  <progress id="native-progress" value="0" max="26.2">0 of 26.2 miles</progress>
+  <div class="value-controls">
+    <button type="button" id="native-decrease">&minus; 1 mile</button>
+    <span id="native-progress-display">0 of 26.2 miles</span>
+    <button type="button" id="native-increase">+ 1 mile</button>
+  </div>
+</div>
+
+<p><b>Expected result:</b> the value should be clamped between 0 (its only possible minimum) and 26.2. The decrease button should have no effect once the value reaches 0.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;progress id="native-progress" value="0" <span class="highlight">max="26.2"</span>&gt;0 of 26.2 miles&lt;/progress&gt;</code></pre>
+</details>
+
+<script>
+(function () {
+  const progress = document.getElementById('native-progress');
+  const display = document.getElementById('native-progress-display');
+  const max = 26.2;
+  let value = 0;
+
+  function render() {
+    progress.value = value;
+    display.textContent = `${value} of ${max} miles`;
+  }
+
+  document.getElementById('native-increase').addEventListener('click', () => {
+    value = Math.min(max, value + 1);
+    render();
+  });
+
+  document.getElementById('native-decrease').addEventListener('click', () => {
+    value = Math.max(0, value - 1);
+    render();
+  });
+})();
+</script>
+
+
+<!-- section -->
+
+
+<h2>Example 2: Custom slider with a non-zero range</h2>
+
+<p>This custom slider represents a temperature gauge from -20&deg;C to 40&deg;C, a range native <code>&lt;progress&gt;</code> cannot express, since it has no way to set a minimum other than 0. Use Arrow Up / Arrow Down to change the value by 1, Home to jump to the minimum, End to jump to the maximum, or the buttons below.</p>
+
+<div class="example">
+  <span class="label" id="temp-label">Temperature</span>
+  <div class="value-controls">
+    <button type="button" id="temp-decrease">&minus; 1&deg;</button>
+    <div
+      role="slider"
+      id="temp-slider"
+      tabindex="0"
+      aria-labelledby="temp-label"
+      aria-valuemin="-20"
+      aria-valuemax="40"
+      aria-valuenow="22"
+    >22&deg;C</div>
+    <button type="button" id="temp-increase">+ 1&deg;</button>
+  </div>
+</div>
+
+<p><b>Expected result:</b> the value should be clamped between -20 and 40. Attempting to go below -20 or above 40, by any method, arrow keys, Home/End, or the buttons, should have no further effect once the boundary is reached.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div
+  role="slider"
+  aria-labelledby="temp-label"
+  <span class="highlight">aria-valuemin="-20"</span>
+  <span class="highlight">aria-valuemax="40"</span>
+  aria-valuenow="22"
+  tabindex="0"
+&gt;22&deg;C&lt;/div&gt;</code></pre>
+</details>
+
+<script>
+(function () {
+  const slider = document.getElementById('temp-slider');
+  const min = -20;
+  const max = 40;
+  let value = 22;
+
+  function render() {
+    slider.setAttribute('aria-valuenow', value);
+    slider.textContent = `${value}\u00B0C`;
+  }
+
+  function setValue(newValue) {
+    value = Math.min(max, Math.max(min, newValue));
+    render();
+  }
+
+  document.getElementById('temp-increase').addEventListener('click', () => setValue(value + 1));
+  document.getElementById('temp-decrease').addEventListener('click', () => setValue(value - 1));
+
+  slider.addEventListener('keydown', (event) => {
+    switch (event.key) {
+      case 'ArrowUp':
+      case 'ArrowRight':
+        event.preventDefault();
+        setValue(value + 1);
+        break;
+      case 'ArrowDown':
+      case 'ArrowLeft':
+        event.preventDefault();
+        setValue(value - 1);
+        break;
+      case 'Home':
+        event.preventDefault();
+        setValue(min);
+        break;
+      case 'End':
+        event.preventDefault();
+        setValue(max);
+        break;
+    }
+  });
+})();
+</script>
+
+
+<!-- section -->
+
+
+<p><b>Note for testing:</b> confirm with your standard browser and screen reader combinations that <code>aria-valuemin</code> and <code>aria-valuemax</code> are announced (for example, as part of a percentage-through-range calculation, or read out directly), and that reaching either boundary is communicated clearly to the user.</p>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>

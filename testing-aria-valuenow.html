@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing aria-valuenow</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    .value-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      margin: 0.5em 0;
+    }
+
+    [role="slider"] {
+      display: inline-block;
+      min-width: 3em;
+      padding: 0.5em 1em;
+      border: 2px solid #333;
+      border-radius: 0.3em;
+      text-align: center;
+      cursor: default;
+    }
+
+    [role="slider"]:focus {
+      outline: 2px solid #000;
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<h1>Testing <code>aria-valuenow</code></h1>
+
+<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-valuenow" target="_blank"><code>aria-valuenow</code></a> defines the current numeric value of a range widget. This page focuses on the raw number itself. For overriding that number with custom, human-readable text (for example, announcing "Loud" instead of "75"), see the <a href="testing-aria-valuetext.html">aria-valuetext testing page</a>.</p>
+
+
+<!-- section -->
+
+
+<h2>Example 1: Native <code>&lt;progress&gt;</code>, updated by a separate control</h2>
+
+<p>The button below is a separate element from the progress bar, focus stays on the button when it is activated, it never moves to the progress bar itself. Because of this, the progress bar's value change needs an explicit <code>aria-live="polite"</code> region to be announced, the browser will not announce it automatically just because the value changed.</p>
+
+<div class="example">
+  <label class="label" for="native-progress">File download progress</label>
+  <progress id="native-progress" value="0" max="100">0%</progress>
+  <div class="value-controls">
+    <button type="button" id="native-increase">Download 10% more</button>
+    <span id="native-progress-display" aria-live="polite">0%</span>
+  </div>
+</div>
+
+<p><b>Expected result:</b> the visible and native value should update with each click, and the <code>aria-live="polite"</code> region should cause the new percentage to be announced, even though focus remains on the button throughout.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;progress id="native-progress" value="0" max="100"&gt;0%&lt;/progress&gt;
+&lt;button type="button" id="native-increase"&gt;Download 10% more&lt;/button&gt;
+&lt;span <span class="highlight">aria-live="polite"</span> id="native-progress-display"&gt;0%&lt;/span&gt;</code></pre>
+</details>
+
+<script>
+(function () {
+  const progress = document.getElementById('native-progress');
+  const display = document.getElementById('native-progress-display');
+  let value = 0;
+
+  document.getElementById('native-increase').addEventListener('click', () => {
+    value = Math.min(100, value + 10);
+    progress.value = value;
+    display.textContent = `${value}%`;
+  });
+})();
+</script>
+
+
+<!-- section -->
+
+
+<h2>Example 2: Custom slider, focused and self-updating</h2>
+
+<p>Unlike Example 1, this slider is the element the user is actually interacting with directly, focus stays on it the whole time. Because the focused element's own value is changing, this relies on the widget role's built-in behaviour, not a separate <code>aria-live</code> region, to be announced. Use Arrow Up / Arrow Down to change the value, or the buttons below.</p>
+
+<div class="example">
+  <span class="label" id="volume-label">Volume</span>
+  <div class="value-controls">
+    <button type="button" id="volume-decrease">&minus;</button>
+    <div
+      role="slider"
+      id="volume-slider"
+      tabindex="0"
+      aria-labelledby="volume-label"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="50"
+    >50</div>
+    <button type="button" id="volume-increase">+</button>
+  </div>
+</div>
+
+<p><b>Expected result:</b> worth confirming directly, when the slider is focused and its value changes, most screen readers should announce the new <code>aria-valuenow</code> automatically, without needing a separate live region. This is a behaviour of the focused widget role itself, not something to assume without testing.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div
+  role="slider"
+  aria-labelledby="volume-label"
+  aria-valuemin="0"
+  aria-valuemax="100"
+  <span class="highlight">aria-valuenow="50"</span>
+  tabindex="0"
+&gt;50&lt;/div&gt;</code></pre>
+</details>
+
+<script>
+(function () {
+  const slider = document.getElementById('volume-slider');
+  const min = 0;
+  const max = 100;
+  let value = 50;
+
+  function render() {
+    slider.setAttribute('aria-valuenow', value);
+    slider.textContent = value;
+  }
+
+  function setValue(newValue) {
+    value = Math.min(max, Math.max(min, newValue));
+    render();
+  }
+
+  document.getElementById('volume-increase').addEventListener('click', () => setValue(value + 1));
+  document.getElementById('volume-decrease').addEventListener('click', () => setValue(value - 1));
+
+  slider.addEventListener('keydown', (event) => {
+    switch (event.key) {
+      case 'ArrowUp':
+      case 'ArrowRight':
+        event.preventDefault();
+        setValue(value + 1);
+        break;
+      case 'ArrowDown':
+      case 'ArrowLeft':
+        event.preventDefault();
+        setValue(value - 1);
+        break;
+      case 'Home':
+        event.preventDefault();
+        setValue(min);
+        break;
+      case 'End':
+        event.preventDefault();
+        setValue(max);
+        break;
+    }
+  });
+})();
+</script>
+
+
+<!-- section -->
+
+
+<p><b>Note for testing:</b> confirm both announcement mechanisms above with your standard browser and screen reader combinations. In particular, verify whether Example 2 genuinely needs no <code>aria-live</code> region, or whether some combinations require one even when the slider itself is focused, this has not been verified here.</p>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
