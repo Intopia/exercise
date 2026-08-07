@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing aria-haspopup</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    .menu-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    [role="menu"] {
+      list-style: none;
+      margin: 0.2em 0 0;
+      padding: 0.25em;
+      border: 1px solid #999;
+      background: #fff;
+      position: absolute;
+      min-width: 10em;
+    }
+
+    [role="menuitem"] {
+      padding: 0.5em;
+      border-radius: 0.2em;
+      cursor: pointer;
+    }
+
+    [role="menuitem"]:focus {
+      background: #1b5e20;
+      color: #fff;
+      outline: none;
+    }
+
+    .reference-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1em 0;
+    }
+
+    .reference-table th,
+    .reference-table td {
+      text-align: left;
+      padding: 0.5em;
+      border: 1px solid #999;
+    }
+
+    .note {
+      background: #fff3cd;
+      border: 1px solid #ffe69c;
+      padding: 0.75em 1em;
+      border-radius: 4px;
+      margin: 1.5em 0;
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<h1>Testing <code>aria-haspopup</code></h1>
+
+<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-haspopup" target="_blank"><code>aria-haspopup</code></a> indicates that an element triggers a popup, and identifies what kind: <code>menu</code>, <code>listbox</code>, <code>tree</code>, <code>grid</code>, or <code>dialog</code>. <code>true</code> is treated as an alias for <code>menu</code>.</p>
+
+<div class="note">
+  <p><code>aria-haspopup</code> was deprecated as a <b>Global</b> attribute in ARIA 1.2, meaning it is no longer intended for use on arbitrary elements. It remains fully valid as a <b>Widget</b> attribute, used on interactive controls like the button below.</p>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Example: <code>aria-haspopup="menu"</code>, interactive</h2>
+
+<p>This is a menu button. Unlike the combobox on the <a href="testing-aria-activedescendant.html">aria-activedescendant page</a>, where focus deliberately stayed on the input the whole time, this pattern moves real keyboard focus into the menu itself. Activate the button, or press Arrow Down while it is focused, to open the menu.</p>
+
+<ul>
+  <li>Arrow Down / Arrow Up move focus between menu items, looping from the last item back to the first.</li>
+  <li>Home / End jump to the first or last item.</li>
+  <li>Enter or Space activates the focused item and closes the menu.</li>
+  <li>Escape closes the menu and returns focus to the button.</li>
+</ul>
+
+<div class="example">
+  <div class="menu-wrapper">
+    <button type="button" id="menu-button" aria-haspopup="menu" aria-expanded="false" aria-controls="action-menu">
+      Actions
+    </button>
+    <ul role="menu" id="action-menu" aria-labelledby="menu-button" hidden>
+      <li role="menuitem" tabindex="-1">Edit</li>
+      <li role="menuitem" tabindex="-1">Duplicate</li>
+      <li role="menuitem" tabindex="-1">Delete</li>
+    </ul>
+  </div>
+  <p id="menu-result" role="status" class="hidden"></p>
+</div>
+
+<p><b>Expected result:</b> "Actions" should be announced as having a popup menu. When the menu opens, focus should genuinely move to the first menu item, not stay on the button, this is real focus movement, not the virtual focus pattern used by <code>aria-activedescendant</code>.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button
+  <span class="highlight">aria-haspopup="menu"</span>
+  aria-expanded="false"
+  aria-controls="action-menu"
+&gt;
+  Actions
+&lt;/button&gt;
+&lt;ul role="menu" id="action-menu" aria-labelledby="menu-button"&gt;
+  &lt;li role="menuitem" tabindex="-1"&gt;Edit&lt;/li&gt;
+  &lt;li role="menuitem" tabindex="-1"&gt;Duplicate&lt;/li&gt;
+  &lt;li role="menuitem" tabindex="-1"&gt;Delete&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</details>
+
+<script>
+(function () {
+  const button = document.getElementById('menu-button');
+  const menu = document.getElementById('action-menu');
+  const items = Array.from(menu.querySelectorAll('[role="menuitem"]'));
+  const result = document.getElementById('menu-result');
+
+  function openMenu(focusIndex) {
+    button.setAttribute('aria-expanded', 'true');
+    menu.hidden = false;
+    items.forEach((item, i) => item.setAttribute('tabindex', i === focusIndex ? '0' : '-1'));
+    items[focusIndex].focus();
+  }
+
+  function closeMenu(returnFocus) {
+    button.setAttribute('aria-expanded', 'false');
+    menu.hidden = true;
+    if (returnFocus) button.focus();
+  }
+
+  function moveFocus(newIndex) {
+    items.forEach((item, i) => item.setAttribute('tabindex', i === newIndex ? '0' : '-1'));
+    items[newIndex].focus();
+  }
+
+  function activateItem(item) {
+    result.textContent = `${item.textContent} activated`;
+    closeMenu(true);
+  }
+
+  button.addEventListener('click', () => {
+    if (menu.hidden) {
+      openMenu(0);
+    } else {
+      closeMenu(false);
+    }
+  });
+
+  button.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      openMenu(0);
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      openMenu(items.length - 1);
+    }
+  });
+
+  menu.addEventListener('keydown', (event) => {
+    const currentIndex = items.findIndex(i => i.getAttribute('tabindex') === '0');
+
+    switch (event.key) {
+      case 'ArrowDown':
+        event.preventDefault();
+        moveFocus((currentIndex + 1) % items.length);
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        moveFocus((currentIndex - 1 + items.length) % items.length);
+        break;
+      case 'Home':
+        event.preventDefault();
+        moveFocus(0);
+        break;
+      case 'End':
+        event.preventDefault();
+        moveFocus(items.length - 1);
+        break;
+      case 'Escape':
+        event.preventDefault();
+        closeMenu(true);
+        break;
+      case 'Enter':
+      case ' ':
+        event.preventDefault();
+        activateItem(items[currentIndex]);
+        break;
+    }
+  });
+
+  items.forEach((item) => {
+    item.addEventListener('click', () => activateItem(item));
+  });
+
+  // Close if focus leaves the menu and the button entirely
+  document.addEventListener('focusout', () => {
+    requestAnimationFrame(() => {
+      const active = document.activeElement;
+      if (!menu.hidden && active !== button && !menu.contains(active)) {
+        closeMenu(false);
+      }
+    });
+  });
+})();
+</script>
+
+
+<!-- section -->
+
+
+<h2>Other values, reference</h2>
+
+<p>The remaining values are demonstrated in full on their own pages elsewhere on this site, rather than rebuilt here.</p>
+
+<table class="reference-table">
+  <caption>aria-haspopup values</caption>
+  <thead>
+    <tr>
+      <th>Value</th>
+      <th>Popup type</th>
+      <th>See</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>menu</code> (or <code>true</code>)</td>
+      <td>A menu of commands</td>
+      <td>Above</td>
+    </tr>
+    <tr>
+      <td><code>listbox</code></td>
+      <td>A list of selectable suggestions, typically in a combobox</td>
+      <td><a href="testing-aria-activedescendant.html">aria-activedescendant page</a></td>
+    </tr>
+    <tr>
+      <td><code>dialog</code></td>
+      <td>A modal or non-modal dialog</td>
+      <td><a href="testing-modal-minimal.html">Modal testing pages</a></td>
+    </tr>
+    <tr>
+      <td><code>tree</code></td>
+      <td>A hierarchical tree of items</td>
+      <td>Not demonstrated on this site, a genuinely rare pattern in most day-to-day work</td>
+    </tr>
+    <tr>
+      <td><code>grid</code></td>
+      <td>A grid-structured popup, such as a date picker</td>
+      <td>Not demonstrated on this site</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<!-- section -->
+
+
+<p><b>Note for testing:</b> confirm with your standard browser and screen reader combinations that "has popup" is announced correctly for the menu button above, and that the popup type is conveyed accurately, not just "has popup" generically.</p>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing aria-autocomplete</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    .combo-wrapper {
+      position: relative;
+      max-width: 20em;
+    }
+
+    [role="listbox"] {
+      list-style: none;
+      margin: 0.2em 0 0;
+      padding: 0.25em;
+      border: 1px solid #999;
+      background: #fff;
+    }
+
+    [role="option"] {
+      padding: 0.5em;
+      border-radius: 0.2em;
+    }
+
+    [role="option"].active {
+      background: #1b5e20;
+      color: #fff;
+    }
+
+    .note {
+      background: #fff3cd;
+      border: 1px solid #ffe69c;
+      padding: 0.75em 1em;
+      border-radius: 4px;
+      margin: 1.5em 0;
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<h1>Testing <code>aria-autocomplete</code></h1>
+
+<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-autocomplete" target="_blank"><code>aria-autocomplete</code></a> tells assistive technology what kind of autocomplete suggestion behaviour a combobox offers as the user types: <code>none</code>, <code>inline</code>, <code>list</code>, or <code>both</code>. All four examples below suggest from the same fixed list: Apple, Apricot, Banana, Blueberry, Cherry, Cranberry.</p>
+
+
+<!-- section -->
+
+
+<h2>Example 1: <code>aria-autocomplete="none"</code></h2>
+
+<p>Typing here produces no suggestions of any kind, no popup, no inline completion. This is the default value, included for contrast with the other three.</p>
+
+<div class="example">
+  <label class="label" for="ac-none">Fruit (no autocomplete)</label>
+  <input type="text" class="input" id="ac-none" role="combobox" aria-autocomplete="none" aria-expanded="false" autocomplete="off">
+</div>
+
+<p><b>Expected result:</b> no suggestions should appear or be offered, by design.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input role="combobox" <span class="highlight">aria-autocomplete="none"</span>&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 2: <code>aria-autocomplete="list"</code></h2>
+
+<p>As you type, matching fruits appear in a popup list below the input. Arrow keys move between matches, using <code>aria-activedescendant</code>, the same virtual focus pattern covered on its own page. Real focus stays on the input throughout.</p>
+
+<div class="example">
+  <label class="label" for="ac-list">Fruit (list suggestions)</label>
+  <div class="combo-wrapper">
+    <input type="text" class="input" id="ac-list" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="ac-list-listbox" autocomplete="off">
+    <ul role="listbox" id="ac-list-listbox" aria-label="Fruit suggestions" hidden></ul>
+  </div>
+</div>
+
+<p><b>Expected result:</b> typing "ap" should show Apple and Apricot in the popup. Arrow keys should move <code>aria-activedescendant</code> between them without moving real focus from the input.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input role="combobox" <span class="highlight">aria-autocomplete="list"</span> aria-controls="ac-list-listbox"&gt;
+&lt;ul role="listbox" id="ac-list-listbox"&gt;&lt;/ul&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 3: <code>aria-autocomplete="inline"</code></h2>
+
+<p>As you type, the input's own value is completed automatically with the first matching suggestion, with the completed remainder shown as selected text. Typing a further character, or pressing Backspace, replaces or removes the suggested part naturally. There is no popup at all with this value.</p>
+
+<div class="example">
+  <label class="label" for="ac-inline">Fruit (inline completion)</label>
+  <input type="text" class="input" id="ac-inline" role="combobox" aria-autocomplete="inline" aria-expanded="false" autocomplete="off">
+</div>
+
+<p><b>Expected result:</b> typing "ap" should complete the input's value to "apple", with "ple" shown as selected text. Typing "b" should complete to the first match, "banana".</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input role="combobox" <span class="highlight">aria-autocomplete="inline"</span>&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 4: <code>aria-autocomplete="both"</code></h2>
+
+<p>Combines the previous two: inline completion of the input's value, and a popup list of all matches, at the same time.</p>
+
+<div class="example">
+  <label class="label" for="ac-both">Fruit (inline and list)</label>
+  <div class="combo-wrapper">
+    <input type="text" class="input" id="ac-both" role="combobox" aria-autocomplete="both" aria-expanded="false" aria-controls="ac-both-listbox" autocomplete="off">
+    <ul role="listbox" id="ac-both-listbox" aria-label="Fruit suggestions" hidden></ul>
+  </div>
+</div>
+
+<p><b>Expected result:</b> typing "ap" should both complete the input's value inline to "apple" (selected remainder), and show Apple and Apricot in the popup list below.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input role="combobox" <span class="highlight">aria-autocomplete="both"</span> aria-controls="ac-both-listbox"&gt;
+&lt;ul role="listbox" id="ac-both-listbox"&gt;&lt;/ul&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<script>
+(function () {
+  const FRUITS = ['Apple', 'Apricot', 'Banana', 'Blueberry', 'Cherry', 'Cranberry'];
+
+  function matchesFor(value) {
+    const lower = value.toLowerCase();
+    if (!lower) return [];
+    return FRUITS.filter(f => f.toLowerCase().startsWith(lower));
+  }
+
+  // --- Example 2: list only ---
+  (function setupListOnly() {
+    const input = document.getElementById('ac-list');
+    const listbox = document.getElementById('ac-list-listbox');
+    let activeIndex = -1;
+    let currentMatches = [];
+
+    function render() {
+      currentMatches = matchesFor(input.value);
+      listbox.innerHTML = '';
+      activeIndex = -1;
+      input.removeAttribute('aria-activedescendant');
+
+      if (currentMatches.length === 0) {
+        listbox.hidden = true;
+        input.setAttribute('aria-expanded', 'false');
+        return;
+      }
+
+      currentMatches.forEach((match, i) => {
+        const li = document.createElement('li');
+        li.setAttribute('role', 'option');
+        li.id = `ac-list-option-${i}`;
+        li.textContent = match;
+        li.addEventListener('mousedown', (e) => e.preventDefault());
+        li.addEventListener('click', () => {
+          input.value = match;
+          listbox.hidden = true;
+          input.setAttribute('aria-expanded', 'false');
+          input.removeAttribute('aria-activedescendant');
+        });
+        listbox.appendChild(li);
+      });
+
+      listbox.hidden = false;
+      input.setAttribute('aria-expanded', 'true');
+    }
+
+    function setActive(index) {
+      const options = Array.from(listbox.children);
+      activeIndex = index;
+      options.forEach((o, i) => o.classList.toggle('active', i === index));
+      if (index === -1) {
+        input.removeAttribute('aria-activedescendant');
+      } else {
+        input.setAttribute('aria-activedescendant', options[index].id);
+      }
+    }
+
+    input.addEventListener('input', render);
+
+    input.addEventListener('keydown', (event) => {
+      if (currentMatches.length === 0) return;
+
+      if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        setActive(Math.min(activeIndex + 1, currentMatches.length - 1));
+      } else if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        setActive(Math.max(activeIndex - 1, 0));
+      } else if (event.key === 'Enter' && activeIndex > -1) {
+        input.value = currentMatches[activeIndex];
+        listbox.hidden = true;
+        input.setAttribute('aria-expanded', 'false');
+        input.removeAttribute('aria-activedescendant');
+      } else if (event.key === 'Escape') {
+        listbox.hidden = true;
+        input.setAttribute('aria-expanded', 'false');
+        input.removeAttribute('aria-activedescendant');
+      }
+    });
+  })();
+
+  // --- Example 3: inline only ---
+  (function setupInlineOnly() {
+    const input = document.getElementById('ac-inline');
+
+    input.addEventListener('input', (event) => {
+      // Only complete on forward typing, not on deletion, otherwise
+      // backspace could never actually shorten the value
+      if (event.inputType && event.inputType.startsWith('delete')) return;
+
+      const typed = input.value;
+      const matches = matchesFor(typed);
+
+      if (matches.length > 0 && matches[0].length > typed.length) {
+        const completion = matches[0];
+        input.value = completion;
+        input.setSelectionRange(typed.length, completion.length);
+      }
+    });
+  })();
+
+  // --- Example 4: both ---
+  (function setupBoth() {
+    const input = document.getElementById('ac-both');
+    const listbox = document.getElementById('ac-both-listbox');
+    let activeIndex = -1;
+    let currentMatches = [];
+
+    function renderList(typedLength) {
+      listbox.innerHTML = '';
+      activeIndex = -1;
+      input.removeAttribute('aria-activedescendant');
+
+      if (currentMatches.length === 0) {
+        listbox.hidden = true;
+        input.setAttribute('aria-expanded', 'false');
+        return;
+      }
+
+      currentMatches.forEach((match, i) => {
+        const li = document.createElement('li');
+        li.setAttribute('role', 'option');
+        li.id = `ac-both-option-${i}`;
+        li.textContent = match;
+        li.addEventListener('mousedown', (e) => e.preventDefault());
+        li.addEventListener('click', () => {
+          input.value = match;
+          input.setSelectionRange(match.length, match.length);
+          listbox.hidden = true;
+          input.setAttribute('aria-expanded', 'false');
+          input.removeAttribute('aria-activedescendant');
+        });
+        listbox.appendChild(li);
+      });
+
+      listbox.hidden = false;
+      input.setAttribute('aria-expanded', 'true');
+    }
+
+    function setActive(index) {
+      const options = Array.from(listbox.children);
+      activeIndex = index;
+      options.forEach((o, i) => o.classList.toggle('active', i === index));
+      if (index === -1) {
+        input.removeAttribute('aria-activedescendant');
+      } else {
+        input.setAttribute('aria-activedescendant', options[index].id);
+      }
+    }
+
+    input.addEventListener('input', (event) => {
+      const isDeleting = event.inputType && event.inputType.startsWith('delete');
+      const typed = input.value;
+
+      currentMatches = matchesFor(typed);
+      renderList(typed.length);
+
+      if (!isDeleting && currentMatches.length > 0 && currentMatches[0].length > typed.length) {
+        const completion = currentMatches[0];
+        input.value = completion;
+        input.setSelectionRange(typed.length, completion.length);
+      }
+    });
+
+    input.addEventListener('keydown', (event) => {
+      if (currentMatches.length === 0) return;
+
+      if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        setActive(Math.min(activeIndex + 1, currentMatches.length - 1));
+      } else if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        setActive(Math.max(activeIndex - 1, 0));
+      } else if (event.key === 'Enter' && activeIndex > -1) {
+        input.value = currentMatches[activeIndex];
+        listbox.hidden = true;
+        input.setAttribute('aria-expanded', 'false');
+        input.removeAttribute('aria-activedescendant');
+      } else if (event.key === 'Escape') {
+        listbox.hidden = true;
+        input.setAttribute('aria-expanded', 'false');
+        input.removeAttribute('aria-activedescendant');
+      }
+    });
+  })();
+})();
+</script>
+
+
+<p><b>Note for testing:</b> confirm with your standard browser and screen reader combinations how each value is actually announced, particularly <code>inline</code>, where the selected/highlighted completion text needs to be conveyed clearly as a suggestion, not silently, or as if the user had typed it themselves.</p>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
