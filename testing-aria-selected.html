@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing aria-selected</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    [role="listbox"] {
+      border: 1px solid #999;
+      max-width: 20em;
+      padding: 0.25em;
+    }
+
+    [role="option"] {
+      padding: 0.5em;
+      cursor: pointer;
+      border-radius: 0.2em;
+    }
+
+    [role="option"][aria-selected="true"] {
+      background: #1b5e20;
+      color: #fff;
+    }
+
+    [role="option"]:focus {
+      outline: 2px solid #000;
+      outline-offset: -2px;
+    }
+
+    [role="option"][aria-selected="true"]:focus {
+      background: #000;
+      outline: 2px solid #fff;
+      outline-offset: -2px;
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<h1>Testing <code>aria-selected</code></h1>
+
+<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-selected" target="_blank"><code>aria-selected</code></a> indicates the current selected state of an element within certain container roles, such as <code>listbox</code>, <code>tablist</code>, and <code>grid</code>. It is only meaningful on elements that support it, and only within a supporting container.</p>
+
+
+<!-- section -->
+
+
+<h2>Example 1: Native <code>&lt;select&gt;</code></h2>
+
+<p>A native <code>&lt;select&gt;</code> element does not use <code>aria-selected</code> at all. Selection is communicated through the native <code>selected</code> HTML property, and the browser maps this to the accessibility tree automatically. This is included as a baseline, to show that ARIA is not always the right tool, native semantics can already do the job.</p>
+
+<div class="example">
+  <label class="label" for="native-select">Choose a fruit</label>
+  <select class="input" id="native-select">
+    <option>Apple</option>
+    <option selected>Banana</option>
+    <option>Cherry</option>
+  </select>
+</div>
+
+<p><b>Expected result:</b> "Banana" should be exposed as the selected option, with no <code>aria-selected</code> attribute anywhere in the markup.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="native-select"&gt;Choose a fruit&lt;/label&gt;
+&lt;select id="native-select"&gt;
+  &lt;option&gt;Apple&lt;/option&gt;
+  &lt;option <span class="highlight">selected</span>&gt;Banana&lt;/option&gt;
+  &lt;option&gt;Cherry&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 2: Custom single-select listbox</h2>
+
+<p>This is a custom, single-select listbox built from generic elements with ARIA roles. Only one option can be selected at a time.</p>
+
+<ul>
+  <li>Tab into the listbox, focus lands on the currently selected option.</li>
+  <li>Arrow Up / Arrow Down moves focus between options. In this pattern, moving focus also moves selection, matching how a native <code>&lt;select&gt;</code> behaves with arrow keys.</li>
+  <li>Home / End move focus (and selection) to the first or last option.</li>
+</ul>
+
+<div class="example">
+  <div id="listbox1" role="listbox" aria-label="Choose a fruit">
+    <div role="option" id="option-apple" aria-selected="false" tabindex="-1">Apple</div>
+    <div role="option" id="option-banana" aria-selected="true" tabindex="0">Banana</div>
+    <div role="option" id="option-cherry" aria-selected="false" tabindex="-1">Cherry</div>
+  </div>
+</div>
+
+<p><b>Expected result:</b> exactly one option should have <code>aria-selected="true"</code> at all times. Moving focus with arrow keys should move selection with it, and only the focused option should have <code>tabindex="0"</code>, every other option should have <code>tabindex="-1"</code>.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div <span class="highlight">role="listbox"</span> aria-label="Choose a fruit"&gt;
+  &lt;div <span class="highlight">role="option"</span> <span class="highlight">aria-selected="false"</span> tabindex="-1"&gt;Apple&lt;/div&gt;
+  &lt;div <span class="highlight">role="option"</span> <span class="highlight">aria-selected="true"</span> tabindex="0"&gt;Banana&lt;/div&gt;
+  &lt;div <span class="highlight">role="option"</span> <span class="highlight">aria-selected="false"</span> tabindex="-1"&gt;Cherry&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+<script>
+(function () {
+  const listbox = document.getElementById('listbox1');
+  const options = Array.from(listbox.querySelectorAll('[role="option"]'));
+
+  function selectOption(option) {
+    options.forEach(o => {
+      o.setAttribute('aria-selected', 'false');
+      o.setAttribute('tabindex', '-1');
+    });
+    option.setAttribute('aria-selected', 'true');
+    option.setAttribute('tabindex', '0');
+    option.focus();
+  }
+
+  listbox.addEventListener('click', (event) => {
+    const option = event.target.closest('[role="option"]');
+    if (option) selectOption(option);
+  });
+
+  listbox.addEventListener('keydown', (event) => {
+    const currentIndex = options.findIndex(o => o.getAttribute('tabindex') === '0');
+    let newIndex = currentIndex;
+
+    switch (event.key) {
+      case 'ArrowDown':
+        newIndex = Math.min(currentIndex + 1, options.length - 1);
+        break;
+      case 'ArrowUp':
+        newIndex = Math.max(currentIndex - 1, 0);
+        break;
+      case 'Home':
+        newIndex = 0;
+        break;
+      case 'End':
+        newIndex = options.length - 1;
+        break;
+      default:
+        return; // let all other keys behave normally
+    }
+
+    event.preventDefault();
+    selectOption(options[newIndex]);
+  });
+})();
+</script>
+
+
+<!-- section -->
+
+
+<h2>Example 3: Custom multi-select listbox</h2>
+
+<p>This listbox uses <code>aria-multiselectable="true"</code>, allowing more than one option to be selected independently. Unlike Example 2, moving focus does not change selection, selection and focus are handled separately.</p>
+
+<ul>
+  <li>Tab into the listbox, focus lands on the first option.</li>
+  <li>Arrow Up / Arrow Down moves focus between options, without changing selection.</li>
+  <li>Space toggles selection of the currently focused option, on or off, independently of any other option.</li>
+</ul>
+
+<div class="example">
+  <div id="listbox2" role="listbox" aria-label="Newsletter interests" aria-multiselectable="true">
+    <div role="option" id="option-bats" aria-selected="true" tabindex="0">Bats</div>
+    <div role="option" id="option-kangaroos" aria-selected="false" tabindex="-1">Kangaroos</div>
+    <div role="option" id="option-possums" aria-selected="true" tabindex="-1">Possums</div>
+  </div>
+</div>
+
+<p><b>Expected result:</b> any number of options, including zero or all three, should be able to have <code>aria-selected="true"</code> at the same time. Moving focus with arrow keys should never change selection on its own, only Space should toggle the focused option's selected state.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div <span class="highlight">role="listbox"</span> aria-label="Newsletter interests" <span class="highlight">aria-multiselectable="true"</span>&gt;
+  &lt;div <span class="highlight">role="option"</span> <span class="highlight">aria-selected="true"</span> tabindex="0"&gt;Bats&lt;/div&gt;
+  &lt;div <span class="highlight">role="option"</span> <span class="highlight">aria-selected="false"</span> tabindex="-1"&gt;Kangaroos&lt;/div&gt;
+  &lt;div <span class="highlight">role="option"</span> <span class="highlight">aria-selected="true"</span> tabindex="-1"&gt;Possums&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+<script>
+(function () {
+  const listbox = document.getElementById('listbox2');
+  const options = Array.from(listbox.querySelectorAll('[role="option"]'));
+
+  function moveFocusTo(option) {
+    options.forEach(o => o.setAttribute('tabindex', '-1'));
+    option.setAttribute('tabindex', '0');
+    option.focus();
+  }
+
+  function toggleSelection(option) {
+    const isSelected = option.getAttribute('aria-selected') === 'true';
+    option.setAttribute('aria-selected', String(!isSelected));
+  }
+
+  listbox.addEventListener('click', (event) => {
+    const option = event.target.closest('[role="option"]');
+    if (option) {
+      moveFocusTo(option);
+      toggleSelection(option);
+    }
+  });
+
+  listbox.addEventListener('keydown', (event) => {
+    const currentIndex = options.findIndex(o => o.getAttribute('tabindex') === '0');
+
+    if (event.key === ' ') {
+      event.preventDefault();
+      toggleSelection(options[currentIndex]);
+      return;
+    }
+
+    let newIndex = currentIndex;
+
+    switch (event.key) {
+      case 'ArrowDown':
+        newIndex = Math.min(currentIndex + 1, options.length - 1);
+        break;
+      case 'ArrowUp':
+        newIndex = Math.max(currentIndex - 1, 0);
+        break;
+      case 'Home':
+        newIndex = 0;
+        break;
+      case 'End':
+        newIndex = options.length - 1;
+        break;
+      default:
+        return; // let all other keys behave normally, selection is untouched
+    }
+
+    event.preventDefault();
+    moveFocusTo(options[newIndex]);
+  });
+})();
+</script>
+
+
+<!-- section -->
+
+
+<h2>Example 4: misuse, no supporting container</h2>
+
+<p>This element has <code>aria-selected</code>, but it is not inside a container role that supports selection, such as <code>listbox</code>, <code>tablist</code>, or <code>grid</code>. This is a misuse of the attribute.</p>
+
+<div class="example">
+  <div aria-selected="true">
+    Apple
+  </div>
+</div>
+
+<p><b>Expected result:</b> worth confirming directly, since there is no supporting container role, <code>aria-selected</code> may not be exposed or announced consistently.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div <span class="highlight">aria-selected="true"</span>&gt;
+  Apple
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<p><b>Note for testing:</b> confirm all four results above with your standard browser and screen reader combinations before treating them as settled. Selection announcements for single-select vs. multi-select listboxes, and the misuse case in Example 4, have not been verified here.</p>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
