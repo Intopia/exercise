@@ -31,9 +31,19 @@
   <p>Please read the <b>terms and conditions</b> before continuing.</p>
 </div>
 
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;p&gt;Please read the <span class="highlight">&lt;b&gt;</span>terms and conditions<span class="highlight">&lt;/b&gt;</span> before continuing.&lt;/p&gt;</code></pre>
+</details>
+
 <div class="example">
   <p>Warning: <strong>do not disconnect the power supply</strong> during installation.</p>
 </div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;p&gt;Warning: <span class="highlight">&lt;strong&gt;</span>do not disconnect the power supply<span class="highlight">&lt;/strong&gt;</span> during installation.&lt;/p&gt;</code></pre>
+</details>
 
 <p><b>Expected result:</b> worth confirming directly, whether <code>&lt;strong&gt;</code> receives any distinct vocal treatment (a change in pitch, emphasis, or an announced label) compared with <code>&lt;b&gt;</code>, or whether both are read identically.</p>
 
@@ -49,9 +59,19 @@
   <p>The term <i>homo sapiens</i> refers to modern humans.</p>
 </div>
 
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;p&gt;The term <span class="highlight">&lt;i&gt;</span>homo sapiens<span class="highlight">&lt;/i&gt;</span> refers to modern humans.&lt;/p&gt;</code></pre>
+</details>
+
 <div class="example">
   <p>I <em>did</em> send the email yesterday.</p>
 </div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;p&gt;I <span class="highlight">&lt;em&gt;</span>did<span class="highlight">&lt;/em&gt;</span> send the email yesterday.&lt;/p&gt;</code></pre>
+</details>
 
 <p><b>Expected result:</b> worth confirming directly, whether <code>&lt;em&gt;</code> is read with any actual vocal stress, or whether it's read identically to plain text and <code>&lt;i&gt;</code>.</p>
 
@@ -67,9 +87,19 @@
   <p>Regular price: <s>$120</s> $89</p>
 </div>
 
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;p&gt;Regular price: <span class="highlight">&lt;s&gt;</span>$120<span class="highlight">&lt;/s&gt;</span> $89&lt;/p&gt;</code></pre>
+</details>
+
 <div class="example">
   <p>The event was <del>cancelled</del> postponed.</p>
 </div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;p&gt;The event was <span class="highlight">&lt;del&gt;</span>cancelled<span class="highlight">&lt;/del&gt;</span> postponed.&lt;/p&gt;</code></pre>
+</details>
 
 <p><b>Expected result:</b> worth confirming directly, whether <code>&lt;del&gt;</code> is announced as a deletion (for example, "deletion, cancelled") or read with no indication anything was removed, identically to <code>&lt;s&gt;</code>.</p>
 
@@ -85,9 +115,19 @@
   <p>The word <u>seperate</u> is misspelled.</p>
 </div>
 
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;p&gt;The word <span class="highlight">&lt;u&gt;</span>seperate<span class="highlight">&lt;/u&gt;</span> is misspelled.&lt;/p&gt;</code></pre>
+</details>
+
 <div class="example">
   <p>The meeting is now scheduled for <ins>Wednesday</ins> at 3pm.</p>
 </div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;p&gt;The meeting is now scheduled for <span class="highlight">&lt;ins&gt;</span>Wednesday<span class="highlight">&lt;/ins&gt;</span> at 3pm.&lt;/p&gt;</code></pre>
+</details>
 
 <p><b>Expected result:</b> worth confirming directly, whether <code>&lt;ins&gt;</code> is announced as an insertion, or read identically to <code>&lt;u&gt;</code> with no indication anything was added.</p>
 
@@ -103,6 +143,11 @@
   <p>The <abbr title="World Health Organization">WHO</abbr> issued new guidelines today.</p>
 </div>
 
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;p&gt;The <span class="highlight">&lt;abbr title="World Health Organization"&gt;</span>WHO<span class="highlight">&lt;/abbr&gt;</span> issued new guidelines today.&lt;/p&gt;</code></pre>
+</details>
+
 <p><b>Expected result:</b> worth confirming directly, whether the <code>title</code> is announced at all, and if so, whether "WHO" is spelled out letter by letter, read as a word, or the expanded title is read instead or in addition.</p>
 
 
@@ -116,6 +161,11 @@
 <div class="example">
   <p>As the saying goes, <q>actions speak louder than words</q>.</p>
 </div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;p&gt;As the saying goes, <span class="highlight">&lt;q&gt;</span>actions speak louder than words<span class="highlight">&lt;/q&gt;</span>.&lt;/p&gt;</code></pre>
+</details>
 
 <p><b>Expected result:</b> worth confirming directly, whether this is announced as a quotation (for example, "quote... end quote"), or whether only the browser-generated punctuation characters are read as plain text, or neither.</p>
 
@@ -131,6 +181,11 @@
   <p>Please review the <mark>highlighted</mark> section before submitting.</p>
 </div>
 
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;p&gt;Please review the <span class="highlight">&lt;mark&gt;</span>highlighted<span class="highlight">&lt;/mark&gt;</span> section before submitting.&lt;/p&gt;</code></pre>
+</details>
+
 <p><b>Expected result:</b> worth confirming directly, whether this is announced as highlighted content, or read with no indication at all.</p>
 
 
@@ -145,9 +200,19 @@
   <p>The chemical formula for water is H<sub>2</sub>O.</p>
 </div>
 
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;p&gt;The chemical formula for water is H<span class="highlight">&lt;sub&gt;</span>2<span class="highlight">&lt;/sub&gt;</span>O.&lt;/p&gt;</code></pre>
+</details>
+
 <div class="example">
   <p>The deadline is March 3<sup>rd</sup>.</p>
 </div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;p&gt;The deadline is March 3<span class="highlight">&lt;sup&gt;</span>rd<span class="highlight">&lt;/sup&gt;</span>.&lt;/p&gt;</code></pre>
+</details>
 
 <p><b>Expected result:</b> worth confirming directly, whether the subscript/superscript positioning is conveyed in any way, or whether the text is simply read in line with no indication of its position.</p>
 
@@ -163,9 +228,19 @@
   <p>As explained in <cite>The Elements of Style</cite>, brevity is essential.</p>
 </div>
 
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;p&gt;As explained in <span class="highlight">&lt;cite&gt;</span>The Elements of Style<span class="highlight">&lt;/cite&gt;</span>, brevity is essential.&lt;/p&gt;</code></pre>
+</details>
+
 <div class="example">
   <p><dfn>Accessibility</dfn> refers to the practice of making content usable by people with disabilities.</p>
 </div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;p&gt;<span class="highlight">&lt;dfn&gt;</span>Accessibility<span class="highlight">&lt;/dfn&gt;</span> refers to the practice of making content usable by people with disabilities.&lt;/p&gt;</code></pre>
+</details>
 
 <p><b>Expected result:</b> worth confirming directly, whether either is announced with any distinct role or label, or read as plain text.</p>
 
@@ -181,13 +256,28 @@
   <p>Terms apply. <small>See website for full details.</small></p>
 </div>
 
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;p&gt;Terms apply. <span class="highlight">&lt;small&gt;</span>See website for full details.<span class="highlight">&lt;/small&gt;</span>&lt;/p&gt;</code></pre>
+</details>
+
 <div class="example">
   <p>Press <kbd>Ctrl</kbd> + <kbd>S</kbd> to save.</p>
 </div>
 
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;p&gt;Press <span class="highlight">&lt;kbd&gt;</span>Ctrl<span class="highlight">&lt;/kbd&gt;</span> + <span class="highlight">&lt;kbd&gt;</span>S<span class="highlight">&lt;/kbd&gt;</span> to save.&lt;/p&gt;</code></pre>
+</details>
+
 <div class="example">
   <p>The formula is <var>x</var> = <var>y</var> + 2.</p>
 </div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;p&gt;The formula is <span class="highlight">&lt;var&gt;</span>x<span class="highlight">&lt;/var&gt;</span> = <span class="highlight">&lt;var&gt;</span>y<span class="highlight">&lt;/var&gt;</span> + 2.&lt;/p&gt;</code></pre>
+</details>
 
 <p><b>Expected result:</b> no distinct announcement is expected for any of these three, they should be read as plain text. This is the deliberate control group for this page, if any of these do produce a distinct announcement, that would be a genuinely notable finding worth recording.</p>
 
