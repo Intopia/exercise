@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing back arrow options</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+      max-width: 48rem;
+      padding: 2rem;
+    }
+
+    h1 {
+      margin: 0 0 0.5rem;
+    }
+
+    p {
+      margin: 1.5rem 0;
+    }
+
+    code {
+      font-size: 0.9rem;
+    }
+
+    .arrow {
+      color: #555;
+    }
+
+    .note {
+      background: #fff3cd;
+      border: 1px solid #ffe69c;
+      padding: 0.75em 1em;
+      border-radius: 4px;
+      margin: 1.5em 0;
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<h1>Testing back arrow options</h1>
+
+<p>Each example uses a text character rather than an icon. Every arrow is purely decorative here, hidden via <code>aria-hidden="true"</code> to avoid additional noise or confusion for screen reader users, since the adjacent visible text ("Back to home") already conveys the link's purpose on its own.</p>
+
+<div class="note">
+  <p><b>What this page is actually testing:</b> the accessibility behaviour is identical and settled across every example below, none of these arrows should ever be announced, that part isn't in question. What varies, and what's worth checking, is how reliably each glyph <em>renders</em> as a recognisable arrow across different browsers, operating systems, and font stacks. The rarer characters here (Examples 4 and 8 in particular) are more likely to fall back to a missing-glyph box ("tofu") on systems with narrower font support than the common ones.</p>
+  <p><b>Scope limitation:</b> this pattern only works because the arrow sits next to visible text conveying the same meaning. An icon-only version of any of these, with no visible "Back to home" text, would need the opposite treatment: a real accessible name on the link itself (for example, via <code>aria-label</code>), not <code>aria-hidden</code> on the arrow. Copying this pattern into an icon-only link would produce a link with no accessible name at all.</p>
+</div>
+
+<h3>Example 1: ← U+2190 LEFTWARDS ARROW</h3>
+<p><span aria-hidden="true" class="arrow">←</span> <a href="/">Back to home</a></p> 
+<pre><code>&lt;span aria-hidden="true"&gt;←&lt;/span&gt; &lt;a href="/"&gt;Back to home&lt;/a&gt;</code></pre>
+
+<h3>Example 2: ‹ U+2039 SINGLE LEFT-POINTING ANGLE QUOTATION MARK</h3>
+<p><span aria-hidden="true" class="arrow">‹</span> <a href="/">Back to home</a></p> 
+<pre><code>&lt;span aria-hidden="true"&gt;‹&lt;/span&gt; &lt;a href="/"&gt;Back to home&lt;/a&gt;</code></pre>
+
+<h3>Example 3: « U+00AB LEFT-POINTING DOUBLE ANGLE QUOTATION MARK</h3>
+<p><span aria-hidden="true" class="arrow">«</span> <a href="/">Back to home</a></p> 
+<pre><code>&lt;span aria-hidden="true"&gt;«&lt;/span&gt; &lt;a href="/"&gt;Back to home&lt;/a&gt;</code></pre>
+
+<h3>Example 4: ⟵ U+27F5 LONG LEFTWARDS ARROW</h3>
+<p><span aria-hidden="true" class="arrow">⟵</span> <a href="/">Back to home</a></p> 
+<pre><code>&lt;span aria-hidden="true"&gt;⟵&lt;/span&gt; &lt;a href="/"&gt;Back to home&lt;/a&gt;</code></pre>
+
+<h3>Example 5: ⬅ U+2B05 LEFTWARDS BLACK ARROW</h3>
+<p><span aria-hidden="true" class="arrow">⬅</span> <a href="/">Back to home</a></p> 
+<pre><code>&lt;span aria-hidden="true"&gt;⬅&lt;/span&gt; &lt;a href="/"&gt;Back to home&lt;/a&gt;</code></pre>
+
+<h3>Example 6: ⇐ U+21D0 LEFTWARDS DOUBLE ARROW</h3>
+<p><span aria-hidden="true" class="arrow">⇐</span> <a href="/">Back to home</a></p> 
+<pre><code>&lt;span aria-hidden="true"&gt;⇐&lt;/span&gt; &lt;a href="/"&gt;Back to home&lt;/a&gt;</code></pre>
+
+<h3>Example 7: ↩ U+21A9 LEFTWARDS ARROW WITH HOOK</h3>
+<p><span aria-hidden="true" class="arrow">↩</span> <a href="/">Back to home</a></p> 
+<pre><code>&lt;span aria-hidden="true"&gt;↩&lt;/span&gt; &lt;a href="/"&gt;Back to home&lt;/a&gt;</code></pre>
+
+<h3>Example 8: ↢ U+21A2 LEFTWARDS ARROW WITH TAIL</h3>
+<p><span aria-hidden="true" class="arrow">↢</span> <a href="/">Back to home</a></p> 
+<pre><code>&lt;span aria-hidden="true"&gt;↢&lt;/span&gt; &lt;a href="/"&gt;Back to home&lt;/a&gt;</code></pre>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
