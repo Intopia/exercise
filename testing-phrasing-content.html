@@ -197,9 +197,18 @@
 
 <h2>Notes</h2>
 
-<p>Most screen readers include features to adjust the announcement or verbosity of content. The tests above assume default settings, with verbosity set to low.</p>
+<p>Verbosity settings vary significantly between screen readers, both in how many levels exist and in what each level is called. None of them use a single, universal "low/medium/high" scale, so it's worth being precise about which setting is actually active when testing:</p>
 
-<p>Based on experience, JAWS and NVDA are expected to announce almost none of the phrasing elements on this page at default, low-verbosity settings. This is an expectation going into testing, not a confirmed result, record what's actually found against each example above.</p>
+<ul>
+  <li><b>JAWS</b>: three levels, Beginner, Intermediate, and Advanced. Beginner gives the most information, Advanced gives the least. Individual items within each level can also be customised separately. <a href="https://support.microsoft.com/en-US/accessibility/word/use-a-screen-reader-to-add-read-and-delete-comments-in-word" target="_blank">Source</a>.</li>
+  <li><b>NVDA</b>: "Speech verbosity," three levels, Terse, Medium, and Verbose. Medium is the default. <a href="https://download.nvaccess.org/documentation/userGuide.html#MathSpeechVerbosity" target="_blank">Source</a>.</li>
+  <li><b>VoiceOver</b>: Verbosity &gt; Speech, three levels, High, Medium, and Low. By default, VoiceOver uses <b>High</b>, "to help new Mac and VoiceOver users." This is the opposite approach to NVDA, which defaults to its middle setting rather than its most verbose. <a href="https://support.apple.com/en-gb/guide/voiceover/cpvouverbgeneral/mac" target="_blank">Source (levels)</a>, <a href="https://support.apple.com/guide/voiceover/customize-verbosity-vo27984/mac" target="_blank">source (default)</a>.</li>
+  <li><b>TalkBack</b>: verbosity presets of High and Low, plus a Custom option that unlocks more granular preferences, such as keyboard echo and usage hints. <a href="https://support.google.com/accessibility/android/answer/6006589?hl=en" target="_blank">Source</a>.</li>
+</ul>
+
+<p>A concrete illustration of how much a default verbosity setting can suppress: in Microsoft Word, JAWS by default announces who inserted a comment and when, but not the comment text itself, unless "Control description" is specifically enabled in JAWS's verbosity settings. The same kind of default suppression is plausible for several of the phrasing elements tested on this page, don't assume something wasn't announced because of a markup or support issue without first checking whether a verbosity setting is filtering it out.</p>
+
+<p>Based on experience, JAWS and NVDA are expected to announce almost none of the phrasing elements on this page at their default settings. This is an expectation going into testing, not a confirmed result, record what's actually found against each example above, and note which verbosity level was active at the time.</p>
 
 <p>Phrasing element announcement is one of the more inconsistently implemented areas across screen readers, several depend on verbosity settings the user controls, and behaviour has been known to change between versions. Rather than guess, this page states what's being tested and leaves the actual result for you to confirm and record.</p>
 
