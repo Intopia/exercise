@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing an accessible character counter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    .character-text,
+    .character-text-error {
+      display: inline-block;
+      margin: .5em 0 0;
+      transition: color 120ms ease-in;
+    }
+
+    .character-text-error {
+      color: #bb0000;
+      font-weight: 600;
+    }
+
+    .note {
+      background: #fff3cd;
+      border: 1px solid #ffe69c;
+      padding: 0.75em 1em;
+      border-radius: 4px;
+      margin: 1.5em 0;
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<h1>Testing an accessible character counter</h1>
+
+<p>A character counter that avoids the two most common accessibility failures of this pattern: saying nothing to screen reader users at all, or announcing every single keystroke. Instead, updates are debounced during normal typing, with specific milestones (20, 10, 5, 1 characters remaining), crossing the limit, and reaching it exactly, all interrupting the debounce to announce immediately.</p>
+
+<p>This also correctly suppresses announcements during IME composition (used for languages like Chinese, Japanese, and Korean), so intermediate, not-yet-committed characters aren't announced mid-composition.</p>
+
+<p><a href="#">Demo link before</a></p>
+
+<div class="example">
+  <label class="label" for="comment">Add a comment</label>
+  <span class="help-text" id="comment-help">Enter up to 100 characters</span>
+  <textarea class="input" id="comment" aria-describedby="comment-help" data-maxlength="100"></textarea>
+  <span class="character-text" id="comment-count-visible" aria-hidden="true"></span>
+  <span class="hidden" id="comment-count-live" aria-live="polite" aria-atomic="true"></span>
+</div>
+
+<p><a href="#">Demo link after</a></p>
+
+<p><b>Expected result:</b> the visible counter should update on every keystroke. The announced value should update at the milestones described above, not on every keystroke, and should announce immediately when crossing into or out of the limit, or reaching it exactly.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="comment"&gt;Add a comment&lt;/label&gt;
+&lt;span id="comment-help"&gt;Enter up to 100 characters&lt;/span&gt;
+&lt;textarea
+  id="comment"
+  <span class="highlight">aria-describedby="comment-help"</span>
+  data-maxlength="100"
+&gt;&lt;/textarea&gt;
+&lt;span id="comment-count-visible" aria-hidden="true"&gt;&lt;/span&gt;
+&lt;span id="comment-count-live" <span class="highlight">aria-live="polite" aria-atomic="true"</span>&gt;&lt;/span&gt;</code></pre>
+</details>
+
+<div class="note">
+  <p><b>Worth testing directly:</b> the script uses <code>requestAnimationFrame</code> to briefly clear the live region before setting new text, this forces a re-announcement even when the new message is identical to the previous one, since some screen reader/browser combinations only announce on an actual text change. A short <code>setTimeout</code> (commonly 100–150ms) is a more established version of this same technique elsewhere in the accessibility community. Whether <code>requestAnimationFrame</code>'s much shorter delay (typically under 20ms, the time to the next paint) is reliably long enough for every AT/browser combination to register two distinct mutations, rather than coalescing them into one, hasn't been verified here.</p>
+  <p>The two "Demo link" anchors above and below the counter are included to test that tab order and focus flow sensibly around the live region, and that the region itself never unexpectedly receives or traps focus.</p>
+</div>
+
+<script>
+(() => {
+  const DEFAULT_MAX = 50;
+  const DEBOUNCE_MS = 700;
+  const WARNING_THRESHOLD = 10; // switch visual state at 10 chars before limit
+
+  const MILESTONES_LEFT = new Set([20, 10, 5, 1]);
+
+  function debounce(fn, delay) {
+    let timerId = null;
+    return (...args) => {
+      if (timerId) window.clearTimeout(timerId);
+      timerId = window.setTimeout(() => fn(...args), delay);
+    };
+  }
+
+  function plural(n, word) {
+    return `${n} ${word}${n === 1 ? "" : "s"}`;
+  }
+
+  function getMaxForTextarea(textarea) {
+    const dataMax = Number(textarea.getAttribute("data-maxlength"));
+    if (Number.isFinite(dataMax) && dataMax > 0) return dataMax;
+
+    const maxAttr = Number(textarea.getAttribute("maxlength"));
+    if (Number.isFinite(maxAttr) && maxAttr > 0) return maxAttr;
+
+    const describedBy = textarea.getAttribute("aria-describedby");
+    if (describedBy) {
+      const ids = describedBy.split(/\s+/).filter(Boolean);
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const match = el.textContent.match(/(\d+)/);
+        if (match) {
+          const parsed = Number(match[1]);
+          if (Number.isFinite(parsed) && parsed > 0) return parsed;
+        }
+      }
+    }
+
+    return DEFAULT_MAX;
+  }
+
+  function buildMessages(count, max) {
+    const remaining = max - count;
+
+    const visible =
+      remaining >= 0
+        ? `${plural(remaining, "character")} left`
+        : `${plural(Math.abs(remaining), "character")} over the limit`;
+
+    const sr =
+      remaining >= 0
+        ? `${plural(remaining, "character")} remaining`
+        : `${plural(Math.abs(remaining), "character")} over limit`;
+
+    return { visible, sr, remaining };
+  }
+
+  function setupCounter(textarea, visibleEl, liveEl) {
+    const max = getMaxForTextarea(textarea);
+
+    let lastRemaining = null;
+    let isComposing = false;
+
+    const updateVisualClass = (remaining) => {
+      // Switch to error state at threshold OR over the limit
+      if (remaining <= WARNING_THRESHOLD) {
+        visibleEl.classList.remove("character-text");
+        visibleEl.classList.add("character-text-error");
+      } else {
+        visibleEl.classList.remove("character-text-error");
+        visibleEl.classList.add("character-text");
+      }
+    };
+
+    const updateVisible = () => {
+      const count = textarea.value.length;
+      const { visible, remaining } = buildMessages(count, max);
+
+      visibleEl.textContent = visible;
+      updateVisualClass(remaining);
+
+      return { count, remaining };
+    };
+
+    const announceNow = (message) => {
+      liveEl.textContent = "";
+      window.requestAnimationFrame(() => {
+        liveEl.textContent = message;
+      });
+    };
+
+    const debouncedAnnounce = debounce(() => {
+      if (isComposing) return;
+      const count = textarea.value.length;
+      const { sr } = buildMessages(count, max);
+      announceNow(sr);
+    }, DEBOUNCE_MS);
+
+    const onInput = () => {
+      const { remaining } = updateVisible();
+      const { sr } = buildMessages(textarea.value.length, max);
+
+      if (isComposing) {
+        lastRemaining = remaining;
+        return;
+      }
+
+      const crossedToOverLimit =
+        lastRemaining !== null && lastRemaining >= 0 && remaining < 0;
+
+      const crossedBackUnder =
+        lastRemaining !== null && lastRemaining < 0 && remaining >= 0;
+
+      const reachedExactlyLimit =
+        remaining === 0 && lastRemaining !== 0;
+
+      if (crossedToOverLimit) {
+        announceNow(`Limit exceeded. ${sr}.`);
+      } else if (crossedBackUnder) {
+        announceNow(`Back under the limit. ${sr}.`);
+      } else if (reachedExactlyLimit) {
+        announceNow(`Limit reached. ${sr}.`);
+      } else if (MILESTONES_LEFT.has(remaining)) {
+        announceNow(sr);
+      } else {
+        debouncedAnnounce();
+      }
+
+      lastRemaining = remaining;
+    };
+
+    textarea.addEventListener("compositionstart", () => {
+      isComposing = true;
+    });
+
+    textarea.addEventListener("compositionend", () => {
+      isComposing = false;
+      onInput();
+    });
+
+    textarea.addEventListener("input", onInput);
+
+    // Initialise
+    const initial = updateVisible();
+    lastRemaining = initial.remaining;
+
+    textarea.addEventListener("focus", () => {
+      const { sr } = buildMessages(textarea.value.length, max);
+      announceNow(sr);
+    });
+  }
+
+  // Targets this specific counter by id, rather than querying the generic
+  // .example class, which is reused across most pages on this site and
+  // would make this script fragile if more than one .example block ever
+  // appears on the same page.
+  const textarea = document.getElementById("comment");
+  const visibleEl = document.getElementById("comment-count-visible");
+  const liveEl = document.getElementById("comment-count-live");
+
+  if (textarea && visibleEl && liveEl) {
+    setupCounter(textarea, visibleEl, liveEl);
+  }
+})();
+</script>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
