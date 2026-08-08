@@ -30,7 +30,7 @@ Headings
 h1,
 h2,
 h3 {
-  line-height: 1.2;
+  ine-height: 1.2;
   color: #C03C0C;
   font-weight: 600;
   font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, Frutiger, 'Frutiger Linotype', Univers, Calibri, 'Gill Sans', 'Gill Sans MT', 'Myriad Pro', Myriad, 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, sans-serif;
@@ -382,6 +382,11 @@ p + .example {
 /* ---------------------
 footer link
 ----------------------*/
+
+.header-link {
+  margin: 0 0 2em;
+  line-height: 1;
+}
 
 .footer-link {
   margin: 5em 0 1em;
@@ -759,7 +764,7 @@ Intopia logo
 
 .intopia-home-link {
   display: inline-block;
-  margin: 0 0 2em;
+  margin: 0 0 1em;
 }
 
 a.intopia-home-link:focus {
