@@ -385,35 +385,7 @@ footer link
 
 .footer-link {
   margin: 5em 0 1em;
-  font-size: 0.777777777777778em;
   line-height: 1;
-}
-
-.footer-link a {
-  display: inline-block;
-  padding: 0.75em 1em;
-  border: 0;
-  background: blue !important;
-  color: #fff !important;
-  text-decoration: none;
-  border-radius: 0.2em;
-}
-
-.footer-link a:focus {
-  background: #000 !important;
-  color: #fff !important;
-  outline: none;
-  box-shadow: 0 0 0 2px #fff, 0 0 0 5px #000;
-}
-
-.footer-link a:hover {
-  background: green !important;
-  color: #fff !important;
-}
-
-.footer-link a:active {
-  background: red !important;
-  color: #fff !important;
 }
 
 /* ---------------------

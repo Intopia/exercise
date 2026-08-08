@@ -241,6 +241,6 @@
 
 <p><b>A lesson from testing this page:</b> the original version of Example 4 used <code>role="grid"</code> for a static calendar display, without the required <code>role="row"</code> structure and without any keyboard interactivity. VoiceOver could not navigate into it at all, treating the whole thing as a single unstructured block. This has been corrected by using a plain, native <code>&lt;table&gt;</code> instead, since <code>aria-current</code> does not need a grid role to work, and a static display should not be given an interactive composite role like <code>grid</code> in the first place.</p>
 
-<p class="footer-link"><a href="testing.html">Testing home</a></p>
+<p class="footer-link"><span aria-hidden="true" class="arrow">←</span> <a href="testing.html">Back to home</a></p>
 </body>
 </html>
