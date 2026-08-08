@@ -45,6 +45,8 @@
   <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
 </a>
 
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
 <h1>Testing <code>aria-activedescendant</code></h1>
 
 <p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-activedescendant" target="_blank"><code>aria-activedescendant</code></a> identifies the currently "active" element within a composite widget, without moving real DOM focus to it. This is often called virtual focus. The classic example is a combobox: a text input keeps real keyboard focus at all times, while <code>aria-activedescendant</code> tracks which option in a separate listbox is currently highlighted.</p>
@@ -264,6 +266,6 @@
 
 <p><b>Note for testing:</b> this is one of the more implementation-sensitive ARIA patterns on this site. Confirm with your standard browser and screen reader combinations that: the active option is actually announced as it changes, the input's own accessible name and role are still announced correctly alongside the active option, and that nothing about this pattern causes real focus to visibly or programmatically leave the input at any point.</p>
 
-<p class="footer-link"><span aria-hidden="true" class="arrow">←</span> <a href="testing.html">Back to home</a></p>
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 </body>
 </html>

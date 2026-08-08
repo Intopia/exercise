@@ -64,6 +64,8 @@
   <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
 </a>
 
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
 <h1>Testing <code>aria-current</code></h1>
 
 <p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-current" target="_blank"><code>aria-current</code></a> indicates the element within a set that represents the current item. It supports several specific values: <code>page</code>, <code>step</code>, <code>location</code>, <code>date</code>, <code>time</code>, and a generic <code>true</code>, plus <code>false</code> (the default).</p>
@@ -241,6 +243,6 @@
 
 <p><b>A lesson from testing this page:</b> the original version of Example 4 used <code>role="grid"</code> for a static calendar display, without the required <code>role="row"</code> structure and without any keyboard interactivity. VoiceOver could not navigate into it at all, treating the whole thing as a single unstructured block. This has been corrected by using a plain, native <code>&lt;table&gt;</code> instead, since <code>aria-current</code> does not need a grid role to work, and a static display should not be given an interactive composite role like <code>grid</code> in the first place.</p>
 
-<p class="footer-link"><span aria-hidden="true" class="arrow">←</span> <a href="testing.html">Back to home</a></p>
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 </body>
 </html>
