@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Testing focus management onsubmit - complex</title>
+  <title>Testing focus management onsubmit - form with more than two form fields</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
@@ -72,9 +72,13 @@ form {
   <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
 </a>
 
-<h1>Testing focus management onsubmit - complex</h1>
+<h1>Testing focus management onsubmit - form with more than two form fields</h1>
 
-<p>Is the focus management of this page logical and intuitive?</p>
+
+<!-- section -->
+
+
+<h2>Example</h2>
 
 <div class="example">
   <h3 class="contact-details-heading">Contact details</h3>
@@ -107,8 +111,26 @@ form {
 
     <button class="button" type="submit">Submit</button>
   </form>
-
 </div>
+
+
+<!-- section -->
+
+
+<h2>Where should focus go when a form is submitted with errors?</h2>
+
+<p>For forms with <b>one or two form fields</b>, move focus to the first field with an error.</p>
+
+<p>For forms with <b>three or more form fields</b>, move focus to an error summary above the form.</p>
+
+<p>The error summary should:</p>
+
+<ul>
+  <li>let users know there are errors in the form</li>
+  <li>state the number of errors</li>
+  <li>list each error</li>
+  <li>provide a link to each form field with an error</li>
+</ul>
 
 <script>
 document.getElementById('contact-form').addEventListener('submit', function (event) {
@@ -118,6 +140,10 @@ document.getElementById('contact-form').addEventListener('submit', function (eve
   // for an existing #error node) means this works identically whether
   // it's the first submit attempt or the fifth.
   const errorContainer = document.getElementById('error-notification-container');
+  // This demo always produces exactly two errors, so the count below is
+  // hardcoded. In a real implementation, calculate this from the actual
+  // number of errors present (e.g. `Please fix the following ${errorCount}
+  // errors`), don't copy the hardcoded "two" as-is.
   errorContainer.innerHTML = `
     <div class="error-notification">
       <h4 id="error" class="focus" tabindex="-1">Error: Please fix the following two errors and resubmit the form</h4>
