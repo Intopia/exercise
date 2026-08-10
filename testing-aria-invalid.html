@@ -102,6 +102,43 @@
 <p>Current support: <code>aria-invalid="grammar"</code> and <code>aria-invalid="spelling"</code> are recognised by modern browsers and assistive technologies. However, support is inconsistent: VoiceOver and NVDA announce the specific error type, while JAWS announces only a generic invalid state and does not distinguish between grammar, spelling and other validation errors.</p>
 
 
+<!-- section -->
+
+
+<h2>Invalid value</h2>
+
+<p>Any value other than <code>false</code>, <code>true</code>, <code>grammar</code> or <code>spelling</code> is not recognised by the ARIA specification.</p>
+
+<div class="example">
+  <label class="label" for="eee">Name</label>
+  <input class="input" id="eee" aria-invalid="yes">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="eee"&gt;Name&lt;/label&gt;
+&lt;input id="eee" <span class="highlight">aria-invalid="yes"</span>&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Empty value</h2>
+
+<p>An empty <code>aria-invalid</code> attribute is not a recognised value and will be flagged as invalid.</p>
+
+<div class="example">
+  <label class="label" for="fff">Name</label>
+  <input class="input" id="fff" aria-invalid="">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="fff"&gt;Name&lt;/label&gt;
+&lt;input id="fff" <span class="highlight">aria-invalid=""</span>&gt;</code></pre>
+</details>
+
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 </body>
