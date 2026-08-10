@@ -31,18 +31,18 @@ label {
 <h2>Example 1: Single visible reference</h2>
 
 <div class="example">
-  <label class="label" for="aaa">Name</label>
-  <p class="help-text" id="aaa-hint">Must be your full name</p>
-  <input class="input" id="aaa" aria-describedby="aaa-hint">
+  <label class="label" for="alpaca">Name</label>
+  <p class="help-text" id="badger">Must be your full name</p>
+  <input class="input" id="alpaca" aria-describedby="badger">
 </div>
 
 <p>Accessible description for the <code>&lt;input&gt;</code> should be: <q>Must be your full name</q></p>
 
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;label for="aaa"&gt;Name&lt;/label&gt;
-&lt;p id="aaa-hint"&gt;Must be your full name&lt;/p&gt;
-&lt;input id="aaa" <span class="highlight">aria-describedby="aaa-hint"</span>&gt;</code></pre>
+<pre><code>&lt;label for="alpaca"&gt;Name&lt;/label&gt;
+&lt;p id="badger"&gt;Must be your full name&lt;/p&gt;
+&lt;input id="alpaca" <span class="highlight">aria-describedby="badger"</span>&gt;</code></pre>
 </details>
 
 
@@ -52,20 +52,20 @@ label {
 <h2>Example 2: Reference to more than one source</h2>
 
 <div class="example">
-  <label class="label" for="bbb">Name</label>
-  <p class="help-text" id="bbb-hint">Must be your full name</p>
-  <input class="input" id="bbb" aria-describedby="bbb-hint bbb-error">
-  <p class="error-message" id="bbb-error">Error: This field is required</p>
+  <label class="label" for="camel">Name</label>
+  <p class="help-text" id="dolphin">Must be your full name</p>
+  <input class="input" id="camel" aria-describedby="dolphin echidna">
+  <p class="error-message" id="echidna">Error: This field is required</p>
 </div>
 
 <p>Accessible description for the <code>&lt;input&gt;</code> should be: <q>Must be your full name Error: This field is required</q></p>
 
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;label for="bbb"&gt;Name&lt;/label&gt;
-&lt;p id="bbb-hint"&gt;Must be your full name&lt;/p&gt;
-&lt;input id="bbb" <span class="highlight">aria-describedby="bbb-hint bbb-error"</span>&gt;
-&lt;p id="bbb-error"&gt;Error: This field is required&lt;/p&gt;</code></pre>
+<pre><code>&lt;label for="camel"&gt;Name&lt;/label&gt;
+&lt;p id="dolphin"&gt;Must be your full name&lt;/p&gt;
+&lt;input id="camel" <span class="highlight">aria-describedby="dolphin echidna"</span>&gt;
+&lt;p id="echidna"&gt;Error: This field is required&lt;/p&gt;</code></pre>
 </details>
 
 
@@ -75,18 +75,18 @@ label {
 <h2>Example 3: Reference to element hidden with <code>display: none</code></h2>
 
 <div class="example">
-  <label class="label" for="ccc">Name</label>
-  <p style="display: none;" id="ccc-hint">Must be your full name</p>
-  <input class="input" id="ccc" aria-describedby="ccc-hint">
+  <label class="label" for="gazelle">Name</label>
+  <p style="display: none;" id="hedgehog">Must be your full name</p>
+  <input class="input" id="gazelle" aria-describedby="hedgehog">
 </div>
 
 <p>Accessible description for the <code>&lt;input&gt;</code> should be: <q>Must be your full name</q></p>
 
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;label for="ccc"&gt;Name&lt;/label&gt;
-&lt;p <span class="highlight">style="display: none;"</span> id="ccc-hint"&gt;Must be your full name&lt;/p&gt;
-&lt;input id="ccc" <span class="highlight">aria-describedby="ccc-hint"</span>&gt;</code></pre>
+<pre><code>&lt;label for="gazelle"&gt;Name&lt;/label&gt;
+&lt;p <span class="highlight">style="display: none;"</span> id="hedgehog"&gt;Must be your full name&lt;/p&gt;
+&lt;input id="gazelle" <span class="highlight">aria-describedby="hedgehog"</span>&gt;</code></pre>
 </details>
 
 
@@ -96,18 +96,18 @@ label {
 <h2>Example 4: Reference to element hidden with CSS</h2>
 
 <div class="example">
-  <label class="label" for="ddd">Name</label>
-  <p class="help-text hidden" id="ddd-hint">Must be your full name</p>
-  <input class="input" id="ddd" aria-describedby="ddd-hint">
+  <label class="label" for="impala">Name</label>
+  <p class="help-text hidden" id="jaguar">Must be your full name</p>
+  <input class="input" id="impala" aria-describedby="jaguar">
 </div>
 
 <p>Accessible description for the <code>&lt;input&gt;</code> should be: <q>Must be your full name</q></p>
 
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;label class="label" for="ddd"&gt;Name&lt;/label&gt;
-&lt;p <span class="highlight">class="hidden"</span> id="ddd-hint"&gt;Must be your full name&lt;/p&gt;
-&lt;input class="input" id="ddd" <span class="highlight">aria-describedby="ddd-hint"</span>&gt;</code></pre>
+<pre><code>&lt;label class="label" for="impala"&gt;Name&lt;/label&gt;
+&lt;p <span class="highlight">class="hidden"</span> id="jaguar"&gt;Must be your full name&lt;/p&gt;
+&lt;input class="input" id="impala" <span class="highlight">aria-describedby="jaguar"</span>&gt;</code></pre>
 </details>
 
 
@@ -117,15 +117,61 @@ label {
 <h2>Example 5: Missing ID reference</h2>
 
 <div class="example">
-  <label class="label" for="eee">Name</label>
-  <input class="input" id="eee" aria-describedby="eee-hint">
+  <label class="label" for="kangaroo">Name</label>
+  <input class="input" id="kangaroo" aria-describedby="leopard">
 </div>
 
 <p>There should be no accessible description for the <code>&lt;input&gt;</code>.</p>
+
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;label class="label" for="eee"&gt;Name&lt;/label&gt;
-&lt;input class="input" id="eee" <span class="highlight">aria-describedby="eee-hint"</span>&gt;</code></pre>
+<pre><code>&lt;label class="label" for="kangaroo"&gt;Name&lt;/label&gt;
+&lt;input class="input" id="kangaroo" <span class="highlight">aria-describedby="leopard"</span>&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 6: Empty referenced element</h2>
+
+<p>If the element referenced by <code>aria-describedby</code> is empty, it does not contribute an accessible description.</p>
+
+<div class="example">
+  <label class="label" for="meerkat">Name</label>
+  <p id="numbat"></p>
+  <input class="input" id="meerkat" aria-describedby="numbat">
+</div>
+
+<p>There should be no accessible description for the <code>&lt;input&gt;</code>.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label class="label" for="meerkat"&gt;Name&lt;/label&gt;
+&lt;p <span class="highlight">id="numbat"</span>&gt;&lt;/p&gt;
+&lt;input class="input" id="meerkat" <span class="highlight">aria-describedby="numbat"</span>&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 7: Multiple references where one is missing</h2>
+
+<div class="example">
+  <label class="label" for="ostrich">Name</label>
+  <p class="help-text" id="parrot">Must be your full name</p>
+  <input class="input" id="ostrich" aria-describedby="parrot quoll">
+</div>
+
+<p>Accessible description for the <code>&lt;input&gt;</code> should be: <q>Must be your full name</q></p>
+<p>The ID <q>quoll</q> does not exist in the page and contributes nothing to the description.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label class="label" for="ostrich"&gt;Name&lt;/label&gt;
+&lt;p id="parrot"&gt;Must be your full name&lt;/p&gt;
+&lt;input class="input" id="ostrich" <span class="highlight">aria-describedby="parrot quoll"</span>&gt;</code></pre>
 </details>
 
 
