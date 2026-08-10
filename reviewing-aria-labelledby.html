@@ -198,6 +198,21 @@
 
 <!-- Section -->
 
+<h2>Example 9: Missing ID</h2>
+<p>If <code>aria-labelledby</code> references an ID that does not exist in the page, that ID contributes nothing to the accessible name.</p>
+<div class="example">
+  <button aria-labelledby="koala">Buy</button>
+</div>
+<p>Accessible name for the <code>&lt;button&gt;</code> should be: none — the referenced ID does not exist.</p>
+<p>Source:</p>
+<ul>
+  <li>No accessible name: the element with an ID of "koala" does not exist in the page</li>
+</ul>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button <span class="highlight">aria-labelledby="koala"</span>&gt;Buy&lt;/button&gt;</code></pre>
+</details>
+
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 </body>
 </html>
