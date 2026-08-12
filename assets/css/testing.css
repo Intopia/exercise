@@ -146,6 +146,10 @@ summary {
   cursor: pointer;
 }
 
+video {
+  margin: 1.5em 0;
+}
+
 /* ---------------------
 Pre and code
 ----------------------*/

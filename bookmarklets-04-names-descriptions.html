@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Page structure bookmarklets explained</title>
+  <title>Names and descriptions bookmarklets explained</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
@@ -52,11 +52,27 @@
 <hr>
 <h2 id="bookmarklet11">Bookmarklet 11. Highlight <code>aria-label</code></h2>
 
-<h3>What it does</h3>
-
 <p>Highlights all elements that use the <code>aria-label</code> attribute. Where present, the bookmarklet displays the value of the <code>aria-label</code> so you can quickly review the accessible name without inspecting the HTML.</p>
 
 <p>It also flags empty <code>aria-label</code> values and identifies cases where <code>aria-label</code> has been applied to roles that prohibit author-provided accessible names.</p>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/11-highlight-aria-label.mp4"></video>
+
+<details>
+  <summary>Transcript</summary>
+  <ul>
+    <li>Step 1: Start on <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page</li>
+    <li>Step 2: Find the "Highlight aria-label" bookmarklet</li>
+    <li>Step 3: Drag the bookmarklet to your browser's Bookmarks Bar</li>
+    <li>Step 4: Use the test page to review the bookmarklet</li>
+    <li>Step 5: Activate the bookmarklet</li>
+    <li>Step 6: Scroll through the page to review the highlighted elements</li>
+    <li>Valid aria-labels are shown in green</li>
+    <li>Empty aria-labels are shown in orange</li>
+    <li>Prohibited aria-labels are shown in red</li>
+    <li>Press the "Escape" key to remove the overlay</li>
+  </ul>
+</details>
 
 <h3>Use this bookmarklet when you want to:</h3>
 
@@ -77,40 +93,14 @@
   <li>Press <code>Esc</code> to remove the overlay.</li>
 </ol>
 
-<h3>Video demonstration</h3>
-
-<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/11-highlight-aria-label.mp4"></video>
-
-<details>
-  <summary>Transcript</summary>
-  <ul>
-    <li>Step 1: Start on <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page</li>
-    <li>Step 2: Find the "Highlight aria-label" bookmarklet</li>
-    <li>Step 3: Drag the bookmarklet to your browser's Bookmarks Bar</li>
-    <li>Step 4: Use the test page to review the bookmarklet</li>
-    <li>Step 5: Activate the bookmarklet</li>
-    <li>Step 6: Scroll through the page to review the highlighted elements</li>
-    <li>Valid aria-labels are shown in green</li>
-    <li>Empty aria-labels are shown in orange</li>
-    <li>Prohibited aria-labels are shown in red</li>
-    <li>Press the "Escape" key to remove the overlay</li>
-  </ul>
-</details>
-
 <h3>When reviewing the page, check for:</h3>
 
 <ul>
-  <li><strong><code>aria-label</code> values</strong> that clearly describe the purpose of the element.</li>
-  <li><strong>Empty <code>aria-label</code> attributes</strong>, which don't provide an accessible name.</li>
-  <li><strong>Elements where <code>aria-label</code> duplicates visible text</strong>, as this may indicate unnecessary markup.</li>
-  <li><strong><code>aria-label</code> used on roles that prohibit author-provided names</strong>, which may be ignored by assistive technologies.</li>
+  <li><code>aria-label</code> values that clearly describe the purpose of the element.</li>
+  <li>Empty <code>aria-label</code> attributes, which don't provide an accessible name.</li>
+  <li>Elements where <code>aria-label</code> duplicates visible text, as this may indicate unnecessary markup.</li>
+  <li><code>aria-label</code> used on roles that prohibit author-provided names, which may be ignored by assistive technologies.</li>
 </ul>
-
-<h3>Things to be aware of</h3>
-
-<p>This bookmarklet only highlights elements that use the <code>aria-label</code> attribute. It doesn't identify accessible names provided by other methods, such as visible text, <code>aria-labelledby</code>, associated <code>label</code> elements or the <code>alt</code> attribute on images.</p>
-
-<p>Using <code>aria-label</code> isn't automatically the best solution. In many cases, native HTML features or visible text provide a better and more maintainable accessible name.</p>
 
 
 <!-- section -->
@@ -118,8 +108,6 @@
 
 <hr>
 <h2 id="bookmarklet12">Bookmarklet 12. Highlight <code>aria-labelledby</code></h2>
-
-<h3>What it does</h3>
 
 <p>Highlights all elements that use the <code>aria-labelledby</code> attribute, together with the elements they reference. This makes it easier to see where an accessible name comes from and how the relationship has been created.</p>
 
@@ -131,27 +119,6 @@
   <li>elements that reference themselves</li>
   <li>referenced IDs that do not exist</li>
 </ul>
-
-<h3>Use this bookmarklet when you want to:</h3>
-
-<ul>
-  <li>identify where <code>aria-labelledby</code> has been used</li>
-  <li>see which content provides an element's accessible name</li>
-  <li>check that referenced IDs exist</li>
-  <li>review accessible name relationships across a page</li>
-</ul>
-
-<h3>How to use it</h3>
-
-<ol>
-  <li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
-  <li>Open the page you want to inspect.</li>
-  <li>Click the <strong>Highlight <code>aria-labelledby</code></strong> bookmarklet.</li>
-  <li>Scroll through the page to review each highlighted element and its referenced targets.</li>
-  <li>Press <code>Esc</code> to remove the overlay.</li>
-</ol>
-
-<h3>Video demonstration</h3>
 
 <video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/12-highlight-aria-labelledby.mp4"></video>
 
@@ -173,24 +140,35 @@
   </ul>
 </details>
 
+<h3>Use this bookmarklet when you want to:</h3>
+
+<ul>
+  <li>identify where <code>aria-labelledby</code> has been used</li>
+  <li>see which content provides an element's accessible name</li>
+  <li>check that referenced IDs exist</li>
+  <li>review accessible name relationships across a page</li>
+</ul>
+
+<h3>How to use it</h3>
+
+<ol>
+  <li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
+  <li>Open the page you want to inspect.</li>
+  <li>Click the <strong>Highlight <code>aria-labelledby</code></strong> bookmarklet.</li>
+  <li>Scroll through the page to review each highlighted element and its referenced targets.</li>
+  <li>Press <code>Esc</code> to remove the overlay.</li>
+</ol>
+
 <h3>When reviewing the page, check for:</h3>
 
 <ul>
-  <li><strong>Referenced elements that exist</strong> and contain meaningful text.</li>
-  <li><strong>Labels that clearly describe the element's purpose</strong>.</li>
-  <li><strong>Multiple referenced IDs</strong> that are combined in a logical order.</li>
-  <li><strong>Missing IDs</strong>, where <code>aria-labelledby</code> points to an element that cannot be found.</li>
-  <li><strong>Hidden referenced elements</strong>, which may not provide the intended accessible name.</li>
-  <li><strong>Self-referencing elements</strong>, where an element includes its own ID in the <code>aria-labelledby</code> attribute.</li>
+  <li>Referenced elements that exist and contain meaningful text.</li>
+  <li>Labels that clearly describe the element's purpose.</li>
+  <li>Multiple referenced IDs that are combined in a logical order.</li>
+  <li>Missing IDs, where <code>aria-labelledby</code> points to an element that cannot be found.</li>
+  <li>Hidden referenced elements, which may not provide the intended accessible name.</li>
+  <li>Self-referencing elements, where an element includes its own ID in the <code>aria-labelledby</code> attribute.</li>
 </ul>
-
-<h3>Things to be aware of</h3>
-
-<p>This bookmarklet shows the relationships created by <code>aria-labelledby</code>, but it can't determine whether the resulting accessible name is clear, concise or appropriate for the context.</p>
-
-<p>It also only checks names created using <code>aria-labelledby</code>. Accessible names may be provided in other ways, including visible text, associated <code>label</code> elements, <code>aria-label</code> and image alternative text.</p>
-
-<p>When multiple IDs are used, their text is combined in the order the IDs appear in the <code>aria-labelledby</code> attribute.</p>
 
 
 <!-- section -->
@@ -198,8 +176,6 @@
 
 <hr>
 <h2 id="bookmarklet13">Bookmarklet 13. Highlight <code>aria-describedby</code></h2>
-
-<h3>What it does</h3>
 
 <p>Highlights all elements that use the <code>aria-describedby</code> attribute, together with the elements they reference. This makes it easier to see where additional descriptions come from and how they are associated with an element.</p>
 
@@ -210,27 +186,6 @@
   <li>referenced elements that are hidden</li>
   <li>referenced IDs that do not exist</li>
 </ul>
-
-<h3>Use this bookmarklet when you want to:</h3>
-
-<ul>
-  <li>identify where <code>aria-describedby</code> has been used</li>
-  <li>inspect descriptions associated with form controls and other elements</li>
-  <li>check that referenced IDs exist</li>
-  <li>review description relationships across a page</li>
-</ul>
-
-<h3>How to use it</h3>
-
-<ol>
-  <li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
-  <li>Open the page you want to inspect.</li>
-  <li>Click the <strong>Highlight <code>aria-describedby</code></strong> bookmarklet.</li>
-  <li>Scroll through the page to review each highlighted element and its referenced descriptions.</li>
-  <li>Press <code>Esc</code> to remove the overlay.</li>
-</ol>
-
-<h3>Video demonstration</h3>
 
 <video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/13-highlight-aria-describedby.mp4"></video>
 
@@ -252,23 +207,34 @@
   </ul>
 </details>
 
+<h3>Use this bookmarklet when you want to:</h3>
+
+<ul>
+  <li>identify where <code>aria-describedby</code> has been used</li>
+  <li>inspect descriptions associated with form controls and other elements</li>
+  <li>check that referenced IDs exist</li>
+  <li>review description relationships across a page</li>
+</ul>
+
+<h3>How to use it</h3>
+
+<ol>
+  <li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
+  <li>Open the page you want to inspect.</li>
+  <li>Click the <strong>Highlight <code>aria-describedby</code></strong> bookmarklet.</li>
+  <li>Scroll through the page to review each highlighted element and its referenced descriptions.</li>
+  <li>Press <code>Esc</code> to remove the overlay.</li>
+</ol>
+
 <h3>When reviewing the page, check for:</h3>
 
 <ul>
-  <li><strong>Referenced elements that exist</strong> and contain useful descriptive information.</li>
-  <li><strong>Descriptions that provide additional context</strong>, such as instructions, hints or error messages.</li>
-  <li><strong>Multiple referenced IDs</strong> that are combined in a logical order.</li>
-  <li><strong>Missing IDs</strong>, where <code>aria-describedby</code> points to an element that cannot be found.</li>
-  <li><strong>Hidden referenced elements</strong>, which may not provide the intended description.</li>
+  <li>Referenced elements that exist and contain useful descriptive information.</li>
+  <li>Descriptions that provide additional context, such as instructions, hints or error messages.</li>
+  <li>Multiple referenced IDs that are combined in a logical order.</li>
+  <li>Missing IDs, where <code>aria-describedby</code> points to an element that cannot be found.</li>
+  <li>Hidden referenced elements, which may not provide the intended description.</li>
 </ul>
-
-<h3>Things to be aware of</h3>
-
-<p>This bookmarklet shows the relationships created by <code>aria-describedby</code>, but it can't determine whether the resulting description is helpful or appropriate for the context.</p>
-
-<p>Unlike <code>aria-labelledby</code>, which provides an element's accessible name, <code>aria-describedby</code> provides <strong>additional descriptive information</strong>. It should supplement an accessible name, not replace it.</p>
-
-<p>When multiple IDs are used, their text is combined in the order the IDs appear in the <code>aria-describedby</code> attribute.</p>
 
 
 <!-- section -->
@@ -277,17 +243,33 @@
 <hr>
 <h2 id="bookmarklet14">Bookmarklet 14. Highlight name mismatches</h2>
 
-<h3>What it does</h3>
-
 <p>Highlights links and buttons where the visible label and accessible name are compared. The bookmarklet identifies whether they:</p>
 
 <ul>
-  <li><strong>Match</strong>, where the accessible name matches the visible label.</li>
-  <li><strong>Partially match</strong>, where the accessible name begins with the visible label but includes additional text.</li>
-  <li><strong>Don't match</strong>, where the accessible name differs from the visible label.</li>
+  <li>Match: where the accessible name matches the visible label.</li>
+  <li>Partially match: where the accessible name begins with the visible label but includes additional text.</li>
+  <li>Don't match: where the accessible name differs from the visible label.</li>
 </ul>
 
 <p>This makes it easy to identify controls that may be difficult to operate using speech recognition software.</p>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/14-highlight-name-mismatches.mp4"></video>
+
+<details>
+  <summary>Transcript</summary>
+  <ul>
+    <li>Step 1: Start on <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page</li>
+    <li>Step 2: Find the "Highlight name mismatches" bookmarklet</li>
+    <li>Step 3: Drag the bookmarklet to your browser's Bookmarks Bar</li>
+    <li>Step 4: Use the test page to review the bookmarklet</li>
+    <li>Step 5: Activate the bookmarklet</li>
+    <li>Step 6: Scroll through the page to review the accessible names of the highlighted links and buttons</li>
+    <li>Accessible name matches are shown in green</li>
+    <li>Partial, modified matches are shown in blue</li>
+    <li>Misatches are shown in red</li>
+    <li>Press the "Escape" key to remove the overlay</li>
+  </ul>
+</details>
 
 <h3>Use this bookmarklet when you want to:</h3>
 
@@ -308,40 +290,14 @@
   <li>Press <code>Esc</code> to remove the overlay.</li>
 </ol>
 
-<h3>Video demonstration</h3>
-
-<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/14-highlight-name-mismatches.mp4"></video>
-
-<details>
-  <summary>Transcript</summary>
-  <ul>
-    <li>Step 1: Start on <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page</li>
-    <li>Step 2: Find the "Highlight name mismatches" bookmarklet</li>
-    <li>Step 3: Drag the bookmarklet to your browser's Bookmarks Bar</li>
-    <li>Step 4: Use the test page to review the bookmarklet</li>
-    <li>Step 5: Activate the bookmarklet</li>
-    <li>Step 6: Scroll through the page to review the accessible names of the highlighted links and buttons</li>
-    <li>Accessible name matches are shown in green</li>
-    <li>Partial, modified matches are shown in blue</li>
-    <li>Misatches are shown in red</li>
-    <li>Press the "Escape" key to remove the overlay</li>
-  </ul>
-</details>
-
 <h3>When reviewing the page, check for:</h3>
 
 <ul>
-  <li><strong>Matching names</strong>, where the accessible name matches the visible label.</li>
-  <li><strong>Partial matches</strong>, where the accessible name begins with the visible label but includes additional descriptive text.</li>
-  <li><strong>Mismatched names</strong>, where the visible label and accessible name differ.</li>
-  <li><strong>Controls that may be difficult to activate using speech recognition</strong>, because users are likely to speak the visible label rather than the accessible name.</li>
+  <li>Matching names, where the accessible name matches the visible label.</li>
+  <li>Partial matches, where the accessible name begins with the visible label but includes additional descriptive text.</li>
+  <li>Mismatched names, where the visible label and accessible name differ.</li>
+  <li>Controls that may be difficult to activate using speech recognition, because users are likely to speak the visible label rather than the accessible name.</li>
 </ul>
-
-<h3>Things to be aware of</h3>
-
-<p>This bookmarklet compares the visible label with the computed accessible name, but it can't determine whether the accessible name is appropriate for the context.</p>
-
-<p>A partial match isn't necessarily a problem. In many cases, additional descriptive text is helpful, provided the accessible name begins with the visible label.</p>
 
 
 <!-- section -->
@@ -350,8 +306,6 @@
 <hr>
 <h2 id="bookmarklet15">Bookmarklet 15. Highlight name-prohibited roles</h2>
 
-<h3>What it does</h3>
-
 <p>Highlights elements that have been given an author-provided accessible name using <code>aria-label</code> or <code>aria-labelledby</code>, even though their role does not allow one.</p>
 
 <p>Each affected element is labelled with the message:</p>
@@ -359,6 +313,22 @@
 <p><code>NAME PROHIBITED: [role]</code></p>
 
 <p>The bookmarklet checks roles that cannot be named in ARIA 1.2, together with additional name-prohibited roles identified in the ARIA 1.3 draft.</p>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/15-highlight-name-prohibited-roles.mp4"></video>
+
+<details>
+  <summary>Transcript</summary>
+  <ul>
+    <li>Step 1: Start on <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page</li>
+    <li>Step 2: Find the "Highlight name-prohibited roles" bookmarklet</li>
+    <li>Step 3: Drag the bookmarklet to your browser's Bookmarks Bar</li>
+    <li>Step 4: Use the test page to review the bookmarklet</li>
+    <li>Step 5: Activate the bookmarklet</li>
+    <li>Step 6: Scroll through the page to review the highlighted elements</li>
+    <li>Name-prohibited roles are shown in red</li>
+    <li>Press the "Escape" key to remove the overlay</li>
+  </ul>
+</details>
 
 <h3>Use this bookmarklet when you want to:</h3>
 
@@ -380,67 +350,16 @@
   <li>Press <code>Esc</code> to remove the overlay.</li>
 </ol>
 
-<h3>Video demonstration</h3>
-
-<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/15-highlight-name-prohibited-roles.mp4"></video>
-
-<details>
-  <summary>Transcript</summary>
-  <ul>
-    <li>Step 1: Start on <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page</li>
-    <li>Step 2: Find the "Highlight name-prohibited roles" bookmarklet</li>
-    <li>Step 3: Drag the bookmarklet to your browser's Bookmarks Bar</li>
-    <li>Step 4: Use the test page to review the bookmarklet</li>
-    <li>Step 5: Activate the bookmarklet</li>
-    <li>Step 6: Scroll through the page to review the highlighted elements</li>
-    <li>Name-prohibited roles are shown in red</li>
-    <li>Press the "Escape" key to remove the overlay</li>
-  </ul>
-</details>
-
 <h3>When reviewing the page, check for:</h3>
 
 <ul>
-  <li><strong><code>aria-label</code> or <code>aria-labelledby</code> applied to a name-prohibited role</strong>.</li>
-  <li><strong>Native HTML elements with implicit name-prohibited roles</strong>, such as <code>caption</code>, <code>code</code>, <code>p</code>, <code>strong</code>, <code>sub</code> and <code>sup</code>.</li>
-  <li><strong>Explicit ARIA roles that cannot be named</strong>, such as <code>role="caption"</code> or <code>role="generic"</code>.</li>
-  <li><strong>ARIA attributes that should be removed</strong>, rather than replaced with another accessible naming technique.</li>
-  <li><strong>Elements that may need a different role or HTML element</strong> if an accessible name is genuinely required.</li>
+  <li><code>aria-label</code> or <code>aria-labelledby</code> applied to a name-prohibited role.</li>
+  <li>Native HTML elements with implicit name-prohibited roles, such as <code>caption</code>, <code>code</code>, <code>p</code>, <code>strong</code>, <code>sub</code> and <code>sup</code>.</li>
+  <li>Explicit ARIA roles that cannot be named, such as <code>role="caption"</code> or <code>role="generic"</code>.</li>
+  <li>ARIA attributes that should be removed, rather than replaced with another accessible naming technique.</li>
+  <li>Elements that may need a different role or HTML element if an accessible name is genuinely required.</li>
 </ul>
 
-<h3>Things to be aware of</h3>
-
-<p>The bookmarklet checks the following name-prohibited roles from ARIA 1.2:</p>
-
-<ul>
-  <li><code>caption</code></li>
-  <li><code>code</code></li>
-  <li><code>deletion</code></li>
-  <li><code>emphasis</code></li>
-  <li><code>generic</code></li>
-  <li><code>insertion</code></li>
-  <li><code>paragraph</code></li>
-  <li><code>presentation</code></li>
-  <li><code>strong</code></li>
-  <li><code>subscript</code></li>
-  <li><code>superscript</code></li>
-</ul>
-
-<p>It also checks these additional name-prohibited roles from the current ARIA 1.3 draft:</p>
-
-<ul>
-  <li><code>definition</code></li>
-  <li><code>mark</code></li>
-  <li><code>none</code></li>
-  <li><code>suggestion</code></li>
-  <li><code>term</code></li>
-  <li><code>time</code></li>
-  <li><code>tooltip</code></li>
-</ul>
-
-<p>Because ARIA 1.3 is still a draft, its role definitions may change before the specification is final.</p>
-
-<p>The bookmarklet only looks for author-provided names created using <code>aria-label</code> or <code>aria-labelledby</code>. It does not mean that the element's text content is invalid or should be removed.</p>
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 </body>

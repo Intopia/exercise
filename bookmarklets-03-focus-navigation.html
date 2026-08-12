@@ -49,8 +49,6 @@
 <hr>
 <h2 id="bookmarklet09">Bookmarklet 9. Track focus order</h2>
 
-<h3>What it does</h3>
-
 <p>Tracks keyboard focus as you move through a page using the <code>Tab</code> key. Each focusable element is numbered in the order it receives focus, making it easy to inspect the page's keyboard navigation sequence.</p>
 
 <p>The currently focused element is highlighted with a badge showing:</p>
@@ -64,6 +62,24 @@
 </ul>
 
 <p>Previously visited elements remain outlined until the bookmarklet is dismissed.</p>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/09-track-focus-order.mp4"></video>
+
+<details>
+  <summary>Transcript</summary>
+  <ul>
+    <li>Step 1: Start on <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page</li>
+    <li>Step 2: Find the "Track focus order" bookmarklet</li>
+    <li>Step 3: Drag the bookmarklet to your browser's Bookmarks Bar</li>
+    <li>Step 4: Use the test page to review the bookmarklet</li>
+    <li>Step 5: Activate the bookmarklet</li>
+    <li>Step 6: Press Tab to move through the page</li>
+    <li>The badge shows the item in focus and it's order number</li>
+    <li>Review the page for logical focus order</li>
+    <li>Press Shift + Tab to move backwards if required</li>
+    <li>Press the "Escape" key to stop tracking and remove the overlay</li>
+  </ul>
+</details>
 
 <h3>Use this bookmarklet when you want to:</h3>
 
@@ -85,42 +101,15 @@
   <li>Press <code>Esc</code> to stop tracking and remove all highlights.</li>
 </ol>
 
-<h3>Video demonstration</h3>
-
-<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/09-track-focus-order.mp4"></video>
-
-<details>
-  <summary>Transcript</summary>
-  <ul>
-    <li>Step 1: Start on <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page</li>
-    <li>Step 2: Find the "Track focus order" bookmarklet</li>
-    <li>Step 3: Drag the bookmarklet to your browser's Bookmarks Bar</li>
-    <li>Step 4: Use the test page to review the bookmarklet</li>
-    <li>Step 5: Activate the bookmarklet</li>
-    <li>Step 6: Press Tab to move through the page</li>
-    <li>The badge shows the item in focus and it's order number</li>
-    <li>Review the page for logical focus order</li>
-    <li>Press Shift + Tab to move backwards if required</li>
-    <li>Press the "Escape" key to stop tracking and remove the overlay</li>
-
-  </ul>
-</details>
-
 <h3>When reviewing the page, check for:</h3>
 
 <ul>
-  <li><strong>A logical focus order</strong>, following the visual reading order of the page.</li>
-  <li><strong>Every interactive element</strong> receiving keyboard focus.</li>
-  <li><strong>Unexpected jumps</strong> between unrelated parts of the page.</li>
-  <li><strong>Controls that receive focus when they shouldn't</strong>, such as hidden or inactive elements.</li>
-  <li><strong>A clear sequence</strong>, making it easy to understand how keyboard users move through the interface.</li>
+  <li>A logical focus order, following the visual reading order of the page.</li>
+  <li>Every interactive element receiving keyboard focus.</li>
+  <li>Unexpected jumps between unrelated parts of the page.</li>
+  <li>Controls that receive focus when they shouldn't, such as hidden or inactive elements.</li>
+  <li>A clear sequence, making it easy to understand how keyboard users move through the interface.</li>
 </ul>
-
-<h3>Things to be aware of</h3>
-
-<p>This bookmarklet tracks the browser's actual keyboard focus order, but it can't determine whether that order is appropriate for the page.</p>
-
-<p>Some pages change dynamically as you interact with them. Opening menus, expanding panels or displaying dialogs may change the focus order during testing.</p>
 
 
 <!-- section -->
@@ -128,8 +117,6 @@
 
 <hr>
 <h2 id="bookmarklet10">Bookmarklet 10. Highlight tabindex</h2>
-
-<h3>What it does</h3>
 
 <p>Highlights all elements that use the <code>tabindex</code> attribute. It distinguishes between:</p>
 
@@ -141,27 +128,6 @@
 </ul>
 
 <p>This makes it easy to identify elements that have been added to the keyboard focus order and to spot values that may cause unexpected keyboard navigation.</p>
-
-<h3>Use this bookmarklet when you want to:</h3>
-
-<ul>
-  <li>identify elements that use the <code>tabindex</code> attribute</li>
-  <li>inspect how keyboard focus has been managed</li>
-  <li>find positive <code>tabindex</code> values</li>
-  <li>identify invalid <code>tabindex</code> values</li>
-</ul>
-
-<h3>How to use it</h3>
-
-<ol>
-  <li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
-  <li>Open the page you want to inspect.</li>
-  <li>Click the <strong>Highlight tabindex</strong> bookmarklet.</li>
-  <li>Scroll through the page to review the highlighted elements.</li>
-  <li>Press <code>Esc</code> to remove the overlay.</li>
-</ol>
-
-<h3>Video demonstration</h3>
 
 <video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/10-highlight-tabindex.mp4"></video>
 
@@ -182,20 +148,33 @@
   </ul>
 </details>
 
+<h3>Use this bookmarklet when you want to:</h3>
+
+<ul>
+  <li>identify elements that use the <code>tabindex</code> attribute</li>
+  <li>inspect how keyboard focus has been managed</li>
+  <li>find positive <code>tabindex</code> values</li>
+  <li>identify invalid <code>tabindex</code> values</li>
+</ul>
+
+<h3>How to use it</h3>
+
+<ol>
+  <li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
+  <li>Open the page you want to inspect.</li>
+  <li>Click the <strong>Highlight tabindex</strong> bookmarklet.</li>
+  <li>Scroll through the page to review the highlighted elements.</li>
+  <li>Press <code>Esc</code> to remove the overlay.</li>
+</ol>
+
 <h3>When reviewing the page, check for:</h3>
 
 <ul>
-  <li><strong>Elements with <code>tabindex="0"</code></strong>, which participate in the normal keyboard focus order.</li>
-  <li><strong>Elements with <code>tabindex="-1"</code></strong>, which can receive programmatic focus but are skipped when tabbing through the page.</li>
-  <li><strong>Positive <code>tabindex</code> values</strong>, which create a custom focus order and should generally be avoided.</li>
-  <li><strong>Invalid <code>tabindex</code> values</strong>, which are not recognised by browsers.</li>
+  <li>Elements with <code>tabindex="0"</code>, which participate in the normal keyboard focus order.</li>
+  <li>Elements with <code>tabindex="-1"</code>, which can receive programmatic focus but are skipped when tabbing through the page.</li>
+  <li>Positive <code>tabindex</code> values, which create a custom focus order and should generally be avoided.</li>
+  <li>Invalid <code>tabindex</code> values, which are not recognised by browsers.</li>
 </ul>
-
-<h3>Things to be aware of</h3>
-
-<p>This bookmarklet only highlights elements that explicitly use the <code>tabindex</code> attribute. It doesn't highlight native interactive elements, such as links, buttons and form controls, that are naturally keyboard focusable.</p>
-
-<p>Using <code>tabindex</code> isn't automatically a problem. Values of <code>0</code> and <code>-1</code> have legitimate uses. Positive values, however, often create confusing keyboard navigation and should generally be avoided.</p>
 
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
