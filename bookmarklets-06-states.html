@@ -40,7 +40,6 @@
 <ul>
   <li><a href="#bookmarklet22">Bookmarklet 22. Highlight <code>aria-expanded</code></a></li>
   <li><a href="#bookmarklet23">Bookmarklet 23. Highlight <code>aria-checked</code></a></li>
-  <li><a href="#bookmarklet24">Bookmarklet 24. Highlight Shadow DOM</a></li>
 </ul>
 
 
@@ -189,85 +188,6 @@
 <p>This bookmarklet shows the current value of the <code>aria-checked</code> attribute, but it can't determine whether the widget behaves correctly or whether the chosen state is appropriate.</p>
 
 <p>If you interact with a widget after running the bookmarklet, run it again to refresh the displayed values.</p>
-
-
-<!-- section -->
-
-
-<hr>
-<h2 id="bookmarklet24">Bookmarklet 24. Highlight Shadow DOM</h2>
-
-<h3>What it does</h3>
-
-<p>Highlights elements that use <strong>open Shadow DOM</strong> and identifies custom elements that may use Shadow DOM but cannot be confirmed.</p>
-
-<p>It distinguishes between:</p>
-
-<ul>
-  <li><strong>Open Shadow DOM hosts</strong>, where the shadow tree can be inspected.</li>
-  <li><strong>Custom elements</strong>, which may or may not use Shadow DOM.</li>
-</ul>
-
-<p>A fixed summary banner at the bottom of the page displays the total number of open Shadow DOM hosts and custom elements found.</p>
-
-<h3>Use this bookmarklet when you want to:</h3>
-
-<ul>
-  <li>identify components that use Shadow DOM</li>
-  <li>inspect pages built with Web Components</li>
-  <li>distinguish between open Shadow DOM and custom elements</li>
-  <li>understand why other bookmarklets may not detect some page content</li>
-</ul>
-
-<h3>How to use it</h3>
-
-<ol>
-  <li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
-  <li>Open the page you want to inspect.</li>
-  <li>Click the <strong>Highlight Shadow DOM</strong> bookmarklet.</li>
-  <li>Scroll through the page to review the highlighted components.</li>
-  <li>Check the summary banner at the bottom of the page for the total counts.</li>
-  <li>Press <code>Esc</code> to remove the overlay.</li>
-</ol>
-
-<h3>Video demonstration</h3>
-
-<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/shadow-dom.mp4"></video>
-
-<details>
-  <summary>Transcript</summary>
-  <ul>
-    <li>Step 1: Start on <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page</li>
-    <li>Step 2: Find the "Highlight Shadow DOM" bookmarklet</li>
-    <li>Step 3: Drag the bookmarklet to your browser's Bookmarks Bar</li>
-    <li>Step 4: Use the test page to review the bookmarklet</li>
-    <li>Step 5: Activate the bookmarklet</li>
-    <li>Step 6: Scroll through the page to review the highlighted components</li>
-    <li>All open shadow DOM are highlighted in green</li>
-    <li>This may be on custom, standard, or declarative elements</li>
-    <li>Closed shadow DOM on custom elements are highlighted in orange</li>
-    <li>No shadow DOM on custom elements are highlighted in orange</li>
-    <li>Closed shadow DOM on standard elements are highlighted in red</li>
-    <li>Regular HTML with no shadown DOM is not highlighted</li>
-    <li>Check the summary banner at the bottom of the page for the total counts</li>
-    <li>Press the "Escape" key to remove the overlay</li>
-  </ul>
-</details>
-
-<h3>When reviewing the page, check for:</h3>
-
-<ul>
-  <li><strong>Open Shadow DOM hosts</strong>, which can be inspected by bookmarklets and browser developer tools.</li>
-  <li><strong>Custom elements</strong>, which may or may not contain a Shadow DOM.</li>
-  <li><strong>Pages that make extensive use of Web Components</strong>, as these may affect how other accessibility testing tools behave.</li>
-  <li><strong>The summary banner</strong>, which provides a quick overview of the number of components identified.</li>
-</ul>
-
-<h3>Things to be aware of</h3>
-
-<p>This bookmarklet can only identify <strong>open Shadow DOM</strong>. It can't detect or inspect <strong>closed Shadow DOM</strong>, as browsers intentionally prevent scripts from accessing it.</p>
-
-<p>Similarly, finding a custom element doesn't necessarily mean it contains a Shadow DOM. Some custom elements don't use Shadow DOM at all, while others use a closed Shadow DOM that cannot be inspected.</p>
 
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
