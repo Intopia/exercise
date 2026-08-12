@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Form bookmarklets explained</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    hr {
+      margin: 3.5em 0;
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Form bookmarklets explained</h1>
+
+<p>These bookmarklets help you inspect common accessibility features in forms and form controls. Use them to review names, buttons, groups, required fields, validation states and autocomplete values.</p>
+
+<p>This page explains the bookmarklets available on the <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="bookmarklet16">Bookmarklet 16. Highlight form field names</h2>
+
+<h3>What it does</h3>
+
+<p>Highlights form fields and identifies how their accessible names have been provided. It distinguishes between names provided by:</p>
+
+<ul>
+  <li>associated <code>label</code> elements</li>
+  <li>implicit labels</li>
+  <li><code>aria-labelledby</code></li>
+  <li><code>aria-label</code></li>
+  <li><code>title</code></li>
+  <li><code>placeholder</code></li>
+</ul>
+
+<p>It also flags form fields that do not have an accessible name.</p>
+
+<p>This makes it easy to identify both missing names and names that rely on less reliable techniques.</p>
+
+<h3>Use this bookmarklet when you want to:</h3>
+
+<ul>
+  <li>inspect how form fields have been labelled</li>
+  <li>identify fields with no accessible name</li>
+  <li>review accessible names created using HTML and ARIA</li>
+  <li>find fields that rely on <code>placeholder</code> or <code>title</code> instead of a proper label</li>
+</ul>
+
+<h3>How to use it</h3>
+
+<ol>
+  <li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
+  <li>Open the page you want to inspect.</li>
+  <li>Click the <strong>Highlight form field names</strong> bookmarklet.</li>
+  <li>Scroll through the page to review the highlighted form fields.</li>
+  <li>Press <code>Esc</code> to remove the overlay.</li>
+</ol>
+
+<h3>Video demonstration</h3>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/16-highlight-form-field-names.mp4"></video>
+
+<details>
+  <summary>Transcript</summary>
+  <ul>
+    <li>Step 1: Start on <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page</li>
+    <li>Step 2: Find the "Highlight form field names" bookmarklet</li>
+    <li>Step 3: Drag the bookmarklet to your browser's Bookmarks Bar</li>
+    <li>Step 4: Use the test page to review the bookmarklet</li>
+    <li>Step 5: Activate the bookmarklet</li>
+    <li>Step 6: Scroll through the page to review the highlighted form fields and their accessible names</li>
+    <li>The badge shows the source of the accessible name</li>
+    <li>Form fields with no accessible name are shown in red</li>
+    <li>Accessible names from the label, implicit label, or aria-label are shown in green</li>
+    <li>Accessible names from placeholders or titles are shown in orange</li>
+    <li>Press the "Escape" key to remove the overlay</li>
+  </ul>
+</details>
+
+<h3>When reviewing the page, check for:</h3>
+
+<ul>
+  <li><strong>Associated labels</strong>, whether explicit or implicit.</li>
+  <li><strong>Names provided using <code>aria-labelledby</code> or <code>aria-label</code></strong>, where appropriate.</li>
+  <li><strong>Fields that rely on <code>title</code> or <code>placeholder</code></strong>, which are generally less reliable sources of accessible names.</li>
+  <li><strong>Fields with no accessible name</strong>, which are likely to be inaccessible to screen reader users.</li>
+</ul>
+
+<h3>Things to be aware of</h3>
+
+<p>This bookmarklet identifies the source of a form field's accessible name, but it can't determine whether the name itself is clear or appropriate.</p>
+
+<p>Although <code>title</code> and <code>placeholder</code> can contribute to an accessible name in some situations, they shouldn't normally be used as a substitute for a visible label. An associated <code>label</code> element remains the preferred approach for most form fields.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="bookmarklet17">Bookmarklet 17. Highlight buttons</h2>
+
+<h3>What it does</h3>
+
+<p>Highlights all buttons and identifies how their accessible names have been provided. It distinguishes between names provided by:</p>
+
+<ul>
+  <li>visible text</li>
+  <li><code>aria-labelledby</code></li>
+  <li><code>aria-label</code></li>
+  <li>the <code>value</code> attribute</li>
+  <li>the <code>title</code> attribute</li>
+  <li>the default labels for submit and reset buttons</li>
+</ul>
+
+<p>It also flags buttons that do not have an accessible name.</p>
+
+<h3>Use this bookmarklet when you want to:</h3>
+
+<ul>
+  <li>inspect how buttons have been labelled</li>
+  <li>identify buttons with no accessible name</li>
+  <li>review accessible names created using HTML and ARIA</li>
+  <li>check that buttons expose a meaningful name to assistive technologies</li>
+</ul>
+
+<h3>How to use it</h3>
+
+<ol>
+  <li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
+  <li>Open the page you want to inspect.</li>
+  <li>Click the <strong>Highlight buttons</strong> bookmarklet.</li>
+  <li>Scroll through the page to review the highlighted buttons.</li>
+  <li>Press <code>Esc</code> to remove the overlay.</li>
+</ol>
+
+<h3>Video demonstration</h3>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/17-highlight-buttons.mp4"></video>
+
+<details>
+  <summary>Transcript</summary>
+  <ul>
+    <li>Step 1: Start on <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page</li>
+    <li>Step 2: Find the "Highlight buttons" bookmarklet</li>
+    <li>Step 3: Drag the bookmarklet to your browser's Bookmarks Bar</li>
+    <li>Step 4: Use the test page to review the bookmarklet</li>
+    <li>Step 5: Activate the bookmarklet</li>
+    <li>Step 6: Scroll through the page to review the highlighted buttons and their accessible names</li>
+    <li>The badge shows the source of the accessible name</li>
+    <li>Acceptable sources are shown in green</li>
+    <li>This includes text content, aria-labelledby, aria-label, and title</li>
+    <li>No badge will appear on elements that are not buttons, like input elements</li>
+    <li>No accessible name is shown in red</li>
+    <li>Press the "Escape" key to remove the overlay</li>
+  </ul>
+</details>
+
+<h3>When reviewing the page, check for:</h3>
+
+<ul>
+  <li><strong>Buttons with meaningful accessible names</strong>, regardless of how those names have been provided.</li>
+  <li><strong>Buttons that rely on <code>aria-label</code> or <code>aria-labelledby</code></strong>, ensuring the name accurately describes the button's purpose.</li>
+  <li><strong>Buttons that use the <code>title</code> attribute</strong> as their accessible name, which may not be the most robust approach.</li>
+  <li><strong>Buttons with no accessible name</strong>, which may be inaccessible to people using assistive technologies.</li>
+</ul>
+
+<h3>Things to be aware of</h3>
+
+<p>This bookmarklet identifies the source of a button's accessible name, but it can't determine whether the name itself is clear or appropriate.</p>
+
+<p>Some buttons, such as <code>input type="submit"</code> and <code>input type="reset"</code>, have default accessible names provided by the browser. These are identified by the bookmarklet.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="bookmarklet18">Bookmarklet 18. Highlight fieldsets</h2>
+
+<h3>What it does</h3>
+
+<p>Highlights <code>fieldset</code>, <code>legend</code> and <code>role="radiogroup"</code> elements. It identifies fieldsets and their legends, highlights radio groups, and flags <code>fieldset</code> elements that do not have a <code>legend</code>.</p>
+
+<p>This makes it easy to inspect how related form controls have been grouped and labelled.</p>
+
+<h3>Use this bookmarklet when you want to:</h3>
+
+<ul>
+  <li>identify groups of related form controls</li>
+  <li>check that fieldsets have meaningful legends</li>
+  <li>inspect radio groups</li>
+  <li>find fieldsets that are missing a legend</li>
+</ul>
+
+<h3>How to use it</h3>
+
+<ol>
+  <li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
+  <li>Open the page you want to inspect.</li>
+  <li>Click the <strong>Highlight fieldsets</strong> bookmarklet.</li>
+  <li>Scroll through the page to review the highlighted fieldsets, legends and radio groups.</li>
+  <li>Press <code>Esc</code> to remove the overlay.</li>
+</ol>
+
+<h3>Video demonstration</h3>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/18-highlight-fieldsets.mp4"></video>
+
+<details>
+  <summary>Transcript</summary>
+  <ul>
+    <li>Step 1: Start on <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page</li>
+    <li>Step 2: Find the "Highlight fieldsets" bookmarklet</li>
+    <li>Step 3: Drag the bookmarklet to your browser's Bookmarks Bar</li>
+    <li>Step 4: Use the test page to review the bookmarklet</li>
+    <li>Step 5: Activate the bookmarklet</li>
+    <li>Step 6: Scroll through the page to review the highlighted fieldsets, legends and radio groups</li>
+    <li>Radio groups with no "group" role and no name will not be highlighted</li>
+    <li>Radio groups with a "group" role via fieldset but no name are highlighted in red</li>
+    <li>When a valid name is present, the fieldset is shown in green</li>
+    <li>The valid name via "legend" is shown in blue</li>
+    <li>A "group" role via radiogroup and name via aria-labelledby is shown in orange</li>
+    <li>Press the "Escape" key to remove the overlay</li>
+  </ul>
+</details>
+
+<h3>When reviewing the page, check for:</h3>
+
+<ul>
+  <li><strong>Fieldsets with meaningful legends</strong> that describe the group of controls.</li>
+  <li><strong>Fieldsets without legends</strong>, where users may not understand the purpose of the group.</li>
+  <li><strong>Related form controls</strong>, such as radio buttons or checkboxes, that have been grouped appropriately.</li>
+  <li><strong>Radio groups</strong> that have a clear group label.</li>
+</ul>
+
+<h3>Things to be aware of</h3>
+
+<p>This bookmarklet identifies fieldsets, legends and radio groups, but it can't determine whether the legend text is meaningful or whether controls have been grouped appropriately.</p>
+
+<p>Not every group of form controls requires a <code>fieldset</code>. Fieldsets are most useful where several related controls share a common question or purpose, particularly radio buttons and groups of checkboxes.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="bookmarklet19">Bookmarklet 19. Highlight required fields</h2>
+
+<h3>What it does</h3>
+
+<p>Highlights form fields that have been marked as required. It distinguishes between:</p>
+
+<ul>
+  <li>native HTML <code>required</code></li>
+  <li><code>aria-required="true"</code></li>
+  <li>controls that use both <code>required</code> and <code>aria-required</code></li>
+</ul>
+
+<p>This makes it easy to see how required fields have been identified and to spot unnecessary duplication.</p>
+
+<h3>Use this bookmarklet when you want to:</h3>
+
+<ul>
+  <li>identify required form fields</li>
+  <li>check how required fields have been marked up</li>
+  <li>distinguish between native HTML and ARIA techniques</li>
+  <li>find fields that use both <code>required</code> and <code>aria-required</code></li>
+</ul>
+
+<h3>How to use it</h3>
+
+<ol>
+  <li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
+  <li>Open the page you want to inspect.</li>
+  <li>Click the <strong>Highlight required fields</strong> bookmarklet.</li>
+  <li>Scroll through the page to review the highlighted form fields.</li>
+  <li>Press <code>Esc</code> to remove the overlay.</li>
+</ol>
+
+<h3>Video demonstration</h3>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/19-highlight-required-fields.mp4"></video>
+
+<details>
+  <summary>Transcript</summary>
+  <ul>
+    <li>Step 1: Start on <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page</li>
+    <li>Step 2: Find the "Highlight required fields" bookmarklet</li>
+    <li>Step 3: Drag the bookmarklet to your browser's Bookmarks Bar</li>
+    <li>Step 4: Use the test page to review the bookmarklet</li>
+    <li>Step 5: Activate the bookmarklet</li>
+    <li>Step 6: Scroll through the page to review the highlighted fields</li>
+    <li>Programmatically associated "required" fields are shown in green</li>
+    <li>Notice if there is a visible label to match</li>
+    <li>Fields with no programatically associated required labels are not highlighted</li>
+    <li>aria-required="true" labels are shown in blue</li>
+    <li>Redundancies with two forms of required labelling are shown in orange</li>
+    <li>Press the "Escape" key to remove the overlay</li>
+  </ul>
+</details>
+
+<h3>When reviewing the page, check for:</h3>
+
+<ul>
+  <li><strong>Fields that use the native <code>required</code> attribute</strong>, which is the preferred approach for standard HTML form controls.</li>
+  <li><strong>Fields that use <code>aria-required="true"</code></strong>, ensuring ARIA has been used appropriately.</li>
+  <li><strong>Fields that use both <code>required</code> and <code>aria-required</code></strong>, which is usually unnecessary duplication.</li>
+  <li><strong>Required fields</strong> that are clearly identified to all users, both visually and programmatically.</li>
+</ul>
+
+<h3>Things to be aware of</h3>
+
+<p>This bookmarklet identifies how a field has been marked as required, but it can't determine whether the field should actually be required.</p>
+
+<p>For standard HTML form controls, the native <code>required</code> attribute is generally preferred. <code>aria-required</code> is primarily intended for custom controls or situations where the native attribute can't be used.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="bookmarklet20">Bookmarklet 20. Highlight <code>aria-invalid</code></h2>
+
+<h3>What it does</h3>
+
+<p>Highlights elements that use the <code>aria-invalid</code> attribute. All recognised values are highlighted in green, making it easy to see where <code>aria-invalid</code> has been used. Elements where <code>aria-invalid</code> contains an unrecognised value are highlighted in red.</p>
+
+<p>The recognised values are:</p>
+
+<ul>
+  <li><code>true</code></li>
+  <li><code>false</code></li>
+  <li><code>grammar</code></li>
+  <li><code>spelling</code></li>
+</ul>
+
+<h3>Use this bookmarklet when you want to:</h3>
+
+<ul>
+  <li>identify fields that use <code>aria-invalid</code></li>
+  <li>inspect how validation states have been marked up</li>
+  <li>check that recognised <code>aria-invalid</code> values have been used</li>
+  <li>find invalid <code>aria-invalid</code> values</li>
+</ul>
+
+<h3>How to use it</h3>
+
+<ol>
+  <li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
+  <li>Open the page you want to inspect.</li>
+  <li>Click the <strong>Highlight <code>aria-invalid</code></strong> bookmarklet.</li>
+  <li>Scroll through the page to review the highlighted elements.</li>
+  <li>Press <code>Esc</code> to remove the overlay.</li>
+</ol>
+
+<h3>Video demonstration</h3>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/20-highlight-aria-invalid.mp4"></video>
+
+<details>
+  <summary>Transcript</summary>
+  <ul>
+    <li>Step 1: Start on <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page</li>
+    <li>Step 2: Find the "Highlight aria-invalid" bookmarklet</li>
+    <li>Step 3: Drag the bookmarklet to your browser's Bookmarks Bar</li>
+    <li>Step 4: Use the test page to review the bookmarklet</li>
+    <li>Step 5: Activate the bookmarklet</li>
+    <li>Step 6: Scroll through the page to review the highlighted elements</li>
+    <li>Valid use of aria-invalid is highlighted in green</li>
+    <li>Notice the value of the aria-invalid</li>
+    <li>Elements with an unrecognised aria-invalid value are highlighted in red</li>
+    <li>Press the "Escape" key to remove the overlay</li>
+  </ul>
+</details>
+
+<h3>When reviewing the page, check for:</h3>
+
+<ul>
+  <li><strong>Fields with <code>aria-invalid="true"</code></strong>, indicating that the current value has failed validation.</li>
+  <li><strong>Fields using <code>grammar</code> or <code>spelling</code></strong>, where those more specific states are appropriate.</li>
+  <li><strong>Fields with <code>aria-invalid="false"</code></strong>, ensuring they have been used intentionally.</li>
+  <li><strong>Invalid <code>aria-invalid</code> values</strong>, which are not recognised by the ARIA specification and are highlighted in red.</li>
+</ul>
+
+<h3>Things to be aware of</h3>
+
+<p>This bookmarklet identifies the value of the <code>aria-invalid</code> attribute, but it can't determine whether the field has actually been validated correctly or whether the chosen value is appropriate.</p>
+
+<p>The <code>aria-invalid</code> attribute informs assistive technologies about the validation state of a field. It does not perform validation itself or display error messages to users.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="bookmarklet21">Bookmarklet 21. Highlight <code>autocomplete</code></h2>
+
+<h3>What it does</h3>
+
+<p>Highlights form fields that use the <code>autocomplete</code> attribute. It distinguishes between:</p>
+
+<ul>
+  <li>valid autocomplete values</li>
+  <li>generic values such as <code>on</code> and <code>off</code></li>
+  <li>invalid or unrecognised values</li>
+</ul>
+
+<p>This makes it easy to review how autocomplete has been used across a form.</p>
+
+<h3>Use this bookmarklet when you want to:</h3>
+
+<ul>
+  <li>identify fields that use the <code>autocomplete</code> attribute</li>
+  <li>check that recognised autocomplete values have been used</li>
+  <li>find fields that rely on generic <code>on</code> or <code>off</code> values</li>
+  <li>identify invalid autocomplete values</li>
+</ul>
+
+<h3>How to use it</h3>
+
+<ol>
+  <li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
+  <li>Open the page you want to inspect.</li>
+  <li>Click the <strong>Highlight <code>autocomplete</code></strong> bookmarklet.</li>
+  <li>Scroll through the page to review the highlighted form fields.</li>
+  <li>Press <code>Esc</code> to remove the overlay.</li>
+</ol>
+
+<h3>Video demonstration</h3>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/autocomplete.mp4"></video>
+
+<details>
+  <summary>Transcript</summary>
+  <ul>
+    <li>Step 1: Start on <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page</li>
+    <li>Step 2: Find the "Highlight autocomplete" bookmarklet</li>
+    <li>Step 3: Drag the bookmarklet to your browser's Bookmarks Bar</li>
+    <li>Step 4: Use the test page to review the bookmarklet</li>
+    <li>Step 5: Activate the bookmarklet</li>
+    <li>Step 6: Scroll through the page to review the highlighted autocomplete attributes</li>
+    <li>A generic autocomplete attribute is shown in blue</li>
+    <li>A specific, valid autocomplete attribute is shown in green</li>
+    <li>Notice the value of the autocomplete attribute</li>
+    <li>An invalid autocomplete attribute is shown in red</li>
+    <li>Press the "Escape" key to remove the overlay</li>
+  </ul>
+</details>
+
+<h3>When reviewing the page, check for:</h3>
+
+<ul>
+  <li><strong>Recognised autocomplete values</strong>, such as <code>given-name</code>, <code>family-name</code>, <code>email</code> or <code>postal-code</code>, where appropriate.</li>
+  <li><strong>Generic values</strong> (<code>on</code> or <code>off</code>), which provide less information than the recognised autocomplete tokens.</li>
+  <li><strong>Invalid autocomplete values</strong>, which browsers may ignore.</li>
+  <li><strong>Consistent use of autocomplete</strong>, particularly across forms that collect personal information.</li>
+</ul>
+
+<h3>Things to be aware of</h3>
+
+<p>This bookmarklet identifies the value of the <code>autocomplete</code> attribute, but it can't determine whether the chosen value is appropriate for the field.</p>
+
+<p>The <code>autocomplete</code> attribute helps browsers understand the purpose of a field so they can offer more accurate autofill suggestions. Using recognised autocomplete values is generally more useful than relying on the generic <code>on</code> or <code>off</code> values.</p>
+
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</body>
+</html>

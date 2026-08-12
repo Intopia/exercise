@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Page structure bookmarklets explained</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    hr {
+      margin: 3.5em 0;
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Page structure bookmarklets explained</h1>
+
+<p>These bookmarklets help you inspect the overall structure of a page, including headings, images, lists, landmarks and language. Use them to quickly identify how key page content has been marked up.</p>
+
+<p>This page explains the bookmarklets available on the <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page.</p>
+
+<hr>
+
+<h2 id="bookmarklet01">Bookmarklet 1. Highlight headings</h2>
+
+<p>Highlights all HTML headings (<code>h1</code> to <code>h6</code>) using different colours so you can quickly see the page's heading structure. Each heading is labelled with its level and text. The bookmarklet also flags empty headings and pages with more than one <code>h1</code> element.</p>
+
+<h3>Use this bookmarklet when you want to:</h3>
+
+<ul>
+  <li>understand the heading structure of a page</li>
+  <li>check that headings are being used to organise content</li>
+  <li>identify empty headings</li>
+  <li>find pages with multiple <code>h1</code> elements</li>
+</ul>
+
+<h3>How to use it</h3>
+
+<ol>
+  <li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
+  <li>Open the page you want to inspect.</li>
+  <li>Click the <strong>Highlight headings</strong> bookmarklet.</li>
+  <li>Scroll through the page to review the highlighted headings.</li>
+  <li>Press <code>Esc</code> to remove the overlay.</li>
+</ol>
+
+<h3>Video demonstration</h3>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/mp4/poster.png" controls src="assets/mp4/01-headings.mp4"></video>
+</video>
+
+<details>
+  <summary>Video transcript</summary>
+  <ul>
+    <li>Step 1: Start on <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page</li>
+    <li>Step 2: Find the "Highlight headings" bookmarklet</li>
+    <li>Step 3: Drag the bookmarklet to your browser's Bookmarks Bar</li>
+    <li>Step 4: Use the test page to review the bookmarklet</li>
+    <li>Step 5: Activate the bookmarklet</li>
+    <li>Step 6: Scroll through the page to review the highlighted headings</li>
+    <li>Notice the second H1 element near the bottom of the page has been flagged in red</li>
+    <li>Press the "Escape" key to remove the overlay.</li>
+  </ul>
+</details>
+
+<h3>When reviewing the page, check for:</h3>
+
+<ul>
+  <li>A single <code>h1</code> that describes the main purpose of the page.</li>
+  <li>A logical heading hierarchy, where heading levels follow the structure of the content.</li>
+  <li>Skipped heading levels, such as jumping from an <code>h2</code> directly to an <code>h4</code>, which can make the page structure harder to understand.</li>
+  <li>Empty headings, which provide no useful information to users.</li>
+  <li>Multiple <code>h1</code> elements, which should be reviewed to ensure the page structure is clear and intentional.</li>
+</ul>
+
+<h3>Things to be aware of</h3>
+
+<p>This bookmarklet only highlights HTML heading elements (<code>h1</code>–<code>h6</code>). It won't identify text that has simply been made to look like a heading using CSS, or text that has been made bold using the <code>strong</code> or <code>b</code> elements without using a heading element.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="bookmarklet02">Bookmarklet 2. Highlight image alternatives</h2>
+
+<p>Highlights all images on a page and identifies how their alternative text has been provided. Each image is labelled with one of three states:</p>
+
+<ul>
+  <li><strong>Alternative text</strong>, where the image has descriptive text.</li>
+  <li><strong>Empty alternative text</strong> (<code>alt=""</code>), which is typically used for decorative images.</li>
+  <li><strong>Missing alternative text</strong>, where no <code>alt</code> attribute has been provided.</li>
+</ul>
+<p>Where alternative text is present, the bookmarklet displays its value, making it easy to review the text without inspecting the HTML.</p>
+
+<h3>Use this bookmarklet when you want to:</h3>
+
+<ul>
+  <li>check that images have appropriate alternative text</li>
+  <li>identify decorative images</li>
+  <li>find images that are missing alternative text</li>
+  <li>review how images have been marked up across a page</li>
+</ul>
+
+<h3>How to use it</h3>
+
+<ol>
+  <li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
+  <li>Open the page you want to inspect.</li>
+  <li>Click the <strong>Highlight image alternatives</strong> bookmarklet.</li>
+  <li>Scroll through the page to review each highlighted image.</li>
+  <li>Press <code>Esc</code> to remove the overlay.</li>
+</ol>
+
+<h3>Video demonstration</h3>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/mp4/poster.png" controls src="assets/mp4/02-images.mp4"></video>
+
+<details>
+  <summary>Video transcript</summary>
+  <ul>
+    <li>Step 1: Start on <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page</li>
+    <li>Step 2: Find the "Highlight image alternatives" bookmarklet</li>
+    <li>Step 3: Drag the bookmarklet to your browser's Bookmarks Bar</li>
+    <li>Step 4: Use the test page to review the bookmarklet</li>
+    <li>Step 5: Activate the bookmarklet</li>
+    <li>Step 6: Scroll through the page to review the highlighted images</li>
+    <li>Images with alternatives are highlighted in green</li>
+    <li>Images with empty alts are highlighted in blue</li>
+    <li>Images with no alts are highlighted in red</li>
+    <li>Press the "Escape" key to remove the overlay</li>
+  </ul>
+</details>
+
+<h3>When reviewing the page, check for:</h3>
+
+<ul>
+  <li>Informative images that have meaningful alternative text describing their purpose or content.</li>
+  <li>Decorative images that use empty alternative text (<code>alt=""</code>) so they can be ignored by screen readers.</li>
+  <li>Images with missing alternative text, which may be inaccessible to people who cannot see the image.</li>
+  <li>Alternative text that matches the purpose of the image, rather than simply describing its appearance.</li>
+</ul>
+
+<h3>Things to be aware of</h3>
+
+<p>This bookmarklet can tell you whether an image has alternative text, but it can't determine whether the text is appropriate or useful. You'll still need to read the alternative text and decide whether it conveys the right information for the context.</p>
+
+<p>It also only checks HTML <code>img</code> elements. Images added using CSS background images or other techniques won't be highlighted.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="bookmarklet03">Bookmarklet 3. Highlight lists</h2>
+
+<p>Highlights lists on a page, including both native HTML list elements and ARIA list roles. Different colours are used to distinguish each type, making it easy to see how lists have been created.</p>
+
+<p>The bookmarklet highlights both <strong>list containers</strong> (such as <code>ul</code>, <code>ol</code> and <code>dl</code>) and their <strong>list items</strong> (<code>li</code>, <code>dt</code> and <code>dd</code>), as well as ARIA <code>list</code> and <code>listitem</code> roles.</p>
+
+<h3>Use this bookmarklet when you want to:</h3>
+
+<ul>
+  <li>identify lists on a page</li>
+  <li>check that groups of related items have been marked up as lists</li>
+  <li>distinguish between native HTML lists and ARIA lists</li>
+  <li>find content that may look like a list but isn't marked up as one</li>
+</ul>
+
+<h3>How to use it</h3>
+
+<ol>
+  <li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
+  <li>Open the page you want to inspect.</li>
+  <li>Click the <strong>Highlight lists</strong> bookmarklet.</li>
+  <li>Scroll through the page to review the highlighted lists.</li>
+  <li>Press <code>Esc</code> to remove the overlay.</li>
+</ol>
+
+<h3>Video demonstration</h3>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/mp4/poster.png" controls src="assets/mp4/03-lists.mp4"></video>
+
+<details>
+  <summary>Video transcript</summary>
+  <ul>
+    <li>Step 1: Start on <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page</li>
+    <li>Step 2: Find the "Highlight lists" bookmarklet</li>
+    <li>Step 3: Drag the bookmarklet to your browser's Bookmarks Bar</li>
+    <li>Step 4: Use the test page to review the bookmarklet</li>
+    <li>Step 5: Activate the bookmarklet</li>
+    <li>Step 6: Scroll through the page to review the highlighted lists</li>
+    <li>Unordered and ordered lists are highlighted in green</li>
+    <li>Description lists are highlighted in blue</li>
+    <li>role="list" and role="listitem" are highlighted in amber</li>
+    <li>Fake lists are not highlighted at all</li>
+    <li>Press the "Escape" key to remove the overlay</li>
+  </ul>
+</details>
+
+<h3>When reviewing the page, check for:</h3>
+
+<ul>
+  <li>Related items that have been grouped into lists.</li>
+  <li>Navigation menus and collections that have been marked up appropriately.</li>
+  <li>Lists that use native HTML elements (<code>ul</code>, <code>ol</code> and <code>dl</code>) wherever possible.</li>
+  <li>Content that looks like a list but has been created using line breaks, paragraphs or other elements instead of proper list markup.</li>
+  <li>Lists that have been recreated using ARIA roles where native HTML list elements would have been more appropriate.</li>
+</ul>
+
+<h3>Things to be aware of</h3>
+
+<p>This bookmarklet identifies both native HTML lists and ARIA list roles, but it can't determine whether the chosen approach is appropriate. In most cases, native HTML list elements are preferred because they provide built-in accessibility and require less code.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="bookmarklet04">Bookmarklet 4. Highlight landmarks</h2>
+
+<p>Highlights all page landmarks using distinct colours for each landmark role. Where a landmark has an accessible name, the name is also displayed, making it easy to identify and distinguish between landmarks of the same type.</p>
+
+<h3>Use this bookmarklet when you want to:</h3>
+
+<ul>
+  <li>identify the landmark structure of a page</li>
+  <li>check that major regions have been marked up as landmarks</li>
+  <li>verify that multiple landmarks of the same type have unique accessible names</li>
+  <li>understand how assistive technologies divide a page into regions</li>
+</ul>
+
+<h3>How to use it</h3>
+
+<ol>
+  <li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
+  <li>Open the page you want to inspect.</li>
+  <li>Click the <strong>Highlight landmarks</strong> bookmarklet.</li>
+  <li>Scroll through the page to review the highlighted landmark regions.</li>
+  <li>Press <code>Esc</code> to remove the overlay.</li>
+</ol>
+
+<h3>Video demonstration</h3>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/mp4/poster.png" controls src="assets/mp4/04-landmarks.mp4"></video>
+
+<details>
+  <summary>Video transcript</summary>
+  <ul>
+    <li>Step 1: Start on <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page</li>
+    <li>Step 2: Find the "Highlight landmarks" bookmarklet</li>
+    <li>Step 3: Drag the bookmarklet to your browser's Bookmarks Bar</li>
+    <li>Step 4: Use the test page to review the bookmarklet</li>
+    <li>Step 5: Activate the bookmarklet</li>
+    <li>Step 6: Scroll through the page to review the highlighted landmarks</li>
+    <li>Banner landmarks are highlighted in dark blue</li>
+    <li>Notice that headers inside other landmarks are not identified as "banner"</li>
+    <li>Contentinfo are highlighted in deep purple</li>
+    <li>Notice that footers inside other landmarks are not identified as "contentinfo"</li>
+    <li>Main landmarks are highlighted in dark green</li>
+    <li>Navigation landmarks are highlighted in amber</li>
+    <li>Notice that the landmark name is displayed, if present</li>
+    <li>Complementary landmarks are highlighted in teal</li>
+    <li>Notice that the landmark name is displayed, if present</li>
+    <li>Notice that nested asides with accessible names are identified as "complementary"</li>
+    <li>However, nested asides without accessible names are not identified as "complementary"</li>
+    <li>Region landmarks are highlighted in blue-grey</li>
+    <li>Notice that sections with accessible names are identified as "region"</li>
+    <li>However, sections without accessible names are not identified as "region"</li>
+    <li>Search landmarks are highlighted in deep pink</li>
+    <li>Form landmarks are highlighted in red</li>
+    <li>Press the "Escape" key to remove the overlay</li>
+  </ul>
+</details>
+
+<h3>When reviewing the page, check for:</h3>
+
+<ul>
+  <li><strong>The expected landmark regions</strong>, such as banner, navigation, main, complementary, contentinfo, search, region and form.</li>
+  <li><strong>A single main landmark</strong>, representing the primary content of the page.</li>
+  <li><strong>Accessible names</strong> on landmarks where there is more than one of the same type (for example, multiple navigation regions).</li>
+  <li><strong>Logical organisation</strong>, where landmarks divide the page into meaningful sections without unnecessary duplication.</li>
+</ul>
+
+<h3>Things to be aware of</h3>
+
+<p>This bookmarklet only identifies <strong>actual landmark roles</strong>. It won't highlight sections of a page that merely look like separate regions but haven't been marked up using HTML landmark elements or ARIA landmark roles.</p>
+
+<p>An unnamed landmark isn't necessarily incorrect. Accessible names are generally only needed when there are multiple landmarks with the same role and users need a way to distinguish between them.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="bookmarklet05">Bookmarklet 5. Highlight page language</h2>
+
+<p>Highlights the language of the page by checking both the document language and any inline language changes.</p>
+
+<p>It validates the language codes used in <code>lang</code> attributes and identifies:</p>
+
+<ul>
+  <li>valid language codes</li>
+  <li>empty <code>lang</code> attributes</li>
+  <li>unrecognised language codes</li>
+  <li>invalid language codes</li>
+  <li>common mistakes, with suggested corrections where possible</li>
+  <li>missing document language</li>
+</ul>
+
+<p>Inline <code>lang</code> attributes are also highlighted so you can see where the language changes within a page.</p>
+
+<h3>Use this bookmarklet when you want to:</h3>
+
+<ul>
+  <li>check that a page has a document language</li>
+  <li>validate <code>lang</code> attribute values</li>
+  <li>identify missing or invalid language codes</li>
+  <li>inspect where language changes occur within a page</li>
+  <li>review multilingual content</li>
+</ul>
+
+<h3>How to use it</h3>
+
+<ol>
+  <li>Open the page you want to inspect.</li>
+  <li>Click the "Highlight page language" bookmarklet.</li>
+  <li>Review the document language banner at the top of the page.</li>
+  <li>Scroll through the page to inspect any highlighted inline language changes.</li>
+</ol>
+
+<h3>Video demonstration</h3>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/mp4/poster.png" controls src="assets/mp4/05-lang.mp4"></video>
+
+<details>
+  <summary>Video transcript</summary>
+  <ul>
+    <li>Step 1: Start on <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page</li>
+    <li>Step 2: Find the "Highlight page language" bookmarklet</li>
+    <li>Step 3: Drag the bookmarklet to your browser's Bookmarks Bar</li>
+    <li>Step 4: Use the first test pages to review the bookmarklet</li>
+    <li>Step 5: Activate the bookmarklet</li>
+    <li>Step 6: Scroll through the page to review the highlighted attributes</li>
+    <li>Valid page langs are highlighted in green</li>
+    <li>Valid lang attributes are highlighted in dark blue</li>
+    <li>Empty and unrecognised lang attributes are highlighted amber</li>
+    <li>Unrecognised lang attributes are highlighted in orange</li>
+    <li>Invalid lang attributes are highlighted red</li>
+    <li>Press the "Escape" key to remove the overlay</li>
+    <li>Invalid page langs are highlighted in red</li>
+    <li>Missing page langs are also highlighted in red</li>
+  </ul>
+</details>
+
+<h3>When reviewing the page, check for:</h3>
+
+<ul>
+  <li>A valid document language, declared on the <code>&lt;html&gt;</code> element.</li>
+  <li>Missing document language, which should be added.</li>
+  <li>Invalid or unrecognised language codes, which should be corrected.</li>
+  <li>Inline language changes, ensuring words or passages in another language have an appropriate <code>lang</code> attribute.</li>
+  <li>Common typing mistakes, where the bookmarklet suggests the intended language code.</li>
+</ul>
+
+<h3>Things to be aware of</h3>
+
+<p>This bookmarklet validates language codes, but it can't determine whether the chosen language accurately reflects the content. For example, a page may correctly use `lang="en"` even though most of its content is actually written in another language.</p>
+
+<p>Similarly, it can identify where inline language changes have been marked up, but it can't determine whether every language change has been identified.</p>
+
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</body>
+</html>

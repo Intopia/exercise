@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Table bookmarklets explained</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    hr {
+      margin: 3.5em 0;
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Table bookmarklets explained</h1>
+
+<p>These bookmarklets help you inspect the structure and accessibility of HTML and ARIA tables. Use them to review captions, headers, cell relationships and table roles.</p>
+
+<p>This page explains the bookmarklets available on the <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="bookmarklet06">Bookmarklet 6. Highlight captions and headers</h2>
+
+<p>Highlights important accessibility features within HTML tables. It identifies:</p>
+
+<ul>
+  <li>table elements</li>
+  <li>table captions</li>
+  <li>header cells</li>
+  <li>header cells with a <code>scope</code> attribute</li>
+  <li>header cells without a <code>scope</code> attribute</li>
+</ul>
+
+<p>This helps you inspect the structure of HTML tables and review how their header cells have been marked up.</p>
+
+<h3>Use this bookmarklet when you want to:</h3>
+
+<ul>
+  <li>identify table captions</li>
+  <li>identify row and column header cells</li>
+  <li>check whether header cells use the <code>scope</code> attribute</li>
+  <li>understand the basic structure of a table</li>
+  <li>find tables that may need further accessibility testing</li>
+</ul>
+
+<h3>How to use it</h3>
+
+<ol>
+  <li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
+  <li>Open the page you want to inspect.</li>
+  <li>Click the <strong>Highlight captions and headers</strong> bookmarklet.</li>
+  <li>Scroll through the page to review the tables.</li>
+  <li>Press <code>n</code> to cycle through <code>table</code>, <code>caption</code> and <code>th</code> elements one at a time.</li>
+  <li>Press <code>Esc</code> to remove the overlay.</li>
+</ol>
+
+<p>By default, tables, captions and header cells are all displayed. Scope information (key <code>4</code>) is hidden by default — press <code>4</code> to reveal it. The keyboard shortcuts let you focus on one part of the table at a time.</p>
+
+<h3>Video demonstration</h3>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/06-highlight-captions-and-headers.mp4">
+</video>
+
+<details>
+  <summary>Transcript</summary>
+  <ul>
+    <li>Step 1: Start on <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page</li>
+    <li>Step 2: Find the "Highlight captions and headers" bookmarklet</li>
+    <li>Step 3: Drag the bookmarklet to your browser's Bookmarks Bar</li>
+    <li>Step 4: Use the test page to review the bookmarklet</li>
+    <li>Step 5: Activate the bookmarklet</li>
+    <li>Step 6: Use 'n' to move through the page to review the highlighted elements</li>
+    <li>Tables, captions and header cells are all displayed by default</li>
+    <li>Press 1 to view table only</li>
+    <li>Press 2 to view caption only</li>
+    <li>Press 3 to view header cells only</li>
+    <li>Press 4 to reveal scope information</li>
+    <li>Press the "Escape" key to remove the overlay</li>
+  </ul>
+</details>
+
+<h3>When reviewing a table, check for:</h3>
+
+<ul>
+  <li><strong>A useful caption</strong> that identifies the purpose of the table.</li>
+  <li><strong>Header cells</strong> that clearly describe the rows or columns they relate to.</li>
+  <li><strong>Appropriate use of <code>scope</code></strong>, such as <code>scope="col"</code> for column headers and <code>scope="row"</code> for row headers.</li>
+  <li><strong>Cells that look like headers</strong> but use ordinary data cells (<code>td</code>) instead of <code>th</code>.</li>
+  <li><strong>Complex header relationships</strong> that may not be adequately described using <code>scope</code> alone.</li>
+</ul>
+
+<h3>Things to be aware of</h3>
+
+<p>A table without a <code>caption</code> is not automatically inaccessible. Its purpose may already be clearly explained by a nearby heading or surrounding text. However, captions are often useful because they provide a title that is directly associated with the table.</p>
+
+<p>Similarly, a header cell without a <code>scope</code> attribute is not automatically incorrect. Simple tables may still be interpreted correctly by browsers and assistive technologies. More complex tables may require additional markup and more detailed testing.</p>
+
+<p>This bookmarklet highlights individual table features, but it can't determine whether all header cells are correctly associated with their data cells.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="bookmarklet07">Bookmarklet 7. Highlight table IDs and headers</h2>
+
+<p>Highlights the relationships between data cells and their associated header cells within complex HTML tables.</p>
+
+<p>When you navigate to a table cell, a floating badge displays the cell's content together with its <code>id</code> or <code>headers</code> attribute where present. When a data cell references one or more header cells using the <code>headers</code> attribute, those header cells are highlighted in green, making the relationships immediately visible.</p>
+
+<p>It also identifies empty table cells.</p>
+
+<h3>Use this bookmarklet when you want to:</h3>
+
+<ul>
+  <li>understand how complex tables associate data cells with header cells</li>
+  <li>verify <code>id</code> and <code>headers</code> relationships</li>
+  <li>inspect the structure of complex HTML tables</li>
+  <li>identify empty table cells</li>
+  <li>teach or learn how accessible table relationships work</li>
+</ul>
+
+<h3>How to use it</h3>
+
+<ol>
+  <li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
+  <li>Open the page you want to inspect.</li>
+  <li>Click the <strong>Highlight table IDs and headers</strong> bookmarklet.</li>
+  <li>Press <code>Tab</code> or <code>n</code> to move through the table cells one at a time.</li>
+  <li>Review the floating badge for each cell, and observe which header cells are highlighted as you navigate.</li>
+  <li>Press <code>Esc</code> to remove the overlay.</li>
+</ol>
+
+<h3>Video demonstration</h3>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/07-highlight-table-ids-and-headers.mp4">
+</video>
+
+<details>
+  <summary>Transcript</summary>
+  <ul>
+    <li>Step 1: Start on <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page</li>
+    <li>Step 2: Find the "Highlight table IDs and headers" bookmarklet</li>
+    <li>Step 3: Drag the bookmarklet to your browser's Bookmarks Bar</li>
+    <li>Step 4: Use the test page to review the bookmarklet</li>
+    <li>Step 5: Activate the bookmarklet</li>
+    <li>Step 6: Use 'tab' or 'n' or mouse click to move through the table cells</li>
+    <li>Review the floating badge for each cell to see the cell value, ID, and associated headers</li>
+    <li>td cells are highlighted in blue</li>
+    <li>th cells are highlighted in green</li>
+    <li>Press the "Escape" key to remove the overlay</li>
+  </ul>
+</details>
+
+<h3>When reviewing a table, check for:</h3>
+
+<ul>
+  <li><strong>Data cells</strong> that reference the correct header cells using the <code>headers</code> attribute.</li>
+  <li><strong>Header cells</strong> that have unique <code>id</code> attributes.</li>
+  <li><strong>Highlighted header cells</strong> that provide the correct row and column context for each data cell.</li>
+  <li><strong>Complex tables</strong> where multiple header cells combine to describe a single data cell.</li>
+  <li><strong>Empty table cells</strong>, which may indicate missing information or unintended markup.</li>
+</ul>
+
+<h3>Things to be aware of</h3>
+
+<p>This bookmarklet is intended for <strong>complex HTML tables</strong> that use <code>id</code> and <code>headers</code> attributes. Simple tables often rely on <code>th</code> elements and the <code>scope</code> attribute instead, and don't require explicit <code>id</code> and <code>headers</code> relationships.</p>
+
+<p>The bookmarklet visualises the relationships defined in the markup, but it can't determine whether those relationships are logically correct. You'll still need to decide whether the highlighted header cells provide the right context for each data cell.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="bookmarklet08">Bookmarklet 8. Highlight ARIA table roles</h2>
+
+<p>Highlights the ARIA roles used to create tables and grids. It identifies the roles that make up an ARIA table or grid, helping you understand how a custom widget has been structured.</p>
+
+<p>It also displays the current value of the <code>aria-sort</code> attribute where it has been applied to sortable column headers.</p>
+
+<h3>Use this bookmarklet when you want to:</h3>
+
+<ul>
+  <li>inspect tables built using ARIA roles instead of native HTML table elements</li>
+  <li>understand the structure of a custom table or grid</li>
+  <li>check that the expected ARIA roles have been applied</li>
+  <li>review the current <code>aria-sort</code> values on sortable column headers</li>
+</ul>
+
+<h3>How to use it</h3>
+
+<ol>
+  <li>Drag a bookmarklet to your browser's Bookmarks Bar.</li>
+  <li>Open the page you want to inspect.</li>
+  <li>Click the <strong>Highlight ARIA table roles</strong> bookmarklet.</li>
+  <li>Scroll through the page to review the ARIA-based tables.</li>
+  <li>Press <code>n</code> to cycle through <code>table</code> / <code>grid</code> / <code>treegrid</code>, <code>rowgroup</code>, <code>row</code>, <code>columnheader</code>, <code>rowheader</code> and <code>cell</code> / <code>gridcell</code> roles one at a time.</li>
+  <li>Press <code>Esc</code> to remove the overlay.</li>
+</ol>
+
+<p><strong>Note:</strong> If you sort a table while the bookmarklet is active, run the bookmarklet again to refresh the displayed <code>aria-sort</code> values.</p>
+
+<h3>Video demonstration</h3>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/08-highlight-aria-table-roles.mp4">
+</video>
+
+<details>
+  <summary>Transcript</summary>
+  <ul>
+    <li>Step 1: Start on <a href="https://intopia.github.io/exercise/testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a> page</li>
+    <li>Step 2: Find the "Highlight ARIA table roles" bookmarklet</li>
+    <li>Step 3: Drag the bookmarklet to your browser's Bookmarks Bar</li>
+    <li>Step 4: Use the test page to review the bookmarklet</li>
+    <li>Step 5: Activate the bookmarklet</li>
+    <li>Step 6: Use 'n' to cycle through the ARIA roles one at a time</li>
+    <li>role="table" or role="grid" is shown in blue</li>
+    <li>role="rowgroup" is shown in turquoise</li>
+    <li>role="row" is shown in orange</li>
+    <li>role="columnheader" is shown in red</li>
+    <li>role="rowheader" is shown in purple</li>
+    <li>role="cell" or role="cellgrid" is shown in green</li>
+    <li>Sortable column headers should be shown as (sort: none)</li>
+    <li>If sorting a table while the bookmarklet is active, run the bookmarklet again to refresh the values</li>
+    <li>A sorted column will change to (sort: ascending) or (sort: descending)</li>
+    <li>Press the "Escape" key to remove the overlay</li>
+  </ul>
+</details>
+
+<p>When reviewing an ARIA table or grid, check for:</p>
+
+<ul>
+  <li><strong>A complete role hierarchy</strong>, with all required parent and child roles present.</li>
+  <li><strong>Rows, headers and cells</strong> that appear in the expected structure.</li>
+  <li><strong>Sortable column headers</strong> that correctly update their <code>aria-sort</code> values.</li>
+  <li><strong>Consistent use of ARIA roles</strong> throughout the table or grid.</li>
+</ul>
+
+<h3>Things to be aware of</h3>
+
+<p>This bookmarklet only inspects <strong>ARIA table roles</strong>. It does not highlight native HTML table elements (<code>table</code>, <code>tr</code>, <code>th</code> and <code>td</code>).</p>
+
+<p>Using ARIA table roles is generally intended for custom widgets and applications. Whenever possible, native HTML tables should be used instead, as they provide built-in accessibility and require much less markup.</p>
+
+<p>This bookmarklet shows the ARIA roles that have been applied, but it can't determine whether the table behaves correctly for keyboard users or assistive technologies.</p>
+
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</body>
+</html>
