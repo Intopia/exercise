@@ -118,6 +118,46 @@
 <!-- section -->
 
 
+<h2>Example 3: multiple values</h2>
+
+<p>Per the <a href="https://w3c.github.io/aria/#aria-details" target="_blank">WAI-ARIA 1.3 specification</a>, <code>aria-details</code> supports referring to more than one element, useful when several independent pieces of extended information relate to the same content, rather than a single description. The example below is a paragraph with two unrelated comments attached.</p>
+
+<p>The spec also defines what should happen when a screen reader's underlying accessibility API can't expose more than one relation at once: it <b>SHOULD</b> fall back to exposing only the first referenced element, not merge the two, not drop the attribute entirely, specifically the first one listed.</p>
+
+<div class="example">
+  <p id="retention-statement" aria-details="comment-1 comment-2">All customer records will be retained for seven years.</p>
+  <div id="comment-1">
+    <p>Should this retention period be reviewed?</p>
+  </div>
+  <div id="comment-2">
+    <p>Legal has confirmed that seven years is required.</p>
+  </div>
+</div>
+
+<p><b>Expected result:</b> worth confirming directly, and worth treating with more caution than Example 2, single-value <code>aria-details</code> support is already documented as inconsistent above, multiple values is a newer, even less-tested capability layered on top of that. Per spec, both comments should be discoverable, or, on an AT that can't support multiple relations, only the first ("Should this retention period be reviewed?") should be exposed as the documented fallback. Confirm which of these, if either, actually happens with your standard testing set.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;p
+  id="retention-statement"
+  <span class="highlight">aria-details="comment-1 comment-2"</span>
+&gt;
+  All customer records will be retained for seven years.
+&lt;/p&gt;
+
+&lt;div id="comment-1"&gt;
+  &lt;p&gt;Should this retention period be reviewed?&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div id="comment-2"&gt;
+  &lt;p&gt;Legal has confirmed that seven years is required.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
 <h2>Note for testing</h2>
 
 <p>Published support data for <code>aria-details</code> is mixed and conflicting, and worth re-testing directly rather than relying on either source below:</p>
@@ -135,6 +175,8 @@
 </ul>
 
 <p>Given the age and conflict between these sources, and that support for this attribute has historically been patchy, this is worth testing fresh against current browser and screen reader versions before drawing conclusions.</p>
+
+<p>Multiple-value support (Example 3) is newer than what either source above tested, and hasn't been independently verified anywhere referenced on this page. Treat it as an open question rather than an extension of the single-value findings above.</p>
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 </body>
