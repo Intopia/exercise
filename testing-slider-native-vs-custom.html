@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing a native vs custom range slider</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    .slider-wrapper {
+      max-width: 20em;
+    }
+
+    .slider-track {
+      position: relative;
+      height: 6px;
+      background: #ccc;
+      border-radius: 3px;
+      margin: 1.5em 0;
+      cursor: pointer;
+    }
+
+    .slider-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: #1b5e20;
+      border-radius: 3px;
+      pointer-events: none;
+    }
+
+    .slider-thumb {
+      position: absolute;
+      top: 50%;
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border: 2px solid #1b5e20;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      cursor: grab;
+    }
+
+    .slider-thumb:focus {
+      outline: 2px solid #000;
+      outline-offset: 2px;
+    }
+
+    .slider-thumb:active {
+      cursor: grabbing;
+    }
+
+    .slider-output {
+      display: inline-block;
+      min-width: 2.5em;
+      font-weight: 600;
+    }
+
+    .resolve-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1em 0;
+    }
+
+    .resolve-table th,
+    .resolve-table td {
+      text-align: left;
+      padding: 0.5em;
+      border: 1px solid #999;
+      vertical-align: top;
+    }
+
+    .note {
+      background: #fff3cd;
+      border: 1px solid #ffe69c;
+      padding: 0.75em 1em;
+      border-radius: 4px;
+      margin: 1.5em 0;
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<h1>Testing a native vs custom range slider</h1>
+
+<p>A native <code>&lt;input type="range"&gt;</code> gives you a fully accessible slider for free. The moment you need to build a custom-styled version from scratch, because native range inputs can't be styled to the degree many designs require, every piece of that accessibility support has to be rebuilt by hand. This page shows both, side by side.</p>
+
+
+<!-- section -->
+
+
+<h2>Example 1: native <code>&lt;input type="range"&gt;</code></h2>
+
+<p>Role, name, minimum, maximum, current value, keyboard interaction, and AT announcement are all handled automatically by the browser. Nothing below is ARIA, none of it is needed.</p>
+
+<div class="example">
+  <label class="label" for="volume-native">Volume</label>
+  <input type="range" id="volume-native" min="0" max="100" value="40">
+  <output for="volume-native" id="volume-native-output">40</output>
+</div>
+
+<p><b>Expected result:</b> Arrow keys, Home, End, and Page Up/Down should all work immediately, with no JavaScript. The <code>&lt;output&gt;</code> is a small, optional addition, purely visual, showing sighted users the numeric value, since a bare slider thumb position alone can be hard to read precisely. It has no effect on what's announced to AT, that comes from the input's own native state.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="volume-native"&gt;Volume&lt;/label&gt;
+&lt;input
+  type="range"
+  id="volume-native"
+  min="0"
+  max="100"
+  value="40"
+&gt;
+&lt;output for="volume-native"&gt;40&lt;/output&gt;</code></pre>
+</details>
+
+<script>
+  const nativeInput = document.getElementById('volume-native');
+  const nativeOutput = document.getElementById('volume-native-output');
+  nativeInput.addEventListener('input', () => {
+    nativeOutput.textContent = nativeInput.value;
+  });
+</script>
+
+
+<!-- section -->
+
+
+<h2>Example 2: custom slider, built from scratch</h2>
+
+<p>Starting point, before anything is resolved:</p>
+
+<pre><code>&lt;div&gt;Volume&lt;/div&gt;
+&lt;div&gt;
+  &lt;div&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+<p>Also worth noting: the native example's mouse and touch behaviour, dragging the thumb, clicking anywhere on the track to jump to that position, is entirely free with a native input. Both are rebuilt by hand below too.</p>
+
+<div class="example">
+  <div class="slider-wrapper">
+    <span class="label" id="volume-custom-label">Volume</span>
+    <div class="slider-track" id="volume-track">
+      <div class="slider-fill" id="volume-fill"></div>
+      <div
+        class="slider-thumb"
+        id="volume-thumb"
+        role="slider"
+        tabindex="0"
+        aria-labelledby="volume-custom-label"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow="40"
+      ></div>
+    </div>
+    <span class="slider-output" id="volume-custom-output">40</span>
+  </div>
+</div>
+
+<p>Two plain, meaningless <code>&lt;div&gt;</code>s became the slider above. Everything the native input gave for free had to be deliberately resolved:</p>
+
+<table class="resolve-table">
+  <caption>What needs to be resolved, and how</caption>
+  <thead>
+    <tr>
+      <th>Question</th>
+      <th>Resolved via</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>What kind of widget is this?</td>
+      <td><code>role="slider"</code></td>
+    </tr>
+    <tr>
+      <td>What is its name?</td>
+      <td><code>aria-labelledby</code>, pointing at the visible "Volume" label</td>
+    </tr>
+    <tr>
+      <td>What is its lowest possible value?</td>
+      <td><code>aria-valuemin="0"</code></td>
+    </tr>
+    <tr>
+      <td>What is its highest possible value?</td>
+      <td><code>aria-valuemax="100"</code></td>
+    </tr>
+    <tr>
+      <td>What is its current value?</td>
+      <td><code>aria-valuenow</code>, updated by JavaScript on every change</td>
+    </tr>
+    <tr>
+      <td>How should the keyboard interact with it?</td>
+      <td>Hand-written keydown handling: Arrow keys, Home, End, Page Up/Down</td>
+    </tr>
+    <tr>
+      <td>What should be passed to assistive technology when the value changes?</td>
+      <td><b>Resolved: neither <code>aria-live</code> nor a hidden announcer element is needed.</b> Real keyboard focus stays on the slider itself the entire time, unlike the character counter or timer examples elsewhere on this site, where a <i>separate</i> element was being updated. A focused widget's own value change should be announced automatically once <code>aria-valuenow</code> updates, worth confirming directly with your own AT set rather than assumed.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><b>Expected result:</b></p>
+<ul>
+  <li>Arrow Up / Arrow Right: increase by 1</li>
+  <li>Arrow Down / Arrow Left: decrease by 1</li>
+  <li>Page Up / Page Down: increase/decrease by 10</li>
+  <li>Home / End: jump to minimum / maximum</li>
+  <li>Clicking anywhere on the track: jump the thumb to that position</li>
+  <li>Dragging the thumb: move it with the mouse or touch, clamped between 0 and 100</li>
+  <li>All of the above should update the visible position, the visible number, and <code>aria-valuenow</code> together, in sync</li>
+</ul>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span id="volume-custom-label"&gt;Volume&lt;/span&gt;
+&lt;div class="slider-track" id="volume-track"&gt;
+  &lt;div class="slider-fill" id="volume-fill"&gt;&lt;/div&gt;
+  &lt;div
+    class="slider-thumb"
+    id="volume-thumb"
+    <span class="highlight">role="slider"</span>
+    tabindex="0"
+    <span class="highlight">aria-labelledby="volume-custom-label"</span>
+    <span class="highlight">aria-valuemin="0"</span>
+    <span class="highlight">aria-valuemax="100"</span>
+    <span class="highlight">aria-valuenow="40"</span>
+  &gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;span id="volume-custom-output"&gt;40&lt;/span&gt;</code></pre>
+</details>
+
+<div class="note">
+  <p><b>Worth testing directly:</b> confirm with your standard screen reader and browser combinations that value changes are actually announced automatically while the thumb is focused, without any <code>aria-live</code> region. If any combination stays silent, that would be a genuinely useful, concrete finding, and would mean the "resolved" answer in the table above needs revisiting for that specific combination.</p>
+</div>
+
+<script>
+(function () {
+  const track = document.getElementById('volume-track');
+  const fill = document.getElementById('volume-fill');
+  const thumb = document.getElementById('volume-thumb');
+  const output = document.getElementById('volume-custom-output');
+
+  const min = 0;
+  const max = 100;
+  let value = 40;
+  let isDragging = false;
+
+  function render() {
+    const percent = ((value - min) / (max - min)) * 100;
+    fill.style.width = percent + '%';
+    thumb.style.left = percent + '%';
+    thumb.setAttribute('aria-valuenow', value);
+    output.textContent = value;
+  }
+
+  function setValue(newValue) {
+    value = Math.min(max, Math.max(min, Math.round(newValue)));
+    render();
+  }
+
+  function valueFromPointer(clientX) {
+    const rect = track.getBoundingClientRect();
+    const percent = (clientX - rect.left) / rect.width;
+    return min + percent * (max - min);
+  }
+
+  // Keyboard
+  thumb.addEventListener('keydown', (event) => {
+    switch (event.key) {
+      case 'ArrowRight':
+      case 'ArrowUp':
+        event.preventDefault();
+        setValue(value + 1);
+        break;
+      case 'ArrowLeft':
+      case 'ArrowDown':
+        event.preventDefault();
+        setValue(value - 1);
+        break;
+      case 'PageUp':
+        event.preventDefault();
+        setValue(value + 10);
+        break;
+      case 'PageDown':
+        event.preventDefault();
+        setValue(value - 10);
+        break;
+      case 'Home':
+        event.preventDefault();
+        setValue(min);
+        break;
+      case 'End':
+        event.preventDefault();
+        setValue(max);
+        break;
+    }
+  });
+
+  // Click anywhere on the track jumps the thumb there
+  track.addEventListener('pointerdown', (event) => {
+    if (event.target === thumb) return; // let the drag handler below take this
+    setValue(valueFromPointer(event.clientX));
+    thumb.focus();
+  });
+
+  // Dragging the thumb itself
+  thumb.addEventListener('pointerdown', (event) => {
+    isDragging = true;
+    thumb.setPointerCapture(event.pointerId);
+    thumb.focus();
+  });
+
+  thumb.addEventListener('pointermove', (event) => {
+    if (!isDragging) return;
+    setValue(valueFromPointer(event.clientX));
+  });
+
+  thumb.addEventListener('pointerup', (event) => {
+    isDragging = false;
+    thumb.releasePointerCapture(event.pointerId);
+  });
+
+  render();
+})();
+</script>
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
+</body>
+</html>
