@@ -140,7 +140,34 @@
 <!-- section -->
 
 
-<p><b>Note for testing:</b> confirm all four results above with your standard browser and screen reader combinations before treating them as settled. <code>aria-roledescription</code> support, and behaviour for the misuse case in Example 4 specifically, has not been verified here.</p>
+<h2>Example 5: empty value</h2>
+
+<p>An empty <code>aria-roledescription</code> attribute provides no meaningful description and will be flagged as an authoring issue.</p>
+
+<div class="example">
+  <div role="group" aria-roledescription="" aria-label="Photo of a mountain lake at sunrise">
+    Slide 1 of 3
+  </div>
+</div>
+
+<p><b>Expected result:</b> the element has a valid underlying role but the roledescription value is empty, so no custom role name will be announced. The role will fall back to the underlying "group".</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div
+  role="group"
+  <span class="highlight">aria-roledescription=""</span>
+  aria-label="Photo of a mountain lake at sunrise"
+&gt;
+  Slide 1 of 3
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<p><b>Note for testing:</b> confirm all results above with your standard browser and screen reader combinations before treating them as settled. <code>aria-roledescription</code> support, and behaviour for the misuse case in Example 4 specifically, has not been verified here.</p>
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 </body>

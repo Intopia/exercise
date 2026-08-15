@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing aria-pressed</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    button[aria-pressed="true"] {
+      background: #1b5e20;
+    }
+    button[aria-pressed="mixed"] {
+      background: #e65100;
+    }
+    .track-list {
+      list-style: none;
+      padding-left: 0;
+    }
+    .track-list li {
+      margin-block-end: 0.5em;
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing <code>aria-pressed</code></h1>
+
+<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-pressed" target="_blank"><code>aria-pressed</code></a> indicates the current "pressed" state of a toggle button. It supports three values, <code>true</code>, <code>false</code>, and <code>mixed</code>. It is intended for use on a real <code>&lt;button&gt;</code> element, or an element with <code>role="button"</code>.</p>
+
+<p>This page uses a single live example to demonstrate all three states, and to demonstrate why <code>mixed</code> exists in the first place: it is a computed consequence of related controls disagreeing, not a state a button starts in or that a user reaches directly.</p>
+
+
+<!-- section -->
+
+
+<h2>Example: Mute all</h2>
+
+<p>The "Mute all" button controls three individual track buttons. Its own <code>aria-pressed</code> state is not set directly, it is recalculated every time a track button changes:</p>
+
+<ul>
+  <li>all three tracks unmuted &rarr; <code>aria-pressed="false"</code></li>
+  <li>all three tracks muted &rarr; <code>aria-pressed="true"</code></li>
+  <li>a mix of muted and unmuted tracks &rarr; <code>aria-pressed="mixed"</code></li>
+</ul>
+
+<p>Pressing "Mute all" while it is <code>false</code> or <code>mixed</code> mutes every track and sets it to <code>true</code>. Pressing it while it is <code>true</code> unmutes every track and sets it back to <code>false</code>.</p>
+
+<p>There is no <code>aria-live</code> region on this page. State changes are only announced when focus lands on, or returns to, a button whose <code>aria-pressed</code> has changed since it was last focused. This is deliberate: it is the honest, default behaviour of <code>aria-pressed</code> without any extra announcement mechanism layered on top.</p>
+
+<div class="example">
+  <button id="mute-all" aria-pressed="false">
+    Mute all
+  </button>
+  <ul class="track-list">
+    <li><button class="track-button" id="track-1" aria-pressed="false">Mute track 1</button></li>
+    <li><button class="track-button" id="track-2" aria-pressed="false">Mute track 2</button></li>
+    <li><button class="track-button" id="track-3" aria-pressed="false">Mute track 3</button></li>
+  </ul>
+</div>
+
+<p><b>Try this:</b></p>
+<ol>
+  <li>Tab to "Mute all". It should announce as not pressed.</li>
+  <li>Tab to "Mute track 2" and activate it. It should announce as pressed.</li>
+  <li>Shift-tab back to "Mute all". It should now announce as mixed, not not-pressed, because one of three tracks is muted.</li>
+  <li>Mute the remaining two tracks individually. "Mute all" should now announce as pressed once all three agree.</li>
+  <li>Activate "Mute all" directly from a mixed or unpressed state. All three tracks should mute and "Mute all" should announce as pressed.</li>
+  <li>Activate "Mute all" again while it is pressed. All three tracks should unmute and "Mute all" should return to not pressed.</li>
+</ol>
+
+<p><b>Expected result:</b> worth confirming directly rather than assuming, whether <code>mixed</code> is announced distinctly from <code>true</code> or <code>false</code> (for example, as "mixed" or "partially pressed" rather than "pressed") has historically varied across screen reader and browser combinations, and is worth checking against your standard test set.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button id="mute-all" <span class="highlight">aria-pressed="false"</span>&gt;
+  Mute all
+&lt;/button&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;button id="track-1" <span class="highlight">aria-pressed="false"</span>&gt;Mute track 1&lt;/button&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;button id="track-2" <span class="highlight">aria-pressed="false"</span>&gt;Mute track 2&lt;/button&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;button id="track-3" <span class="highlight">aria-pressed="false"</span>&gt;Mute track 3&lt;/button&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</details>
+
+<details>
+  <summary>JavaScript</summary>
+<pre><code>const muteAll = document.getElementById('mute-all');
+const trackButtons = Array.from(document.querySelectorAll('.track-button'));
+
+function updateMuteAll() {
+  const states = trackButtons.map(btn => btn.getAttribute('aria-pressed'));
+  const allTrue = states.every(state => state === 'true');
+  const allFalse = states.every(state => state === 'false');
+
+  if (allTrue) {
+    muteAll.setAttribute('aria-pressed', 'true');
+  } else if (allFalse) {
+    muteAll.setAttribute('aria-pressed', 'false');
+  } else {
+    muteAll.setAttribute('aria-pressed', 'mixed');
+  }
+}
+
+trackButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const isPressed = btn.getAttribute('aria-pressed') === 'true';
+    btn.setAttribute('aria-pressed', String(!isPressed));
+    updateMuteAll();
+  });
+});
+
+muteAll.addEventListener('click', () => {
+  const currentState = muteAll.getAttribute('aria-pressed');
+  // true resolves to false (unmute all)
+  // false or mixed both resolve to true (mute all)
+  const nextState = currentState === 'true' ? 'false' : 'true';
+
+  trackButtons.forEach(btn => btn.setAttribute('aria-pressed', nextState));
+  muteAll.setAttribute('aria-pressed', nextState);
+});</code></pre>
+</details>
+
+<script>
+  const muteAll = document.getElementById('mute-all');
+  const trackButtons = Array.from(document.querySelectorAll('.track-button'));
+
+  function updateMuteAll() {
+    const states = trackButtons.map(btn => btn.getAttribute('aria-pressed'));
+    const allTrue = states.every(state => state === 'true');
+    const allFalse = states.every(state => state === 'false');
+
+    if (allTrue) {
+      muteAll.setAttribute('aria-pressed', 'true');
+    } else if (allFalse) {
+      muteAll.setAttribute('aria-pressed', 'false');
+    } else {
+      muteAll.setAttribute('aria-pressed', 'mixed');
+    }
+  }
+
+  trackButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const isPressed = btn.getAttribute('aria-pressed') === 'true';
+      btn.setAttribute('aria-pressed', String(!isPressed));
+      updateMuteAll();
+    });
+  });
+
+  muteAll.addEventListener('click', () => {
+    const currentState = muteAll.getAttribute('aria-pressed');
+    // true resolves to false (unmute all)
+    // false or mixed both resolve to true (mute all)
+    const nextState = currentState === 'true' ? 'false' : 'true';
+
+    trackButtons.forEach(btn => btn.setAttribute('aria-pressed', nextState));
+    muteAll.setAttribute('aria-pressed', nextState);
+  });
+</script>
+
+
+<!-- section -->
+
+
+<p><b>Note for testing:</b> confirm the mixed state announcement, and the two different resolutions of pressing "Mute all" (mixed/false both resolving to true, true resolving to false), with your standard browser and screen reader combinations before treating them as settled.</p>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</body>
+</html>
