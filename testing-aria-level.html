@@ -12,12 +12,131 @@
       color: #C03C0C;
     }
 
+    /* Example 3: card component reused at two different levels */
+    .card-context {
+      margin-bottom: 1.5em;
+    }
+
+    .card-context:last-child {
+      margin-bottom: 0;
+    }
+
+    .context-label {
+      font-size: 0.85em;
+      color: #555;
+      font-style: italic;
+      margin: 0 0 0.5em 0;
+    }
+
+    .fake-card {
+      border: 1px solid #d0d0d0;
+      border-radius: 4px;
+      padding: 0.75em 1em;
+    }
+
+    .fake-card p {
+      margin: 0.5em 0 0 0;
+      font-weight: normal;
+      color: #444;
+    }
+
     .note {
       background: #fff3cd;
       border: 1px solid #ffe69c;
       padding: 0.75em 1em;
       border-radius: 4px;
       margin: 1.5em 0;
+    }
+
+    /* Example 4: treegrid demo, scoped so it doesn't affect other examples */
+    .treegrid-demo [role="treegrid"] {
+      border-collapse: collapse;
+      width: 100%;
+      border: 1px solid #d0d0d0;
+      font-size: 0.95rem;
+    }
+
+    .treegrid-demo [role="row"] {
+      display: flex;
+      border-bottom: 1px solid #d0d0d0;
+    }
+
+    .treegrid-demo [role="row"]:last-child {
+      border-bottom: none;
+    }
+
+    .treegrid-demo [role="row"].header-row {
+      background: #333;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .treegrid-demo [role="columnheader"],
+    .treegrid-demo [role="gridcell"] {
+      padding: 0.5em 0.75em;
+      flex: 1;
+    }
+
+    .treegrid-demo [role="gridcell"]:first-child,
+    .treegrid-demo [role="columnheader"]:first-child {
+      flex: 2;
+    }
+
+    /* visual indent is CSS only, driven off aria-level for convenience;
+       it has no bearing on what a screen reader announces */
+    .treegrid-demo [role="row"][aria-level="2"] {
+      background: #eef4fb;
+    }
+
+    .treegrid-demo [role="row"][aria-level="3"] {
+      background: #e4edf7;
+    }
+
+    .treegrid-demo .name-cell {
+      display: flex;
+      align-items: center;
+    }
+
+    .treegrid-demo [role="row"][aria-level="2"] .name-cell {
+      padding-left: 1.5em;
+    }
+
+    .treegrid-demo [role="row"][aria-level="3"] .name-cell {
+      padding-left: 3em;
+    }
+
+    .treegrid-demo [role="row"][tabindex="0"]:focus {
+      outline: 2px solid #1a5fb4;
+      outline-offset: -2px;
+    }
+
+    .treegrid-demo .toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font: inherit;
+      padding: 0 0.4em 0 0;
+      color: inherit;
+    }
+
+    .treegrid-demo .toggle::before {
+      content: "▸";
+      display: inline-block;
+      width: 1em;
+      transition: transform 0.1s;
+    }
+
+    .treegrid-demo [aria-expanded="true"] .toggle::before {
+      transform: rotate(90deg);
+    }
+
+    .treegrid-demo .leaf-spacer {
+      display: inline-block;
+      width: 1.4em;
+    }
+
+    .treegrid-demo [role="row"].is-hidden {
+      display: none;
     }
   </style>
 </head>
@@ -37,7 +156,7 @@
 <!-- section -->
 
 
-<h2>Example 1: native heading, for comparison</h2>
+<h2 id="example-1">Example 1: native heading, for comparison</h2>
 
 <p>A real heading element needs no <code>aria-level</code> at all, its level is fixed by its tag name.</p>
 
@@ -56,9 +175,9 @@
 <!-- section -->
 
 
-<h2>Example 2: <code>role="heading"</code> with <code>aria-level="2"</code></h2>
+<h2 id="example-2">Example 2: <code>role="heading"</code> with <code>aria-level="2"</code></h2>
 
-<p>The same heading level as Example 1, but built from a non-heading element. This is the pattern used when a component's markup can't use a native heading tag, for example, because the level needs to be set dynamically depending on where the component is used.</p>
+<p>The same heading level as Example 1, but built from a non-heading element. This shows up in the wild most often when content arrives without structure and structure has to be faked back in: a CMS field, a syndicated feed, or an API response that hands the page a title string with no indication of where it sits in the outline. A card component built to render that title might get reused in a sidebar (where it should behave like an h3) and on a landing page (where it should behave like an h2), so the level can't be hardcoded into the component's markup, it has to be set dynamically by whatever context drops the component in, and <code>role="heading"</code> with <code>aria-level</code> is what lets the level travel with that decision instead of being baked into a fixed tag name.</p>
 
 <div class="example">
   <div role="heading" aria-level="2">This behaves like a heading, level 2</div>
@@ -77,21 +196,153 @@
 <!-- section -->
 
 
-<h2>Example 3: <code>role="heading"</code> with <code>aria-level="4"</code></h2>
+<h2 id="example-3">Example 3: same card, two different levels</h2>
 
-<p>The same element type as Example 2, but at a different level. This demonstrates that the level is entirely arbitrary and author-controlled, unlike a native heading tag, which is fixed the moment it's written.</p>
+<p>This is the CMS/feed scenario made concrete. Imagine a "related content" card component: it renders a title from data with no structural information attached, just a string. The exact same component gets dropped into two different contexts on this page, a sidebar and a landing-page section, and each context needs the card's title to sit at a different depth in the outline. A native <code>&lt;h2&gt;</code>-<code>&lt;h6&gt;</code> tag is fixed the moment it's written, so it can't do this, the component has no way to know its level until the page tells it. <code>role="heading"</code> with a dynamically-set <code>aria-level</code> is what lets the same markup serve both contexts correctly.</p>
 
 <div class="example">
-  <div role="heading" aria-level="4">This behaves like a heading, level 4</div>
+  <div class="card-context">
+    <p class="context-label">Context A: card sits inside a sidebar, one level under this section's own h3</p>
+    <div class="fake-card">
+      <div role="heading" aria-level="4">Understanding aria-level</div>
+      <p>A short related-content teaser, rendered from a CMS field with no heading markup of its own.</p>
+    </div>
+  </div>
+
+  <div class="card-context">
+    <p class="context-label">Context B: the same card component, now placed directly under this page's h1</p>
+    <div class="fake-card">
+      <div role="heading" aria-level="2">Understanding aria-level</div>
+      <p>Identical markup and identical component, only the level passed in has changed.</p>
+    </div>
+  </div>
 </div>
 
-<p><b>Expected result:</b> should be announced as a level 4 heading.</p>
+<p><b>Expected result:</b> the first card's title should be announced as a level 4 heading, and the second, identical, component should be announced as a level 2 heading. Confirm both appear correctly in a screen reader's headings list at their respective, different levels, despite being the same component with the same markup shape.</p>
 
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;div <span class="highlight">role="heading"</span> <span class="highlight">aria-level="4"</span>&gt;
-  This behaves like a heading, level 4
+<pre><code>&lt;!-- the component itself never changes --&gt;
+&lt;div class="fake-card"&gt;
+  &lt;div role="heading" <span class="highlight">aria-level="4"</span>&gt;Understanding aria-level&lt;/div&gt;
+  &lt;p&gt;A short related-content teaser...&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- only the level passed in by the parent context changes --&gt;
+&lt;div class="fake-card"&gt;
+  &lt;div role="heading" <span class="highlight">aria-level="2"</span>&gt;Understanding aria-level&lt;/div&gt;
+  &lt;p&gt;Identical markup and identical component...&lt;/p&gt;
 &lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2 id="example-4">Example 4: <code>aria-level</code> in a treegrid</h2>
+
+<p>Away from headings, <code>aria-level</code> also applies to <code>row</code> in a <code>treegrid</code>. Treegrid rows are conventionally flat siblings in the DOM, so that arrow-key navigation moves predictably in two dimensions, which means depth can't be inferred from DOM ancestry the way it can in a nested tree. <code>aria-level</code> is what communicates the hierarchy instead. The example below is a small file browser: "Reports" and "Archive" are folders at levels 1 and 2, their contents sit one level deeper, and none of that nesting exists in the DOM, only in the <code>aria-level</code> value on each row.</p>
+
+<div class="example treegrid-demo">
+  <div role="treegrid" aria-label="Project files" aria-rowcount="7">
+
+    <div role="row" class="header-row">
+      <span role="columnheader">Name</span>
+      <span role="columnheader">Type</span>
+      <span role="columnheader">Modified</span>
+    </div>
+
+    <div role="row" aria-level="1" aria-expanded="true" aria-setsize="2" aria-posinset="1" tabindex="0" data-id="reports">
+      <span role="gridcell" class="name-cell">
+        <button class="toggle" type="button"></button>
+        📁 Reports
+      </span>
+      <span role="gridcell">Folder</span>
+      <span role="gridcell">14 Aug 2026</span>
+    </div>
+
+    <div role="row" aria-level="2" data-parent="reports" aria-setsize="2" aria-posinset="1">
+      <span role="gridcell" class="name-cell">
+        <span class="leaf-spacer"></span>
+        📄 Q3 report.docx
+      </span>
+      <span role="gridcell">Word doc</span>
+      <span role="gridcell">2 Aug 2026</span>
+    </div>
+
+    <div role="row" aria-level="2" aria-expanded="true" data-parent="reports" aria-setsize="2" aria-posinset="2" tabindex="-1" data-id="archive">
+      <span role="gridcell" class="name-cell">
+        <button class="toggle" type="button"></button>
+        📁 Archive
+      </span>
+      <span role="gridcell">Folder</span>
+      <span role="gridcell">11 Jun 2026</span>
+    </div>
+
+    <div role="row" aria-level="3" data-parent="archive" aria-setsize="2" aria-posinset="1">
+      <span role="gridcell" class="name-cell">
+        <span class="leaf-spacer"></span><span class="leaf-spacer"></span>
+        📄 Q1 report.docx
+      </span>
+      <span role="gridcell">Word doc</span>
+      <span role="gridcell">4 Apr 2026</span>
+    </div>
+
+    <div role="row" aria-level="3" data-parent="archive" aria-setsize="2" aria-posinset="2">
+      <span role="gridcell" class="name-cell">
+        <span class="leaf-spacer"></span><span class="leaf-spacer"></span>
+        📄 Q2 report.docx
+      </span>
+      <span role="gridcell">Word doc</span>
+      <span role="gridcell">7 Jul 2026</span>
+    </div>
+
+    <div role="row" aria-level="1" aria-setsize="2" aria-posinset="2" tabindex="-1">
+      <span role="gridcell" class="name-cell">
+        <span class="leaf-spacer"></span>
+        📄 budget.xlsx
+      </span>
+      <span role="gridcell">Excel</span>
+      <span role="gridcell">16 Aug 2026</span>
+    </div>
+
+  </div>
+</div>
+
+<div class="note">
+  <p><b>Why not a native table?</b> A native <code>&lt;table&gt;</code> has no concept of one row containing another, rows are flat and peer-level by definition. That rules out three things a table alone can't do: hierarchy (no attribute says "this row is nested inside that row", which is what <code>aria-level</code> provides), collapse state (no attribute says "this row's children are currently hidden", which is what <code>aria-expanded</code> provides), and 2D arrow-key navigation between cells, which <code>treegrid</code> implies and a plain table doesn't.</p>
+  <p>That said, treegrid is a narrow tool, not a fancier table. If the data is flat, use a native table. If it's hierarchical but doesn't need cell-by-cell keyboard navigation, a nested list or <code>role="tree"</code> is usually the better, simpler fit. Treegrid earns its place only when hierarchy, multiple columns, and per-cell interaction are all genuinely needed at once, which in practice is a fairly small set of cases (file browsers, spreadsheet-like tools).</p>
+  <p><b>Why not native headings instead?</b> Headings describe the content that follows them, that's their whole job, a heading with nothing underneath it is meaningless, and a real heading should never sit on a page with no content beneath it. There's no such content here: "Reports" and "Archive" aren't titles introducing a following passage, they're row labels sitting next to data cells in the same row. That's a fundamentally different shape from what headings model, so this isn't a case of headings being technically unable to nest (<code>aria-level</code> handles that fine on <code>role="heading"</code>, see Examples 2 and 3 above), it's that headings are the wrong semantic for row/cell data in the first place.</p>
+  <p><b>No cap at 6.</b> Native headings only go to <code>h6</code>, that's an HTML limitation, not an ARIA one. <code>aria-level</code> itself is just <code>&lt;integer&gt;</code> with no upper bound. That matters here specifically because real-world hierarchical data, deep folder structures, org charts, nested categories, has no reason to respect a six-level ceiling that exists purely because HTML only shipped six heading tags. A treegrid representing that kind of structure can go to level 7, 12, whatever the data actually needs, and <code>aria-level</code> will carry it correctly. It's a good example of ARIA generally being the less constrained option where the "equivalent" native HTML feature has a practical limit baked in.</p>
+</div>
+
+<p><b>Expected result:</b> arrowing through the rows, level should be announced for each row (wording and position in the announcement varies by screen reader). Collapsing "Archive" via its toggle should hide its level-3 children from the accessibility tree entirely, and re-expanding "Reports" should not leave "Archive" incorrectly pre-expanded. Confirm <code>aria-setsize</code>/<code>aria-posinset</code> are announced sensibly (e.g. "2 of 2") given not all rows are present at once.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="treegrid" aria-label="Project files"&gt;
+
+  &lt;div role="row" aria-level="1" <span class="highlight">aria-expanded="true"</span> aria-setsize="2" aria-posinset="1" data-id="reports"&gt;
+    &lt;span role="gridcell"&gt;📁 Reports&lt;/span&gt;
+    &lt;span role="gridcell"&gt;Folder&lt;/span&gt;
+  &lt;/div&gt;
+
+  &lt;div role="row" <span class="highlight">aria-level="2"</span> data-parent="reports" aria-setsize="2" aria-posinset="1"&gt;
+    &lt;span role="gridcell"&gt;📄 Q3 report.docx&lt;/span&gt;
+    &lt;span role="gridcell"&gt;Word doc&lt;/span&gt;
+  &lt;/div&gt;
+
+  &lt;!-- a nested folder repeats the pattern one level deeper --&gt;
+  &lt;div role="row" <span class="highlight">aria-level="2"</span> aria-expanded="true" data-parent="reports" data-id="archive"&gt;
+    &lt;span role="gridcell"&gt;📁 Archive&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div role="row" <span class="highlight">aria-level="3"</span> data-parent="archive"&gt;
+    &lt;span role="gridcell"&gt;📄 Q1 report.docx&lt;/span&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;!-- aria-level is on the row, never the gridcell --&gt;</code></pre>
 </details>
 
 
@@ -105,5 +356,33 @@
 <p><b>Note for testing:</b> confirm with your standard browser and screen reader combinations that Examples 2 and 3 appear correctly in the headings list/navigation feature, at the expected levels, alongside real native headings.</p>
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<script>
+  // Example 4: treegrid expand/collapse. Toggling aria-expanded and
+  // hiding/showing rows with data-parent is enough; aria-level on each
+  // row is what carries the hierarchy, this script never touches it.
+  document.querySelectorAll('.treegrid-demo .toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var row = btn.closest('[role="row"]');
+      var id = row.dataset.id;
+      var expanded = row.getAttribute('aria-expanded') === 'true';
+      row.setAttribute('aria-expanded', String(!expanded));
+
+      document.querySelectorAll('[data-parent="' + id + '"]').forEach(function (child) {
+        child.classList.toggle('is-hidden', expanded);
+
+        // collapsing a folder should also collapse and hide any grandchildren,
+        // so re-expanding later doesn't reveal stale open state
+        if (expanded && child.dataset.id) {
+          child.setAttribute('aria-expanded', 'false');
+          document.querySelectorAll('[data-parent="' + child.dataset.id + '"]').forEach(function (grandchild) {
+            grandchild.classList.add('is-hidden');
+          });
+        }
+      });
+    });
+  });
+</script>
+
 </body>
 </html>
