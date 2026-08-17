@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing aria-setsize and aria-posinset</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    .treegrid-demo [role="treegrid"] {
+      border-collapse: collapse;
+      width: 100%;
+      border: 1px solid #d0d0d0;
+      font-size: 0.95rem;
+    }
+
+    .treegrid-demo [role="row"] {
+      display: flex;
+      border-bottom: 1px solid #d0d0d0;
+    }
+
+    .treegrid-demo [role="row"]:last-child {
+      border-bottom: none;
+    }
+
+    .treegrid-demo [role="row"].header-row {
+      background: #333;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .treegrid-demo [role="columnheader"],
+    .treegrid-demo [role="gridcell"] {
+      padding: 0.5em 0.75em;
+      flex: 1;
+    }
+
+    .treegrid-demo [role="gridcell"]:first-child,
+    .treegrid-demo [role="columnheader"]:first-child {
+      flex: 3;
+    }
+
+    .treegrid-demo [role="row"][aria-level="1"] {
+      background: #ffffff;
+      font-weight: 600;
+    }
+
+    .treegrid-demo [role="row"][aria-level="2"] {
+      background: #eef4fb;
+    }
+
+    .treegrid-demo [role="row"][aria-level="3"] {
+      background: #e4edf7;
+    }
+
+    .treegrid-demo [role="row"][aria-level="4"] {
+      background: #d9e6f3;
+    }
+
+    .treegrid-demo .name-cell {
+      display: flex;
+      align-items: center;
+    }
+
+    .treegrid-demo [role="row"][aria-level="2"] .name-cell {
+      padding-left: 1.5em;
+    }
+
+    .treegrid-demo [role="row"][aria-level="3"] .name-cell {
+      padding-left: 3em;
+    }
+
+    .treegrid-demo [role="row"][aria-level="4"] .name-cell {
+      padding-left: 4.5em;
+    }
+
+    .treegrid-demo [role="row"]:focus {
+      outline: 2px solid #1a5fb4;
+      outline-offset: -2px;
+    }
+  </style>
+</head>
+<body>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing <code>aria-setsize</code> and <code>aria-posinset</code></h1>
+
+<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-setsize" target="_blank"><code>aria-setsize</code></a> defines the total number of items in a set. <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-posinset" target="_blank"><code>aria-posinset</code></a> defines the position of the current item within that set. They are almost always used together, and together they let assistive technologies announce something like "Reports, 1 of 3" when a user navigates to an item.</p>
+
+<p>These attributes are most commonly needed when the full set of items is not all present in the DOM at once — for example, in a virtualised list or a treegrid where some rows are collapsed. Without them, a screen reader can only report what it can see, which may be fewer items than actually exist in the logical structure.</p>
+
+<p>The example below is a flat, fully visible treegrid representing a company file structure, going down to four levels of depth. Because all rows are present in the DOM, the attributes are technically optional here — but the example is designed to let you inspect and test them directly, including how the count resets for each sibling group at each level.</p>
+
+
+<!-- section -->
+
+
+<h2>Treegrid example: company file structure</h2>
+
+<p>This treegrid has three top-level departments, each containing folders and files at varying depths. The deepest items sit at level 4. All rows are visible at once, making it straightforward to inspect the <code>aria-setsize</code> and <code>aria-posinset</code> values with a bookmarklet.</p>
+
+<div class="example treegrid-demo">
+  <div role="treegrid" aria-label="Company files" aria-rowcount="18">
+
+    <div role="row" class="header-row">
+      <span role="columnheader">Name</span>
+      <span role="columnheader">Type</span>
+      <span role="columnheader">Modified</span>
+    </div>
+
+    <!-- Finance: Level 1, 1 of 3 -->
+    <div role="row" aria-level="1" aria-setsize="3" aria-posinset="1" tabindex="0">
+      <span role="gridcell" class="name-cell">Finance</span>
+      <span role="gridcell">Folder</span>
+      <span role="gridcell">12 Aug 2026</span>
+    </div>
+
+    <!-- Finance > Budget: Level 2, 1 of 2 -->
+    <div role="row" aria-level="2" aria-setsize="2" aria-posinset="1" tabindex="-1">
+      <span role="gridcell" class="name-cell">Budget</span>
+      <span role="gridcell">Folder</span>
+      <span role="gridcell">10 Aug 2026</span>
+    </div>
+
+    <!-- Finance > Budget > 2025.xlsx: Level 3, 1 of 2 -->
+    <div role="row" aria-level="3" aria-setsize="2" aria-posinset="1" tabindex="-1">
+      <span role="gridcell" class="name-cell">2025.xlsx</span>
+      <span role="gridcell">Spreadsheet</span>
+      <span role="gridcell">3 Jan 2025</span>
+    </div>
+
+    <!-- Finance > Budget > 2026.xlsx: Level 3, 2 of 2 -->
+    <div role="row" aria-level="3" aria-setsize="2" aria-posinset="2" tabindex="-1">
+      <span role="gridcell" class="name-cell">2026.xlsx</span>
+      <span role="gridcell">Spreadsheet</span>
+      <span role="gridcell">1 Jan 2026</span>
+    </div>
+
+    <!-- Finance > Reports: Level 2, 2 of 2 -->
+    <div role="row" aria-level="2" aria-setsize="2" aria-posinset="2" tabindex="-1">
+      <span role="gridcell" class="name-cell">Reports</span>
+      <span role="gridcell">Folder</span>
+      <span role="gridcell">5 Aug 2026</span>
+    </div>
+
+    <!-- Finance > Reports > Q3.pdf: Level 3, 1 of 1 -->
+    <div role="row" aria-level="3" aria-setsize="1" aria-posinset="1" tabindex="-1">
+      <span role="gridcell" class="name-cell">Q3.pdf</span>
+      <span role="gridcell">PDF</span>
+      <span role="gridcell">5 Aug 2026</span>
+    </div>
+
+    <!-- Engineering: Level 1, 2 of 3 -->
+    <div role="row" aria-level="1" aria-setsize="3" aria-posinset="2" tabindex="-1">
+      <span role="gridcell" class="name-cell">Engineering</span>
+      <span role="gridcell">Folder</span>
+      <span role="gridcell">14 Aug 2026</span>
+    </div>
+
+    <!-- Engineering > Frontend: Level 2, 1 of 2 -->
+    <div role="row" aria-level="2" aria-setsize="2" aria-posinset="1" tabindex="-1">
+      <span role="gridcell" class="name-cell">Frontend</span>
+      <span role="gridcell">Folder</span>
+      <span role="gridcell">14 Aug 2026</span>
+    </div>
+
+    <!-- Engineering > Frontend > src: Level 3, 1 of 2 -->
+    <div role="row" aria-level="3" aria-setsize="2" aria-posinset="1" tabindex="-1">
+      <span role="gridcell" class="name-cell">src</span>
+      <span role="gridcell">Folder</span>
+      <span role="gridcell">14 Aug 2026</span>
+    </div>
+
+    <!-- Engineering > Frontend > src > Button.jsx: Level 4, 1 of 2 -->
+    <div role="row" aria-level="4" aria-setsize="2" aria-posinset="1" tabindex="-1">
+      <span role="gridcell" class="name-cell">Button.jsx</span>
+      <span role="gridcell">JSX file</span>
+      <span role="gridcell">13 Aug 2026</span>
+    </div>
+
+    <!-- Engineering > Frontend > src > Modal.jsx: Level 4, 2 of 2 -->
+    <div role="row" aria-level="4" aria-setsize="2" aria-posinset="2" tabindex="-1">
+      <span role="gridcell" class="name-cell">Modal.jsx</span>
+      <span role="gridcell">JSX file</span>
+      <span role="gridcell">12 Aug 2026</span>
+    </div>
+
+    <!-- Engineering > Frontend > tests: Level 3, 2 of 2 -->
+    <div role="row" aria-level="3" aria-setsize="2" aria-posinset="2" tabindex="-1">
+      <span role="gridcell" class="name-cell">tests</span>
+      <span role="gridcell">Folder</span>
+      <span role="gridcell">11 Aug 2026</span>
+    </div>
+
+    <!-- Engineering > Backend: Level 2, 2 of 2 -->
+    <div role="row" aria-level="2" aria-setsize="2" aria-posinset="2" tabindex="-1">
+      <span role="gridcell" class="name-cell">Backend</span>
+      <span role="gridcell">Folder</span>
+      <span role="gridcell">10 Aug 2026</span>
+    </div>
+
+    <!-- Engineering > Backend > api.md: Level 3, 1 of 1 -->
+    <div role="row" aria-level="3" aria-setsize="1" aria-posinset="1" tabindex="-1">
+      <span role="gridcell" class="name-cell">api.md</span>
+      <span role="gridcell">Markdown</span>
+      <span role="gridcell">9 Aug 2026</span>
+    </div>
+
+    <!-- Marketing: Level 1, 3 of 3 -->
+    <div role="row" aria-level="1" aria-setsize="3" aria-posinset="3" tabindex="-1">
+      <span role="gridcell" class="name-cell">Marketing</span>
+      <span role="gridcell">Folder</span>
+      <span role="gridcell">8 Aug 2026</span>
+    </div>
+
+    <!-- Marketing > Campaigns: Level 2, 1 of 2 -->
+    <div role="row" aria-level="2" aria-setsize="2" aria-posinset="1" tabindex="-1">
+      <span role="gridcell" class="name-cell">Campaigns</span>
+      <span role="gridcell">Folder</span>
+      <span role="gridcell">7 Aug 2026</span>
+    </div>
+
+    <!-- Marketing > Campaigns > Spring2026: Level 3, 1 of 1 -->
+    <div role="row" aria-level="3" aria-setsize="1" aria-posinset="1" tabindex="-1">
+      <span role="gridcell" class="name-cell">Spring2026</span>
+      <span role="gridcell">Folder</span>
+      <span role="gridcell">6 Aug 2026</span>
+    </div>
+
+    <!-- Marketing > Campaigns > Spring2026 > brief.docx: Level 4, 1 of 1 -->
+    <div role="row" aria-level="4" aria-setsize="1" aria-posinset="1" tabindex="-1">
+      <span role="gridcell" class="name-cell">brief.docx</span>
+      <span role="gridcell">Word doc</span>
+      <span role="gridcell">6 Aug 2026</span>
+    </div>
+
+    <!-- Marketing > Assets: Level 2, 2 of 2 -->
+    <div role="row" aria-level="2" aria-setsize="2" aria-posinset="2" tabindex="-1">
+      <span role="gridcell" class="name-cell">Assets</span>
+      <span role="gridcell">Folder</span>
+      <span role="gridcell">4 Aug 2026</span>
+    </div>
+
+    <!-- Marketing > Assets > logo.svg: Level 3, 1 of 2 -->
+    <div role="row" aria-level="3" aria-setsize="2" aria-posinset="1" tabindex="-1">
+      <span role="gridcell" class="name-cell">logo.svg</span>
+      <span role="gridcell">SVG</span>
+      <span role="gridcell">3 Aug 2026</span>
+    </div>
+
+    <!-- Marketing > Assets > brand.pdf: Level 3, 2 of 2 -->
+    <div role="row" aria-level="3" aria-setsize="2" aria-posinset="2" tabindex="-1">
+      <span role="gridcell" class="name-cell">brand.pdf</span>
+      <span role="gridcell">PDF</span>
+      <span role="gridcell">1 Aug 2026</span>
+    </div>
+
+  </div>
+</div>
+
+
+<h2>Setsize and posinset map</h2>
+
+<p>The diagram below shows how <code>aria-setsize</code> and <code>aria-posinset</code> are scoped to sibling groups, not to the treegrid as a whole. Each group restarts its own count. R1 is the header row counted by <code>aria-rowcount</code>.</p>
+
+<pre class="setsize-tree"><code>R1:  aria-rowcount: 18 (1 header row + 17 data rows)
+R2:  Finance              (Level 1, 1 of 3)
+R3:    Budget             (Level 2, 1 of 2)
+R4:      2025.xlsx        (Level 3, 1 of 2)
+R5:      2026.xlsx        (Level 3, 2 of 2)
+R6:    Reports            (Level 2, 2 of 2)
+R7:      Q3.pdf           (Level 3, 1 of 1)
+R8:  Engineering          (Level 1, 2 of 3)
+R9:    Frontend           (Level 2, 1 of 2)
+R10:     src              (Level 3, 1 of 2)
+R11:       Button.jsx     (Level 4, 1 of 2)
+R12:       Modal.jsx      (Level 4, 2 of 2)
+R13:     tests            (Level 3, 2 of 2)
+R14:   Backend            (Level 2, 2 of 2)
+R15:     api.md           (Level 3, 1 of 1)
+R16: Marketing            (Level 1, 3 of 3)
+R17:   Campaigns          (Level 2, 1 of 2)
+R18:     Spring2026       (Level 3, 1 of 1)
+R19:       brief.docx     (Level 4, 1 of 1)
+R20:   Assets             (Level 2, 2 of 2)
+R21:     logo.svg         (Level 3, 1 of 2)
+R22:     brand.pdf        (Level 3, 2 of 2)</code></pre>
+
+<p><b>Expected result:</b> navigating through rows, a screen reader should announce each item's position within its sibling group (for example "2 of 2") and its level. The counts reset for each group — the two level-3 items inside Budget are "1 of 2" and "2 of 2", completely independent of the level-3 items inside Frontend or Marketing.</p>
+
+<p><b>Note for testing:</b> confirm with your standard browser and screen reader combinations that level and position announcements are consistent across different screen reader and browser pairings.</p>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</body>
+</html>
