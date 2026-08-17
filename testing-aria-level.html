@@ -156,26 +156,7 @@
 <!-- section -->
 
 
-<h2 id="example-1">Example 1: native heading, for comparison</h2>
-
-<p>A real heading element needs no <code>aria-level</code> at all, its level is fixed by its tag name.</p>
-
-<div class="example">
-  <h2>This is a native h2</h2>
-</div>
-
-<p><b>Expected result:</b> should be announced as a level 2 heading.</p>
-
-<details>
-  <summary>HTML markup</summary>
-<pre><code>&lt;h2&gt;This is a native h2&lt;/h2&gt;</code></pre>
-</details>
-
-
-<!-- section -->
-
-
-<h2 id="example-2">Example 2: <code>role="heading"</code> with <code>aria-level="2"</code></h2>
+<h2 id="example-1">Example 1: <code>role="heading"</code> with <code>aria-level="2"</code></h2>
 
 <p>The same heading level as Example 1, but built from a non-heading element. This shows up in the wild most often when content arrives without structure and structure has to be faked back in: a CMS field, a syndicated feed, or an API response that hands the page a title string with no indication of where it sits in the outline. A card component built to render that title might get reused in a sidebar (where it should behave like an h3) and on a landing page (where it should behave like an h2), so the level can't be hardcoded into the component's markup, it has to be set dynamically by whatever context drops the component in, and <code>role="heading"</code> with <code>aria-level</code> is what lets the level travel with that decision instead of being baked into a fixed tag name.</p>
 
@@ -196,7 +177,7 @@
 <!-- section -->
 
 
-<h2 id="example-3">Example 3: same card, two different levels</h2>
+<h2 id="example-2">Example 2: same card, two different levels</h2>
 
 <p>This is the CMS/feed scenario made concrete. Imagine a "related content" card component: it renders a title from data with no structural information attached, just a string. The exact same component gets dropped into two different contexts on this page, a sidebar and a landing-page section, and each context needs the card's title to sit at a different depth in the outline. A native <code>&lt;h2&gt;</code>-<code>&lt;h6&gt;</code> tag is fixed the moment it's written, so it can't do this, the component has no way to know its level until the page tells it. <code>role="heading"</code> with a dynamically-set <code>aria-level</code> is what lets the same markup serve both contexts correctly.</p>
 
@@ -239,7 +220,7 @@
 <!-- section -->
 
 
-<h2 id="example-4">Example 4: <code>aria-level</code> in a treegrid</h2>
+<h2 id="example-3">Example 3: <code>aria-level</code> in a treegrid</h2>
 
 <p>Away from headings, <code>aria-level</code> also applies to <code>row</code> in a <code>treegrid</code>. Treegrid rows are conventionally flat siblings in the DOM, so that arrow-key navigation moves predictably in two dimensions, which means depth can't be inferred from DOM ancestry the way it can in a nested tree. <code>aria-level</code> is what communicates the hierarchy instead. The example below is a small file browser: "Reports" and "Archive" are folders at levels 1 and 2, their contents sit one level deeper, and none of that nesting exists in the DOM, only in the <code>aria-level</code> value on each row.</p>
 
