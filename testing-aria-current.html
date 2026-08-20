@@ -7,7 +7,7 @@
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
   <style>
-    .current-nav {
+    .states-nav {
       list-style: none;
       margin: 0.5em 0;
       padding: 0;
@@ -15,7 +15,7 @@
       gap: 1em;
     }
 
-    .current-nav a[aria-current="page"] {
+    .states-nav a[aria-current="page"] {
       font-weight: bold;
       text-decoration: underline;
     }
@@ -56,6 +56,70 @@
       color: #fff;
       font-weight: bold;
     }
+
+    .museum-list {
+      display: flex;
+      gap: 0.5em;
+      margin: 1em 0;
+      padding: 0;
+      flex-wrap: wrap;
+    }
+
+    .museum-list li {
+      list-style: none;
+      padding: 0.75em 1em;
+      border: 2px solid #999;
+      border-radius: 0.3em;
+    }
+
+    .museum-list li[aria-current="location"] {
+      border-color: #1b5e20;
+      background: #1b5e20;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .schedule-list {
+      list-style: none;
+      margin: 0.5em 0;
+      padding: 0;
+    }
+
+    .schedule-list li {
+      display: flex;
+      gap: 1em;
+      padding: 0.5em 0.75em;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .schedule-list li[aria-current="time"] {
+      background: #1b5e20;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .filter-tabs {
+      list-style: none;
+      margin: 0.5em 0;
+      padding: 0;
+      display: flex;
+      gap: 0.5em;
+    }
+
+    .filter-tabs button {
+      border: 2px solid #999;
+      background: #fff;
+      padding: 0.5em 1em;
+      border-radius: 0.3em;
+      cursor: pointer;
+    }
+
+    .filter-tabs button[aria-current="true"] {
+      border-color: #1b5e20;
+      background: #1b5e20;
+      color: #fff;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -63,8 +127,6 @@
 <a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
   <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
 </a>
-
-<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 
 <h1>Testing <code>aria-current</code></h1>
 
@@ -80,7 +142,7 @@
 
 <div class="example">
   <nav aria-label="Example navigation, no aria-current">
-    <ul class="current-nav">
+    <ul class="states-nav">
       <li><a href="#" style="font-weight: bold; text-decoration: underline;">Home</a></li>
       <li><a href="#">About</a></li>
       <li><a href="#">Contact</a></li>
@@ -111,7 +173,7 @@
 
 <div class="example">
   <nav aria-label="Example navigation, with aria-current">
-    <ul class="current-nav">
+    <ul class="states-nav">
       <li><a href="#" aria-current="page">Home</a></li>
       <li><a href="#">About</a></li>
       <li><a href="#">Contact</a></li>
@@ -165,33 +227,6 @@
 &lt;/ol&gt;</code></pre>
 </details>
 
-<script>
-(function () {
-  const steps = Array.from(document.querySelectorAll('#step-list li'));
-  let currentIndex = 0;
-
-  function render() {
-    steps.forEach((step, index) => {
-      if (index === currentIndex) {
-        step.setAttribute('aria-current', 'step');
-      } else {
-        step.removeAttribute('aria-current');
-      }
-    });
-  }
-
-  document.getElementById('step-next').addEventListener('click', () => {
-    currentIndex = Math.min(currentIndex + 1, steps.length - 1);
-    render();
-  });
-
-  document.getElementById('step-back').addEventListener('click', () => {
-    currentIndex = Math.max(currentIndex - 1, 0);
-    render();
-  });
-})();
-</script>
-
 
 <!-- section -->
 
@@ -239,10 +274,130 @@
 <!-- section -->
 
 
-<p><b>Note for testing:</b> unlike some other ARIA attributes covered on this site, <code>aria-current</code> is not deprecated in any current version of the spec, and published support data (a11ysupport.io) shows a comparatively strong pass rate. Still worth confirming with your own standard browser and screen reader combinations, particularly the <code>step</code> value, which has not been verified here.</p>
+<h2>Example 5: <code>aria-current="location"</code></h2>
+
+<p>Per the WAI-ARIA specification, <code>location</code> is intended for "the element that is visually styled as the current component, such as within a flow chart." This example shows a museum floor plan, marking which room you're currently in.</p>
+
+<p>This is a genuinely different shape from Example 3's checkout steps, not just a different justification. A museum layout has no fixed order, you could walk from the entrance straight to the gift shop, skip a room entirely, or backtrack. There's no "step 3 of 5," no completion state, nothing forcing a sequence. That's why this uses a plain, unordered list rather than the numbered list used for the checkout steps, order isn't semantically meaningful here the way it was there.</p>
+
+<p><b>A note on this value specifically:</b> unlike <code>page</code> or <code>step</code>, which have obvious, near-canonical real-world examples, <code>location</code> is comparatively spec-vague. The specification's own illustration ("a flow chart") is abstract enough that reasonable people land on quite different concrete examples for it, an earlier version of this page used an order-tracking diagram instead, which turned out to be too structurally similar to <code>step</code> to make the distinction clear. If this example still doesn't feel like an obvious, settled case to you, that's a fair reaction, not a sign you're missing something.</p>
+
+<div class="example">
+  <ul class="museum-list" aria-label="Museum floor plan">
+    <li>Entrance</li>
+    <li>Ancient Egypt</li>
+    <li aria-current="location">Dinosaurs</li>
+    <li>Space exploration</li>
+    <li>Gift shop</li>
+  </ul>
+</div>
+
+<p><b>Expected result:</b> "Dinosaurs" should be announced as the current location, in addition to its position in the list.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;ul aria-label="Museum floor plan"&gt;
+  &lt;li&gt;Entrance&lt;/li&gt;
+  &lt;li&gt;Ancient Egypt&lt;/li&gt;
+  &lt;li <span class="highlight">aria-current="location"</span>&gt;Dinosaurs&lt;/li&gt;
+  &lt;li&gt;Space exploration&lt;/li&gt;
+  &lt;li&gt;Gift shop&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 6: <code>aria-current="time"</code></h2>
+
+<p>Used to mark the current entry within a set of times, for example, the current slot in a daily schedule or timetable.</p>
+
+<div class="example">
+  <ol class="schedule-list" aria-label="Today's schedule">
+    <li><span>9:00am</span><span>Team standup</span></li>
+    <li aria-current="time"><span>10:30am</span><span>Client call</span></li>
+    <li><span>1:00pm</span><span>Lunch</span></li>
+    <li><span>2:30pm</span><span>Design review</span></li>
+  </ol>
+</div>
+
+<p><b>Expected result:</b> the "10:30am, Client call" entry should be announced as the current time, in addition to its position in the list.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;ol aria-label="Today's schedule"&gt;
+  &lt;li&gt;9:00am, Team standup&lt;/li&gt;
+  &lt;li <span class="highlight">aria-current="time"</span>&gt;10:30am, Client call&lt;/li&gt;
+  &lt;li&gt;1:00pm, Lunch&lt;/li&gt;
+  &lt;li&gt;2:30pm, Design review&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 7: <code>aria-current="true"</code></h2>
+
+<p>The generic value, used when none of the more specific values (<code>page</code>, <code>step</code>, <code>location</code>, <code>date</code>, <code>time</code>) apply. A common real-world case is a set of filter or category buttons, where "current" doesn't map cleanly onto any of the more specific meanings.</p>
+
+<div class="example">
+  <div role="group" aria-label="Filter by category">
+    <ul class="filter-tabs">
+      <li><button type="button">All</button></li>
+      <li><button type="button" aria-current="true">Accessibility</button></li>
+      <li><button type="button">Development</button></li>
+      <li><button type="button">Design</button></li>
+    </ul>
+  </div>
+</div>
+
+<p><b>Expected result:</b> "Accessibility" should be announced as current, without implying any of the more specific meanings (not a page, not a step, not a location, date, or time).</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button&gt;All&lt;/button&gt;
+&lt;button <span class="highlight">aria-current="true"</span>&gt;Accessibility&lt;/button&gt;
+&lt;button&gt;Development&lt;/button&gt;
+&lt;button&gt;Design&lt;/button&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<p><b>Note for testing:</b> unlike some other ARIA attributes covered on this site, <code>aria-current</code> is not deprecated in any current version of the spec, and published support data (a11ysupport.io) shows a comparatively strong pass rate for the <code>page</code> value specifically. The remaining values, <code>step</code>, <code>location</code>, <code>date</code>, <code>time</code>, and the generic <code>true</code>, have not been independently verified here, worth confirming each one with your own standard browser and screen reader combinations rather than assuming the same strong support extends to all of them equally.</p>
 
 <p><b>A lesson from testing this page:</b> the original version of Example 4 used <code>role="grid"</code> for a static calendar display, without the required <code>role="row"</code> structure and without any keyboard interactivity. VoiceOver could not navigate into it at all, treating the whole thing as a single unstructured block. This has been corrected by using a plain, native <code>&lt;table&gt;</code> instead, since <code>aria-current</code> does not need a grid role to work, and a static display should not be given an interactive composite role like <code>grid</code> in the first place.</p>
 
-<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<script>
+  const steps = Array.from(document.querySelectorAll('#step-list li'));
+  let currentIndex = 0;
+
+  function render() {
+    steps.forEach((step, index) => {
+      if (index === currentIndex) {
+        step.setAttribute('aria-current', 'step');
+      } else {
+        step.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  document.getElementById('step-next').addEventListener('click', () => {
+    currentIndex = Math.min(currentIndex + 1, steps.length - 1);
+    render();
+  });
+
+  document.getElementById('step-back').addEventListener('click', () => {
+    currentIndex = Math.max(currentIndex - 1, 0);
+    render();
+  });
+</script>
+
+
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
 </html>
