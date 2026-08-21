@@ -107,7 +107,7 @@
 <!-- section -->
 
 
-<h2>Example 1: <code>aria-haspopup="false"</code></h2>
+<h2 id="false">Example 1: <code>aria-haspopup="false"</code></h2>
 
 <p>The default. No popup, included as a baseline for contrast with the rest of this page.</p>
 
@@ -126,7 +126,7 @@
 <!-- section -->
 
 
-<h2>Example 2: <code>aria-haspopup="true"</code> (alias for <code>menu</code>)</h2>
+<h2 id="true">Example 2: <code>aria-haspopup="true"</code> (alias for <code>menu</code>)</h2>
 
 <p><code>true</code> is treated identically to <code>menu</code>. Real keyboard focus moves into the menu when opened, unlike the virtual-focus pattern used by <code>listbox</code>-based comboboxes elsewhere on this site.</p>
 
@@ -162,7 +162,7 @@
 <!-- section -->
 
 
-<h2>Example 3: <code>aria-haspopup="menu"</code></h2>
+<h2 id="menu">Example 3: <code>aria-haspopup="menu"</code></h2>
 
 <p>The same pattern as Example 2, written with the explicit <code>menu</code> value rather than its <code>true</code> alias, with different content to keep the two visually distinct.</p>
 
@@ -198,7 +198,7 @@
 <!-- section -->
 
 
-<h2>Example 4: <code>aria-haspopup="listbox"</code></h2>
+<h2 id="listbox">Example 4: <code>aria-haspopup="listbox"</code></h2>
 
 <p>A closed-by-default single-select dropdown. The button shows the current selection; opening it reveals a list of options.</p>
 
@@ -235,7 +235,7 @@
 <!-- section -->
 
 
-<h2>Example 5: <code>aria-haspopup="tree"</code></h2>
+<h2 id="tree">Example 5: <code>aria-haspopup="tree"</code></h2>
 
 <p>A closed-by-default hierarchical browser, categories that expand to reveal sub-categories. Both categories start <b>already expanded</b>, so the hierarchy is visible the moment the popup opens, rather than requiring Arrow Right first just to discover the structure exists. This is a deliberate choice: without it, this example can look almost identical to Example 4's flat listbox until you happen to try expanding something.</p>
 
@@ -286,7 +286,7 @@
 <!-- section -->
 
 
-<h2>Example 6: <code>aria-haspopup="grid"</code></h2>
+<h2 id="grid">Example 6: <code>aria-haspopup="grid"</code></h2>
 
 <p>A closed-by-default date picker, a genuinely grid-structured popup rather than a linear list.</p>
 
@@ -336,7 +336,7 @@
 <!-- section -->
 
 
-<h2>Example 7: <code>aria-haspopup="dialog"</code></h2>
+<h2 id="dialog">Example 7: <code>aria-haspopup="dialog"</code></h2>
 
 <p>A confirmation dialog. Unlike every other example on this page, this one deliberately does <b>not</b> open on hover. A modal dialog makes the rest of the page inert and forcibly relocates focus, consequences disproportionate to something as low-intent as a cursor passing nearby. This opens on click or keyboard activation only.</p>
 
@@ -376,7 +376,7 @@
 <!-- section -->
 
 
-<h2>Example 8: invalid value</h2>
+<h2 id="invalid-value">Example 8: invalid value</h2>
 
 <p>A value that isn't one of the seven valid tokens (<code>false</code>, <code>true</code>, <code>menu</code>, <code>listbox</code>, <code>tree</code>, <code>grid</code>, <code>dialog</code>). <code>"tooltip"</code> is a realistic mistake here, tooltips are genuinely a kind of popup-like UI, so it's an understandable guess, it's just not in the spec's actual enumerated list. No working popup is built for this example, the point is the invalid declaration itself, not the interaction.</p>
 
@@ -395,7 +395,7 @@
 <!-- section -->
 
 
-<h2>Example 9: empty value</h2>
+<h2 id="empty-value">Example 9: empty value</h2>
 
 <p>An empty string is also not one of the seven valid tokens. As with Example 8, no working popup is built here, this is purely a markup-validity case.</p>
 
