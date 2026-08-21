@@ -2,49 +2,82 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Testing aria-haspopup</title>
+  <title>Testing aria-haspopup, all values</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
   <style>
-    .menu-wrapper {
+    .popup-wrapper {
       position: relative;
       display: inline-block;
     }
 
-    [role="menu"] {
-      list-style: none;
-      margin: 0.2em 0 0;
-      padding: 0.25em;
-      border: 1px solid #999;
-      background: #fff;
+    .popup-panel {
       position: absolute;
-      min-width: 10em;
+      top: 100%;
+      left: 0;
+      margin-top: 0.2em;
+      background: #fff;
+      border: 1px solid #999;
+      min-width: 12em;
+      padding: 0.25em;
+      z-index: 10;
     }
 
-    [role="menuitem"] {
+    [role="menuitem"],
+    [role="option"],
+    [role="treeitem"] {
       padding: 0.5em;
       border-radius: 0.2em;
       cursor: pointer;
     }
 
-    [role="menuitem"]:focus {
+    [role="menuitem"]:focus,
+    [role="option"][aria-selected="true"],
+    [role="treeitem"]:focus {
       background: #1b5e20;
       color: #fff;
       outline: none;
     }
 
-    .reference-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1em 0;
+    [role="tree"] [role="group"] {
+      padding-left: 1.25em;
     }
 
-    .reference-table th,
-    .reference-table td {
-      text-align: left;
-      padding: 0.5em;
+    .grid-popup table {
+      border-collapse: collapse;
+    }
+
+    .grid-popup th,
+    .grid-popup td {
+      padding: 0.4em 0.6em;
+      text-align: center;
+      border: 1px solid #ccc;
+    }
+
+    .grid-popup td:focus {
+      background: #1b5e20;
+      color: #fff;
+      outline: none;
+    }
+
+    .dialog-panel {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
       border: 1px solid #999;
+      padding: 1.5em;
+      max-width: 24em;
+      z-index: 20;
+    }
+
+    .dialog-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 19;
     }
 
     .note {
@@ -62,211 +95,752 @@
   <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
 </a>
 
-<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+<h1>Testing <code>aria-haspopup</code>, all values</h1>
 
-<h1>Testing <code>aria-haspopup</code></h1>
-
-<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-haspopup" target="_blank"><code>aria-haspopup</code></a> indicates that an element triggers a popup, and identifies what kind: <code>menu</code>, <code>listbox</code>, <code>tree</code>, <code>grid</code>, or <code>dialog</code>. <code>true</code> is treated as an alias for <code>menu</code>.</p>
+<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-haspopup" target="_blank"><code>aria-haspopup</code></a> indicates that an element triggers a popup, and identifies its type: <code>menu</code>, <code>listbox</code>, <code>tree</code>, <code>grid</code>, or <code>dialog</code>. <code>true</code> is an alias for <code>menu</code>. <code>false</code> is the default, no popup at all. Examples 8 and 9 cover two common markup errors, an invalid value and an empty value, exactly what the companion bookmarklet is built to catch.</p>
 
 <div class="note">
-  <p><code>aria-haspopup</code> was deprecated as a <b>Global</b> attribute in ARIA 1.2, meaning it is no longer intended for use on arbitrary elements. It remains fully valid as a <b>Widget</b> attribute, used on interactive controls like the button below.</p>
+  <p>Every example below except the dialog (Example 7) opens on hover, click, and keyboard activation. Hover-to-open is standard, expected behaviour for <code>menu</code>, <code>listbox</code>, <code>tree</code>, and <code>grid</code>, hovering only previews, nothing is committed, and moving the mouse away costs nothing. A modal dialog is a different category of interaction: it makes the rest of the page inert and forcibly relocates focus the instant it opens, consequences disproportionate to a cursor passing near a button with no real intent behind it. Opening a destructive-action confirmation from incidental mouse movement is a genuine UX failure, not just a lesser version of the same trade-off the other four make safely, so it's deliberately excluded here rather than included as a cautioned-about example.</p>
 </div>
 
 
 <!-- section -->
 
 
-<h2>Example: <code>aria-haspopup="menu"</code>, interactive</h2>
+<h2>Example 1: <code>aria-haspopup="false"</code></h2>
 
-<p>This is a menu button. Unlike the combobox on the <a href="testing-aria-activedescendant.html">aria-activedescendant page</a>, where focus deliberately stayed on the input the whole time, this pattern moves real keyboard focus into the menu itself. Activate the button, or press Arrow Down while it is focused, to open the menu.</p>
-
-<ul>
-  <li>Arrow Down / Arrow Up move focus between menu items, looping from the last item back to the first.</li>
-  <li>Home / End jump to the first or last item.</li>
-  <li>Enter or Space activates the focused item and closes the menu.</li>
-  <li>Escape closes the menu and returns focus to the button.</li>
-</ul>
+<p>The default. No popup, included as a baseline for contrast with the rest of this page.</p>
 
 <div class="example">
-  <div class="menu-wrapper">
-    <button type="button" id="menu-button" aria-haspopup="menu" aria-expanded="false" aria-controls="action-menu">
+  <button type="button" aria-haspopup="false">Plain button</button>
+</div>
+
+<p><b>Expected result:</b> no popup indication should be announced, this button should behave exactly like any ordinary button.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button <span class="highlight">aria-haspopup="false"</span>&gt;Plain button&lt;/button&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 2: <code>aria-haspopup="true"</code> (alias for <code>menu</code>)</h2>
+
+<p><code>true</code> is treated identically to <code>menu</code>. Real keyboard focus moves into the menu when opened, unlike the virtual-focus pattern used by <code>listbox</code>-based comboboxes elsewhere on this site.</p>
+
+<div class="example">
+  <div class="popup-wrapper" id="menu1-wrapper">
+    <button type="button" id="menu1-button" aria-haspopup="true" aria-expanded="false" aria-controls="menu1-popup">
+      Options
+    </button>
+    <ul role="menu" id="menu1-popup" class="popup-panel" aria-labelledby="menu1-button" hidden>
+      <li role="menuitem" tabindex="-1">Save</li>
+      <li role="menuitem" tabindex="-1">Save As</li>
+      <li role="menuitem" tabindex="-1">Print</li>
+    </ul>
+  </div>
+  <span id="menu1-result" role="status" class="hidden"></span>
+</div>
+
+<p><b>Expected result:</b> hovering, clicking, or pressing Enter/Space/Arrow Down on the button should open the menu. Arrow keys should move focus between items, looping from last to first. Enter or Space activates the focused item and closes the menu. Escape closes and returns focus to the button.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button <span class="highlight">aria-haspopup="true"</span> aria-expanded="false" aria-controls="menu1-popup"&gt;
+  Options
+&lt;/button&gt;
+&lt;ul role="menu" id="menu1-popup" aria-labelledby="menu1-button" hidden&gt;
+  &lt;li role="menuitem" tabindex="-1"&gt;Save&lt;/li&gt;
+  &lt;li role="menuitem" tabindex="-1"&gt;Save As&lt;/li&gt;
+  &lt;li role="menuitem" tabindex="-1"&gt;Print&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 3: <code>aria-haspopup="menu"</code></h2>
+
+<p>The same pattern as Example 2, written with the explicit <code>menu</code> value rather than its <code>true</code> alias, with different content to keep the two visually distinct.</p>
+
+<div class="example">
+  <div class="popup-wrapper" id="menu2-wrapper">
+    <button type="button" id="menu2-button" aria-haspopup="menu" aria-expanded="false" aria-controls="menu2-popup">
       Actions
     </button>
-    <ul role="menu" id="action-menu" aria-labelledby="menu-button" hidden>
+    <ul role="menu" id="menu2-popup" class="popup-panel" aria-labelledby="menu2-button" hidden>
       <li role="menuitem" tabindex="-1">Edit</li>
       <li role="menuitem" tabindex="-1">Duplicate</li>
       <li role="menuitem" tabindex="-1">Delete</li>
     </ul>
   </div>
-  <p id="menu-result" role="status" class="hidden"></p>
+  <span id="menu2-result" role="status" class="hidden"></span>
 </div>
 
-<p><b>Expected result:</b> "Actions" should be announced as having a popup menu. When the menu opens, focus should genuinely move to the first menu item, not stay on the button, this is real focus movement, not the virtual focus pattern used by <code>aria-activedescendant</code>.</p>
+<p><b>Expected result:</b> identical interaction to Example 2.</p>
 
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;button
-  <span class="highlight">aria-haspopup="menu"</span>
-  aria-expanded="false"
-  aria-controls="action-menu"
-&gt;
+<pre><code>&lt;button <span class="highlight">aria-haspopup="menu"</span> aria-expanded="false" aria-controls="menu2-popup"&gt;
   Actions
 &lt;/button&gt;
-&lt;ul role="menu" id="action-menu" aria-labelledby="menu-button"&gt;
+&lt;ul role="menu" id="menu2-popup" aria-labelledby="menu2-button" hidden&gt;
   &lt;li role="menuitem" tabindex="-1"&gt;Edit&lt;/li&gt;
   &lt;li role="menuitem" tabindex="-1"&gt;Duplicate&lt;/li&gt;
   &lt;li role="menuitem" tabindex="-1"&gt;Delete&lt;/li&gt;
 &lt;/ul&gt;</code></pre>
 </details>
 
+
+<!-- section -->
+
+
+<h2>Example 4: <code>aria-haspopup="listbox"</code></h2>
+
+<p>A closed-by-default single-select dropdown. The button shows the current selection; opening it reveals a list of options.</p>
+
+<div class="example">
+  <div class="popup-wrapper" id="listbox-wrapper">
+    <button type="button" id="listbox-button" aria-haspopup="listbox" aria-expanded="false" aria-controls="listbox-popup">
+      Sort by: <span id="listbox-current">Newest</span>
+    </button>
+    <ul role="listbox" id="listbox-popup" class="popup-panel" aria-labelledby="listbox-button" hidden>
+      <li role="option" tabindex="-1" aria-selected="true">Newest</li>
+      <li role="option" tabindex="-1" aria-selected="false">Oldest</li>
+      <li role="option" tabindex="-1" aria-selected="false">Most popular</li>
+      <li role="option" tabindex="-1" aria-selected="false">Alphabetical</li>
+    </ul>
+  </div>
+</div>
+
+<p><b>Expected result:</b> opens on hover, click, or Enter/Space/Arrow Down. Arrow keys move the selection (select-follows-focus). Enter, Space, or clicking an option confirms the selection, closes the popup, updates the button text, and returns focus to the button. Escape closes without changing the selection.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button <span class="highlight">aria-haspopup="listbox"</span> aria-expanded="false" aria-controls="listbox-popup"&gt;
+  Sort by: Newest
+&lt;/button&gt;
+&lt;ul role="listbox" id="listbox-popup" aria-labelledby="listbox-button" hidden&gt;
+  &lt;li role="option" tabindex="-1" aria-selected="true"&gt;Newest&lt;/li&gt;
+  &lt;li role="option" tabindex="-1" aria-selected="false"&gt;Oldest&lt;/li&gt;
+  &lt;li role="option" tabindex="-1" aria-selected="false"&gt;Most popular&lt;/li&gt;
+  &lt;li role="option" tabindex="-1" aria-selected="false"&gt;Alphabetical&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 5: <code>aria-haspopup="tree"</code></h2>
+
+<p>A closed-by-default hierarchical browser, categories that expand to reveal sub-categories. Both categories start <b>already expanded</b>, so the hierarchy is visible the moment the popup opens, rather than requiring Arrow Right first just to discover the structure exists. This is a deliberate choice: without it, this example can look almost identical to Example 4's flat listbox until you happen to try expanding something.</p>
+
+<div class="example">
+  <div class="popup-wrapper" id="tree-wrapper">
+    <button type="button" id="tree-button" aria-haspopup="tree" aria-expanded="false" aria-controls="tree-popup">
+      Browse categories: <span id="tree-current">none selected</span>
+    </button>
+    <ul role="tree" id="tree-popup" class="popup-panel" aria-labelledby="tree-button" hidden>
+      <li role="treeitem" tabindex="-1" aria-expanded="true">
+        Electronics
+        <ul role="group">
+          <li role="treeitem" tabindex="-1">Phones</li>
+          <li role="treeitem" tabindex="-1">Laptops</li>
+        </ul>
+      </li>
+      <li role="treeitem" tabindex="-1" aria-expanded="true">
+        Clothing
+        <ul role="group">
+          <li role="treeitem" tabindex="-1">Men's</li>
+          <li role="treeitem" tabindex="-1">Women's</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<p><b>Expected result:</b> opens on hover, click, or Enter/Space/Arrow Down, already expanded, both categories and all four sub-items visible immediately. Arrow Down/Up move between visible items. Arrow Right on an expanded category moves into its first child; Arrow Left on a child moves back to its parent, or collapses an expanded category if focus is already there. Enter or Space on a leaf item selects it, closes the popup, updates the button, and returns focus to the button. Escape closes without selecting.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button <span class="highlight">aria-haspopup="tree"</span> aria-expanded="false" aria-controls="tree-popup"&gt;
+  Browse categories
+&lt;/button&gt;
+&lt;ul role="tree" id="tree-popup" aria-labelledby="tree-button" hidden&gt;
+  &lt;li role="treeitem" tabindex="-1" <span class="highlight">aria-expanded="true"</span>&gt;
+    Electronics
+    &lt;ul role="group"&gt;
+      &lt;li role="treeitem" tabindex="-1"&gt;Phones&lt;/li&gt;
+      &lt;li role="treeitem" tabindex="-1"&gt;Laptops&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;!-- Clothing follows the same pattern, also starting expanded --&gt;
+&lt;/ul&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 6: <code>aria-haspopup="grid"</code></h2>
+
+<p>A closed-by-default date picker, a genuinely grid-structured popup rather than a linear list.</p>
+
+<div class="example">
+  <div class="popup-wrapper" id="grid-wrapper">
+    <button type="button" id="grid-button" aria-haspopup="grid" aria-expanded="false" aria-controls="grid-popup">
+      Choose a date: <span id="grid-current">none selected</span>
+    </button>
+    <div id="grid-popup" class="popup-panel grid-popup" hidden>
+      <table role="grid" aria-labelledby="grid-button">
+        <caption>March 2026</caption>
+        <thead>
+          <tr>
+            <th scope="col">Su</th>
+            <th scope="col">Mo</th>
+            <th scope="col">Tu</th>
+            <th scope="col">We</th>
+            <th scope="col">Th</th>
+            <th scope="col">Fr</th>
+            <th scope="col">Sa</th>
+          </tr>
+        </thead>
+        <tbody id="grid-body">
+          <!-- populated by JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<p><b>Expected result:</b> opens on hover, click, or Enter/Space/Arrow Down. Arrow keys move focus in two dimensions, up/down between weeks, left/right between days. Enter or Space selects the focused date, closes the popup, updates the button, and returns focus to the button. Escape closes without selecting.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button <span class="highlight">aria-haspopup="grid"</span> aria-expanded="false" aria-controls="grid-popup"&gt;
+  Choose a date
+&lt;/button&gt;
+&lt;div id="grid-popup" hidden&gt;
+  &lt;table role="grid"&gt;
+    &lt;caption&gt;March 2026&lt;/caption&gt;
+    &lt;!-- header row, then date cells, each td focusable via tabindex --&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 7: <code>aria-haspopup="dialog"</code></h2>
+
+<p>A confirmation dialog. Unlike every other example on this page, this one deliberately does <b>not</b> open on hover. A modal dialog makes the rest of the page inert and forcibly relocates focus, consequences disproportionate to something as low-intent as a cursor passing nearby. This opens on click or keyboard activation only.</p>
+
+<div class="example">
+  <button type="button" id="dialog-button" aria-haspopup="dialog" aria-expanded="false" aria-controls="dialog-popup">
+    Delete item
+  </button>
+</div>
+
+<div class="dialog-backdrop" id="dialog-backdrop" hidden></div>
+<div class="dialog-panel" id="dialog-popup" role="dialog" aria-modal="true" aria-labelledby="dialog-title" hidden>
+  <h3 id="dialog-title" tabindex="-1">Delete this item?</h3>
+  <p>This action cannot be undone.</p>
+  <button type="button" id="dialog-confirm">Delete</button>
+  <button type="button" id="dialog-cancel">Cancel</button>
+</div>
+
+<p><b>Expected result:</b> opens on click or Enter/Space on the button, not on hover. Focus moves to the dialog heading. Tab is trapped within the dialog while open. Escape, clicking the backdrop, or clicking Cancel closes the dialog and returns focus to the trigger button.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button <span class="highlight">aria-haspopup="dialog"</span> aria-expanded="false" aria-controls="dialog-popup"&gt;
+  Delete item
+&lt;/button&gt;
+&lt;div id="dialog-popup" role="dialog" aria-modal="true" aria-labelledby="dialog-title" hidden&gt;
+  &lt;h3 id="dialog-title" tabindex="-1"&gt;Delete this item?&lt;/h3&gt;
+  &lt;p&gt;This action cannot be undone.&lt;/p&gt;
+  &lt;button&gt;Delete&lt;/button&gt;
+  &lt;button&gt;Cancel&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<!-- section -->
+
+
+<h2>Example 8: invalid value</h2>
+
+<p>A value that isn't one of the seven valid tokens (<code>false</code>, <code>true</code>, <code>menu</code>, <code>listbox</code>, <code>tree</code>, <code>grid</code>, <code>dialog</code>). <code>"tooltip"</code> is a realistic mistake here, tooltips are genuinely a kind of popup-like UI, so it's an understandable guess, it's just not in the spec's actual enumerated list. No working popup is built for this example, the point is the invalid declaration itself, not the interaction.</p>
+
+<div class="example">
+  <button type="button" aria-haspopup="tooltip">Invalid value example</button>
+</div>
+
+<p><b>Expected result:</b> this is exactly the kind of markup error the bookmarklet is built to catch, an invalid, unrecognised token. Worth confirming what AT does with an invalid value too, whether it's silently ignored (treated as if <code>aria-haspopup</code> weren't present at all), or something else, that's a separate, real question from whether the bookmarklet flags it.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button <span class="highlight">aria-haspopup="tooltip"</span>&gt;Invalid value example&lt;/button&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 9: empty value</h2>
+
+<p>An empty string is also not one of the seven valid tokens. As with Example 8, no working popup is built here, this is purely a markup-validity case.</p>
+
+<div class="example">
+  <button type="button" aria-haspopup="">Empty value example</button>
+</div>
+
+<p><b>Expected result:</b> another case the bookmarklet should flag. Worth confirming directly whether AT treats an empty value the same way as an invalid one (Example 8), the same as <code>false</code> (the spec default), or some third behaviour, this isn't something to assume either way.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button <span class="highlight">aria-haspopup=""</span>&gt;Empty value example&lt;/button&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<p><b>Note for testing:</b> confirm with your standard browser and screen reader combinations that each popup type is announced correctly, not just "has popup" generically, and that the type-specific keyboard patterns above all behave as described.</p>
+
+
 <script>
 (function () {
-  const button = document.getElementById('menu-button');
-  const menu = document.getElementById('action-menu');
-  const items = Array.from(menu.querySelectorAll('[role="menuitem"]'));
-  const result = document.getElementById('menu-result');
 
-  function openMenu(focusIndex) {
-    button.setAttribute('aria-expanded', 'true');
-    menu.hidden = false;
-    items.forEach((item, i) => item.setAttribute('tabindex', i === focusIndex ? '0' : '-1'));
-    items[focusIndex].focus();
-  }
+  // ---------- Shared helpers ----------
 
-  function closeMenu(returnFocus) {
-    button.setAttribute('aria-expanded', 'false');
-    menu.hidden = true;
-    if (returnFocus) button.focus();
-  }
+  function setupHoverOpen(wrapper, button, panel, openFn, closeFn) {
+    let closeTimer = null;
 
-  function moveFocus(newIndex) {
-    items.forEach((item, i) => item.setAttribute('tabindex', i === newIndex ? '0' : '-1'));
-    items[newIndex].focus();
-  }
-
-  function activateItem(item) {
-    result.textContent = `${item.textContent} activated`;
-    closeMenu(true);
-  }
-
-  button.addEventListener('click', () => {
-    if (menu.hidden) {
-      openMenu(0);
-    } else {
-      closeMenu(false);
+    function cancelClose() {
+      if (closeTimer) {
+        clearTimeout(closeTimer);
+        closeTimer = null;
+      }
     }
-  });
 
-  button.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowDown') {
-      event.preventDefault();
-      openMenu(0);
-    } else if (event.key === 'ArrowUp') {
-      event.preventDefault();
-      openMenu(items.length - 1);
+    function scheduleClose() {
+      cancelClose();
+      closeTimer = setTimeout(() => closeFn(false), 200);
     }
-  });
 
-  menu.addEventListener('keydown', (event) => {
-    const currentIndex = items.findIndex(i => i.getAttribute('tabindex') === '0');
+    wrapper.addEventListener('mouseenter', () => {
+      cancelClose();
+      if (panel.hidden) openFn();
+    });
 
-    switch (event.key) {
-      case 'ArrowDown':
-        event.preventDefault();
-        moveFocus((currentIndex + 1) % items.length);
-        break;
-      case 'ArrowUp':
-        event.preventDefault();
-        moveFocus((currentIndex - 1 + items.length) % items.length);
-        break;
-      case 'Home':
-        event.preventDefault();
-        moveFocus(0);
-        break;
-      case 'End':
-        event.preventDefault();
-        moveFocus(items.length - 1);
-        break;
-      case 'Escape':
-        event.preventDefault();
-        closeMenu(true);
-        break;
-      case 'Enter':
-      case ' ':
-        event.preventDefault();
-        activateItem(items[currentIndex]);
-        break;
+    wrapper.addEventListener('mouseleave', scheduleClose);
+
+    document.addEventListener('focusout', () => {
+      requestAnimationFrame(() => {
+        const active = document.activeElement;
+        if (!panel.hidden && active !== button && !panel.contains(active)) {
+          closeFn(false);
+        }
+      });
+    });
+  }
+
+  // ---------- Example 2 & 3: menu ----------
+
+  function setupMenu(buttonId, popupId, resultId) {
+    const button = document.getElementById(buttonId);
+    const wrapper = button.closest('.popup-wrapper');
+    const menu = document.getElementById(popupId);
+    const result = document.getElementById(resultId);
+    const items = Array.from(menu.querySelectorAll('[role="menuitem"]'));
+
+    function open(focusIndex) {
+      button.setAttribute('aria-expanded', 'true');
+      menu.hidden = false;
+      items.forEach((item, i) => item.setAttribute('tabindex', i === focusIndex ? '0' : '-1'));
+      if (typeof focusIndex === 'number') items[focusIndex].focus();
     }
-  });
 
-  items.forEach((item) => {
-    item.addEventListener('click', () => activateItem(item));
-  });
+    function close(returnFocus) {
+      button.setAttribute('aria-expanded', 'false');
+      menu.hidden = true;
+      if (returnFocus) button.focus();
+    }
 
-  // Close if focus leaves the menu and the button entirely
-  document.addEventListener('focusout', () => {
-    requestAnimationFrame(() => {
-      const active = document.activeElement;
-      if (!menu.hidden && active !== button && !menu.contains(active)) {
-        closeMenu(false);
+    function moveFocus(newIndex) {
+      items.forEach((item, i) => item.setAttribute('tabindex', i === newIndex ? '0' : '-1'));
+      items[newIndex].focus();
+    }
+
+    function activate(item) {
+      result.textContent = `${item.textContent.trim()} activated`;
+      close(true);
+    }
+
+    button.addEventListener('click', () => {
+      if (menu.hidden) open(0); else close(false);
+    });
+
+    button.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowDown') { event.preventDefault(); open(0); }
+      else if (event.key === 'ArrowUp') { event.preventDefault(); open(items.length - 1); }
+    });
+
+    menu.addEventListener('keydown', (event) => {
+      const currentIndex = items.findIndex(i => i.getAttribute('tabindex') === '0');
+      switch (event.key) {
+        case 'ArrowDown': event.preventDefault(); moveFocus((currentIndex + 1) % items.length); break;
+        case 'ArrowUp': event.preventDefault(); moveFocus((currentIndex - 1 + items.length) % items.length); break;
+        case 'Home': event.preventDefault(); moveFocus(0); break;
+        case 'End': event.preventDefault(); moveFocus(items.length - 1); break;
+        case 'Escape': event.preventDefault(); close(true); break;
+        case 'Enter': case ' ': event.preventDefault(); activate(items[currentIndex]); break;
       }
     });
-  });
+
+    items.forEach(item => item.addEventListener('click', () => activate(item)));
+
+    setupHoverOpen(wrapper, button, menu, () => open(0), close);
+  }
+
+  setupMenu('menu1-button', 'menu1-popup', 'menu1-result');
+  setupMenu('menu2-button', 'menu2-popup', 'menu2-result');
+
+  // ---------- Example 4: listbox ----------
+
+  (function setupListbox() {
+    const button = document.getElementById('listbox-button');
+    const wrapper = button.closest('.popup-wrapper');
+    const listbox = document.getElementById('listbox-popup');
+    const currentLabel = document.getElementById('listbox-current');
+    const options = Array.from(listbox.querySelectorAll('[role="option"]'));
+
+    function selectedIndex() {
+      return options.findIndex(o => o.getAttribute('aria-selected') === 'true');
+    }
+
+    function open() {
+      button.setAttribute('aria-expanded', 'true');
+      listbox.hidden = false;
+      const index = Math.max(selectedIndex(), 0);
+      options.forEach((o, i) => o.setAttribute('tabindex', i === index ? '0' : '-1'));
+      options[index].focus();
+    }
+
+    function close(returnFocus) {
+      button.setAttribute('aria-expanded', 'false');
+      listbox.hidden = true;
+      if (returnFocus) button.focus();
+    }
+
+    function highlight(index) {
+      options.forEach((o, i) => o.setAttribute('tabindex', i === index ? '0' : '-1'));
+      options[index].focus();
+    }
+
+    function confirm(index) {
+      options.forEach((o, i) => o.setAttribute('aria-selected', i === index ? 'true' : 'false'));
+      currentLabel.textContent = options[index].textContent.trim();
+      close(true);
+    }
+
+    button.addEventListener('click', () => { if (listbox.hidden) open(); else close(false); });
+
+    button.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') { event.preventDefault(); open(); }
+    });
+
+    listbox.addEventListener('keydown', (event) => {
+      const currentIndex = options.findIndex(o => o.getAttribute('tabindex') === '0');
+      switch (event.key) {
+        case 'ArrowDown': event.preventDefault(); highlight(Math.min(currentIndex + 1, options.length - 1)); break;
+        case 'ArrowUp': event.preventDefault(); highlight(Math.max(currentIndex - 1, 0)); break;
+        case 'Home': event.preventDefault(); highlight(0); break;
+        case 'End': event.preventDefault(); highlight(options.length - 1); break;
+        case 'Escape': event.preventDefault(); close(true); break;
+        case 'Enter': case ' ': event.preventDefault(); confirm(currentIndex); break;
+      }
+    });
+
+    options.forEach((option, index) => option.addEventListener('click', () => confirm(index)));
+
+    setupHoverOpen(wrapper, button, listbox, open, close);
+  })();
+
+  // ---------- Example 5: tree ----------
+
+  (function setupTree() {
+    const button = document.getElementById('tree-button');
+    const wrapper = button.closest('.popup-wrapper');
+    const tree = document.getElementById('tree-popup');
+    const currentLabel = document.getElementById('tree-current');
+
+    function visibleItems() {
+      return Array.from(tree.querySelectorAll('[role="treeitem"]')).filter(item => {
+        const group = item.closest('[role="group"]');
+        return !group || !group.hidden;
+      });
+    }
+
+    function itemLabel(item) {
+      return Array.from(item.childNodes)
+        .filter(n => n.nodeType === Node.TEXT_NODE)
+        .map(n => n.textContent.trim())
+        .join('');
+    }
+
+    function open() {
+      button.setAttribute('aria-expanded', 'true');
+      tree.hidden = false;
+      const items = visibleItems();
+      items.forEach((item, i) => item.setAttribute('tabindex', i === 0 ? '0' : '-1'));
+      items[0].focus();
+    }
+
+    function close(returnFocus) {
+      button.setAttribute('aria-expanded', 'false');
+      tree.hidden = true;
+      if (returnFocus) button.focus();
+    }
+
+    function focusItem(item) {
+      visibleItems().forEach(i => i.setAttribute('tabindex', i === item ? '0' : '-1'));
+      item.focus();
+    }
+
+    tree.addEventListener('keydown', (event) => {
+      const items = visibleItems();
+      const active = document.activeElement;
+      const currentIndex = items.indexOf(active);
+      const isParent = active.hasAttribute('aria-expanded');
+      const group = active.querySelector(':scope > [role="group"]');
+
+      switch (event.key) {
+        case 'ArrowDown':
+          event.preventDefault();
+          if (currentIndex < items.length - 1) focusItem(items[currentIndex + 1]);
+          break;
+        case 'ArrowUp':
+          event.preventDefault();
+          if (currentIndex > 0) focusItem(items[currentIndex - 1]);
+          break;
+        case 'ArrowRight':
+          event.preventDefault();
+          if (isParent) {
+            if (active.getAttribute('aria-expanded') === 'false') {
+              active.setAttribute('aria-expanded', 'true');
+              group.hidden = false;
+            } else if (group) {
+              const firstChild = group.querySelector('[role="treeitem"]');
+              if (firstChild) focusItem(firstChild);
+            }
+          }
+          break;
+        case 'ArrowLeft':
+          event.preventDefault();
+          if (isParent && active.getAttribute('aria-expanded') === 'true') {
+            active.setAttribute('aria-expanded', 'false');
+            group.hidden = true;
+          } else {
+            const parentGroup = active.closest('[role="group"]');
+            if (parentGroup) {
+              const parentItem = parentGroup.closest('[role="treeitem"]');
+              if (parentItem) focusItem(parentItem);
+            }
+          }
+          break;
+        case 'Enter':
+        case ' ':
+          event.preventDefault();
+          if (!isParent) {
+            currentLabel.textContent = itemLabel(active);
+            close(true);
+          }
+          break;
+        case 'Escape':
+          event.preventDefault();
+          close(true);
+          break;
+      }
+    });
+
+    tree.querySelectorAll('[role="treeitem"]').forEach(item => {
+      item.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const isParent = item.hasAttribute('aria-expanded');
+        if (isParent) {
+          const group = item.querySelector(':scope > [role="group"]');
+          const expanded = item.getAttribute('aria-expanded') === 'true';
+          item.setAttribute('aria-expanded', String(!expanded));
+          group.hidden = expanded;
+          focusItem(item);
+        } else {
+          currentLabel.textContent = itemLabel(item);
+          close(true);
+        }
+      });
+    });
+
+    button.addEventListener('click', () => { if (tree.hidden) open(); else close(false); });
+    button.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowDown') { event.preventDefault(); open(); }
+    });
+
+    setupHoverOpen(wrapper, button, tree, open, close);
+  })();
+
+  // ---------- Example 6: grid (date picker) ----------
+
+  (function setupGrid() {
+    const button = document.getElementById('grid-button');
+    const wrapper = button.closest('.popup-wrapper');
+    const panel = document.getElementById('grid-popup');
+    const body = document.getElementById('grid-body');
+    const currentLabel = document.getElementById('grid-current');
+
+    // Build a simple March 2026 grid, starting Sunday, 1st falls on a Sunday for simplicity
+    const daysInMonth = 31;
+    const cells = [];
+    let row;
+    for (let day = 1; day <= daysInMonth; day++) {
+      if ((day - 1) % 7 === 0) {
+        row = document.createElement('tr');
+        body.appendChild(row);
+      }
+      const cell = document.createElement('td');
+      cell.textContent = day;
+      cell.tabIndex = -1;
+      row.appendChild(cell);
+      cells.push(cell);
+    }
+
+    function open() {
+      button.setAttribute('aria-expanded', 'true');
+      panel.hidden = false;
+      cells.forEach(c => c.tabIndex = -1);
+      cells[0].tabIndex = 0;
+      cells[0].focus();
+    }
+
+    function close(returnFocus) {
+      button.setAttribute('aria-expanded', 'false');
+      panel.hidden = true;
+      if (returnFocus) button.focus();
+    }
+
+    function focusCell(cell) {
+      cells.forEach(c => c.tabIndex = -1);
+      cell.tabIndex = 0;
+      cell.focus();
+    }
+
+    panel.addEventListener('keydown', (event) => {
+      const active = document.activeElement;
+      const index = cells.indexOf(active);
+      if (index === -1) return;
+
+      switch (event.key) {
+        case 'ArrowRight': event.preventDefault(); if (index < cells.length - 1) focusCell(cells[index + 1]); break;
+        case 'ArrowLeft': event.preventDefault(); if (index > 0) focusCell(cells[index - 1]); break;
+        case 'ArrowDown': event.preventDefault(); if (index + 7 < cells.length) focusCell(cells[index + 7]); break;
+        case 'ArrowUp': event.preventDefault(); if (index - 7 >= 0) focusCell(cells[index - 7]); break;
+        case 'Enter': case ' ':
+          event.preventDefault();
+          currentLabel.textContent = `March ${active.textContent}, 2026`;
+          close(true);
+          break;
+        case 'Escape':
+          event.preventDefault();
+          close(true);
+          break;
+      }
+    });
+
+    cells.forEach(cell => {
+      cell.addEventListener('click', () => {
+        currentLabel.textContent = `March ${cell.textContent}, 2026`;
+        close(true);
+      });
+    });
+
+    button.addEventListener('click', () => { if (panel.hidden) open(); else close(false); });
+    button.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowDown') { event.preventDefault(); open(); }
+    });
+
+    setupHoverOpen(wrapper, button, panel, open, close);
+  })();
+
+  // ---------- Example 7: dialog ----------
+
+  (function setupDialog() {
+    const button = document.getElementById('dialog-button');
+    const backdrop = document.getElementById('dialog-backdrop');
+    const dialog = document.getElementById('dialog-popup');
+    const title = document.getElementById('dialog-title');
+    const confirmBtn = document.getElementById('dialog-confirm');
+    const cancelBtn = document.getElementById('dialog-cancel');
+
+    let lastFocused = null;
+
+    function focusableElements() {
+      return Array.from(dialog.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'));
+    }
+
+    function open() {
+      lastFocused = document.activeElement;
+      button.setAttribute('aria-expanded', 'true');
+      backdrop.hidden = false;
+      dialog.hidden = false;
+      title.focus();
+      document.addEventListener('keydown', onKeydown, true);
+    }
+
+    function close() {
+      button.setAttribute('aria-expanded', 'false');
+      backdrop.hidden = true;
+      dialog.hidden = true;
+      document.removeEventListener('keydown', onKeydown, true);
+      if (lastFocused) lastFocused.focus();
+    }
+
+    function trapTab(event) {
+      const focusables = focusableElements();
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement;
+      const isOnTitle = active === title;
+
+      if (event.shiftKey) {
+        if (active === first || isOnTitle) { event.preventDefault(); last.focus(); }
+      } else {
+        if (active === last) { event.preventDefault(); first.focus(); }
+      }
+    }
+
+    function onKeydown(event) {
+      if (event.key === 'Escape') { event.preventDefault(); close(); return; }
+      if (event.key === 'Tab') trapTab(event);
+    }
+
+    button.addEventListener('click', open);
+    cancelBtn.addEventListener('click', close);
+    confirmBtn.addEventListener('click', close);
+    backdrop.addEventListener('click', close);
+  })();
+
 })();
 </script>
 
-
-<!-- section -->
-
-
-<h2>Other values, reference</h2>
-
-<p>The remaining values are demonstrated in full on their own pages elsewhere on this site, rather than rebuilt here.</p>
-
-<table class="reference-table">
-  <caption>aria-haspopup values</caption>
-  <thead>
-    <tr>
-      <th>Value</th>
-      <th>Popup type</th>
-      <th>See</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>menu</code> (or <code>true</code>)</td>
-      <td>A menu of commands</td>
-      <td>Above</td>
-    </tr>
-    <tr>
-      <td><code>listbox</code></td>
-      <td>A list of selectable suggestions, typically in a combobox</td>
-      <td><a href="testing-aria-activedescendant.html">aria-activedescendant page</a></td>
-    </tr>
-    <tr>
-      <td><code>dialog</code></td>
-      <td>A modal or non-modal dialog</td>
-      <td><a href="testing-modal-minimal.html">Modal testing pages</a></td>
-    </tr>
-    <tr>
-      <td><code>tree</code></td>
-      <td>A hierarchical tree of items</td>
-      <td>Not demonstrated on this site, a genuinely rare pattern in most day-to-day work</td>
-    </tr>
-    <tr>
-      <td><code>grid</code></td>
-      <td>A grid-structured popup, such as a date picker</td>
-      <td>Not demonstrated on this site</td>
-    </tr>
-  </tbody>
-</table>
-
-
-<!-- section -->
-
-
-<p><b>Note for testing:</b> confirm with your standard browser and screen reader combinations that "has popup" is announced correctly for the menu button above, and that the popup type is conveyed accurately, not just "has popup" generically.</p>
-
-<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+<p class="footer-link"><a href="testing.html">Testing home</a></p>
 </body>
 </html>
