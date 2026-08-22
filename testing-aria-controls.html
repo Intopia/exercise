@@ -6,29 +6,82 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
-<style>
+  <style>
 
-.focus-container {
-  padding: 1em 0 0;
-}
+    .focus-container {
+      padding: 1em 0 0;
+    }
 
-.focus-heading:focus {
-  color: #000;
-  outline: 0;
-  box-shadow: 0 0 0 2px #fff, 0 0 0 5px #000;
-  animation: fade 5s forwards;
-}
+    .focus-heading:focus {
+      color: #000;
+      outline: 0;
+      box-shadow: 0 0 0 2px #fff, 0 0 0 5px #000;
+      animation: fade 5s forwards;
+    }
 
-@keyframes fade {
-  0% {
-    background-color: #FFFF00;
-  }
-  100% {
-    background-color: transparent;
-  }
-}
+    @keyframes fade {
+      0% {
+        background-color: #FFFF00;
+      }
+      100% {
+        background-color: transparent;
+      }
+    }
 
-</style>
+    [role="tablist"] {
+      display: flex;
+      gap: 0.5em;
+      border-bottom: 1px solid #999;
+    }
+
+    [role="tab"] {
+      border: 1px solid #999;
+      border-bottom: none;
+      background: #eee;
+      padding: 0.5em 1em;
+      cursor: pointer;
+    }
+
+    [role="tab"][aria-selected="true"] {
+      background: #fff;
+      font-weight: bold;
+    }
+
+    [role="tab"]:focus {
+      outline: 2px solid #000;
+      outline-offset: -2px;
+    }
+
+    [role="tabpanel"] {
+      border: 1px solid #999;
+      border-top: none;
+      padding: 1em;
+    }
+
+    [role="tabpanel"]:focus {
+      outline: 2px solid #000;
+    }
+
+    .results-list {
+      list-style: none;
+      margin: 0.5em 0;
+      padding: 0;
+    }
+
+    .results-list li {
+      padding: 0.4em;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .note {
+      background: #fff3cd;
+      border: 1px solid #ffe69c;
+      padding: 0.75em 1em;
+      border-radius: 4px;
+      margin: 1.5em 0;
+    }
+
+  </style>
 </head>
 <body>
 
@@ -40,72 +93,542 @@
 
 <h1>Testing <code>aria-controls</code></h1>
 
-<p>The button below uses <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-controls">aria-controls</a> to create a relationship between the controller (the button) and the controlled element (the content panel).
-</p>
+<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-controls" target="_blank"><code>aria-controls</code></a> identifies the element or elements that a given element controls. It's set on the controlling element and points, by ID, to whatever it affects. It doesn't move focus and doesn't trigger anything on its own, it's a relationship, not a behaviour.</p>
+
+<p>Support for actually announcing that relationship is patchy across screen reader and browser combinations, and a chunk of the accessibility community treats it as effectively decorative. The examples below cover the common working patterns first, then a set of deliberately broken cases, so we can test what's real rather than repeat what's assumed.</p>
+
+
+<!-- section -->
+
+
+<h2>Example 1: show/hide toggle</h2>
+
+<p>A single button controlling a single panel of content that appears and disappears. Focus moves to the new content's heading once it's revealed. The panel already exists in the DOM at page load, just hidden with the <code>hidden</code> attribute, so <code>aria-controls</code> has a valid target from the very first render.</p>
 
 <div class="example">
-  <button
-    id="toggle"
-    type="button"
-    aria-controls="extra-info"
-    aria-expanded="false">
-    Show extra information
+  <button id="ex1-toggle" type="button" aria-controls="ex1-panel" aria-expanded="false">
+    Show details
   </button>
-  <div id="extra-info" hidden></div>
+  <div id="ex1-panel" hidden></div>
 </div>
+
+<p><b>Expected result:</b> activating the button should announce the new expanded state, move focus to the heading inside the revealed panel, and screen reader users navigating by relationship (if supported) should be able to identify that the button controls this specific panel.</p>
 
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;button
-  id="toggle"
-  type="button"
-  <span class="highlight">aria-controls="extra-info"</span>
+  id="ex1-toggle"
+  <span class="highlight">aria-controls="ex1-panel"</span>
   aria-expanded="false"&gt;
-  <span class="comment">&lt;!-- "false" changed to "true" when button activated --&gt;</span>
-  Show extra information
+  Show details
 &lt;/button&gt;
-&lt;div <span class="highlight">id="extra-info"</span> hidden&gt;&lt;/div&gt;
-<span class="comment">&lt;!-- "hidden" removed when button activated --&gt;</span></code></pre>
+&lt;div <span class="highlight">id="ex1-panel"</span> hidden&gt;&lt;/div&gt;</code></pre>
 </details>
 
+
+<!-- section -->
+
+
+<h2>Example 2: controlled element inserted after page load</h2>
+
+<p>Visually, this looks identical to Example 1, a button reveals a panel. The difference is entirely in the DOM and its timing, not in anything a sighted user can see:</p>
+
+<ul>
+  <li>In Example 1, the panel exists in the DOM from page load, just hidden. <code>aria-controls</code> always has a valid target to point to.</li>
+  <li>Here, the panel doesn't exist in the DOM at all until this button is activated for the first time. <code>aria-controls</code> points at an ID that doesn't exist yet, and only becomes valid the moment the script inserts it.</li>
+</ul>
+
+<p>This is a real-world failure mode distinct from a typo (see the broken examples further down), the reference isn't wrong, it's just not there yet.</p>
+
+<div class="example">
+  <button id="ex2-trigger" type="button" aria-controls="ex2-panel" aria-expanded="false">
+    Reveal dynamically inserted panel
+  </button>
+</div>
+
+<p><b>Expected result:</b> on first activation, <code>aria-controls</code> points at an ID that doesn't exist yet. Worth checking whether this behaves differently to Example 1, where the target was always present, and differently again to the permanently broken reference in Example 6 further down, since here the reference becomes valid after interaction rather than staying broken.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;!-- before activation, aria-controls points at an ID not yet in the DOM --&gt;
+&lt;button id="ex2-trigger" <span class="highlight">aria-controls="ex2-panel"</span> aria-expanded="false"&gt;
+  Reveal dynamically inserted panel
+&lt;/button&gt;
+&lt;!-- #ex2-panel is only created and inserted by JS on click --&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 3: tabs</h2>
+
+<p>Each tab controls a separate, always-present-in-DOM panel, only one of which is visible at a time. This is a full, accessible tabs pattern, not just the <code>aria-controls</code> relationship, arrow keys move between tabs and switch panels, Home/End jump to the first/last tab.</p>
+
+<div class="example">
+  <div role="tablist" aria-label="Example tabs">
+    <button role="tab" id="ex3-tab-1" aria-selected="true" aria-controls="ex3-panel-1" tabindex="0">Tab 1</button>
+    <button role="tab" id="ex3-tab-2" aria-selected="false" aria-controls="ex3-panel-2" tabindex="-1">Tab 2</button>
+    <button role="tab" id="ex3-tab-3" aria-selected="false" aria-controls="ex3-panel-3" tabindex="-1">Tab 3</button>
+  </div>
+  <div id="ex3-panel-1" role="tabpanel" aria-labelledby="ex3-tab-1" tabindex="0">
+    <p>Panel 1 content.</p>
+  </div>
+  <div id="ex3-panel-2" role="tabpanel" aria-labelledby="ex3-tab-2" tabindex="0" hidden>
+    <p>Panel 2 content.</p>
+  </div>
+  <div id="ex3-panel-3" role="tabpanel" aria-labelledby="ex3-tab-3" tabindex="0" hidden>
+    <p>Panel 3 content.</p>
+  </div>
+</div>
+
+<p><b>Expected result:</b> each tab should be identifiable as controlling its matching panel. Arrow Left/Right move focus between tabs and switch the visible panel immediately. Home/End jump to the first/last tab. Since <code>role="tabpanel"</code> is a well-established pattern, this is a good baseline case, if <code>aria-controls</code> fails to announce anywhere, it's likely to fail here too.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="tablist" aria-label="Example tabs"&gt;
+  &lt;button role="tab" id="ex3-tab-1" aria-selected="true" <span class="highlight">aria-controls="ex3-panel-1"</span> tabindex="0"&gt;Tab 1&lt;/button&gt;
+  &lt;button role="tab" id="ex3-tab-2" aria-selected="false" <span class="highlight">aria-controls="ex3-panel-2"</span> tabindex="-1"&gt;Tab 2&lt;/button&gt;
+&lt;/div&gt;
+&lt;div id="ex3-panel-1" role="tabpanel" aria-labelledby="ex3-tab-1"&gt;Panel 1 content&lt;/div&gt;
+&lt;div id="ex3-panel-2" role="tabpanel" aria-labelledby="ex3-tab-2" hidden&gt;Panel 2 content&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 4: filter controlling an always-visible results list</h2>
+
+<p>Unlike the previous examples, the controlled element here is never hidden, only its contents change. This tests whether <code>aria-controls</code> is announced at all when there's no expand/collapse state riding alongside it.</p>
+
+<div class="example">
+  <label class="label" for="ex4-filter">Filter results</label>
+  <select class="input" id="ex4-filter" aria-controls="ex4-results">
+    <option value="all">All</option>
+    <option value="active">Active</option>
+    <option value="archived">Archived</option>
+  </select>
+  <ul class="results-list" id="ex4-results">
+    <li data-status="active">Quarterly report</li>
+    <li data-status="active">Budget proposal</li>
+    <li data-status="archived">2023 planning notes</li>
+    <li data-status="archived">Old meeting minutes</li>
+  </ul>
+</div>
+
+<p><b>Expected result:</b> this is the weakest signal case by design, no <code>aria-expanded</code>, no hidden state, just a bare relationship plus a content change. Worth noting whether any AT announces this relationship at all, and whether the content change itself is picked up without an explicit live region.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;select id="ex4-filter" <span class="highlight">aria-controls="ex4-results"</span>&gt;
+  &lt;option value="all"&gt;All&lt;/option&gt;
+  &lt;option value="active"&gt;Active&lt;/option&gt;
+  &lt;option value="archived"&gt;Archived&lt;/option&gt;
+&lt;/select&gt;
+&lt;ul id="ex4-results"&gt;
+  &lt;li data-status="active"&gt;Quarterly report&lt;/li&gt;
+  &lt;!-- remaining items follow the same pattern --&gt;
+&lt;/ul&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 5: one control, multiple targets</h2>
+
+<p><code>aria-controls</code> accepts a space-separated list of IDs. This is valid per spec but far less common in the wild, worth testing separately since a multi-target relationship may not behave the same as a single-target one.</p>
+
+<div class="example">
+  <button id="ex5-toggle" type="button" aria-controls="ex5-panel-a ex5-panel-b" aria-expanded="false">
+    Toggle both panels
+  </button>
+  <div id="ex5-panel-a" hidden>
+    <p>Panel A content.</p>
+  </div>
+  <div id="ex5-panel-b" hidden>
+    <p>Panel B content.</p>
+  </div>
+</div>
+
+<p><b>Expected result:</b> confirm whether AT announces a relationship to two elements, one element, or none at all, this is untested territory for most testers.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button id="ex5-toggle" <span class="highlight">aria-controls="ex5-panel-a ex5-panel-b"</span> aria-expanded="false"&gt;
+  Toggle both panels
+&lt;/button&gt;
+&lt;div id="ex5-panel-a" hidden&gt;&lt;/div&gt;
+&lt;div id="ex5-panel-b" hidden&gt;&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<div class="note">
+  <p><b>Broken examples from here on.</b> These are deliberately incorrect. They exist to test failure behaviour, not to be copied. Where possible, the visible show/hide behaviour still works correctly, so the demo remains usable, only the <code>aria-controls</code> relationship itself is broken, which is the specific thing being tested.</p>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Broken example 6: ID does not resolve (typo)</h2>
+
+<p><code>aria-controls</code> references an ID that has never existed on the page. The button still correctly shows and hides its panel, only the <code>aria-controls</code> attribute itself is wrong.</p>
+
+<div class="example">
+  <button id="ex6-toggle" type="button" aria-controls="ex6-panle-typo" aria-expanded="false">
+    Show details (broken: typo'd ID)
+  </button>
+  <div id="ex6-panel" hidden>
+    <p>This panel's real ID is <code>ex6-panel</code>, but <code>aria-controls</code> points at <code>ex6-panle-typo</code>.</p>
+  </div>
+</div>
+
+<p><b>Expected result:</b> confirm what, if anything, is announced, silence, an error, or no different to Example 1.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;!-- typo: "panle" instead of "panel" --&gt;
+&lt;button id="ex6-toggle" <span class="highlight">aria-controls="ex6-panle-typo"</span> aria-expanded="false"&gt;
+  Show details
+&lt;/button&gt;
+&lt;div id="ex6-panel" hidden&gt;...&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Broken example 7: controlled element removed from the DOM after reference is set</h2>
+
+<p>Activating the first button removes the controlled panel entirely, leaving <code>aria-controls</code> pointing at nothing. Use Reset to bring the panel back and try again.</p>
+
+<div class="example">
+  <button id="ex7-trigger" type="button" aria-controls="ex7-panel" aria-expanded="false">
+    Remove the controlled panel
+  </button>
+  <button id="ex7-reset" type="button">
+    Reset example
+  </button>
+  <div id="ex7-panel" hidden>
+    <p>Activating the button above removes this element entirely, leaving <code>aria-controls</code> pointing at nothing.</p>
+  </div>
+</div>
+
+<p><b>Expected result:</b> distinct from Example 6, this reference was valid and then became invalid. Worth checking whether AT caches the relationship from first encounter or re-checks it live.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button id="ex7-trigger" <span class="highlight">aria-controls="ex7-panel"</span> aria-expanded="false"&gt;
+  Remove the controlled panel
+&lt;/button&gt;
+&lt;div id="ex7-panel" hidden&gt;...&lt;/div&gt;
+&lt;!-- JS on click: document.getElementById('ex7-panel').remove() --&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Broken example 8: valid ID, but three different hiding methods</h2>
+
+<p>Same relationship, same markup shape, only the CSS/HTML method of hiding the controlled element changes. Each button independently toggles its own target, so you can compare all three in both the hidden and visible state, not just at page load.</p>
+
+<div class="example">
+  <button id="ex8-toggle-hidden" type="button" aria-controls="ex8-hidden-attr" aria-expanded="false">
+    Target uses <code>hidden</code> attribute
+  </button>
+  <div id="ex8-hidden-attr" hidden>
+    <p>Hidden via the <code>hidden</code> attribute.</p>
+  </div>
+
+  <button id="ex8-toggle-display" type="button" aria-controls="ex8-display-none" aria-expanded="false" style="margin-top: 1rem;">
+    Target uses <code>display: none</code>
+  </button>
+  <div id="ex8-display-none" style="display: none;">
+    <p>Hidden via <code>display: none</code>.</p>
+  </div>
+
+  <button id="ex8-toggle-visibility" type="button" aria-controls="ex8-visibility-hidden" aria-expanded="false" style="margin-top: 1rem;">
+    Target uses <code>visibility: hidden</code>
+  </button>
+  <div id="ex8-visibility-hidden" style="visibility: hidden;">
+    <p>Hidden via <code>visibility: hidden</code>.</p>
+  </div>
+</div>
+
+<p><b>Expected result:</b> the point is purely to test whether <code>aria-controls</code> support differs by hiding method. Toggle each one open and closed, and inspect each target's accessibility tree presence directly if needed.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button aria-controls="ex8-hidden-attr"&gt;...&lt;/button&gt;
+&lt;div id="ex8-hidden-attr" hidden&gt;...&lt;/div&gt;
+
+&lt;button aria-controls="ex8-display-none"&gt;...&lt;/button&gt;
+&lt;div id="ex8-display-none" style="display: none;"&gt;...&lt;/div&gt;
+
+&lt;button aria-controls="ex8-visibility-hidden"&gt;...&lt;/button&gt;
+&lt;div id="ex8-visibility-hidden" style="visibility: hidden;"&gt;...&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Broken example 9: empty value</h2>
+
+<p><code>aria-controls</code> is present but has no value at all, no ID reference of any kind. Distinct from Example 6, this isn't a broken reference, it's not a reference at all. The button still works visually, using a direct reference in the script rather than relying on the empty attribute.</p>
+
+<div class="example">
+  <button id="ex9-toggle" type="button" aria-controls="" aria-expanded="false">
+    Show details (broken: empty value)
+  </button>
+  <div id="ex9-panel" hidden>
+    <p>This panel is shown correctly, but <code>aria-controls</code> itself is empty and points at nothing.</p>
+  </div>
+</div>
+
+<p><b>Expected result:</b> exactly the kind of markup error an automated checker is built to catch, an empty, non-referencing value. Worth confirming whether AT treats this the same as Example 6's broken reference, the same as the attribute being absent entirely, or something else.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button id="ex9-toggle" <span class="highlight">aria-controls=""</span> aria-expanded="false"&gt;
+  Show details
+&lt;/button&gt;
+&lt;div id="ex9-panel" hidden&gt;...&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<p><b>Note for testing:</b> given the reputation <code>aria-controls</code> has for patchy support, this page is a good candidate for the full AT/browser matrix, Mac VoiceOver, Windows JAWS, Windows NVDA, iOS VoiceOver, Android TalkBack, across the browsers you'd normally pair with each, rather than a partial spot check.</p>
+
+
 <script>
-const button = document.getElementById('toggle');
-const panel = document.getElementById('extra-info');
+(function () {
 
-button.addEventListener('click', () => {
-  const expanded = button.getAttribute('aria-expanded') === 'true';
+  // ---------- Shared: reveal a panel with a focusable heading ----------
 
-  if (expanded) {
-    button.setAttribute('aria-expanded', 'false');
-    button.textContent = 'Show extra information';
-
-    panel.hidden = true;
-    panel.innerHTML = '';
-    return;
+  function revealPanel(panel, headingText, bodyText) {
+    panel.hidden = false;
+    panel.innerHTML = `
+      <div class="focus-container">
+        <h2 tabindex="-1" class="focus-heading">${headingText}</h2>
+        <p>${bodyText}</p>
+      </div>
+    `;
+    panel.querySelector('.focus-heading').focus();
   }
 
-  button.setAttribute('aria-expanded', 'true');
-  button.textContent = 'Hide extra information';
+  // ---------- Example 1 ----------
 
-  panel.hidden = false;
-  panel.innerHTML = `
-    <div class="focus-container">
-      <h2 id="extra-info-heading" tabindex="-1" class="focus-heading">
-        Extra information
-      </h2>
+  (function () {
+    const button = document.getElementById('ex1-toggle');
+    const panel = document.getElementById('ex1-panel');
 
-      <p>
-        This content was added by JavaScript. Focus was then moved to the heading,
-        which has <code>tabindex="-1"</code>.
-      </p>
-    </div>
-  `;
+    button.addEventListener('click', () => {
+      const expanded = button.getAttribute('aria-expanded') === 'true';
 
-  document.getElementById('extra-info-heading').focus();
-});
+      if (expanded) {
+        button.setAttribute('aria-expanded', 'false');
+        button.textContent = 'Show details';
+        panel.hidden = true;
+        panel.innerHTML = '';
+        return;
+      }
+
+      button.setAttribute('aria-expanded', 'true');
+      button.textContent = 'Hide details';
+      revealPanel(panel, 'Extra information', 'This content was added by JavaScript. Focus was then moved to this heading, which has <code>tabindex="-1"</code>.');
+    });
+  })();
+
+  // ---------- Example 2 (dynamically inserted panel) ----------
+
+  (function () {
+    const button = document.getElementById('ex2-trigger');
+
+    button.addEventListener('click', () => {
+      let panel = document.getElementById('ex2-panel');
+
+      if (!panel) {
+        panel = document.createElement('div');
+        panel.id = 'ex2-panel';
+        button.insertAdjacentElement('afterend', panel);
+        button.setAttribute('aria-expanded', 'true');
+        revealPanel(panel, 'Dynamically inserted panel', 'This panel did not exist in the DOM until the button was activated.');
+        return;
+      }
+
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!expanded));
+      panel.hidden = expanded;
+    });
+  })();
+
+  // ---------- Example 3: tabs ----------
+
+  (function () {
+    const tabs = Array.from(document.querySelectorAll('#ex3-tab-1, #ex3-tab-2, #ex3-tab-3'));
+    const panels = tabs.map(tab => document.getElementById(tab.getAttribute('aria-controls')));
+
+    function selectTab(index) {
+      tabs.forEach((tab, i) => {
+        const selected = i === index;
+        tab.setAttribute('aria-selected', String(selected));
+        tab.setAttribute('tabindex', selected ? '0' : '-1');
+        panels[i].hidden = !selected;
+      });
+      tabs[index].focus();
+    }
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => selectTab(index));
+
+      tab.addEventListener('keydown', (event) => {
+        switch (event.key) {
+          case 'ArrowRight':
+            event.preventDefault();
+            selectTab((index + 1) % tabs.length);
+            break;
+          case 'ArrowLeft':
+            event.preventDefault();
+            selectTab((index - 1 + tabs.length) % tabs.length);
+            break;
+          case 'Home':
+            event.preventDefault();
+            selectTab(0);
+            break;
+          case 'End':
+            event.preventDefault();
+            selectTab(tabs.length - 1);
+            break;
+        }
+      });
+    });
+  })();
+
+  // ---------- Example 4: filter ----------
+
+  (function () {
+    const select = document.getElementById('ex4-filter');
+    const items = Array.from(document.querySelectorAll('#ex4-results li'));
+
+    select.addEventListener('change', () => {
+      const value = select.value;
+      items.forEach(item => {
+        item.hidden = value !== 'all' && item.dataset.status !== value;
+      });
+    });
+  })();
+
+  // ---------- Example 5 ----------
+
+  (function () {
+    const button = document.getElementById('ex5-toggle');
+    const panelA = document.getElementById('ex5-panel-a');
+    const panelB = document.getElementById('ex5-panel-b');
+
+    button.addEventListener('click', () => {
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!expanded));
+      panelA.hidden = expanded;
+      panelB.hidden = expanded;
+    });
+  })();
+
+  // ---------- Example 6 ----------
+
+  (function () {
+    const button = document.getElementById('ex6-toggle');
+    const panel = document.getElementById('ex6-panel'); // correct id, deliberately different from the broken aria-controls value
+
+    button.addEventListener('click', () => {
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!expanded));
+      panel.hidden = expanded;
+    });
+  })();
+
+  // ---------- Example 7, with reset ----------
+
+  (function () {
+    const trigger = document.getElementById('ex7-trigger');
+    const resetButton = document.getElementById('ex7-reset');
+    const container = trigger.parentElement;
+
+    function removePanel() {
+      const panel = document.getElementById('ex7-panel');
+      if (panel) {
+        panel.remove();
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    }
+
+    function resetExample() {
+      const existing = document.getElementById('ex7-panel');
+      if (existing) existing.remove();
+
+      const panel = document.createElement('div');
+      panel.id = 'ex7-panel';
+      panel.hidden = true;
+      panel.innerHTML = '<p>Activating the button above removes this element entirely, leaving <code>aria-controls</code> pointing at nothing.</p>';
+      container.appendChild(panel);
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+
+    trigger.addEventListener('click', removePanel);
+    resetButton.addEventListener('click', resetExample);
+  })();
+
+  // ---------- Example 8 ----------
+
+  (function () {
+    const hiddenBtn = document.getElementById('ex8-toggle-hidden');
+    const hiddenTarget = document.getElementById('ex8-hidden-attr');
+    hiddenBtn.addEventListener('click', () => {
+      const expanded = hiddenBtn.getAttribute('aria-expanded') === 'true';
+      hiddenBtn.setAttribute('aria-expanded', String(!expanded));
+      hiddenTarget.hidden = expanded;
+    });
+
+    const displayBtn = document.getElementById('ex8-toggle-display');
+    const displayTarget = document.getElementById('ex8-display-none');
+    displayBtn.addEventListener('click', () => {
+      const expanded = displayBtn.getAttribute('aria-expanded') === 'true';
+      displayBtn.setAttribute('aria-expanded', String(!expanded));
+      displayTarget.style.display = expanded ? 'none' : 'block';
+    });
+
+    const visibilityBtn = document.getElementById('ex8-toggle-visibility');
+    const visibilityTarget = document.getElementById('ex8-visibility-hidden');
+    visibilityBtn.addEventListener('click', () => {
+      const expanded = visibilityBtn.getAttribute('aria-expanded') === 'true';
+      visibilityBtn.setAttribute('aria-expanded', String(!expanded));
+      visibilityTarget.style.visibility = expanded ? 'hidden' : 'visible';
+    });
+  })();
+
+  // ---------- Example 9 ----------
+
+  (function () {
+    const button = document.getElementById('ex9-toggle');
+    const panel = document.getElementById('ex9-panel'); // referenced directly, not via the empty aria-controls value
+
+    button.addEventListener('click', () => {
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!expanded));
+      panel.hidden = expanded;
+    });
+  })();
+
+})();
 </script>
-
-<p>Note: <code>aria-controls</code> has inconsistent support across browser and screen reader combinations. Many screen readers do not announce the relationship during normal navigation. It is still worth using because some assistive technologies and accessibility tools expose these relationships.</p>
 
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
