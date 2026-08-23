@@ -34,28 +34,53 @@
       border-bottom: 1px solid #999;
     }
 
+    /* !important used throughout below: testing.css sets `color: #fff !important`
+       (and non-important hover/active backgrounds that still out-specificity
+       [role="tab"] alone) on all buttons. Specificity alone can't override an
+       !important rule, so background/colour are pinned explicitly here. */
+
     [role="tab"] {
       border: 1px solid #999;
       border-bottom: none;
-      background: #eee;
+      background: #eee !important;
+      color: #333 !important;
       padding: 0.5em 1em;
       cursor: pointer;
     }
 
     [role="tab"][aria-selected="true"] {
-      background: #fff;
+      background: #fff !important;
+      color: #000 !important;
       font-weight: bold;
+    }
+
+    [role="tab"]:hover {
+      background: #ddd !important;
+      color: #000 !important;
     }
 
     [role="tab"]:focus {
       outline: 2px solid #000;
       outline-offset: -2px;
+      background: #eee !important;
+      color: #000 !important;
+    }
+
+    [role="tab"][aria-selected="true"]:hover,
+    [role="tab"][aria-selected="true"]:focus {
+      background: #fff !important;
+    }
+
+    [role="tab"]:active {
+      background: #ddd !important;
+      color: #000 !important;
     }
 
     [role="tabpanel"] {
       border: 1px solid #999;
       border-top: none;
       padding: 1em;
+      background: #fff;
     }
 
     [role="tabpanel"]:focus {
@@ -116,13 +141,18 @@
 
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;button
-  id="ex1-toggle"
+<pre><code><span class="comment">&lt;!-- Button --&gt;</span>
+&lt;button
   <span class="highlight">aria-controls="ex1-panel"</span>
-  aria-expanded="false"&gt;
+  aria-expanded="false"
+&gt;
   Show details
 &lt;/button&gt;
-&lt;div <span class="highlight">id="ex1-panel"</span> hidden&gt;&lt;/div&gt;</code></pre>
+
+<span class="comment">&lt;!-- Panel --&gt;</span>
+&lt;div <span class="highlight">id="ex1-panel"</span> hidden&gt;
+  ...
+&lt;/div&gt;</code></pre>
 </details>
 
 
@@ -150,11 +180,15 @@
 
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;!-- before activation, aria-controls points at an ID not yet in the DOM --&gt;
-&lt;button id="ex2-trigger" <span class="highlight">aria-controls="ex2-panel"</span> aria-expanded="false"&gt;
+<pre><code><span class="comment">&lt;!-- before activation, ID not yet in the DOM --&gt;</span>
+&lt;button
+  <span class="highlight">aria-controls="ex2-panel"</span>
+  aria-expanded="false"
+&gt;
   Reveal dynamically inserted panel
 &lt;/button&gt;
-&lt;!-- #ex2-panel is only created and inserted by JS on click --&gt;</code></pre>
+
+<span class="comment">&lt;!-- #ex2-panel is only created and inserted by JS on click --&gt;</span></code></pre>
 </details>
 
 
@@ -167,18 +201,18 @@
 
 <div class="example">
   <div role="tablist" aria-label="Example tabs">
-    <button role="tab" id="ex3-tab-1" aria-selected="true" aria-controls="ex3-panel-1" tabindex="0">Tab 1</button>
-    <button role="tab" id="ex3-tab-2" aria-selected="false" aria-controls="ex3-panel-2" tabindex="-1">Tab 2</button>
-    <button role="tab" id="ex3-tab-3" aria-selected="false" aria-controls="ex3-panel-3" tabindex="-1">Tab 3</button>
+    <button role="tab" id="ex3-tab-1" aria-selected="true" aria-controls="ex3-panel-1" tabindex="0">Wombats</button>
+    <button role="tab" id="ex3-tab-2" aria-selected="false" aria-controls="ex3-panel-2" tabindex="-1">Emus</button>
+    <button role="tab" id="ex3-tab-3" aria-selected="false" aria-controls="ex3-panel-3" tabindex="-1">Bandicoots</button>
   </div>
   <div id="ex3-panel-1" role="tabpanel" aria-labelledby="ex3-tab-1" tabindex="0">
-    <p>Panel 1 content.</p>
+    <p><b>Wombats</b> are sturdy, burrowing marsupials native to Australia.</p>
   </div>
   <div id="ex3-panel-2" role="tabpanel" aria-labelledby="ex3-tab-2" tabindex="0" hidden>
-    <p>Panel 2 content.</p>
+    <p><b>Emus</b> are large, flightless birds that can run at high speeds.</p>
   </div>
   <div id="ex3-panel-3" role="tabpanel" aria-labelledby="ex3-tab-3" tabindex="0" hidden>
-    <p>Panel 3 content.</p>
+    <p><b>Bandicoots</b> are small, nocturnal marsupials with pointed snouts.</p>
   </div>
 </div>
 
@@ -186,12 +220,46 @@
 
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;div role="tablist" aria-label="Example tabs"&gt;
-  &lt;button role="tab" id="ex3-tab-1" aria-selected="true" <span class="highlight">aria-controls="ex3-panel-1"</span> tabindex="0"&gt;Tab 1&lt;/button&gt;
-  &lt;button role="tab" id="ex3-tab-2" aria-selected="false" <span class="highlight">aria-controls="ex3-panel-2"</span> tabindex="-1"&gt;Tab 2&lt;/button&gt;
+<pre><code><span class="comment">&lt;!-- tab container --&gt;</span>
+&lt;div role="tablist" aria-label="Example tabs"&gt;
+
+  <span class="comment">&lt;!-- buttons --&gt;</span>
+  &lt;button
+    role="tab"
+    aria-selected="true"
+    <span class="highlight">aria-controls="ex3-panel-1"</span>
+    tabindex="0"
+  &gt;
+    Wombats
+  &lt;/button&gt;
+
+  &lt;button
+    role="tab"
+    aria-selected="false"
+    <span class="highlight">aria-controls="ex3-panel-2"</span>
+    tabindex="-1"
+  &gt;
+    Emus
+  &lt;/button&gt;
 &lt;/div&gt;
-&lt;div id="ex3-panel-1" role="tabpanel" aria-labelledby="ex3-tab-1"&gt;Panel 1 content&lt;/div&gt;
-&lt;div id="ex3-panel-2" role="tabpanel" aria-labelledby="ex3-tab-2" hidden&gt;Panel 2 content&lt;/div&gt;</code></pre>
+
+<span class="comment">&lt;!-- panels --&gt;</span>
+&lt;div
+  <span class="highlight">id="ex3-panel-1"</span>
+  role="tabpanel"
+  aria-labelledby="ex3-tab-1"
+&gt;
+  Wombats are sturdy...
+&lt;/div&gt;
+
+&lt;div
+  <span class="highlight">id="ex3-panel-2"</span>
+  role="tabpanel"
+  aria-labelledby="ex3-tab-2"
+  hidden
+&gt;
+  Emus are large...
+&lt;/div&gt;</code></pre>
 </details>
 
 
@@ -221,14 +289,20 @@
 
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;select id="ex4-filter" <span class="highlight">aria-controls="ex4-results"</span>&gt;
+<pre><code><span class="comment">&lt;!-- Label --&gt;</span>
+&lt;label class="label" for="ex4-filter"&gt;Filter results&lt;/label&gt;
+
+<span class="comment">&lt;!-- Select --&gt;</span>
+&lt;select id="ex4-filter" <span class="highlight">aria-controls="ex4-results"</span>&gt;
   &lt;option value="all"&gt;All&lt;/option&gt;
   &lt;option value="active"&gt;Active&lt;/option&gt;
   &lt;option value="archived"&gt;Archived&lt;/option&gt;
 &lt;/select&gt;
-&lt;ul id="ex4-results"&gt;
+
+<span class="comment">&lt;!-- Results--&gt;</span>
+&lt;ul <span class="highlight">id="ex4-results"</span>&gt;
   &lt;li data-status="active"&gt;Quarterly report&lt;/li&gt;
-  &lt;!-- remaining items follow the same pattern --&gt;
+  <span class="comment">&lt;!-- remaining items follow the same pattern --&gt;</span>
 &lt;/ul&gt;</code></pre>
 </details>
 
@@ -245,10 +319,10 @@
     Toggle both panels
   </button>
   <div id="ex5-panel-a" hidden>
-    <p>Panel A content.</p>
+    <p><b>Koalas</b> are tree-dwelling marsupials that mainly eat eucalyptus leaves.</p>
   </div>
   <div id="ex5-panel-b" hidden>
-    <p>Panel B content.</p>
+    <p><b>Platypuses</b> are unusual egg-laying mammals with broad, duck-like bills.</p>
   </div>
 </div>
 
@@ -256,11 +330,22 @@
 
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;button id="ex5-toggle" <span class="highlight">aria-controls="ex5-panel-a ex5-panel-b"</span> aria-expanded="false"&gt;
+<pre><code><span class="comment">&lt;!-- Button --&gt;</span>
+&lt;button
+  <span class="highlight">aria-controls="ex5-panel-a ex5-panel-b"</span>
+  aria-expanded="false"
+&gt;
   Toggle both panels
 &lt;/button&gt;
-&lt;div id="ex5-panel-a" hidden&gt;&lt;/div&gt;
-&lt;div id="ex5-panel-b" hidden&gt;&lt;/div&gt;</code></pre>
+
+<span class="comment">&lt;!-- Panels --&gt;</span>
+&lt;div <span class="highlight">id="ex5-panel-a"</span> hidden&gt;
+  Koalas are tree-dwelling...
+&lt;/div&gt;
+
+&lt;div <span class="highlight">id="ex5-panel-b"</span> hidden&gt;
+  Platypuses are unusual...
+&lt;/div&gt;</code></pre>
 </details>
 
 
@@ -275,13 +360,13 @@
 <!-- section -->
 
 
-<h2>Broken example 6: ID does not resolve (typo)</h2>
+<h2>Broken example 6: ID does not resolve</h2>
 
 <p><code>aria-controls</code> references an ID that has never existed on the page. The button still correctly shows and hides its panel, only the <code>aria-controls</code> attribute itself is wrong.</p>
 
 <div class="example">
   <button id="ex6-toggle" type="button" aria-controls="ex6-panle-typo" aria-expanded="false">
-    Show details (broken: typo'd ID)
+    Show details
   </button>
   <div id="ex6-panel" hidden>
     <p>This panel's real ID is <code>ex6-panel</code>, but <code>aria-controls</code> points at <code>ex6-panle-typo</code>.</p>
@@ -292,102 +377,33 @@
 
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;!-- typo: "panle" instead of "panel" --&gt;
-&lt;button id="ex6-toggle" <span class="highlight">aria-controls="ex6-panle-typo"</span> aria-expanded="false"&gt;
+<pre><code><span class="comment">&lt;!-- Button: Value does not match ID --&gt;</span>
+&lt;button
+  <span class="highlight">aria-controls="ex6-panle-typo"</span>
+  aria-expanded="false"
+&gt;
   Show details
 &lt;/button&gt;
-&lt;div id="ex6-panel" hidden&gt;...&lt;/div&gt;</code></pre>
+
+<span class="comment">&lt;!-- Panel --&gt;</span>
+&lt;div id="ex6-panel" hidden&gt;
+  ...
+&lt;/div&gt;</code></pre>
 </details>
 
 
 <!-- section -->
 
 
-<h2>Broken example 7: controlled element removed from the DOM after reference is set</h2>
-
-<p>Activating the first button removes the controlled panel entirely, leaving <code>aria-controls</code> pointing at nothing. Use Reset to bring the panel back and try again.</p>
-
-<div class="example">
-  <button id="ex7-trigger" type="button" aria-controls="ex7-panel" aria-expanded="false">
-    Remove the controlled panel
-  </button>
-  <button id="ex7-reset" type="button">
-    Reset example
-  </button>
-  <div id="ex7-panel" hidden>
-    <p>Activating the button above removes this element entirely, leaving <code>aria-controls</code> pointing at nothing.</p>
-  </div>
-</div>
-
-<p><b>Expected result:</b> distinct from Example 6, this reference was valid and then became invalid. Worth checking whether AT caches the relationship from first encounter or re-checks it live.</p>
-
-<details>
-  <summary>HTML markup</summary>
-<pre><code>&lt;button id="ex7-trigger" <span class="highlight">aria-controls="ex7-panel"</span> aria-expanded="false"&gt;
-  Remove the controlled panel
-&lt;/button&gt;
-&lt;div id="ex7-panel" hidden&gt;...&lt;/div&gt;
-&lt;!-- JS on click: document.getElementById('ex7-panel').remove() --&gt;</code></pre>
-</details>
-
-
-<!-- section -->
-
-
-<h2>Broken example 8: valid ID, but three different hiding methods</h2>
-
-<p>Same relationship, same markup shape, only the CSS/HTML method of hiding the controlled element changes. Each button independently toggles its own target, so you can compare all three in both the hidden and visible state, not just at page load.</p>
-
-<div class="example">
-  <button id="ex8-toggle-hidden" type="button" aria-controls="ex8-hidden-attr" aria-expanded="false">
-    Target uses <code>hidden</code> attribute
-  </button>
-  <div id="ex8-hidden-attr" hidden>
-    <p>Hidden via the <code>hidden</code> attribute.</p>
-  </div>
-
-  <button id="ex8-toggle-display" type="button" aria-controls="ex8-display-none" aria-expanded="false" style="margin-top: 1rem;">
-    Target uses <code>display: none</code>
-  </button>
-  <div id="ex8-display-none" style="display: none;">
-    <p>Hidden via <code>display: none</code>.</p>
-  </div>
-
-  <button id="ex8-toggle-visibility" type="button" aria-controls="ex8-visibility-hidden" aria-expanded="false" style="margin-top: 1rem;">
-    Target uses <code>visibility: hidden</code>
-  </button>
-  <div id="ex8-visibility-hidden" style="visibility: hidden;">
-    <p>Hidden via <code>visibility: hidden</code>.</p>
-  </div>
-</div>
-
-<p><b>Expected result:</b> the point is purely to test whether <code>aria-controls</code> support differs by hiding method. Toggle each one open and closed, and inspect each target's accessibility tree presence directly if needed.</p>
-
-<details>
-  <summary>HTML markup</summary>
-<pre><code>&lt;button aria-controls="ex8-hidden-attr"&gt;...&lt;/button&gt;
-&lt;div id="ex8-hidden-attr" hidden&gt;...&lt;/div&gt;
-
-&lt;button aria-controls="ex8-display-none"&gt;...&lt;/button&gt;
-&lt;div id="ex8-display-none" style="display: none;"&gt;...&lt;/div&gt;
-
-&lt;button aria-controls="ex8-visibility-hidden"&gt;...&lt;/button&gt;
-&lt;div id="ex8-visibility-hidden" style="visibility: hidden;"&gt;...&lt;/div&gt;</code></pre>
-</details>
-
-
-<!-- section -->
-
-
-<h2>Broken example 9: empty value</h2>
+<h2>Broken example 7: empty value</h2>
 
 <p><code>aria-controls</code> is present but has no value at all, no ID reference of any kind. Distinct from Example 6, this isn't a broken reference, it's not a reference at all. The button still works visually, using a direct reference in the script rather than relying on the empty attribute.</p>
 
 <div class="example">
-  <button id="ex9-toggle" type="button" aria-controls="" aria-expanded="false">
+  <button id="ex7-toggle" type="button" aria-controls="" aria-expanded="false">
     Show details (broken: empty value)
   </button>
-  <div id="ex9-panel" hidden>
+  <div id="ex7-panel" hidden>
     <p>This panel is shown correctly, but <code>aria-controls</code> itself is empty and points at nothing.</p>
   </div>
 </div>
@@ -396,10 +412,18 @@
 
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;button id="ex9-toggle" <span class="highlight">aria-controls=""</span> aria-expanded="false"&gt;
+<pre><code><span class="comment">&lt;!-- Button: aria-controls has no value --&gt;</span>
+&lt;button
+  <span class="highlight">aria-controls=""</span>
+  aria-expanded="false"
+&gt;
   Show details
 &lt;/button&gt;
-&lt;div id="ex9-panel" hidden&gt;...&lt;/div&gt;</code></pre>
+
+<span class="comment">&lt;!-- Panel --&gt;</span>
+&lt;div id="ex7-panel" hidden&gt;
+  ...
+&lt;/div&gt;</code></pre>
 </details>
 
 
@@ -555,70 +579,11 @@
     });
   })();
 
-  // ---------- Example 7, with reset ----------
+  // ---------- Example 7 ----------
 
   (function () {
-    const trigger = document.getElementById('ex7-trigger');
-    const resetButton = document.getElementById('ex7-reset');
-    const container = trigger.parentElement;
-
-    function removePanel() {
-      const panel = document.getElementById('ex7-panel');
-      if (panel) {
-        panel.remove();
-        trigger.setAttribute('aria-expanded', 'false');
-      }
-    }
-
-    function resetExample() {
-      const existing = document.getElementById('ex7-panel');
-      if (existing) existing.remove();
-
-      const panel = document.createElement('div');
-      panel.id = 'ex7-panel';
-      panel.hidden = true;
-      panel.innerHTML = '<p>Activating the button above removes this element entirely, leaving <code>aria-controls</code> pointing at nothing.</p>';
-      container.appendChild(panel);
-      trigger.setAttribute('aria-expanded', 'false');
-    }
-
-    trigger.addEventListener('click', removePanel);
-    resetButton.addEventListener('click', resetExample);
-  })();
-
-  // ---------- Example 8 ----------
-
-  (function () {
-    const hiddenBtn = document.getElementById('ex8-toggle-hidden');
-    const hiddenTarget = document.getElementById('ex8-hidden-attr');
-    hiddenBtn.addEventListener('click', () => {
-      const expanded = hiddenBtn.getAttribute('aria-expanded') === 'true';
-      hiddenBtn.setAttribute('aria-expanded', String(!expanded));
-      hiddenTarget.hidden = expanded;
-    });
-
-    const displayBtn = document.getElementById('ex8-toggle-display');
-    const displayTarget = document.getElementById('ex8-display-none');
-    displayBtn.addEventListener('click', () => {
-      const expanded = displayBtn.getAttribute('aria-expanded') === 'true';
-      displayBtn.setAttribute('aria-expanded', String(!expanded));
-      displayTarget.style.display = expanded ? 'none' : 'block';
-    });
-
-    const visibilityBtn = document.getElementById('ex8-toggle-visibility');
-    const visibilityTarget = document.getElementById('ex8-visibility-hidden');
-    visibilityBtn.addEventListener('click', () => {
-      const expanded = visibilityBtn.getAttribute('aria-expanded') === 'true';
-      visibilityBtn.setAttribute('aria-expanded', String(!expanded));
-      visibilityTarget.style.visibility = expanded ? 'hidden' : 'visible';
-    });
-  })();
-
-  // ---------- Example 9 ----------
-
-  (function () {
-    const button = document.getElementById('ex9-toggle');
-    const panel = document.getElementById('ex9-panel'); // referenced directly, not via the empty aria-controls value
+    const button = document.getElementById('ex7-toggle');
+    const panel = document.getElementById('ex7-panel'); // referenced directly, not via the empty aria-controls value
 
     button.addEventListener('click', () => {
       const expanded = button.getAttribute('aria-expanded') === 'true';
