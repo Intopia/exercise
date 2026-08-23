@@ -35,22 +35,26 @@
 
 <h1>Testing <code>aria-readonly</code></h1>
 
-<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-readonly" target="_blank"><code>aria-readonly</code></a> indicates that a widget's value cannot be edited, but the widget itself is still fully operable, focusable, selectable, and copyable, unlike a disabled control. It is the ARIA equivalent of the native <code>readonly</code> attribute, for use on custom widgets that don't have a native readonly state of their own.</p>
+<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-readonly" target="_blank"><code>aria-readonly</code></a> indicates that a widget's value cannot be edited, but the widget itself is still fully operable, focusable, selectable, and copyable, unlike a disabled control. It's the ARIA equivalent of the native <code>readonly</code> attribute, for use on custom widgets that don't have a native readonly state of their own.</p>
+
+<p>On a native input though, <code>aria-readonly</code> alone does nothing functional. It's announcement-only, it tells assistive technology the field is read-only, but doesn't stop typing unless the field is also functionally restricted some other way (native <code>readonly</code>, <code>disabled</code>, or, for a custom widget, something like <code>contenteditable="false"</code>). The examples below start with the native input combinations, then repeat the same valid and redundant patterns on a custom widget, before finishing with an invalid value.</p>
+
+<p>Depending on the widget, exactly one pattern below is the one to actually reach for: <a href="#example-1">Example 1</a> (native <code>readonly</code>) for a native element, <a href="#example-6">Example 6</a> (<code>aria-readonly="true"</code> + <code>contenteditable="false"</code>) for a custom widget. Everything else on this page demonstrates a gap, a redundancy, a conflict, or an invalid value, not a recommended pattern.</p>
 
 
 <!-- section -->
 
 
-<h2>Example 1: native <code>readonly</code>, for comparison</h2>
+<h2 id="example-1">Example 1: readonly on native element</h2>
 
-<p>A native input's own <code>readonly</code> attribute needs no ARIA at all, it's mapped to the accessibility tree automatically.</p>
+<p>A native input's own <code>readonly</code> attribute needs no ARIA at all, it's mapped to the accessibility tree automatically. <b>This is the ideal pattern for a native element.</b></p>
 
 <div class="example">
-  <label class="label" for="native-readonly">Confirmation number</label>
-  <input class="input" type="text" id="native-readonly" value="ABC-123-XYZ" readonly>
+  <label class="label" for="ex1-field">Confirmation number</label>
+  <input class="input" type="text" id="ex1-field" value="ABC-123-XYZ" readonly>
 </div>
 
-<p><b>Expected result:</b> the field should be announced as read-only. It should remain focusable, and its value should be selectable and copyable, but not editable.</p>
+<p><b>Expected result:</b> the field should be announced as read-only. It should remain focusable, and its value should be selectable and copyable, but not editable, this is the baseline every other example is compared against.</p>
 
 <details>
   <summary>HTML markup</summary>
@@ -61,22 +65,102 @@
 <!-- section -->
 
 
-<h2>Example 2: <code>aria-readonly</code> on a custom widget</h2>
+<h2>Example 2: aria-readonly="true" on a native input</h2>
 
-<p>This is a custom text field, built from a <code>contenteditable</code> element with <code>role="textbox"</code> rather than a native input. Since it has no native <code>readonly</code> attribute to rely on, <code>aria-readonly</code> is what communicates the same state.</p>
+<p>No native <code>readonly</code>, so nothing actually stops the user editing the value. This is the core gap: <code>aria-readonly</code> carries no enforcement of its own on a native input, that's already handled by native <code>readonly</code> if it's present.</p>
 
 <div class="example">
-  <span class="label" id="custom-readonly-label">Confirmation number</span>
-  <div role="textbox" aria-labelledby="custom-readonly-label" aria-readonly="true" contenteditable="false" tabindex="0">ABC-123-XYZ</div>
+  <label class="label" for="ex2-field">Confirmation number</label>
+  <input class="input" type="text" id="ex2-field" value="ABC-123-XYZ" aria-readonly="true">
 </div>
 
-<p><b>Expected result:</b> the field should be announced as read-only, the same as Example 1. It should remain focusable.</p>
+<p><b>Expected result:</b> the field remains fully editable, typing and pasting both work normally. Assistive technology should still announce it as read-only, since that's all this attribute does, worth confirming directly whether every AT/browser combination actually surfaces this announcement, ARIA state support is never guaranteed.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input type="text" value="ABC-123-XYZ" <span class="highlight">aria-readonly="true"</span>&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 3: aria-readonly="false" on a native input</h2>
+
+<p><code>false</code> is already the default value of <code>aria-readonly</code>, so stating it explicitly changes nothing. Flagged for redundancy, not for being wrong.</p>
+
+<div class="example">
+  <label class="label" for="ex3-field">Confirmation number</label>
+  <input class="input" type="text" id="ex3-field" value="ABC-123-XYZ" aria-readonly="false">
+</div>
+
+<p><b>Expected result:</b> behaves identically to an ordinary field with no <code>aria-readonly</code> attribute at all, editable, and announced as editable. No difference from omitting the attribute entirely.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input type="text" value="ABC-123-XYZ" <span class="highlight">aria-readonly="false"</span>&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 4: readonly + aria-readonly="true" on a native input</h2>
+
+<p>Native <code>readonly</code> already handles both the enforcement and the announcement on its own, so adding <code>aria-readonly="true"</code> duplicates what's already implied. Redundant, not conflicting, both attributes agree.</p>
+
+<div class="example">
+  <label class="label" for="ex4-field">Confirmation number</label>
+  <input class="input" type="text" id="ex4-field" value="ABC-123-XYZ" readonly aria-readonly="true">
+</div>
+
+<p><b>Expected result:</b> behaves identically to Example 1, typing and paste are rejected, and it's announced as read-only. The <code>aria-readonly="true"</code> adds nothing on top of native <code>readonly</code>.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input type="text" value="ABC-123-XYZ" readonly <span class="highlight">aria-readonly="true"</span>&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 5: readonly + aria-readonly="false" on a native input</h2>
+
+<p>The two attributes disagree. Native <code>readonly</code> is what actually governs behaviour, the browser still blocks typing and paste regardless of what <code>aria-readonly</code> says. But <code>aria-readonly="false"</code> tells assistive technology the opposite of what's actually happening.</p>
+
+<div class="example">
+  <label class="label" for="ex5-field">Confirmation number</label>
+  <input class="input" type="text" id="ex5-field" value="ABC-123-XYZ" readonly aria-readonly="false">
+</div>
+
+<p><b>Expected result:</b> the field stays browser-enforced read-only, typing and paste are still rejected, native <code>readonly</code> wins functionally. Whether assistive technology announces it as read-only (matching actual behaviour) or as editable (matching the ARIA state) is genuinely unsettled and needs confirming directly across AT/browser combinations, don't assume either outcome.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input type="text" value="ABC-123-XYZ" readonly <span class="highlight">aria-readonly="false"</span>&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2 id="example-6">Example 6: aria-readonly="true" on a custom widget</h2>
+
+<p>This is a custom text field, built from a <code>contenteditable</code> element with <code>role="textbox"</code> rather than a native input. Since it has no native <code>readonly</code> attribute to rely on, <code>aria-readonly</code> is what communicates the same state, this is the scenario <code>aria-readonly</code> actually exists for. <code>contenteditable="false"</code> is what does the functional enforcement here, not <code>aria-readonly</code> itself. <b>This is the ideal pattern for a custom widget.</b></p>
+
+<div class="example">
+  <span class="label" id="ex6-label">Confirmation number</span>
+  <div role="textbox" aria-labelledby="ex6-label" aria-readonly="true" contenteditable="false" tabindex="0">ABC-123-XYZ</div>
+</div>
+
+<p><b>Expected result:</b> the field should be announced as read-only, the same as Example 1. It should remain focusable, and typing should be blocked by <code>contenteditable="false"</code>, not by <code>aria-readonly</code>.</p>
 
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;div
   role="textbox"
-  aria-labelledby="custom-readonly-label"
+  aria-labelledby="ex6-label"
   <span class="highlight">aria-readonly="true"</span>
   contenteditable="false"
   tabindex="0"
@@ -87,11 +171,57 @@
 <!-- section -->
 
 
-<div class="note">
-  <p><b>Readonly is not the same as disabled.</b> A read-only field stays focusable, its value can still be selected and copied, and for native form fields, it's still submitted with the form. A disabled field is removed from the tab order, its value typically cannot be selected, and it is excluded from form submission entirely. If a value should still be readable and copyable, but not editable, readonly is usually the correct choice, not disabled.</p>
+<h2>Example 7: aria-readonly="false" on a custom widget</h2>
+
+<p><code>false</code> is already the default value of <code>aria-readonly</code>, so stating it explicitly on a genuinely editable custom widget changes nothing. Same redundancy as Example 3, just on a non-native element.</p>
+
+<div class="example">
+  <span class="label" id="ex7-label">Confirmation number</span>
+  <div role="textbox" aria-labelledby="ex7-label" aria-readonly="false" contenteditable="true" tabindex="0">ABC-123-XYZ</div>
 </div>
 
-<p><b>Note for testing:</b> confirm with your standard browser and screen reader combinations that both examples are announced as read-only, and that the distinction from a disabled field (still focusable, still selectable) actually holds in practice.</p>
+<p><b>Expected result:</b> behaves as an ordinary editable custom widget, typing works normally, and it should be announced as editable. No functional difference from omitting the attribute entirely, the same as Example 3's native case.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div
+  role="textbox"
+  aria-labelledby="ex7-label"
+  <span class="highlight">aria-readonly="false"</span>
+  contenteditable="true"
+  tabindex="0"
+&gt;ABC-123-XYZ&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 8: invalid value</h2>
+
+<p><code>aria-readonly</code> is a boolean-valued property, only <code>true</code> or <code>false</code> are valid. This example uses a common authoring mistake, echoing the HTML attribute name itself as the ARIA value.</p>
+
+<div class="example">
+  <label class="label" for="ex8-field">Confirmation number</label>
+  <input class="input" type="text" id="ex8-field" value="ABC-123-XYZ" aria-readonly="readonly">
+</div>
+
+<p><b>Expected result:</b> per spec, an invalid token on a boolean ARIA property should fall back to the default (<code>false</code>), so the field should behave and be announced as ordinary and editable. Invalid-value handling is inconsistent across implementations though, worth confirming directly rather than assuming spec-correct fallback behaviour.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input type="text" value="ABC-123-XYZ" <span class="highlight">aria-readonly="readonly"</span>&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<div class="note">
+  <p><b>Readonly is not the same as disabled.</b> A read-only field stays focusable, its value can still be selected and copied, and for native form fields, it's still submitted with the form. A disabled field is removed from the tab order, its value typically cannot be selected, and it's excluded from form submission entirely. If a value should still be readable and copyable, but not editable, readonly is usually the correct choice, not disabled.</p>
+</div>
+
+<p><b>Note for testing:</b> confirm with your standard browser and screen reader combinations that Examples 1 and 6 are announced as read-only, that Examples 2 and 7's announcements hold even though the field stays editable, that Example 5's conflicting combination doesn't produce an unpredictable announcement, and that the distinction from a disabled field (still focusable, still selectable) actually holds in practice.</p>
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 </body>
