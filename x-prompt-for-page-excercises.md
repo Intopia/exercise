@@ -28,6 +28,7 @@ Actual landing page for all tests: https://intopia.github.io/exercise/testing.ht
   <link href="assets/css/testing.css" rel="stylesheet">
 </head>
 <body>
+<main>
 
 <a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
   <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
@@ -40,6 +41,7 @@ Actual landing page for all tests: https://intopia.github.io/exercise/testing.ht
 [content]
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
 </body>
 </html>
 ```

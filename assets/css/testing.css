@@ -554,30 +554,6 @@ Testing headings
   font-family: source sans pro,helvetica neue,Helvetica,Arial,Frutiger,frutiger linotype,Univers,Calibri,gill sans,gill sans mt,myriad pro,Myriad,dejavu sans condensed,liberation sans,nimbus sans l,Tahoma,Geneva,sans-serif;
 }
 
-/* ---------------------
-Testing landmarks
-----------------------*/
-
-header,
-footer,
-main,
-nav,
-aside,
-section,
-article,
-search {
-  padding: 1em;
-  border: 1px solid #ccc;
-  background: #efefef;
-  margin: 0 0 1em;
-}
-
-search form {
-  margin: 0;
-  padding: 0;
-  background: transparent;
-}
-
 
 /* ---------------------
 Testing images
