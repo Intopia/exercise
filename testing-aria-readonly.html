@@ -23,6 +23,24 @@
       border-radius: 4px;
       margin: 1.5em 0;
     }
+
+    /* Visual state reflects actual functional behaviour, not just attribute
+       presence: a field is only styled read-only when something genuinely
+       stops editing (native `readonly`, or `contenteditable="false"` on a
+       custom widget). aria-readonly alone changes neither. */
+
+    .input[readonly],
+    [role="textbox"][contenteditable="false"] {
+      background: #e9e9e9;
+      color: #1a1a1a;
+    }
+
+    .input:disabled,
+    [role="textbox"][aria-disabled="true"] {
+      background: #e9e9e9;
+      color: #767676;
+      border-color: #ccc;
+    }
   </style>
 </head>
 <body>
