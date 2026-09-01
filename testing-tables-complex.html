@@ -47,18 +47,18 @@
 <p>This table is considered complex because each data cell is associated with four header cells instead of a single row header and a single column header.</p>
 
 <table>
-  <caption>Consolidated and Parent revenue</caption>
+  <caption>International and Local revenue</caption>
   <thead>
     <tr>
       <td rowspan="2"></td>
-      <th colspan="2" id="consolidated">Consolidated</th>
-      <th colspan="2" id="parent">Parent</th>
+      <th colspan="2" id="international">International</th>
+      <th colspan="2" id="local">Local</th>
     </tr>
     <tr>
-      <th class="right" id="consolidated-2023">2023<br>$000</th>
-      <th class="right" id="consolidated-2022">2022<br>$000</th>
-      <th class="right" id="parent-2023">2023<br>$000</th>
-      <th class="right" id="parent-2022">2022<br>$000</th>
+      <th class="right" id="international-2023">2023<br>$000</th>
+      <th class="right" id="international-2022">2022<br>$000</th>
+      <th class="right" id="local-2023">2023<br>$000</th>
+      <th class="right" id="local-2022">2022<br>$000</th>
     </tr>
   </thead>
   <tbody>
@@ -67,35 +67,35 @@
     </tr>
     <tr>
       <th id="rail">Rail</th>
-      <td headers="consolidated consolidated-2023 revenue rail">$2,000,000</td>
-      <td headers="consolidated consolidated-2022 revenue rail">$1,900,000</td>
-      <td headers="parent parent-2023 revenue rail"><span class="sr-only">NA</span><span aria-hidden="true">-</span></td>
-      <td headers="parent parent-2022 revenue rail"><span class="sr-only">NA</span><span aria-hidden="true">-</span></td>
+      <td headers="international international-2023 revenue rail">$2,000,000</td>
+      <td headers="international international-2022 revenue rail">$1,900,000</td>
+      <td headers="local local-2023 revenue rail"><span class="sr-only">NA</span><span aria-hidden="true">-</span></td>
+      <td headers="local local-2022 revenue rail"><span class="sr-only">NA</span><span aria-hidden="true">-</span></td>
     </tr>
     <tr>
-      <th id="network">Network</th>
-      <td headers="consolidated consolidated-2023 revenue network">$182,000</td>
-      <td headers="consolidated consolidated-2022 revenue network">$170,000</td>
-      <td headers="parent parent-2023 revenue network"><span class="sr-only">NA</span><span aria-hidden="true">-</span></td>
-      <td headers="parent parent-2022 revenue network">$1,900</td>
+      <th id="shipping">Shipping</th>
+      <td headers="international international-2023 revenue shipping">$182,000</td>
+      <td headers="international international-2022 revenue shipping">$170,000</td>
+      <td headers="local local-2023 revenue shipping"><span class="sr-only">NA</span><span aria-hidden="true">-</span></td>
+      <td headers="local local-2022 revenue shipping">$1,900</td>
     </tr>
 
     <tr>
       <th colspan="5" id="other"><b>Other revenue</b></th>
     </tr>
     <tr>
-      <th id="something">Something</th>
-      <td headers="consolidated consolidated-2023 other something">$4,000</td>
-      <td headers="consolidated consolidated-2022 other something">$1,300</td>
-      <td headers="parent parent-2023 other something">$1,500</td>
-      <td headers="parent parent-2022 other something"><span class="sr-only">NA</span><span aria-hidden="true">-</span></td>
+      <th id="investments">Investments</th>
+      <td headers="international international-2023 other investments">$4,000</td>
+      <td headers="international international-2022 other investments">$1,300</td>
+      <td headers="local local-2023 other investments">$1,500</td>
+      <td headers="local local-2022 other investments"><span class="sr-only">NA</span><span aria-hidden="true">-</span></td>
     </tr>
     <tr class="totals">
       <th id="totals">Totals</th>
-      <td headers="consolidated consolidated-2023 totals">$2,186,000</td>
-      <td headers="consolidated consolidated-2022 totals">$2,071,300</td>
-      <td headers="parent parent-2023 totals">$1,500</td>
-      <td headers="parent parent-2022 totals">$1,900</td>
+      <td headers="international international-2023 totals">$2,186,000</td>
+      <td headers="international international-2022 totals">$2,071,300</td>
+      <td headers="local local-2023 totals">$1,500</td>
+      <td headers="local local-2022 totals">$1,900</td>
     </tr>
   </tbody>
 </table>
@@ -111,14 +111,14 @@
 <p>The same information is presented in a simpler structure by repeating some values rather than grouping them under additional headers. This reduces the number of headers associated with each data cell.</p>
 
 <table>
-  <caption>Consolidated and Parent revenue</caption>
+  <caption>international and Local revenue</caption>
   <thead>
     <tr>
       <td></td>
-      <th class="right" scope="col">Consolidated<br>2023<br>$000</th>
-      <th class="right" scope="col">Consolidated<br>2022<br>$000</th>
-      <th class="right" scope="col">Parent<br>2023<br>$000</th>
-      <th class="right" scope="col">Parent<br>2022<br>$000</th>
+      <th class="right" scope="col">International<br>2023<br>$000</th>
+      <th class="right" scope="col">International<br>2022<br>$000</th>
+      <th class="right" scope="col">Local<br>2023<br>$000</th>
+      <th class="right" scope="col">Local<br>2022<br>$000</th>
     </tr>
   </thead>
   <tbody>
@@ -130,14 +130,14 @@
       <td><span class="sr-only">NA</span><span aria-hidden="true">-</span></td>
     </tr>
     <tr>
-      <th scope="row">Revenue from contracts - Network</th>
+      <th scope="row">Revenue from contracts - Shipping</th>
       <td>$182,000</td>
       <td>$170,000</td>
       <td><span class="sr-only">NA</span><span aria-hidden="true">-</span></td>
       <td>$1,900</td>
     </tr>
     <tr>
-      <th scope="row">Other revenue - Something</th>
+      <th scope="row">Other revenue - Investments</th>
       <td>$4,000</td>
       <td>$1,300</td>
       <td>$1,500</td>
