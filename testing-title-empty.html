@@ -20,7 +20,7 @@
 
 <p>The <code>&lt;title&gt;</code> element is present in <code>&lt;head&gt;</code>, but has no text content. Distinct from the missing-title case, the element exists, it's just empty, and browsers/AT may treat that differently from the element being absent entirely.</p>
 
-<p><b>Expected result:</b> browsers typically fall back to showing the page's URL or a blank tab. Whether assistive technology announces an empty string, falls back to the URL, or announces nothing at all on page load is genuinely worth confirming directly, this is exactly the kind of case that varies by implementation.</p>
+<p><b>Expected result:</b> Chrome is known to fall back to generating a tab title from the page's <code>&lt;h1&gt;</code> rather than showing the URL or a blank tab, worth checking whether the tab text below actually matches this page's own <code>&lt;h1&gt;</code>, and whether it behaves any differently from the missing-title case now that both may resolve to the same fallback. Other browsers may still fall back to the URL or a blank tab instead, this needs confirming per browser rather than assumed to be universal. What assistive technology announces on page load is a separate question again, and needs its own confirmation.</p>
 
 <details>
   <summary>HTML markup</summary>

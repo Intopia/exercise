@@ -20,7 +20,7 @@
 
 <p>There's no <code>&lt;title&gt;</code> element anywhere in <code>&lt;head&gt;</code> on this page, not even an empty one, it's absent entirely. This is invalid HTML, <code>&lt;title&gt;</code> is a required element, but worth testing what actually happens rather than assuming.</p>
 
-<p><b>Expected result:</b> browsers typically fall back to showing the page's URL or file path in the tab. What assistive technology announces on page load with no title present at all is genuinely worth confirming directly, don't assume it's the same fallback as the empty-title case.</p>
+<p><b>Expected result:</b> Chrome is known to fall back to generating a tab title from the page's <code>&lt;h1&gt;</code> rather than showing the URL or a blank tab, worth checking whether the tab text below actually matches this page's own <code>&lt;h1&gt;</code>. Other browsers may still fall back to the URL or file path instead, this needs confirming per browser rather than assumed to be universal. What assistive technology announces on page load is a separate question again, and needs its own confirmation, don't assume it matches whatever the tab shows.</p>
 
 <details>
   <summary>HTML markup</summary>
