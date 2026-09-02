@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing document title: multiple title elements</title>
+  <title>Second title element (should be ignored)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing document title: multiple title elements</h1>
+
+<p>There are two <code>&lt;title&gt;</code> elements in <code>&lt;head&gt;</code> on this page, invalid HTML, only one is permitted. Per the HTML spec, the first <code>&lt;title&gt;</code> encountered is used and later ones are ignored, but that's a spec statement, not a guarantee about every browser or AT implementation.</p>
+
+<p><b>Expected result:</b> the browser tab should show the first title's text, "Testing document title: multiple title elements", not the second. Assistive technology should announce the same first title on page load, worth confirming directly rather than assuming every combination follows the spec exactly.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;head&gt;
+  <span class="highlight">&lt;title&gt;Testing document title: multiple title elements&lt;/title&gt;</span>
+  <span class="highlight">&lt;title&gt;Second title element (should be ignored)&lt;/title&gt;</span>
+&lt;/head&gt;</code></pre>
+</details>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+</body>
+</html>

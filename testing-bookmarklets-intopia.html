@@ -116,6 +116,26 @@ table {
         </ul>
       </td>
     </tr>
+<!-- End bookmarklet -->
+
+<!-- Start bookmarklet -->
+    <tr>
+      <td>
+<p>
+<a class="bookmarklet" href="javascript:!function()%7Bvar%20e%3D%22a11y-doc-title-banner%22%3Bfunction%20makeBanner(t%2Cn)%7Bvar%20o%3Ddocument.createElement(%22div%22)%3Bo.className%3De%2Co.textContent%3Dt%2Co.style.cssText%3D%5B%22position%3Afixed%22%2C%22top%3A20px%22%2C%22left%3A50%25%22%2C%22transform%3AtranslateX(-50%25)%22%2C%22background%3A%22%2Bn%2C%22color%3A%23ffffff%22%2C%22padding%3A8px%2016px%22%2C%22border-radius%3A6px%22%2C%22font-size%3A16px%22%2C%22font-family%3AArial%2Csans-serif%22%2C%22z-index%3A999999%22%2C%22pointer-events%3Anone%22%2C%22max-width%3A90vw%22%2C%22text-align%3Acenter%22%2C%22box-shadow%3A0%202px%208px%20rgba(0%2C0%2C0%2C0.3)%22%2C%22white-space%3Anowrap%22%5D.join(%22%3B%22)%2Cdocument.body.appendChild(o)%7Ddocument.querySelectorAll(%22.%22%2Be).forEach(function(e)%7Be.remove()%7D)%3Bvar%20t%3Ddocument.querySelectorAll(%22title%22)%3Bif(0%3D%3D%3Dt.length)makeBanner(%22NO%20DOCUMENT%20TITLE%20%E2%80%94%20%3Ctitle%3E%20element%20is%20missing%22%2C%22%23b00020%22)%3Belse%7Bt.length%3E1%26%26makeBanner(%22Warning%3A%20%22%2Bt.length%2B%22%20%3Ctitle%3E%20elements%20found%20%E2%80%94%20only%20one%20is%20valid%22%2C%22%23e65100%22)%3Bvar%20n%3Dt%5B0%5D.textContent.trim()%3B%22%22%3D%3D%3Dn%3FmakeBanner(%22Document%20title%3A%20(empty)%20%E2%80%94%20%3Ctitle%3E%20element%20is%20present%20but%20has%20no%20content%22%2C%22%23b00020%22)%3AmakeBanner(%22Document%20title%3A%20%E2%80%9C%22%2Bn%2B%22%E2%80%9D%22%2C%22%231b5e20%22)%7Ddocument.addEventListener(%22keydown%22%2Cfunction%20onKey(t)%7B%22Escape%22%3D%3D%3Dt.key%26%26(document.querySelectorAll(%22.%22%2Be).forEach(function(e)%7Be.remove()%7D)%2Cdocument.removeEventListener(%22keydown%22%2ConKey))%7D)%7D()%3B">Highlight <b>document title</b></a>
+</p>
+<p>Displays the document title from the <code>&lt;title&gt;</code> element as a fixed banner at the top of the page. Flags missing titles, empty titles, and pages with more than one <code>&lt;title&gt;</code> element. Click to activate, Esc to clear.
+</p>
+      </td>
+      <td>
+<p><a href="testing-title-correct.html">Testing document title - good example</a></p>
+<p><a href="testing-title-missing.html">Testing document title - missing example</a></p>
+<p><a href="testing-title-empty.html">Testing document title - empty example</a></p>
+<p><a href="testing-title-multiple.html">Testing document title - multiple example</a></p>
+      </td>
+    </tr>
+<!-- End bookmarklet -->
+
   </tbody>
 </table>
 

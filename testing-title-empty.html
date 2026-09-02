@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing document title: empty title</h1>
+
+<p>The <code>&lt;title&gt;</code> element is present in <code>&lt;head&gt;</code>, but has no text content. Distinct from the missing-title case, the element exists, it's just empty, and browsers/AT may treat that differently from the element being absent entirely.</p>
+
+<p><b>Expected result:</b> browsers typically fall back to showing the page's URL or a blank tab. Whether assistive technology announces an empty string, falls back to the URL, or announces nothing at all on page load is genuinely worth confirming directly, this is exactly the kind of case that varies by implementation.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;head&gt;
+  <span class="highlight">&lt;title&gt;&lt;/title&gt;</span>
+&lt;/head&gt;</code></pre>
+</details>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+</body>
+</html>
