@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing character encoding: conflicting declarations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+<!-- Invalid: a second, conflicting charset declaration, and it's outside <head> entirely -->
+<meta charset="ISO-8859-1">
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing character encoding: conflicting declarations</h1>
+
+<p>Two problems combined here. <code>&lt;head&gt;</code> correctly declares <code>&lt;meta charset="utf-8"&gt;</code>, valid and matches the file's actual encoding. But a second, conflicting <code>&lt;meta charset="ISO-8859-1"&gt;</code> also appears, placed in <code>&lt;body&gt;</code>, invalid on two counts, a charset declaration doesn't belong outside <code>&lt;head&gt;</code>, and it disagrees with the one that's already there.</p>
+
+<div class="example">
+  <p>Café — naïve piñata costs €5.99, “today” only.</p>
+</div>
+
+<p><b>Expected result:</b> per spec, character encoding is determined during early parsing of <code>&lt;head&gt;</code>, before <code>&lt;body&gt;</code> is even reached, so the body-placed declaration should have no effect at all, and this page should behave identically to the correct example, rendering every character above exactly as authored. Worth confirming directly that browsers actually ignore it entirely rather than getting confused by the conflicting signal.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;head&gt;
+  <span class="highlight">&lt;meta charset="utf-8"&gt;</span>
+  ...
+&lt;/head&gt;
+&lt;body&gt;
+  <span class="highlight">&lt;meta charset="ISO-8859-1"&gt;</span>
+  ...</code></pre>
+</details>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+</body>
+</html>

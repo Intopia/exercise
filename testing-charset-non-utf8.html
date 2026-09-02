@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Testing character encoding: non-UTF-8 declaration</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing character encoding: non-UTF-8 declaration</h1>
+
+<p><code>&lt;meta charset="ISO-8859-1"&gt;</code> is declared, but this file is actually saved as UTF-8 bytes, a genuine mismatch between what's declared and what's real, and a common real-world authoring mistake (e.g. an editor auto-saving as UTF-8 after the encoding was set to something else in the markup).</p>
+
+<div class="example">
+  <p>Café — naïve piñata costs €5.99, “today” only.</p>
+</div>
+
+<p><b>Expected result:</b> the browser should honour the declared (incorrect) ISO-8859-1 encoding and mis-decode the underlying UTF-8 bytes, so the accented letters, the em dash, the euro sign, and the curly quotes above should render as mojibake rather than the intended characters. Assistive technology will read whatever garbled substitute characters result, confirm this directly since decode-mismatch handling can vary slightly by browser.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;head&gt;
+  <span class="highlight">&lt;meta charset="ISO-8859-1"&gt;</span>
+  ...
+&lt;/head&gt;
+&lt;!-- file itself is saved as UTF-8 --&gt;</code></pre>
+</details>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+</body>
+</html>

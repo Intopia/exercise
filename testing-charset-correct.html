@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing character encoding: correct example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing character encoding: correct example</h1>
+
+<p><code>&lt;meta charset="utf-8"&gt;</code> is declared as the very first element inside <code>&lt;head&gt;</code>, matching the encoding the file is actually saved in. Encoding is both a rendering and an accessibility issue, garbled text isn't just visually wrong, assistive technology will read whatever garbled substitute characters result too. The test string below uses literal multi-byte characters, not HTML entities, so a genuine encoding mismatch would actually be visible.</p>
+
+<div class="example">
+  <p>Café — naïve piñata costs €5.99, “today” only.</p>
+</div>
+
+<p><b>Expected result:</b> every character above, accented letters, the em dash, the euro sign, and the curly quotes, should render exactly as authored, both visually and when read by assistive technology.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;head&gt;
+  <span class="highlight">&lt;meta charset="utf-8"&gt;</span>
+  ...
+&lt;/head&gt;</code></pre>
+</details>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+</body>
+</html>

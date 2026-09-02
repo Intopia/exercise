@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="">
+  <title>Testing character encoding: empty declaration</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing character encoding: empty declaration</h1>
+
+<p>The <code>&lt;meta charset&gt;</code> element is present in <code>&lt;head&gt;</code>, but its value is empty. Distinct from the missing-declaration case, the element exists, it's just invalid, and browsers may or may not treat that the same as the element being absent entirely.</p>
+
+<div class="example">
+  <p>Café — naïve piñata costs €5.99, “today” only.</p>
+</div>
+
+<p><b>Expected result:</b> an empty value is invalid, so this likely falls back to the same heuristic detection as the missing-declaration page, worth confirming that directly rather than assuming, and comparing the two pages side by side for any difference in how the characters above render or are announced.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;head&gt;
+  <span class="highlight">&lt;meta charset=""&gt;</span>
+  ...
+&lt;/head&gt;</code></pre>
+</details>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+</body>
+</html>

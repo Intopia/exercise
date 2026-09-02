@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Intentionally no <meta charset> element: testing the missing-declaration case -->
+  <title>Testing character encoding: missing declaration</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing character encoding: missing declaration</h1>
+
+<p>There's no <code>&lt;meta charset&gt;</code> element anywhere in <code>&lt;head&gt;</code> on this page. This only tests what's declared in the markup itself, worth confirming separately what your actual hosting environment sends as an HTTP <code>Content-Type</code> header, since that can also supply an encoding and would take precedence over heuristic guessing.</p>
+
+<div class="example">
+  <p>Café — naïve piñata costs €5.99, “today” only.</p>
+</div>
+
+<p><b>Expected result:</b> without any encoding hint in the markup, browsers fall back to heuristic detection. Modern Chromium-based browsers often guess UTF-8 correctly by default, but this isn't guaranteed across all browsers. Check whether the characters above render correctly or turn into mojibake, and whether assistive technology reads them correctly or reads the raw garbled substitute characters.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;head&gt;
+  <span class="highlight">&lt;!-- no &lt;meta charset&gt; element --&gt;</span>
+  ...
+&lt;/head&gt;</code></pre>
+</details>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+</body>
+</html>
