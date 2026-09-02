@@ -136,6 +136,20 @@ table {
     </tr>
 <!-- End bookmarklet -->
 
+<!-- Start bookmarklet -->
+    <tr>
+      <td>
+<p>
+<a class="bookmarklet" href="javascript:!function()%7Bvar%20e%3D%22a11y-encoding-banner%22%3Bfunction%20makeBanner(t%2Cn)%7Bvar%20r%3Ddocument.createElement(%22div%22)%3Br.className%3De%2Cr.textContent%3Dt%2Cr.style.cssText%3D%5B%22position%3Afixed%22%2C%22top%3A20px%22%2C%22left%3A50%25%22%2C%22transform%3AtranslateX(-50%25)%22%2C%22background%3A%22%2Bn%2C%22color%3A%23ffffff%22%2C%22padding%3A8px%2016px%22%2C%22border-radius%3A6px%22%2C%22font-size%3A16px%22%2C%22font-family%3AArial%2Csans-serif%22%2C%22z-index%3A999999%22%2C%22pointer-events%3Anone%22%2C%22max-width%3A90vw%22%2C%22text-align%3Acenter%22%2C%22box-shadow%3A0%202px%208px%20rgba(0%2C0%2C0%2C0.3)%22%2C%22white-space%3Anowrap%22%5D.join(%22%3B%22)%2Cdocument.body.appendChild(r)%7Ddocument.querySelectorAll(%22.%22%2Be).forEach(function(e)%7Be.remove()%7D)%3Bvar%20t%3Ddocument.querySelector(%22meta%5Bcharset%5D%22)%2Cn%3Ddocument.querySelector('meta%5Bhttp-equiv%3D%22Content-Type%22%5D')%2Cr%3Dnull%3Bif(n)%7Bvar%20a%3D(n.getAttribute(%22content%22)%7C%7C%22%22).match(%2Fcharset%3D(%5B%5E%5Cs%3B%5D%2B)%2Fi)%3Ba%26%26(r%3Da%5B1%5D)%7Dif(t%26%26n%26%26r)%7Bvar%20o%3Dt.getAttribute(%22charset%22).trim()%2Ci%3Dr.trim()%3Bif(o.toLowerCase()!%3D%3Di.toLowerCase())return%20void%20makeBanner('Warning%3A%20conflicting%20charset%20declarations%20%E2%80%94%20meta%20charset%3A%20%22'%2Bo%2B'%22%20and%20http-equiv%3A%20%22'%2Bi%2B'%22'%2C%22%23e65100%22)%7Dvar%20s%3Dnull%2Cc%3Dnull%3Bt%3F(s%3Dt.getAttribute(%22charset%22).trim()%2Cc%3D%22%3Cmeta%20charset%3E%22)%3Ar%26%26(s%3Dr.trim()%2Cc%3D%22http-equiv%20Content-Type%22)%2Cnull%3D%3D%3Ds%3FmakeBanner(%22NO%20CHARSET%20DECLARATION%20%E2%80%94%20%3Cmeta%20charset%3E%20is%20missing%22%2C%22%23b00020%22)%3A%22%22%3D%3D%3Ds%3FmakeBanner(%22Charset%3A%20(empty)%20%E2%80%94%20charset%20attribute%20is%20present%20but%20has%20no%20value%22%2C%22%23b00020%22)%3A%22UTF-8%22%3D%3D%3Ds.toUpperCase()%3FmakeBanner('Charset%3A%20%22'%2Bs%2B'%22%20via%20'%2Bc%2C%22%231b5e20%22)%3AmakeBanner('Charset%3A%20%22'%2Bs%2B'%22%20via%20'%2Bc%2B%22%20%E2%80%94%20UTF-8%20is%20recommended%22%2C%22%23e65100%22)%3Bvar%20d%3Dt%7C%7Cn%3Bd%26%26!d.closest(%22head%22)%26%26makeBanner(%22Warning%3A%20charset%20declaration%20found%20outside%20%3Chead%3E%22%2C%22%23e65100%22)%2Cdocument.addEventListener(%22keydown%22%2Cfunction%20onKey(t)%7B%22Escape%22%3D%3D%3Dt.key%26%26(document.querySelectorAll(%22.%22%2Be).forEach(function(e)%7Be.remove()%7D)%2Cdocument.removeEventListener(%22keydown%22%2ConKey))%7D)%7D()%3B">Highlight page encoding</a>
+</p>
+<p>Displays the character encoding declaration as a fixed banner at the top of the page. Detects both <code>&lt;meta charset&gt;</code> and <code>http-equiv Content-Type</code> forms. Flags missing, empty and non-UTF-8 declarations, conflicting declarations and charset outside <code>&lt;head&gt;</code>. Click to activate, Esc to clear.</p>
+      </td>
+      <td>
+
+      </td>
+    </tr>
+<!-- End bookmarklet -->
+
   </tbody>
 </table>
 
