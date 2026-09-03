@@ -95,16 +95,21 @@
 <p>Two links, identical accessible name, identical destination.</p>
 
 <div class="example">
-  <p>See the <a href="https://example.com/shipping-policy">shipping policy</a> for full details, or check the <a href="https://example.com/shipping-policy">shipping policy</a> again from the order confirmation page.</p>
+  <ul>
+    <li>Pricing</li>
+    <li><a href="https://example.com/shipping-policy">Shipping policy</a></li>
+    <li>Availability</li>
+    <li><a href="https://example.com/shipping-policy">Shipping policy</a></li>
+  </ul>
 </div>
 
 <p><b>Expected result:</b> both links share the exact same accessible name and resolve to the exact same destination. This is a common, generally fine pattern, the same policy linked from two places doesn't confuse anyone, since both take you to the same place. The bookmarklet should badge both green.</p>
 
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;a <span class="highlight">href="https://example.com/shipping-policy"</span>&gt;shipping policy&lt;/a&gt;
+<pre><code>&lt;a <span class="highlight">href="https://example.com/shipping-policy"</span>&gt;Shipping policy&lt;/a&gt;
 ...
-&lt;a <span class="highlight">href="https://example.com/shipping-policy"</span>&gt;shipping policy&lt;/a&gt;</code></pre>
+&lt;a <span class="highlight">href="https://example.com/shipping-policy"</span>&gt;Shipping policy&lt;/a&gt;</code></pre>
 </details>
 
 
@@ -116,16 +121,21 @@
 <p>Two links, identical accessible name, different destinations.</p>
 
 <div class="example">
-  <p>Compare our two options: <a href="https://example.com/product-a">see product details</a> for the standard plan, or <a href="https://example.com/product-b">see product details</a> for the premium plan.</p>
+  <ul>
+    <li>Pricing</li>
+    <li><a href="https://example.com/product-a">Product details</a></li>
+    <li>Availability</li>
+    <li><a href="https://example.com/product-b">Product details</a></li>
+  </ul>
 </div>
 
 <p><b>Expected result:</b> both links share the exact same accessible name, "see product details", but resolve to two different destinations. A screen reader user navigating by a list of links, or anyone relying on the link text alone, has no way to tell these apart before activating one. The bookmarklet should badge both red.</p>
 
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;a <span class="highlight">href="https://example.com/product-a"</span>&gt;see product details&lt;/a&gt;
+<pre><code>&lt;a <span class="highlight">href="https://example.com/product-a"</span>&gt;Product details&lt;/a&gt;
 ...
-&lt;a <span class="highlight">href="https://example.com/product-b"</span>&gt;see product details&lt;/a&gt;</code></pre>
+&lt;a <span class="highlight">href="https://example.com/product-b"</span>&gt;Product details&lt;/a&gt;</code></pre>
 </details>
 
 
@@ -144,7 +154,8 @@
 
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;a href="https://example.com/report" <span class="highlight">title="Download the annual report"</span>&gt;Download the annual report&lt;/a&gt;</code></pre>
+<pre><code>&lt;a href="https://example.com/report"
+  <span class="highlight">title="Download the annual report"</span>&gt;Download the annual report&lt;/a&gt;</code></pre>
 </details>
 
 
@@ -163,7 +174,8 @@
 
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;a href="https://example.com/account/settings" <span class="highlight">title="Opens in a new section"</span>&gt;View account settings&lt;/a&gt;</code></pre>
+<pre><code>&lt;a href="https://example.com/account/settings"
+  <span class="highlight">title="Opens in a new section"</span>&gt;View account settings&lt;/a&gt;</code></pre>
 </details>
 
 
