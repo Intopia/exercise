@@ -1,10 +1,36 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your New Credit Card</title>
-    <link href="assets/css/testing.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <title>Testing links</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+
+    .note {
+      background: #fff3cd;
+      border: 1px solid #ffe69c;
+      padding: 0.75em 1em;
+      border-radius: 4px;
+      margin: 1.5em 0;
+    }
+
+    .icon-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2em;
+      height: 2em;
+      color: #333;
+    }
+
+    .icon-link svg {
+      width: 1.5em;
+      height: 1.5em;
+    }
+
+  </style>
 </head>
 <body>
 <main>
@@ -15,65 +41,193 @@
 
 <p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 
-<h1>Your New Credit Card</h1>
+<h1>Testing links</h1>
+
+<p>This page pairs with the "Highlight links" bookmarklet, which scans every link on the page and badges it based on its accessible name, its <code>title</code> attribute, and where its <code>href</code> actually points.</p>
+
+<div class="note">
+  <p>Badge colours used by the bookmarklet:</p>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Colour</th>
+        <th scope="col">Meaning</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Green</td><td>Unique accessible name</td></tr>
+      <tr><td>Green</td><td>Same accessible name, points to the same URL</td></tr>
+      <tr><td>Red</td><td>Same accessible name, points to a different URL</td></tr>
+      <tr><td>Amber</td><td>Accessible name + matching title (redundant, may double-announce)</td></tr>
+      <tr><td>Amber</td><td>Accessible name + mismatching title (confusing, different text announced twice)</td></tr>
+      <tr><td>Amber</td><td>No accessible name but has a title (presented to screen reader users only, not sighted users)</td></tr>
+      <tr><td>Red</td><td>Empty <code>href=""</code>, resolves, but still broken</td></tr>
+      <tr><td>Red</td><td>No <code>href</code> at all, not really a link</td></tr>
+    </tbody>
+  </table>
+</div>
 
 
 <!-- section -->
 
 
-<h2>Why our card?</h2>
+<h2>Example 1: unique accessible name</h2>
 
-<p>Enjoy exclusive benefits, cashback rewards, and a low APR. <a href="#">Find out more</a>.</p>
+<p>A link with its own accessible name, pointing to its own destination, nothing shared with any other link on the page.</p>
 
+<div class="example">
+  <p><a href="https://example.com/pricing">View pricing</a></p>
+</div>
 
-<!-- section -->
+<p><b>Expected result:</b> this link's accessible name is unique across the whole page, and it points to its own destination. Nothing here should trigger any warning from the bookmarklet.</p>
 
-
-<h2>When can you start?</h2>
-
-<p>Apply today and get a response within minutes. <a href="#">Find out more</a>.</p>
-
-
-<!-- section -->
-
-
-<h2>Any hidden fees?</h2>
-
-<p>We believe in transparency. Here’s what you need to know:</p>
-
-<ul>
-  <li>No annual fees for the first year <span class="small"><a href="#footnote1">*</a></span></li>
-  <li>0% intro APR for 12 months <span class="small"><a href="#footnote1">*</a></span></li>
-  <li>Foreign transaction fees may apply <span class="small"><a href="#footnote1">*</a></span></li>
-  <li>Late payment penalties up to $35 <span class="small"><a href="#footnote1">*</a></span></li>
-</ul>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;a <span class="highlight">href="https://example.com/pricing"</span>&gt;View pricing&lt;/a&gt;</code></pre>
+</details>
 
 
 <!-- section -->
 
 
-<h2>Exclusive Rewards</h2>
+<h2>Example 2: same accessible name, same URL</h2>
 
-<p>Earn points on every purchase and redeem them for travel, gift cards, or statement credits. <a href="#">Find out more</a>.</p>
+<p>Two links, identical accessible name, identical destination.</p>
+
+<div class="example">
+  <p>See the <a href="https://example.com/shipping-policy">shipping policy</a> for full details, or check the <a href="https://example.com/shipping-policy">shipping policy</a> again from the order confirmation page.</p>
+</div>
+
+<p><b>Expected result:</b> both links share the exact same accessible name and resolve to the exact same destination. This is a common, generally fine pattern, the same policy linked from two places doesn't confuse anyone, since both take you to the same place. The bookmarklet should badge both green.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;a <span class="highlight">href="https://example.com/shipping-policy"</span>&gt;shipping policy&lt;/a&gt;
+...
+&lt;a <span class="highlight">href="https://example.com/shipping-policy"</span>&gt;shipping policy&lt;/a&gt;</code></pre>
+</details>
 
 
 <!-- section -->
 
 
-<h2>Security Features</h2>
+<h2>Example 3: same accessible name, different URL</h2>
 
-<p>Enjoy peace of mind with fraud protection, instant card freeze, and zero liability for unauthorized purchases. <a href="#">Find out more</a>.</p>
+<p>Two links, identical accessible name, different destinations.</p>
+
+<div class="example">
+  <p>Compare our two options: <a href="https://example.com/product-a">see product details</a> for the standard plan, or <a href="https://example.com/product-b">see product details</a> for the premium plan.</p>
+</div>
+
+<p><b>Expected result:</b> both links share the exact same accessible name, "see product details", but resolve to two different destinations. A screen reader user navigating by a list of links, or anyone relying on the link text alone, has no way to tell these apart before activating one. The bookmarklet should badge both red.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;a <span class="highlight">href="https://example.com/product-a"</span>&gt;see product details&lt;/a&gt;
+...
+&lt;a <span class="highlight">href="https://example.com/product-b"</span>&gt;see product details&lt;/a&gt;</code></pre>
+</details>
 
 
 <!-- section -->
 
 
-<h2>How to Apply</h2>
+<h2>Example 4: accessible name + matching title</h2>
 
-<p>Applying is simple! Just fill out our online form, and we’ll take care of the rest. <a href="#">Find out more</a>.</p>
-    
-<p class="fine-print">Terms and conditions apply. Subject to credit approval. Rates and fees may change.</p>
+<p>The <code>title</code> attribute duplicates the link's own visible, accessible text exactly.</p>
 
+<div class="example">
+  <p><a href="https://example.com/report" title="Download the annual report">Download the annual report</a></p>
+</div>
+
+<p><b>Expected result:</b> the accessible name already comes from the link text, "Download the annual report", the identical <code>title</code> adds nothing new. Some screen reader/browser combinations will still announce the title as a tooltip readout on top of the accessible name, meaning the same text may be spoken twice. Worth confirming directly whether your standard AT/browser combinations actually double up here, behaviour varies.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;a href="https://example.com/report" <span class="highlight">title="Download the annual report"</span>&gt;Download the annual report&lt;/a&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 5: accessible name + mismatching title</h2>
+
+<p>The <code>title</code> attribute says something different from the link's own visible, accessible text.</p>
+
+<div class="example">
+  <p><a href="https://example.com/account/settings" title="Opens in a new section">View account settings</a></p>
+</div>
+
+<p><b>Expected result:</b> the accessible name still comes from the visible link text, "View account settings", per the accessible name computation, <code>title</code> only becomes the name when no other name source exists, so it doesn't overwrite it here. Instead it typically becomes the accessible description, and some AT will read both the name and this differing description back to back, two different, unrelated pieces of text for one link. Confirm directly what your standard combinations actually do.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;a href="https://example.com/account/settings" <span class="highlight">title="Opens in a new section"</span>&gt;View account settings&lt;/a&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 6: no accessible name, but has a title</h2>
+
+<p>An icon-only link, no visible text, no <code>aria-label</code>, no <code>aria-labelledby</code>, and the icon itself is hidden from the accessibility tree. The <code>title</code> attribute is the only thing left to supply a name.</p>
+
+<div class="example">
+  <a class="icon-link" href="https://example.com/chat" title="Open live chat">
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+      <path d="M4 4h16v12H8l-4 4V4z" fill="currentColor" />
+    </svg>
+  </a>
+</div>
+
+<p><b>Expected result:</b> with nothing else to draw from, the accessible name computation falls back to <code>title</code>, so screen reader users hear "Open live chat". Sighted users get no text at all, only an icon shape to interpret. This is the reverse of the usual discoverability problem, the name is presented to screen reader users, but not to sighted users.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;a <span class="highlight">title="Open live chat"</span>&gt;
+  &lt;svg aria-hidden="true"&gt;...&lt;/svg&gt;
+&lt;/a&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 7: empty href</h2>
+
+<p><code>href=""</code> is present, but empty.</p>
+
+<div class="example">
+  <p><a href="">Continue to checkout</a></p>
+</div>
+
+<p><b>Expected result:</b> an empty <code>href</code> resolves to the current page's own URL, so activating it doesn't error, it just reloads the page. It still counts as broken, there's no genuine destination, and depending on the page, form state, scroll position, unsaved input, reloading may not be harmless either. The bookmarklet should badge this red even though it technically resolves.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;a <span class="highlight">href=""</span>&gt;Continue to checkout&lt;/a&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 8: no href at all</h2>
+
+<p>No <code>href</code> attribute whatsoever.</p>
+
+<div class="example">
+  <p><a>Terms and conditions</a></p>
+</div>
+
+<p><b>Expected result:</b> without an <code>href</code>, this isn't interactive content per the HTML spec, it's not part of the tab order, it has no default keyboard interaction, and browsers don't treat it as a hyperlink at all. Anyone expecting an <code>&lt;a&gt;</code> element to always behave like a link will be caught out here. The bookmarklet should badge this red.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;a&gt;Terms and conditions&lt;/a&gt; <span class="comment">&lt;!-- no href --&gt;</span></code></pre>
+</details>
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 </main>
