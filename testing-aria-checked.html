@@ -219,6 +219,33 @@
 </details>
 
 
+<!-- section -->
+
+
+<h2>Example 6: Undefined</h2>
+
+<p><code>aria-checked</code> is required for the <code>checkbox</code> role, but this element has no <code>aria-checked</code> attribute at all. Distinct from Example 5's empty value, the attribute doesn't exist here, there's nothing to parse as invalid, just nothing declared.</p>
+
+<div class="example">
+  <div class="testing-checked-checkbox" role="checkbox" tabindex="0">
+    Subscribe to newsletter
+  </div>
+</div>
+
+<p><b>Expected result:</b> the accessibility tree should show no determinable checked state at all, this is not the same as <code>checked: false</code>, assistive technology has nothing to announce either way. The bookmarklet should flag this as undefined.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div
+  role="checkbox"
+  tabindex="0"
+&gt;
+  Subscribe to newsletter
+&lt;/div&gt;
+<span class="comment">&lt;!-- no aria-checked attribute --&gt;</span></code></pre>
+</details>
+
+
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 </main>
 </body>
