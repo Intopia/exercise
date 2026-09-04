@@ -120,7 +120,7 @@
 
 <h2>Example 4: misuse, no underlying role</h2>
 
-<p>This element has <code>aria-roledescription</code> but no role at all, explicit or implicit. This is a misuse of the attribute, <code>aria-roledescription</code> is intended to relabel an existing role, not create one from nothing.</p>
+<p>This element has no explicit <code>role</code> attribute. But per ARIA 1.2, a plain <code>&lt;div&gt;</code> isn't actually roleless, its implicit role is <code>generic</code>, and <code>generic</code> is specifically one of the roles <a href="https://www.w3.org/TR/wai-aria-1.2/#namefromprohibited" target="_blank">where naming is prohibited</a>. Per the <a href="https://www.w3.org/TR/html-aam-1.0/" target="_blank">HTML Accessibility API Mappings</a> spec, user agents must not expose <code>aria-roledescription</code> on an element with no corresponding role, or mapped to the <code>generic</code> role, unless the element also has an explicit, conforming role that doesn't itself prohibit the attribute. This isn't "no role, so nothing to relabel", it's a specific role that disallows this specific attribute.</p>
 
 <div class="example">
   <div aria-roledescription="slide">
@@ -128,11 +128,35 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> worth confirming directly, spec guidance advises against this pattern, but what different screen readers actually do with a roledescription on a roleless element (ignore it, announce it anyway, or something else) is worth testing rather than assuming.</p>
+<p><b>Expected result:</b> per spec, this <code>aria-roledescription</code> should be stripped and not exposed to assistive technology at all, since it isn't permitted on the <code>generic</code> role this element implicitly has. Confirm directly what your standard AT/browser combinations actually do, implementation of this specific prohibition has historically been inconsistent.</p>
 
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;div <span class="highlight">aria-roledescription="slide"</span>&gt;
+  Slide 1 of 3
+&lt;/div&gt;
+<span class="comment">&lt;!-- implicit role: generic --&gt;</span></code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 5: misuse, explicit prohibited role</h2>
+
+<p><code>generic</code> is a real, valid ARIA role, not just a placeholder for "no role", it's the exact role Example 4's roleless <code>&lt;div&gt;</code> implicitly has. Stating it explicitly doesn't grant permission to add <code>aria-roledescription</code>, the prohibition applies to the role itself, however it got there.</p>
+
+<div class="example">
+  <div role="generic" aria-roledescription="slide">
+    Slide 1 of 3
+  </div>
+</div>
+
+<p><b>Expected result:</b> the same outcome as Example 4, per spec this <code>aria-roledescription</code> should be stripped and not exposed to assistive technology, since <code>generic</code> explicitly prohibits it. Confirm directly what your standard AT/browser combinations actually do.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="generic" <span class="highlight">aria-roledescription="slide"</span>&gt;
   Slide 1 of 3
 &lt;/div&gt;</code></pre>
 </details>
@@ -141,7 +165,7 @@
 <!-- section -->
 
 
-<h2>Example 5: empty value</h2>
+<h2>Example 6: empty value</h2>
 
 <p>An empty <code>aria-roledescription</code> attribute provides no meaningful description and will be flagged as an authoring issue.</p>
 
@@ -168,7 +192,7 @@
 <!-- section -->
 
 
-<p><b>Note for testing:</b> confirm all results above with your standard browser and screen reader combinations before treating them as settled. <code>aria-roledescription</code> support, and behaviour for the misuse case in Example 4 specifically, has not been verified here.</p>
+<p><b>Note for testing:</b> confirm all results above with your standard browser and screen reader combinations before treating them as settled. <code>aria-roledescription</code> support, and behaviour for the two misuse cases in Examples 4 and 5 specifically, has not been verified here.</p>
 
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
