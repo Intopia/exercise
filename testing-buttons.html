@@ -18,7 +18,7 @@
 
 <h1>Testing buttons</h1>
 
-<p>While all of these examples demonstrate how an accessible name can be calculated, they are not all examples of good practice. Some techniques override visible text, rely on attributes that are poorly supported or undiscoverable, or recreate native functionality unnecessarily. Whenever possible, use native HTML buttons with visible text, and only use ARIA when there is no suitable native solution.</p>
+<p>While all of these examples demonstrate how an accessible name can be calculated, they are not all examples of good practice. Some techniques override visible text, rely on attributes that are poorly supported or undiscoverable, or recreate native functionality unnecessarily. Whenever possible, use native HTML buttons with visible text, and only use ARIA when there is no suitable native solution. This page also covers <code>&lt;input&gt;</code> elements of type <code>submit</code>, <code>reset</code>, and <code>image</code>, which share button semantics but not always the same naming mechanism.</p>
 
 
 <!-- section -->
@@ -119,6 +119,105 @@
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;input type="button" <span class="highlight">value="Create account"</span>&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="submit"&gt;</code></h2>
+
+<p><b>Recommended</b>. Like <code>&lt;input type="button"&gt;</code>, the <code>value</code> attribute provides both the visible label and the accessible name. Without a <code>value</code>, the browser supplies its own default label, and that default isn't guaranteed to be the same string across browsers or locales.</p>
+
+<div class="example">
+  <input class="button" type="submit" value="Create account">
+  <input class="button" type="submit">
+</div>
+
+<p>The accessible name for the first button should be: <q>Create account</q>. The second has no <code>value</code> attribute, so its accessible name comes from the browser's own default label, confirm directly what that actually is in your standard browsers rather than assuming.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input type="submit" <span class="highlight">value="Create account"</span>&gt;
+&lt;input type="submit"&gt; <span class="comment">&lt;!-- no value: browser-supplied default label --&gt;</span></code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="reset"&gt;</code></h2>
+
+<p><b>Recommended</b>. Same mechanism as <code>submit</code> and <code>button</code>, the <code>value</code> attribute provides both the visible label and the accessible name, with the same browser-default caveat when it's omitted.</p>
+
+<div class="example">
+  <input class="button" type="reset" value="Clear form">
+  <input class="button" type="reset">
+</div>
+
+<p>The accessible name for the first button should be: <q>Clear form</q>. The second has no <code>value</code> attribute, confirm directly what default label your standard browsers supply.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input type="reset" <span class="highlight">value="Clear form"</span>&gt;
+&lt;input type="reset"&gt; <span class="comment">&lt;!-- no value: browser-supplied default label --&gt;</span></code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="image"&gt;</code></h2>
+
+<p><b>Recommended when used</b>, though a native <code>&lt;button&gt;</code> containing an <code>&lt;img&gt;</code> is usually more flexible. Unlike the other input button types, <code>&lt;input type="image"&gt;</code> takes its accessible name from the <code>alt</code> attribute, the same mechanism as a plain <code>&lt;img&gt;</code>, not from <code>value</code>.</p>
+
+<div class="example">
+  <input class="button" type="image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Search">
+</div>
+
+<p>The accessible name for this <code>&lt;button&gt;</code> should be: <q>Search</q></p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input type="image" src="search-icon.png" <span class="highlight">alt="Search"</span>&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="image"&gt;</code>, no accessible name</h2>
+
+<p><b>Never do this</b>. The same failure as a bare <code>&lt;button&gt;&lt;/button&gt;</code>, but here the missing piece is <code>alt</code>, since this element has no visible text of its own to fall back on at all.</p>
+
+<div class="example">
+  <input class="button" type="image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==">
+</div>
+
+<p>There is no accessible name for this <code>&lt;button&gt;</code>.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input type="image" src="search-icon.png"&gt; <span class="comment">&lt;!-- no alt --&gt;</span></code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="image"&gt;</code>, name via <code>title</code></h2>
+
+<p><b>Avoid</b>. If <code>alt</code> is missing, some browsers fall back to <code>title</code> to supply an accessible name, the same reliability problem as relying on <code>title</code> for a native <code>&lt;button&gt;</code>, not guaranteed, and not discoverable to sighted users.</p>
+
+<div class="example">
+  <input class="button" type="image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" title="Search">
+</div>
+
+<p>The accessible name for this <code>&lt;button&gt;</code> should be: <q>Search</q>, worth confirming directly, this fallback isn't guaranteed across browsers.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input type="image" src="search-icon.png" <span class="highlight">title="Search"</span>&gt; <span class="comment">&lt;!-- no alt --&gt;</span></code></pre>
 </details>
 
 

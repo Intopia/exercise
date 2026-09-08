@@ -45,28 +45,6 @@
 
 <p>This page pairs with the "Highlight links" bookmarklet, which scans every link on the page and badges it based on its accessible name, its <code>title</code> attribute, and where its <code>href</code> actually points.</p>
 
-<div class="note">
-  <p>Badge colours used by the bookmarklet:</p>
-  <table>
-    <thead>
-      <tr>
-        <th scope="col">Colour</th>
-        <th scope="col">Meaning</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>Green</td><td>Unique accessible name</td></tr>
-      <tr><td>Green</td><td>Same accessible name, points to the same URL</td></tr>
-      <tr><td>Red</td><td>Same accessible name, points to a different URL</td></tr>
-      <tr><td>Amber</td><td>Accessible name + matching title (redundant, may double-announce)</td></tr>
-      <tr><td>Amber</td><td>Accessible name + mismatching title (confusing, different text announced twice)</td></tr>
-      <tr><td>Amber</td><td>No accessible name but has a title (presented to screen reader users only, not sighted users)</td></tr>
-      <tr><td>Red</td><td>Empty <code>href=""</code>, resolves, but still broken</td></tr>
-      <tr><td>Red</td><td>No <code>href</code> at all, not really a link</td></tr>
-    </tbody>
-  </table>
-</div>
-
 
 <!-- section -->
 

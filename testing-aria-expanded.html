@@ -129,6 +129,48 @@
 </script>
 
 
+<!-- section -->
+
+
+<h2>Example 4: literal value "undefined"</h2>
+
+<p>Per the ARIA <code>true/false/undefined</code> value type, <code>aria-expanded</code> supports three values: <code>true</code>, <code>false</code>, and the literal string <code>undefined</code>. That's a genuine, spec-valid value, not an error, distinct from Example 3 where the attribute is missing entirely. In practice this can also turn up by accident, for example JavaScript coercing an actual <code>undefined</code> value into a string when setting the attribute.</p>
+
+<div class="example">
+  <button id="expand-button-literal-undefined" aria-expanded="undefined" aria-controls="expand-content-literal-undefined">
+    Filters
+  </button>
+  <div id="expand-content-literal-undefined" hidden>
+    <p>This content is only shown once the button above is activated.</p>
+  </div>
+</div>
+
+<p><b>Expected result:</b> a valid value per spec, functionally equivalent to omitting the attribute, no determinable expanded state either way. The bookmarklet should treat this as valid, not flag it as an error.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button
+  id="expand-button-literal-undefined"
+  <span class="highlight">aria-expanded="undefined"</span>
+  aria-controls="expand-content-literal-undefined"
+&gt;
+  Filters
+&lt;/button&gt;
+&lt;div id="expand-content-literal-undefined" hidden&gt;
+  &lt;p&gt;This content is only shown once the button above is activated.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+<script>
+  const expandButtonLiteralUndefined = document.getElementById('expand-button-literal-undefined');
+  const expandContentLiteralUndefined = document.getElementById('expand-content-literal-undefined');
+
+  expandButtonLiteralUndefined.addEventListener('click', () => {
+    expandContentLiteralUndefined.hidden = !expandContentLiteralUndefined.hidden;
+  });
+</script>
+
+
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 </main>
 </body>

@@ -176,6 +176,69 @@ label {
 </details>
 
 
+<!-- section -->
+
+
+<h2>Example 8: Empty attribute value</h2>
+
+<p><code>aria-describedby=""</code> is present but has no value at all, no ID reference of any kind.</p>
+
+<div class="example">
+  <label class="label" for="rabbit">Name</label>
+  <input class="input" id="rabbit" aria-describedby="">
+</div>
+
+<p>There should be no accessible description for the <code>&lt;input&gt;</code>.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label class="label" for="rabbit"&gt;Name&lt;/label&gt;
+&lt;input class="input" id="rabbit" <span class="highlight">aria-describedby=""</span>&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 9: Self-reference</h2>
+
+<p>This button's <code>aria-describedby</code> points at its own <code>id</code>. The ID resolves, so per the accessible description computation, its own visible text becomes its own description too, redundant, but not technically broken.</p>
+
+<div class="example">
+  <button class="button" id="seahorse" aria-describedby="seahorse">Submit</button>
+</div>
+
+<p>Accessible description for the <code>&lt;button&gt;</code> should be: <q>Submit</q>, the same as its own accessible name.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button id="seahorse" <span class="highlight">aria-describedby="seahorse"</span>&gt;Submit&lt;/button&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 10: Reference to element hidden with <code>visibility: hidden</code></h2>
+
+<p>Distinct from Examples 3 and 4, this specifically tests <code>visibility: hidden</code>. The referenced element still occupies layout space, unlike <code>display: none</code>, but per the accessible name and description computation, hidden text still contributes to the description regardless of how it's hidden. The referenced element itself just won't get its own outline or badge, since it isn't visibly rendered.</p>
+
+<div class="example">
+  <label class="label" for="tapir">Name</label>
+  <p style="visibility: hidden;" id="urchin">Must be your full name</p>
+  <input class="input" id="tapir" aria-describedby="urchin">
+</div>
+
+<p>Accessible description for the <code>&lt;input&gt;</code> should be: <q>Must be your full name</q></p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label class="label" for="tapir"&gt;Name&lt;/label&gt;
+&lt;p <span class="highlight">style="visibility: hidden;"</span> id="urchin"&gt;Must be your full name&lt;/p&gt;
+&lt;input class="input" id="tapir" <span class="highlight">aria-describedby="urchin"</span>&gt;</code></pre>
+</details>
+
+
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 </main>
 </body>

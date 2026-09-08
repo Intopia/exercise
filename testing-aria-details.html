@@ -159,6 +159,104 @@
 <!-- section -->
 
 
+<h2>Example 4: empty attribute value</h2>
+
+<p><code>aria-details=""</code> is present but has no value at all, no ID reference of any kind.</p>
+
+<figure class="example">
+  <img src="assets/img/image-complex.png" alt="Venn diagram depicting content category relationships." aria-details="">
+</figure>
+
+<p><b>Expected result:</b> the bookmarklet should label this "aria-details: (empty)" and treat it as broken, not merely a missing ID.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;img src="image-complex.png" alt="..." <span class="highlight">aria-details=""</span>&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 5: self-reference</h2>
+
+<p>This <code>&lt;details&gt;</code> element's <code>aria-details</code> points at its own <code>id</code>. The ID resolves, so this isn't a broken reference, just a circular one, a plausible mix-up between which element should carry the attribute and which should be its target.</p>
+
+<div class="example">
+  <details id="self-description" aria-details="self-description">
+    <summary>Show more</summary>
+    <p>Extra information here.</p>
+  </details>
+</div>
+
+<p><b>Expected result:</b> the ID resolves, to itself, so this should be treated as a valid, resolved reference, not an error, labelled "(self)" rather than flagged as missing.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;details id="self-description" <span class="highlight">aria-details="self-description"</span>&gt;
+  &lt;summary&gt;Show more&lt;/summary&gt;
+  &lt;p&gt;Extra information here.&lt;/p&gt;
+&lt;/details&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 6: multiple values, one missing</h2>
+
+<p>Similar to Example 3, but only one of the two referenced IDs actually exists. Distinct from a fully broken reference where every ID is missing, this is a partial failure, one usable relationship alongside one that resolves to nothing.</p>
+
+<div class="example">
+  <p id="pricing-statement" aria-details="pricing-note pricing-note-missing">Prices shown exclude tax.</p>
+  <div id="pricing-note">
+    <p>Tax is calculated at checkout based on delivery address.</p>
+  </div>
+</div>
+
+<p><b>Expected result:</b> per the bookmarklet, when some but not all referenced IDs are missing, the badge should be amber, not red, distinct from a reference that fails completely.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;p
+  id="pricing-statement"
+  <span class="highlight">aria-details="pricing-note pricing-note-missing"</span>
+&gt;
+  Prices shown exclude tax.
+&lt;/p&gt;
+
+&lt;div id="pricing-note"&gt;
+  &lt;p&gt;Tax is calculated at checkout based on delivery address.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 7: referenced element uses <code>visibility: hidden</code></h2>
+
+<p>The extended description this image points to is hidden with <code>visibility: hidden</code> rather than a <code>&lt;details&gt;</code> disclosure. The reference itself is still valid, the ID resolves to a real element, but a visibility-hidden element still occupies layout space, unlike <code>display: none</code>, so it's worth testing separately.</p>
+
+<div class="example">
+  <img src="assets/img/image-complex.png" alt="Venn diagram depicting content category relationships." aria-details="hidden-description">
+  <p style="visibility: hidden;" id="hidden-description">Extended description text that is never visually shown.</p>
+</div>
+
+<p><b>Expected result:</b> the relationship itself should be treated as valid, the ID resolves to a real element, but the referenced element shouldn't get its own outline or badge, since it isn't visibly rendered.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;img src="image-complex.png" alt="..." <span class="highlight">aria-details="hidden-description"</span>&gt;
+&lt;p <span class="highlight">style="visibility: hidden;"</span> id="hidden-description"&gt;
+  Extended description text that is never visually shown.
+&lt;/p&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
 <h2>Note for testing</h2>
 
 <p>Published support data for <code>aria-details</code> is mixed and conflicting, and worth re-testing directly rather than relying on either source below:</p>

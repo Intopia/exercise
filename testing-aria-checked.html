@@ -246,6 +246,33 @@
 </details>
 
 
+<!-- section -->
+
+
+<h2>Example 7: literal value "undefined"</h2>
+
+<p>Per the ARIA <code>tristate</code> value type, <code>aria-checked</code> supports four values: <code>true</code>, <code>false</code>, <code>mixed</code>, and the literal string <code>undefined</code>. That's a genuine, spec-valid value, not an error, distinct from Example 6 where the attribute is missing entirely. In practice this can also turn up by accident, for example JavaScript coercing an actual <code>undefined</code> value into a string when setting the attribute.</p>
+
+<div class="example">
+  <div class="testing-checked-checkbox" role="checkbox" tabindex="0" aria-checked="undefined">
+    Subscribe to newsletter
+  </div>
+</div>
+
+<p><b>Expected result:</b> a valid value per spec, functionally equivalent to omitting the attribute, no determinable checked state either way. The bookmarklet should treat this as valid, not flag it as an error.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div
+  role="checkbox"
+  tabindex="0"
+  <span class="highlight">aria-checked="undefined"</span>
+&gt;
+  Subscribe to newsletter
+&lt;/div&gt;</code></pre>
+</details>
+
+
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 </main>
 </body>

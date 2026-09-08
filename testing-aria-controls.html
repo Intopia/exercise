@@ -177,7 +177,7 @@
   </button>
 </div>
 
-<p><b>Expected result:</b> on first activation, <code>aria-controls</code> points at an ID that doesn't exist yet. Worth checking whether this behaves differently to Example 1, where the target was always present, and differently again to the permanently broken reference in Example 6 further down, since here the reference becomes valid after interaction rather than staying broken.</p>
+<p><b>Expected result:</b> on first activation, <code>aria-controls</code> points at an ID that doesn't exist yet. Worth checking whether this behaves differently to Example 1, where the target was always present, and differently again to the permanently broken reference in Example 8 further down, since here the reference becomes valid after interaction rather than staying broken.</p>
 
 <details>
   <summary>HTML markup</summary>
@@ -353,6 +353,70 @@
 <!-- section -->
 
 
+<h2>Example 6: self-reference</h2>
+
+<p>This button's <code>aria-controls</code> points at its own <code>id</code>, an element referencing itself. The ID technically resolves, so this isn't a broken reference the way the examples further down are, the relationship is still valid, just semantically unusual, and worth testing in its own right rather than assuming it behaves like any other resolved reference.</p>
+
+<div class="example">
+  <button id="ex6-self" type="button" aria-controls="ex6-self" aria-expanded="false">
+    Show more<span id="ex6-extra" hidden> — Wombats are sturdy, burrowing marsupials.</span>
+  </button>
+</div>
+
+<p><b>Expected result:</b> the ID resolves, to itself, so this should be treated as a valid, resolved reference, not an error. Worth confirming whether AT announces anything meaningful about an element that controls itself, versus staying silent on the relationship entirely.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code><span class="comment">&lt;!-- Button controls its own id --&gt;</span>
+&lt;button
+  id="ex6-self"
+  <span class="highlight">aria-controls="ex6-self"</span>
+  aria-expanded="false"
+&gt;
+  Show more
+  &lt;span hidden&gt; — Wombats are sturdy, burrowing marsupials.&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 7: referenced element uses <code>visibility: hidden</code></h2>
+
+<p>The panel this button controls is hidden with <code>visibility: hidden</code> rather than the <code>hidden</code> attribute or <code>display: none</code>. The reference itself is still perfectly valid, the ID resolves to a real element, but a visibility-hidden element still occupies layout space, unlike a display:none one, so it's worth testing separately rather than assuming every kind of "hidden" behaves the same way.</p>
+
+<div class="example">
+  <button id="ex7-toggle" type="button" aria-controls="ex7-panel" aria-expanded="false">
+    Show details
+  </button>
+  <div id="ex7-panel" style="visibility: hidden;">
+    <p>This panel is hidden with <code>visibility: hidden</code> rather than the <code>hidden</code> attribute.</p>
+  </div>
+</div>
+
+<p><b>Expected result:</b> the relationship itself should be treated as valid, the ID resolves to a real element. Worth confirming whether AT announces this relationship or its content at all while the target is visibility-hidden, since it's technically present but not visible to anyone.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code><span class="comment">&lt;!-- Button --&gt;</span>
+&lt;button
+  <span class="highlight">aria-controls="ex7-panel"</span>
+  aria-expanded="false"
+&gt;
+  Show details
+&lt;/button&gt;
+
+<span class="comment">&lt;!-- Panel: hidden via visibility, not the hidden attribute --&gt;</span>
+&lt;div id="ex7-panel" <span class="highlight">style="visibility: hidden;"</span>&gt;
+  ...
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
 <div class="note">
   <p><b>Broken examples from here on.</b> These are deliberately incorrect. They exist to test failure behaviour, not to be copied. Where possible, the visible show/hide behaviour still works correctly, so the demo remains usable, only the <code>aria-controls</code> relationship itself is broken, which is the specific thing being tested.</p>
 </div>
@@ -361,16 +425,16 @@
 <!-- section -->
 
 
-<h2>Broken example 6: ID does not resolve</h2>
+<h2>Broken example 8: ID does not resolve</h2>
 
 <p><code>aria-controls</code> references an ID that has never existed on the page. The button still correctly shows and hides its panel, only the <code>aria-controls</code> attribute itself is wrong.</p>
 
 <div class="example">
-  <button id="ex6-toggle" type="button" aria-controls="ex6-panle-typo" aria-expanded="false">
+  <button id="ex8-toggle" type="button" aria-controls="ex8-panle-typo" aria-expanded="false">
     Show details
   </button>
-  <div id="ex6-panel" hidden>
-    <p>This panel's real ID is <code>ex6-panel</code>, but <code>aria-controls</code> points at <code>ex6-panle-typo</code>.</p>
+  <div id="ex8-panel" hidden>
+    <p>This panel's real ID is <code>ex8-panel</code>, but <code>aria-controls</code> points at <code>ex8-panle-typo</code>.</p>
   </div>
 </div>
 
@@ -380,14 +444,14 @@
   <summary>HTML markup</summary>
 <pre><code><span class="comment">&lt;!-- Button: Value does not match ID --&gt;</span>
 &lt;button
-  <span class="highlight">aria-controls="ex6-panle-typo"</span>
+  <span class="highlight">aria-controls="ex8-panle-typo"</span>
   aria-expanded="false"
 &gt;
   Show details
 &lt;/button&gt;
 
 <span class="comment">&lt;!-- Panel --&gt;</span>
-&lt;div id="ex6-panel" hidden&gt;
+&lt;div id="ex8-panel" hidden&gt;
   ...
 &lt;/div&gt;</code></pre>
 </details>
@@ -396,20 +460,20 @@
 <!-- section -->
 
 
-<h2>Broken example 7: empty value</h2>
+<h2>Broken example 9: empty value</h2>
 
-<p><code>aria-controls</code> is present but has no value at all, no ID reference of any kind. Distinct from Example 6, this isn't a broken reference, it's not a reference at all. The button still works visually, using a direct reference in the script rather than relying on the empty attribute.</p>
+<p><code>aria-controls</code> is present but has no value at all, no ID reference of any kind. Distinct from Example 8, this isn't a broken reference, it's not a reference at all. The button still works visually, using a direct reference in the script rather than relying on the empty attribute.</p>
 
 <div class="example">
-  <button id="ex7-toggle" type="button" aria-controls="" aria-expanded="false">
+  <button id="ex9-toggle" type="button" aria-controls="" aria-expanded="false">
     Show details (broken: empty value)
   </button>
-  <div id="ex7-panel" hidden>
+  <div id="ex9-panel" hidden>
     <p>This panel is shown correctly, but <code>aria-controls</code> itself is empty and points at nothing.</p>
   </div>
 </div>
 
-<p><b>Expected result:</b> exactly the kind of markup error an automated checker is built to catch, an empty, non-referencing value. Worth confirming whether AT treats this the same as Example 6's broken reference, the same as the attribute being absent entirely, or something else.</p>
+<p><b>Expected result:</b> exactly the kind of markup error an automated checker is built to catch, an empty, non-referencing value. The bookmarklet should label this "aria-controls: (empty)" and treat it as broken, not merely a missing ID. Worth confirming whether AT treats this the same as Example 8's broken reference, the same as the attribute being absent entirely, or something else.</p>
 
 <details>
   <summary>HTML markup</summary>
@@ -422,7 +486,7 @@
 &lt;/button&gt;
 
 <span class="comment">&lt;!-- Panel --&gt;</span>
-&lt;div id="ex7-panel" hidden&gt;
+&lt;div id="ex9-panel" hidden&gt;
   ...
 &lt;/div&gt;</code></pre>
 </details>
@@ -567,11 +631,37 @@
     });
   })();
 
-  // ---------- Example 6 ----------
+  // ---------- Example 6: self-reference ----------
 
   (function () {
-    const button = document.getElementById('ex6-toggle');
-    const panel = document.getElementById('ex6-panel'); // correct id, deliberately different from the broken aria-controls value
+    const button = document.getElementById('ex6-self');
+    const extra = document.getElementById('ex6-extra');
+
+    button.addEventListener('click', () => {
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!expanded));
+      extra.hidden = expanded;
+    });
+  })();
+
+  // ---------- Example 7: visibility:hidden target ----------
+
+  (function () {
+    const button = document.getElementById('ex7-toggle');
+    const panel = document.getElementById('ex7-panel');
+
+    button.addEventListener('click', () => {
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!expanded));
+      panel.style.visibility = expanded ? 'hidden' : 'visible';
+    });
+  })();
+
+  // ---------- Example 8 ----------
+
+  (function () {
+    const button = document.getElementById('ex8-toggle');
+    const panel = document.getElementById('ex8-panel'); // correct id, deliberately different from the broken aria-controls value
 
     button.addEventListener('click', () => {
       const expanded = button.getAttribute('aria-expanded') === 'true';
@@ -580,11 +670,11 @@
     });
   })();
 
-  // ---------- Example 7 ----------
+  // ---------- Example 9 ----------
 
   (function () {
-    const button = document.getElementById('ex7-toggle');
-    const panel = document.getElementById('ex7-panel'); // referenced directly, not via the empty aria-controls value
+    const button = document.getElementById('ex9-toggle');
+    const panel = document.getElementById('ex9-panel'); // referenced directly, not via the empty aria-controls value
 
     button.addEventListener('click', () => {
       const expanded = button.getAttribute('aria-expanded') === 'true';
