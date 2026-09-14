@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing a "Back to top" pattern</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+<style>
+
+/* Progressive enhancement: the fragment link still works without JavaScript. */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Keeps the heading and its 4px focus-ring offset clear of the viewport edge.
+   Both the plain fragment link and the enhanced path honour this, so the two
+   land in the same place. On a site with a sticky header, this value must
+   clear the header height or the heading arrives underneath it. */
+h1[tabindex="-1"] {
+  scroll-margin-top: 1rem;
+}
+
+/* :focus, not :focus-visible. Focus arrives here through navigation rather
+   than through the keyboard, so :focus-visible heuristics will not reliably
+   match and mouse and magnification users would get no indicator at all. */
+h1[tabindex="-1"]:focus {
+  outline: 3px solid red;
+  outline-offset: 4px;
+}
+
+/* The arrival cue is separate from the focus indicator. This page drives it
+   from a class rather than from :focus, because smooth scrolling means focus
+   and arrival happen at different moments. Without smooth scrolling, the same
+   animation on :focus needs no script at all.
+
+   No animation-fill-mode, so the animation never holds a value that would
+   outrank the :focus rule above. */
+h1[tabindex="-1"].is-flashing {
+  animation: flash 1s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  h1[tabindex="-1"].is-flashing {
+    animation: none;
+  }
+}
+
+/* #ff0 against near-black heading text. Check the contrast if the heading
+   colour is anything lighter. Forced colours overrides background-color,
+   so this cue will not render there and the focus ring carries the message. */
+@keyframes flash {
+  from {
+    background-color: #ff0;
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+/* Keep the control at the content-start edge rather than the far viewport edge. */
+.back-to-top-container {
+  text-align: start;
+  margin: 2em 0;
+}
+
+/* Control */
+
+.back-to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.5em 1em 0.5em 0.7em;
+  border: 1px solid #767676;
+  border-radius: 0.25em;
+  font: inherit;
+  text-decoration: none;
+}
+
+.back-to-top:hover {
+  background-color: #e4e4e4;
+}
+
+.back-to-top:active {
+  background-color: #d4d4d4;
+}
+
+.back-to-top:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.back-to-top__icon {
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+</style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1 id="top" tabindex="-1">Testing a "Back to top" pattern</h1>
+
+<p><a href="#">A link directly after the main heading</a></p>
+
+<h2>The basics</h2>
+
+<p>The accessible version of this pattern is simple. It just needs a fragment link, an <code>id</code>, and <code>tabindex="-1"</code> so the heading can receive focus.</p>
+
+<pre><code>&lt;h1 id="top" tabindex="-1"&gt;Main heading&lt;/h1&gt;
+...
+&lt;p&gt;&lt;a href="#top"&gt;Back to top&lt;/a&gt;&lt;/p&gt;</code></pre>
+
+<p>The CSS provides a visible focus indicator when the heading receives focus:</p>
+
+<pre><code>h1[tabindex="-1"]:focus {
+  outline: 3px solid red;
+  outline-offset: 4px;
+}</code></pre>
+
+<p>That is the basic pattern. It does not need JavaScript, and it keeps the viewport position, keyboard focus and the screen reader's reading position together. Keeping these aligned is an important part of making the pattern work well.</p>
+
+<p>This test page adds smooth scrolling to that baseline, which is why it includes a small amount of JavaScript. The sections below look at the additional features and the trade-offs involved in each one.</p>
+
+<h2>Required</h2>
+
+<ul>
+  <li>Use a real fragment link, such as <code>&lt;a href="#top"&gt;</code>. This provides the basic behaviour and continues to work without JavaScript.</li>
+  <li>Point it at a meaningful target, such as the first <code>&lt;h1&gt;</code>, and give that target an <code>id</code>. This gives people a clear indication of where they have landed.</li>
+  <li>Add <code>tabindex="-1"</code> to the target if it cannot already receive focus. Without it, the viewport moves but focus does not, which can cause problems for screen reader and keyboard users.</li>
+  <li>Keep a clear focus indicator on the target for as long as it has focus. This shows where focus has moved and remains useful if someone looks away and then returns to the page.</li>
+  <li>Add <code>scroll-margin-top</code> if anything is fixed to the top of the viewport, so the target is not hidden underneath it. This relates to <a href="https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html" target="_blank">WCAG 2.4.11 Focus Not Obscured</a>.</li>
+</ul>
+
+<h2>Good practice</h2>
+
+<p>These are not strict requirements, and they do not require JavaScript.</p>
+
+<h3>Highlight the destination</h3>
+
+<p>The focus ring shows where focus is. A brief flash can provide an additional cue that something has moved. Because Back to top can replace several screens of content at once, the destination may look quite different from what the user was just viewing.</p>
+
+<p>A static focus ring can still take time to find, particularly for keyboard users and people using high zoom with only a small part of the page visible.</p>
+
+<p>With an instant jump, focus and the visual change happen at the same time, so this cue only needs a few lines of CSS:</p>
+
+<pre><code>h1[tabindex="-1"]:focus {
+  animation: flash 1s ease-out;
+}
+
+@keyframes flash {
+  from { background-color: #ff0; }
+  to   { background-color: transparent; }
+}</code></pre>
+
+<ul>
+  <li>Keep the flash separate from the focus ring. It supplements the ring rather than replacing it, because once the flash has faded it can no longer show where focus is.</li>
+  <li>Check the contrast of the flash colour against the heading text. <code>#ff0</code> works well behind near-black text, but may be less effective behind a mid-grey heading.</li>
+  <li>Turn the flash off under <code>prefers-reduced-motion: reduce</code>, while keeping the focus ring.</li>
+  <li>A single one-second fade is not a flashing hazard. WCAG 2.3.1 is concerned with three or more flashes per second, so this cue is well below that threshold.</li>
+</ul>
+
+<h3>The control itself</h3>
+
+<ul>
+  <li>Name the destination rather than the motion. "Back to top" describes where the user will go, while "Scroll to top" describes the visual effect. An icon-only control still needs an accessible name.</li>
+  <li>Keep the link's position in the DOM consistent with its visual position, so the tab order and reading order make sense.</li>
+  <li>Keep the link at the content-start edge. Controls placed at the far edge of the viewport can be missed by people using magnification, who may only see part of the page at a time.</li>
+  <li>Do not let a CSS reset remove the outline from <code>[tabindex="-1"]</code>. This is a common reset rule and can remove the visible focus indicator.</li>
+</ul>
+
+<h2>Optional: smooth scrolling</h2>
+
+<p>Smooth scrolling only needs a small amount of CSS and can help show how far the page has moved, rather than using an instant jump.</p>
+
+<ul>
+  <li>Set <code>scroll-behavior: smooth</code> on the root element.</li>
+  <li>Honour <code>prefers-reduced-motion: reduce</code> by switching back to an instant move.</li>
+</ul>
+
+<p>One thing to consider before adding it: smooth scrolling separates the moment focus moves from the moment the target comes into view. On its own, this is not necessarily a problem. However, if it is combined with the focus flash above, the flash may begin while the target is still off screen. The next section looks at how to coordinate the two.</p>
+
+<h2>Optional: coordinating the cue with smooth scrolling</h2>
+
+<p>The script on this page delays the yellow flash until the smooth scrolling has finished. If you are not combining the flash with smooth scrolling, you do not need this script.</p>
+
+<ul>
+  <li>Trigger the animation with a class rather than <code>:focus</code>, so it can start when the target comes into view rather than when it receives focus.</li>
+  <li>Use the document <code>scrollend</code> event where supported, with a timeout as a fallback for browsers that do not support it.</li>
+  <li>Check whether any scrolling will actually occur, such as when the page is already at the target or is shorter than the viewport. In these cases, show the cue immediately rather than waiting for a timeout.</li>
+  <li>Focus the target with <code>preventScroll: true</code>, so moving focus does not jump to the target before the smooth scroll begins.</li>
+  <li>Keep the visual destination and the focus destination the same. If the viewport scrolls to one place while focus moves somewhere else, the focused element may end up off screen.</li>
+  <li>Limit the script to "Back to top" links. Avoid intercepting every same-page fragment link or adding <code>tabindex="-1"</code> to unrelated targets.</li>
+  <li>Allow modified clicks and links with another browsing target to keep their normal browser behaviour.</li>
+  <li>Update the URL fragment when the link is activated, preserving the addressable <code>#top</code> state without adding duplicate history entries.</li>
+  <li>Restore focus to the link when the user presses the browser Back button. Because the script changes the link's default behaviour, it also needs to manage the resulting focus behaviour.</li>
+  <li>No additional handling is needed on initial page load. Arriving at <code>page.html#top</code> directly is normal fragment navigation, which the browser can handle.</li>
+</ul>
+
+<p class="back-to-top-container">
+  <a class="back-to-top" href="#top">
+    <span class="back-to-top__icon" aria-hidden="true">&#8593;</span>
+    Back to top
+  </a>
+</p>
+
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var links = document.querySelectorAll('a.back-to-top[href^="#"]');
+  var lastActivatedLink = null;
+
+  /* Replay the yellow arrival cue on repeat visits. */
+  function flash(target) {
+    if (reduceMotion.matches) return;
+
+    target.classList.remove('is-flashing');
+    void target.offsetWidth; // force reflow so the animation can replay
+    target.classList.add('is-flashing');
+  }
+
+  /* Wait until smooth scrolling finishes before showing the arrival cue.
+     The caller detects the no-scroll case up front, so the timeout here is
+     only a support fallback and a safety net, not the primary mechanism. */
+  function whenScrollSettles(noMove, callback) {
+    if (noMove || reduceMotion.matches) {
+      callback();
+      return;
+    }
+
+    if (!('onscrollend' in document)) {
+      setTimeout(callback, 600);
+      return;
+    }
+
+    var fired = false;
+    var timer;
+
+    function run() {
+      if (fired) return;
+      fired = true;
+      document.removeEventListener('scrollend', run);
+      clearTimeout(timer);
+      callback();
+    }
+
+    timer = setTimeout(run, 1200); // safety net if scrollend is missed
+    document.addEventListener('scrollend', run);
+  }
+
+  function getTarget(link) {
+    var id;
+
+    try {
+      id = decodeURIComponent(link.hash.slice(1));
+    } catch (error) {
+      return null;
+    }
+
+    if (!id) return null;
+    return document.getElementById(id);
+  }
+
+  /* True when the target is already sitting at its resting position, so no
+     scroll will happen and scrollend will never fire. Reads the computed
+     scroll-margin-top rather than assuming a value, so this stays correct
+     if the margin changes or another target uses a different one. */
+  function willNotScroll(target) {
+    var margin = parseFloat(window.getComputedStyle(target).scrollMarginTop) || 0;
+    return Math.abs(target.getBoundingClientRect().top - margin) < 2;
+  }
+
+  function goTo(target, hash) {
+    /* Move actual focus, but prevent focus itself from performing an
+       immediate browser scroll before our coordinated scroll starts. */
+    target.focus({ preventScroll: true });
+
+    /* Preserve the addressable fragment without stacking duplicate
+       history entries when the page is already at the same hash. */
+    if (hash && location.hash !== hash) {
+      history.pushState(null, '', hash);
+    }
+
+    var noMove = willNotScroll(target);
+
+    /* Same destination as the plain fragment link, so the enhanced and
+       unenhanced paths land in exactly the same place, and the viewport
+       destination matches where focus and the arrival cue are. */
+    target.scrollIntoView({
+      behavior: (noMove || reduceMotion.matches) ? 'auto' : 'smooth',
+      block: 'start'
+    });
+
+    whenScrollSettles(noMove, function () {
+      flash(target);
+    });
+  }
+
+  links.forEach(function (link) {
+    link.addEventListener('click', function (event) {
+      /* Preserve native behaviour for modified clicks, new tabs/windows,
+         or another script that has already handled the event. */
+      if (event.defaultPrevented || event.button !== 0 ||
+          event.metaKey || event.ctrlKey || event.shiftKey || event.altKey ||
+          (link.target && link.target !== '_self')) {
+        return;
+      }
+
+      var target = getTarget(link);
+      if (!target) return;
+
+      event.preventDefault();
+      lastActivatedLink = link;
+      goTo(target, link.hash);
+    });
+  });
+
+  /* The browser restores the scroll position on Back, but focus would stay
+     stranded at the heading. Return it to the link the user activated. */
+  window.addEventListener('popstate', function () {
+    if (!lastActivatedLink || !lastActivatedLink.isConnected) return;
+    if (location.hash === lastActivatedLink.hash) return;
+
+    lastActivatedLink.focus({ preventScroll: true });
+    lastActivatedLink = null;
+  });
+
+  /* No initial-load handling. Arriving at page.html#top is ordinary fragment
+     navigation: the browser positions the page, and the id plus tabindex="-1"
+     give it a valid focus target, so focus and announcement happen natively.
+     The yellow cue is feedback for activating the control, so it does not
+     belong on a visit the user did not initiate. */
+})();
+</script>
+</body>
+</html>
