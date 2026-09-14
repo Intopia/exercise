@@ -43,7 +43,7 @@ h1[tabindex="-1"]:focus {
    No animation-fill-mode, so the animation never holds a value that would
    outrank the :focus rule above. */
 h1[tabindex="-1"].is-flashing {
-  animation: flash 1s ease-out;
+  animation: flash 2s ease-out;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -273,7 +273,7 @@ h1[tabindex="-1"].is-flashing {
       callback();
     }
 
-    timer = setTimeout(run, 1200); // safety net if scrollend is missed
+    timer = setTimeout(run, 1800); // safety net if scrollend is missed
     document.addEventListener('scrollend', run);
   }
 
