@@ -184,14 +184,6 @@ h1[tabindex="-1"].is-flashing {
   <li>Do not let a CSS reset remove the outline from <code>[tabindex="-1"]</code>. This is a common reset rule and can remove the visible focus indicator.</li>
 </ul>
 
-<h3><code>:focus</code> vs <code>:focus-visible</code></h3>
-
-<p><code>:focus</code> matches whenever an element has focus, regardless of how focus arrived there. <code>:focus-visible</code> is more selective: the browser decides when a visible focus indicator is likely to be useful, usually showing it for keyboard interaction and often hiding it after mouse or pointer interaction.</p>
-
-<p>For most interactive controls, <code>:focus-visible</code> is a good choice. For the Back to top target, <code>:focus</code> is more reliable. Someone may activate the Back to top link with a mouse or pointer, but focus still moves to the heading. Using <code>:focus-visible</code> may mean the heading receives focus without showing the focus indicator.</p>
-
-<p>The downside of using <code>:focus</code> is that the indicator can also appear if someone clicks the heading directly and the browser gives it focus. This may look a little unusual, but it is a minor trade-off for ensuring the destination is clearly indicated whenever the Back to top link moves focus there.</p>
-
 <h2>Optional: smooth scrolling</h2>
 
 <p>Smooth scrolling only needs a small amount of CSS and can help show how far the page has moved, rather than using an instant jump.</p>
