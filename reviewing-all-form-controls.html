@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Reviewing all form controls</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Reviewing all form controls</h1>
+
+<p>Form controls are elements that let users enter, select, submit or activate something. They&rsquo;re often inside a <code>&lt;form&gt;</code> element, but they don&rsquo;t have to be. Interactions may include:</p>
+
+<ul>
+  <li>Adding data to a text field.</li>
+  <li>Selecting an option from a dropdown.</li>
+  <li>Checking or unchecking a radio or checkbox.</li>
+  <li>Activating a button.</li>
+  <li>Choosing a file to upload.</li>
+  <li>Picking a date or time.</li>
+  <li>Adjusting a slider (<code>type="range"</code>).</li>
+  <li>Choosing a colour.</li>
+</ul>
+
+<p>Elements that are form controls:</p>
+
+<ul>
+  <li><code>&lt;button&gt;</code></li>
+  <li>all <code>&lt;input&gt;</code> types, except <code>&lt;input type="hidden"&gt;</code>, which has no visible interface</li>
+  <li><code>&lt;textarea&gt;</code></li>
+  <li><code>&lt;select&gt;</code></li>
+</ul>
+
+<p>Custom controls also count. A <code>&lt;div role="combobox"&gt;</code> isn&rsquo;t a HTML form element, but users interact with it the same way, so it carries the same requirements for name, role, state and keyboard support.</p>
+
+<p>These elements appear in forms but are not form controls:</p>
+
+<ul>
+  <li>Display values only: <code>&lt;meter&gt;</code>, <code>&lt;progress&gt;</code>, <code>&lt;output&gt;</code></li>
+  <li>Structural or grouping: <code>&lt;form&gt;</code>, <code>&lt;fieldset&gt;</code>, <code>&lt;legend&gt;</code></li>
+  <li>Interaction comes from the parent control: <code>&lt;option&gt;</code>, <code>&lt;optgroup&gt;</code>, <code>&lt;datalist&gt;</code></li>
+  <li>Interaction is passed to another element: <code>&lt;label&gt;</code></li>
+</ul>
+
+<p>Clicking a <code>&lt;label&gt;</code> moves focus to its associated control and toggles checkboxes and radios, but the focus and the state belong to the control, not the label.</p>
+
+<p>Here is a list of all form controls:</p>
+
+<hr>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;button&gt;</code></h2>
+
+<div class="example">
+  <button>Button</button>
+</div>
+
+<pre><code><span class="highlight">&lt;button&gt;</span>Button<span class="highlight">&lt;/button&gt;</span></code></pre>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;textarea&gt;</code></h2>
+
+<div class="example">
+  <label class="label" for="textarea">Textarea</label>
+  <textarea class="input" id="textarea"></textarea>
+</div>
+
+<pre><code>&lt;label for="textarea"&gt;Textarea&lt;/label&gt;
+<span class="highlight">&lt;textarea id="textarea"&gt;&lt;/textarea&gt;</span></code></pre>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;select&gt;</code></h2>
+
+<div class="example">
+  <label class="label" for="select">Select</label>
+  <select class="input" id="select">
+    <option>Option 1</option>
+    <option>Option 2</option>
+    <option>Option 3</option>
+    <option>Option 4</option>
+  </select>
+</div>
+
+<pre><code>&lt;label for="select"&gt;Select&lt;/label&gt;
+<span class="highlight">&lt;select id="select"&gt;</span>
+  &lt;option&gt;Option 1&lt;/option&gt;
+  &lt;option&gt;Option 2&lt;/option&gt;
+  &lt;option&gt;Option 3&lt;/option&gt;
+  &lt;option&gt;Option 4&lt;/option&gt;
+<span class="highlight">&lt;/select&gt;</span></code></pre>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="button"&gt;</code></h2>
+
+<div class="example">
+  <input class="button" type="button" value="Button">
+</div>
+
+<pre><code><span class="highlight">&lt;input type="button" value="Button"&gt;</span></code></pre>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="checkbox"&gt;</code></h2>
+
+<div class="example">
+  <input id="checkbox" type="checkbox">
+  <label for="checkbox">Checkbox</label>
+</div>
+
+<pre><code><span class="highlight">&lt;input id="checkbox" type="checkbox"&gt;</span>
+&lt;label for="checkbox"&gt;Checkbox&lt;/label&gt;</code></pre>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="color"&gt;</code></h2>
+
+<div class="example">
+  <label class="label" for="color">Pick a colour</label>
+  <input id="color" type="color">
+</div>
+
+<pre><code>&lt;label for="color"&gt;Pick a colour&lt;/label&gt;
+<span class="highlight">&lt;input id="color" type="color"&gt;</span></code></pre>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="date"&gt;</code></h2>
+
+<div class="example">
+  <label class="label" for="date">Date</label>
+  <input class="input" id="date" type="date">
+</div>
+
+<pre><code>&lt;label for="date"&gt;Date&lt;/label&gt;
+<span class="highlight">&lt;input id="date" type="date"&gt;</span></code></pre>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="datetime-local"&gt;</code></h2>
+
+<div class="example">
+  <label class="label" for="datetime-local">Datetime local</label>
+  <input class="input" id="datetime-local" type="datetime-local">
+</div>
+
+<pre><code>&lt;label for="datetime-local"&gt;Datetime local&lt;/label&gt;
+<span class="highlight">&lt;input id="datetime-local" type="datetime-local"&gt;</span></code></pre>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="email"&gt;</code></h2>
+
+<div class="example">
+  <label class="label" for="email">Email</label>
+  <input class="input" id="email" type="email">
+</div>
+
+<pre><code>&lt;label for="email"&gt;Email&lt;/label&gt;
+<span class="highlight">&lt;input id="email" type="email"&gt;</span></code></pre>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="file"&gt;</code></h2>
+
+<div class="example">
+  <label class="label" for="file">Choose a file</label>
+  <input id="file" type="file">
+</div>
+
+<pre><code>&lt;label for="file"&gt;Choose a file&lt;/label&gt;
+<span class="highlight">&lt;input id="file" type="file"&gt;</span></code></pre>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="image"&gt;</code></h2>
+
+<div class="example">
+  <input type="image" alt="Login" src="https://placehold.co/100x100">
+</div>
+
+<pre><code><span class="highlight">&lt;input type="image" alt="Login" src="image.png"&gt;</span></code></pre>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="month"&gt;</code></h2>
+
+<div class="example">
+  <label class="label" for="month">Month</label>
+  <input class="input" id="month" type="month">
+</div>
+
+<pre><code>&lt;label for="month"&gt;Month&lt;/label&gt;
+<span class="highlight">&lt;input id="month" type="month"&gt;</span></code></pre>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="number"&gt;</code></h2>
+
+<div class="example">
+  <label class="label" for="number">Number</label>
+  <input class="input" id="number" type="number">
+</div>
+
+<pre><code>&lt;label for="number"&gt;Number&lt;/label&gt;
+<span class="highlight">&lt;input id="number" type="number"&gt;</span></code></pre>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="password"&gt;</code></h2>
+
+<div class="example">
+  <label class="label" for="password">Password</label>
+  <input class="input" id="password" type="password">
+</div>
+
+<pre><code>&lt;label for="password"&gt;Password&lt;/label&gt;
+<span class="highlight">&lt;input id="password" type="password"&gt;</span></code></pre>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="radio"&gt;</code></h2>
+
+<div class="example">
+  <input id="radio" type="radio" name="radio-group">
+  <label for="radio">Radio button</label>
+</div>
+
+<pre><code><span class="highlight">&lt;input id="radio" type="radio" name="radio-group"&gt;</span>
+&lt;label for="radio"&gt;Radio button&lt;/label&gt;</code></pre>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="range"&gt;</code></h2>
+
+<div class="example">
+  <label class="label" for="range">Range</label>
+  <input id="range" type="range">
+</div>
+
+<pre><code>&lt;label for="range"&gt;Range&lt;/label&gt;
+<span class="highlight">&lt;input id="range" type="range"&gt;</span></code></pre>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="reset"&gt;</code></h2>
+
+<div class="example">
+  <input class="button" value="reset" type="reset">
+</div>
+
+<pre><code><span class="highlight">&lt;input type="reset" value="reset"&gt;</span></code></pre>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="search"&gt;</code></h2>
+
+<div class="example">
+  <label class="label" for="search">Search</label>
+  <input id="search" type="search">
+</div>
+
+<pre><code>&lt;label for="search"&gt;Search&lt;/label&gt;
+<span class="highlight">&lt;input id="search" type="search"&gt;</span></code></pre>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="submit"&gt;</code></h2>
+
+<div class="example">
+  <input class="button" value="submit" type="submit">
+</div>
+
+<pre><code><span class="highlight">&lt;input type="submit" value="submit"&gt;</span></code></pre>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="tel"&gt;</code></h2>
+
+<div class="example">
+  <label class="label" for="tel">Tel</label>
+  <input class="input" id="tel" type="tel">
+</div>
+
+<pre><code>&lt;label for="tel"&gt;Tel&lt;/label&gt;
+<span class="highlight">&lt;input id="tel" type="tel"&gt;</span></code></pre>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="text"&gt;</code> (default)</h2>
+
+<div class="example">
+  <label class="label" for="text">Text</label>
+  <input class="input" id="text" type="text">
+</div>
+
+<pre><code>&lt;label for="text"&gt;Text&lt;/label&gt;
+<span class="highlight">&lt;input id="text" type="text"&gt;</span></code></pre>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="time"&gt;</code></h2>
+
+<div class="example">
+  <label class="label" for="time">Time</label>
+  <input class="input" id="time" type="time">
+</div>
+
+<pre><code>&lt;label for="time"&gt;Time&lt;/label&gt;
+<span class="highlight">&lt;input id="time" type="time"&gt;</span></code></pre>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="url"&gt;</code></h2>
+
+<div class="example">
+  <label class="label" for="url">URL</label>
+  <input class="input" id="url" type="url">
+</div>
+
+<pre><code>&lt;label for="url"&gt;URL&lt;/label&gt;
+<span class="highlight">&lt;input id="url" type="url"&gt;</span></code></pre>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;input type="week"&gt;</code></h2>
+
+<div class="example">
+  <label class="label" for="week">Week</label>
+  <input class="input" id="week" type="week">
+</div>
+
+<pre><code>&lt;label for="week"&gt;Week&lt;/label&gt;
+<span class="highlight">&lt;input id="week" type="week"&gt;</span></code></pre>
+
+
+<!-- section -->
+
+
+<h2><code>&lt;div role="combobox"&gt;</code></h2>
+
+<p>A minimal, real select-only combobox, not just a div with the role attached. Focus stays on the combobox itself, <code>aria-activedescendant</code> tracks which option is current, and the listbox opens and closes via click, keyboard, and <kbd>Escape</kbd>.</p>
+
+<div class="example">
+  <label class="label" id="combobox-label">Choose a fruit</label>
+  <div class="combobox-wrapper">
+    <div
+      id="combobox"
+      class="input"
+      role="combobox"
+      tabindex="0"
+      aria-haspopup="listbox"
+      aria-expanded="false"
+      aria-labelledby="combobox-label"
+      aria-controls="combobox-listbox"
+    >Select a fruit</div>
+    <ul id="combobox-listbox" role="listbox" aria-labelledby="combobox-label" hidden>
+      <li id="combobox-option-apple" role="option">Apple</li>
+      <li id="combobox-option-banana" role="option">Banana</li>
+      <li id="combobox-option-cherry" role="option">Cherry</li>
+    </ul>
+  </div>
+</div>
+
+<pre><code>&lt;label id="combobox-label"&gt;Choose a fruit&lt;/label&gt;
+<span class="highlight">&lt;div
+  role="combobox"
+  tabindex="0"
+  aria-haspopup="listbox"
+  aria-expanded="false"
+  aria-labelledby="combobox-label"
+  aria-controls="combobox-listbox"
+&gt;Select a fruit&lt;/div&gt;</span>
+&lt;ul id="combobox-listbox" role="listbox" hidden&gt;
+  &lt;li role="option"&gt;Apple&lt;/li>
+  &lt;li role="option"&gt;Banana&lt;/li&gt;
+  &lt;li role="option"&gt;Cherry&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+<style>
+  .combobox-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  #combobox {
+    cursor: default;
+  }
+
+  #combobox-listbox {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin: 0.2em 0 0;
+    padding: 0;
+    list-style: none;
+    min-width: 100%;
+    border: 1px solid #999;
+    background: #fff;
+    z-index: 10;
+  }
+
+  #combobox-listbox li {
+    padding: 0.4em 0.6em;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  #combobox-listbox li[aria-selected="true"] {
+    background: #0a558c;
+    color: #fff;
+  }
+</style>
+
+<script>
+  (function () {
+    var combobox = document.getElementById('combobox');
+    var listbox = document.getElementById('combobox-listbox');
+    var options = Array.prototype.slice.call(listbox.querySelectorAll('[role="option"]'));
+    var activeIndex = -1;
+
+    function openListbox() {
+      listbox.hidden = false;
+      combobox.setAttribute('aria-expanded', 'true');
+      if (activeIndex === -1) setActive(0);
+    }
+
+    function closeListbox() {
+      listbox.hidden = true;
+      combobox.setAttribute('aria-expanded', 'false');
+      combobox.removeAttribute('aria-activedescendant');
+      activeIndex = -1;
+    }
+
+    function setActive(index) {
+      if (index < 0 || index >= options.length) return;
+      activeIndex = index;
+      combobox.setAttribute('aria-activedescendant', options[index].id);
+      options.forEach(function (opt, i) {
+        opt.setAttribute('aria-selected', i === index ? 'true' : 'false');
+      });
+    }
+
+    function selectActive() {
+      if (activeIndex === -1) return;
+      combobox.textContent = options[activeIndex].textContent;
+      closeListbox();
+    }
+
+    combobox.addEventListener('click', function () {
+      listbox.hidden ? openListbox() : closeListbox();
+    });
+
+    combobox.addEventListener('keydown', function (event) {
+      switch (event.key) {
+        case 'ArrowDown':
+          event.preventDefault();
+          if (listbox.hidden) {
+            openListbox();
+          } else {
+            setActive(Math.min(activeIndex + 1, options.length - 1));
+          }
+          break;
+        case 'ArrowUp':
+          event.preventDefault();
+          if (listbox.hidden) {
+            openListbox();
+          } else {
+            setActive(Math.max(activeIndex - 1, 0));
+          }
+          break;
+        case 'Enter':
+        case ' ':
+          event.preventDefault();
+          listbox.hidden ? openListbox() : selectActive();
+          break;
+        case 'Escape':
+          if (!listbox.hidden) {
+            event.preventDefault();
+            closeListbox();
+          }
+          break;
+      }
+    });
+
+    options.forEach(function (opt, index) {
+      opt.addEventListener('click', function () {
+        setActive(index);
+        selectActive();
+      });
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!listbox.hidden && !combobox.contains(event.target) && !listbox.contains(event.target)) {
+        closeListbox();
+      }
+    });
+  })();
+</script>
+
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+</body>
+</html>
+
