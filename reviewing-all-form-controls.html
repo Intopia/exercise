@@ -6,6 +6,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    .combobox-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    #combobox {
+      cursor: default;
+    }
+
+    #combobox-listbox {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin: 0.2em 0 0;
+      padding: 0;
+      list-style: none;
+      min-width: 100%;
+      border: 1px solid #999;
+      background: #fff;
+      z-index: 10;
+    }
+
+    #combobox-listbox li {
+      padding: 0.4em 0.6em;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    #combobox-listbox li[aria-selected="true"] {
+      background: #0a558c;
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
 <main>
@@ -406,7 +440,7 @@
   <div class="combobox-wrapper">
     <div
       id="combobox"
-      class="input"
+      class="button"
       role="combobox"
       tabindex="0"
       aria-haspopup="listbox"
@@ -436,41 +470,6 @@
   &lt;li role="option"&gt;Banana&lt;/li&gt;
   &lt;li role="option"&gt;Cherry&lt;/li&gt;
 &lt;/ul&gt;</code></pre>
-
-<style>
-  .combobox-wrapper {
-    position: relative;
-    display: inline-block;
-  }
-
-  #combobox {
-    cursor: default;
-  }
-
-  #combobox-listbox {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    margin: 0.2em 0 0;
-    padding: 0;
-    list-style: none;
-    min-width: 100%;
-    border: 1px solid #999;
-    background: #fff;
-    z-index: 10;
-  }
-
-  #combobox-listbox li {
-    padding: 0.4em 0.6em;
-    cursor: pointer;
-    white-space: nowrap;
-  }
-
-  #combobox-listbox li[aria-selected="true"] {
-    background: #0a558c;
-    color: #fff;
-  }
-</style>
 
 <script>
   (function () {
