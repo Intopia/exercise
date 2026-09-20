@@ -16,6 +16,22 @@ Each control was checked twice per variation: once by tabbing to it, and once by
 
 ## Browsers and operating systems tested
 
+Test pages:
+
+Form controls - browser defaults
+https://intopia.github.io/exercise/form-controls-focus.html
+
+Form controls - using :focus-visible
+https://intopia.github.io/exercise/form-controls-visible.html
+
+Form controls - using :focus
+https://intopia.github.io/exercise/form-controls-raw.html
+
+Form controls tested on each page: 
+
+
+Browsers and operating systems:
+
 Tested in September 2026 across 24 form controls, three CSS variations and five browser and operating system combinations. 360 results in total.
 
 macOS 26.7:
@@ -37,7 +53,7 @@ The three CSS variations were:
 - `:focus-visible { outline: 3px solid red; outline-offset: 2px; }` only
 - `:focus { outline: 3px solid purple; outline-offset: 2px; }` only
 
-Test page: [add link]
+
 
 ---
 
