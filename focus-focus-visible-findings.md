@@ -1,10 +1,16 @@
-# Results of `:focus` and `:focus-visible` browser review
+# Testing `:focus` vs `:focus-visible`
 
-Browsers decide for themselves when to show a focus indicator. Tab to a button and you usually see a ring. Click the same button and you usually don't. That decision is what `:focus-visible` is built on, but it isn't written down anywhere as a simple list, and most explanations stop at "buttons don't show a ring, text fields do".
+Browsers use their own rules to decide when to show a visible focus indicator. For example, tabbing to a button will usually show a focus ring, while clicking the same button usually will not.
 
-These tests set out to find what actually happens, control by control, rather than relying on that shorthand. Every HTML form control was tested three ways: with no CSS at all, to see what the browser does on its own; with a `:focus-visible` rule, to see whether an author's rule fires in the same places as the browser's own indicator; and with a `:focus` rule, to work out whether a control that shows no ring is one the browser chose not to indicate, or one that never received focus in the first place.
+The `:focus-visible` pseudo-class is based on this browser behaviour. However, the rules are more nuanced than the common explanation of "buttons don't show a ring, text fields do".
 
-Each control was checked twice per variation: once by tabbing to it, and once by clicking it. The results are below.
+These tests set out to find what actually happens, control by control, rather than relying on that shorthand. Each form control was tested three ways:
+
+1. With no author CSS, to see what the browser does on its own.
+2. With a `:focus-visible` rule, to see whether an author's rule applies in the same places as the browser's own indicator.
+3. With a `:focus` rule, to see where it differs from the first two.
+
+Each control was checked twice per variation: once by tabbing to it, and once by clicking it. The overall results are below.
 
 ---
 
