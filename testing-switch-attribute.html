@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the switch attribute</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing the switch attribute</h1>
+
+<p><code>switch</code> is a boolean attribute valid only on <code>&lt;input type="checkbox"&gt;</code>. When present, it renders the checkbox as an on/off switch rather than a traditional checkbox, and the browser exposes it to assistive technology with <code>role="switch"</code> automatically, no ARIA required. The underlying behaviour doesn't change, it's still a checkbox for form submission purposes, and a switch never supports the indeterminate state that an ordinary checkbox can.</p>
+
+<p>This is a newer HTML feature with still-evolving browser support. Unsupported browsers silently ignore the attribute and render an ordinary checkbox instead, worth confirming directly which of your standard browsers and screen readers actually recognise it.</p>
+
+
+<!-- section -->
+
+
+<h2>Default</h2>
+
+<p>A standard checkbox, no <code>switch</code> attribute, included for comparison.</p>
+
+<div class="example">
+  <input id="switch-default" type="checkbox">
+  <label for="switch-default">Enable notifications</label>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input id="switch-default" type="checkbox"&gt;
+&lt;label for="switch-default"&gt;Enable notifications&lt;/label&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Switch present</h2>
+
+<p>The same checkbox with the <code>switch</code> attribute added. Where supported, this changes its visual appearance to an on/off switch and its accessible role to <code>switch</code> instead of <code>checkbox</code>, automatically.</p>
+
+<div class="example">
+  <input id="switch-present" type="checkbox" switch>
+  <label for="switch-present">Enable notifications</label>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input id="switch-present" type="checkbox" <span class="highlight">switch</span>&gt;
+&lt;label for="switch-present"&gt;Enable notifications&lt;/label&gt;</code></pre>
+</details>
+
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+</body>
+</html>
