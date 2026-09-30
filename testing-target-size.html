@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing target size</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+
+    .note {
+      background: #fff3cd;
+      border: 1px solid #ffe69c;
+      padding: 0.75em 1em;
+      border-radius: 4px;
+      margin: 1.5em 0;
+    }
+
+    .btn-pass {
+      width: 44px;
+      height: 44px;
+      cursor: pointer;
+    }
+
+    .btn-tiny-alone {
+      width: 16px;
+      height: 16px;
+      font-size: 12px;
+      padding: 0;
+        line-height: 1;
+      cursor: pointer;
+      margin-right: 200px;
+    }
+
+    .tiny-pair {
+      display: inline-flex;
+      gap: 4px;
+    }
+
+    .btn-tiny-pair {
+      width: 16px;
+      height: 16px;
+      font-size: 12px;
+      padding: 0;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .btn-disabled-tiny {
+      width: 16px;
+      height: 16px;
+      font-size: 12px;
+      padding: 0;
+      color: #999;
+      line-height: 1;
+    }
+
+    .inline-small-link {
+      font-size: 12px;
+    }
+
+    .checkbox-tiny {
+      width: 14px;
+      height: 14px;
+      margin: 0;
+    }
+
+    .rescued-label {
+      display: inline-block;
+      padding: 8px 4px;
+      font-size: 16px;
+      line-height: 1.2;
+      vertical-align: middle;
+    }
+
+    .far-apart-row {
+      display: flex;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .card-target {
+      position: relative;
+      width: 280px;
+      height: 90px;
+      border: 1px solid #999;
+      border-radius: 4px;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .card-target p {
+      margin: 0;
+    }
+
+    .icon-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 16px;
+      height: 16px;
+      padding: 0;
+      font-size: 14px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .tiny-with-overlay {
+      position: relative;
+      width: 16px;
+      height: 16px;
+      font-size: 12px;
+      padding: 0;
+      font-size: 12px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .tiny-with-overlay::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+    }
+
+  </style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing target size</h1>
+
+<p>This page pairs with the "Highlight target size" bookmarklet, covering <a href="https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html" target="_blank">WCAG 2.2 2.5.8 Target Size (Minimum)</a>. The bookmarklet flags pointer targets smaller than 24 &times; 24 CSS pixels, draws a dashed 24px circle centred on each undersized target, and reports whether that circle overlaps another target.</p>
+
+<div class="note">
+  <p>What the bookmarklet reports:</p>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Colour</th>
+        <th scope="col">Meaning</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>No badge</td><td>Meets 24 &times; 24, or excluded from measurement entirely</td></tr>
+      <tr><td>Amber</td><td>Under 24 &times; 24, spacing is clear</td></tr>
+      <tr><td>Red</td><td>Under 24 &times; 24, its 24px circle overlaps another target</td></tr>
+    </tbody>
+  </table>
+  <p>This is a warnings-only tool. 2.5.8 has exceptions that need human judgement, an inline text link, the same function available another way, or a control whose size the browser sets and the author never touched, and the bookmarklet can't evaluate any of those on its own. Where a warning might be one of these exceptions, the badge says so, it doesn't resolve it for you.</p>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Example 1: passes</h2>
+
+<p>A button comfortably over 24 &times; 24.</p>
+
+<div class="example">
+  <button class="btn-pass" type="button">&times;</button>
+</div>
+
+<p><b>Expected result:</b> no badge at all. A genuine pass is silent, the summary panel at the bottom of the page is what confirms this target was actually measured and counted, not skipped.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button <span class="highlight">style="width: 44px; height: 44px;"</span>&gt;&times;&lt;/button&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 2: too small, spacing clear</h2>
+
+<p>A 16 &times; 16 button with plenty of space around it, nothing else nearby to conflict with.</p>
+
+<div class="example">
+  <button class="btn-tiny-alone" type="button" aria-label="Close">&times;</button>
+</div>
+
+<p><b>Expected result:</b> amber. Undersized, but its 24px circle doesn't overlap any other target, "16 &times; 16 &mdash; under 24 &times; 24. Spacing clear".</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button <span class="highlight">style="width: 16px; height: 16px;"</span> aria-label="Close"&gt;&times;&lt;/button&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 3: too small, and too close together</h2>
+
+<p>Two 16 &times; 16 buttons with only 4px between them, close enough that their 24px circles overlap.</p>
+
+<div class="example">
+  <span class="tiny-pair">
+    <button class="btn-tiny-pair" type="button" aria-label="Decrease quantity">&minus;</button>
+    <button class="btn-tiny-pair" type="button" aria-label="Increase quantity">+</button>
+  </span>
+</div>
+
+<p><b>Expected result:</b> red, on both buttons. Each is undersized, and each one's 24px circle overlaps the other, "24px circle overlaps 1 other target".</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button style="width: 16px; height: 16px;" aria-label="Decrease quantity"&gt;&minus;&lt;/button&gt;
+&lt;button style="width: 16px; height: 16px;" <span class="highlight">aria-label="Increase quantity"</span>&gt;+&lt;/button&gt;
+<span class="comment">&lt;!-- 4px gap between them --&gt;</span></code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 4: disabled, excluded entirely</h2>
+
+<p>The same tiny button as Example 2, but disabled.</p>
+
+<div class="example">
+  <button class="btn-disabled-tiny" type="button" aria-label="Close" disabled>&times;</button>
+</div>
+
+<p><b>Expected result:</b> no badge, and not counted in the summary panel's total either. A disabled control can't receive a pointer action, so it isn't a target at all, this isn't a pass, it's an exclusion.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button style="width: 16px; height: 16px;" aria-label="Close" <span class="highlight">disabled</span>&gt;&times;&lt;/button&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 5: hidden, excluded entirely</h2>
+
+<p>Nothing to see here, deliberately. A hidden field and a button removed from rendering, both excluded from measurement before size is even considered.</p>
+
+<div class="example">
+  <input type="hidden" name="tracking-id" value="abc123">
+  <button type="button" style="display: none;">Never shown</button>
+</div>
+
+<p><b>Expected result:</b> no badge, no entry in the summary panel's total, for either element. Correct, not a bug in this page, an <code>&lt;input type="hidden"&gt;</code> has no visible interface at all, and a <code>display: none</code> element has no box to measure.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input <span class="highlight">type="hidden"</span> name="tracking-id" value="abc123"&gt;
+&lt;button <span class="highlight">style="display: none;"</span>&gt;Never shown&lt;/button&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 6: inline text link</h2>
+
+<p>A link sitting inside a sentence, smaller than 24 &times; 24 because of its reduced font size.</p>
+
+<div class="example">
+  <p>For more information, read our <a href="#" class="inline-small-link">full policy</a> before continuing.</p>
+</div>
+
+<p><b>Expected result:</b> still flagged, the tool doesn't grant the exception itself, but the badge text adds "Inline text link, exception may apply", flagging that this is exactly the kind of case 2.5.8 excludes, a link that's part of running text, and needs a human decision rather than an automated one.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;p&gt;For more information, read our
+  &lt;a href="#" <span class="highlight">style="font-size: 12px;"</span>&gt;full policy&lt;/a&gt;
+  before continuing.
+&lt;/p&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 7: native control, unlabelled</h2>
+
+<p>A plain checkbox at its native size, no label anywhere nearby.</p>
+
+<div class="example">
+  <input class="checkbox-tiny" type="checkbox" aria-label="Subscribe to updates">
+</div>
+
+<p><b>Expected result:</b> flagged, with "Native control, check whether the author changed its size" appended. This is a nudge, not a verdict, a native checkbox rendered at its own default size is a common, often accepted exception, but this one has no visible label to union with either, so it's worth a second look regardless.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input type="checkbox" <span class="highlight">style="width: 14px; height: 14px;"</span> aria-label="Subscribe to updates"&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 8: small control, rescued by its label</h2>
+
+<p>The same tiny checkbox, but with a real, adjacent <code>&lt;label&gt;</code>. Clicking the label activates the checkbox, so the label is part of the target, and here it's big enough on its own to carry the combined box over 24 &times; 24 in both directions.</p>
+
+<div class="example">
+  <input class="checkbox-tiny" type="checkbox" id="rescued-checkbox">
+  <label class="rescued-label" for="rescued-checkbox">Subscribe to updates</label>
+</div>
+
+<p><b>Expected result:</b> no badge. The checkbox alone is 14 &times; 14, but unioned with its label's padded box, the combined target clears 24 &times; 24 in both width and height, so it isn't undersized at all.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input type="checkbox" id="rescued-checkbox" style="width: 14px; height: 14px;"&gt;
+&lt;label for="rescued-checkbox" <span class="highlight">style="padding: 8px 4px;"</span>&gt;Subscribe to updates&lt;/label&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 9: small control, label too far away</h2>
+
+<p>The same pairing again, but with 60px between the checkbox and its label, well past the 12px gap the bookmarklet allows before it stops treating them as adjacent.</p>
+
+<div class="example">
+  <div class="far-apart-row">
+    <input class="checkbox-tiny" type="checkbox" id="far-checkbox">
+    <label for="far-checkbox">Subscribe to updates</label>
+  </div>
+</div>
+
+<p><b>Expected result:</b> flagged on its own, at 14 &times; 14. The label is still programmatically associated and still activates the checkbox when clicked, but it's positioned too far away to be counted as part of the same visual target, so the union doesn't apply and the checkbox is measured alone.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div <span class="highlight">style="display: flex; gap: 60px;"</span>&gt;
+  &lt;input type="checkbox" id="far-checkbox" style="width: 14px; height: 14px;"&gt;
+  &lt;label for="far-checkbox"&gt;Subscribe to updates&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 10: nested targets don't conflict with each other</h2>
+
+<p>A large clickable card, made interactive with <code>role="button"</code> and a click handler rather than a real <code>&lt;a&gt;</code> or <code>&lt;button&gt;</code>, specifically so it can validly contain a real nested <code>&lt;button&gt;</code> for a single action inside it.</p>
+
+<div class="example">
+  <div class="card-target" role="button" tabindex="0" onclick="void(0)">
+    <p>Wireless keyboard</p>
+    <button class="icon-btn" type="button" aria-label="Add to favourites" onclick="event.stopPropagation()">&hearts;</button>
+  </div>
+</div>
+
+<p><b>Expected result:</b> the card itself passes silently, comfortably over 24 &times; 24. The icon button is undersized at 16 &times; 16, and its 24px circle does overlap the card underneath it, but since the card contains the button, that overlap isn't counted as a spacing conflict. Amber, not red, "Spacing clear".</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div <span class="highlight">role="button"</span> tabindex="0" onclick="..."&gt;
+  &lt;p&gt;Wireless keyboard&lt;/p&gt;
+  &lt;button style="width: 16px; height: 16px;" aria-label="Add to favourites" onclick="event.stopPropagation()"&gt;
+    &hearts;
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Example 11: hit area extended by ::before</h2>
+
+<p>A 16 &times; 16 button, but with a <code>::before</code> overlay extending 8px past every edge, giving it a real, clickable hit area of roughly 32 &times; 32. Clicking anywhere in that overlay still activates the button, generated content is part of the element's own hit-testing.</p>
+
+<div class="example">
+  <button class="tiny-with-overlay" type="button" aria-label="Info">i</button>
+</div>
+
+<p><b>Expected result:</b> flagged as undersized, 16 &times; 16, even though the real clickable area is closer to 32 &times; 32. This is a documented, genuine limitation, not a bug, the bookmarklet measures <code>getBoundingClientRect()</code> on the element itself, and a <code>::before</code> or <code>::after</code> overlay isn't part of that measurement. Worth checking by hand before treating this one as a real failure.</p>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button style="width: 16px; height: 16px;" aria-label="Info"&gt;i&lt;/button&gt;
+
+<span class="comment">/* extends the clickable area, but not the measured box */</span>
+button<span class="highlight">::before</span> {
+  content: '';
+  position: absolute;
+  <span class="highlight">inset: -8px;</span>
+}</code></pre>
+</details>
+
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+</body>
+</html>

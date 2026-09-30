@@ -6,6 +6,66 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    .switch-track {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      width: 9em;
+      height: 2.75em;
+      border: 2px solid #0a2a4d;
+      border-radius: 999px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .switch-input {
+      position: absolute;
+      inset: 0;
+      margin: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .switch-off,
+    .switch-on {
+      position: relative;
+      flex: 1;
+      z-index: 1;
+      text-align: center;
+      font-weight: bold;
+      padding: 0.4em 0;
+      margin: 0.25em;
+      border-radius: 999px;
+      pointer-events: none;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .switch-off {
+      background: #ddd;
+      color: #000;
+    }
+
+    .switch-on {
+      background: transparent;
+      color: #666;
+    }
+
+    .switch-track:has(.switch-input:checked) .switch-off {
+      background: transparent;
+      color: #666;
+    }
+
+    .switch-track:has(.switch-input:checked) .switch-on {
+      background: #3b6fc4;
+      color: #fff;
+    }
+
+    .switch-track:has(.switch-input:focus-visible) {
+      outline: 2px solid #000;
+      outline-offset: 2px;
+    }
+  </style>
 </head>
 <body>
 <main>
@@ -58,6 +118,33 @@
   <summary>HTML markup</summary>
 <pre><code>&lt;input id="switch-present" type="checkbox" <span class="highlight">switch</span>&gt;
 &lt;label for="switch-present"&gt;Enable notifications&lt;/label&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Custom styled switch</h2>
+
+<p>This example uses <code>switch</code> purely as a CSS hook (<code>input[switch]</code>), not for its native rendering. The checkbox itself stays fully keyboard-operable and its <code>checked</code> state is untouched, it's just made visually invisible and overlaid on a custom OFF/ON track built with plain CSS (<code>:has()</code> and sibling styling). Unlike Safari's own switch pseudo-elements, which are still behind an experimental flag, this renders consistently in any current browser.</p>
+
+<div class="example">
+  <label class="label" for="switch-styled">Enable notifications</label>
+  <span class="switch-track">
+    <input class="switch-input" type="checkbox" switch id="switch-styled">
+    <span class="switch-off" aria-hidden="true">OFF</span>
+    <span class="switch-on" aria-hidden="true">ON</span>
+  </span>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="switch-styled"&gt;Enable notifications&lt;/label&gt;
+&lt;span class="switch-track"&gt;
+  &lt;input class="switch-input" type="checkbox" <span class="highlight">switch</span> id="switch-styled"&gt;
+  &lt;span class="switch-off" aria-hidden="true"&gt;OFF&lt;/span&gt;
+  &lt;span class="switch-on" aria-hidden="true"&gt;ON&lt;/span&gt;
+&lt;/span&gt;</code></pre>
 </details>
 
 
