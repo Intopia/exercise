@@ -263,19 +263,19 @@ test('every button has an accessible name', async ({ page }) =&gt; {
 <h3>Try it yourself</h3>
 
 <video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/mp4/poster.png" controls src="assets/mp4/playwright2.mp4"></video>
-</video>
 
 <details>
-  <summary>Video transcript</summary>
-  <ul>
-    <li>Example 1: button</li>
-    <li>View the HTML example page</li>
-    <li>The 5th button has no accessible name</li>
-    <li>Run the test in terminal</li>
-    <li>Review the HTML report</li>
-    <li>Review the errors in terminal</li>
-  </ul>
+  <summary>Video description</summary>
+  <p>The video has no audio. It shows:</p>
+  <ol>
+    <li><strong>View the HTML example page.</strong> An accessible name bookmarklet is run on the buttons playground page, and each of the five buttons is reached using Tab.</li>
+    <li><strong>The fifth button has no accessible name.</strong> The bookmarklet shows a red badge on the fifth button reading "No accessible name".</li>
+    <li><strong>Run the test in terminal.</strong> When the test finishes, the HTML report opens automatically in the browser.</li>
+    <li><strong>Review the HTML report.</strong> The report shows the test failed in Chromium, Firefox and WebKit. The Chromium result is opened to show the error message, including the markup of the button that failed.</li>
+    <li><strong>Review the errors in terminal.</strong> The same three failures are shown in the terminal.</li>
+  </ol>
 </details>
+
 
 <p>The <a href="https://intopia.github.io/playwright-testing/playground/buttons.html">buttons playground page</a> has five buttons. Four have accessible names. One is an icon-only button with no name.</p>
 
