@@ -30,11 +30,11 @@
   <li><a href="#playwright-vs-axe-core">Playwright vs axe-core</a></li>
   <li><a href="#try-the-examples-yourself">Try the examples yourself</a></li>
   <li><a href="#example-1-every-button-has-an-accessible-name">Example 1: Every button has an accessible name</a></li>
-  <li><a href="#example-2-testing-disclosure-states">Example 2: Testing disclosure states</a></li>
+  <li><a href="#example-2-disclosures-communicate-their-expanded-state">Example 2: Disclosures communicate their expanded state</a></li>
   <li><a href="#example-3-every-control-can-be-reached-with-the-keyboard">Example 3: Every control can be reached with the keyboard</a></li>
   <li><a href="#example-4-dialogs-manage-focus">Example 4: Dialogs manage focus</a></li>
   <li><a href="#example-5-form-errors-are-marked-and-linked">Example 5: Form errors are marked and linked</a></li>
-  <li><a href="#example-6-reusing-tests-across-a-website">Example 6: Reusing tests across a website</a></li>
+  <li><a href="#example-6-accessibility-checks-are-reused-across-a-website">Example 6: Accessibility checks are reused across a website</a></li>
   <li><a href="#practical-notes">Practical notes</a></li>
   <li><a href="#further-exploration">Further exploration</a></li>
   <li><a href="#conclusion">Conclusion</a></li>
@@ -47,21 +47,23 @@
 <hr>
 <h2 id="introduction">Introduction</h2>
 
-<p>Automated accessibility tools like axe-core and Lighthouse can identify many accessibility issues. However, some issues only become apparent when people interact with a page, such as opening a dialog, submitting a form or navigating with a keyboard.</p>
+<p>Automated accessibility testing tools, such as WAVE, axe DevTools and Lighthouse, can identify many accessibility issues.</p>
 
-<p>Playwright can help test these interactions and check that they behave as expected.</p>
+<p>However, some issues only become apparent after someone interacts with a page, such as opening a dialog, submitting a form or navigating with a keyboard.</p>
 
-<p>This resource provides practical examples of using Playwright to test common accessibility requirements. Each example builds on the previous one and includes a simple JavaScript snippet and a test page with working and deliberately broken components, so you can see how the tests behave.</p>
+<p>Tools like Playwright can automate these interactions and check that they behave as expected.</p>
+
+<p>This resource provides practical examples of using Playwright to test common accessibility requirements. Each example builds on the previous one and includes a simple JavaScript snippet and a test page with working and deliberately broken components. This allows you to see how the tests behave.</p>
 
 <h3>Who this is for</h3>
 
 <ul>
+  <li><strong>Accessibility specialists and auditors</strong> who may never write tests, but advise teams who do.</li>
   <li><strong>Developers new to Playwright</strong> who want to learn how to test accessibility-related behaviour.</li>
   <li><strong>Developers already using Playwright</strong>, perhaps through Storybook, who want to explore testing interactions.</li>
-  <li><strong>Accessibility specialists and auditors</strong> who may never write a test, but advise teams who do.</li>
 </ul>
 
-<p>If you're in that last group, you don't need to follow every line of code. Each example starts with the expectation in plain language and shows what happens when the test fails. Those two parts tell the story on their own.</p>
+<p>If you're an accessibility specialist or auditor, you don't need to follow every line of code. Each example starts with the expectation in plain language and shows what happens when the test fails. Those two parts tell the story on their own.</p>
 
 
 <!-- section -->
@@ -70,11 +72,11 @@
 <hr>
 <h2 id="playwright-vs-axe-core">Playwright vs axe-core</h2>
 
-<p>axe-core can examine pages and identify accessibility issues it can detect automatically. These include missing accessible names, invalid ARIA attributes and poor colour contrast.</p>
+<p>axe-core is an open-source accessibility testing engine that powers tools such as the axe DevTools browser extension.</p>
 
-<p>However, axe-core can only check pages in their current state. It cannot interact with the page by pressing keys, opening dialogs or tracking where keyboard focus moves.</p>
+<p>axe-core checks pages in their current state. It can identify issues such as missing accessible names, invalid ARIA attributes and poor colour contrast, but cannot perform interactions such as pressing keys, opening dialogs or tracking keyboard focus.</p>
 
-<p>Playwright can also check pages in their current state, but it can automate interactions in a browser too. For example, a test can open a page, press Tab or Enter, click buttons, fill in forms and check what happens next.</p>
+<p>Playwright can automate these interactions in a browser. For example, a test can open a page, press Tab or Enter, click buttons, fill in forms and check what happens next.</p>
 
 <h3>Playwright reports are not audit reports</h3>
 
@@ -138,7 +140,9 @@
 
 <h3>Tests only answer the questions you ask</h3>
 
-<p>A test that passes can only confirm that a specific expectation was met. It doesn't prove a component is accessible, and it doesn't replace accessibility audits or testing with real people, including people who use assistive technologies every day.</p>
+<p>A passing test can only confirm that a specific expectation was met. For example, a test might confirm that every button has an accessible name, but it cannot determine whether those names are meaningful.</p>
+
+<p>Automated tests don't prove a component is accessible, and they don't replace accessibility audits or testing with real people, including people who use assistive technologies every day.</p>
 
 
 <!-- section -->
@@ -155,7 +159,7 @@
 
 <h3>The tests</h3>
 
-<p>All six tests, plus the reusable checks from example 6, are available in the <a href="https://github.com/Intopia/playwright-testing">playground repository</a>. The code matches the examples in this resource.</p>
+<p>All six tests are available in the <a href="https://github.com/Intopia/playwright-testing">playground repository</a>. The code matches the examples in this resource.</p>
 
 <p>To run the tests, you'll need the test files on your computer and Playwright installed. You can either:</p>
 
@@ -203,15 +207,15 @@
 
 <p>Every button needs an accessible name so assistive technologies can identify it. Icon-only buttons are a common source of problems. The icon may be visually clear, but without an accessible name, screen reader users may not know what the button does.</p>
 
-<h3>What we're looking for</h3>
+<h3>What we will test</h3>
 
 <p>Any button without an accessible name.</p>
 
 <p><strong>The expectation:</strong> Every button on the page has an accessible name.</p>
 
-<p>axe-core already checks for this. We're starting here because it introduces a simple testing approach used throughout the later examples: find all instances of an element and check each one.</p>
+<p>axe-core already checks for this. We're starting with a simple example to introduce an approach used throughout this resource: find all elements of a particular type and check each one.</p>
 
-<h3>The test</h3>
+<h3>The test script</h3>
 
 <pre tabindex="0"><code class="language-javascript">import { test, expect } from '@playwright/test';
 
@@ -324,11 +328,11 @@ Received string:  ""</code></pre>
 
 
 <hr>
-<h2 id="example-2-testing-disclosure-states">Example 2: Testing disclosure states</h2>
+<h2 id="example-2-disclosures-communicate-their-expanded-state">Example 2: Disclosures communicate their expanded state</h2>
 
 <p>A disclosure is a button that shows and hides content, such as an accordion panel or a "Read more" section. The button's <code>aria-expanded</code> attribute tells assistive technologies whether the content is currently expanded (<code>"true"</code>) or collapsed (<code>"false"</code>).</p>
 
-<h3>What we're looking for</h3>
+<h3>What we will test</h3>
 
 <p>A disclosure that opens and closes visually, but doesn't update its <code>aria-expanded</code> attribute.</p>
 
@@ -338,7 +342,7 @@ Received string:  ""</code></pre>
 
 <p>An axe-core scan of the initial page may not identify this issue because <code>aria-expanded="false"</code> is valid when the disclosure is closed. The problem only becomes apparent after someone activates the button, which is why testing the interaction is important.</p>
 
-<h3>The test</h3>
+<h3>The test script</h3>
 
 <pre tabindex="0"><code class="language-javascript">import { test, expect } from '@playwright/test';
 
@@ -415,7 +419,7 @@ Received: "false"</code></pre>
 
 <p>Keyboard users often navigate through interactive elements using the Tab key. Links, buttons and form controls should generally be reachable this way. If a control cannot receive keyboard focus, some people may be unable to use it.</p>
 
-<h3>What we're looking for</h3>
+<h3>What we will test</h3>
 
 <p>An interactive control that cannot be reached using Tab.</p>
 
@@ -425,7 +429,7 @@ Received: "false"</code></pre>
 
 <p>axe-core cannot simulate keyboard navigation on its own, so it may not identify this problem. The broken control on our playground page has a valid role and an accessible name, but cannot be reached using Tab.</p>
 
-<h3>The test</h3>
+<h3>The test script</h3>
 
 <pre tabindex="0"><code class="language-javascript">import { test, expect } from '@playwright/test';
 
@@ -524,7 +528,7 @@ test('every interactive control can be reached with the Tab key', async ({ page,
 
 <p>The ARIA Authoring Practices allow for this approach in some situations, and other approaches may also be appropriate. The important thing is to decide where focus should move and test that it behaves as expected.</p>
 
-<h3>What we're looking for</h3>
+<h3>What we will test</h3>
 
 <p>Two things can go wrong: focus doesn't move to the heading when the dialog opens, or it doesn't return to the button when the dialog closes.</p>
 
@@ -534,7 +538,7 @@ test('every interactive control can be reached with the Tab key', async ({ page,
 
 <p>These issues only become apparent when someone interacts with the dialog, so a standard axe-core scan of the initial page won't detect them.</p>
 
-<h3>The test</h3>
+<h3>The test script</h3>
 
 <pre tabindex="0"><code class="language-javascript">import { test, expect } from '@playwright/test';
 
@@ -629,7 +633,7 @@ Received: inactive</code></pre>
   <li><strong>The error message associated with the field</strong>, usually using <code>aria-describedby</code>, so the message can be announced when the user moves to the field.</li>
 </ul>
 
-<h3>What we're looking for</h3>
+<h3>What we will test</h3>
 
 <p>A field that displays an error message but doesn't communicate the error correctly to assistive technologies.</p>
 
@@ -639,7 +643,7 @@ Received: inactive</code></pre>
 
 <p>A scan of the initial page won't identify these issues because the error messages only appear after the form is submitted. Playwright can submit the form and check the resulting state.</p>
 
-<h3>The test</h3>
+<h3>The test script</h3>
 
 <pre tabindex="0"><code class="language-javascript">import { test, expect } from '@playwright/test';
 
@@ -724,12 +728,6 @@ Error: Book a call &gt; Phone: error message should be in its accessible descrip
 
 <p>However, it also means that tests with multiple failures can take longer to complete, and may reach Playwright's default 30-second timeout for an entire test.</p>
 
-<h3>Limitations of this test</h3>
-
-<p>This test checks that after submitting an empty form, every field displaying an error is marked as invalid and includes the error message in its accessible description.</p>
-
-<p>It doesn't check other validation errors, such as an incorrectly formatted email address. It also doesn't check focus management, error summaries or what a screen reader announces. The test relies on the page's naming convention to associate error messages with fields, so other forms may require a different approach.</p>
-
 <h3>Adapting the test for other forms</h3>
 
 <p>When given a plain text string, <code>toHaveAccessibleDescription</code> expects the entire accessible description to match.</p>
@@ -743,18 +741,24 @@ Error: Book a call &gt; Phone: error message should be in its accessible descrip
 
 <p>If the error message contains special regular expression characters, such as <code>.</code>, <code>?</code> or brackets, these must be escaped before creating the expression.</p>
 
+<h3>Limitations of this test</h3>
+
+<p>This test checks that after submitting an empty form, every field displaying an error is marked as invalid and includes the error message in its accessible description.</p>
+
+<p>It doesn't check other validation errors, such as an incorrectly formatted email address. It also doesn't check focus management, error summaries or what a screen reader announces. The test relies on the page's naming convention to associate error messages with fields, so other forms may require a different approach.</p>
+
 
 <!-- section -->
 
 
 <hr>
-<h2 id="example-6-reusing-tests-across-a-website">Example 6: Reusing tests across a website</h2>
+<h2 id="example-6-accessibility-checks-are-reused-across-a-website">Example 6: Accessibility checks are reused across a website</h2>
 
 <p>So far, each example has tested one type of component on a single page. However, real websites contain many pages with different combinations of components.</p>
 
 <p>Rather than writing separate tests for every component on every page, Playwright allows developers to create reusable checks. These checks can then run across multiple pages, making it easier to maintain consistent accessibility testing throughout a website.</p>
 
-<h3>What we're looking for</h3>
+<h3>What we will test</h3>
 
 <p>A small demonstration website with three pages:</p>
 
@@ -766,7 +770,7 @@ Error: Book a call &gt; Phone: error message should be in its accessible descrip
 
 <p><strong>The expectation:</strong> Every page meets the relevant accessibility requirements tested in Examples 2 to 5.</p>
 
-<h3>The test</h3>
+<h3>The test scripts</h3>
 
 <p>This example uses two files.</p>
 
