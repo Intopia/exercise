@@ -1,0 +1,988 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Accessibility testing with Playwright</title>
+  <meta name="description" content="Learn how to test accessibility with Playwright using six practical JavaScript examples covering keyboard navigation, focus management, ARIA states and form errors.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-a11y-dark.min.css" rel="stylesheet">
+  <link href="assets/css/testing.css" rel="stylesheet">
+<style>
+
+</style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Accessibility testing with Playwright</h1>
+
+<h2 id="contents">Contents</h2>
+
+<ul>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#playwright-vs-axe-core">Playwright vs axe-core</a></li>
+  <li><a href="#try-the-examples-yourself">Try the examples yourself</a></li>
+  <li><a href="#example-1-every-button-has-an-accessible-name">Example 1: Every button has an accessible name</a></li>
+  <li><a href="#example-2-testing-disclosure-states">Example 2: Testing disclosure states</a></li>
+  <li><a href="#example-3-every-control-can-be-reached-with-the-keyboard">Example 3: Every control can be reached with the keyboard</a></li>
+  <li><a href="#example-4-dialogs-manage-focus">Example 4: Dialogs manage focus</a></li>
+  <li><a href="#example-5-form-errors-are-marked-and-linked">Example 5: Form errors are marked and linked</a></li>
+  <li><a href="#example-6-reusing-tests-across-a-website">Example 6: Reusing tests across a website</a></li>
+  <li><a href="#practical-notes">Practical notes</a></li>
+  <li><a href="#further-exploration">Further exploration</a></li>
+  <li><a href="#conclusion">Conclusion</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="introduction">Introduction</h2>
+
+<p>Automated accessibility tools like axe-core and Lighthouse can identify many accessibility issues. However, some issues only become apparent when people interact with a page, such as opening a dialog, submitting a form or navigating with a keyboard.</p>
+
+<p>Playwright can help test these interactions and check that they behave as expected.</p>
+
+<p>This resource provides practical examples of using Playwright to test common accessibility requirements. Each example builds on the previous one and includes a simple JavaScript snippet and a test page with working and deliberately broken components, so you can see how the tests behave.</p>
+
+<h3>Who this is for</h3>
+
+<ul>
+  <li><strong>Developers new to Playwright</strong> who want to learn how to test accessibility-related behaviour.</li>
+  <li><strong>Developers already using Playwright</strong>, perhaps through Storybook, who want to explore testing interactions.</li>
+  <li><strong>Accessibility specialists and auditors</strong> who may never write a test, but advise teams who do.</li>
+</ul>
+
+<p>If you're in that last group, you don't need to follow every line of code. Each example starts with the expectation in plain language and shows what happens when the test fails. Those two parts tell the story on their own.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="playwright-vs-axe-core">Playwright vs axe-core</h2>
+
+<p>axe-core can examine pages and identify accessibility issues it can detect automatically. These include missing accessible names, invalid ARIA attributes and poor colour contrast.</p>
+
+<p>However, axe-core can only check pages in their current state. It cannot interact with the page by pressing keys, opening dialogs or tracking where keyboard focus moves.</p>
+
+<p>Playwright can also check pages in their current state, but it can automate interactions in a browser too. For example, a test can open a page, press Tab or Enter, click buttons, fill in forms and check what happens next.</p>
+
+<h3>Playwright reports are not audit reports</h3>
+
+<p>Accessibility audit reports typically document accessibility issues found during an assessment. They may include descriptions of each issue, where it occurs, which accessibility requirements it fails, how severe the issue is, and recommendations for fixing it.</p>
+
+<p>Playwright also produces reports, but these serve a different purpose. They show which automated tests passed or failed, along with information to help developers investigate and fix problems during development. These reports do not provide a comprehensive assessment of a product's accessibility.</p>
+
+<p>For example, a Playwright report might show that a test failed because keyboard focus did not move to a dialog when it opened.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Comparison</th>
+      <th scope="col">Audit report</th>
+      <th scope="col">Playwright report</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Answers</td>
+      <td>What's wrong with this page?</td>
+      <td>Did the expected behaviour happen?</td>
+    </tr>
+    <tr>
+      <td>Covers</td>
+      <td>Issues identified during the audit</td>
+      <td>Only what the tests check</td>
+    </tr>
+    <tr>
+      <td>Includes</td>
+      <td>Severity, WCAG mapping, remediation advice</td>
+      <td>Pass or fail, where it failed, the steps, a snapshot</td>
+    </tr>
+    <tr>
+      <td>Written for</td>
+      <td>Teams, managers, stakeholders</td>
+      <td>Developers working on the code</td>
+    </tr>
+    <tr>
+      <td>When</td>
+      <td>At a point in time</td>
+      <td>Whenever the tests run</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Catching accessibility issues after code changes</h3>
+
+<p>Accessibility audits assess a website at a particular point in time. Between audits, developers may make hundreds of changes to the code. Some of these changes could accidentally reintroduce accessibility issues that were previously fixed.</p>
+
+<p>Playwright offers a way to help prevent this through <strong>regression testing</strong>. Developers can write automated tests for specific accessibility requirements and include them in their development process. These tests can run whenever code changes are proposed, helping teams identify problems before those changes are released.</p>
+
+<p>For example, a typical development process might look like this:</p>
+
+<ol>
+  <li>A developer proposes a change to the code.</li>
+  <li>The build system automatically runs the tests.</li>
+  <li>If all tests pass, the change can proceed.</li>
+  <li>If a test fails, the developer can investigate and fix the problem before the change is merged.</li>
+</ol>
+
+<h3>Tests only answer the questions you ask</h3>
+
+<p>A test that passes can only confirm that a specific expectation was met. It doesn't prove a component is accessible, and it doesn't replace accessibility audits or testing with real people, including people who use assistive technologies every day.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="try-the-examples-yourself">Try the examples yourself</h2>
+
+<p>You can read this resource without running any tests. However, if you'd like to see the tests pass and fail for yourself, everything you need is provided.</p>
+
+<p>Every example has its own page on the <a href="https://intopia.github.io/playwright-testing/playground/">playground site</a>. Each page includes working components and at least one deliberately broken component, with an explanation of what's wrong.</p>
+
+<p>It's worth opening each page and trying the components yourself before running the tests. In many cases, the accessibility issue won't be immediately obvious. That's part of what these tests are designed to demonstrate.</p>
+
+<h3>The tests</h3>
+
+<p>All six tests, plus the reusable checks from example 6, are available in the <a href="https://github.com/Intopia/playwright-testing">playground repository</a>. The code matches the examples in this resource.</p>
+
+<p>To run the tests, you'll need the test files on your computer and Playwright installed. You can either:</p>
+
+<ul>
+  <li><strong>Clone or download the repository</strong> to get all the tests and a ready-made Playwright project.</li>
+  <li><strong>Copy individual tests</strong> from this resource into the <code>tests</code> folder of your own Playwright project.</li>
+</ul>
+
+<p>The tests run on your computer and open the published playground pages in a browser.</p>
+
+<h3>Setting up Playwright</h3>
+
+<p>If you haven't used Playwright before, you'll need to install <a href="https://nodejs.org/">Node.js</a> and follow the <a href="https://playwright.dev/docs/intro">Playwright installation guide</a>.</p>
+
+<p>If you've cloned the repository, the README includes instructions for getting started.</p>
+
+<h3>Two ways to run a test</h3>
+
+<p><strong>UI mode</strong> is useful while you're exploring. It opens a window where you can run individual tests, explore each step and see the results:</p>
+
+<pre tabindex="0"><code class="language-bash">npx playwright test --ui</code></pre>
+
+<p>By default, UI mode only runs the first browser in the configuration, which is Chromium in this project. You can select the others in its Projects filter.</p>
+
+<p><strong>The terminal</strong> runs tests in Chromium, Firefox and WebKit, and generates an HTML report you can open afterwards. This is similar to how tests run on a build server:</p>
+
+<pre tabindex="0"><code class="language-bash">npx playwright test tests/disclosures.spec.js</code></pre>
+
+<p>To open the report from the last terminal run:</p>
+
+<pre tabindex="0"><code class="language-bash">npx playwright show-report</code></pre>
+
+<h3>Understanding test failures</h3>
+
+<p>Every test in this resource is designed to identify at least one deliberately broken component. This means you should expect some tests to fail.</p>
+
+<p>When a test fails, look at the results to understand what went wrong and why.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="example-1-every-button-has-an-accessible-name">Example 1: Every button has an accessible name</h2>
+
+<p>Every button needs an accessible name so assistive technologies can identify it. Icon-only buttons are a common source of problems. The icon may be visually clear, but without an accessible name, screen reader users may not know what the button does.</p>
+
+<h3>What we're looking for</h3>
+
+<p>Any button without an accessible name.</p>
+
+<p><strong>The expectation:</strong> Every button on the page has an accessible name.</p>
+
+<p>axe-core already checks for this. We're starting here because it introduces a simple testing approach used throughout the later examples: find all instances of an element and check each one.</p>
+
+<h3>The test</h3>
+
+<pre tabindex="0"><code class="language-javascript">import { test, expect } from '@playwright/test';
+
+// The playground page
+const pageUrl = 'https://intopia.github.io/playwright-testing/playground/buttons.html';
+
+test('every button has an accessible name', async ({ page }) =&gt; {
+  // Open the playground page
+  await page.goto(pageUrl);
+
+  // Find every button on the page
+  const buttons = await page.getByRole('button').all();
+
+  // Check each one has an accessible name (at least one character)
+  for (const button of buttons) {
+    // Grab the button's markup so a failure shows exactly which button it was
+    const markup = await button.evaluate(el =&gt; el.outerHTML);
+
+    // expect.soft keeps going after a failure, so every broken button is reported
+    await expect.soft(
+      button,
+      'This button has no accessible name:\n' + markup
+    ).toHaveAccessibleName(/.+/);
+  }
+});</code></pre>
+
+<p>In plain language, the test:</p>
+
+<ol>
+  <li><strong>Opens the page.</strong></li>
+  <li><strong>Finds every button.</strong> <code>getByRole('button')</code> finds elements with the button role, and <code>.all()</code> returns them as a list.</li>
+  <li><strong>Checks each button.</strong> The loop checks buttons one at a time. <code>toHaveAccessibleName(/.+/)</code> checks that each has a name containing at least one character.</li>
+  <li><strong>Reports every failure.</strong> <code>expect.soft</code> allows the test to continue checking other buttons after a failure, rather than stopping at the first one.</li>
+  <li><strong>Identifies the problem.</strong> The test includes the failing button's HTML markup in the report, making it easier to locate and fix.</li>
+</ol>
+
+<p>The loop means the test works regardless of how many buttons are on the page. If more buttons are added, they'll be checked automatically.</p>
+
+<p>The later examples build on this approach, checking multiple elements and reporting which ones failed and why.</p>
+
+<h3>A word about <code>await</code></h3>
+
+<p>You'll see <code>await</code> throughout this test and the examples that follow. Playwright's actions and checks take time to complete, such as opening a page, pressing a key or waiting for something to appear. <code>await</code> tells the test to wait for each operation to finish before moving on. The <code>async</code> keyword at the start of the test allows <code>await</code> to be used inside it.</p>
+
+<p>Forgetting <code>await</code> is a common mistake when learning Playwright. Without it, a test may continue or even finish before a check has completed. This can sometimes result in a test passing when it should fail.</p>
+
+<p>If a test passes unexpectedly, check for missing <code>await</code> statements.</p>
+
+<h3>Try it yourself</h3>
+
+<p>The <a href="https://intopia.github.io/playwright-testing/playground/buttons.html">buttons playground page</a> has five buttons. Four have accessible names. One is an icon-only button with no name.</p>
+
+<p>Run the test:</p>
+
+<pre tabindex="0"><code class="language-bash">npx playwright test tests/buttons.spec.js</code></pre>
+
+<p>The test should fail, with a message that starts like this:</p>
+
+<pre tabindex="0"><code class="language-none">Error: This button has no accessible name:
+&lt;button type="button"&gt;
+  &lt;svg aria-hidden="true" viewBox="0 0 24 24"&gt;...&lt;/svg&gt;
+&lt;/button&gt;
+
+expect(locator).toHaveAccessibleName(expected) failed
+
+Locator: getByRole('button').nth(4)
+Expected pattern: /.+/
+Received string:  ""</code></pre>
+
+<p>The first part is the custom message showing the HTML markup of the button that failed. The rest is Playwright's report, showing that it expected an accessible name containing at least one character but found an empty string.</p>
+
+<p>The <code>nth(4)</code> identifies the fifth button on the page, because Playwright starts counting from zero.</p>
+
+<h3>Fixing the button</h3>
+
+<p>You can't edit the published playground page, but you can edit a local copy. <a href="https://github.com/Intopia/playwright-testing">Clone the playground repository</a>, open <code>playground/buttons.html</code> and add <code>aria-label="Menu"</code> to the broken button.</p>
+
+<p>Then update the <code>pageUrl</code> line in your test to point to the local file:</p>
+
+<pre tabindex="0"><code class="language-javascript">const pageUrl = 'file://' + process.cwd() + '/playground/buttons.html';</code></pre>
+
+<p>You don't need a web server for this. <code>file://</code> opens the page directly from your computer, while <code>process.cwd()</code> refers to the folder where you run the test. Make sure you run it from the repository folder.</p>
+
+<p>Run the test again. It should now pass, confirming that the test can detect the issue and recognise when it's been fixed.</p>
+
+<p>You can use the same approach with the other examples to explore what happens when components are fixed or broken.</p>
+
+<h3>Limitations of this test</h3>
+
+<p>This test checks that every button has an accessible name containing at least one character. However, it cannot determine whether those names are meaningful. A button named "button" or "click here" would still pass, so the quality of accessible names needs to be checked by a person.</p>
+
+
+<!-- section -->
+
+
+
+<hr>
+<h2 id="example-2-testing-disclosure-states">Example 2: Testing disclosure states</h2>
+
+<p>A disclosure is a button that shows and hides content, such as an accordion panel or a "Read more" section. The button's <code>aria-expanded</code> attribute tells assistive technologies whether the content is currently expanded (<code>"true"</code>) or collapsed (<code>"false"</code>).</p>
+
+<h3>What we're looking for</h3>
+
+<p>A disclosure that opens and closes visually, but doesn't update its <code>aria-expanded</code> attribute.</p>
+
+<p>For example, a sighted mouse user may not notice anything wrong. However, a screen reader user could activate the disclosure and still hear "collapsed", even though the content is now visible.</p>
+
+<p><strong>The expectation:</strong> When a disclosure opens, <code>aria-expanded</code> changes to <code>"true"</code>. When it closes, the value changes back to <code>"false"</code>.</p>
+
+<p>An axe-core scan of the initial page may not identify this issue because <code>aria-expanded="false"</code> is valid when the disclosure is closed. The problem only becomes apparent after someone activates the button, which is why testing the interaction is important.</p>
+
+<h3>The test</h3>
+
+<pre tabindex="0"><code class="language-javascript">import { test, expect } from '@playwright/test';
+
+// The playground page
+const pageUrl = 'https://intopia.github.io/playwright-testing/playground/disclosures.html';
+
+test('every disclosure keeps aria-expanded in sync with its content', async ({ page }) =&gt; {
+  await page.goto(pageUrl);
+
+  // Find every disclosure button: any button that controls another element
+  const buttons = await page.locator('button[aria-controls]').all();
+
+  for (const button of buttons) {
+    // The button's visible text, so failures say which disclosure it was
+    const name = (await button.textContent()).trim();
+
+    // Find the content this button controls, using its aria-controls value
+    const panelId = await button.getAttribute('aria-controls');
+    const panel = page.locator('#' + panelId);
+
+    // OPEN: press Enter on the button
+    await button.press('Enter');
+    await expect.soft(panel, name + ': content should be visible when opened').toBeVisible();
+    await expect.soft(button, name + ': aria-expanded should be "true" when opened').toHaveAttribute('aria-expanded', 'true');
+
+    // CLOSE: press Enter again
+    await button.press('Enter');
+    await expect.soft(panel, name + ': content should be hidden when closed').toBeHidden();
+    await expect.soft(button, name + ': aria-expanded should be "false" when closed').toHaveAttribute('aria-expanded', 'false');
+  }
+});</code></pre>
+
+<p>This test builds on the loop introduced in Example 1, with three new concepts:</p>
+
+<ol>
+  <li><strong><code>page.locator('button[aria-controls]')</code></strong> uses a CSS selector to find buttons with an <code>aria-controls</code> attribute. In this example, these are the disclosure buttons.</li>
+  <li><strong><code>button.press('Enter')</code></strong> focuses the button and presses Enter to activate it. However, this doesn't check whether someone can reach the button using Tab. We'll explore that in Example 3.</li>
+  <li><strong>Two checks after each interaction.</strong> The test checks whether the content is visible or hidden, and whether <code>aria-expanded</code> reflects that state. Both checks must pass when the disclosure opens and closes.</li>
+</ol>
+
+<h3>Try it yourself</h3>
+
+<p>The <a href="https://intopia.github.io/playwright-testing/playground/disclosures.html">disclosures playground page</a> has four disclosures. Three work correctly. The fourth, "Gift wrapping", shows and hides its content but doesn't update <code>aria-expanded</code>.</p>
+
+<p>Try them with a mouse first. All four appear to work correctly, so the accessibility issue may not be obvious.</p>
+
+<p>Then run the test:</p>
+
+<pre tabindex="0"><code class="language-bash">npx playwright test tests/disclosures.spec.js</code></pre>
+
+<p>The test should report a failure for the "Gift wrapping" disclosure:</p>
+
+<pre tabindex="0"><code class="language-none">Error: Gift wrapping: aria-expanded should be "true" when opened
+
+Expected: "true"
+Received: "false"</code></pre>
+
+<p>The results also show that the content opens and closes correctly. Only the <code>aria-expanded</code> value is incorrect, demonstrating how Playwright can identify an issue that isn't visually apparent.</p>
+
+<h3>Limitations of this test</h3>
+
+<p>This test checks that pressing Enter opens and closes each disclosure, and that <code>aria-expanded</code> updates correctly.</p>
+
+<p>It doesn't check other interactions, such as pressing Space or clicking with a mouse. It also doesn't confirm what a screen reader announces.</p>
+
+<p>The test uses <code>aria-controls</code> to identify each disclosure's content. If your disclosures are built differently, you may need to adjust the test.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="example-3-every-control-can-be-reached-with-the-keyboard">Example 3: Every control can be reached with the keyboard</h2>
+
+<p>Keyboard users often navigate through interactive elements using the Tab key. Links, buttons and form controls should generally be reachable this way. If a control cannot receive keyboard focus, some people may be unable to use it.</p>
+
+<h3>What we're looking for</h3>
+
+<p>An interactive control that cannot be reached using Tab.</p>
+
+<p>For example, a <code>div</code> with <code>role="button"</code> and a click handler, but no <code>tabindex</code>. It has a role, an accessible name and works with a mouse. However, keyboard users cannot reach it using Tab.</p>
+
+<p><strong>The expectation:</strong> Every link, button and form control on the page can be reached by pressing Tab.</p>
+
+<p>axe-core cannot simulate keyboard navigation on its own, so it may not identify this problem. The broken control on our playground page has a valid role and an accessible name, but cannot be reached using Tab.</p>
+
+<h3>The test</h3>
+
+<pre tabindex="0"><code class="language-javascript">import { test, expect } from '@playwright/test';
+
+// The playground page
+const pageUrl = 'https://intopia.github.io/playwright-testing/playground/keyboard.html';
+
+test('every interactive control can be reached with the Tab key', async ({ page, browserName }) =&gt; {
+  // On macOS, Playwright's WebKit follows the system keyboard navigation setting,
+  // where Tab skips links by default. That would make this test fail for reasons
+  // unrelated to the page, so skip it there.
+  test.skip(browserName === 'webkit', 'WebKit skips links with Tab by default');
+
+  await page.goto(pageUrl);
+
+  // The controls we expect keyboard users to reach:
+  // anything exposed as a link, button, text field, checkbox or select
+  const controls = await page
+    .getByRole('link')
+    .or(page.getByRole('button'))
+    .or(page.getByRole('textbox'))
+    .or(page.getByRole('checkbox'))
+    .or(page.getByRole('combobox'))
+    .all();
+
+  // Press Tab through the page. Each time, mark whatever has focus.
+  // (We press Tab twice as many times as there are controls, to be safe.)
+  for (let i = 0; i &lt; controls.length * 2; i++) {
+    await page.keyboard.press('Tab');
+    await page.evaluate(() =&gt; document.activeElement.setAttribute('data-reached', ''));
+  }
+
+  // Check every control was marked
+  for (const control of controls) {
+    const markup = await control.evaluate(el =&gt; el.outerHTML);
+
+    await expect.soft(
+      control,
+      'Could not reach this control with the Tab key:\n' + markup
+    ).toHaveAttribute('data-reached', '');
+  }
+});</code></pre>
+
+<p>This test compares the controls on the page with those that can be reached using the Tab key.</p>
+
+<ol>
+  <li><strong>Find the controls that should be reachable.</strong> The <code>.or()</code> method combines different roles, including links, buttons, text fields, checkboxes and comboboxes. This includes the broken button because it has <code>role="button"</code>.</li>
+  <li><strong>Move through the page using Tab.</strong> Each time an element receives focus, the test adds a <code>data-reached</code> attribute to mark it as visited. This attribute is added to the page during the test.</li>
+  <li><strong>Check which controls were reached.</strong> The test checks each control for the <code>data-reached</code> attribute. Any control without it was not reached during the test.</li>
+</ol>
+
+<h3>Try it yourself</h3>
+
+<p>The <a href="https://intopia.github.io/playwright-testing/playground/keyboard.html">keyboard playground page</a> has three navigation links, a text field, a select, a checkbox and a button, all reachable using Tab. It also has a "Download brochure" control that cannot be reached this way.</p>
+
+<p>Try navigating through the page using Tab. You'll notice that the "Download brochure" control is skipped.</p>
+
+<p>Then run the test:</p>
+
+<pre tabindex="0"><code class="language-bash">npx playwright test tests/keyboard.spec.js</code></pre>
+
+<p>The test should report one failure in Chromium and Firefox:</p>
+
+<pre tabindex="0"><code class="language-none">Error: Could not reach this control with the Tab key:
+&lt;div role="button" class="fake-button" id="download"&gt;Download brochure&lt;/div&gt;</code></pre>
+
+<p>WebKit will be skipped, for reasons explained in the next section.</p>
+
+<h3>Why skip WebKit?</h3>
+
+<p>Without this exception, the test also fails on the three navigation links. This isn't a problem with the page itself. By default, Safari on macOS skips links when navigating with Tab. Users can enable "Press Tab to highlight each item" in Safari's settings, or use Option + Tab to reach links.</p>
+
+<p>Playwright uses its own browser installations rather than the browsers installed on your computer, so they may behave differently. Playwright's WebKit doesn't follow Safari's keyboard navigation setting. Instead, it follows the macOS "Keyboard navigation" setting in System Settings > Keyboard (<a href="https://github.com/microsoft/playwright/issues/41808">Playwright issue #41808</a>). This means the same test may produce different results on different computers.</p>
+
+<p>When interpreting automated test results, it's important to remember that a failure may be caused by browser behaviour rather than a problem with the page.</p>
+
+<h3>Limitations of this test</h3>
+
+<p>This test checks whether each identified interactive control receives keyboard focus when navigating with Tab.</p>
+
+<p>It doesn't check whether the focus order is logical or whether the focus indicator is visible.</p>
+
+<p>It also only checks elements with the roles included in the test. For example, a <code>div</code> with a click handler but no interactive role wouldn't be included. Identifying these kinds of issues generally requires manual testing.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="example-4-dialogs-manage-focus">Example 4: Dialogs manage focus</h2>
+
+<p>When a modal dialog opens, keyboard and screen reader users need focus to move into it. When it closes, focus should generally return to the element that opened it, usually a button.</p>
+
+<p>Where focus moves when the dialog opens depends on the content and purpose of the dialog. In this example, <strong>focus moves to the dialog's heading</strong>.</p>
+
+<p>Moving focus directly to the first control, such as a close button or form field, may not give screen reader users enough context. Focusing the heading allows them to hear what the dialog is about before interacting with its content.</p>
+
+<p>The ARIA Authoring Practices allow for this approach in some situations, and other approaches may also be appropriate. The important thing is to decide where focus should move and test that it behaves as expected.</p>
+
+<h3>What we're looking for</h3>
+
+<p>Two things can go wrong: focus doesn't move to the heading when the dialog opens, or it doesn't return to the button when the dialog closes.</p>
+
+<p>In the broken playground example, focus is lost when the dialog closes. This leaves keyboard users without a visible focus indicator, making it difficult to know where they are on the page. In Chrome, pressing Tab may even move focus into the browser's toolbar rather than to another element on the page.</p>
+
+<p><strong>The expectation:</strong> When the dialog opens, focus moves to its heading. When it's closed using Escape, focus returns to the button that opened it.</p>
+
+<p>These issues only become apparent when someone interacts with the dialog, so a standard axe-core scan of the initial page won't detect them.</p>
+
+<h3>The test</h3>
+
+<pre tabindex="0"><code class="language-javascript">import { test, expect } from '@playwright/test';
+
+// The playground page
+const pageUrl = 'https://intopia.github.io/playwright-testing/playground/dialogs.html';
+
+test('every dialog focuses its heading on open and returns focus on Escape', async ({ page }) =&gt; {
+  await page.goto(pageUrl);
+
+  // Find every button that opens a dialog
+  const triggers = await page.locator('button[aria-haspopup="dialog"]').all();
+
+  for (const trigger of triggers) {
+    const name = (await trigger.textContent()).trim();
+
+    // OPEN: press Enter on the trigger button
+    await trigger.press('Enter');
+
+    // Find the open dialog (closed dialogs are ignored by getByRole)
+    const dialog = page.getByRole('dialog');
+    await expect.soft(dialog, name + ': dialog should be open').toBeVisible();
+
+    // Focus should be on the dialog's heading
+    await expect.soft(
+      dialog.getByRole('heading'),
+      name + ': focus should move to the dialog heading'
+    ).toBeFocused();
+
+    // CLOSE: press Escape
+    await page.keyboard.press('Escape');
+    await expect.soft(dialog, name + ': dialog should close with Escape').toBeHidden();
+
+    // Focus should return to the button that opened the dialog
+    await expect.soft(
+      trigger,
+      name + ': focus should return to the button that opened the dialog'
+    ).toBeFocused();
+  }
+});</code></pre>
+
+<p>This test introduces a new approach: checking a sequence of interactions. For each dialog, the test opens it, checks focus, closes it and checks focus again.</p>
+
+<ol>
+  <li><strong>Open the dialog.</strong> Press Enter on the button that opens it.</li>
+  <li><strong>Check the dialog and focus.</strong> Confirm that the dialog is open and its heading has keyboard focus.</li>
+  <li><strong>Close the dialog.</strong> Press Escape.</li>
+  <li><strong>Check the dialog and focus again.</strong> Confirm that the dialog has closed and focus has returned to the button that opened it.</li>
+</ol>
+
+<p>The test uses <code>getByRole('dialog')</code> to find the currently open dialog. Because closed dialogs are excluded from the accessibility tree, the test doesn't need to know which dialog belongs to each button.</p>
+
+<h3>Try it yourself</h3>
+
+<p>The <a href="https://intopia.github.io/playwright-testing/playground/dialogs.html">dialogs playground page</a> has four buttons that open native <code>&lt;dialog&gt;</code> elements. Each dialog heading uses <code>tabindex="-1"</code> and <code>autofocus</code>, allowing the browser to move focus to the heading without additional JavaScript.</p>
+
+<p>Three dialogs work correctly. The fourth, "Sign out", loses focus when it closes.</p>
+
+<p>Try each dialog using the keyboard: Tab to the button, press Enter to open it, then Escape to close it. Notice where focus moves at each step.</p>
+
+<p>Then run the test:</p>
+
+<pre tabindex="0"><code class="language-bash">npx playwright test tests/dialogs.spec.js</code></pre>
+
+<p>The test should report one failure in each browser:</p>
+
+<pre tabindex="0"><code class="language-none">Error: Sign out: focus should return to the button that opened the dialog
+
+Expected: focused
+Received: inactive</code></pre>
+
+<p>All the heading focus checks pass in Chromium, Firefox and WebKit. This demonstrates that the <code>autofocus</code> approach works across all three browser engines in this example.</p>
+
+<h3>Limitations of this test</h3>
+
+<p>This test checks that focus moves to each dialog's heading when it opens, and returns to the button that opened it when the dialog is closed using Escape.</p>
+
+<p>It doesn't check what happens when the dialog is closed using its own buttons, or whether focus stays within the dialog while it's open. These could be added as further checks. It also doesn't confirm how a screen reader announces the heading, which still needs testing with a screen reader.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="example-5-form-errors-are-marked-and-linked">Example 5: Form errors are marked and linked</h2>
+
+<p>When someone submits a form with errors, the affected fields may display error messages and visual indicators, such as coloured borders.</p>
+
+<p>Screen reader users also need:</p>
+
+<ul>
+  <li><strong>The field identified as invalid</strong>, using <code>aria-invalid="true"</code>.</li>
+  <li><strong>The error message associated with the field</strong>, usually using <code>aria-describedby</code>, so the message can be announced when the user moves to the field.</li>
+</ul>
+
+<h3>What we're looking for</h3>
+
+<p>A field that displays an error message but doesn't communicate the error correctly to assistive technologies.</p>
+
+<p>The broken form on our playground page has two examples: one field that doesn't get <code>aria-invalid="true"</code>, and another whose error message isn't associated with the field. Both appear visually identical to the working fields.</p>
+
+<p><strong>The expectation:</strong> After submitting an empty form, every field displaying an error has <code>aria-invalid="true"</code>, and its error message is included in its accessible description.</p>
+
+<p>A scan of the initial page won't identify these issues because the error messages only appear after the form is submitted. Playwright can submit the form and check the resulting state.</p>
+
+<h3>The test</h3>
+
+<pre tabindex="0"><code class="language-javascript">import { test, expect } from '@playwright/test';
+
+// The playground page
+const pageUrl = 'https://intopia.github.io/playwright-testing/playground/forms.html';
+
+test('every field with an error is marked invalid and linked to its message', async ({ page }) =&gt; {
+  await page.goto(pageUrl);
+
+  // Find every form on the page
+  const forms = await page.locator('form').all();
+
+  for (const form of forms) {
+    // The form's heading, so failures say which form it was
+    const formName = (await form.getByRole('heading').textContent()).trim();
+
+    // SUBMIT: press Enter on the form's button, with every field left empty
+    await form.getByRole('button').press('Enter');
+
+    // Make sure error messages actually appeared.
+    // (Without this, a form that showed no errors would quietly pass.)
+    const visibleErrors = form.locator('.error:visible');
+    await expect.soft(visibleErrors, formName + ': submitting empty should show error messages').not.toHaveCount(0);
+
+    // Check every field that is now showing an error
+    for (const error of await visibleErrors.all()) {
+      const errorText = (await error.textContent()).trim();
+
+      // Each error's id is the field's id plus "-error", so work back to the field
+      const fieldId = (await error.getAttribute('id')).replace('-error', '');
+      const field = page.locator('#' + fieldId);
+
+      // The field's label, so failures say which field it was
+      const fieldLabel = (await page.locator('label[for="' + fieldId + '"]').textContent()).trim();
+      const name = formName + ' &gt; ' + fieldLabel;
+
+      // The field should be marked as invalid...
+      await expect.soft(field, name + ': should have aria-invalid="true"').toHaveAttribute('aria-invalid', 'true');
+
+      // ...and its error message should be part of its accessible description
+      await expect.soft(field, name + ': error message should be in its accessible description').toHaveAccessibleDescription(errorText);
+    }
+  }
+});</code></pre>
+
+<p>For every form on the page, the test:</p>
+
+<ol>
+  <li><strong>Submits the form empty</strong>, by pressing Enter on its submit button.</li>
+  <li><strong>Checks that error messages appear.</strong> Without this check, a form that displays no errors could pass because there would be nothing to test.</li>
+  <li><strong>Finds the field associated with each error.</strong> The test uses the page's naming convention, where the error message's <code>id</code> matches the field's <code>id</code> with <code>-error</code> added. It doesn't use <code>aria-describedby</code> to find the field because that's one of the things being tested.</li>
+  <li><strong>Checks two things for each field.</strong> <code>aria-invalid="true"</code> identifies the field as invalid, while <code>toHaveAccessibleDescription</code> checks that the error message is included in its accessible description.</li>
+</ol>
+
+<p>The final check is particularly useful. Rather than simply checking whether <code>aria-describedby</code> exists, it checks the field's accessible description. If the error message isn't correctly associated with the field, the test fails.</p>
+
+<h3>Try it yourself</h3>
+
+<p>The <a href="https://intopia.github.io/playwright-testing/playground/forms.html">forms playground page</a> has three forms. "Contact us" and "Newsletter" work correctly, while "Book a call" has two fields with accessibility issues.</p>
+
+<p>Try submitting all three forms without entering any information. Visually, they behave the same way.</p>
+
+<p>Then run the test:</p>
+
+<pre tabindex="0"><code class="language-bash">npx playwright test tests/forms.spec.js</code></pre>
+
+<p>The test should report two failures in each browser:</p>
+
+<pre tabindex="0"><code class="language-none">Error: Book a call &gt; Name: should have aria-invalid="true"
+
+Error: Book a call &gt; Phone: error message should be in its accessible description</code></pre>
+
+<p>Each field fails a different check. The Name field passes the accessible description check but fails the <code>aria-invalid</code> check. The Phone field passes the <code>aria-invalid</code> check but fails the accessible description check.</p>
+
+<p>This shows how the test can identify two different accessibility issues, even when the fields appear to behave correctly on screen.</p>
+
+<h3>Why failing tests take longer</h3>
+
+<p>Open this test in the HTML report and look at the steps. The passing checks take a few milliseconds, while the two failing checks take around five seconds each.</p>
+
+<p>This happens because Playwright automatically retries checks for a short period before reporting a failure. This is useful for pages where content may take time to update.</p>
+
+<p>However, it also means that tests with multiple failures can take longer to complete, and may reach Playwright's default 30-second timeout for an entire test.</p>
+
+<h3>Limitations of this test</h3>
+
+<p>This test checks that after submitting an empty form, every field displaying an error is marked as invalid and includes the error message in its accessible description.</p>
+
+<p>It doesn't check other validation errors, such as an incorrectly formatted email address. It also doesn't check focus management, error summaries or what a screen reader announces. The test relies on the page's naming convention to associate error messages with fields, so other forms may require a different approach.</p>
+
+<h3>Adapting the test for other forms</h3>
+
+<p>When given a plain text string, <code>toHaveAccessibleDescription</code> expects the entire accessible description to match.</p>
+
+<p>In this example, each field's description contains only its error message. However, many forms also provide instructions or hint text using <code>aria-describedby</code>. For example, a field might have the hint "Use your work email" followed by an error message.</p>
+
+<p>In these cases, the test can check whether the accessible description contains the error message, rather than requiring an exact match:</p>
+
+<pre tabindex="0"><code class="language-javascript">await expect.soft(field, name + ': error message should be in its accessible description')
+  .toHaveAccessibleDescription(new RegExp(errorText));</code></pre>
+
+<p>If the error message contains special regular expression characters, such as <code>.</code>, <code>?</code> or brackets, these must be escaped before creating the expression.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="example-6-reusing-tests-across-a-website">Example 6: Reusing tests across a website</h2>
+
+<p>So far, each example has tested one type of component on a single page. However, real websites contain many pages with different combinations of components.</p>
+
+<p>Rather than writing separate tests for every component on every page, Playwright allows developers to create reusable checks. These checks can then run across multiple pages, making it easier to maintain consistent accessibility testing throughout a website.</p>
+
+<h3>What we're looking for</h3>
+
+<p>A small demonstration website with three pages:</p>
+
+<ul>
+  <li><strong>Home:</strong> Disclosures and a newsletter dialog. All components work correctly.</li>
+  <li><strong>Products:</strong> A product list with "Add to cart" buttons. One button cannot be reached using the keyboard, as demonstrated in Example 3.</li>
+  <li><strong>Help:</strong> FAQ disclosures and a contact form. The Email field is not marked as invalid, as demonstrated in Example 5.</li>
+</ul>
+
+<p><strong>The expectation:</strong> Every page meets the relevant accessibility requirements tested in Examples 2 to 5.</p>
+
+<h3>The test</h3>
+
+<p>This example uses two files.</p>
+
+<p>The first contains the <strong>reusable checks</strong>. Each check is based on an earlier example, converted into a function that can be used by multiple tests. Here's the structure, with the dialog check shown in full:</p>
+
+<pre tabindex="0"><code class="language-javascript">// tests/helpers/accessibility-checks.js
+import { expect } from '@playwright/test';
+
+// Each check is the test from an earlier example, wrapped in a function.
+// The page name is added to every failure message.
+// If a page has none of a component, its check simply passes.
+
+// These three are shortened here. Copy the full versions from the repo.
+// If you run them as they are, they stop the test with an error,
+// rather than passing without checking anything.
+export async function checkDisclosures(page, pageName) {
+  throw new Error('checkDisclosures is a placeholder: copy the full version from the repo');
+}
+export async function checkKeyboard(page, pageName) {
+  throw new Error('checkKeyboard is a placeholder: copy the full version from the repo');
+}
+export async function checkForms(page, pageName) {
+  throw new Error('checkForms is a placeholder: copy the full version from the repo');
+}
+
+// DIALOGS (example 4)
+export async function checkDialogs(page, pageName) {
+  const triggers = await page.locator('button[aria-haspopup="dialog"]').all();
+
+  for (const trigger of triggers) {
+    const name = pageName + ' &gt; ' + (await trigger.textContent()).trim();
+
+    await trigger.press('Enter');
+    const dialog = page.getByRole('dialog');
+    await expect.soft(dialog, name + ': dialog should be open').toBeVisible();
+    await expect.soft(dialog.getByRole('heading'), name + ': focus should move to the dialog heading').toBeFocused();
+
+    await page.keyboard.press('Escape');
+    await expect.soft(dialog, name + ': dialog should close with Escape').toBeHidden();
+
+    // Find out where focus actually is, so a failure can say where it went
+    const focusedOn = await page.evaluate(() =&gt; document.activeElement.tagName.toLowerCase());
+
+    await expect.soft(
+      trigger,
+      name + ': focus should return to the button that opened the dialog (focus is currently on: &lt;' + focusedOn + '&gt;)'
+    ).toBeFocused();
+  }
+}</code></pre>
+
+<p><strong>Don't copy this file as it stands.</strong> Three checks have been replaced with placeholders to keep the example short. These placeholders deliberately produce errors because an empty function could allow tests to pass without checking anything.</p>
+
+<p>The complete file, containing all the reusable checks, is available in the <a href="https://github.com/Intopia/playwright-testing">playground repository</a>.</p>
+
+<p>The second file contains the tests that use these reusable checks:</p>
+
+<pre tabindex="0"><code class="language-javascript">// tests/site.spec.js
+import { test } from '@playwright/test';
+import { checkDisclosures, checkKeyboard, checkDialogs, checkForms } from './helpers/accessibility-checks.js';
+
+// Every page on the site we want to check.
+// To cover a new page, just add it to this list.
+const sitePages = [
+  { name: 'Home', url: 'https://intopia.github.io/playwright-testing/playground/site/index.html' },
+  { name: 'Products', url: 'https://intopia.github.io/playwright-testing/playground/site/products.html' },
+  { name: 'Help', url: 'https://intopia.github.io/playwright-testing/playground/site/help.html' },
+];
+
+// For each page, create a group of tests: one for each reusable check
+for (const sitePage of sitePages) {
+  test.describe(sitePage.name + ' page', () =&gt; {
+
+    // Before each test in this group, open the page
+    test.beforeEach(async ({ page }) =&gt; {
+      await page.goto(sitePage.url);
+    });
+
+    test('disclosures keep aria-expanded in sync', async ({ page }) =&gt; {
+      await checkDisclosures(page, sitePage.name);
+    });
+
+    test('every control can be reached with the keyboard', async ({ page, browserName }) =&gt; {
+      // WebKit skips links with Tab by default (see example 3)
+      test.skip(browserName === 'webkit', 'WebKit skips links with Tab by default');
+      await checkKeyboard(page, sitePage.name);
+    });
+
+    test('dialogs manage focus', async ({ page }) =&gt; {
+      await checkDialogs(page, sitePage.name);
+    });
+
+    test('form errors are marked invalid and linked', async ({ page }) =&gt; {
+      await checkForms(page, sitePage.name);
+    });
+
+  });
+}</code></pre>
+
+<p>This example introduces five concepts:</p>
+
+<ol>
+  <li><strong>Reusable functions.</strong> Each accessibility check is written once and can be imported into multiple tests.</li>
+  <li><strong>A list of pages.</strong> The test runs the same checks against every page in the list.</li>
+  <li><strong>Grouped tests.</strong> <code>test.describe</code> groups tests by page, while <code>test.beforeEach</code> opens the page before each test.</li>
+  <li><strong>Separate test results.</strong> Each check runs as a separate test for each page. This makes it easier to identify failures and allows the WebKit exception to apply only to keyboard tests.</li>
+  <li><strong>Clearer failure messages.</strong> Reports identify the page being tested and provide details about what went wrong, including, for dialogs, where keyboard focus ended up.</li>
+</ol>
+
+<p>To test another page, add it to the list. To introduce a new accessibility check, create a reusable function and add it to the tests.</p>
+
+<h3>Try it yourself</h3>
+
+<p>The <a href="https://intopia.github.io/playwright-testing/playground/site/index.html">playground site</a> is a demonstration outdoor equipment shop with three pages. Each page includes a note identifying any deliberately broken components.</p>
+
+<p>Run the test:</p>
+
+<pre tabindex="0"><code class="language-bash">npx playwright test tests/site.spec.js</code></pre>
+
+<p>This produces 36 results: three pages, four checks per page, across three browsers. Most tests pass, but two accessibility issues are identified:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Test</th>
+      <th scope="col">Chromium</th>
+      <th scope="col">Firefox</th>
+      <th scope="col">WebKit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Products: keyboard</td>
+      <td>Fail</td>
+      <td>Fail</td>
+      <td>Skipped</td>
+    </tr>
+    <tr>
+      <td>Help: forms</td>
+      <td>Fail</td>
+      <td>Fail</td>
+      <td>Fail</td>
+    </tr>
+    <tr>
+      <td>All other tests</td>
+      <td>Pass</td>
+      <td>Pass</td>
+      <td>Pass</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Example failure messages:</p>
+
+<pre tabindex="0"><code class="language-none">Error: Products: could not reach this control with the Tab key:
+&lt;div role="button" class="add-to-cart fake-button"&gt;Add Trail bottle to cart&lt;/div&gt;
+
+Error: Help &gt; Contact support &gt; Email: should have aria-invalid="true"</code></pre>
+
+<p>These messages identify the page, the component and the problem, making it easier for developers to investigate failures.</p>
+
+<p>Some checks pass because there's nothing for them to check. For example, the Home page has no forms, so the forms check finds nothing to test and passes.</p>
+
+<p>This is an important limitation. A test may pass because there are no relevant components, or because it isn't finding components that should be tested. Running each check against a known failure helps confirm that it works as intended.</p>
+
+<h3>Limitations of this test</h3>
+
+<p>This test checks disclosures, keyboard navigation, dialogs and forms across three pages and three browser engines, using the same set of reusable checks.</p>
+
+<p>These checks rely on consistent component patterns. For example, they identify disclosures using <code>aria-controls</code>, dialogs using <code>aria-haspopup="dialog"</code>, and form errors using a specific naming convention.</p>
+
+<p>Components built differently may need additional or modified checks. This highlights another benefit of using consistent, reusable components across a website.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="practical-notes">Practical notes</h2>
+
+<p>A few additional considerations when working with Playwright:</p>
+
+<ul>
+  <li><strong>Check that your tests can detect failures.</strong> A passing test doesn't necessarily mean it's working correctly. Test it against a known accessibility issue to confirm that it identifies the problem.</li>
+  <li><strong>Accessibility tree information.</strong> Playwright's HTML reports can include a snapshot of the accessibility tree, showing elements by their roles and accessible names. This can help identify problems such as buttons without accessible names.</li>
+  <li><strong>Investigating failures.</strong> When trace recording is enabled, Playwright's trace viewer lets you examine what happened during a test, including actions, page snapshots and errors. This is particularly useful when investigating failures from automated builds.</li>
+</ul>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="further-exploration">Further exploration</h2>
+
+<h3>Testing individual components</h3>
+
+<p>If your team already uses Playwright with Storybook or another component library, you can apply the same techniques to individual components. For example, you could test keyboard interactions, focus management and changes in ARIA states for each component.</p>
+
+<p>See Playwright's <a href="https://playwright.dev/docs/test-components">component testing documentation</a> for more information.</p>
+
+<h3>Other accessibility checks</h3>
+
+<p>There are many more accessibility behaviours that Playwright can help test, including:</p>
+
+<ul>
+  <li><strong>Form validation:</strong> Error summaries, focus management and validation of radio button and checkbox groups.</li>
+  <li><strong>Focus after navigation:</strong> Checking where focus moves when a single-page application changes views.</li>
+  <li><strong>Accessibility tree snapshots:</strong> Comparing accessible roles, names and states against expected results after an interaction.</li>
+</ul>
+
+<p>For more information, explore the <a href="https://playwright.dev/docs/intro">Playwright documentation</a> and its <a href="https://playwright.dev/docs/accessibility-testing">accessibility testing guide</a>.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Playwright allows developers to test accessibility-related behaviour during development, including keyboard interactions, focus management and changes in component states.</p>
+
+<p>By including these tests in their development process, teams can identify issues before release and help prevent previously fixed problems from returning.</p>
+
+<p>Start with a single accessibility requirement, write a test for it, and gradually expand your coverage.</p>
+
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+</body>
+</html>
