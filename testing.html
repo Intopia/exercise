@@ -57,6 +57,8 @@ a:link code {
   <li><a href="testing-bookmarklets.html">"Testing web accessibility for teams" bookmarklets</a></li>
   <li><a href="testing-browser-extensions.html">Installing browser extensions and add-ons</a></li>
   <li><a href="testing-tools.html">Different types of accessibility testing tools</a></li>
+  <li><a href="testing-console.html">Testing with the browser console</a></li>
+  <li><a href="accessibility-testing-with-playwright.html">Accessibility testing with Playwright</a> <span class="new">NEW</span></li>
 </ul>
 
 
@@ -85,7 +87,7 @@ a:link code {
 <!-- section -->
 
 
-<h2>Tests: Page title, landuage, encoding</h2>
+<h2>Tests: Page title, language, encoding</h2>
 
 <p>Document title:</p>
 <ul>
@@ -95,15 +97,16 @@ a:link code {
   <li><a href="testing-title-multiple.html">Testing document title - multiple example</a></li>
 </ul>
 
-<p>Page language</p>
+<p>Page language:</p>
 
 <ul>
   <li><a href="testing-lang-good.html">Testing page language - good example</a></li>
   <li><a href="testing-lang-missing.html">Testing page language - missing example</a></li>
   <li><a href="testing-lang-invalid.html">Testing page language - invalid example</a></li>
+  <li><a href="localisation.html">Testing localisation</a></li>
 </ul>
 
-<p>Character encoding</p>
+<p>Character encoding:</p>
 
 <ul>
   <li><a href="testing-charset-correct.html">Testing character encoding - good example</a></li>
@@ -112,6 +115,10 @@ a:link code {
   <li><a href="testing-charset-empty.html">Testing character encoding - empty example</a></li>
   <li><a href="testing-charset-conflicting.html">Testing character encoding - conflicting example</a></li>
 </ul>
+
+
+<!-- section -->
+
 
 <h2>Tests: Page structure and semantics</h2>
 
@@ -136,6 +143,7 @@ a:link code {
 <ul>
   <li><a href="testing-images.html">Testing images</a></li>
   <li><a href="reviewing-image-types.html">Reviewing the four image types</a></li>
+  <li><a href="image-controls.html">Testing image controls</a></li>
   <li><a href="testing-svg.html">Testing <code>&lt;svg&gt;</code></a></li>
   <li><a href="testing-svg-inside-links.html">Testing <code>&lt;svg&gt;</code> inside links</a></li>
   <li><a href="testing-canvas.html">Testing the <code>&lt;canvas&gt;</code> element</a></li>
@@ -217,10 +225,23 @@ a:link code {
   <li><a href="reviewing-tabindex.html">Reviewing different <code>tabindex</code> methods</a></li>
   <li><a href="testing-back-to-top.html">Testing a "back to top" pattern</a> <span class="new">NEW</span></li>
   <li><a href="testing-focus-indication.html">Testing focus indication</a></li>
+  <li><a href="test-page-1-default.html">Focus test page 1 - browser default focus styles</a></li>
+  <li><a href="test-page-2-focus-visible.html">Focus test page 2 - <code>:focus-visible</code></a></li>
+  <li><a href="test-page-3-focus.html">Focus test page 3 - <code>:focus</code></a></li>
   <li><a href="testing-onsubmit-simple.html">Testing focus management onsubmit - form with two form fields</a></li>
   <li><a href="testing-onsubmit-complex.html">Testing focus management onsubmit - form with more than two form fields</a></li>
   <li><a href="testing-focus-management.html">Testing focus management - single page app</a></li>
   <li><a href="testing-aria-activedescendant.html">Testing <code>aria-activedescendant</code></a> <span class="new">NEW</span></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2>Tests: Pointer and target size</h2>
+
+<ul>
+  <li><a href="testing-target-size.html">Testing target size</a></li>
 </ul>
 
 
@@ -239,6 +260,7 @@ a:link code {
   <li><a href="testing-placeholder.html">Testing the <code>placeholder</code> attribute</a></li>
   <li><a href="testing-input-name.html">Testing accessible name priority for an <code>&lt;input&gt;</code></a></li>
   <li><a href="testing-autocomplete.html">Testing <code>autocomplete</code></a></li>
+  <li><a href="testing-contact-form.html">Testing a contact form</a></li>
   <li><a href="reviewing-all-form-elements.html">Reviewing all form elements</a></li>
   <li><a href="reviewing-all-input-types.html">Reviewing all <code>&lt;input&gt;</code> types</a></li>
   <li><a href="reviewing-all-form-controls.html">Reviewing all form controls</a></li>
@@ -301,10 +323,10 @@ a:link code {
   <li><a href="testing-aria-valuetext.html">Testing <code>aria-valuetext</code></a> <span class="new">NEW</span></li>
   <li><a href="testing-aria-valuenow.html">Testing <code>aria-valuenow</code></a> <span class="new">NEW</span></li>
   <li><a href="testing-aria-valuemin-valuemax.html">Testing <code>aria-valuemin</code> and <code>aria-valuemax</code></a> <span class="new">NEW</span></li>
+  <li><a href="testing-slider-native-vs-custom.html">Testing native vs custom sliders</a></li>
   <li><a href="testing-aria-haspopup.html">Testing <code>aria-haspopup</code></a> <span class="new">NEW</span></li>
   <li><a href="testing-aria-autocomplete.html">Testing <code>aria-autocomplete</code></a> <span class="new">NEW</span></li>
   <li><a href="reviewing-aria-owns.html">Reviewing <code>aria-owns</code></a></li>
-  <li><a href="testing-aria-haspopup.html">Testing <code>aria-haspopup</code></a> <span class="new">NEW</span></li>
 </ul>
 
 
@@ -344,6 +366,12 @@ a:link code {
   <li><a href="reviewing-aria-role-alert.html">Reviewing <code>role="alert"</code></a></li>
   <li><a href="reviewing-aria-role-status.html">Reviewing <code>role="status"</code></a></li>
   <li><a href="reviewing-aria-role-log.html">Reviewing <code>role="log"</code></a></li>
+</ul>
+
+<h3>Programmatic announcements</h3>
+
+<ul>
+  <li><a href="testing-aria-notify.html">Testing <code>ariaNotify()</code></a></li>
 </ul>
 
 
