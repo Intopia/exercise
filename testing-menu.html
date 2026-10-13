@@ -50,7 +50,7 @@
 
 <p>The <a href="https://html.spec.whatwg.org/#the-menu-element" target="_blank"><code>&lt;menu&gt;</code></a> element is described in the HTML specification as a semantic alternative to <code>&lt;ul&gt;</code>, but treated by browsers (and exposed through the accessibility tree) as no different than <code>&lt;ul&gt;</code>. It represents an unordered list of items (which are represented by <code>&lt;li&gt;</code> elements).</p>
 
-<p>The key difference is that <code>&lt;ul&gt;</code> primarily contains items for display, while <code>&lt;menu&gt;</code>was intended for interactive items.</p>
+<p>The key difference is that <code>&lt;ul&gt;</code> primarily contains items for display, while <code>&lt;menu&gt;</code> was intended for interactive items.</p>
 
 <p>The related <code>&lt;menuitem&gt;</code> element has been <a href="https://html.spec.whatwg.org/#non-conforming-features" target="_blank">deprecated</a>.</p>
 
@@ -112,14 +112,14 @@
 <h3>Expected results for screen readers</h3>
 
 <ol>
-  <li>The <code>menu</code> role should be announced when the element is in focus</li>
+  <li>The <code>&lt;menu&gt;</code> element should be announced as a list (for example, "list, 3 items") when the screen reader enters it. It should not be announced as a menu</li>
   <li>All button names should be announced</li>
-  <li>Activating "Inject hello" should present "Hello world" into container below</li>
+  <li>Activating "Inject Hello" should present "Hello world" into container below</li>
   <li>The injected information should be announced to screen readers</li>
-  <li>Activating "Inject goodbye" should present "Goodbye world" into container below</li>
+  <li>Activating "Inject Goodbye" should present "Goodbye world" into container below</li>
   <li>The injected information should be announced to screen readers</li>
-  <li>Activating the "Clear" biutton should clear any information from the container below</li>
-  <li>After a short pause, "Your message has been cleared" shpould be announced</li>
+  <li>Activating the "Clear" button should clear any information from the container below</li>
+  <li>"Your message has been cleared" should be announced</li>
 </ol>
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
