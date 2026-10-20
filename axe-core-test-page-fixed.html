@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!-- FIXED 1: lang attribute added to the html element -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>axe test page (fixed)</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 2em;
+      font-family: arial, helvetica, sans-serif;
+    }
+
+    button {
+      padding: .5em 1em;
+      border-radius: .3em;
+      border: 1px solid red;
+    }
+
+    a:link {
+      padding: .5em 1em;
+      border-radius: .3em;
+      border: 1px solid red;
+    }
+
+    label {
+      display: block;
+      margin: 0 0 .3em;
+    }
+
+    /* FIXED 7: darker grey, with enough contrast against white */
+    .faint { color: #595959; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>axe test page (fixed)</h1>
+
+    <!-- FIXED 2: heading level follows on from h1 -->
+    <h2>A section</h2>
+
+    <!-- FIXED 3: empty alt marks the image as decorative -->
+    <p><img src="https://placehold.co/200x200" alt=""></p>
+
+    <!-- FIXED 4: text input has a label -->
+    <div>
+      <label for="name">Name</label>
+      <input id="name" type="text">
+    </div>
+
+    <!-- FIXED 5: button has text -->
+    <p><button>Send</button></p>
+
+    <!-- FIXED 6: link has text -->
+    <p><a href="#">Home</a></p>
+
+    <!-- FIXED 7: see the style above -->
+    <p class="faint">This text is easier to read.</p>
+  </main>
+</body>
+</html>

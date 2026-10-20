@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!-- ERROR 1: no lang attribute on the html element -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>axe test page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 2em;
+      font-family: arial, helvetica, sans-serif;
+    }
+
+    button {
+      padding: .5em 1em;
+      border-radius: .3em;
+      border: 1px solid red;
+    }
+
+    a:link {
+      padding: .5em 1em;
+      border-radius: .3em;
+      border: 1px solid red;
+    }
+
+    label {
+      display: block;
+      margin: 0 0 .3em;
+    }
+
+    /* FIXED 7: darker grey, with enough contrast against white */
+    .faint { color: #aaa; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>axe test page</h1>
+
+    <!-- ERROR 2: heading level skips from h1 to h3 -->
+    <h3>A section</h3>
+
+    <!-- ERROR 3: image with no alt attribute -->
+    <p><img src="https://placehold.co/200x200"></p>
+
+
+    <!-- ERROR 4: text input with no label -->
+    <div>
+      <input type="text">
+    </div>
+
+    <!-- ERROR 5: button with no accessible name -->
+    <p><button></button></p>
+
+    <!-- ERROR 6: link with no text -->
+    <p><a href="#"></a></p>
+
+    <!-- ERROR 7: low contrast text (grey on white) -->
+    <p class="faint">This text is hard to read.</p>
+  </main>
+</body>
+</html>
