@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Running axe-core from the command line</title>
+  <meta name="description" content="Learn how to run axe-core from the command line, try some useful options, save the results to a file, and turn them into a readable report.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-a11y-dark.min.css" rel="stylesheet">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+hr {
+  border: 0;
+  border-top: 2px solid #999;
+  margin: 2em 0;
+}
+
+.copy-code-wrapper {
+  margin: .5em 0 1.5em;
+  font-size: .9em;
+}
+
+.copy-code-status {
+  margin-left: 0.75em;
+}
+  </style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Running axe-core from the command line</h1>
+
+
+<!-- section -->
+
+
+<h2 id="what-this-tutorial-is-about">What this tutorial is about</h2>
+
+<p>In <a href="axe-core-in-the-browser-console.html">Running axe-core in the browser console</a>, you ran axe-core by hand, one step at a time. In this tutorial, you'll run axe-core with a single command, without opening a browser yourself. You'll also try some useful options, save the results to a file, and turn them into a readable report.</p>
+
+<h3>About the axe command line tool</h3>
+
+<p>The axe command line tool (<code>@axe-core/cli</code>) is a free tool from Deque, the makers of axe-core. When you give it a web address, it:</p>
+
+<ol>
+  <li>opens the page in an invisible copy of Chrome</li>
+  <li>runs axe-core on it</li>
+  <li>lists any problems it finds.</li>
+</ol>
+
+<p>These are the same steps you did by hand in the browser console. The tool just does them for you.</p>
+
+<h3>Before you start</h3>
+
+<p>Complete <a href="#">Setting up Node.js</a> first. You should have:</p>
+
+<ul>
+  <li>Node.js 22.12 or higher</li>
+  <li>an <code>axe-learning</code> project folder</li>
+  <li>the axe tools installed in that folder</li>
+  <li>Google Chrome</li>
+  <li>a matching ChromeDriver.</li>
+</ul>
+
+<p>You'll type the commands in Terminal (Mac) or Command Prompt (Windows).</p>
+
+<h3>Why use the command line?</h3>
+
+<p>The command line lets you check pages without opening them, check several pages at once, save the results to a file, and make a check pass or fail. It's also a step towards how development teams run axe-core automatically.</p>
+
+<p>Most teams don’t run axe-core from the command line day to day either. Instead, they build it into their automated tests or their CI pipeline, so checks run every time code changes. Learning the command line first makes those setups much easier to understand.</p>
+
+<!-- section -->
+
+
+<hr>
+<h2 id="whats-in-this-tutorial">What's in this tutorial</h2>
+
+<h3>Getting started</h3>
+
+<ul>
+  <li><a href="#1-open-your-project-folder">Step 1. Open your project folder</a></li>
+  <li><a href="#2-run-axe-on-the-test-page">Step 2. Run axe on the test page</a></li>
+  <li><a href="#3-read-the-results">Step 3. Read the results</a></li>
+</ul>
+
+<h3>Trying different options</h3>
+
+<ul>
+  <li><a href="#run-wcag-rules-only">Run WCAG rules only</a></li>
+  <li><a href="#test-the-fixed-page">Test the fixed page</a></li>
+  <li><a href="#test-more-than-one-page-at-once">Test more than one page at once</a></li>
+  <li><a href="#fail-when-issues-are-found">Fail when issues are found</a></li>
+</ul>
+
+<h3>Saving and reporting</h3>
+
+<ul>
+  <li><a href="#save-the-results-to-a-file">Save the results to a file</a></li>
+  <li><a href="#explore-the-json-file">Explore the JSON file</a></li>
+  <li><a href="#write-a-reporting-script">Write a reporting script</a></li>
+  <li><a href="#run-the-report">Run the report</a></li>
+  <li><a href="#add-a-shortcut-command">Add a shortcut command</a></li>
+  <li><a href="#run-the-shortcut-command">Run the shortcut command</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="getting-started">Getting started</h2>
+
+<h3 id="1-open-your-project-folder">Step 1. Open your project folder</h3>
+
+<p>Open Terminal (Mac) or Command Prompt (Windows), then move into the <code>axe-learning</code> folder you made in <a href="#">Setting up Node.js</a>.</p>
+
+<p><strong>Mac:</strong></p>
+
+<pre><code class="language-bash">cd Documents/axe-learning</code></pre>
+
+<p><strong>Windows:</strong></p>
+
+<pre><code class="language-bash">cd %USERPROFILE%\axe-learning</code></pre>
+
+<p>In plain terms: <code>cd</code> stands for "change directory", which means "go into this folder".</p>
+
+<p><strong>To check it worked:</strong></p>
+
+<ul>
+  <li><strong>Mac:</strong> type <code>pwd</code> and press Return. You should see something ending in <code>/Documents/axe-learning</code>.</li>
+  <li><strong>Windows:</strong> type <code>cd</code> on its own and press Enter. You should see something like <code>C:\Users\yourname\axe-learning</code>.</li>
+</ul>
+
+<p>Watch out for:</p>
+
+<ul>
+  <li>You'll need to do this every time you open Terminal or Command Prompt. The tools are installed in this folder, so the commands only work from inside it.</li>
+  <li>On Windows, use Command Prompt, not PowerShell. If the line where you type starts with <code>PS</code>, you're in PowerShell.</li>
+</ul>
+
+<h3 id="2-run-axe-on-the-test-page">Step 2. Run axe on the test page</h3>
+
+<p>This uses the same <a href="https://intopia.github.io/exercise/axe-core-test-page.html" target="_blank">axe test page</a> as the browser console tutorial, with 7 deliberately planted accessibility errors. Type the command for your computer and press Enter:</p>
+
+<p><strong>Mac:</strong></p>
+
+<pre><code class="language-bash">npx axe https://intopia.github.io/exercise/axe-core-test-page.html --chromedriver-path "node_modules/chromedriver/lib/chromedriver/chromedriver"</code></pre>
+
+<p><strong>Windows:</strong></p>
+
+<pre><code class="language-bash">npx axe https://intopia.github.io/exercise/axe-core-test-page.html --chromedriver-path "node_modules\chromedriver\lib\chromedriver\chromedriver.exe"</code></pre>
+
+<p>In plain terms: "run axe on this page, using the ChromeDriver you installed during setup."</p>
+
+<ul>
+  <li><code>npx</code> runs a tool installed in your project folder. Here, it runs <code>axe</code>.</li>
+  <li>The web address is the page to check.</li>
+  <li><code>--chromedriver-path</code> tells axe which ChromeDriver to use. You'll include it every time.</li>
+</ul>
+
+<p>It can take a few seconds. When it's done, you should see <code>7 Accessibility issues detected</code>.</p>
+
+<p>Watch out for:</p>
+
+<ul>
+  <li>An error mentioning "session not created" means Chrome has updated since you installed ChromeDriver. Repeat the ChromeDriver steps in <a href="#">Setting up Node.js</a> with your new Chrome version.</li>
+  <li>Keep the quotes around the ChromeDriver path.</li>
+  <li>You need an internet connection, because the test page is online.</li>
+</ul>
+
+<h3 id="3-read-the-results">Step 3. Read the results</h3>
+
+<p>The results will look something like this (shortened here):</p>
+
+<pre><code class="language-none">Running axe-core 4.14.0 in chrome-headless
+
+Testing https://intopia.github.io/exercise/axe-core-test-page.html ... please wait, this may take a minute.
+
+  Violation of "button-name" with 1 occurrences!
+    Ensure buttons have discernible text. Correct invalid elements at:
+     - button
+    For details, see: https://dequeuniversity.com/rules/axe/4.14/button-name
+
+  ...
+
+7 Accessibility issues detected.
+Testing complete of 1 pages</code></pre>
+
+<p>Each block is one failed rule. In plain terms:</p>
+
+<ul>
+  <li><strong><code>"button-name"</code></strong> is the rule that failed.</li>
+  <li><strong>"with 1 occurrences"</strong> is the number of elements that failed it.</li>
+  <li><strong>"Ensure buttons have discernible text"</strong> describes what the rule checks.</li>
+  <li><strong>The line starting with a dash</strong> (<code>- button</code>) is the CSS selector of each element that failed.</li>
+  <li><strong>"For details, see"</strong> links to Deque's help page for the rule.</li>
+</ul>
+
+<p>This is the same information you explored in the browser console, just printed as text.</p>
+
+<p>Watch out for:</p>
+
+<ul>
+  <li>The total at the end counts <strong>elements</strong>, not rules. On this page, each rule fails on exactly one element, so both numbers are 7. On a real site, three images with no alt text would add 3 to the total.</li>
+  <li>The results don't show impact levels (critical, serious and so on), and there's no option to filter by them.</li>
+</ul>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="trying-different-options">Trying different options</h2>
+
+<p>The following examples are optional. They show some of the command line tool's options, and you can try them in any order.</p>
+
+<h3 id="run-wcag-rules-only">Run WCAG rules only</h3>
+
+<p>Add <code>--tags wcag2a,wcag2aa</code> to only run rules for WCAG levels A and AA. This does the same job as turning off the axe DevTools Best Practices setting.</p>
+
+<p><strong>Mac:</strong></p>
+
+<pre><code class="language-bash">npx axe https://intopia.github.io/exercise/axe-core-test-page.html --tags wcag2a,wcag2aa --chromedriver-path "node_modules/chromedriver/lib/chromedriver/chromedriver"</code></pre>
+
+<p><strong>Windows:</strong></p>
+
+<pre><code class="language-bash">npx axe https://intopia.github.io/exercise/axe-core-test-page.html --tags wcag2a,wcag2aa --chromedriver-path "node_modules\chromedriver\lib\chromedriver\chromedriver.exe"</code></pre>
+
+<p>In plain terms: "same as before, but only run rules tagged WCAG 2 level A or AA."</p>
+
+<p>You should see 6 issues. <code>heading-order</code> is gone, because it's a best practice rule, not a WCAG requirement.</p>
+
+<p>Watch out for:</p>
+
+<ul>
+  <li>Don't put spaces after the commas in the tag list. <code>wcag2a, wcag2aa</code> would break it.</li>
+  <li>Each WCAG version has its own tags. Testing against WCAG 2.2 AA means listing them all: <code>wcag2a,wcag2aa,wcag21a,wcag21aa,wcag22aa</code>.</li>
+</ul>
+
+<h3 id="test-the-fixed-page">Test the fixed page</h3>
+
+<p>Run axe on the <a href="https://intopia.github.io/exercise/axe-core-test-page-fixed.html" target="_blank">fixed version of the test page</a>, where all 7 errors have been corrected:</p>
+
+<p><strong>Mac:</strong></p>
+
+<pre><code class="language-bash">npx axe https://intopia.github.io/exercise/axe-core-test-page-fixed.html --chromedriver-path "node_modules/chromedriver/lib/chromedriver/chromedriver"</code></pre>
+
+<p><strong>Windows:</strong></p>
+
+<pre><code class="language-bash">npx axe https://intopia.github.io/exercise/axe-core-test-page-fixed.html --chromedriver-path "node_modules\chromedriver\lib\chromedriver\chromedriver.exe"</code></pre>
+
+<p>You should see <code>0 violations found!</code></p>
+
+<p>Watch out for:</p>
+
+<ul>
+  <li>0 violations doesn't mean the page is fully accessible. axe-core can only find some accessibility issues automatically. A person still needs to check things like whether alt text makes sense, and whether everything works with a keyboard.</li>
+</ul>
+
+<h3 id="test-more-than-one-page-at-once">Test more than one page at once</h3>
+
+<p>Give the command more than one web address, separated by spaces, and it checks each page in turn:</p>
+
+<p><strong>Mac:</strong></p>
+
+<pre><code class="language-bash">npx axe https://intopia.github.io/exercise/axe-core-test-page.html https://intopia.github.io/exercise/axe-core-test-page-fixed.html --chromedriver-path "node_modules/chromedriver/lib/chromedriver/chromedriver"</code></pre>
+
+<p><strong>Windows:</strong></p>
+
+<pre><code class="language-bash">npx axe https://intopia.github.io/exercise/axe-core-test-page.html https://intopia.github.io/exercise/axe-core-test-page-fixed.html --chromedriver-path "node_modules\chromedriver\lib\chromedriver\chromedriver.exe"</code></pre>
+
+<p>In plain terms: "check both pages, one after the other."</p>
+
+<p>You should see the results for each page, then <code>Testing complete of 2 pages</code>.</p>
+
+<p>Watch out for:</p>
+
+<ul>
+  <li>The command line tool checks each page as it first loads. It can't log in, open a menu or fill in a form first. For that, you need a script, which is covered in a future tutorial.</li>
+  <li>It also doesn't find pages by itself. You need to list every page you want to check.</li>
+</ul>
+
+<h3 id="fail-when-issues-are-found">Fail when issues are found</h3>
+
+<p>Every command quietly reports a number when it finishes, called an <strong>exit code</strong>. <code>0</code> means success, and anything else means failure. Automated tools read this number to decide what to do next, such as stopping new code from going live.</p>
+
+<p>By default, the axe command line tool reports success even when it finds issues. Add <code>--exit</code> to make it report a failure instead:</p>
+
+<p><strong>Mac:</strong></p>
+
+<pre><code class="language-bash">npx axe https://intopia.github.io/exercise/axe-core-test-page.html --exit --chromedriver-path "node_modules/chromedriver/lib/chromedriver/chromedriver"</code></pre>
+
+<p><strong>Windows:</strong></p>
+
+<pre><code class="language-bash">npx axe https://intopia.github.io/exercise/axe-core-test-page.html --exit --chromedriver-path "node_modules\chromedriver\lib\chromedriver\chromedriver.exe"</code></pre>
+
+<p>The results look the same as before. To see the exit code, type this straight afterwards and press Enter:</p>
+
+<p><strong>Mac:</strong></p>
+
+<pre><code class="language-bash">echo $?</code></pre>
+
+<p><strong>Windows:</strong></p>
+
+<pre><code class="language-bash">echo %errorlevel%</code></pre>
+
+<p>You should see <code>1</code>, meaning the check failed. Now try the same two commands on the fixed page. This time, you should see <code>0</code>.</p>
+
+<p>Watch out for:</p>
+
+<ul>
+  <li>The exit code only tells you whether the last command passed or failed. Run <code>echo</code> straight after the axe command, before anything else.</li>
+  <li><code>--exit</code> fails on <strong>any</strong> violation, whatever its impact. The Playwright tutorial shows how to fail only on critical and serious issues.</li>
+</ul>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="saving-and-reporting">Saving and reporting</h2>
+
+<p>These examples build on each other, so do them in order.</p>
+
+<h3 id="save-the-results-to-a-file">Save the results to a file</h3>
+
+<p>Add <code>--save results.json</code> to save the full results as a file. JSON is a plain-text format for structured data. It's the same results you explored in the browser console, written into a file.</p>
+
+<p><strong>Mac:</strong></p>
+
+<pre><code class="language-bash">npx axe https://intopia.github.io/exercise/axe-core-test-page.html --save results.json --chromedriver-path "node_modules/chromedriver/lib/chromedriver/chromedriver"</code></pre>
+
+<p><strong>Windows:</strong></p>
+
+<pre><code class="language-bash">npx axe https://intopia.github.io/exercise/axe-core-test-page.html --save results.json --chromedriver-path "node_modules\chromedriver\lib\chromedriver\chromedriver.exe"</code></pre>
+
+<p>In plain terms: "run axe on the test page, and also save the full results into a file called <code>results.json</code>."</p>
+
+<p>You'll see the same results as before, plus a line starting with <code>Saved file at</code>.</p>
+
+<p><strong>To check it worked</strong>, list the files in your folder (<code>ls</code> on Mac, <code>dir</code> on Windows). You should see <code>results.json</code>.</p>
+
+<p>Watch out for:</p>
+
+<ul>
+  <li>Each run replaces the file with the latest results.</li>
+  <li>Save the results for one page at a time. If you check several pages, the file holds them all, but the reporting script below only reads the first one.</li>
+</ul>
+
+<h3 id="explore-the-json-file">Explore the JSON file</h3>
+
+<p>Open <code>results.json</code> in Chrome, and find the same groups and fields you saw in the console: violations, impact, nodes, tags, help and the "how to fix" summaries.</p>
+
+<p><strong>Mac:</strong></p>
+
+<pre><code class="language-bash">open -a "Google Chrome" results.json</code></pre>
+
+<p><strong>Windows:</strong></p>
+
+<pre><code class="language-bash">start chrome "%cd%\results.json"</code></pre>
+
+<p>Chrome shows the file as one long block of text. Tick the <strong>Pretty-print</strong> checkbox at the top of the page to lay it out neatly.</p>
+
+<p>Watch out for:</p>
+
+<ul>
+  <li>Scroll down past <strong>inapplicable</strong> to find <strong>violations</strong>. It's near the end of the file.</li>
+  <li><code>"impact": null</code> means the rule passed or didn't apply. Impact is only filled in when something fails.</li>
+  <li>On Windows, Chrome needs the full path to the file, which is what <code>%cd%</code> fills in. Without it, Chrome shows "This site can't be reached".</li>
+</ul>
+
+<h3 id="write-a-reporting-script">Write a reporting script</h3>
+
+<p>Create a script that reads <code>results.json</code> and turns it into a full HTML report. The report includes the test details, a summary, every violation with its tags and description, the failing elements with "how to fix" text, and a list of things that need a human to review.</p>
+
+<p>Create the file and open it:</p>
+
+<p><strong>Mac:</strong></p>
+
+<pre><code class="language-bash">touch make-report.js
+code make-report.js</code></pre>
+
+<p><strong>Windows:</strong></p>
+
+<pre><code class="language-bash">type nul &gt; make-report.js
+notepad make-report.js</code></pre>
+
+<p>Paste in the following code, then save the file:</p>
+
+<pre><code class="language-javascript">// Load Node's built-in file tools
+const fs = require('fs');
+const path = require('path');
+
+// 1. Read the JSON file saved by the axe CLI
+const raw = fs.readFileSync(path.join(__dirname, 'results.json'), 'utf8');
+const data = JSON.parse(raw);
+
+// The CLI saves a list (one item per page tested). We take the first page.
+const results = Array.isArray(data) ? data[0] : data;
+
+// 2. Helper: make text safe to show inside HTML
+const escape = s =&gt; String(s ?? '')
+  .replace(/&amp;/g, '&amp;amp;')
+  .replace(/&lt;/g, '&amp;lt;')
+  .replace(/&gt;/g, '&amp;gt;')
+  .replace(/"/g, '&amp;quot;');
+
+// 3. Sort violations from most to least severe
+const order = { critical: 0, serious: 1, moderate: 2, minor: 3 };
+const violations = [...results.violations].sort((a, b) =&gt; order[a.impact] - order[b.impact]);
+
+// 4. Count violations by impact
+const counts = { critical: 0, serious: 0, moderate: 0, minor: 0 };
+violations.forEach(v =&gt; counts[v.impact]++);
+
+// 5. Build one section per violation
+const sections = violations.length === 0
+  ? '&lt;p&gt;No violations found.&lt;/p&gt;'
+  : violations.map(v =&gt; `
+&lt;section&gt;
+  &lt;h3&gt;${escape(v.help)}&lt;/h3&gt;
+  &lt;dl&gt;
+    &lt;dt&gt;Rule&lt;/dt&gt;&lt;dd&gt;&lt;code&gt;${escape(v.id)}&lt;/code&gt;&lt;/dd&gt;
+    &lt;dt&gt;Impact&lt;/dt&gt;&lt;dd&gt;${escape(v.impact)}&lt;/dd&gt;
+    &lt;dt&gt;Description&lt;/dt&gt;&lt;dd&gt;${escape(v.description)}&lt;/dd&gt;
+    &lt;dt&gt;Tags&lt;/dt&gt;&lt;dd&gt;${v.tags.map(t =&gt; `&lt;code&gt;${escape(t)}&lt;/code&gt;`).join(', ')}&lt;/dd&gt;
+    &lt;dt&gt;Elements affected&lt;/dt&gt;&lt;dd&gt;${v.nodes.length}&lt;/dd&gt;
+  &lt;/dl&gt;
+  &lt;p&gt;&lt;a href="${escape(v.helpUrl)}"&gt;Learn more about ${escape(v.id)} at Deque University&lt;/a&gt;&lt;/p&gt;
+  &lt;h4&gt;Failing elements&lt;/h4&gt;
+  &lt;ol&gt;
+    ${v.nodes.map(n =&gt; `
+    &lt;li&gt;
+      &lt;p&gt;Selector: &lt;code&gt;${escape(n.target.join(' '))}&lt;/code&gt;&lt;/p&gt;
+      &lt;pre&gt;&lt;code&gt;${escape(n.html)}&lt;/code&gt;&lt;/pre&gt;
+      &lt;p&gt;How to fix:&lt;/p&gt;
+      &lt;pre&gt;${escape(n.failureSummary)}&lt;/pre&gt;
+    &lt;/li&gt;`).join('')}
+  &lt;/ol&gt;
+&lt;/section&gt;`).join('');
+
+// 6. Build the "needs review" list from incomplete results
+const review = results.incomplete.length === 0
+  ? '&lt;p&gt;Nothing needs review.&lt;/p&gt;'
+  : `&lt;ul&gt;${results.incomplete.map(v =&gt;
+      `&lt;li&gt;&lt;code&gt;${escape(v.id)}&lt;/code&gt;: ${escape(v.help)} (${v.nodes.length} elements)&lt;/li&gt;`
+    ).join('')}&lt;/ul&gt;`;
+
+// 7. Put the whole page together
+const env = results.testEnvironment || {};
+const report = `&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;title&gt;Full axe report&lt;/title&gt;
+&lt;style&gt;
+  body { font-family: system-ui, sans-serif; line-height: 1.5; max-width: 60rem; margin: 2rem auto; padding: 0 1rem; color: #1a1a1a; }
+  section { border-top: 2px solid #ccc; padding-top: 1rem; margin-top: 2rem; }
+  dt { font-weight: bold; }
+  dd { margin: 0 0 0.5rem 0; }
+  pre { background: #f4f4f4; padding: 0.75rem; white-space: pre-wrap; }
+  table { border-collapse: collapse; }
+  th, td { border: 1px solid #999; padding: 0.25rem 0.75rem; text-align: left; }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;main&gt;
+&lt;h1&gt;Full axe report&lt;/h1&gt;
+
+&lt;h2&gt;Test details&lt;/h2&gt;
+&lt;dl&gt;
+  &lt;dt&gt;Page&lt;/dt&gt;&lt;dd&gt;&lt;code&gt;${escape(results.url)}&lt;/code&gt;&lt;/dd&gt;
+  &lt;dt&gt;Tested&lt;/dt&gt;&lt;dd&gt;${escape(new Date(results.timestamp).toLocaleString('en-AU'))}&lt;/dd&gt;
+  &lt;dt&gt;axe version&lt;/dt&gt;&lt;dd&gt;${escape(results.testEngine?.version || 'Not recorded')}&lt;/dd&gt;
+  &lt;dt&gt;Window size&lt;/dt&gt;&lt;dd&gt;${escape(env.windowWidth)} × ${escape(env.windowHeight)}&lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;table&gt;
+  &lt;caption&gt;Rule results&lt;/caption&gt;
+  &lt;tr&gt;&lt;th scope="row"&gt;Violations&lt;/th&gt;&lt;td&gt;${results.violations.length}&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;th scope="row"&gt;Passes&lt;/th&gt;&lt;td&gt;${results.passes.length}&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;th scope="row"&gt;Needs review (incomplete)&lt;/th&gt;&lt;td&gt;${results.incomplete.length}&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;th scope="row"&gt;Not applicable&lt;/th&gt;&lt;td&gt;${results.inapplicable.length}&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;Violations by impact: ${counts.critical} critical, ${counts.serious} serious, ${counts.moderate} moderate, ${counts.minor} minor.&lt;/p&gt;
+
+&lt;h2&gt;Violations&lt;/h2&gt;
+${sections}
+
+&lt;h2&gt;Needs review&lt;/h2&gt;
+${review}
+&lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;`;
+
+// 8. Save the report
+fs.writeFileSync(path.join(__dirname, 'report-full.html'), report);
+console.log('Full report saved to report-full.html');</code></pre>
+
+<p>In plain terms, the script:</p>
+
+<ol>
+  <li>reads <code>results.json</code></li>
+  <li>sorts the violations from critical to minor, and counts them</li>
+  <li>builds a section for each violation, with its details and failing elements</li>
+  <li>builds a list of things that need a human to review</li>
+  <li>wraps it all in an accessible HTML page and saves it as <code>report-full.html</code>.</li>
+</ol>
+
+<p><strong>To check it worked</strong>, list the files in your folder (<code>ls</code> on Mac, <code>dir</code> on Windows). You should see <code>make-report.js</code>.</p>
+
+<p>Watch out for:</p>
+
+<ul>
+  <li>On Mac, the <code>code</code> command only works once VS Code has been set up for it. If you see "command not found", open VS Code, press <strong>Command + Shift + P</strong>, type <code>shell command</code>, and choose <strong>Install 'code' command in PATH</strong>.</li>
+  <li>Make sure the file is called exactly <code>make-report.js</code>. If it shows up as <code>make-report.js.txt</code>, rename it.</li>
+  <li>Any HTML in the results has to be escaped, which is what the <code>escape</code> helper does. Without it, code like <code>&lt;button&gt;&lt;/button&gt;</code> would show up in the report as a real button, not as text.</li>
+</ul>
+
+<h3 id="run-the-report">Run the report</h3>
+
+<p>Run the reporting script, then open the report in Chrome. Type each line separately, pressing Enter after each one.</p>
+
+<p><strong>Mac:</strong></p>
+
+<pre><code class="language-bash">node make-report.js
+open -a "Google Chrome" report-full.html</code></pre>
+
+<p><strong>Windows:</strong></p>
+
+<pre><code class="language-bash">node make-report.js
+start chrome "%cd%\report-full.html"</code></pre>
+
+<p>After the first line, you should see <code>Full report saved to report-full.html</code>. The report shows the test details, a summary, then all 7 violations, sorted from critical to moderate.</p>
+
+<p>Watch out for:</p>
+
+<ul>
+  <li>If you see "ENOENT: no such file or directory ... results.json", the results file doesn't exist yet. Save the results first.</li>
+  <li>The report only shows what's in the latest <code>results.json</code>.</li>
+</ul>
+
+<h3 id="add-a-shortcut-command">Add a shortcut command</h3>
+
+<p>Add a <code>report</code> shortcut to <code>package.json</code>, so one short command runs axe, builds the report <em>and</em> opens it.</p>
+
+<p>Open <code>package.json</code> in your editor:</p>
+
+<p><strong>Mac:</strong></p>
+
+<pre><code class="language-bash">code package.json</code></pre>
+
+<p><strong>Windows:</strong></p>
+
+<pre><code class="language-bash">notepad package.json</code></pre>
+
+<p>Find this part:</p>
+
+<pre><code class="language-json">  "scripts": {
+    "test": "echo \"Error: no test specified\" &amp;&amp; exit 1"
+  },</code></pre>
+
+<p>Replace it with the version for your computer, then save the file.</p>
+
+<p><strong>Mac:</strong></p>
+
+<pre><code class="language-json">  "scripts": {
+    "report": "axe https://intopia.github.io/exercise/axe-core-test-page.html --save results.json --chromedriver-path node_modules/chromedriver/lib/chromedriver/chromedriver &amp;&amp; node make-report.js &amp;&amp; open -a \"Google Chrome\" report-full.html"
+  },</code></pre>
+
+<p><strong>Windows:</strong></p>
+
+<pre><code class="language-json">  "scripts": {
+    "report": "axe https://intopia.github.io/exercise/axe-core-test-page.html --save results.json --chromedriver-path node_modules/chromedriver/lib/chromedriver/chromedriver.exe &amp;&amp; node make-report.js &amp;&amp; start chrome \"%cd%\\report-full.html\""
+  },</code></pre>
+
+<p>In plain terms: "when I type <code>npm run report</code>, run axe on the test page and save the results, then build the report, then open it in Chrome."</p>
+
+<ul>
+  <li><code>&amp;&amp;</code> means "then, if that worked, run this".</li>
+  <li>You don't need <code>npx</code> inside a shortcut. npm already knows where to find the tools installed in your project.</li>
+</ul>
+
+<p>Watch out for:</p>
+
+<ul>
+  <li>JSON is very fussy. One missing comma or quote mark breaks the whole file.</li>
+  <li>Quote marks inside a JSON value need a backslash in front, like <code>\"</code>. A single backslash is written as two, like <code>\\</code>.</li>
+  <li>On Windows, the ChromeDriver path uses forward slashes (<code>/</code>) here. Windows is happy with them, and it avoids having to double every backslash.</li>
+</ul>
+
+<h3 id="run-the-shortcut-command">Run the shortcut command</h3>
+
+<p>Type:</p>
+
+<pre><code class="language-bash">npm run report</code></pre>
+
+<p>You should see the results, then <code>Full report saved to report-full.html</code>, and then the report opens in Chrome.</p>
+
+<p>Watch out for:</p>
+
+<ul>
+  <li>Each run opens the report in a new Chrome tab. Close the old ones as you go.</li>
+  <li>If you see <code>Missing script: "report"</code>, the change to <code>package.json</code> didn't save, or the name is spelled differently.</li>
+</ul>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="related-articles">Related articles</h2>
+
+<p>This tutorial is part of a series on accessibility testing with axe-core and Playwright. Other articles in the series include:</p>
+
+<ul>
+  <li><a href="https://www.maxdesign.com.au/articles/axe-core-playwright.html" target="_blank">axe-core, Playwright and Cucumber: accessibility testing in the development lifecycle</a></li>
+  <li><a href="axe-core-in-the-browser-console.html">Running axe-core in the browser console</a></li>
+  <li><a href="https://intopia.github.io/exercise/accessibility-testing-with-playwright.html" target="_blank">Accessibility testing with Playwright</a></li>
+</ul>
+
+<p>Future articles will cover:</p>
+
+<ul>
+  <li>Running axe-core with a Playwright script</li>
+</ul>
+
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+<script>
+  // Add a "Copy code" button under each code example
+  document.querySelectorAll('pre > code').forEach(code => {
+    const pre = code.parentElement;
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'copy-code';
+    button.textContent = 'Copy code';
+
+    const status = document.createElement('span');
+    status.className = 'copy-code-status';
+    status.setAttribute('role', 'status');
+
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(code.textContent);
+        status.textContent = 'Copied';
+      } catch {
+        status.textContent = 'Copy failed. Select the code and copy it manually.';
+      }
+      setTimeout(() => { status.textContent = ''; }, 3000);
+    });
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'copy-code-wrapper';
+    wrapper.append(button, status);
+    pre.after(wrapper);
+  });
+</script>
+</body>
+</html>
