@@ -6,6 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+hr {
+  border: 0;
+  border-top: 2px solid #999;
+  margin: 2em 0;
+}
+  </style>
 </head>
 <body>
 <main>
@@ -48,6 +55,10 @@
   <li>Running axe-core with a Playwright script</li>
 </ul>
 
+
+<!-- section -->
+
+
 <h2 id="what-youll-learn">What you'll learn</h2>
 
 <p>This article will help you understand how axe-core works by running it directly in the browser console. You'll see how axe-core produces accessibility test results and how tools like axe DevTools build on this functionality to make testing easier.</p>
@@ -56,8 +67,13 @@
 
 <p>Most teams don't use the browser console for everyday accessibility testing. However, it's a useful way to understand how axe-core works before moving on to running tests from the command line.</p>
 
-<h2 id="steps-at-a-glance">Steps at a glance</h2>
 
+<!-- section -->
+
+
+<h2 id="whats-in-this-tutorial">What's in this tutorial</h2>
+
+<h3>Getting started</h3>
 
 <ol>
   <li><a href="#1-open-the-test-page">Open the test page</a></li>
@@ -66,20 +82,35 @@
   <li><a href="#4-check-axe-has-loaded">Check axe has loaded</a></li>
   <li><a href="#5-run-axe">Run axe</a></li>
   <li><a href="#6-look-inside-the-results">Look inside the results</a></li>
-  <li><a href="#7-count-the-failed-rules">Count the failed rules</a></li>
-  <li><a href="#8-show-the-violations-as-a-table">Show the violations as a table</a></li>
-  <li><a href="#9-filter-to-critical-and-serious">Filter to critical and serious</a></li>
-  <li><a href="#10-see-which-elements-failed">See which elements failed</a></li>
-  <li><a href="#11-highlight-the-failing-elements">Highlight the failing elements</a></li>
-  <li><a href="#12-copy-the-results">Copy the results</a></li>
-  <li><a href="#13-open-a-full-report-in-a-new-tab">Open a full report in a new tab</a></li>
-  <li><a href="#14-load-and-run-axe-core-on-a-new-page">Load and run axe-core on a new page</a></li>
-  <li><a href="#15-check-the-results">Check the results</a></li>
 </ol>
 
-<p>You only need Google Chrome. There's nothing to install.</p>
+<h3>Exploring the results</h3>
 
-<h2 id="1-open-the-test-page">1. Open the test page</h2>
+<ul>
+  <li><a href="#count-the-failed-rules">Count the failed rules</a></li>
+  <li><a href="#show-the-violations-as-a-table">Show the violations as a table</a></li>
+  <li><a href="#filter-to-critical-and-serious">Filter to critical and serious</a></li>
+  <li><a href="#see-which-elements-failed">See which elements failed</a></li>
+  <li><a href="#highlight-the-failing-elements">Highlight the failing elements</a></li>
+  <li><a href="#copy-the-results">Copy the results</a></li>
+  <li><a href="#open-a-full-report-in-a-new-tab">Open a full report in a new tab</a></li>
+</ul>
+
+<h3>Trying another page</h3>
+
+<ul>
+  <li><a href="#load-and-run-on-a-new-page">Load and run axe-core on a new page</a></li>
+  <li><a href="#check-the-results">Check the results</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="getting-started">Getting started</h2>
+
+<h3 id="1-open-the-test-page">Step 1. Open the test page</h3>
 
 <p>Open the <a href="https://intopia.github.io/exercise/axe-core-test-page.html" target="_blank">axe test page</a> in Chrome, since its console is the easiest to work with.</p>
 
@@ -126,7 +157,7 @@
 
 <p>You should see a heading, a placeholder image, an empty text box, an empty button and an empty link, and some faint grey text. The button and link have red borders, so you can see where they are, even though they have no text.</p>
 
-<h2 id="2-open-the-console">2. Open the console</h2>
+<h3 id="2-open-the-console">Step 2. Open the console</h3>
 
 <p>Open Chrome's developer tools and go to the <strong>Console</strong> tab. This is where you'll run JavaScript directly in the browser.</p>
 
@@ -142,7 +173,7 @@
   <li>If the shortcut doesn't work, right-click anywhere on the page, choose <strong>Inspect</strong>, then click the <strong>Console</strong> tab.</li>
 </ul>
 
-<h2 id="3-load-axe-core-into-the-page">3. Load axe-core into the page</h2>
+<h3 id="3-load-axe-core-into-the-page">Step 3. Load axe-core into the page</h3>
 
 <p>Paste this code into the console and press Enter. It adds the axe-core script to the page. This works much like adding a <code>&lt;script&gt;</code> element to the HTML, but you're doing it while the page is open.</p>
 
@@ -165,8 +196,7 @@ document.head.appendChild(script);</code></pre>
   <li>The address includes a version number (<code>axe-core@4.14.0</code>). This helps keep the test results consistent, even when newer versions of axe-core are released.</li>
 </ul>
 
-
-<h2 id="4-check-axe-has-loaded">4. Check axe has loaded</h2>
+<h3 id="4-check-axe-has-loaded">Step 4. Check axe has loaded</h3>
 
 <p>Type this and press Enter:</p>
 
@@ -180,7 +210,7 @@ document.head.appendChild(script);</code></pre>
   <li>If you see <code>axe is not defined</code>, the file may still be downloading. Wait a couple of seconds and try again.</li>
 </ul>
 
-<h2 id="5-run-axe">5. Run axe</h2>
+<h3 id="5-run-axe">Step 5. Run axe</h3>
 
 <p>Paste this and press Enter:</p>
 
@@ -194,8 +224,7 @@ document.head.appendChild(script);</code></pre>
   <li>The console may show <code>undefined</code>. This is normal. Your results have been stored, ready for the next step.</li>
 </ul>
 
-
-<h2 id="6-look-inside-the-results">6. Look inside the results</h2>
+<h3 id="6-look-inside-the-results">Step 6. Look inside the results</h3>
 
 <p>Type this and press Enter:</p>
 
@@ -219,8 +248,33 @@ document.head.appendChild(script);</code></pre>
   <li>The rules under <strong>inapplicable</strong> may look like errors because they're described as accessibility requirements. They're not errors. They simply don't apply to this page.</li>
 </ul>
 
+<h3 id="video-walkthrough1">Video walkthrough: Getting started</h3>
 
-<h2 id="7-count-the-failed-rules">7. Count the failed rules</h2>
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/axe-core-article2.mp4"></video>
+
+<details>
+  <summary>Transcript</summary>
+  <ul>
+    <li>Title: Getting started</li>
+    <li>Step 1. Open the test page</li>
+    <li>Step 2. Open the console</li>
+    <li>Step 3. Load axe-core into the page</li>
+    <li>Step 4. Check axe has loaded</li>
+    <li>Step 5. Run axe</li>
+    <li>Step 6. Look inside the results</li>
+  </ul>
+</details>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="exploring-the-results">Exploring the results</h2>
+
+<p>The following examples are optional. They show different ways to explore and present the results, and you can try them in any order.</p>
+
+<h3 id="7-count-the-failed-rules">Count the failed rules</h3>
 
 <p>Type this and press Enter:</p>
 
@@ -236,7 +290,7 @@ document.head.appendChild(script);</code></pre>
   <li>This counts the number of <strong>rules that failed</strong>, not individual problems. Three images with no alt text would still count as one failed rule.</li>
 </ul>
 
-<h2 id="8-show-the-violations-as-a-table">8. Show the violations as a table</h2>
+<h3 id="8-show-the-violations-as-a-table">Show the violations as a table</h3>
 
 <p>Paste this and press Enter:</p>
 
@@ -257,7 +311,7 @@ document.head.appendChild(script);</code></pre>
   <li>axe lists rules alphabetically, not by severity or by where they appear on the page.</li>
 </ul>
 
-<h2 id="9-filter-to-critical-and-serious">9. Filter to critical and serious</h2>
+<h3 id="9-filter-to-critical-and-serious">Filter to critical and serious</h3>
 
 <p>Paste this and press Enter:</p>
 
@@ -278,7 +332,7 @@ document.head.appendChild(script);</code></pre>
 </ul>
 
 
-<h2 id="10-see-which-elements-failed">10. See which elements failed</h2>
+<h3 id="10-see-which-elements-failed">See which elements failed</h3>
 
 <p>Paste this and press Enter:</p>
 
@@ -296,7 +350,7 @@ document.head.appendChild(script);</code></pre>
   <li>On this small page, each target is just an element name like <code>img</code>. On a real site, selectors are often longer to help identify specific elements.</li>
 </ul>
 
-<h2 id="11-highlight-the-failing-elements">11. Highlight the failing elements</h2>
+<h3 id="11-highlight-the-failing-elements">Highlight the failing elements</h3>
 
 <p>Highlight the affected elements on the page, rather than just viewing them in the console. Paste this and press Enter:</p>
 
@@ -318,7 +372,7 @@ document.head.appendChild(script);</code></pre>
   <li>Highlighting should only change how elements look, not their accessibility. For example, adding a <code>title</code> attribute could give an empty button an accessible name and change the test results.</li>
 </ul>
 
-<h2 id="12-copy-the-results">12. Copy the results</h2>
+<h3 id="12-copy-the-results">Copy the results</h3>
 
 <p>Chrome's console has a built-in <code>copy()</code> command. Type this and press Enter:</p>
 
@@ -337,8 +391,7 @@ document.head.appendChild(script);</code></pre>
   <li>The results can be long. Paste them into a code editor rather than a chat or email.</li>
 </ul>
 
-
-<h2 id="13-open-a-full-report-in-a-new-tab">13. Open a full report in a new tab</h2>
+<h3 id="13-open-a-full-report-in-a-new-tab">Open a full report in a new tab</h3>
 
 <p>Turn the results into a readable report and open it in a new browser tab. Paste this and press Enter:</p>
 
@@ -412,7 +465,32 @@ ${sections}
   <li>The curly brackets around the code mean you can paste it again without causing an error.</li>
 </ul>
 
-<h2 id="14-load-and-run-axe-core-on-a-new-page">14. Load and run axe-core on a new page</h2>
+<h3 id="video-walkthrough2">Video walkthrough: Exploring the results</h3>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/axe-core-article2.mp4"></video>
+
+<details>
+  <summary>Transcript</summary>
+  <ul>
+    <li>Title: Exploring the results</li>
+    <li>Count the failed rules</li>
+    <li>Show the violations as a table</li>
+    <li>Filter to critical and serious</li>
+    <li>See which elements failed</li>
+    <li>Highlight the failing elements</li>
+    <li>Copy the results</li>
+    <li>Open a full report in a new tab</li>
+  </ul>
+</details>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="trying-another-page">Trying another page</h2>
+
+<h3 id="14-load-and-run-axe-core-on-a-new-page">Load and run axe-core on a new page</h3>
 
 <p>Now let's try axe-core on another page. There's a <a href="https://intopia.github.io/exercise/axe-core-test-page-fixed.html" target="_blank">fixed version of the test page</a>, with all seven accessibility issues corrected.</p>
 
@@ -439,7 +517,7 @@ const results = await axe.run();</code></pre>
   <li>Some websites block external scripts as a security measure. If you see an error mentioning <strong>Content Security Policy</strong>, the site may be blocking axe-core from loading.</li>
 </ul>
 
-<h2 id="15-check-the-results">15. Check the results</h2>
+<h3 id="15-check-the-results">Check the results</h3>
 
 <p>Let's see what axe-core found on the fixed page.</p>
 
@@ -464,6 +542,24 @@ const results = await axe.run();</code></pre>
   <li>The fixed page marks its image as decorative, with <code>alt=""</code>. On a real page, an image that carries meaning needs appropriate alternative text.</li>
 </ul>
 
+<h3 id="video-walkthrough3">Video walkthrough: Trying another page</h3>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/axe-core-article2.mp4"></video>
+
+<details>
+  <summary>Transcript</summary>
+  <ul>
+    <li>Title: Trying another page</li>
+    <li>Load and run axe-core on a new page</li>
+    <li>Check the results</li>    
+  </ul>
+</details>
+
+
+<!-- section -->
+
+
+<hr>
 <h2 id="try-it-in-axe-devtools">Try it in axe DevTools</h2>
 
 <p>If you have the axe DevTools browser extension, run it on both test pages and compare the results. You should see the same issues, because the extension uses axe-core too.</p>
@@ -471,37 +567,11 @@ const results = await axe.run();</code></pre>
 <p>If your counts don't match, check the extension's <strong>Best Practices</strong> setting. When it's turned off, <code>heading-order</code> won't appear, because it's a best practice rule rather than a WCAG requirement.</p>
 
 
-<h2 id="video-walkthrough">Video walkthrough: all 15 steps</h2>
+<!-- section -->
 
-<p>Prefer to watch the process? This video walks through all 15 steps, from loading axe-core into the browser to exploring the accessibility test results.</p>
-
-<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/axe-core-article2.mp4"></video>
-
-<details>
-  <summary>Transcript</summary>
-  <ul>
-    <li>Title: Running axe-core in the browser console</li>
-    <li>Step 1. Open the test page</li>
-    <li>Step 2. Open the console</li>
-    <li>Step 3. Load axe-core into the page</li>
-    <li>Step 4. Check axe has loaded</li>
-    <li>Step 5. Run axe</li>
-    <li>Step 6. Look inside the results</li>
-    <li>Step 7. Count the failed rules</li>
-    <li>Step 8. Show the violations as a table</li>
-    <li>Step 9. Filter to critical and serious</li>
-    <li>Step 10. See which elements failed</li>
-    <li>Step 11. Highlight the failing elements</li>
-    <li>Step 12. Copy the results</li>
-    <li>Step 13. Open a full report in a new tab</li>
-    <li>Step 14. Load and run axe-core on a new page</li>
-    <li>Step 15. Check the results</li>    
-  </ul>
-</details>
 
 <hr>
-
-<p><strong>Related articles:</strong></p>
+<h2 id="related-articles">Related articles</h2>
 
 <ul>
   <li><a href="https://www.maxdesign.com.au/articles/axe-core-playwright.html">axe-core, Playwright and Cucumber: accessibility testing in the development lifecycle</a></li>
