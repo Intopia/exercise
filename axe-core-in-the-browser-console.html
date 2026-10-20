@@ -25,6 +25,18 @@ hr {
 
 <h1>Running axe-core in the browser console</h1>
 
+
+<!-- section -->
+
+
+<h2 id="what-this-tutorial-is-about">What this tutorial is about</h2>
+
+<p>This article will help you understand how axe-core works by running it directly in the browser console. You'll see how axe-core produces accessibility test results and how tools like axe DevTools build on this functionality to make testing easier.</p>
+
+<p>Tools like browser extensions can seem a bit magical. But under the surface, axe-core just produces a set of results. How you look at those results, filter them, report on them and act on them is up to you.</p>
+
+<h3>About axe-core</h3>
+
 <p>axe-core is a free, open-source accessibility testing engine. It's the engine inside tools like the axe DevTools browser extension.</p>
 
 <p>In this article, you'll run axe-core directly from Chrome's browser console. There's nothing to install, and no extension needed.</p>
@@ -39,31 +51,14 @@ hr {
 
 <p>Every axe tool, from browser extensions to automated test suites, follows these same three basic steps.</p>
 
-<p>Tools like browser extensions can seem a bit magical. But under the surface, axe-core just produces a set of results. How you look at those results, filter them, report on them and act on them is up to you.</p>
 
-<p>This article is part of a series on accessibility testing with axe-core and Playwright. Other articles in the series include:</p>
+<h3>Before you start</h3>
 
-<ul>
-  <li><a href="https://www.maxdesign.com.au/articles/axe-core-playwright.html" target="_blank">axe-core, Playwright and Cucumber: accessibility testing in the development lifecycle</a></li>
-  <li><a href="https://intopia.github.io/exercise/accessibility-testing-with-playwright.html" target="_blank">Accessibility testing with Playwright</a></li>
-</ul>
+<p>You'll need Google Chrome. There's nothing to install.</p>
 
-<p>Future articles will cover:</p>
+<p>If you'd like to try the optional axe DevTools exercise at the end, you'll also need the <a href="https://www.deque.com/axe/devtools/" target="_blank">axe DevTools</a> browser extension.</p>
 
-<ul>
-  <li>Running axe-core from the command line</li>
-  <li>Running axe-core with a Playwright script</li>
-</ul>
-
-
-<!-- section -->
-
-
-<h2 id="what-youll-learn">What you'll learn</h2>
-
-<p>This article will help you understand how axe-core works by running it directly in the browser console. You'll see how axe-core produces accessibility test results and how tools like axe DevTools build on this functionality to make testing easier.</p>
-
-<h2 id="why-start-with-the-browser-console">Why start with the browser console?</h2>
+<h3>Why start with the browser console?</h3>
 
 <p>Most teams don't use the browser console for everyday accessibility testing. However, it's a useful way to understand how axe-core works before moving on to running tests from the command line.</p>
 
@@ -71,6 +66,7 @@ hr {
 <!-- section -->
 
 
+<hr>
 <h2 id="whats-in-this-tutorial">What's in this tutorial</h2>
 
 <h3>Getting started</h3>
@@ -573,9 +569,18 @@ const results = await axe.run();</code></pre>
 <hr>
 <h2 id="related-articles">Related articles</h2>
 
+<p>This article is part of a series on accessibility testing with axe-core and Playwright. Other articles in the series include:</p>
+
 <ul>
-  <li><a href="https://www.maxdesign.com.au/articles/axe-core-playwright.html">axe-core, Playwright and Cucumber: accessibility testing in the development lifecycle</a></li>
-  <li><a href="https://intopia.github.io/exercise/accessibility-testing-with-playwright.html">Accessibility testing with Playwright</a></li>
+  <li><a href="https://www.maxdesign.com.au/articles/axe-core-playwright.html" target="_blank">axe-core, Playwright and Cucumber: accessibility testing in the development lifecycle</a></li>
+  <li><a href="https://intopia.github.io/exercise/accessibility-testing-with-playwright.html" target="_blank">Accessibility testing with Playwright</a></li>
+</ul>
+
+<p>Future articles will cover:</p>
+
+<ul>
+  <li>Running axe-core from the command line</li>
+  <li>Running axe-core with a Playwright script</li>
 </ul>
 
 
