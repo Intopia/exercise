@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Running axe-core in the browser console</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<h1>Running axe-core in the browser console</h1>
+
+<p>axe-core is a free, open-source accessibility testing engine. It's the engine inside tools like the axe DevTools browser extension.</p>
+
+<p>In this article, you'll run axe-core directly from Chrome's browser console. There's nothing to install, and no extension needed.</p>
+
+<p>The basic idea behind axe tools:</p>
+
+<ol>
+  <li>Load a page.</li>
+  <li>Run an accessibility test.</li>
+  <li>Do something with the results.</li>
+</ol>
+
+<p>Every axe tool, from browser extensions to automated test suites, follows these same three basic steps.</p>
+
+<p>Tools like browser extensions can seem a bit magical. But under the surface, axe-core just produces a set of results. How you look at those results, filter them, report on them and act on them is up to you.</p>
+
+<p>This article is part of a series on accessibility testing with axe-core and Playwright. Other articles in the series include:</p>
+
+<ul>
+  <li><a href="https://www.maxdesign.com.au/articles/axe-core-playwright.html">axe-core, Playwright and Cucumber: accessibility testing in the development lifecycle</a></li>
+  <li><a href="https://intopia.github.io/exercise/accessibility-testing-with-playwright.html">Accessibility testing with Playwright</a></li>
+</ul>
+
+<p>Future articles will cover:</p>
+
+<ul>
+  <li>Running axe-core from the command line</li>
+  <li>Running axe-core with a Playwright script</li>
+</ul>
+
+<h2 id="what-youll-learn">What you'll learn</h2>
+
+<p>This article will help you understand how axe-core works by running it directly in the browser console. You'll see how axe-core produces accessibility test results and how tools like axe DevTools build on this functionality to make testing easier.</p>
+
+<p>Most teams don't use the browser console for everyday accessibility testing. However, it's a useful way to understand how axe-core works before moving on to running tests from the command line.</p>
+
+<h2 id="steps-at-a-glance">Steps at a glance</h2>
+
+<ol>
+  <li><a href="#1-open-the-test-page">Open the test page</a>: a page with seven intentional accessibility issues.</li>
+  <li><a href="#2-open-the-console">Open the console</a>: where you'll run JavaScript in the browser.</li>
+  <li><a href="#3-load-axe-core-into-the-page">Load axe-core into the page</a>: add the axe-core script to the page.</li>
+  <li><a href="#4-check-axe-has-loaded">Check axe has loaded</a>: confirm the version number.</li>
+  <li><a href="#5-run-axe">Run axe</a>: run the accessibility checks and store the results.</li>
+  <li><a href="#6-look-inside-the-results">Look inside the results</a>: explore the four groups of results.</li>
+  <li><a href="#7-count-the-failed-rules">Count the failed rules</a>: see how many rules found violations.</li>
+  <li><a href="#8-show-the-violations-as-a-table">Show the violations as a table</a>: view each rule, its impact and the number of affected elements.</li>
+  <li><a href="#9-filter-to-critical-and-serious">Filter to critical and serious</a>: focus on the most severe issues.</li>
+  <li><a href="#10-see-which-elements-failed">See which elements failed</a>: identify the elements with accessibility issues.</li>
+  <li><a href="#11-highlight-the-failing-elements">Highlight the failing elements</a>: outline the affected elements on the page.</li>
+  <li><a href="#12-copy-the-results">Copy the results</a>: copy the full results as JSON.</li>
+  <li><a href="#13-open-a-full-report-in-a-new-tab">Open a full report in a new tab</a>: view a readable report in a separate browser tab.</li>
+  <li><a href="#14-try-the-fixed-page">Try the fixed page</a>: see what a page with no reported violations looks like.</li>
+</ol>
+
+<p>You only need Google Chrome. There's nothing to install.</p>
+
+<h2 id="1-open-the-test-page">1. Open the test page</h2>
+
+<p>Open the <a href="https://intopia.github.io/exercise/axe-core-test-page.html">axe test page</a> in Chrome, since its console is the easiest to work with.</p>
+
+<p>The page has 7 deliberately planted accessibility errors. The table below explains each issue, so you can compare them with axe-core's results.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Error</th>
+      <th scope="col">What's wrong</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>The page doesn't say what language it's in</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>A heading jumps from level 1 to level 3</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>An image has no alt text</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>A text box has no label</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>A button has no text</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>A link has no text</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Some grey text has low contrast</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>You should see a heading, a placeholder image, an empty text box, an empty button and an empty link, and some faint grey text. The button and link have red borders, so you can see where they are, even though they have no text.</p>
+
+    <h2 id="2-open-the-console">2. Open the console</h2>
+
+    <p>Open Chrome's developer tools and go to the <strong>Console</strong> tab. This is where you'll type JavaScript straight into the page.</p>
+
+    <ul>
+      <li><strong>Mac:</strong> Command + Option + J</li>
+      <li><strong>Windows:</strong> Ctrl + Shift + J</li>
+    </ul>
+
+    <p>Watch out for:</p>
+
+    <ul>
+      <li>Click on the web page first. Otherwise the shortcut may go to a different app.</li>
+      <li>If the shortcut doesn't work, right-click anywhere on the page, choose <strong>Inspect</strong>, then click the <strong>Console</strong> tab.</li>
+    </ul>
+
+    <h2 id="3-load-axe-core-into-the-page">3. Load axe-core into the page</h2>
+
+    <p>Paste this code into the console and press Enter. It adds the axe-core script to the page. It's the same as writing a <code>&lt;script&gt;</code> element into the HTML, just done live.</p>
+
+    <pre><code>const script = document.createElement('script');
+script.src = 'https://cdn.jsdelivr.net/npm/axe-core@4.14.0/axe.min.js';
+document.head.appendChild(script);</code></pre>
+
+    <p>In plain terms:</p>
+
+    <ol>
+      <li>Make a new <code>&lt;script&gt;</code> element.</li>
+      <li>Point it at the axe-core file, which is hosted online.</li>
+      <li>Add it to the page, so the browser downloads and runs it.</li>
+    </ol>
+
+    <p>Watch out for:</p>
+
+    <ul>
+      <li>Chrome may block your first paste. If it does, type <code>allow pasting</code>, press Enter, then paste again.</li>
+      <li>The address includes a version number (<code>axe-core@4.14.0</code>), so you get the same results as this article, even after newer versions of axe-core come out.</li>
+    </ul>
+
+    <h2 id="4-check-axe-has-loaded">4. Check axe has loaded</h2>
+
+    <p>Type this and press Enter:</p>
+
+    <pre><code>axe.version</code></pre>
+
+    <p>You should see <code>'4.14.0'</code>. That means axe is now running inside the page, waiting to be told what to do.</p>
+
+    <p>Watch out for:</p>
+
+    <ul>
+      <li>If you see "axe is not defined", the file may still be downloading. Wait a couple of seconds and try again.</li>
+    </ul>
+
+    <h2 id="5-run-axe">5. Run axe</h2>
+
+    <p>Paste this and press Enter:</p>
+
+    <pre><code>const results = await axe.run();</code></pre>
+
+    <p>In plain terms: "run axe on the whole page, wait for it to finish, and store everything it found in a box called <code>results</code>."</p>
+
+    <p>Nothing will happen yet. axe has run, but the results are sitting in the box, waiting for you to look at them. The console will just show <code>undefined</code>, which means the line ran and had nothing to show.</p>
+
+    <h2 id="6-look-inside-the-results">6. Look inside the results</h2>
+
+    <p>Type this and press Enter:</p>
+
+    <pre><code>results</code></pre>
+
+    <p>Click the small triangle at the start of the line to expand it. Near the bottom, you'll find four groups, each with a count in brackets:</p>
+
+    <ul>
+      <li><strong>violations:</strong> rules that failed (7)</li>
+      <li><strong>passes:</strong> rules that passed</li>
+      <li><strong>incomplete:</strong> rules axe couldn't decide on, so a human needs to check</li>
+      <li><strong>inapplicable:</strong> rules with nothing to check on this page, such as table rules on a page with no tables</li>
+    </ul>
+
+    <p>This four-way split is the heart of how axe works. It never says a page is accessible, only what it could and couldn't confirm.</p>
+
+    <p>Watch out for:</p>
+
+    <ul>
+      <li>The groups are listed in alphabetical order, mixed in with other details such as the page address and the time of the test.</li>
+      <li>The rules under <strong>inapplicable</strong> look like errors, because each one is described as a requirement. They're not errors, just rules that didn't apply.</li>
+    </ul>
+
+    <h2 id="7-count-the-failed-rules">7. Count the failed rules</h2>
+
+    <p>Type this and press Enter:</p>
+
+    <pre><code>results.violations.length</code></pre>
+
+    <p>In plain terms: "from <code>results</code>, take the <code>violations</code> bucket, and tell me its <code>length</code>", which means how many items are in it. Each dot steps one level further into the box.</p>
+
+    <p>You should see <code>7</code>, one for each planted error.</p>
+
+    <p>Watch out for:</p>
+
+    <ul>
+      <li>The count is the number of <strong>rules that failed</strong>, not individual problems. Three images with no alt text would still count as one failed rule.</li>
+    </ul>
+
+    <h2 id="8-show-the-violations-as-a-table">8. Show the violations as a table</h2>
+
+    <p>Paste this and press Enter:</p>
+
+    <pre><code>console.table(results.violations.map(v =&gt; ({
+  rule: v.id,
+  impact: v.impact,
+  instances: v.nodes.length,
+  help: v.help
+})));</code></pre>
+
+    <p>In plain terms: "for each violation, pull out four things (the rule's name, how severe it is, how many elements failed and a short description), then show them as a table."</p>
+
+    <p>You should see a table with 7 rows: 3 critical, 3 serious and 1 moderate.</p>
+
+    <p>Watch out for:</p>
+
+    <ul>
+      <li>axe lists rules alphabetically, not by severity or by where they appear on the page.</li>
+    </ul>
+
+    <h2 id="9-filter-to-critical-and-serious">9. Filter to critical and serious</h2>
+
+    <p>Paste this and press Enter:</p>
+
+    <pre><code>results.violations
+  .filter(v =&gt; v.impact === 'critical' || v.impact === 'serious')
+  .forEach(v =&gt; console.log(v.impact, v.id));</code></pre>
+
+    <p>In plain terms: "keep only the violations that are critical or serious, then print each one on its own line."</p>
+
+    <p>You should see 6 lines. <code>heading-order</code> is gone, because it's moderate.</p>
+
+    <p>axe itself always reports everything. Every tool that lets you filter by severity is doing exactly this, afterwards, on the results.</p>
+
+    <p>Watch out for:</p>
+
+    <ul>
+      <li>axe has four impact levels: critical, serious, moderate and minor. There's no "high".</li>
+    </ul>
+
+    <h2 id="10-see-which-elements-failed">10. See which elements failed</h2>
+
+    <p>Paste this and press Enter:</p>
+
+    <pre><code>results.violations.forEach(v =&gt;
+  v.nodes.forEach(n =&gt; console.log(v.id, '|', n.target.join(' '), '|', n.html))
+);</code></pre>
+
+    <p>In plain terms: "for each violation, go through every element that failed it, and print the rule's name, the element's CSS selector (the <strong>target</strong>) and its HTML."</p>
+
+    <p>You should see 7 lines, each showing the problem code from your test page, such as <code>&lt;img src="https://placehold.co/200x200"&gt;</code> on the <code>image-alt</code> line. This answers the "where on the page?" question.</p>
+
+    <p>Watch out for:</p>
+
+    <ul>
+      <li>On this small page, each target is just an element name like <code>img</code>. On a real site, it would be a longer selector that points to one exact element.</li>
+    </ul>
+
+    <h2 id="11-highlight-the-failing-elements">11. Highlight the failing elements</h2>
+
+    <p>See the problems on the page itself, not just in the console. Paste this and press Enter:</p>
+
+    <pre><code>results.violations.forEach(v =&gt;
+  v.nodes.forEach(n =&gt; {
+    const el = document.querySelector(n.target[0]);
+    if (el) el.style.outline = '4px dashed red';
+  })
+);</code></pre>
+
+    <p>In plain terms: "for each element that failed, find it on the page using its CSS selector (the <strong>target</strong>), and draw a thick, dashed red outline around it."</p>
+
+    <p>You should see dashed red outlines appear around the 7 problem elements: the heading, image, text box, button, link, faint text, and the whole page (for the missing <code>lang</code>).</p>
+
+    <p>Watch out for:</p>
+
+    <ul>
+      <li>The outlines are temporary. Reload the page to remove them.</li>
+      <li>Only change how the elements look, not what they are. For example, adding a <code>title</code> to label each element would give the empty button an accessible name, and axe would then pass it. A highlight shouldn't change the accessibility of what it's highlighting.</li>
+    </ul>
+
+    <h2 id="12-copy-the-results">12. Copy the results</h2>
+
+    <p>Chrome's console has a built-in <code>copy()</code> command. Type this and press Enter:</p>
+
+    <pre><code>copy(results)</code></pre>
+
+    <p>In plain terms: "copy everything in <code>results</code> to the clipboard."</p>
+
+    <p>The console will just show <code>undefined</code>. Now paste (<strong>Command + V</strong> on Mac, <strong>Ctrl + V</strong> on Windows) into a text editor. You'll see the full results as JSON.</p>
+
+    <p>This is the same data that other axe tools work with. The axe command line tool, for example, saves exactly this to a file. Both come from the same <code>axe.run()</code>.</p>
+
+    <p>Watch out for:</p>
+
+    <ul>
+      <li><code>copy()</code> only works when you type it into the console. It won't work inside a web page's own code or a bookmarklet.</li>
+      <li>The results can be long. Paste them into a code editor rather than a chat or email.</li>
+    </ul>
+
+    <h2 id="13-open-a-full-report-in-a-new-tab">13. Open a full report in a new tab</h2>
+
+    <p>Turn the results into a readable report, and open it in a new browser tab. Paste this and press Enter:</p>
+
+    <pre><code>{
+  const escape = s =&gt; String(s ?? '')
+    .replace(/&amp;/g, '&amp;amp;')
+    .replace(/&lt;/g, '&amp;lt;')
+    .replace(/&gt;/g, '&amp;gt;')
+    .replace(/"/g, '&amp;quot;');
+
+  const order = { critical: 0, serious: 1, moderate: 2, minor: 3 };
+  const violations = [...results.violations].sort((a, b) =&gt; order[a.impact] - order[b.impact]);
+
+  const sections = violations.map(v =&gt; `
+    &lt;section&gt;
+      &lt;h2&gt;${escape(v.help)}&lt;/h2&gt;
+      &lt;p&gt;&lt;strong&gt;Impact:&lt;/strong&gt; ${escape(v.impact)}. &lt;strong&gt;Rule:&lt;/strong&gt; &lt;code&gt;${escape(v.id)}&lt;/code&gt;&lt;/p&gt;
+      &lt;p&gt;${escape(v.description)}&lt;/p&gt;
+      &lt;h3&gt;Failing elements&lt;/h3&gt;
+      &lt;ul&gt;
+        ${v.nodes.map(n =&gt; `
+        &lt;li&gt;
+          &lt;pre&gt;&lt;code&gt;${escape(n.html)}&lt;/code&gt;&lt;/pre&gt;
+          &lt;pre&gt;${escape(n.failureSummary)}&lt;/pre&gt;
+        &lt;/li&gt;`).join('')}
+      &lt;/ul&gt;
+      &lt;p&gt;&lt;a href="${escape(v.helpUrl)}"&gt;Learn more about ${escape(v.id)}&lt;/a&gt;&lt;/p&gt;
+    &lt;/section&gt;`).join('');
+
+  const html = `&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;title&gt;axe report&lt;/title&gt;
+&lt;style&gt;
+  body { font-family: system-ui, sans-serif; line-height: 1.5; max-width: 60rem; margin: 2rem auto; padding: 0 1rem; }
+  section { border-top: 2px solid #ccc; margin-top: 2rem; }
+  pre { background: #f4f4f4; padding: 0.75rem; white-space: pre-wrap; }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;main&gt;
+&lt;h1&gt;axe report&lt;/h1&gt;
+&lt;p&gt;Page: &lt;code&gt;${escape(results.url)}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;${results.violations.length} violations, ${results.passes.length} passes, ${results.incomplete.length} need review.&lt;/p&gt;
+${sections}
+&lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;`;
+
+  window.open(URL.createObjectURL(new Blob([html], { type: 'text/html' })));
+}</code></pre>
+
+    <p>In plain terms:</p>
+
+    <ol>
+      <li><code>escape</code> makes sure any HTML in the results shows up as text, not as real buttons and links.</li>
+      <li>The violations are sorted from critical to minor.</li>
+      <li>Each violation becomes a section, with its description, impact, failing elements, "how to fix" text and a help link.</li>
+      <li>The sections are wrapped in a simple web page.</li>
+      <li><code>window.open</code> opens that page in a new tab.</li>
+    </ol>
+
+    <p>You should see a new tab called "axe report", listing all 7 violations, with the critical ones first.</p>
+
+    <p>Watch out for:</p>
+
+    <ul>
+      <li>If nothing opens, Chrome may have blocked the new tab as a pop-up. Look for a blocked pop-up icon at the right of the address bar, and choose to allow pop-ups for this page.</li>
+      <li>The report only exists in the browser. To keep it, save the page (<strong>Command + S</strong> on Mac, <strong>Ctrl + S</strong> on Windows) while you're on the report tab.</li>
+      <li>The curly brackets around the code mean you can paste it again without causing an error.</li>
+    </ul>
+
+    <h2 id="15-try-the-fixed-page">14. Try the fixed page</h2>
+
+    <p>There's also a <a href="FIXED-PAGE-URL">fixed version of the test page</a>, with all 7 errors fixed.</p>
+
+    <ol>
+      <li>Open the fixed page in Chrome.</li>
+      <li>Open the console.</li>
+      <li>Paste the quick start from step 14, and press Enter.</li>
+      <li>Type this and press Enter:</li>
+    </ol>
+
+    <pre><code>results.violations.length</code></pre>
+
+    <p>You should see <code>0</code>. Now try:</p>
+
+    <pre><code>results.passes.length</code></pre>
+
+    <p>You should see more passes than on the broken page, because the fixed elements now pass the rules they failed before.</p>
+
+    <p>Watch out for:</p>
+
+    <ul>
+      <li><code>0</code> violations doesn't mean the page is accessible. axe only checks what a computer can test. A person still needs to check things like whether alt text makes sense, and whether everything works with a keyboard.</li>
+      <li>The fixed page marks its image as decorative, with <code>alt=""</code>. On a real page, an image that carries meaning needs alt text that describes it.</li>
+    </ul>
+
+    <h2 id="quick-start-the-two-essentials">Quick start: the two essentials</h2>
+
+    <p>Every step after step 5 uses <code>results</code>. And <code>results</code> only exists once two things have happened in the page you're on:</p>
+
+    <ol>
+      <li><strong>Load axe into the page</strong> (step 3)</li>
+      <li><strong>Run axe and store the results</strong> (step 5)</li>
+    </ol>
+
+    <p>Everything else is optional, and you can do it in any order: look inside the results, count them, show a table, filter by severity, see which elements failed, highlight them, copy them or open a full report.</p>
+
+    <p>If you reload the page, or move to a different page, both essentials are wiped. So you need to do them again before any of the other steps will work.</p>
+
+    <p>Here's a single paste that does both. Reload the page to start fresh, then paste this and press Enter:</p>
+
+    <pre><code>const script = document.createElement('script');
+script.src = 'https://cdn.jsdelivr.net/npm/axe-core@4.14.0/axe.min.js';
+const loaded = new Promise(resolve =&gt; script.onload = resolve);
+document.head.appendChild(script);
+await loaded;
+const results = await axe.run();</code></pre>
+
+    <p>In plain terms:</p>
+
+    <ol>
+      <li>Make a <code>&lt;script&gt;</code> element, and point it at the axe-core file.</li>
+      <li>Get ready to notice when it has finished loading.</li>
+      <li>Add it to the page, so the browser downloads it.</li>
+      <li>Wait until it has loaded.</li>
+      <li>Run axe, and store the results in <code>results</code>.</li>
+    </ol>
+
+    <p>The console will show <code>undefined</code> when it's done. Now paste any of the steps from 6 to 13, in whatever order you like.</p>
+
+    <p>Watch out for:</p>
+
+    <ul>
+      <li>You can't just paste the lines from steps 3 and 5 together. The page needs a moment to download axe, so the <code>axe.run()</code> line runs too early and fails with "axe is not defined". The <code>loaded</code> line is what makes it wait.</li>
+      <li>This works on many web pages, not just your test page. But some sites, such as GitHub and most banking sites, block scripts from outside addresses. On those, you'll see a large red error in the console, starting with something like "Refused to load the script", and mentioning a "Content Security Policy". That's the site protecting itself, not something you did wrong. Practise on your test page or simple sites first.</li>
+    </ul>
+
+    <hr>
+
+    <p><strong>Related:</strong></p>
+
+    <ul>
+      <li><a href="https://www.maxdesign.com.au/articles/axe-core-playwright.html">axe-core, Playwright and Cucumber: accessibility testing in the development lifecycle</a></li>
+      <li><a href="https://intopia.github.io/exercise/accessibility-testing-with-playwright.html">Accessibility testing with Playwright</a></li>
+    </ul>
+
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+</body>
+</html>
