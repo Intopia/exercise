@@ -31,7 +31,7 @@ hr {
 
 <h2 id="what-this-tutorial-is-about">What this tutorial is about</h2>
 
-<p>This article will help you understand how axe-core works by running it directly in the browser console. You'll see how axe-core produces accessibility test results and how tools like axe DevTools build on this functionality to make testing easier.</p>
+<p>This tutorial will help you understand how axe-core works by running it directly in the browser console. You'll see how axe-core produces accessibility test results and how tools like axe DevTools build on this functionality to make testing easier.</p>
 
 <p>Tools like browser extensions can seem a bit magical. But under the surface, axe-core just produces a set of results. How you look at those results, filter them, report on them and act on them is up to you.</p>
 
@@ -39,7 +39,7 @@ hr {
 
 <p>axe-core is a free, open-source accessibility testing engine. It's the engine inside tools like the axe DevTools browser extension.</p>
 
-<p>In this article, you'll run axe-core directly from Chrome's browser console. There's nothing to install, and no extension needed.</p>
+<p>In this tutorial, you'll run axe-core directly from Chrome's browser console. There's nothing to install, and no extension needed.</p>
 
 <p>The basic idea behind axe tools:</p>
 
@@ -246,7 +246,7 @@ document.head.appendChild(script);</code></pre>
 
 <h3 id="video-walkthrough1">Video walkthrough: Getting started</h3>
 
-<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/axe-core-article2.mp4"></video>
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/axe-core-article1.mp4"></video>
 
 <details>
   <summary>Transcript</summary>
@@ -270,7 +270,7 @@ document.head.appendChild(script);</code></pre>
 
 <p>The following examples are optional. They show different ways to explore and present the results, and you can try them in any order.</p>
 
-<h3 id="7-count-the-failed-rules">Count the failed rules</h3>
+<h3 id="count-the-failed-rules">Count the failed rules</h3>
 
 <p>Type this and press Enter:</p>
 
@@ -286,7 +286,7 @@ document.head.appendChild(script);</code></pre>
   <li>This counts the number of <strong>rules that failed</strong>, not individual problems. Three images with no alt text would still count as one failed rule.</li>
 </ul>
 
-<h3 id="8-show-the-violations-as-a-table">Show the violations as a table</h3>
+<h3 id="show-the-violations-as-a-table">Show the violations as a table</h3>
 
 <p>Paste this and press Enter:</p>
 
@@ -307,7 +307,7 @@ document.head.appendChild(script);</code></pre>
   <li>axe lists rules alphabetically, not by severity or by where they appear on the page.</li>
 </ul>
 
-<h3 id="9-filter-to-critical-and-serious">Filter to critical and serious</h3>
+<h3 id="filter-to-critical-and-serious">Filter to critical and serious</h3>
 
 <p>Paste this and press Enter:</p>
 
@@ -328,7 +328,7 @@ document.head.appendChild(script);</code></pre>
 </ul>
 
 
-<h3 id="10-see-which-elements-failed">See which elements failed</h3>
+<h3 id="see-which-elements-failed">See which elements failed</h3>
 
 <p>Paste this and press Enter:</p>
 
@@ -346,7 +346,7 @@ document.head.appendChild(script);</code></pre>
   <li>On this small page, each target is just an element name like <code>img</code>. On a real site, selectors are often longer to help identify specific elements.</li>
 </ul>
 
-<h3 id="11-highlight-the-failing-elements">Highlight the failing elements</h3>
+<h3 id="highlight-the-failing-elements">Highlight the failing elements</h3>
 
 <p>Highlight the affected elements on the page, rather than just viewing them in the console. Paste this and press Enter:</p>
 
@@ -368,7 +368,7 @@ document.head.appendChild(script);</code></pre>
   <li>Highlighting should only change how elements look, not their accessibility. For example, adding a <code>title</code> attribute could give an empty button an accessible name and change the test results.</li>
 </ul>
 
-<h3 id="12-copy-the-results">Copy the results</h3>
+<h3 id="copy-the-results">Copy the results</h3>
 
 <p>Chrome's console has a built-in <code>copy()</code> command. Type this and press Enter:</p>
 
@@ -387,7 +387,7 @@ document.head.appendChild(script);</code></pre>
   <li>The results can be long. Paste them into a code editor rather than a chat or email.</li>
 </ul>
 
-<h3 id="13-open-a-full-report-in-a-new-tab">Open a full report in a new tab</h3>
+<h3 id="open-a-full-report-in-a-new-tab">Open a full report in a new tab</h3>
 
 <p>Turn the results into a readable report and open it in a new browser tab. Paste this and press Enter:</p>
 
@@ -486,7 +486,7 @@ ${sections}
 <hr>
 <h2 id="trying-another-page">Trying another page</h2>
 
-<h3 id="14-load-and-run-axe-core-on-a-new-page">Load and run axe-core on a new page</h3>
+<h3 id="load-and-run-on-a-new-page">Load and run axe-core on a new page</h3>
 
 <p>Now let's try axe-core on another page. There's a <a href="https://intopia.github.io/exercise/axe-core-test-page-fixed.html" target="_blank">fixed version of the test page</a>, with all seven accessibility issues corrected.</p>
 
@@ -513,7 +513,7 @@ const results = await axe.run();</code></pre>
   <li>Some websites block external scripts as a security measure. If you see an error mentioning <strong>Content Security Policy</strong>, the site may be blocking axe-core from loading.</li>
 </ul>
 
-<h3 id="15-check-the-results">Check the results</h3>
+<h3 id="check-the-results">Check the results</h3>
 
 <p>Let's see what axe-core found on the fixed page.</p>
 
@@ -529,7 +529,7 @@ const results = await axe.run();</code></pre>
 
 <p>You should see more passes than on the original test page, because the corrected elements now pass the rules they failed before.</p>
 
-<p>You can also use any of the commands from steps 6 to 13 to explore the results further.</p>
+<p>You can also try any of the examples from <a href="#exploring-the-results">Exploring the results</a> on this page.</p>
 
 <p>Watch out for:</p>
 
@@ -540,7 +540,7 @@ const results = await axe.run();</code></pre>
 
 <h3 id="video-walkthrough3">Video walkthrough: Trying another page</h3>
 
-<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/axe-core-article2.mp4"></video>
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/axe-core-article3.mp4"></video>
 
 <details>
   <summary>Transcript</summary>
@@ -569,7 +569,7 @@ const results = await axe.run();</code></pre>
 <hr>
 <h2 id="related-articles">Related articles</h2>
 
-<p>This article is part of a series on accessibility testing with axe-core and Playwright. Other articles in the series include:</p>
+<p>This tutorial is part of a series on accessibility testing with axe-core and Playwright. Other articles in the series include:</p>
 
 <ul>
   <li><a href="https://www.maxdesign.com.au/articles/axe-core-playwright.html" target="_blank">axe-core, Playwright and Cucumber: accessibility testing in the development lifecycle</a></li>
