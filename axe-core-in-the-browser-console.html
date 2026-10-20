@@ -3,14 +3,25 @@
 <head>
   <meta charset="utf-8">
   <title>Running axe-core in the browser console</title>
+  <meta name="description" content="Learn how axe-core works by running it directly in the browser console. See how axe-core produces accessibility test results and how tools like axe DevTools build on this functionality to make testing easier.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-a11y-dark.min.css" rel="stylesheet">
   <link href="assets/css/testing.css" rel="stylesheet">
   <style>
 hr {
   border: 0;
   border-top: 2px solid #999;
   margin: 2em 0;
+}
+
+.copy-code-wrapper {
+  margin: .5em 0 1.5em;
+  font-size: .9em;
+}
+
+.copy-code-status {
+  margin-left: 0.75em;
 }
   </style>
 </head>
@@ -71,14 +82,14 @@ hr {
 
 <h3>Getting started</h3>
 
-<ol>
-  <li><a href="#1-open-the-test-page">Open the test page</a></li>
-  <li><a href="#2-open-the-console">Open the console</a></li>
-  <li><a href="#3-load-axe-core-into-the-page">Load axe-core into the page</a></li>
-  <li><a href="#4-check-axe-has-loaded">Check axe has loaded</a></li>
-  <li><a href="#5-run-axe">Run axe</a></li>
-  <li><a href="#6-look-inside-the-results">Look inside the results</a></li>
-</ol>
+<ul>
+  <li><a href="#1-open-the-test-page">Step 1. Open the test page</a></li>
+  <li><a href="#2-open-the-console">Step 2. Open the console</a></li>
+  <li><a href="#3-load-axe-core-into-the-page">Step 3. Load axe-core into the page</a></li>
+  <li><a href="#4-check-axe-has-loaded">Step 4. Check axe has loaded</a></li>
+  <li><a href="#5-run-axe">Step 5. Run axe</a></li>
+  <li><a href="#6-look-inside-the-results">Step 6. Look inside the results</a></li>
+</ul>
 
 <h3>Exploring the results</h3>
 
@@ -173,7 +184,7 @@ hr {
 
 <p>Paste this code into the console and press Enter. It adds the axe-core script to the page. This works much like adding a <code>&lt;script&gt;</code> element to the HTML, but you're doing it while the page is open.</p>
 
-<pre><code>const script = document.createElement('script');
+<pre><code class="language-javascript">const script = document.createElement('script');
 script.src = 'https://cdn.jsdelivr.net/npm/axe-core@4.14.0/axe.min.js';
 document.head.appendChild(script);</code></pre>
 
@@ -196,7 +207,7 @@ document.head.appendChild(script);</code></pre>
 
 <p>Type this and press Enter:</p>
 
-<pre><code>axe.version</code></pre>
+<pre><code class="language-javascript">axe.version</code></pre>
 
 <p>You should see <code>'4.14.0'</code>. This means axe-core has loaded into the page and is ready to run accessibility tests.</p>
 
@@ -210,7 +221,7 @@ document.head.appendChild(script);</code></pre>
 
 <p>Paste this and press Enter:</p>
 
-<pre><code>const results = await axe.run();</code></pre>
+<pre><code class="language-javascript">const results = await axe.run();</code></pre>
 
 <p>In plain terms: run axe on the whole page, wait for it to finish, and store the findings in something called <code>results</code>.</p>
 
@@ -224,7 +235,7 @@ document.head.appendChild(script);</code></pre>
 
 <p>Type this and press Enter:</p>
 
-<pre><code>results</code></pre>
+<pre><code class="language-javascript">results</code></pre>
 
 <p>Click the small triangle at the start of the line to expand it. Near the bottom, you'll find four groups, each with a count in brackets:</p>
 
@@ -246,7 +257,7 @@ document.head.appendChild(script);</code></pre>
 
 <h3 id="video-walkthrough1">Video walkthrough: Getting started</h3>
 
-<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/axe-core-article1.mp4"></video>
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/axe-core1.mp4"></video>
 
 <details>
   <summary>Transcript</summary>
@@ -274,7 +285,7 @@ document.head.appendChild(script);</code></pre>
 
 <p>Type this and press Enter:</p>
 
-<pre><code>results.violations.length</code></pre>
+<pre><code class="language-javascript">results.violations.length</code></pre>
 
 <p>In plain terms: from <code>results</code>, find the <code>violations</code> group and use <code>length</code> to count how many items it contains. Each dot lets you access another part of the results.</p>
 
@@ -290,7 +301,7 @@ document.head.appendChild(script);</code></pre>
 
 <p>Paste this and press Enter:</p>
 
-<pre><code>console.table(results.violations.map(v =&gt; ({
+<pre><code class="language-javascript">console.table(results.violations.map(v =&gt; ({
   rule: v.id,
   impact: v.impact,
   instances: v.nodes.length,
@@ -311,7 +322,7 @@ document.head.appendChild(script);</code></pre>
 
 <p>Paste this and press Enter:</p>
 
-<pre><code>results.violations
+<pre><code class="language-javascript">results.violations
   .filter(v =&gt; v.impact === 'critical' || v.impact === 'serious')
   .forEach(v =&gt; console.log(v.impact, v.id));</code></pre>
 
@@ -332,7 +343,7 @@ document.head.appendChild(script);</code></pre>
 
 <p>Paste this and press Enter:</p>
 
-<pre><code>results.violations.forEach(v =&gt;
+<pre><code class="language-javascript">results.violations.forEach(v =&gt;
   v.nodes.forEach(n =&gt; console.log(v.id, '|', n.target.join(' '), '|', n.html))
 );</code></pre>
 
@@ -350,7 +361,7 @@ document.head.appendChild(script);</code></pre>
 
 <p>Highlight the affected elements on the page, rather than just viewing them in the console. Paste this and press Enter:</p>
 
-<pre><code>results.violations.forEach(v =&gt;
+<pre><code class="language-javascript">results.violations.forEach(v =&gt;
   v.nodes.forEach(n =&gt; {
     const el = document.querySelector(n.target[0]);
     if (el) el.style.outline = '4px dashed red';
@@ -372,7 +383,7 @@ document.head.appendChild(script);</code></pre>
 
 <p>Chrome's console has a built-in <code>copy()</code> command. Type this and press Enter:</p>
 
-<pre><code>copy(results)</code></pre>
+<pre><code class="language-javascript">copy(results)</code></pre>
 
 <p>In plain terms: copy everything in <code>results</code> to the clipboard.</p>
 
@@ -391,7 +402,7 @@ document.head.appendChild(script);</code></pre>
 
 <p>Turn the results into a readable report and open it in a new browser tab. Paste this and press Enter:</p>
 
-<pre><code>{
+<pre><code class="language-javascript">{
   const escape = s =&gt; String(s ?? '')
     .replace(/&amp;/g, '&amp;amp;')
     .replace(/&lt;/g, '&amp;lt;')
@@ -463,7 +474,7 @@ ${sections}
 
 <h3 id="video-walkthrough2">Video walkthrough: Exploring the results</h3>
 
-<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/axe-core-article2.mp4"></video>
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/axe-core2.mp4"></video>
 
 <details>
   <summary>Transcript</summary>
@@ -494,7 +505,7 @@ ${sections}
 
 <p>Here's a quicker way to load axe-core and run the test. Instead of entering two separate commands, you can combine them into one:</p>
 
-<pre><code>const script = document.createElement('script');
+<pre><code class="language-javascript">const script = document.createElement('script');
 script.src = 'https://cdn.jsdelivr.net/npm/axe-core@4.14.0/axe.min.js';
 const loaded = new Promise(resolve =&gt; script.onload = resolve);
 document.head.appendChild(script);
@@ -519,13 +530,13 @@ const results = await axe.run();</code></pre>
 
 <p>Type this and press Enter:</p>
 
-<pre><code>results.violations.length</code></pre>
+<pre><code class="language-javascript">results.violations.length</code></pre>
 
 <p>You should see <code>0</code>, meaning axe-core found no violations.</p>
 
 <p>Now check how many rules passed:</p>
 
-<pre><code>results.passes.length</code></pre>
+<pre><code class="language-javascript">results.passes.length</code></pre>
 
 <p>You should see more passes than on the original test page, because the corrected elements now pass the rules they failed before.</p>
 
@@ -540,7 +551,7 @@ const results = await axe.run();</code></pre>
 
 <h3 id="video-walkthrough3">Video walkthrough: Trying another page</h3>
 
-<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/axe-core-article3.mp4"></video>
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/axe-core3.mp4"></video>
 
 <details>
   <summary>Transcript</summary>
@@ -586,5 +597,38 @@ const results = await axe.run();</code></pre>
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 </main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<script>
+  // Add a "Copy code" button under each code example
+  document.querySelectorAll('pre > code').forEach(code => {
+    const pre = code.parentElement;
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'copy-code';
+    button.textContent = 'Copy code';
+
+    const status = document.createElement('span');
+    status.className = 'copy-code-status';
+    status.setAttribute('role', 'status');
+
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(code.textContent);
+        status.textContent = 'Copied';
+      } catch {
+        status.textContent = 'Copy failed. Select the code and copy it manually.';
+      }
+      setTimeout(() => { status.textContent = ''; }, 3000);
+    });
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'copy-code-wrapper';
+    wrapper.append(button, status);
+    pre.after(wrapper);
+  });
+</script>
 </body>
 </html>
