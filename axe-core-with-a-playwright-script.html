@@ -1,0 +1,858 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Running axe-core with a Playwright script</title>
+  <meta name="description" content="Write your own script to run axe-core with Playwright. Show only critical and serious issues, make the check pass or fail, and run it every time a page changes.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-a11y-dark.min.css" rel="stylesheet">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+hr {
+  border: 0;
+  border-top: 2px solid #999;
+  margin: 2em 0;
+}
+
+.copy-code-wrapper {
+  margin: .5em 0 1.5em;
+  font-size: .9em;
+}
+
+.copy-code-status {
+  margin-left: 0.75em;
+}
+  </style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Running axe-core with a Playwright script</h1>
+
+<p style="font-size: .9em; color: #555;">Published: <time datetime="2026-10-23">23 October 2026</time> | Author: Russ Weakley</p>
+
+
+<!-- section -->
+
+
+<h2 id="what-this-tutorial-is-about">What this tutorial is about</h2>
+
+<p>In <a href="axe-core-from-the-command-line.html">Running axe-core from the command line</a>, you ran axe-core with a single command. But the command line tool can't filter by severity, and it only checks a page when you tell it to.</p>
+
+<p>In this tutorial, you'll write your own script, using Playwright to open a page and run axe-core. That puts you in control of what gets tested, what gets shown, and when it runs. By the end, you'll have a check that shows only critical and serious issues, passes or fails, and runs again every time the page changes.</p>
+
+<p>Tools like browser extensions can seem a bit magical. But under the surface, axe-core just produces a set of results. How you look at those results, filter them, report on them and act on them is up to you.</p>
+
+<h3>About Playwright</h3>
+
+<p>Playwright is a free tool that controls a web browser with code. It can open pages, click buttons and fill in forms, just like a person would. The <code>@axe-core/playwright</code> add-on lets you run axe-core on any page Playwright opens.</p>
+
+<p>This is the closest of the three tutorials to how development teams actually use axe-core: as part of automated checks that run as they work, and decide whether new code can go live.</p>
+
+<h3>Before you start</h3>
+
+<p>Complete <a href="axe-setting-up-nodejs.html">Setting up Node.js</a> first. You should have:</p>
+
+<ul>
+  <li>Node.js 22.12 or higher</li>
+  <li>an <code>axe-learning</code> project folder</li>
+  <li>the axe and Playwright tools installed in that folder</li>
+  <li>Playwright's browser, downloaded during setup.</li>
+</ul>
+
+<p>You won't need ChromeDriver in this tutorial, because Playwright uses its own browser.</p>
+
+<p>You'll type the commands in Terminal (Mac) or Command Prompt (Windows).</p>
+
+<h3>How this tutorial works</h3>
+
+<p>You'll build one script, <code>check.js</code>, a little at a time. Each time you change it, you'll replace <strong>everything</strong> in the file with a new version, so you always start from a complete, working file. The new parts are marked with comments in CAPITALS, so you can see what's changed.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="whats-in-this-tutorial">What's in this tutorial</h2>
+
+<h3>Getting started</h3>
+
+<ul>
+  <li><a href="#1-open-your-project-folder">Step 1. Open your project folder</a></li>
+  <li><a href="#2-add-the-test-page">Step 2. Add the test page</a></li>
+  <li><a href="#3-create-the-check-script">Step 3. Create the check script</a></li>
+  <li><a href="#4-run-the-check-script">Step 4. Run the check script</a></li>
+</ul>
+
+<h3>Building and running the check</h3>
+
+<ul>
+  <li><a href="#5-show-only-critical-and-serious">Step 5. Show only critical and serious</a></li>
+  <li><a href="#6-pass-or-fail">Step 6. Pass or fail</a></li>
+  <li><a href="#7-run-the-check-whenever-the-page-changes">Step 7. Run the check whenever the page changes</a></li>
+  <li><a href="#8-add-check-and-watch-shortcuts">Step 8. Add check and watch shortcuts</a></li>
+</ul>
+
+<h3>Fixing the page</h3>
+
+<ul>
+  <li><a href="#9-save-a-broken-copy-of-the-test-page">Step 9. Save a broken copy of the test page</a></li>
+  <li><a href="#10-fix-the-page-and-reach-pass">Step 10. Fix the page and reach PASS</a></li>
+  <li><a href="#11-reset-the-test-page">Step 11. Reset the test page</a></li>
+</ul>
+
+<h3>Optional extras</h3>
+
+<ul>
+  <li><a href="#sort-the-most-severe-issues-to-the-top">Sort the most severe issues to the top</a></li>
+  <li><a href="#write-a-simple-html-report">Write a simple HTML report</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="getting-started">Getting started</h2>
+
+<h3 id="1-open-your-project-folder">Step 1. Open your project folder</h3>
+
+<p>Open Terminal (Mac) or Command Prompt (Windows), then move into the <code>axe-learning</code> folder you made in <a href="axe-setting-up-nodejs.html">Setting up Node.js</a>.</p>
+
+<p><strong>Mac:</strong></p>
+
+<pre><code class="language-bash">cd Documents/axe-learning</code></pre>
+
+<p><strong>Windows:</strong></p>
+
+<pre><code class="language-bash">cd %USERPROFILE%\axe-learning</code></pre>
+
+<p>In plain terms: <code>cd</code> stands for "change directory", which means "go into this folder".</p>
+
+<p>Watch out for:</p>
+
+<ul>
+  <li>You'll need to do this every time you open Terminal or Command Prompt. The tools are installed in this folder, so the commands only work from inside it.</li>
+  <li>On Windows, use Command Prompt, not PowerShell. If the line where you type starts with <code>PS</code>, you're in PowerShell.</li>
+</ul>
+
+<h3 id="2-add-the-test-page">Step 2. Add the test page</h3>
+
+<p>This is the same test page used in the earlier tutorials, with 7 deliberately planted accessibility errors. This time, you need your own copy, in your <code>axe-learning</code> folder. That's because later on, you'll fix the errors yourself and watch the results change.</p>
+
+<p>Create an empty file, then open it:</p>
+
+<p><strong>Mac:</strong></p>
+
+<pre><code class="language-bash">touch test-page.html
+code test-page.html</code></pre>
+
+<p><strong>Windows:</strong></p>
+
+<pre><code class="language-bash">type nul &gt; test-page.html
+notepad test-page.html</code></pre>
+
+<p>Paste in the following code, then save the file (<strong>Command + S</strong> on Mac, <strong>Ctrl + S</strong> on Windows):</p>
+
+<pre><code class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;!-- ERROR 1: no lang attribute on the html element --&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;axe test page&lt;/title&gt;
+  &lt;style&gt;
+    body {
+      margin: 0;
+      padding: 2em;
+      font-family: arial, helvetica, sans-serif;
+    }
+
+    button {
+      padding: .5em 1em;
+      border-radius: .3em;
+      border: 1px solid red;
+    }
+
+    a:link {
+      padding: .5em 1em;
+      border-radius: .3em;
+      border: 1px solid red;
+    }
+
+    .faint { color: #aaa; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;main&gt;
+    &lt;h1&gt;axe test page&lt;/h1&gt;
+
+    &lt;!-- ERROR 2: heading level skips from h1 to h3 --&gt;
+    &lt;h3&gt;A section&lt;/h3&gt;
+
+    &lt;!-- ERROR 3: image with no alt attribute --&gt;
+    &lt;p&gt;&lt;img src="https://placehold.co/200x200"&gt;&lt;/p&gt;
+
+
+    &lt;!-- ERROR 4: text input with no label --&gt;
+    &lt;p&gt;&lt;input type="text"&gt;&lt;/p&gt;
+
+    &lt;!-- ERROR 5: button with no accessible name --&gt;
+    &lt;p&gt;&lt;button&gt;&lt;/button&gt;&lt;/p&gt;
+
+    &lt;!-- ERROR 6: link with no text --&gt;
+    &lt;p&gt;&lt;a href="#"&gt;&lt;/a&gt;&lt;/p&gt;
+
+    &lt;!-- ERROR 7: low contrast text (grey on white) --&gt;
+    &lt;p class="faint"&gt;This text is hard to read.&lt;/p&gt;
+  &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<p><strong>To check it worked</strong>, list the files in your folder (<code>ls</code> on Mac, <code>dir</code> on Windows). You should see <code>test-page.html</code>.</p>
+
+<p>Watch out for:</p>
+
+<ul>
+  <li>On Mac, the <code>code</code> command only works once VS Code has been set up for it. If you see "command not found", open VS Code, press <strong>Command + Shift + P</strong>, type <code>shell command</code>, and choose <strong>Install 'code' command in PATH</strong>. Then try again.</li>
+  <li>On Mac, avoid TextEdit. It can save files as formatted text instead of plain code.</li>
+  <li>On Windows, don't use <code>start test-page.html</code> to open the file. That opens it in a browser, not an editor.</li>
+</ul>
+
+<h3 id="3-create-the-check-script">Step 3. Create the check script</h3>
+
+<p>Create a script that uses Playwright to open the test page, and the axe add-on to run axe-core on it. To start with, it just counts how many rules failed.</p>
+
+<p><strong>Mac:</strong></p>
+
+<pre><code class="language-bash">touch check.js
+code check.js</code></pre>
+
+<p><strong>Windows:</strong></p>
+
+<pre><code class="language-bash">type nul &gt; check.js
+notepad check.js</code></pre>
+
+<p>Paste in the following code, then save the file:</p>
+
+<pre><code class="language-javascript">// Load the tools
+const { chromium } = require('playwright');
+const AxeBuilder = require('@axe-core/playwright').default;
+const path = require('path');
+const { pathToFileURL } = require('url');
+
+(async () =&gt; {
+  // Open an invisible browser, a fresh private window, and a new tab
+  const browser = await chromium.launch();
+  const context = await browser.newContext();
+  const page = await context.newPage();
+
+  // Load the test page from this folder
+  await page.goto(pathToFileURL(path.join(__dirname, 'test-page.html')).href);
+
+  // Inject axe, run it, and store the results
+  const results = await new AxeBuilder({ page }).analyze();
+
+  // Print how many rules failed
+  console.log('Violations found:', results.violations.length);
+
+  // Close the browser
+  await browser.close();
+})();</code></pre>
+
+<p>In plain terms, it's the browser console steps, done by code:</p>
+
+<ol>
+  <li>Open a browser and a tab.</li>
+  <li>Load the test page.</li>
+  <li>Inject axe-core, run it, and store the results.</li>
+  <li>Print how many rules failed.</li>
+  <li>Close the browser.</li>
+</ol>
+
+<p>Don't worry about the <code>(async () =&gt; { ... })();</code> wrapper. It's just what lets the script wait for each step to finish before moving on to the next.</p>
+
+<p>Watch out for:</p>
+
+<ul>
+  <li>Make sure the file is called exactly <code>check.js</code>. If it shows up as <code>check.js.txt</code>, rename it.</li>
+</ul>
+
+<h3 id="4-run-the-check-script">Step 4. Run the check script</h3>
+
+<p>Type:</p>
+
+<pre><code class="language-bash">node check.js</code></pre>
+
+<p>After a few seconds, you should see:</p>
+
+<pre><code class="language-none">Violations found: 7</code></pre>
+
+<p>Watch out for:</p>
+
+<ul>
+  <li>A "Cannot find module ...check.js" error means the file isn't in your <code>axe-learning</code> folder, or has a different name. List your files to check.</li>
+  <li>An error saying a browser "executable doesn't exist" means Playwright's browser isn't installed. Run <code>npx playwright install chromium</code>, then try again.</li>
+</ul>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="building-and-running-the-check">Building and running the check</h2>
+
+<h3 id="5-show-only-critical-and-serious">Step 5. Show only critical and serious</h3>
+
+<p>Change the script so it only shows critical and serious violations, with the details of each one. The command line tool can't do this, which is one of the main reasons to write your own script.</p>
+
+<p>Open <code>check.js</code> in your editor. Select everything (<strong>Command + A</strong> on Mac, <strong>Ctrl + A</strong> on Windows), delete it, paste in this new version, then save the file:</p>
+
+<pre><code class="language-javascript">// Load the tools
+const { chromium } = require('playwright');
+const AxeBuilder = require('@axe-core/playwright').default;
+const path = require('path');
+const { pathToFileURL } = require('url');
+
+(async () =&gt; {
+  // Open an invisible browser, a fresh private window, and a new tab
+  const browser = await chromium.launch();
+  const context = await browser.newContext();
+  const page = await context.newPage();
+
+  // Load the test page from this folder
+  await page.goto(pathToFileURL(path.join(__dirname, 'test-page.html')).href);
+
+  // Inject axe, run it, and store the results
+  const results = await new AxeBuilder({ page }).analyze();
+
+  // KEEP ONLY CRITICAL AND SERIOUS
+  const important = results.violations.filter(
+    v =&gt; v.impact === 'critical' || v.impact === 'serious'
+  );
+
+  // PRINT THE RESULTS
+  console.log(`Critical and serious issues: ${important.length}`);
+  important.forEach(v =&gt; {
+    console.log(`\n[${v.impact}] ${v.id}: ${v.help}`);
+    v.nodes.forEach(n =&gt; console.log(`  - ${n.html}`));
+  });
+
+  // Close the browser
+  await browser.close();
+})();</code></pre>
+
+<p><strong>What's new:</strong></p>
+
+<ul>
+  <li><strong>KEEP ONLY CRITICAL AND SERIOUS</strong> is the same filter you used in the browser console. It keeps only the critical and serious violations.</li>
+  <li><strong>PRINT THE RESULTS</strong> replaces the old count. It prints how many issues there are, then each issue's severity, rule and short description, with the problem code underneath.</li>
+</ul>
+
+<p>Now run it:</p>
+
+<pre><code class="language-bash">node check.js</code></pre>
+
+<p>You should see <code>Critical and serious issues: 6</code>, followed by the six issues. <code>heading-order</code> is gone, because it's moderate.</p>
+
+<h3 id="6-pass-or-fail">Step 6. Pass or fail</h3>
+
+<p>In <a href="axe-core-from-the-command-line.html#fail-when-issues-are-found">Make accessibility tests fail when issues are found</a>, you used <code>--exit</code> to make the command line tool report a failure through its <strong>exit code</strong>. <code>0</code> means success, and anything else means failure. Development teams use this to stop a build or block a release when accessibility tests fail.</p>
+
+<p>The catch was that <code>--exit</code> fails on <strong>any</strong> violation, even a minor one. Now you'll decide where the line is. Change the script so it only fails on critical and serious issues, ends with a clear PASS or FAIL, and sets the exit code to match.</p>
+
+<p>Open <code>check.js</code> in your editor. Select everything (<strong>Command + A</strong> on Mac, <strong>Ctrl + A</strong> on Windows), delete it, paste in this new version, then save the file:</p>
+
+<pre><code class="language-javascript">// Load the tools
+const { chromium } = require('playwright');
+const AxeBuilder = require('@axe-core/playwright').default;
+const path = require('path');
+const { pathToFileURL } = require('url');
+
+(async () =&gt; {
+  // Open an invisible browser, a fresh private window, and a new tab
+  const browser = await chromium.launch();
+  const context = await browser.newContext();
+  const page = await context.newPage();
+
+  // Load the test page from this folder
+  await page.goto(pathToFileURL(path.join(__dirname, 'test-page.html')).href);
+
+  // Inject axe, run it, and store the results
+  const results = await new AxeBuilder({ page }).analyze();
+
+  // Keep only critical and serious
+  const important = results.violations.filter(
+    v =&gt; v.impact === 'critical' || v.impact === 'serious'
+  );
+
+  // Print the results
+  console.log(`Critical and serious issues: ${important.length}`);
+  important.forEach(v =&gt; {
+    console.log(`\n[${v.impact}] ${v.id}: ${v.help}`);
+    v.nodes.forEach(n =&gt; console.log(`  - ${n.html}`));
+  });
+
+  // Close the browser
+  await browser.close();
+
+  // PASS OR FAIL
+  if (important.length &gt; 0) {
+    console.log('\nFAIL: critical or serious issues found');
+    process.exitCode = 1;
+  } else {
+    console.log('\nPASS: no critical or serious issues');
+  }
+})();</code></pre>
+
+<p><strong>What's new:</strong></p>
+
+<ul>
+  <li><strong>PASS OR FAIL</strong>, at the end, says: "if there are any critical or serious issues, print FAIL and set the exit code to 1. Otherwise, print PASS."</li>
+</ul>
+
+<p>Now run it:</p>
+
+<pre><code class="language-bash">node check.js</code></pre>
+
+<p>You should see the 6 issues, then <code>FAIL: critical or serious issues found</code>.</p>
+
+<p>To see the exit code, type this straight afterwards and press Enter:</p>
+
+<p><strong>Mac:</strong></p>
+
+<pre><code class="language-bash">echo $?</code></pre>
+
+<p><strong>Windows:</strong></p>
+
+<pre><code class="language-bash">echo %errorlevel%</code></pre>
+
+<p>You should see <code>1</code>, meaning the check failed.</p>
+
+<p>Watch out for:</p>
+
+<ul>
+  <li>The exit code only tells you about the last command. Run <code>echo</code> straight after <code>node check.js</code>, before anything else.</li>
+  <li>A team could choose a different line, such as failing on moderate issues too. You'd change the filter in step 5 to include them.</li>
+</ul>
+
+<h3 id="7-run-the-check-whenever-the-page-changes">Step 7. Run the check whenever the page changes</h3>
+
+<p>Node has a built-in <strong>watch mode</strong>. It runs your script, then keeps an eye on a file, and runs the script again every time that file is saved. This is like a developer working on a page, with checks running in the background.</p>
+
+<p>Type:</p>
+
+<pre><code class="language-bash">node --watch-path=test-page.html check.js</code></pre>
+
+<p>In plain terms: "run <code>check.js</code>, then watch <code>test-page.html</code>, and run it again whenever that file changes."</p>
+
+<p>You'll see the same 6 issues and FAIL as before. This time you won't get your prompt back, because watch mode keeps running, waiting for changes.</p>
+
+<p><strong>To test it:</strong></p>
+
+<ol>
+  <li>Leave watch mode running.</li>
+  <li>Open <code>test-page.html</code> in your editor.</li>
+  <li>Change <code>&lt;html&gt;</code> to <code>&lt;html lang="en"&gt;</code>, then save the file.</li>
+  <li>Look back at the command line window.</li>
+</ol>
+
+<p>The script should run again by itself, and now say <code>Critical and serious issues: 5</code>, with <code>html-has-lang</code> gone. Now undo the change and save again. The count should go back to 6.</p>
+
+<p>To stop watch mode, press <strong>Control + C</strong> on Mac, or <strong>Ctrl + C</strong> on Windows.</p>
+
+<p>Watch out for:</p>
+
+<ul>
+  <li>The screen clears before each run, so it can look like a new window.</li>
+  <li>You may see a message saying watch mode is "experimental". That's fine. It just means Node is still polishing the feature.</li>
+  <li>Watch mode only watches <code>test-page.html</code>. If you change <code>check.js</code>, stop watch mode and start it again.</li>
+</ul>
+
+<h3 id="8-add-check-and-watch-shortcuts">Step 8. Add check and watch shortcuts</h3>
+
+<p>Add two shortcuts to <code>package.json</code>, so you don't have to type the long commands.</p>
+
+<p>Open <code>package.json</code> in your editor:</p>
+
+<p><strong>Mac:</strong></p>
+
+<pre><code class="language-bash">code package.json</code></pre>
+
+<p><strong>Windows:</strong></p>
+
+<pre><code class="language-bash">notepad package.json</code></pre>
+
+<p>Find the <code>"scripts"</code> part. If you haven't changed it, it looks like this:</p>
+
+<pre><code class="language-json">  "scripts": {
+    "test": "echo \"Error: no test specified\" &amp;&amp; exit 1"
+  },</code></pre>
+
+<p>Replace it with this, then save the file. It's the same on Mac and Windows:</p>
+
+<pre><code class="language-json">  "scripts": {
+    "check": "node check.js",
+    "watch": "node --watch-path=test-page.html check.js"
+  },</code></pre>
+
+<p>Now try the first shortcut:</p>
+
+<pre><code class="language-bash">npm run check</code></pre>
+
+<p>This runs the check once and stops, ending with FAIL. Then try the second one:</p>
+
+<pre><code class="language-bash">npm run watch</code></pre>
+
+<p>This starts watch mode, just like step 7. Press <strong>Control + C</strong> (Mac) or <strong>Ctrl + C</strong> (Windows) to stop it.</p>
+
+<p>Watch out for:</p>
+
+<ul>
+  <li>After FAIL, npm adds a few error lines of its own, saying the script failed. That's not a bug. It's npm noticing the exit code of 1, which proves your check works.</li>
+  <li>If you added a <code>report</code> shortcut in <a href="axe-core-from-the-command-line.html">Running axe-core from the command line</a>, keep that line. Put a comma at the end of it, then add the <code>check</code> and <code>watch</code> lines underneath.</li>
+  <li>Every line inside <code>"scripts"</code> ends with a comma, except the last one. A missing or extra comma breaks the whole file.</li>
+  <li>On Windows, stopping <code>npm run watch</code> may ask "Terminate batch job (Y/N)?". Type <code>Y</code> and press Enter.</li>
+</ul>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="fixing-the-page">Fixing the page</h2>
+
+<h3 id="9-save-a-broken-copy-of-the-test-page">Step 9. Save a broken copy of the test page</h3>
+
+<p>You're about to fix the test page. Save a copy with all its errors first, so you can put them back later, such as before a demo.</p>
+
+<p><strong>Mac:</strong></p>
+
+<pre><code class="language-bash">cp test-page.html test-page-broken.html</code></pre>
+
+<p><strong>Windows:</strong></p>
+
+<pre><code class="language-bash">copy test-page.html test-page-broken.html</code></pre>
+
+<p><strong>To check it worked</strong>, list the files in your folder (<code>ls</code> on Mac, <code>dir</code> on Windows). You should see <code>test-page-broken.html</code>.</p>
+
+<h3 id="10-fix-the-page-and-reach-pass">Step 10. Fix the page and reach PASS</h3>
+
+<p>Fix the six critical and serious problems one at a time, and watch the count drop until the check passes.</p>
+
+<p>Start watch mode:</p>
+
+<pre><code class="language-bash">npm run watch</code></pre>
+
+<p>Open <code>test-page.html</code> in your editor. Make each of these changes, saving after each one, and watch the count go down in the command line window:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Problem</th>
+      <th scope="col">Change this</th>
+      <th scope="col">To this</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>No page language</td><td><code>&lt;html&gt;</code></td><td><code>&lt;html lang="en"&gt;</code></td></tr>
+    <tr><td>Image with no alt text</td><td><code>&lt;img src="https://placehold.co/200x200"&gt;</code></td><td><code>&lt;img src="https://placehold.co/200x200" alt=""&gt;</code></td></tr>
+    <tr><td>Input with no label</td><td><code>&lt;input type="text"&gt;</code></td><td><code>&lt;label&gt;Name &lt;input type="text"&gt;&lt;/label&gt;</code></td></tr>
+    <tr><td>Button with no name</td><td><code>&lt;button&gt;&lt;/button&gt;</code></td><td><code>&lt;button&gt;Send&lt;/button&gt;</code></td></tr>
+    <tr><td>Link with no text</td><td><code>&lt;a href="#"&gt;&lt;/a&gt;</code></td><td><code>&lt;a href="#"&gt;Home&lt;/a&gt;</code></td></tr>
+    <tr><td>Low contrast text</td><td><code>.faint { color: #aaa; }</code></td><td><code>.faint { color: #595959; }</code></td></tr>
+  </tbody>
+</table>
+
+<p>After the last change, you should see <code>Critical and serious issues: 0</code> and <code>PASS: no critical or serious issues</code>.</p>
+
+<p>Press <strong>Control + C</strong> (Mac) or <strong>Ctrl + C</strong> (Windows) to stop watch mode.</p>
+
+<p>Watch out for:</p>
+
+<ul>
+  <li>The <code>heading-order</code> problem is still on the page at PASS, because it's moderate. It's a good reminder of what severity filters let through.</li>
+  <li>PASS only means axe-core found no critical or serious issues. It doesn't mean the page is accessible. A person still needs to check things like whether alt text makes sense, and whether everything works with a keyboard.</li>
+  <li>The <code>alt=""</code> fix marks the image as decorative. On a real page, an image that carries meaning needs alt text that describes it.</li>
+</ul>
+
+<h3 id="11-reset-the-test-page">Step 11. Reset the test page</h3>
+
+<p>Put the broken version back, so the page has all its errors again.</p>
+
+<p><strong>Mac:</strong></p>
+
+<pre><code class="language-bash">cp test-page-broken.html test-page.html</code></pre>
+
+<p><strong>Windows:</strong></p>
+
+<pre><code class="language-bash">copy /Y test-page-broken.html test-page.html</code></pre>
+
+<p><strong>To check it worked</strong>, run <code>npm run check</code>. You should see 6 issues and FAIL again.</p>
+
+<p>Watch out for:</p>
+
+<ul>
+  <li>On Windows, <code>/Y</code> means "yes, replace the existing file" without asking first.</li>
+</ul>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="optional-extras">Optional extras</h2>
+
+<p>These extras add more to the script you built in step 6. They build on each other, so do them in order.</p>
+
+<h3 id="sort-the-most-severe-issues-to-the-top">Sort the most severe issues to the top</h3>
+
+<p>axe-core lists issues alphabetically, so the critical and serious ones are mixed together. Change the script so the critical ones come first.</p>
+
+<p>Open <code>check.js</code> in your editor. Select everything (<strong>Command + A</strong> on Mac, <strong>Ctrl + A</strong> on Windows), delete it, paste in this new version, then save the file:</p>
+
+<pre><code class="language-javascript">// Load the tools
+const { chromium } = require('playwright');
+const AxeBuilder = require('@axe-core/playwright').default;
+const path = require('path');
+const { pathToFileURL } = require('url');
+
+(async () =&gt; {
+  // Open an invisible browser, a fresh private window, and a new tab
+  const browser = await chromium.launch();
+  const context = await browser.newContext();
+  const page = await context.newPage();
+
+  // Load the test page from this folder
+  await page.goto(pathToFileURL(path.join(__dirname, 'test-page.html')).href);
+
+  // Inject axe, run it, and store the results
+  const results = await new AxeBuilder({ page }).analyze();
+
+  // Keep only critical and serious
+  const important = results.violations.filter(
+    v =&gt; v.impact === 'critical' || v.impact === 'serious'
+  );
+
+  // SORT CRITICAL ISSUES TO THE TOP
+  const order = { critical: 0, serious: 1 };
+  important.sort((a, b) =&gt; order[a.impact] - order[b.impact]);
+
+  // Print the results
+  console.log(`Critical and serious issues: ${important.length}`);
+  important.forEach(v =&gt; {
+    console.log(`\n[${v.impact}] ${v.id}: ${v.help}`);
+    v.nodes.forEach(n =&gt; console.log(`  - ${n.html}`));
+  });
+
+  // Close the browser
+  await browser.close();
+
+  // Pass or fail
+  if (important.length &gt; 0) {
+    console.log('\nFAIL: critical or serious issues found');
+    process.exitCode = 1;
+  } else {
+    console.log('\nPASS: no critical or serious issues');
+  }
+})();</code></pre>
+
+<p><strong>What's new:</strong></p>
+
+<ul>
+  <li><strong>SORT CRITICAL ISSUES TO THE TOP</strong> has two lines. The first is a ranking: critical comes first (0), serious second (1). The second sorts the issues by that ranking.</li>
+</ul>
+
+<p>It sits after the filter and before the printing, because code runs from top to bottom. The issues have to be filtered before they can be sorted, and sorted before they're printed.</p>
+
+<p>Now run it:</p>
+
+<pre><code class="language-bash">npm run check</code></pre>
+
+<p>You should see the three critical issues (<code>button-name</code>, <code>image-alt</code>, <code>label</code>) first, then the three serious ones.</p>
+
+<h3 id="write-a-simple-html-report">Write a simple HTML report</h3>
+
+<p>Change the script so it also saves the critical and serious issues as a simple web page, <code>report.html</code>.</p>
+
+<p>Open <code>check.js</code> in your editor. Select everything (<strong>Command + A</strong> on Mac, <strong>Ctrl + A</strong> on Windows), delete it, paste in this new version, then save the file:</p>
+
+<pre><code class="language-javascript">// Load the tools
+const { chromium } = require('playwright');
+const AxeBuilder = require('@axe-core/playwright').default;
+const path = require('path');
+const { pathToFileURL } = require('url');
+const fs = require('fs'); // NEW: Node's built-in file tools
+
+(async () =&gt; {
+  // Open an invisible browser, a fresh private window, and a new tab
+  const browser = await chromium.launch();
+  const context = await browser.newContext();
+  const page = await context.newPage();
+
+  // Load the test page from this folder
+  await page.goto(pathToFileURL(path.join(__dirname, 'test-page.html')).href);
+
+  // Inject axe, run it, and store the results
+  const results = await new AxeBuilder({ page }).analyze();
+
+  // Keep only critical and serious
+  const important = results.violations.filter(
+    v =&gt; v.impact === 'critical' || v.impact === 'serious'
+  );
+
+  // Sort critical issues to the top
+  const order = { critical: 0, serious: 1 };
+  important.sort((a, b) =&gt; order[a.impact] - order[b.impact]);
+
+  // Print the results
+  console.log(`Critical and serious issues: ${important.length}`);
+  important.forEach(v =&gt; {
+    console.log(`\n[${v.impact}] ${v.id}: ${v.help}`);
+    v.nodes.forEach(n =&gt; console.log(`  - ${n.html}`));
+  });
+
+  // WRITE A SIMPLE HTML REPORT
+  const escape = s =&gt; String(s ?? '')
+    .replace(/&amp;/g, '&amp;amp;')
+    .replace(/&lt;/g, '&amp;lt;')
+    .replace(/&gt;/g, '&amp;gt;');
+
+  const items = important.map(v =&gt; `
+    &lt;li&gt;
+      &lt;h2&gt;[${v.impact}] ${escape(v.id)}&lt;/h2&gt;
+      &lt;p&gt;${escape(v.help)}&lt;/p&gt;
+      &lt;ul&gt;${v.nodes.map(n =&gt; `&lt;li&gt;&lt;code&gt;${escape(n.html)}&lt;/code&gt;&lt;/li&gt;`).join('')}&lt;/ul&gt;
+      &lt;p&gt;&lt;a href="${v.helpUrl}"&gt;More about ${escape(v.id)}&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;`).join('');
+
+  const report = `&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;title&gt;axe report&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;main&gt;
+&lt;h1&gt;axe report: ${important.length} critical and serious issues&lt;/h1&gt;
+&lt;ol&gt;${items}&lt;/ol&gt;
+&lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;`;
+
+  fs.writeFileSync(path.join(__dirname, 'report.html'), report);
+  console.log('\nReport saved to report.html');
+
+  // Close the browser
+  await browser.close();
+
+  // Pass or fail
+  if (important.length &gt; 0) {
+    console.log('\nFAIL: critical or serious issues found');
+    process.exitCode = 1;
+  } else {
+    console.log('\nPASS: no critical or serious issues');
+  }
+})();</code></pre>
+
+<p><strong>What's new:</strong></p>
+
+<ul>
+  <li><strong><code>fs</code></strong>, at the top, stands for "file system". It's Node's built-in tool for reading and writing files.</li>
+  <li><strong>WRITE A SIMPLE HTML REPORT</strong> builds and saves the report. <code>escape</code> makes sure the problem code shows up as text, not as real buttons and links. <code>items</code> builds one list item for each issue. <code>report</code> wraps the items in a basic, accessible web page. <code>writeFileSync</code> saves it as <code>report.html</code>.</li>
+</ul>
+
+<p>Now run the check, then open the report. Type each line separately, pressing Enter after each one:</p>
+
+<p><strong>Mac:</strong></p>
+
+<pre><code class="language-bash">npm run check
+open -a "Google Chrome" report.html</code></pre>
+
+<p><strong>Windows:</strong></p>
+
+<pre><code class="language-bash">npm run check
+start chrome "%cd%\report.html"</code></pre>
+
+<p>You should see <code>Report saved to report.html</code> near the end of the output. The report lists the 6 issues, critical ones first.</p>
+
+<p>Watch out for:</p>
+
+<ul>
+  <li>The PASS or FAIL message only appears in the command line window, not in the report.</li>
+  <li>If watch mode is running, the report is rewritten every time you save the test page. Refresh the report tab to see the latest version.</li>
+</ul>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="next-steps">Next steps</h2>
+
+<p>In real projects, developers usually put checks like this inside Playwright's own test runner, alongside their other tests. The checks then run automatically, for example every time someone saves their work or tries to add new code.</p>
+
+<p>axe-core can only find some accessibility issues. Playwright can also test things axe-core can't, such as keyboard access, focus and changes to a page as people use it. To see how, read <a href="accessibility-testing-with-playwright.html">Accessibility testing with Playwright</a>.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="related-articles">Related articles</h2>
+
+<p>This tutorial is part of a series on accessibility testing with axe-core and Playwright. The articles in this series are:</p>
+
+<ol>
+  <li><a href="https://www.maxdesign.com.au/articles/axe-core-playwright.html" target="_blank">axe-core, Playwright and Cucumber</a></li>
+  <li><a href="axe-core-in-the-browser-console.html">Running axe-core in the browser console</a></li>
+  <li><a href="axe-setting-up-nodejs.html">Setting up Node.js</a></li>
+  <li><a href="axe-core-from-the-command-line.html">Running axe-core from the command line</a></li>
+  <li><strong>Running axe-core with a Playwright script</strong></li>
+  <li><a href="accessibility-testing-with-playwright.html">Accessibility testing with Playwright</a></li>
+</ol>
+
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+<script>
+  // Add a "Copy code" button under each code example
+  document.querySelectorAll('pre > code').forEach(code => {
+    const pre = code.parentElement;
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'copy-code';
+    button.textContent = 'Copy code';
+
+    const status = document.createElement('span');
+    status.className = 'copy-code-status';
+    status.setAttribute('role', 'status');
+
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(code.textContent);
+        status.textContent = 'Copied';
+      } catch {
+        status.textContent = 'Copy failed. Select the code and copy it manually.';
+      }
+      setTimeout(() => { status.textContent = ''; }, 3000);
+    });
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'copy-code-wrapper';
+    wrapper.append(button, status);
+    pre.after(wrapper);
+  });
+</script>
+</body>
+</html>
