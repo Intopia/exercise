@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Understanding axe-core and Playwright</title>
+  <meta name="description" content="An introduction to axe-core and Playwright: what each tool does, what it can and can't test, and how they fit together for accessibility testing.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-a11y-dark.min.css" rel="stylesheet">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+hr {
+  border: 0;
+  border-top: 2px solid #999;
+  margin: 2em 0;
+}
+
+.series-navigation {
+  border: 2px solid #333;
+  border-left-width: 8px;
+  background: #f5f5f5;
+  padding: 1em 1.5em;
+  margin: 2em 0;
+}
+
+.series-navigation h2 {
+  margin-top: 0;
+  font-size: 1.2em;
+}
+
+.series-navigation ol {
+  margin-bottom: 0;
+}
+  </style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Understanding axe-core and Playwright</h1>
+
+<p style="font-size: .9em; color: #555;">Published: <time datetime="2026-10-22">22 October 2026</time> | Author: Russ Weakley</p>
+
+<aside class="series-navigation" aria-labelledby="series-heading">
+  <h2 id="series-heading">About this series</h2>
+  <p>This article is part of a series on accessibility testing with axe-core and Playwright. <a href="exploring-automated-accessibility-testing.html">Read the series overview</a>.</p>
+  <ol>
+    <li aria-current="page"><strong>Understanding axe-core and Playwright</strong> (you are here)</li>
+    <li><a href="axe-core-in-the-browser-console.html">Running axe-core in the browser console</a></li>
+    <li><a href="axe-setting-up-nodejs.html">Setting up Node.js</a></li>
+    <li><a href="axe-core-from-the-command-line.html">Running axe-core from the command line</a></li>
+    <li><a href="axe-core-with-a-playwright-script.html">Running axe-core with a Playwright script</a></li>
+    <li><a href="accessibility-testing-with-playwright.html">Accessibility testing with Playwright</a></li>
+  </ol>
+</aside>
+
+
+<!-- section -->
+
+
+<h2 id="what-this-article-is-about">What this article is about</h2>
+
+<p>This article is the starting point for the series. There's nothing to install and no code to run. It explains what axe-core and Playwright are, what each one can and can't test, and how they fit together. The tutorials that follow put each idea into practice.</p>
+
+<p>If you work in accessibility, you've probably used an automated testing tool such as the axe DevTools browser extension. But developers often approach accessibility testing differently. They build accessibility checks <strong>into the development process</strong>, so issues can be caught before they reach the finished product.</p>
+
+<p>That's where axe-core and Playwright come in:</p>
+
+<ul>
+  <li><strong>axe-core</strong> scans a page for accessibility problems that can be detected automatically.</li>
+  <li><strong>Playwright</strong> controls a real browser, and tests how a website behaves, including its accessibility.</li>
+</ul>
+
+<p>They can be used separately, but they're especially useful together.</p>
+
+<p>One thing worth knowing up front: <strong>Playwright can do accessibility testing on its own, without axe-core.</strong> We'll see how shortly.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="axe-core">axe-core</h2>
+
+<p>axe-core is an accessibility testing engine.</p>
+
+<p>If you've used the axe DevTools browser extension, you've already used axe-core. It's the engine inside that extension, and inside many other accessibility tools, including Lighthouse.</p>
+
+<p>axe-core runs inside the web page itself. You load a page, run axe-core on it, and it checks the rendered page for accessibility problems that can be detected automatically.</p>
+
+<p>These include things such as:</p>
+
+<ul>
+  <li>missing accessible names</li>
+  <li>invalid ARIA</li>
+  <li>colour contrast</li>
+  <li>form labelling</li>
+  <li>landmark issues</li>
+  <li>heading issues</li>
+  <li>structural accessibility problems.</li>
+</ul>
+
+<p>At its simplest:</p>
+
+<pre><code class="language-none">Page loads
+↓
+axe-core runs inside the page
+↓
+axe-core returns its results</code></pre>
+
+<p>That's all any axe tool does. A browser extension, a command line tool and a test script all follow the same three steps. They just present the results differently. You'll do these steps by hand in <a href="axe-core-in-the-browser-console.html">Running axe-core in the browser console</a>, and with a single command in <a href="axe-core-from-the-command-line.html">Running axe-core from the command line</a>.</p>
+
+<p>Each problem axe-core finds is given an impact level: <strong>minor</strong>, <strong>moderate</strong>, <strong>serious</strong> or <strong>critical</strong>. This helps teams decide what to fix first. In <a href="axe-core-with-a-playwright-script.html">Running axe-core with a Playwright script</a>, you'll use impact levels to decide which issues should make a test fail.</p>
+
+<p>Where axe-core really shines is breadth. It can sweep a whole page for a wide range of common problems in one go, without anyone needing to write a test for each one.</p>
+
+<p>axe-core is also honest about what it doesn't know. Alongside its violations, it returns "incomplete" results. These are things it couldn't decide automatically, which need a person to check. A common example is colour contrast for text over a background image or gradient. You'll explore these results in the browser console tutorial.</p>
+
+<p>That points to the important limitation: axe-core can only detect issues that can be determined automatically.</p>
+
+<p>It can't reliably answer questions such as:</p>
+
+<ul>
+  <li>Is the focus order logical?</li>
+  <li>Is a visible label meaningful?</li>
+  <li>Does the alt text appropriately describe the image?</li>
+  <li>Is the experience understandable with a screen reader?</li>
+  <li>Is the keyboard interaction appropriate for this component?</li>
+</ul>
+
+<p>So axe-core provides <strong>automated accessibility testing</strong>, not a complete accessibility audit.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="playwright">Playwright</h2>
+
+<p>Playwright is a browser automation and testing framework.</p>
+
+<p>It can control a browser much like a person would use a website. For example, Playwright can:</p>
+
+<ul>
+  <li>open a page</li>
+  <li>log in</li>
+  <li>click buttons</li>
+  <li>complete forms</li>
+  <li>open dialogs</li>
+  <li>navigate between pages</li>
+  <li>use keyboard commands</li>
+  <li>wait for dynamic content</li>
+  <li>inspect elements and states</li>
+  <li>take screenshots.</li>
+</ul>
+
+<p>This means Playwright can get an application into the exact state you want to test. For example:</p>
+
+<pre><code class="language-none">Open checkout page
+↓
+Add a product to the cart
+↓
+Open the cart dialog
+↓
+Run an accessibility test</code></pre>
+
+<p>This is one place where Playwright and axe-core fit together well. axe-core can inspect the current page, but it can't navigate through an application by itself. Playwright can do the navigation, then run axe-core inside the page it has opened. There's even an official package, <code>@axe-core/playwright</code>, that connects the two. You'll use it in <a href="axe-core-with-a-playwright-script.html">Running axe-core with a Playwright script</a>.</p>
+
+<p>But Playwright is much more than a way to get pages ready for axe-core.</p>
+
+<h3 id="playwright-can-test-accessibility-on-its-own">Playwright can test accessibility on its own</h3>
+
+<p>Playwright can work with accessibility information such as roles, accessible names and descriptions, much like the information exposed to assistive technologies.</p>
+
+<p>For example, Playwright can find elements by their <strong>role</strong> and <strong>accessible name</strong>:</p>
+
+<pre><code class="language-javascript">page.getByRole('button', { name: 'Submit' })</code></pre>
+
+<p>If the button doesn't expose the expected accessible name, Playwright won't find it, and the test fails. Just finding elements this way is already a small accessibility check.</p>
+
+<p>axe-core would also flag a button with no accessible name at all. But only a test like this can confirm the name is the <em>right</em> one.</p>
+
+<p>Playwright also has checks (called assertions) built specifically around accessibility, such as:</p>
+
+<ul>
+  <li><code>toHaveAccessibleName</code>: does this element have the expected accessible name?</li>
+  <li><code>toHaveAccessibleDescription</code>: does it have the expected accessible description?</li>
+  <li><code>toHaveRole</code>: does it have the expected role?</li>
+  <li><code>toHaveAccessibleErrorMessage</code>: is the expected error message connected to it?</li>
+  <li><code>toBeFocused</code>: does this element currently have keyboard focus?</li>
+</ul>
+
+<p>It can also take an <strong>ARIA snapshot</strong>. This is a simple text outline of how part of the page appears in the accessibility tree, which Playwright compares against what you expect.</p>
+
+<p>Here's a complete accessibility test with no axe-core in it at all:</p>
+
+<pre><code class="language-javascript">test('Escape closes the dialog and returns focus', async ({ page }) =&gt; {
+  const trigger = page.getByRole('button', { name: 'Open settings' });
+  await trigger.click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+
+  await page.keyboard.press('Escape');
+
+  await expect(page.getByRole('dialog')).toBeHidden();
+  await expect(trigger).toBeFocused();
+});</code></pre>
+
+<p>Even if you don't write code, you can probably read what this does: open the dialog, press Escape, check the dialog has closed, and check focus went back to the button that opened it.</p>
+
+<p>That's <strong>functional accessibility testing</strong>: checking that things actually <em>behave</em> accessibly, not just that the code looks right to an automated scanner. You'll find six worked examples like this in <a href="accessibility-testing-with-playwright.html">Accessibility testing with Playwright</a>.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="how-they-fit-together">How they fit together</h2>
+
+<p>The two tools work at different layers. A useful mental model is:</p>
+
+<pre><code class="language-none">Playwright
+"Interact with the application and test the expected behaviour."
+        ↓
+Optional: axe-core (runs inside the page Playwright has opened)
+"Check this state for automatically detectable accessibility problems."</code></pre>
+
+<p>Consider a registration form, where the email field should show an accessible error message when the form is submitted empty.</p>
+
+<p>Playwright could:</p>
+
+<pre><code class="language-none">Open the registration page
+↓
+Submit the form
+↓
+Find the email field
+↓
+Check the error message appears
+↓
+Check the error is connected to the field
+↓
+Check where focus moved</code></pre>
+
+<p>axe-core could then scan the resulting page for problems that can be detected automatically.</p>
+
+<p>But notice that axe-core couldn't do the earlier checks. If the error message isn't connected to the field, axe-core can't reliably work out which text on the page was meant to be the error. Playwright can check this directly, using <code>toHaveAccessibleErrorMessage</code> or <code>toHaveAccessibleDescription</code>, depending on how the error is connected.</p>
+
+<h3 id="what-about-cucumber">What about Cucumber?</h3>
+
+<p>Some teams add a third tool, Cucumber, which lets them write tests as plain-language scenarios ("Given... When... Then...") that run Playwright and axe-core behind the scenes. It's optional, and it isn't covered in this series. To learn more, read <a href="https://www.maxdesign.com.au/articles/axe-core-playwright.html" target="_blank">axe-core, Playwright and Cucumber</a>.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="summary">Summary</h2>
+
+<p>If you only remember one thing:</p>
+
+<ul>
+  <li><strong>axe-core</strong> scans a page for accessibility problems that can be detected automatically.</li>
+  <li><strong>Playwright</strong> drives the website and tests how it behaves, including its accessibility behaviour.</li>
+</ul>
+
+<p>Playwright can test accessibility behaviour on its own. axe-core adds a broad automated scan on top. Many teams use both.</p>
+
+<p>Together, they can help move accessibility testing earlier into development, while also expanding testing well beyond a simple automated scan.</p>
+
+<p>And neither of them replaces testing with real people, including people who use assistive technologies every day.</p>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="next-steps">Next steps</h2>
+
+<p>Ready to see axe-core in action? Start with <a href="axe-core-in-the-browser-console.html">Running axe-core in the browser console</a>. It needs no setup at all, just Google Chrome.</p>
+
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+</body>
+</html>

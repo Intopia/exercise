@@ -24,15 +24,21 @@ hr {
   margin-left: 0.75em;
 }
 
-.new {
-  display: inline-block;
-  font-size: .7em;
-  color: #fff;
-  background: #000;
-  border-radius: .3em;
-  padding: .2em .6em;
-  line-height: 1;
-  letter-spacing: .03em;
+.series-navigation {
+  border: 2px solid #333;
+  border-left-width: 8px;
+  background: #f5f5f5;
+  padding: 1em 1.5em;
+  margin: 2em 0;
+}
+
+.series-navigation h2 {
+  margin-top: 0;
+  font-size: 1.2em;
+}
+
+.series-navigation ol {
+  margin-bottom: 0;
 }
   </style>
 </head>
@@ -48,6 +54,19 @@ hr {
 <h1>Running axe-core in the browser console</h1>
 
 <p style="font-size: .9em; color: #555;">Published: <time datetime="2026-10-20">20 October 2026</time> | Author: Russ Weakley</p>
+
+<aside class="series-navigation" aria-labelledby="series-heading">
+  <h2 id="series-heading">About this series</h2>
+  <p>This article is part of a series on accessibility testing with axe-core and Playwright. <a href="exploring-automated-accessibility-testing.html">Read the series overview</a>.</p>
+  <ol>
+    <li><a href="understanding-axe-core-and-playwright.html">Understanding axe-core and Playwright</a></li>
+    <li aria-current="page"><strong>Running axe-core in the browser console</strong> (you are here)</li>
+    <li><a href="axe-setting-up-nodejs.html">Setting up Node.js</a></li>
+    <li><a href="axe-core-from-the-command-line.html">Running axe-core from the command line</a></li>
+    <li><a href="axe-core-with-a-playwright-script.html">Running axe-core with a Playwright script</a></li>
+    <li><a href="accessibility-testing-with-playwright.html">Accessibility testing with Playwright</a></li>
+  </ol>
+</aside>
 
 
 <!-- section -->
