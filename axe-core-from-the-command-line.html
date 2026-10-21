@@ -23,6 +23,17 @@ hr {
 .copy-code-status {
   margin-left: 0.75em;
 }
+
+.new {
+  display: inline-block;
+  font-size: .7em;
+  color: #fff;
+  background: #000;
+  border-radius: .3em;
+  padding: .2em .6em;
+  line-height: 1;
+  letter-spacing: .03em;
+}
   </style>
 </head>
 <body>
@@ -96,7 +107,15 @@ hr {
   <li><a href="#run-wcag-rules-only">Run WCAG rules only</a></li>
   <li><a href="#test-the-fixed-page">Test the fixed page</a></li>
   <li><a href="#test-more-than-one-page-at-once">Test more than one page at once</a></li>
-  <li><a href="#fail-when-issues-are-found">Fail when issues are found</a></li>
+</ul>
+
+<h3>Make accessibility tests fail when issues are found</h3>
+
+<ul>
+  <li><a href="#understand-exit-codes">Understand exit codes</a></li>
+  <li><a href="#make-axe-report-a-failure">Make axe report a failure</a></li>
+  <li><a href="#check-whether-the-test-passed-or-failed">Check whether the test passed or failed</a></li>
+  <li><a href="#run-the-test-on-the-fixed-page">Run the test on the fixed page</a></li>
 </ul>
 
 <h3>Saving and reporting</h3>
@@ -177,7 +196,7 @@ hr {
 
 <h3 id="3-read-the-results">Step 3. Read the results</h3>
 
-<p>The results will look something like this (shortened here):</p>
+<p>The results will look something like this:</p>
 
 <pre><code class="language-none">Running axe-core 4.14.0 in chrome-headless
 
@@ -188,7 +207,35 @@ Testing https://intopia.github.io/exercise/axe-core-test-page.html ... please wa
      - button
     For details, see: https://dequeuniversity.com/rules/axe/4.14/button-name
 
-  ...
+  Violation of "color-contrast" with 1 occurrences!
+    Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds. Correct invalid elements at:
+     - .faint
+    For details, see: https://dequeuniversity.com/rules/axe/4.14/color-contrast
+
+  Violation of "heading-order" with 1 occurrences!
+    Ensure the order of headings is semantically correct. Correct invalid elements at:
+     - h3
+    For details, see: https://dequeuniversity.com/rules/axe/4.14/heading-order
+
+  Violation of "html-has-lang" with 1 occurrences!
+    Ensure every HTML document has a lang attribute. Correct invalid elements at:
+     - html
+    For details, see: https://dequeuniversity.com/rules/axe/4.14/html-has-lang
+
+  Violation of "image-alt" with 1 occurrences!
+    Ensure img elements have alternative text or a role of none or presentation. Correct invalid elements at:
+     - img
+    For details, see: https://dequeuniversity.com/rules/axe/4.14/image-alt
+
+  Violation of "label" with 1 occurrences!
+    Ensure every form element has a label. Correct invalid elements at:
+     - input
+    For details, see: https://dequeuniversity.com/rules/axe/4.14/label
+
+  Violation of "link-name" with 1 occurrences!
+    Ensure links have discernible text. Correct invalid elements at:
+     - a
+    For details, see: https://dequeuniversity.com/rules/axe/4.14/link-name
 
 7 Accessibility issues detected.
 Testing complete of 1 pages</code></pre>
@@ -256,12 +303,18 @@ Testing complete of 1 pages</code></pre>
 
 <pre><code class="language-bash">npx axe https://intopia.github.io/exercise/axe-core-test-page-fixed.html --chromedriver-path "node_modules\chromedriver\lib\chromedriver\chromedriver.exe"</code></pre>
 
-<p>You should see <code>0 violations found!</code></p>
+<p>The results will look something like this:</p>
+
+<pre><code class="language-none">Running axe-core 4.14.0 in chrome-headless
+
+Testing https://intopia.github.io/exercise/axe-core-test-page-fixed.html ... please wait, this may take a minute.
+ 0 violations found!
+Testing complete of 1 pages</code></pre>
 
 <p>Watch out for:</p>
 
 <ul>
-  <li>0 violations doesn't mean the page is fully accessible. axe-core can only find some accessibility issues automatically. A person still needs to check things like whether alt text makes sense, and whether everything works with a keyboard.</li>
+  <li><code>0 violations</code> doesn't mean the page is fully accessible. axe-core can only find some accessibility issues automatically. A person still needs to check things like whether alt text makes sense, and whether everything works with a keyboard.</li>
 </ul>
 
 <h3 id="test-more-than-one-page-at-once">Test more than one page at once</h3>
@@ -287,11 +340,33 @@ Testing complete of 1 pages</code></pre>
   <li>It also doesn't find pages by itself. You need to list every page you want to check.</li>
 </ul>
 
-<h3 id="fail-when-issues-are-found">Fail when issues are found</h3>
 
-<p>Every command quietly reports a number when it finishes, called an <strong>exit code</strong>. <code>0</code> means success, and anything else means failure. Automated tools read this number to decide what to do next, such as stopping new code from going live.</p>
+<!-- section -->
 
-<p>By default, the axe command line tool reports success even when it finds issues. Add <code>--exit</code> to make it report a failure instead:</p>
+
+<hr>
+<h2 id="fail-when-issues-are-found">Make accessibility tests fail when issues are found</h2>
+
+<p>Finding accessibility issues is useful. But automated tests can also help prevent those issues from reaching a live website.</p>
+
+<p>Development teams can set up their automated processes to stop a build or block a release when accessibility tests fail. Let's look at how this works.</p>
+
+<h3 id="understand-exit-codes">Understand exit codes</h3>
+
+<p>Every command reports a number when it finishes, called an <strong>exit code</strong>. This tells other programs whether the command succeeded or failed.</p>
+
+<ul>
+  <li><code>0</code> means the command succeeded.</li>
+  <li>A non-zero number means the command failed or encountered an error.</li>
+</ul>
+
+<p>Automated development tools can read these exit codes and decide what to do next. For example, a team could set up its testing process to prevent code from being released when an accessibility test fails.</p>
+
+<h3 id="make-axe-report-a-failure">Make axe report a failure</h3>
+
+<p>By default, the axe command line tool can report success even when it finds accessibility violations. Add <code>--exit</code> to make the command report a failure when violations are found.</p>
+
+<p><strong>You won't see anything different in the test results</strong>. The change is in the exit code, which we'll check in the next section.</p>
 
 <p><strong>Mac:</strong></p>
 
@@ -301,7 +376,11 @@ Testing complete of 1 pages</code></pre>
 
 <pre><code class="language-bash">npx axe https://intopia.github.io/exercise/axe-core-test-page.html --exit --chromedriver-path "node_modules\chromedriver\lib\chromedriver\chromedriver.exe"</code></pre>
 
-<p>The results look the same as before. To see the exit code, type this straight afterwards and press Enter:</p>
+<p>The results should look the same as before. Although you can't see it yet, the command has reported a failure because accessibility violations were found.</p>
+
+<h3 id="check-whether-the-test-passed-or-failed">Check whether the test passed or failed</h3>
+
+<p>Let's check the exit code from the test you just ran.</p>
 
 <p><strong>Mac:</strong></p>
 
@@ -311,13 +390,44 @@ Testing complete of 1 pages</code></pre>
 
 <pre><code class="language-bash">echo %errorlevel%</code></pre>
 
-<p>You should see <code>1</code>, meaning the check failed. Now try the same two commands on the fixed page. This time, you should see <code>0</code>.</p>
+<p>You should see <code>1</code>, meaning the test reported a failure.</p>
+
+<h3 id="run-the-test-on-the-fixed-page">Run the test on the fixed page</h3>
+
+<p>Now let's see what happens when you run the same accessibility test on a page without the seven known issues.</p>
+
+<p>Use the following command to test the <a href="https://intopia.github.io/exercise/axe-core-test-page-fixed.html" target="_blank">fixed version of the test page</a>. We've kept <code>--exit</code>, so the command will report whether the test passed or failed.</p>
+
+<p><strong>Mac:</strong></p>
+
+<pre><code class="language-bash">npx axe https://intopia.github.io/exercise/axe-core-test-page-fixed.html --exit --chromedriver-path "node_modules/chromedriver/lib/chromedriver/chromedriver"</code></pre>
+
+<p><strong>Windows:</strong></p>
+
+<pre><code class="language-bash">npx axe https://intopia.github.io/exercise/axe-core-test-page-fixed.html --exit --chromedriver-path "node_modules\chromedriver\lib\chromedriver\chromedriver.exe"</code></pre>
+
+<p>You should see that axe found no accessibility violations.</p>
+
+<p>Now check the exit code:</p>
+
+<p><strong>Mac:</strong></p>
+
+<pre><code class="language-bash">echo $?</code></pre>
+
+<p><strong>Windows:</strong></p>
+
+<pre><code class="language-bash">echo %errorlevel%</code></pre>
+
+<p>You should see <code>0</code>, meaning the command completed successfully without finding any violations.</p>
+
+<p>You've now seen how the same accessibility test can report a failure on one page and success on another. Development teams can use these exit codes to stop code from being released when accessibility issues are found, if their automated processes are set up to do so.</p>
 
 <p>Watch out for:</p>
 
 <ul>
-  <li>The exit code only tells you whether the last command passed or failed. Run <code>echo</code> straight after the axe command, before anything else.</li>
-  <li><code>--exit</code> fails on <strong>any</strong> violation, whatever its impact. The Playwright tutorial shows how to fail only on critical and serious issues.</li>
+  <li>The exit code only tells you whether the last command succeeded or failed. Run the <code>echo</code> command straight after the axe command, before running anything else.</li>
+  <li><code>--exit</code> reports a failure if <strong>any</strong> accessibility violations are found, regardless of their impact. The Playwright tutorial will show how to fail a test only when critical or serious issues are found.</li>
+  <li>A non-zero exit code can also mean something went wrong while running the test. Check the results or error messages to understand why the command failed.</li>
 </ul>
 
 
@@ -620,19 +730,16 @@ start chrome "%cd%\report-full.html"</code></pre>
 <hr>
 <h2 id="related-articles">Related articles</h2>
 
-<p>This tutorial is part of a series on accessibility testing with axe-core and Playwright. Other articles in the series include:</p>
+<p>This tutorial is part of a series on accessibility testing with axe-core and Playwright. The articles in this series are:</p>
 
-<ul>
-  <li><a href="https://www.maxdesign.com.au/articles/axe-core-playwright.html" target="_blank">axe-core, Playwright and Cucumber: accessibility testing in the development lifecycle</a></li>
+<ol>
+  <li><a href="https://www.maxdesign.com.au/articles/axe-core-playwright.html" target="_blank">axe-core, Playwright and Cucumber</a></li>
   <li><a href="axe-core-in-the-browser-console.html">Running axe-core in the browser console</a></li>
-  <li><a href="https://intopia.github.io/exercise/accessibility-testing-with-playwright.html" target="_blank">Accessibility testing with Playwright</a></li>
-</ul>
-
-<p>Future articles will cover:</p>
-
-<ul>
-  <li>Running axe-core with a Playwright script</li>
-</ul>
+  <li><a href="axe-setting-up-nodejs.html">Setting up Node.js</a></li>
+  <li><strong>Running axe-core from the command line</strong></li>
+  <li>Running axe-core with a Playwright script <span class="new">COMING SOON</span></li>
+  <li><a href="accessibility-testing-with-playwright.html">Accessibility testing with Playwright</a></li>
+</ol>
 
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>

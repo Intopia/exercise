@@ -23,6 +23,17 @@ hr {
 .copy-code-status {
   margin-left: 0.75em;
 }
+
+.new {
+  display: inline-block;
+  font-size: .7em;
+  color: #fff;
+  background: #000;
+  border-radius: .3em;
+  padding: .2em .6em;
+  line-height: 1;
+  letter-spacing: .03em;
+}
   </style>
 </head>
 <body>
@@ -36,31 +47,31 @@ hr {
 
 <h1>Setting up Node.js</h1>
 
-
 <!-- section -->
-
 
 <h2 id="what-this-tutorial-is-about">What this tutorial is about</h2>
 
-<p><a href="axe-core-in-the-browser-console.html">Running axe-core in the browser console</a> only needed Chrome. The next tutorials in this series run axe-core outside the browser, so you'll need a few tools installed first.</p>
+<p><a href="axe-core-in-the-browser-console.html">Running axe-core in the browser console</a> only required Chrome. The next tutorials in this series run axe-core outside the browser, so you'll need a few tools installed first.</p>
 
-<p>This tutorial walks you through it, step by step, on a Mac or on Windows. Where the steps are different, you'll see a <strong>Mac</strong> version and a <strong>Windows</strong> version. You only need to do this once.</p>
+<p>This tutorial walks you through the setup, step by step, on a Mac or on Windows. Where the instructions differ, you'll see a <strong>Mac</strong> version and a <strong>Windows</strong> version.</p>
 
 <p>By the end, you'll have installed Node.js, created a project folder, installed the accessibility tools, and run your first check.</p>
+
 
 <h3>Before you start</h3>
 
 <p>You'll need:</p>
 
 <ul>
-  <li>a Mac or a Windows computer</li>
-  <li>an internet connection</li>
-  <li>permission to install software on your computer. On some work computers, this needs approval from your IT team.</li>
-  <li>about 20 to 30 minutes.</li>
+  <li>A Mac or Windows computer</li>
+  <li>An internet connection</li>
+  <li>Permission to install software on your computer. On some work computers, this needs approval from your IT team.</li>
+  <li>About 20 to 30 minutes</li>
 </ul>
 
 
 <!-- section -->
+
 
 
 <hr>
@@ -70,9 +81,9 @@ hr {
 
 <ul>
   <li><a href="#1-open-your-command-line-app">Step 1. Open your command line app</a></li>
-  <li><a href="#2-check-you-have-nodejs">Step 2. Check you have Node.js</a></li>
-  <li><a href="#3-check-you-have-npm">Step 3. Check you have npm</a></li>
-  <li><a href="#4-check-you-have-google-chrome">Step 4. Check you have Google Chrome</a></li>
+  <li><a href="#2-check-you-have-nodejs">Step 2. Check if you have Node.js</a></li>
+  <li><a href="#3-check-you-have-npm">Step 3. Check if you have npm</a></li>
+  <li><a href="#4-check-you-have-google-chrome">Step 4. Check if you have Google Chrome</a></li>
   <li><a href="#5-show-file-name-extensions">Step 5. Show file name extensions (Windows only)</a></li>
 </ul>
 
@@ -97,6 +108,7 @@ hr {
 <!-- section -->
 
 
+
 <hr>
 <h2 id="check-your-computer">Check your computer</h2>
 
@@ -113,18 +125,19 @@ hr {
 
 <ul>
   <li>Copy each command exactly as it's shown, paste it into your command line app, then press <strong>Return</strong> (Mac) or <strong>Enter</strong> (Windows). To paste, press <strong>Command + V</strong> on Mac. On Windows, press <strong>Ctrl + V</strong> or right-click inside the window.</li>
-  <li>Do one command at a time, and wait for it to finish before typing the next one. You'll know it's finished when you see a blinking cursor on a new line. On Windows, the new line starts with something like <code>C:\Users\yourname&gt;</code>.</li>
-  <li>If you see words like <strong>warn</strong> or <strong>deprecated</strong> in the output, don't worry. These are normal and you can ignore them.</li>
+  <li>Run one command at a time, and wait for it to finish before entering the next one. You'll know it's finished when the command prompt appears again. On Windows, this looks something like <code>C:\Users\yourname&gt;</code>.</li>
+  <li>You may see warnings containing words like <strong>warn</strong> or <strong>deprecated</strong>. These don't necessarily mean something has gone wrong. Check whether the command completed successfully before moving on.</li>
 </ul>
 
 <p>Watch out for:</p>
 
 <ul>
-  <li>On Windows, use Command Prompt, not PowerShell. PowerShell looks similar, but it often blocks the tools in this tutorial with an error saying "running scripts is disabled on this system". Command Prompt doesn't have that problem.</li>
+  <li>On Windows, use Command Prompt rather than PowerShell for this tutorial. PowerShell can sometimes block npm commands with an error saying "running scripts is disabled on this system". Using Command Prompt avoids this issue.</li>
   <li>To check you're in Command Prompt, look at the line where you type. If it starts with <code>PS</code>, like <code>PS C:\Users\yourname&gt;</code>, you're in PowerShell. Close it and open Command Prompt instead.</li>
 </ul>
 
-<h3 id="2-check-you-have-nodejs">Step 2. Check you have Node.js</h3>
+
+<h3 id="2-check-you-have-nodejs">Step 2. Check if you have Node.js</h3>
 
 <p>Node.js is a program that lets your computer run JavaScript outside a web browser. The accessibility tools in this series are written in JavaScript, so they need Node.js to work.</p>
 
@@ -134,24 +147,26 @@ hr {
 
 <p>(The <code>-v</code> is short for "version".)</p>
 
-<p>You should see a version number that starts with the letter <code>v</code>, like <code>v22.12.0</code>.</p>
+<p>You should see a version number that starts with the letter <code>v</code>, such as <code>v24.13.0</code>.</p>
 
-<p><strong>What the number means:</strong> the first number is the main version. You need <strong>version 22.12 or higher</strong>, because older versions are missing features these tools rely on.</p>
+<p><strong>What the number means:</strong> Node.js versions have three numbers. For these tutorials, you'll need version 22.12 or later, but it's best to use a supported LTS version.</p>
 
 <ul>
-  <li><code>v22.12.0</code>, or anything starting with <code>v23</code>, <code>v24</code> or higher: you're good to go.</li>
-  <li><code>v20...</code>, <code>v18...</code> or anything lower: too old, so follow the steps below.</li>
+  <li><code>v22.12.0</code> or later in the 22 series, or a supported version 24 or 26: you can continue.</li>
+  <li>Version 20 or earlier, or an unsupported version such as 23: follow the installation steps below.</li>
 </ul>
 
-<p><strong>If you see an error, or your version is too old:</strong> the error says "command not found" on a Mac, or "'node' is not recognized as an internal or external command" on Windows.</p>
+<p>If you see an error such as <code>command not found</code> on Mac or <code>'node' is not recognized as an internal or external command</code> on Windows, Node.js may not be installed.</p>
+
+<p><strong>If Node.js is missing or needs updating:</strong></p>
 
 <ol>
   <li>Go to <a href="https://nodejs.org" target="_blank">nodejs.org</a>.</li>
-  <li>Download the version marked <strong>LTS</strong>, which stands for "Long Term Support". It's the stable version most people should use. On Windows, choose the <strong>Windows Installer (.msi)</strong>.</li>
-  <li>Open the file you downloaded and follow the steps in the installer.
+  <li>Download the version marked <strong>LTS</strong>, which stands for "Long Term Support". This is the recommended version for most people. On Windows, choose the <strong>Windows Installer (.msi)</strong>.</li>
+  <li>Open the downloaded file and follow the installation instructions.
     <ul>
       <li><strong>Mac:</strong> your Mac may ask for your password. That's normal.</li>
-      <li><strong>Windows:</strong> you can accept the default settings on each screen, with one exception. When you reach a screen called <strong>Tools for Native Modules</strong>, leave the box <strong>unticked</strong>. Ticking it installs a lot of extra software you don't need. Windows may also ask "Do you want to allow this app to make changes to your device?" That's normal. Click <strong>Yes</strong>.</li>
+      <li><strong>Windows:</strong> you can accept the default settings, with one exception. If you see an option called <strong>Tools for Native Modules</strong>, leave it unticked. You don't need these extra tools for this tutorial. Windows may also ask whether you want to allow the installer to make changes to your device. Click <strong>Yes</strong> if it's the installer you downloaded from the official Node.js website.</li>
     </ul>
   </li>
   <li>Close your command line app completely, then open it again.
@@ -160,39 +175,42 @@ hr {
       <li><strong>Windows:</strong> click the <strong>X</strong> in the corner of Command Prompt, or type <code>exit</code> and press Enter.</li>
     </ul>
   </li>
-  <li>Type <code>node -v</code> again to check it worked.</li>
+  <li>Type <code>node -v</code> again to check that Node.js is installed and meets the version requirement.</li>
 </ol>
 
-<h3 id="3-check-you-have-npm">Step 3. Check you have npm</h3>
+
+<h3 id="3-check-you-have-npm">Step 3. Check if you have npm</h3>
 
 <p>npm stands for "Node Package Manager". It downloads and installs extra software, called <strong>packages</strong>, that other people have written. You'll use it to install the accessibility tools.</p>
 
-<p>npm comes with Node.js, so if you have Node.js, you have npm too.</p>
+<p>npm normally comes with Node.js, so you should already have it installed.</p>
 
 <p>Type:</p>
 
 <pre><code class="language-bash">npm -v</code></pre>
 
-<p>You should see a version number, such as <code>10.9.2</code>. Any number means npm is working.</p>
+<p>You should see a version number, such as <code>10.9.2</code>. This means npm is installed and responding.</p>
 
-<p><strong>If you see an error</strong> saying "command not found" (Mac) or "'npm' is not recognized" (Windows), install (or reinstall) Node.js using the steps in <a href="#2-check-you-have-nodejs">step 2</a>. npm comes with it.</p>
+<p><strong>If you see an error</strong> saying "command not found" (Mac) or "'npm' is not recognized" (Windows), try installing Node.js again using the instructions in <a href="#2-check-you-have-nodejs">step 2</a>.</p>
 
-<h3 id="4-check-you-have-google-chrome">Step 4. Check you have Google Chrome</h3>
 
-<p>The accessibility tools open Google Chrome behind the scenes to check your pages, so you need Chrome installed.</p>
+<h3 id="4-check-you-have-google-chrome">Step 4. Check if you have Google Chrome</h3>
+
+<p>The accessibility tools in this tutorial use Google Chrome to check web pages, so you'll need Chrome installed.</p>
 
 <ul>
   <li><strong>Mac:</strong> if you don't have Chrome, download it from <a href="https://www.google.com/chrome" target="_blank">google.com/chrome</a>.</li>
-  <li><strong>Windows:</strong> Windows only comes with Microsoft Edge, not Chrome. So unless you've installed Chrome yourself, download it from <a href="https://www.google.com/chrome" target="_blank">google.com/chrome</a>.</li>
+  <li><strong>Windows:</strong> if you don't have Chrome, download it from <a href="https://www.google.com/chrome" target="_blank">google.com/chrome</a>.</li>
 </ul>
+
 
 <h3 id="5-show-file-name-extensions">Step 5. Show file name extensions (Windows only)</h3>
 
 <p><strong>Mac:</strong> you can skip this step.</p>
 
-<p><strong>Windows:</strong> a file name extension is the part at the end of a file name after the dot, like <code>.js</code> in <code>check.js</code>. It tells your computer what kind of file it is.</p>
+<p><strong>Windows:</strong> a file name extension is the part after the dot in a file name, such as <code>.js</code> in <code>check.js</code>. It tells your computer what kind of file it is.</p>
 
-<p>Windows hides extensions by default. That means a file actually called <code>check.js.txt</code> can look like <code>check.js</code>, and the tools won't work with it. Turning extensions on lets you see the real name.</p>
+<p>Windows usually hides file extensions. This means a file named <code>check.js.txt</code> might appear as <code>check.js</code>, even though it's actually a text file. Showing file extensions helps you avoid this problem.</p>
 
 <p><strong>On Windows 11:</strong></p>
 
@@ -213,13 +231,14 @@ hr {
 <p>Watch out for:</p>
 
 <ul>
-  <li>A proper code editor, such as <a href="https://code.visualstudio.com" target="_blank">VS Code</a>, is the most reliable way to create and edit code files, on both Mac and Windows.</li>
-  <li>On Mac, avoid TextEdit. It can save files as formatted text instead of plain code.</li>
-  <li>On Windows, Notepad also works, as long as the file already exists with the right name, which is how these tutorials use it. The thing to avoid is <strong>Save As</strong> in Notepad. That's when it adds <code>.txt</code> to the end of the name, unless you change <strong>Save as type</strong> to <strong>All files</strong> first.</li>
+  <li>A code editor, such as <a href="https://code.visualstudio.com" target="_blank">VS Code</a>, is a good way to create and edit code files on Mac and Windows.</li>
+  <li>On Mac, avoid TextEdit. It can save files as formatted text instead of plain text.</li>
+  <li>On Windows, Notepad works for editing existing code files. However, when creating a new file, <strong>Save As</strong> may add <code>.txt</code> to the name. To avoid this, choose <strong>All files</strong> under <strong>Save as type</strong>.</li>
 </ul>
 
 
 <!-- section -->
+
 
 
 <hr>
@@ -227,19 +246,19 @@ hr {
 
 <h3 id="6-create-a-project-folder">Step 6. Create a project folder</h3>
 
-<p>You'll keep everything for this series in one folder. Type these commands one at a time.</p>
+<p>You'll keep everything for this series in one folder. Enter the following commands one at a time.</p>
 
 <p><strong>Mac:</strong></p>
 
-<pre><code class="language-bash">cd Documents</code></pre>
+<pre><code class="language-bash">cd ~/Documents</code></pre>
 
-<p><code>cd</code> stands for "change directory". (Directory is another word for folder.) This moves you into your Documents folder.</p>
+<p><code>cd</code> stands for "change directory". A directory is another word for a folder. This command moves you into your Documents folder.</p>
 
 <p><strong>Windows:</strong></p>
 
 <pre><code class="language-bash">cd %USERPROFILE%</code></pre>
 
-<p><code>cd</code> stands for "change directory". (Directory is another word for folder.) <code>%USERPROFILE%</code> is a shortcut that means "my user folder", which is <code>C:\Users\</code> followed by your user name. This moves you into that folder.</p>
+<p>This moves you into your user folder, usually <code>C:\Users\yourname</code>. The <code>%USERPROFILE%</code> part is a shortcut for the location of that folder.</p>
 
 <p><strong>Then, on both Mac and Windows:</strong></p>
 
@@ -254,22 +273,23 @@ hr {
 <p><strong>To check it worked:</strong></p>
 
 <ul>
-  <li><strong>Mac:</strong> type <code>pwd</code> and press Return. <code>pwd</code> stands for "print working directory", which is a fancy way of saying "show me where I am". You should see something ending in <code>/Documents/axe-learning</code>.</li>
-  <li><strong>Windows:</strong> type <code>cd</code> on its own and press Enter. This shows you which folder you're in. You should see something like <code>C:\Users\yourname\axe-learning</code>.</li>
+  <li><strong>Mac:</strong> type <code>pwd</code> and press Return. This stands for "print working directory", which means "show me which folder I'm in". You should see a location ending in <code>/Documents/axe-learning</code>.</li>
+  <li><strong>Windows:</strong> type <code>cd</code> and press Enter. This shows which folder you're in. You should see something like <code>C:\Users\yourname\axe-learning</code>.</li>
 </ul>
 
-<p><strong>Important:</strong> from now on, every command should be typed while you're inside this folder. If you close your command line app and come back later, you'll need to move back into the folder first:</p>
+<p><strong>Important:</strong> You'll need to be inside your <code>axe-learning</code> folder for the remaining commands in this tutorial. If you close your command line app and return later, use one of these commands to get back:</p>
 
 <ul>
-  <li><strong>Mac:</strong> type <code>cd Documents/axe-learning</code> and press Return.</li>
-  <li><strong>Windows:</strong> type <code>cd %USERPROFILE%\axe-learning</code> and press Enter.</li>
+  <li><strong>Mac:</strong> <code>cd ~/Documents/axe-learning</code></li>
+  <li><strong>Windows:</strong> <code>cd %USERPROFILE%\axe-learning</code></li>
 </ul>
 
 <p>Watch out for:</p>
 
 <ul>
-  <li>On Windows, don't put the folder in Documents. On many Windows computers, especially new ones, the Documents folder is synced to OneDrive. The tools you're about to install contain thousands of small files, and OneDrive will try to upload every one of them, which is slow and messy. Your user folder isn't synced, so it's a better place.</li>
+  <li>On Windows, it's best to keep your project outside folders that sync with OneDrive. Some computers automatically sync the Documents folder, and the tools you're about to install can create thousands of small files. Keeping the project in your user folder usually avoids this problem.</li>
 </ul>
+
 
 <h3 id="7-turn-the-folder-into-a-project">Step 7. Turn the folder into a project</h3>
 
@@ -277,9 +297,9 @@ hr {
 
 <pre><code class="language-bash">npm init -y</code></pre>
 
-<p>This turns your folder into a project, which means npm can install tools into it. The <code>-y</code> stands for "yes", and accepts all the default settings for you, so you won't be asked any questions.</p>
+<p>This sets up your folder as an npm project, so you can install tools into it. The <code>-y</code> stands for "yes" and accepts the default settings, so you won't be asked any questions.</p>
 
-<p>You'll see some text appear on screen. That's npm showing you what it created, a file called <code>package.json</code>. Think of this file as the project's notebook: it keeps a list of the tools you install.</p>
+<p>You'll see some text appear on screen. This is npm showing you what it created: a file called <code>package.json</code>. Think of this as the project's notebook. It keeps information about your project, including the tools it uses.</p>
 
 <p><strong>To check it worked</strong>, list the files in your folder:</p>
 
@@ -290,21 +310,22 @@ hr {
 
 <p>You should see <code>package.json</code> in the list.</p>
 
+
 <h3 id="8-install-the-accessibility-tools">Step 8. Install the accessibility tools</h3>
 
 <p>Type:</p>
 
 <pre><code class="language-bash">npm install @axe-core/cli playwright @axe-core/playwright</code></pre>
 
-<p>This installs three tools in one go. It may take a minute.</p>
+<p>This installs three tools in one go. It may take a few minutes.</p>
 
 <ul>
-  <li><strong><code>@axe-core/cli</code></strong> checks a web page for accessibility problems when you type one command. "CLI" stands for "command line interface", which just means a tool you use by typing commands rather than clicking buttons.</li>
+  <li><strong><code>@axe-core/cli</code></strong> checks a web page for accessibility problems when you type one command. "CLI" stands for "command line interface", which means a tool you use by typing commands rather than clicking buttons.</li>
   <li><strong><code>playwright</code></strong> controls a web browser automatically. It can open pages, click buttons and fill in forms, just like a person would.</li>
-  <li><strong><code>@axe-core/playwright</code></strong> lets the accessibility checker run while Playwright is in control of the browser. This is useful for pages that need you to log in or click through steps before you check them.</li>
+  <li><strong><code>@axe-core/playwright</code></strong> lets you run accessibility checks in a browser controlled by Playwright. This is useful when you need to interact with a page before testing it.</li>
 </ul>
 
-<p>You'll notice a new folder called <code>node_modules</code> appears in your project folder. That's where npm stores the tools it installed. You never need to open it or change anything in it.</p>
+<p>You'll notice a new folder called <code>node_modules</code> appears in your project folder. That's where npm stores the tools it installed. You don't need to open or change anything in it for these tutorials.</p>
 
 <p><strong>To check it worked, type:</strong></p>
 
@@ -314,13 +335,13 @@ hr {
 
 <h3 id="9-download-playwrights-browser">Step 9. Download Playwright's browser</h3>
 
-<p>Playwright uses its own copy of a browser, separate from the Chrome you normally use. Type:</p>
+<p>Playwright uses its own version of Chromium, separate from the Google Chrome browser you normally use. Type:</p>
 
 <pre><code class="language-bash">npx playwright install chromium</code></pre>
 
-<p>Chromium is the free, open-source browser that Google Chrome is built on. This download may take a minute or two.</p>
+<p>Chromium is the free, open-source browser that Google Chrome is built on. This download may take a few minutes.</p>
 
-<p>You'll see progress bars while it downloads. It's finished when the blinking cursor comes back on a new line.</p>
+<p>You'll see progress information while it downloads. It's finished when the command prompt appears again.</p>
 
 
 <!-- section -->
@@ -331,23 +352,23 @@ hr {
 
 <h3 id="10-find-your-chrome-version">Step 10. Find your Chrome version</h3>
 
-<p>The axe command line tool uses a helper program called <strong>ChromeDriver</strong> to control Chrome. Each copy of ChromeDriver only works with one main version of Chrome, so you need to install one that matches yours. First, find out which version of Chrome you have.</p>
+<p>The axe command line tool uses a helper program called <strong>ChromeDriver</strong> to control Chrome. ChromeDriver needs to be compatible with your version of Chrome, so let's find out which version you have.</p>
 
 <ol>
   <li>Open Google Chrome.</li>
   <li>Click in the address bar, type <code>chrome://version</code>, then press <strong>Return</strong> (Mac) or <strong>Enter</strong> (Windows).</li>
-  <li>Look at the first line. It says something like <code>Google Chrome 155.0.8059.85</code>.</li>
+  <li>Look for the Chrome version number. It should look something like <code>155.0.8059.85</code>.</li>
 </ol>
 
 <p>The first number, in this case <code>155</code>, is the main version. Make a note of it.</p>
 
 <h3 id="11-install-a-matching-chromedriver">Step 11. Install a matching ChromeDriver</h3>
 
-<p>Type this, replacing <code>155</code> with your main version number:</p>
+<p>Type this, replacing <code>155</code> with your main Chrome version number:</p>
 
 <pre><code class="language-bash">npm install chromedriver@155</code></pre>
 
-<p>This downloads the ChromeDriver that matches your Chrome, and puts it in your project folder.</p>
+<p>This installs a version of ChromeDriver that matches your main Chrome version and adds it to your project.</p>
 
 <p><strong>To check it worked, type:</strong></p>
 
@@ -357,7 +378,7 @@ hr {
 
 <h3 id="12-run-your-first-check">Step 12. Run your first check</h3>
 
-<p>Type the version for your computer:</p>
+<p>Use the command for your computer:</p>
 
 <p><strong>Mac:</strong></p>
 
@@ -367,26 +388,36 @@ hr {
 
 <pre><code class="language-bash">npx axe https://example.com --chromedriver-path "node_modules\chromedriver\lib\chromedriver\chromedriver.exe"</code></pre>
 
-<p><code>npx</code> comes with npm. It runs a tool you've installed in your project. Here it runs axe, which:</p>
+
+<p><strong>You're now running your first axe-core accessibility test!</strong> The command:</p>
 
 <ol>
-  <li>opens the page in an invisible copy of Chrome</li>
-  <li>checks it for common accessibility problems</li>
-  <li>lists any problems it finds.</li>
+  <li>Opens the page in Chrome, without displaying a browser window.</li>
+  <li>Checks the page for common accessibility problems.</li>
+  <li>Lists any problems it finds.</li>
 </ol>
 
-<p>The <code>--chromedriver-path</code> part tells axe to use the ChromeDriver you just installed. You'll include it every time you run a check.</p>
+<p>Here's what the different parts of the command mean:</p>
 
-<p>It can take a few seconds, so be patient. When it's done, you'll see a list of any problems it found, followed by a line saying how many it found in total.</p>
+<ul>
+  <li><code>npx</code> comes with npm. It runs a tool you've installed in your project.</li>
+  <li><code>axe</code> is the accessibility testing tool you're running.</li>
+  <li><code>https://example.com</code> is the demonstration website you're testing.</li>
+  <li><code>--chromedriver-path</code> tells axe where to find the ChromeDriver you installed in step 11.</li>
+</ul>
+
+<p>You'll need to include <code>--chromedriver-path</code> each time you run an axe check in this tutorial.</p>
+
+<p>The test may take a few seconds to complete. When it's done, you'll see any accessibility issues axe-core found, along with the total number of violations.</p>
 
 <p>To check a different page, replace <code>https://example.com</code> with that page's address.</p>
 
 <p>Watch out for:</p>
 
 <ul>
-  <li>An error mentioning "session not created" or "This version of ChromeDriver only supports Chrome version" means ChromeDriver and Chrome don't match. Check the version number you used in <a href="#11-install-a-matching-chromedriver">step 11</a>. The error also shows your Chrome version, in a line like <code>Current browser version is 155.0.8059.85</code>.</li>
-  <li>The error message suggests a tool called <code>browser-driver-manager</code>. You can ignore that. Installing ChromeDriver with npm, as in step 11, is simpler.</li>
-  <li>Chrome updates itself every few weeks. When it does, this error will come back. Repeat steps 10 and 11 with the new version number.</li>
+  <li>An error mentioning "session not created" or "This version of ChromeDriver only supports Chrome version" usually means ChromeDriver and Chrome don't match. Check the version number you used in <a href="#11-install-a-matching-chromedriver">step 11</a>. The error may also show your Chrome version, in a line like <code>Current browser version is 155.0.8059.85</code>.</li>
+  <li>The error message may suggest a tool called <code>browser-driver-manager</code>. You don't need to use it for this tutorial. You've already installed ChromeDriver with npm in step 11.</li>
+  <li>Chrome updates automatically. If you see a version mismatch error after an update, repeat steps 10 and 11 using your new Chrome version.</li>
 </ul>
 
 
@@ -396,20 +427,16 @@ hr {
 <hr>
 <h2 id="related-articles">Related articles</h2>
 
-<p>This tutorial is part of a series on accessibility testing with axe-core and Playwright. Other articles in the series include:</p>
+<p>This tutorial is part of a series on accessibility testing with axe-core and Playwright. The articles in this series are:</p>
 
-<ul>
-  <li><a href="https://www.maxdesign.com.au/articles/axe-core-playwright.html" target="_blank">axe-core, Playwright and Cucumber: accessibility testing in the development lifecycle</a></li>
+<ol>
+  <li><a href="https://www.maxdesign.com.au/articles/axe-core-playwright.html" target="_blank">axe-core, Playwright and Cucumber</a></li>
   <li><a href="axe-core-in-the-browser-console.html">Running axe-core in the browser console</a></li>
-  <li><a href="https://intopia.github.io/exercise/accessibility-testing-with-playwright.html" target="_blank">Accessibility testing with Playwright</a></li>
-</ul>
-
-<p>Future articles will cover:</p>
-
-<ul>
-  <li>Running axe-core from the command line</li>
-  <li>Running axe-core with a Playwright script</li>
-</ul>
+  <li><strong>Setting up Node.js</strong></li>
+  <li><a href="axe-core-from-the-command-line.html">Running axe-core from the command line</a></li>
+  <li>Running axe-core with a Playwright script <span class="new">COMING SOON</span></li>
+  <li><a href="accessibility-testing-with-playwright.html">Accessibility testing with Playwright</a></li>
+</ol>
 
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
