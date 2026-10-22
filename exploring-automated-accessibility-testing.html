@@ -32,9 +32,25 @@ hr {
 <!-- section -->
 
 
-<p>Accessibility testing tools can seem a bit magical. You run a test, and a list of issues appears. But under the surface, axe-core just produces a set of results. How you filter them, report on them and act on them is up to you.</p>
+<p>Automated accessibility testing can help teams find accessibility issues, check how components behave, and prevent problems from being introduced during development.</p>
 
-<p>This series of six articles explores that idea. It starts with the basic concepts, then gradually builds towards repeatable testing with <strong>axe-core</strong> and <strong>Playwright</strong>.</p>
+<p>This series of six articles explores how tools like axe-core and Playwright work, what they can and can't test, and how they can be used together. It starts with the basic concepts, then gradually builds towards more advanced testing techniques.</p>
+
+<p>Along the way, you'll see that there's nothing magical about these tools. You can understand how they work, control what they test, and decide how to use the results.</p>
+
+
+<!-- section -->
+
+
+<h2>The series is for:</h2>
+
+<ul>
+  <li><strong>accessibility professionals</strong> who want to understand how development teams test for accessibility</li>
+  <li><strong>developers and testers</strong> who are new to automated accessibility testing</li>
+  <li><strong>product owners and team leads</strong> who want to know what automated accessibility testing can and can’t do (article 1 is a good place to start)</li>
+</ul>
+
+<p>You don't need any coding experience to start. Every step is explained in plain language.</p>
 
 
 <!-- section -->
@@ -45,7 +61,7 @@ hr {
 
 <p>An introduction to the two tools used in this series, with nothing to install and no code to run. Learn what each tool does, what it can and can't test, and how they can work together to support accessibility testing.</p>
 
-<p><strong>Why this matters:</strong> Before getting into code, it's useful to understand the different roles these tools play. axe-core scans a page for accessibility issues that can be detected automatically. Playwright controls a browser and tests how a website behaves, including its accessibility. Understanding these differences makes it easier to see how the tools fit together, and why many teams use both.</p>
+<p><strong>Why this matters:</strong> Before getting into code, it's useful to understand the different roles these tools play. axe-core scans a page for accessibility issues that can be detected automatically. Playwright controls a browser and tests how a website behaves, including its accessibility. They do different jobs, and using them together lets teams test more than either tool can on its own.</p>
 
 
 <!-- section -->
@@ -65,7 +81,7 @@ hr {
 
 <p>Prepare your computer for more advanced testing. Install Node.js and the tools needed to run axe-core outside the browser console and begin automating accessibility checks.</p>
 
-<p><strong>Why this matters:</strong> Running tests in the browser console is useful for learning, but you have to open a browser and run commands by hand. Node.js lets JavaScript tools like axe-core and Playwright run outside the browser, straight from your computer's command line. That opens the door to repeatable tests, scripts and more advanced automation.</p>
+<p><strong>Why this matters:</strong> Running tests in the browser console is useful for learning, but you have to open a browser and run commands by hand. Node.js lets JavaScript tools like axe-core and Playwright run outside the browser, straight from your computer's command line. This means you can start running repeatable tests and creating scripts to automate the process.</p>
 
 
 <!-- section -->
@@ -85,7 +101,7 @@ hr {
 
 <p>Take greater control of your accessibility testing by combining axe-core with Playwright. Learn how to write scripts, customise which issues cause tests to fail, generate reports, and automatically rerun tests as you make changes.</p>
 
-<p><strong>Why this matters:</strong> The command line tool can't filter results by impact, and it fails on any issue, however minor. Writing your own script puts you in charge. You decide which issues matter, what counts as a failure, how results are reported, and when tests run. This is also much closer to how development teams use axe-core in practice.</p>
+<p><strong>Why this matters:</strong> The command line tool can't filter results by impact, and it fails on any issue, however minor. Writing your own script puts you in charge. You decide which issues matter, what counts as a failure, how results are reported, and when tests run. This approach is closer to how development teams typically use axe-core in practice.</p>
 
 
 <!-- section -->
@@ -108,7 +124,7 @@ hr {
 
 <p>If you're already comfortable with axe-core or Playwright, you can jump directly to the topics that interest you. Just note that articles 4 and 5 rely on the setup covered in article 3.</p>
 
-<p><strong>Remember:</strong> Automated accessibility testing is only one part of a wider accessibility testing process. These tools can help find issues and prevent regressions, but they don't replace manual testing or testing with people with disability.</p>
+<p>Automated accessibility testing is only one part of a wider accessibility testing process. These tools can help find issues and prevent regressions, but they don't replace manual testing or testing with people with disability.</p>
 
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
