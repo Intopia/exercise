@@ -72,19 +72,18 @@ hr {
 <!-- section -->
 
 
+
 <h2 id="what-this-tutorial-is-about">What this tutorial is about</h2>
 
-<p>In <a href="axe-core-from-the-command-line.html">Running axe-core from the command line</a>, you ran axe-core with a single command. But the command line tool can't filter by severity, and it only checks a page when you tell it to.</p>
+<p>In <a href="axe-core-from-the-command-line.html">Running axe-core from the command line</a>, you ran axe-core with a single command. However, the command line tool can't filter by severity, and it only checks a page when you tell it to.</p>
 
-<p>In this tutorial, you'll write your own script, using Playwright to open a page and run axe-core. That puts you in control of what gets tested, what gets shown, and when it runs. By the end, you'll have a check that shows only critical and serious issues, passes or fails, and runs again every time the page changes.</p>
-
-<p>Tools like browser extensions can seem a bit magical. But under the surface, axe-core just produces a set of results. How you look at those results, filter them, report on them and act on them is up to you.</p>
+<p>In this tutorial, you'll write your own script, using Playwright to open a page and run axe-core. You'll have control over what gets tested, what gets shown, and when it runs. By the end, you'll have a check that shows only critical and serious issues, passes or fails, and runs again every time the page changes.</p>
 
 <h3>About Playwright</h3>
 
 <p>Playwright is a free tool that controls a web browser with code. It can open pages, click buttons and fill in forms, just like a person would. The <code>@axe-core/playwright</code> add-on lets you run axe-core on any page Playwright opens.</p>
 
-<p>This is the closest of the three tutorials to how development teams actually use axe-core: as part of automated checks that run as they work, and decide whether new code can go live.</p>
+<p>Of the three tutorials, this one is closest to how development teams use axe-core in practice. It can become part of their automated testing process, helping them find accessibility issues as they work and prevent new code from being released when tests fail.</p>
 
 <h3>Before you start</h3>
 
@@ -126,16 +125,17 @@ hr {
 <ul>
   <li><a href="#5-show-only-critical-and-serious">Step 5. Show only critical and serious</a></li>
   <li><a href="#6-pass-or-fail">Step 6. Pass or fail</a></li>
-  <li><a href="#7-run-the-check-whenever-the-page-changes">Step 7. Run the check whenever the page changes</a></li>
-  <li><a href="#8-add-check-and-watch-shortcuts">Step 8. Add check and watch shortcuts</a></li>
+  <li><a href="#7-check-the-exit-code">Step 7. Check the exit code</a></li>
+  <li><a href="#8-run-the-check-whenever-the-page-changes">Step 8. Run the check whenever the page changes</a></li>
+  <li><a href="#9-add-check-and-watch-shortcuts">Step 9. Add check and watch shortcuts</a></li>
 </ul>
 
 <h3>Fixing the page</h3>
 
 <ul>
-  <li><a href="#9-save-a-broken-copy-of-the-test-page">Step 9. Save a broken copy of the test page</a></li>
-  <li><a href="#10-fix-the-page-and-reach-pass">Step 10. Fix the page and reach PASS</a></li>
-  <li><a href="#11-reset-the-test-page">Step 11. Reset the test page</a></li>
+  <li><a href="#10-save-a-broken-copy-of-the-test-page">Step 10. Save a broken copy of the test page</a></li>
+  <li><a href="#11-fix-the-page-and-reach-pass">Step 11. Fix the page and reach PASS</a></li>
+  <li><a href="#12-reset-the-test-page">Step 12. Reset the test page</a></li>
 </ul>
 
 <h3>Optional extras</h3>
@@ -296,7 +296,7 @@ const { pathToFileURL } = require('url');
   await browser.close();
 })();</code></pre>
 
-<p>In plain terms, it's the browser console steps, done by code:</p>
+<p>In plain terms, the script follows the same steps you used in the browser console:</p>
 
 <ol>
   <li>Open a browser and a tab.</li>
@@ -382,14 +382,14 @@ const { pathToFileURL } = require('url');
 
 <ul>
   <li><strong>KEEP ONLY CRITICAL AND SERIOUS</strong> is the same filter you used in the browser console. It keeps only the critical and serious violations.</li>
-  <li><strong>PRINT THE RESULTS</strong> replaces the old count. It prints how many issues there are, then each issue's severity, rule and short description, with the problem code underneath.</li>
+  <li><strong>PRINT THE RESULTS</strong> replaces the old count. It prints how many rules failed, then each violation's severity, rule and short description, followed by the HTML of the affected elements.</li>
 </ul>
 
 <p>Now run it:</p>
 
 <pre><code class="language-bash">node check.js</code></pre>
 
-<p>You should see <code>Critical and serious issues: 6</code>, followed by the six issues. <code>heading-order</code> is gone, because it's moderate.</p>
+<p>You should see <code>Critical and serious issues: 6</code>, followed by the details of each violation. The <code>heading-order</code> violation is no longer included because its severity is moderate.</p>
 
 <h3 id="6-pass-or-fail">Step 6. Pass or fail</h3>
 
@@ -453,7 +453,16 @@ const { pathToFileURL } = require('url');
 
 <p>You should see the 6 issues, then <code>FAIL: critical or serious issues found</code>.</p>
 
-<p>To see the exit code, type this straight afterwards and press Enter:</p>
+
+<h3 id="7-check-the-exit-code">Step 7. Check the exit code</h3>
+
+<p>Your script now reports PASS or FAIL, but it also sets an exit code that other tools can use to tell whether the check succeeded or failed.</p>
+
+<p>Run the script again:</p>
+
+<pre><code class="language-bash">node check.js</code></pre>
+
+<p>Then check the exit code:</p>
 
 <p><strong>Mac:</strong></p>
 
@@ -463,18 +472,18 @@ const { pathToFileURL } = require('url');
 
 <pre><code class="language-bash">echo %errorlevel%</code></pre>
 
-<p>You should see <code>1</code>, meaning the check failed.</p>
+<p>You should see <code>1</code>, meaning the check failed. An exit code of <code>0</code> would mean the check passed.</p>
 
 <p>Watch out for:</p>
 
 <ul>
   <li>The exit code only tells you about the last command. Run <code>echo</code> straight after <code>node check.js</code>, before anything else.</li>
-  <li>A team could choose a different line, such as failing on moderate issues too. You'd change the filter in step 5 to include them.</li>
+  <li>A team could choose a different line, such as failing on moderate issues too. You'd change the filter in Step 5 to include them.</li>
 </ul>
 
-<h3 id="7-run-the-check-whenever-the-page-changes">Step 7. Run the check whenever the page changes</h3>
+<h3 id="8-run-the-check-whenever-the-page-changes">Step 8. Run the check whenever the page changes</h3>
 
-<p>Node has a built-in <strong>watch mode</strong>. It runs your script, then keeps an eye on a file, and runs the script again every time that file is saved. This is like a developer working on a page, with checks running in the background.</p>
+<p>Node has a built-in <strong>watch mode</strong>. It runs your script, watches a file for changes, and runs the script again whenever that file is saved. This is similar to a developer working on a page, with checks running automatically as they make changes.</p>
 
 <p>Type:</p>
 
@@ -505,9 +514,9 @@ const { pathToFileURL } = require('url');
   <li>Watch mode only watches <code>test-page.html</code>. If you change <code>check.js</code>, stop watch mode and start it again.</li>
 </ul>
 
-<h3 id="8-add-check-and-watch-shortcuts">Step 8. Add check and watch shortcuts</h3>
+<h3 id="9-add-check-and-watch-shortcuts">Step 9. Add check and watch shortcuts</h3>
 
-<p>Add two shortcuts to <code>package.json</code>, so you don't have to type the long commands.</p>
+<p>Add two shortcuts to <code>package.json</code> so you don't have to type the full commands each time.</p>
 
 <p>Open <code>package.json</code> in your editor:</p>
 
@@ -545,7 +554,7 @@ const { pathToFileURL } = require('url');
 <p>Watch out for:</p>
 
 <ul>
-  <li>After FAIL, npm adds a few error lines of its own, saying the script failed. That's not a bug. It's npm noticing the exit code of 1, which proves your check works.</li>
+  <li>After FAIL, npm may add a few error lines of its own, saying the script failed. That's expected. npm has detected the exit code of 1 returned by your script.</li>
   <li>If you added a <code>report</code> shortcut in <a href="axe-core-from-the-command-line.html">Running axe-core from the command line</a>, keep that line. Put a comma at the end of it, then add the <code>check</code> and <code>watch</code> lines underneath.</li>
   <li>Every line inside <code>"scripts"</code> ends with a comma, except the last one. A missing or extra comma breaks the whole file.</li>
   <li>On Windows, stopping <code>npm run watch</code> may ask "Terminate batch job (Y/N)?". Type <code>Y</code> and press Enter.</li>
@@ -558,7 +567,7 @@ const { pathToFileURL } = require('url');
 <hr>
 <h2 id="fixing-the-page">Fixing the page</h2>
 
-<h3 id="9-save-a-broken-copy-of-the-test-page">Step 9. Save a broken copy of the test page</h3>
+<h3 id="10-save-a-broken-copy-of-the-test-page">Step 10. Save a broken copy of the test page</h3>
 
 <p>You're about to fix the test page. Save a copy with all its errors first, so you can put them back later, such as before a demo.</p>
 
@@ -572,7 +581,7 @@ const { pathToFileURL } = require('url');
 
 <p><strong>To check it worked</strong>, list the files in your folder (<code>ls</code> on Mac, <code>dir</code> on Windows). You should see <code>test-page-broken.html</code>.</p>
 
-<h3 id="10-fix-the-page-and-reach-pass">Step 10. Fix the page and reach PASS</h3>
+<h3 id="11-fix-the-page-and-reach-pass">Step 11. Fix the page and reach PASS</h3>
 
 <p>Fix the six critical and serious problems one at a time, and watch the count drop until the check passes.</p>
 
@@ -607,12 +616,12 @@ const { pathToFileURL } = require('url');
 <p>Watch out for:</p>
 
 <ul>
-  <li>The <code>heading-order</code> problem is still on the page at PASS, because it's moderate. It's a good reminder of what severity filters let through.</li>
+  <li>The <code>heading-order</code> problem is still on the page, even though the check passes. That's because it's a moderate issue, and your script only fails on critical and serious issues.</li>
   <li>PASS only means axe-core found no critical or serious issues. It doesn't mean the page is accessible. A person still needs to check things like whether alt text makes sense, and whether everything works with a keyboard.</li>
   <li>The <code>alt=""</code> fix marks the image as decorative. On a real page, an image that carries meaning needs alt text that describes it.</li>
 </ul>
 
-<h3 id="11-reset-the-test-page">Step 11. Reset the test page</h3>
+<h3 id="12-reset-the-test-page">Step 12. Reset the test page</h3>
 
 <p>Put the broken version back, so the page has all its errors again.</p>
 
@@ -639,7 +648,7 @@ const { pathToFileURL } = require('url');
 <hr>
 <h2 id="optional-extras">Optional extras</h2>
 
-<p>These extras add more to the script you built in step 6. They build on each other, so do them in order.</p>
+<p>These extras build on the script you created in Step 6. Each adds a new feature, so work through them in order.</p>
 
 <h3 id="sort-the-most-severe-issues-to-the-top">Sort the most severe issues to the top</h3>
 
@@ -699,7 +708,7 @@ const { pathToFileURL } = require('url');
   <li><strong>SORT CRITICAL ISSUES TO THE TOP</strong> has two lines. The first is a ranking: critical comes first (0), serious second (1). The second sorts the issues by that ranking.</li>
 </ul>
 
-<p>It sits after the filter and before the printing, because code runs from top to bottom. The issues have to be filtered before they can be sorted, and sorted before they're printed.</p>
+<p>The sorting code sits between the filter and the printing. This means the script first selects the critical and serious issues, then sorts them by severity before displaying the results.</p>
 
 <p>Now run it:</p>
 
@@ -709,7 +718,7 @@ const { pathToFileURL } = require('url');
 
 <h3 id="write-a-simple-html-report">Write a simple HTML report</h3>
 
-<p>Change the script so it also saves the critical and serious issues as a simple web page, <code>report.html</code>.</p>
+<p>Change the script so it also creates a simple HTML report called <code>report.html</code>, listing the critical and serious issues found.</p>
 
 <p>Open <code>check.js</code> in your editor. Select everything (<strong>Command + A</strong> on Mac, <strong>Ctrl + A</strong> on Windows), delete it, paste in this new version, then save the file:</p>
 
@@ -792,7 +801,7 @@ const fs = require('fs'); // NEW: Node's built-in file tools
 
 <ul>
   <li><strong><code>fs</code></strong>, at the top, stands for "file system". It's Node's built-in tool for reading and writing files.</li>
-  <li><strong>WRITE A SIMPLE HTML REPORT</strong> builds and saves the report. <code>escape</code> makes sure the problem code shows up as text, not as real buttons and links. <code>items</code> builds one list item for each issue. <code>report</code> wraps the items in a basic, accessible web page. <code>writeFileSync</code> saves it as <code>report.html</code>.</li>
+  <li><strong>WRITE A SIMPLE HTML REPORT</strong> builds and saves the report. The <code>escape</code> function makes sure the HTML of affected elements appears as text, rather than being interpreted as actual buttons, links or other elements. The <code>items</code> variable builds a list of issues, which <code>report</code> places inside a basic HTML page. Finally, <code>writeFileSync</code> saves the page as <code>report.html</code>.</li>
 </ul>
 
 <p>Now run the check, then open the report. Type each line separately, pressing Enter after each one:</p>
@@ -823,7 +832,7 @@ start chrome "%cd%\report.html"</code></pre>
 <hr>
 <h2 id="next-steps">Next steps</h2>
 
-<p>In real projects, developers usually put checks like this inside Playwright's own test runner, alongside their other tests. The checks then run automatically, for example every time someone saves their work or tries to add new code.</p>
+<p>In real projects, developers usually put checks like this inside Playwright's own test runner, alongside their other tests. These checks can then run automatically as developers work, or when new code is submitted for review.</p>
 
 <p>axe-core can only find some accessibility issues. Playwright can also test things axe-core can't, such as keyboard access, focus and changes to a page as people use it. To see how, read <a href="accessibility-testing-with-playwright.html">Accessibility testing with Playwright</a>.</p>
 
