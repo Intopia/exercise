@@ -42,12 +42,12 @@ hr {
 <!-- section -->
 
 
-<h2>The series is for:</h2>
+<h2 id="who-this-series-is-for">Who this series is for</h2>
 
 <ul>
   <li><strong>accessibility professionals</strong> who want to understand how development teams test for accessibility</li>
   <li><strong>developers and testers</strong> who are new to automated accessibility testing</li>
-  <li><strong>product owners and team leads</strong> who want to know what automated accessibility testing can and can’t do (article 1 is a good place to start)</li>
+  <li><strong>product owners and team leads</strong> who want to know what automated accessibility testing can and can't do (article 1 is a good place to start)</li>
 </ul>
 
 <p>You don't need any coding experience to start. Every step is explained in plain language.</p>
@@ -63,6 +63,8 @@ hr {
 
 <p><strong>Why this matters:</strong> Before getting into code, it's useful to understand the different roles these tools play. axe-core scans a page for accessibility issues that can be detected automatically. Playwright controls a browser and tests how a website behaves, including its accessibility. They do different jobs, and using them together lets teams test more than either tool can on its own.</p>
 
+<p><strong>Start here if:</strong> You're new to automated accessibility testing and want to understand the tools before trying them. No technical knowledge needed.</p>
+
 
 <!-- section -->
 
@@ -71,7 +73,9 @@ hr {
 
 <p>Start using axe-core without installing any software. Run accessibility checks directly in your browser's developer console, explore the results, and learn how axe-core works behind the scenes.</p>
 
-<p><strong>Why this matters:</strong> Many people first meet axe-core through a browser extension, where the underlying processes are hidden. Running it in the console is not how most teams would test websites in practice, but it's a simple way to look under the hood. You can see the results axe-core produces and experiment with how those results are displayed and filtered, without needing to build an application or set up a development environment.</p>
+<p><strong>Why this matters:</strong> Many people first meet axe-core through a browser extension, where everything happens behind the scenes. Running axe-core in the console is not something you'd do in day-to-day testing. It's a stepping stone. It shows you what axe-core actually does, and the results it produces, with nothing to install or set up. Everything in the later tutorials builds on this.</p>
+
+<p><strong>Start here if:</strong> You've used the axe browser extension and want to see what it's doing behind the scenes. No coding experience needed.</p>
 
 
 <!-- section -->
@@ -83,6 +87,8 @@ hr {
 
 <p><strong>Why this matters:</strong> Running tests in the browser console is useful for learning, but you have to open a browser and run commands by hand. Node.js lets JavaScript tools like axe-core and Playwright run outside the browser, straight from your computer's command line. This means you can start running repeatable tests and creating scripts to automate the process.</p>
 
+<p><strong>Start here if:</strong> You understand the basics and are ready to try hands-on testing on your own computer.</p>
+
 
 <!-- section -->
 
@@ -93,6 +99,8 @@ hr {
 
 <p><strong>Why this matters:</strong> Rather than manually opening pages and running checks, you can automate the process with simple commands. You also gain control over how results are saved and reported. Most importantly, tests can be set up to return a failure status when accessibility issues are found, allowing development teams to use them in automated build and release processes.</p>
 
+<p><strong>Start here if:</strong> You've already set up Node.js and the axe tools from article 3.</p>
+
 
 <!-- section -->
 
@@ -101,7 +109,17 @@ hr {
 
 <p>Take greater control of your accessibility testing by combining axe-core with Playwright. Learn how to write scripts, customise which issues cause tests to fail, generate reports, and automatically rerun tests as you make changes.</p>
 
-<p><strong>Why this matters:</strong> The command line tool can report a failure when accessibility issues are found, but it fails on any violation, even a minor one. By writing your own script, you decide what counts as a failure, how results are reported, and when the checks run. This approach is closer to how development teams typically use axe-core in practice.</p>
+<p><strong>Why this matters:</strong> The command line tool fails on any violation, even a minor one, and only runs when you tell it to. By writing your own script, you can:</p>
+
+<ul>
+  <li>decide what counts as a failure</li>
+  <li>run checks automatically every time the code changes</li>
+  <li>use a failing check to stop a build or block a release.</li>
+</ul>
+
+<p>This is much closer to how development teams use axe-core in practice.</p>
+
+<p><strong>Start here if:</strong> You've set up Node.js from article 3, and want more control over what counts as a failure and when checks run.</p>
 
 
 <!-- section -->
@@ -114,15 +132,13 @@ hr {
 
 <p><strong>Why this matters:</strong> Automated accessibility scanners can only detect certain types of issues. They cannot reliably determine whether every interaction behaves as expected. Playwright allows you to write tests for specific behaviours, such as whether a dialog receives focus when opened or whether a disclosure updates its expanded state. These tests can help teams check expected accessibility behaviour and prevent regressions as their products change.</p>
 
+<p><strong>Start here if:</strong> You want to explore how Playwright can test accessibility behaviour beyond what axe-core can detect. You don't need to complete the earlier tutorials.</p>
+
 
 <!-- section -->
 
 
-<h2 id="where-to-start">Where to start</h2>
-
-<p>If you're new to automated accessibility testing, start with the first article and work through the series in order. Each article introduces new concepts and techniques.</p>
-
-<p>If you're already comfortable with axe-core or Playwright, you can jump directly to the topics that interest you. Just note that articles 4 and 5 rely on the setup covered in article 3.</p>
+<h2 id="remember">Remember</h2>
 
 <p>Automated accessibility testing is only one part of a wider accessibility testing process. These tools can help find issues and prevent regressions, but they don't replace manual testing or testing with people with disability.</p>
 

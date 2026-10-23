@@ -139,6 +139,11 @@ hr {
   <li><a href="#5-show-only-critical-and-serious">Step 5. Show only critical and serious</a></li>
   <li><a href="#6-pass-or-fail">Step 6. Pass or fail</a></li>
   <li><a href="#7-check-the-exit-code">Step 7. Check the exit code</a></li>
+</ul>
+
+<h3>Running the check automatically</h3>
+
+<ul>
   <li><a href="#8-run-the-check-whenever-the-page-changes">Step 8. Run the check whenever the page changes</a></li>
   <li><a href="#9-add-check-and-watch-shortcuts">Step 9. Add check and watch shortcuts</a></li>
 </ul>
@@ -499,6 +504,23 @@ const { pathToFileURL } = require('url');
   <li>The exit code only tells you about the last command. Run <code>echo</code> straight after <code>node check.js</code>, before anything else.</li>
   <li>A team could choose a different line, such as failing on moderate issues too. You'd change the filter in Step 5 to include them.</li>
 </ul>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="running-the-check-automatically">Running the check automatically</h2>
+
+<p>So far, you've run the check yourself, each time you wanted to test the page. Development teams don't usually work that way. Their checks run automatically whenever the code changes, often as part of a CI (continuous integration) pipeline.</p>
+
+<p>In this section, you'll set up something similar on your own computer. The check will watch the test page, and run again every time you save a change.</p>
+
+<div class="key-point">
+  <p><strong>Accessibility checks work best when nobody has to remember to run them.</strong> Running them automatically means issues are caught as soon as they're introduced.</p>
+</div>
+
+
 
 <h3 id="8-run-the-check-whenever-the-page-changes">Step 8. Run the check whenever the page changes</h3>
 
