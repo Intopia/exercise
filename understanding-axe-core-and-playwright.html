@@ -67,9 +67,7 @@ hr {
 
 <p>This article is the starting point for the series. There's nothing to install and no code to run. It explains what axe-core and Playwright are, what each one can and can't test, and how they fit together. The tutorials that follow put each idea into practice.</p>
 
-<p>If you work in accessibility, you've probably used an automated testing tool such as the axe DevTools browser extension. But developers often approach accessibility testing differently. They build accessibility checks <strong>into the development process</strong>, so issues can be caught before they reach the finished product.</p>
-
-<p>That's where axe-core and Playwright come in:</p>
+<p>If you work in accessibility, you've probably used an automated testing tool such as the axe DevTools browser extension. Developers often use these same tools as part of their development process, running accessibility checks as they work to catch problems before code is released.</p>
 
 <ul>
   <li><strong>axe-core</strong> scans a page for accessibility problems that can be detected automatically.</li>
@@ -78,7 +76,7 @@ hr {
 
 <p>They can be used separately, but they're especially useful together.</p>
 
-<p>One thing worth knowing up front: <strong>Playwright can do accessibility testing on its own, without axe-core.</strong> We'll see how shortly.</p>
+<p>They can be used separately or together. And importantly, Playwright can test accessibility behaviour on its own, without axe-core.</p>
 
 
 <!-- section -->
@@ -113,15 +111,15 @@ axe-core runs inside the page
 ↓
 axe-core returns its results</code></pre>
 
-<p>That's all any axe tool does. A browser extension, a command line tool and a test script all follow the same three steps. They just present the results differently. You'll do these steps by hand in <a href="axe-core-in-the-browser-console.html">Running axe-core in the browser console</a>, and with a single command in <a href="axe-core-from-the-command-line.html">Running axe-core from the command line</a>.</p>
+<p>These are the basic steps behind tools that use axe-core, whether it's a browser extension, a command line tool or a test script. The difference is how they run the checks and what they do with the results. You'll explore this by hand in <a href="axe-core-in-the-browser-console.html">Running axe-core in the browser console</a>, and with a single command in <a href="axe-core-from-the-command-line.html">Running axe-core from the command line</a>.</p>
 
 <p>Each problem axe-core finds is given an impact level: <strong>minor</strong>, <strong>moderate</strong>, <strong>serious</strong> or <strong>critical</strong>. This helps teams decide what to fix first. In <a href="axe-core-with-a-playwright-script.html">Running axe-core with a Playwright script</a>, you'll use impact levels to decide which issues should make a test fail.</p>
 
-<p>Where axe-core really shines is breadth. It can sweep a whole page for a wide range of common problems in one go, without anyone needing to write a test for each one.</p>
+<p>One of axe-core's strengths is that it can check a whole page for a wide range of common accessibility problems at once, without anyone needing to write a separate test for each one.</p>
 
-<p>axe-core is also honest about what it doesn't know. Alongside its violations, it returns "incomplete" results. These are things it couldn't decide automatically, which need a person to check. A common example is colour contrast for text over a background image or gradient. You'll explore these results in the browser console tutorial.</p>
+<p>axe-core also returns "incomplete" results alongside its violations. These are things it couldn't decide automatically and need a person to check. A common example is colour contrast for text over a background image or gradient. You'll explore these results in the browser console tutorial.</p>
 
-<p>That points to the important limitation: axe-core can only detect issues that can be determined automatically.</p>
+<p>This is an important limitation of axe-core. It cannot determine every accessibility issue on its own.</p>
 
 <p>It can't reliably answer questions such as:</p>
 
@@ -171,7 +169,7 @@ Run an accessibility test</code></pre>
 
 <p>This is one place where Playwright and axe-core fit together well. axe-core can inspect the current page, but it can't navigate through an application by itself. Playwright can do the navigation, then run axe-core inside the page it has opened. There's even an official package, <code>@axe-core/playwright</code>, that connects the two. You'll use it in <a href="axe-core-with-a-playwright-script.html">Running axe-core with a Playwright script</a>.</p>
 
-<p>But Playwright is much more than a way to get pages ready for axe-core.</p>
+<p>Playwright can also test accessibility behaviour directly, without running axe-core.</p>
 
 <h3 id="playwright-can-test-accessibility-on-its-own">Playwright can test accessibility on its own</h3>
 
@@ -212,7 +210,7 @@ Run an accessibility test</code></pre>
 
 <p>Even if you don't write code, you can probably read what this does: open the dialog, press Escape, check the dialog has closed, and check focus went back to the button that opened it.</p>
 
-<p>That's <strong>functional accessibility testing</strong>: checking that things actually <em>behave</em> accessibly, not just that the code looks right to an automated scanner. You'll find six worked examples like this in <a href="accessibility-testing-with-playwright.html">Accessibility testing with Playwright</a>.</p>
+<p>This is <strong>functional accessibility testing</strong>: checking whether a component behaves as expected, rather than relying only on an automated scan to find accessibility problems. You'll find six worked examples like this in <a href="accessibility-testing-with-playwright.html">Accessibility testing with Playwright</a>.</p>
 
 
 <!-- section -->
@@ -247,7 +245,7 @@ Check where focus moved</code></pre>
 
 <p>axe-core could then scan the resulting page for problems that can be detected automatically.</p>
 
-<p>But notice that axe-core couldn't do the earlier checks. If the error message isn't connected to the field, axe-core can't reliably work out which text on the page was meant to be the error. Playwright can check this directly, using <code>toHaveAccessibleErrorMessage</code> or <code>toHaveAccessibleDescription</code>, depending on how the error is connected.</p>
+<p>axe-core can't reliably perform all of those earlier checks. For example, if an error message isn't connected to the field, axe-core can't reliably determine which text on the page was intended to be the error. Playwright can check for the expected connection directly, using <code>toHaveAccessibleErrorMessage</code> or <code>toHaveAccessibleDescription</code>, depending on how the error is connected.</p>
 
 <h3 id="what-about-cucumber">What about Cucumber?</h3>
 
