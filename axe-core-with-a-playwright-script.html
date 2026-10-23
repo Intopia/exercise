@@ -40,6 +40,19 @@ hr {
 .series-navigation ol {
   margin-bottom: 0;
 }
+
+.key-point {
+  border-left: 6px solid #000;
+  background: #fff8d6;
+  padding: .75em 1.25em;
+  margin: 1.5em 0;
+  font-size: 1.1em;
+}
+
+.key-point p {
+  margin: 0;
+}
+
   </style>
 </head>
 <body>
@@ -395,7 +408,13 @@ const { pathToFileURL } = require('url');
 
 <p>In <a href="axe-core-from-the-command-line.html#fail-when-issues-are-found">Make accessibility tests fail when issues are found</a>, you used <code>--exit</code> to make the command line tool report a failure through its <strong>exit code</strong>. <code>0</code> means success, and anything else means failure. Development teams use this to stop a build or block a release when accessibility tests fail.</p>
 
-<p>The catch was that <code>--exit</code> fails on <strong>any</strong> violation, even a minor one. Now you'll decide where the line is. Change the script so it only fails on critical and serious issues, ends with a clear PASS or FAIL, and sets the exit code to match.</p>
+<p>The catch was that <code>--exit</code> fails on <strong>any</strong> violation, even a minor one.</p>
+
+<div class="key-point">
+  <p><strong>Writing your own script means you decide what counts as a failure.</strong> You can choose which issues should make a test fail, rather than treating every violation the same way.</p>
+</div>
+
+<p>In this step, you'll change the script so it only fails on critical and serious issues, displays a clear PASS or FAIL message, and sets the exit code to match.</p>
 
 <p>Open <code>check.js</code> in your editor. Select everything (<strong>Command + A</strong> on Mac, <strong>Ctrl + A</strong> on Windows), delete it, paste in this new version, then save the file:</p>
 
