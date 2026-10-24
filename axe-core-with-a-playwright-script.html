@@ -349,6 +349,21 @@ const { pathToFileURL } = require('url');
   <li>An error saying a browser "executable doesn't exist" means Playwright's browser isn't installed. Run <code>npx playwright install chromium</code>, then try again.</li>
 </ul>
 
+<h3 id="video-walkthrough1">Video walkthrough: Getting started</h3>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/script1.mp4"></video>
+
+<details>
+  <summary>Transcript</summary>
+  <ul>
+    <li>Title: Getting started</li>
+    <li>Step 1. Open your project folder</li>
+    <li>Step 2. Add the test page</li>
+    <li>Step 3. Create the check script</li>
+    <li>Step 4. Run the check script</li>
+  </ul>
+</details>
+
 
 <!-- section -->
 
@@ -505,6 +520,20 @@ const { pathToFileURL } = require('url');
   <li>A team could choose a different line, such as failing on moderate issues too. You'd change the filter in Step 5 to include them.</li>
 </ul>
 
+<h3 id="video-walkthrough2">Video walkthrough: Building and running the check</h3>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/script2.mp4"></video>
+
+<details>
+  <summary>Transcript</summary>
+  <ul>
+    <li>Title: Building and running the check</li>
+    <li>Step 5. Show only critical and serious</li>
+    <li>Step 6. Pass or fail</li>
+    <li>Step 7. Check the exit code</li>
+  </ul>
+</details>
+
 
 <!-- section -->
 
@@ -600,6 +629,19 @@ const { pathToFileURL } = require('url');
   <li>Every line inside <code>"scripts"</code> ends with a comma, except the last one. A missing or extra comma breaks the whole file.</li>
   <li>On Windows, stopping <code>npm run watch</code> may ask "Terminate batch job (Y/N)?". Type <code>Y</code> and press Enter.</li>
 </ul>
+
+<h3 id="video-walkthrough3">Video walkthrough: Running the check automatically</h3>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/script3.mp4"></video>
+
+<details>
+  <summary>Transcript</summary>
+  <ul>
+    <li>Title: Running the check automatically</li>
+    <li>Step 8. Run the check whenever the page changes</li>
+    <li>Step 9. Add check and watch shortcuts</li>
+  </ul>
+</details>
 
 
 <!-- section -->
@@ -705,6 +747,20 @@ const { pathToFileURL } = require('url');
 <ul>
   <li>On Windows, <code>/Y</code> means "yes, replace the existing file" without asking first.</li>
 </ul>
+
+<h3 id="video-walkthrough4">Video walkthrough: Fixing the page</h3>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/script4.mp4"></video>
+
+<details>
+  <summary>Transcript</summary>
+  <ul>
+    <li>Title: Fixing the page</li>
+    <li>Step 10. Save a broken copy of the test page</li>
+    <li>Step 11. Fix the page and reach PASS</li>
+    <li>Step 12. Reset the test page</li>
+  </ul>
+</details>
 
 
 <!-- section -->
@@ -890,6 +946,19 @@ start chrome "%cd%\report.html"</code></pre>
   <li>If watch mode is running, the report is rewritten every time you save the test page. Refresh the report tab to see the latest version.</li>
 </ul>
 
+<h3 id="video-walkthrough5">Video walkthrough: Optional extras</h3>
+
+<video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/script5.mp4"></video>
+
+<details>
+  <summary>Transcript</summary>
+  <ul>
+    <li>Title: Optional extras</li>
+    <li>Sort the most severe issues to the top</li>
+    <li>Write a simple HTML report</li>
+  </ul>
+</details>
+
 
 <!-- section -->
 
@@ -900,24 +969,6 @@ start chrome "%cd%\report.html"</code></pre>
 <p>In real projects, developers usually put checks like this inside Playwright's own test runner, alongside their other tests. These checks can then run automatically as developers work, or when new code is submitted for review.</p>
 
 <p>axe-core can only find some accessibility issues. Playwright can also test things axe-core can't, such as keyboard access, focus and changes to a page as people use it. To see how, read <a href="accessibility-testing-with-playwright.html">Accessibility testing with Playwright</a>.</p>
-
-
-<!-- section -->
-
-
-<hr>
-<h2 id="related-articles">Related articles</h2>
-
-<p>This tutorial is part of a series on accessibility testing with axe-core and Playwright. The articles in this series are:</p>
-
-<ol>
-  <li><a href="https://www.maxdesign.com.au/articles/axe-core-playwright.html" target="_blank">axe-core, Playwright and Cucumber</a></li>
-  <li><a href="axe-core-in-the-browser-console.html">Running axe-core in the browser console</a></li>
-  <li><a href="axe-setting-up-nodejs.html">Setting up Node.js</a></li>
-  <li><a href="axe-core-from-the-command-line.html">Running axe-core from the command line</a></li>
-  <li><strong>Running axe-core with a Playwright script</strong></li>
-  <li><a href="accessibility-testing-with-playwright.html">Accessibility testing with Playwright</a></li>
-</ol>
 
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
