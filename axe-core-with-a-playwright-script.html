@@ -641,12 +641,36 @@ const { pathToFileURL } = require('url');
     </tr>
   </thead>
   <tbody>
-    <tr><td>No page language</td><td><code>&lt;html&gt;</code></td><td><code>&lt;html lang="en"&gt;</code></td></tr>
-    <tr><td>Image with no alt text</td><td><code>&lt;img src="https://placehold.co/200x200"&gt;</code></td><td><code>&lt;img src="https://placehold.co/200x200" alt=""&gt;</code></td></tr>
-    <tr><td>Input with no label</td><td><code>&lt;input type="text"&gt;</code></td><td><code>&lt;label&gt;Name &lt;input type="text"&gt;&lt;/label&gt;</code></td></tr>
-    <tr><td>Button with no name</td><td><code>&lt;button&gt;&lt;/button&gt;</code></td><td><code>&lt;button&gt;Send&lt;/button&gt;</code></td></tr>
-    <tr><td>Link with no text</td><td><code>&lt;a href="#"&gt;&lt;/a&gt;</code></td><td><code>&lt;a href="#"&gt;Home&lt;/a&gt;</code></td></tr>
-    <tr><td>Low contrast text</td><td><code>.faint { color: #aaa; }</code></td><td><code>.faint { color: #595959; }</code></td></tr>
+    <tr>
+      <td>No page language</td>
+      <td><code>&lt;html&gt;</code></td>
+      <td><code>&lt;html lang="en"&gt;</code></td>
+    </tr>
+    <tr>
+      <td>Image with no alt text</td>
+      <td><code>&lt;img src="https://placehold.co/200x200"&gt;</code></td>
+      <td><code>&lt;img src="https://placehold.co/200x200" alt=""&gt;</code></td>
+    </tr>
+    <tr>
+      <td>Input with no label</td>
+      <td><code>&lt;input type="text"&gt;</code></td>
+      <td><code>&lt;input type="text" aria-label="Name"&gt;</code></td>
+    </tr>
+    <tr>
+      <td>Button with no name</td>
+      <td><code>&lt;button&gt;&lt;/button&gt;</code></td>
+      <td><code>&lt;button&gt;Send&lt;/button&gt;</code></td>
+    </tr>
+    <tr>
+      <td>Link with no text</td>
+      <td><code>&lt;a href="#"&gt;&lt;/a&gt;</code></td>
+      <td><code>&lt;a href="#"&gt;Home&lt;/a&gt;</code></td>
+    </tr>
+    <tr>
+      <td>Low contrast text</td>
+      <td><code>.faint { color: #aaa; }</code></td>
+      <td><code>.faint { color: #595959; }</code></td>
+    </tr>
   </tbody>
 </table>
 
