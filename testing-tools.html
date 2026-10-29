@@ -6,6 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+    /* Move these rules into testing.css if preferred */
+    .table-wrapper { overflow-x: auto; margin-bottom: 1.5rem; }
+    .table-wrapper:focus { outline: 3px solid #000; outline-offset: 2px; }
+    table { border-collapse: collapse; width: 100%; }
+    caption { text-align: left; font-weight: bold; padding-bottom: 0.5rem; }
+    th, td { border: 1px solid #767676; padding: 0.5rem 0.75rem; text-align: left; vertical-align: top; }
+    thead th { background-color: #f2f2f2; }
+  </style>
 </head>
 <body>
 <main>
@@ -18,110 +27,576 @@
 
 <h1>Different types of accessibility testing tools</h1>
 
-<p>Here is a wide range of accessibility testing tools that can be used to identify and address accessibility issues. </p>
+<p>Here is a wide range of tools and approaches that help teams identify and address accessibility issues, from design and content through to development, testing and automation.</p>
 
-<h2>Automated accessibility platforms</h2>
+<p>No single tool or type of testing finds every accessibility issue. Most teams combine automated tools with manual testing and assistive technology testing.</p>
 
-<p>These are large-scale tools that allow multiple users to perform checks across a webpage.</p>
+<p>Tools are listed alphabetically within each category. Inclusion does not imply endorsement by Intopia. All external links open in a new tab.</p>
 
-<ul>
-  <li><a href="https://www.deque.com/axe" target="_blank">Deque Axe</a></li>
-  <li><a href="https://www.levelaccess.com/" target="_blank">Level Access</a></li>
-  <li><a href="https://monsido.com/" target="_blank">Monsido</a></li>
-  <li><a href="https://usablenet.com/technology/aqa" target="_blank">UsableNet AQA</a></li>
-</ul>
+<!-- ============================================ -->
+<h2 id="automated-platforms">Automated accessibility platforms</h2>
 
-<h2>Browser extensions</h2>
+<p>These are large-scale tools that allow multiple users to run checks across a whole website.</p>
 
-<p>These tools allow us to check aspects of accessibility directly in the browsers.</p>
+<p><strong>Good for:</strong> scanning many pages at once, monitoring sites over time, and reporting on issues across teams.</p>
+<p><strong>Limitations:</strong> automated checks detect only a portion of accessibility issues. They cannot judge whether content is meaningful, such as whether alt text accurately describes an image. Results still need manual review.</p>
 
-<ul>
-  <li>Lighthouse (<a href="https://chromewebstore.google.com/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk?hl=en" target="_blank">Installed as part of Chrome</a>)</li>
-  <li>axe DevTools (<a href="https://chrome.google.com/webstore/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd" target="_blank">Chrome</a>, <a href="https://addons.mozilla.org/en-US/firefox/addon/axe-devtools/" target="_blank">Firefox</a> or <a href="https://microsoftedge.microsoft.com/addons/detail/axe-devtools-web-access/kcenlimkmjjkdfcaleembgmldmnnlfkn" target="_blank">Edge</a>)</li>
-  <li>Accessibility Insights for Web (<a href="https://accessibilityinsights.io/downloads/" target="_blank">Chrome or Edge</a>)</li>
-  <li>Wave Evaluation Tool (<a href="https://chromewebstore.google.com/detail/wave-evaluation-tool/jbbplnpkjmmeebjpijfedlgcdilocofh" target="_blank">Chrome</a>, <a href="https://addons.mozilla.org/en-US/firefox/addon/wave-accessibility-tool/" target="_blank">Firefox</a> or <a href="https://microsoftedge.microsoft.com/addons/detail/wave-evaluation-tool/khapceneeednkiopkkbgkibbdoajpkoj" target="_blank">Edge</a>)</li>
-  <li>Web Developer extension (<a href="https://chrispederick.com/work/web-developer/" target="_blank">Chrome, Firefox or Opera</a>)</li>
-  <li>ARC Toolkit (<a href="https://chromewebstore.google.com/detail/arc-toolkit/chdkkkccnlfncngelccgbgfmjebmkmce" target="_blank">Chrome</a>, <a href="https://addons.mozilla.org/en-US/firefox/addon/arc-toolkit/" target="_blank">Firefox</a>, <a href="https://www.tpgi.com/arc-platform/arc-toolkit/" target="_blank">Edge</a>)</li>
-  <li>Tota11y: Accessibility toolkit (<a href="https://addons.mozilla.org/en-US/firefox/addon/tota11y-accessibility-toolkit/" target="_blank">Firefox</a>)</li>
-</ul>
+<div class="table-wrapper" role="region" aria-labelledby="automated-platforms" tabindex="0">
+<table>
+  <caption>Automated accessibility platforms</caption>
+  <thead>
+    <tr>
+      <th scope="col">Tool</th>
+      <th scope="col">Platform</th>
+      <th scope="col">Cost</th>
+      <th scope="col">Typical users</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><a href="https://www.deque.com/axe" target="_blank">Deque Axe</a></th>
+      <td>Web platform</td>
+      <td>Paid</td>
+      <td>Developers, testers, accessibility teams</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://www.levelaccess.com/" target="_blank">Level Access</a></th>
+      <td>Web platform</td>
+      <td>Paid</td>
+      <td>Developers, testers, accessibility teams</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://monsido.com/" target="_blank">Monsido</a></th>
+      <td>Web platform</td>
+      <td>Paid</td>
+      <td>Content teams, accessibility teams</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://tanaguru.com/" target="_blank">Tanaguru</a></th>
+      <td>Web platform, including multi-page user journeys</td>
+      <td>Free and paid options</td>
+      <td>Testers, accessibility teams</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://usablenet.com/technology/aqa" target="_blank">UsableNet AQA</a></th>
+      <td>Web platform</td>
+      <td>Paid</td>
+      <td>Developers, testers, accessibility teams</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
-<h2>Bookmarklets</h2>
+<!-- ============================================ -->
+<h2 id="developer-tools">Developer and CI tools</h2>
+
+<p>These tools let developers run automated accessibility checks inside their own code, unit tests and build pipelines.</p>
+
+<p><strong>Good for:</strong> catching issues early and preventing regressions before code is deployed.</p>
+<p><strong>Limitations:</strong> they share the limits of all automated testing, and require developer setup and maintenance.</p>
+
+<div class="table-wrapper" role="region" aria-labelledby="developer-tools" tabindex="0">
+<table>
+  <caption>Developer and CI tools</caption>
+  <thead>
+    <tr>
+      <th scope="col">Tool</th>
+      <th scope="col">Platform</th>
+      <th scope="col">Cost</th>
+      <th scope="col">Typical users</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><a href="https://github.com/dequelabs/axe-core" target="_blank">axe-core</a></th>
+      <td>JavaScript accessibility rules engine, used by many of the tools on this page</td>
+      <td>Free (open source)</td>
+      <td>Developers</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://github.com/component-driven/cypress-axe" target="_blank">Cypress with cypress-axe</a></th>
+      <td>Browser testing framework, with axe-core added through a plugin</td>
+      <td>Free (open source)</td>
+      <td>Developers, testers</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://pa11y.org/" target="_blank">Pa11y</a></th>
+      <td>Command line tool and CI runner</td>
+      <td>Free (open source)</td>
+      <td>Developers</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://playwright.dev/docs/accessibility-testing" target="_blank">Playwright with @axe-core/playwright</a></th>
+      <td>Browser testing framework, with axe-core added through a package. Also includes role-based locators and ARIA snapshot testing</td>
+      <td>Free (open source)</td>
+      <td>Developers, testers</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ============================================ -->
+<h2 id="browser-extensions">Browser extensions</h2>
+
+<p>These tools allow us to check aspects of accessibility directly in the browser.</p>
+
+<p><strong>Good for:</strong> quick checks of a single page, highlighting issues visually on the page, and learning about common issues.</p>
+<p><strong>Limitations:</strong> they test one page or state at a time. Different extensions use different rules, so results may vary between tools.</p>
+
+<div class="table-wrapper" role="region" aria-labelledby="browser-extensions" tabindex="0">
+<table>
+  <caption>Browser extensions</caption>
+  <thead>
+    <tr>
+      <th scope="col">Tool</th>
+      <th scope="col">Platform</th>
+      <th scope="col">Cost</th>
+      <th scope="col">Typical users</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Accessibility Insights for Web</th>
+      <td><a href="https://accessibilityinsights.io/downloads/" target="_blank">Chrome or Edge</a></td>
+      <td>Free</td>
+      <td>Developers, testers</td>
+    </tr>
+    <tr>
+      <th scope="row">ARC Toolkit</th>
+      <td><a href="https://chromewebstore.google.com/detail/arc-toolkit/chdkkkccnlfncngelccgbgfmjebmkmce" target="_blank">Chrome</a>, <a href="https://addons.mozilla.org/en-US/firefox/addon/arc-toolkit/" target="_blank">Firefox</a> or <a href="https://www.tpgi.com/arc-platform/arc-toolkit/" target="_blank">Edge</a></td>
+      <td>Free</td>
+      <td>Developers, testers</td>
+    </tr>
+    <tr>
+      <th scope="row">axe DevTools</th>
+      <td><a href="https://chrome.google.com/webstore/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd" target="_blank">Chrome</a>, <a href="https://addons.mozilla.org/en-US/firefox/addon/axe-devtools/" target="_blank">Firefox</a> or <a href="https://microsoftedge.microsoft.com/addons/detail/axe-devtools-web-access/kcenlimkmjjkdfcaleembgmldmnnlfkn" target="_blank">Edge</a></td>
+      <td>Free, with paid features</td>
+      <td>Developers, testers</td>
+    </tr>
+    <tr>
+      <th scope="row">Tota11y: Accessibility toolkit</th>
+      <td><a href="https://addons.mozilla.org/en-US/firefox/addon/tota11y-accessibility-toolkit/" target="_blank">Firefox</a></td>
+      <td>Free</td>
+      <td>Developers, designers</td>
+    </tr>
+    <tr>
+      <th scope="row">WAVE Evaluation Tool</th>
+      <td><a href="https://chromewebstore.google.com/detail/wave-evaluation-tool/jbbplnpkjmmeebjpijfedlgcdilocofh" target="_blank">Chrome</a>, <a href="https://addons.mozilla.org/en-US/firefox/addon/wave-accessibility-tool/" target="_blank">Firefox</a> or <a href="https://microsoftedge.microsoft.com/addons/detail/wave-evaluation-tool/khapceneeednkiopkkbgkibbdoajpkoj" target="_blank">Edge</a>. Also available as an <a href="https://wave.webaim.org/" target="_blank">online service</a></td>
+      <td>Free</td>
+      <td>Developers, testers, content authors</td>
+    </tr>
+    <tr>
+      <th scope="row">Web Developer extension</th>
+      <td><a href="https://chrispederick.com/work/web-developer/" target="_blank">Chrome, Firefox or Opera</a></td>
+      <td>Free</td>
+      <td>Developers, testers</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ============================================ -->
+<h2 id="built-in-browser-tools">Built-in browser tools</h2>
+
+<p>These tools come built into browser developer tools, so nothing needs to be installed.</p>
+
+<p><strong>Good for:</strong> inspecting the accessibility tree, and checking the names, roles and states that are passed to assistive technologies.</p>
+<p><strong>Limitations:</strong> they show what the browser exposes, not how a specific screen reader will announce it. Some technical knowledge is needed to interpret results.</p>
+
+<div class="table-wrapper" role="region" aria-labelledby="built-in-browser-tools" tabindex="0">
+<table>
+  <caption>Built-in browser tools</caption>
+  <thead>
+    <tr>
+      <th scope="col">Tool</th>
+      <th scope="col">Platform</th>
+      <th scope="col">Cost</th>
+      <th scope="col">Typical users</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><a href="https://developer.chrome.com/docs/devtools/accessibility/reference" target="_blank">Chrome DevTools Accessibility pane</a></th>
+      <td>Chrome</td>
+      <td>Built in</td>
+      <td>Developers, testers</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://firefox-source-docs.mozilla.org/devtools-user/accessibility_inspector/" target="_blank">Firefox Accessibility Inspector</a></th>
+      <td>Firefox</td>
+      <td>Built in</td>
+      <td>Developers, testers</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://developer.chrome.com/docs/lighthouse/overview" target="_blank">Lighthouse</a></th>
+      <td>Chrome and Edge DevTools (also available as an extension and command line tool)</td>
+      <td>Built in</td>
+      <td>Developers</td>
+    </tr>
+    <tr>
+      <th scope="row">Safari Accessibility Inspector</th>
+      <td>Safari</td>
+      <td>Built in</td>
+      <td>Developers, testers</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ============================================ -->
+<h2 id="bookmarklets">Bookmarklets</h2>
 
 <p>Simple tests that allow us to test individual accessibility issues.</p>
 
-<ul>
-  <li><a href="https://a11y-tools.com/bookmarklets/#revealfocusorder" target="_blank">A11y audit bookmarklets</a></li>
-  <li><a href="http://pauljadam.com/bookmarklets/" target="_blank">JavaScript Bookmarklets for Accessibility Testing</a></li>
-  <li><a href="https://www.ssa.gov/accessibility/andi/help/install.html" target="_blank">ANDI Accessibility Testing Tool</a></li>
-</ul>
+<p><strong>Good for:</strong> highlighting one specific feature on a page, such as headings, focus order or alt text. They work in most browsers and need no installation.</p>
+<p><strong>Limitations:</strong> they show what is on the page but do not decide whether it is correct. Some websites block bookmarklets from running.</p>
 
-<h2>Colour contrast tools</h2>
+<div class="table-wrapper" role="region" aria-labelledby="bookmarklets" tabindex="0">
+<table>
+  <caption>Bookmarklets</caption>
+  <thead>
+    <tr>
+      <th scope="col">Tool</th>
+      <th scope="col">Platform</th>
+      <th scope="col">Cost</th>
+      <th scope="col">Typical users</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><a href="https://a11y-tools.com/bookmarklets/#revealfocusorder" target="_blank">A11y audit bookmarklets</a></th>
+      <td>Any browser</td>
+      <td>Free</td>
+      <td>Testers, developers</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://www.ssa.gov/accessibility/andi/help/install.html" target="_blank">ANDI Accessibility Testing Tool</a></th>
+      <td>Any browser</td>
+      <td>Free</td>
+      <td>Testers, developers</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="http://pauljadam.com/bookmarklets/" target="_blank">JavaScript Bookmarklets for Accessibility Testing</a></th>
+      <td>Any browser</td>
+      <td>Free</td>
+      <td>Testers, developers</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ============================================ -->
+<h2 id="colour-contrast">Colour contrast tools</h2>
 
 <p>These tools are focused on testing colour contrast.</p>
 
-<ul>
-  <li><a href="https://paciellogroup.com/resources/contrastanalyser" target="_blank">Colour Contrast Analyzer (CCA)</a> (Mac, Windows)</li>
-  <li><a href="https://webaim.org/resources/contrastchecker/" target="_blank">WebAIM Color Contrast Checker</a> (Web)</li>
-  <li><a href="https://www.getstark.co/" target="_blank">Stark</a> (Figma and Sketch plugins)</li>
-</ul>
+<p><strong>Good for:</strong> precise contrast ratio checks, including on design files before anything is built.</p>
+<p><strong>Limitations:</strong> most test one colour pair at a time. Text over images, gradients and transparent colours can be difficult to measure accurately.</p>
 
-<h2>Automated mobile tools</h2>
+<div class="table-wrapper" role="region" aria-labelledby="colour-contrast" tabindex="0">
+<table>
+  <caption>Colour contrast tools</caption>
+  <thead>
+    <tr>
+      <th scope="col">Tool</th>
+      <th scope="col">Platform</th>
+      <th scope="col">Cost</th>
+      <th scope="col">Typical users</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><a href="https://www.tpgi.com/color-contrast-checker/" target="_blank">Colour Contrast Analyser (CCA)</a></th>
+      <td>Mac, Windows</td>
+      <td>Free</td>
+      <td>Designers, testers</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://www.getstark.co/" target="_blank">Stark</a></th>
+      <td>Figma and Sketch plugins</td>
+      <td>Free, with paid features</td>
+      <td>Designers</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://webaim.org/resources/contrastchecker/" target="_blank">WebAIM Color Contrast Checker</a></th>
+      <td>Web</td>
+      <td>Free</td>
+      <td>Designers, developers, testers</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ============================================ -->
+<h2 id="content-testing">Content testing tools</h2>
+
+<p>These tools test the readability and clarity of written content.</p>
+
+<p><strong>Good for:</strong> spotting long sentences, complex words and passive voice, and estimating reading level.</p>
+<p><strong>Limitations:</strong> readability formulas measure word and sentence length, not real understanding. Most are designed for English. They do not replace testing content with real users.</p>
+
+<div class="table-wrapper" role="region" aria-labelledby="content-testing" tabindex="0">
+<table>
+  <caption>Content testing tools</caption>
+  <thead>
+    <tr>
+      <th scope="col">Tool</th>
+      <th scope="col">Platform</th>
+      <th scope="col">Cost</th>
+      <th scope="col">Typical users</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><a href="https://www.grammarly.com/" target="_blank">Grammarly</a></th>
+      <td>Web, desktop, browser extension</td>
+      <td>Free, with paid features</td>
+      <td>Content authors</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://hemingwayapp.com/" target="_blank">Hemingway</a></th>
+      <td>Web, desktop</td>
+      <td>Free, with paid features</td>
+      <td>Content authors</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://accessibility.oit.ncsu.edu/it-accessibility-at-nc-state/developers/tools/readability-bookmarklet/" target="_blank">Readability Bookmarklet</a></th>
+      <td>Any browser</td>
+      <td>Free</td>
+      <td>Content authors, testers</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://www.webfx.com/tools/read-able/" target="_blank">Readability Test</a></th>
+      <td>Web</td>
+      <td>Free</td>
+      <td>Content authors</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ============================================ -->
+<h2 id="mobile-tools">Automated mobile tools</h2>
 
 <p>These tools provide automated testing for accessibility on mobile devices.</p>
 
-<ul>
-  <li><a href="https://chrome.google.com/webstore/detail/arc-toolkit/chdkkkccnlfncngelccgbgfmjebmkmce?hl=en" target="_blank">iOS Accessibility Inspector</a></li>
-  <li><a href="https://bit.ly/a11y-scanner" target="_blank">Android Accessibility Scanner</a></li>
-  <li><a href="https://www.deque.com/android-accessibility/" target="_blank">Axe for Android</a></li>
-  <li><a href="https://android-doc.github.io/tools/debugging/improving-w-lint.html" target="_blank">Android Studio - Lint</a></li>
-</ul>
+<p><strong>Good for:</strong> checking native apps for issues like missing labels, small touch targets and low contrast.</p>
+<p><strong>Limitations:</strong> like web automated tools, they find only a portion of issues. Apps should also be tested with VoiceOver and TalkBack.</p>
 
-<h2>Content testing tools</h2>
+<div class="table-wrapper" role="region" aria-labelledby="mobile-tools" tabindex="0">
+<table>
+  <caption>Automated mobile tools</caption>
+  <thead>
+    <tr>
+      <th scope="col">Tool</th>
+      <th scope="col">Platform</th>
+      <th scope="col">Cost</th>
+      <th scope="col">Typical users</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><a href="https://play.google.com/store/apps/details?id=com.google.android.apps.accessibility.auditor" target="_blank">Android Accessibility Scanner</a></th>
+      <td>Android</td>
+      <td>Free</td>
+      <td>Testers, developers</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://developer.android.com/studio/write/lint" target="_blank">Android Studio Lint</a></th>
+      <td>Android Studio</td>
+      <td>Free</td>
+      <td>Developers</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://www.deque.com/android-accessibility/" target="_blank">Axe for Android</a></th>
+      <td>Android</td>
+      <td>Paid</td>
+      <td>Developers, testers</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://developer.apple.com/documentation/accessibility/accessibility-inspector" target="_blank">iOS Accessibility Inspector</a></th>
+      <td>Xcode on macOS</td>
+      <td>Free</td>
+      <td>Developers, testers</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
-<p>These tools will test readability levels of written content.</p>
+<!-- ============================================ -->
+<h2 id="keyboard-testing">Keyboard testing</h2>
 
-<ul>
-    <li><a href="https://www.webfx.com/tools/read-able/" target="_blank">Readability Test</a></li>
-    <li><a href="https://hemingwayapp.com/" target="_blank">Hemingway</a></li>
-    <li><a href="https://accessibility.oit.ncsu.edu/it-accessibility-at-nc-state/developers/tools/readability-bookmarklet/" target="_blank">Readability Bookmarklet</a></li>
-</ul>
+<p>Testing with only a keyboard requires no tools and can be done in any browser.</p>
 
-<h2>Screen readers</h2>
+<p><strong>Good for:</strong> checking that everything can be reached and used without a mouse, that focus order is logical, that focus is always visible, and that there are no keyboard traps.</p>
+<p><strong>Limitations:</strong> it does not tell you what a screen reader announces.</p>
+
+<div class="table-wrapper" role="region" aria-labelledby="keyboard-testing" tabindex="0">
+<table>
+  <caption>Keyboard testing</caption>
+  <thead>
+    <tr>
+      <th scope="col">Tool</th>
+      <th scope="col">Platform</th>
+      <th scope="col">Cost</th>
+      <th scope="col">Typical users</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Keyboard-only navigation (Tab, Shift+Tab, Enter, Space, arrow keys, Escape)</th>
+      <td>Any browser</td>
+      <td>Built in</td>
+      <td>Everyone</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ============================================ -->
+<h2 id="screen-readers">Screen readers</h2>
 
 <p>These are the most commonly used screen readers across desktop and mobile devices.</p>
 
-<ul>
-  <li><a href="https://support.freedomscientific.com/Downloads/JAWS" target="_blank">JAWS - Job Access With Speech</a> (Windows)</li>
-  <li><a href="https://www.nvaccess.org/download/" target="_blank">NVDA - NonVisual Desktop Access</a> (Windows)</li>
-  <li><a href="https://support.apple.com/en-au/guide/voiceover/welcome/mac" target="_blank">VoiceOver</a> (MacOS and iOS)</li>
-  <li><a href="https://play.google.com/store/apps/details?id=com.google.android.marvin.talkback&amp;hl=en" target="_blank">TalkBack</a> (Android)</li>
-</ul>
+<p><strong>Good for:</strong> confirming that headings, labels, roles and states actually work for screen reader users, especially for complex components such as menus, dialogs and forms.</p>
+<p><strong>Limitations:</strong> there is a learning curve, and testing takes longer. Behaviour can differ between screen reader and browser combinations, so testing with one screen reader does not cover them all.</p>
 
-<h2>Screen magnification and low vision tools</h2>
+<div class="table-wrapper" role="region" aria-labelledby="screen-readers" tabindex="0">
+<table>
+  <caption>Screen readers</caption>
+  <thead>
+    <tr>
+      <th scope="col">Tool</th>
+      <th scope="col">Platform</th>
+      <th scope="col">Cost</th>
+      <th scope="col">Typical users</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><a href="https://support.freedomscientific.com/Downloads/JAWS" target="_blank">JAWS - Job Access With Speech</a></th>
+      <td>Windows</td>
+      <td>Paid</td>
+      <td>Testers, developers</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://www.nvaccess.org/download/" target="_blank">NVDA - NonVisual Desktop Access</a></th>
+      <td>Windows</td>
+      <td>Free</td>
+      <td>Testers, developers</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://play.google.com/store/apps/details?id=com.google.android.marvin.talkback&amp;hl=en" target="_blank">TalkBack</a></th>
+      <td>Android</td>
+      <td>Built in</td>
+      <td>Testers, developers</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://support.apple.com/en-au/guide/voiceover/welcome/mac" target="_blank">VoiceOver</a></th>
+      <td>macOS and iOS</td>
+      <td>Built in</td>
+      <td>Testers, developers</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
-<ul>
-  <li><a href="https://support.freedomscientific.com/Downloads/ZoomText" target="_blank">ZoomText</a></li>
-  <li>Windows Magnifier</li>
-  <li>macOS Zoom</li>
-  <li>Browser zoom</li>
-</ul>
+<!-- ============================================ -->
+<h2 id="magnification">Screen magnification and low vision tools</h2>
 
-<h2>Accessibility inspection tools</h2>
+<p>These tools enlarge content or change how it is displayed.</p>
 
-<ul>
-  <li>Chrome DevTools Accessibility pane</li>
-  <li>Firefox Accessibility Inspector</li>
-  <li>Safari Accessibility Inspector</li>
-</ul>
+<p><strong>Good for:</strong> checking that content reflows, text resizes without loss of content, and nothing is cut off or overlaps when zoomed.</p>
+<p><strong>Limitations:</strong> they show the experience of zooming, but low vision needs vary widely. Results should be combined with other testing.</p>
 
-<h2>Content testing tools</h2>
+<div class="table-wrapper" role="region" aria-labelledby="magnification" tabindex="0">
+<table>
+  <caption>Screen magnification and low vision tools</caption>
+  <thead>
+    <tr>
+      <th scope="col">Tool</th>
+      <th scope="col">Platform</th>
+      <th scope="col">Cost</th>
+      <th scope="col">Typical users</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Browser zoom</th>
+      <td>Any browser</td>
+      <td>Built in</td>
+      <td>Everyone</td>
+    </tr>
+    <tr>
+      <th scope="row">macOS Zoom</th>
+      <td>macOS</td>
+      <td>Built in</td>
+      <td>Testers, designers</td>
+    </tr>
+    <tr>
+      <th scope="row">Windows Magnifier</th>
+      <td>Windows</td>
+      <td>Built in</td>
+      <td>Testers, designers</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://support.freedomscientific.com/Downloads/ZoomText" target="_blank">ZoomText</a></th>
+      <td>Windows</td>
+      <td>Paid</td>
+      <td>Testers</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
-<ul>
-  <li><a href="https://hemingwayapp.com/" target="_blank">Hemingway</a></li>
-  <li><a href="https://www.webfx.com/tools/read-able/" target="_blank">Readability Test</a></li>
-  <li><a href="https://www.grammarly.com/" target="_blank">Grammarly</a></li>
-</ul>
 
+<!-- ============================================ -->
+<h2 id="languages">Languages and formats for describing accessibility</h2>
+
+<p>These are not testing tools. They are structured ways of writing down accessibility requirements, test cases, test rules or results, so that everyone on a team can read and agree on them. Many can be connected to the tools above to run as automated tests.</p>
+
+<p><strong>Good for:</strong> turning accessibility requirements into clear, shared acceptance criteria. They help designers, product owners, testers and developers describe the same behaviour in the same way.</p>
+<p><strong>Limitations:</strong> a test is only as good as what it describes. Writing good scenarios still needs accessibility knowledge, and automated runs still need to be checked with assistive technology.</p>
+
+<div class="table-wrapper" role="region" aria-labelledby="languages" tabindex="0">
+<table>
+  <caption>Languages and formats for describing accessibility</caption>
+  <thead>
+    <tr>
+      <th scope="col">Language</th>
+      <th scope="col">What it describes</th>
+      <th scope="col">Maintained by</th>
+      <th scope="col">Typical users</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><a href="https://www.w3.org/TR/act-rules-format/" target="_blank">ACT Rules Format (Accessibility Conformance Testing)</a></th>
+      <td>Test rules: a standard format for writing accessibility test rules, so different tools and testers get consistent results</td>
+      <td>W3C</td>
+      <td>Tool makers, accessibility specialists</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://www.w3.org/TR/EARL10-Schema/" target="_blank">EARL (Evaluation and Report Language)</a></th>
+      <td>Test results: a machine-readable format for recording and sharing accessibility test results</td>
+      <td>W3C</td>
+      <td>Tool makers, developers</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://cucumber.io/docs/gherkin/reference/" target="_blank">Gherkin</a></th>
+      <td>Behaviour scenarios: plain-language "Given, When, Then" steps that can describe accessible behaviour and be run by frameworks such as Cucumber</td>
+      <td>Cucumber open source project</td>
+      <td>Product owners, testers, developers</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://ucdl.org/" target="_blank">UCDL (Use Case Definition Language)</a></th>
+      <td>Accessibility use cases: user tasks written as readable steps, with elements identified by role and accessible name, that can be run as automated browser tests</td>
+      <td>AFixt</td>
+      <td>Testers, product owners, developers</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 </main>
