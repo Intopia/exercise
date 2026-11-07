@@ -37,12 +37,12 @@
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#automated-platforms">Automated accessibility scanning tools and platforms</a></li>
     <li><a href="#developer-tools">Developer and CI tools</a></li>
+    <li><a href="#mobile-tools">Automated mobile tools</a></li>
     <li><a href="#browser-extensions">Browser extensions</a></li>
     <li><a href="#built-in-browser-tools">Built-in browser tools</a></li>
     <li><a href="#bookmarklets">Bookmarklets</a></li>
     <li><a href="#colour-contrast">Colour contrast tools</a></li>
     <li><a href="#content-testing">Content testing tools</a></li>
-    <li><a href="#mobile-tools">Automated mobile tools</a></li>
     <li><a href="#keyboard-testing">Keyboard testing</a></li>
     <li><a href="#screen-readers">Screen readers</a></li>
     <li><a href="#magnification">Screen magnification and low vision tools</a></li>
@@ -63,11 +63,21 @@
 
 <h3>How to use this page</h3>
 
-<p>Tools are grouped by category and listed alphabetically within each category. All external links open in a new tab.</p>
+<p>The sections move from automated tools through to hands-on testing:</p>
+
+<ul>
+  <li><strong>Automated tools</strong> that scan websites, code and apps for common issues.</li>
+  <li><strong>Tools for inspecting a page in the browser</strong>, such as extensions, developer tools and bookmarklets.</li>
+  <li><strong>Tools for focused checks</strong>, such as colour contrast and readability.</li>
+  <li><strong>Manual and assistive technology testing</strong>, using a keyboard, screen readers and magnification.</li>
+  <li><strong>Languages and formats</strong> for writing down accessibility requirements, tests and results.</li>
+</ul>
+
+<p>Tools are listed alphabetically within each section. All external links open in a new tab.</p>
 
 <h3>A note about inclusion</h3>
 
-<p>Inclusion in this list does not imply endorsement by Intopia.</p>
+<p>Apart from Intopia's own resources, inclusion in this list does not imply endorsement by Intopia.</p>
 
 
 <!-- section -->
@@ -173,6 +183,58 @@
       <th scope="row"><a href="https://playwright.dev/docs/accessibility-testing" target="_blank">Playwright with @axe-core/playwright</a></th>
       <td>Browser testing framework, with axe-core added through a package. Also includes role-based locators and ARIA snapshot testing</td>
       <td>Free (open source)</td>
+      <td>Developers, testers</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<!-- section -->
+
+
+<hr>
+<h2 id="mobile-tools">Automated mobile tools</h2>
+
+<p>These tools provide automated testing for accessibility on mobile devices.</p>
+
+<p><strong>Good for:</strong> checking native apps for issues like missing labels, small touch targets and low contrast.</p>
+<p><strong>Limitations:</strong> like the automated web tools above, they find only a portion of issues. Apps should also be tested with VoiceOver and TalkBack.</p>
+
+<div class="table-wrapper" role="region" aria-labelledby="mobile-tools" tabindex="0">
+<table>
+  <caption>Automated mobile tools</caption>
+  <thead>
+    <tr>
+      <th scope="col">Tool</th>
+      <th scope="col">Platform</th>
+      <th scope="col">Cost</th>
+      <th scope="col">Typical users</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><a href="https://play.google.com/store/apps/details?id=com.google.android.apps.accessibility.auditor" target="_blank">Android Accessibility Scanner</a></th>
+      <td>Android</td>
+      <td>Free</td>
+      <td>Testers, developers</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://developer.android.com/studio/write/lint" target="_blank">Android Studio Lint</a></th>
+      <td>Android Studio</td>
+      <td>Free</td>
+      <td>Developers</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://www.deque.com/android-accessibility/" target="_blank">Axe for Android</a></th>
+      <td>Android</td>
+      <td>Paid</td>
+      <td>Developers, testers</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="https://developer.apple.com/documentation/accessibility/accessibility-inspector" target="_blank">iOS Accessibility Inspector</a></th>
+      <td>Xcode on macOS</td>
+      <td>Free</td>
       <td>Developers, testers</td>
     </tr>
   </tbody>
@@ -452,58 +514,6 @@
       <td>Web</td>
       <td>Free</td>
       <td>Content authors</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-<!-- section -->
-
-
-<hr>
-<h2 id="mobile-tools">Automated mobile tools</h2>
-
-<p>These tools provide automated testing for accessibility on mobile devices.</p>
-
-<p><strong>Good for:</strong> checking native apps for issues like missing labels, small touch targets and low contrast.</p>
-<p><strong>Limitations:</strong> like web automated tools, they find only a portion of issues. Apps should also be tested with VoiceOver and TalkBack.</p>
-
-<div class="table-wrapper" role="region" aria-labelledby="mobile-tools" tabindex="0">
-<table>
-  <caption>Automated mobile tools</caption>
-  <thead>
-    <tr>
-      <th scope="col">Tool</th>
-      <th scope="col">Platform</th>
-      <th scope="col">Cost</th>
-      <th scope="col">Typical users</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row"><a href="https://play.google.com/store/apps/details?id=com.google.android.apps.accessibility.auditor" target="_blank">Android Accessibility Scanner</a></th>
-      <td>Android</td>
-      <td>Free</td>
-      <td>Testers, developers</td>
-    </tr>
-    <tr>
-      <th scope="row"><a href="https://developer.android.com/studio/write/lint" target="_blank">Android Studio Lint</a></th>
-      <td>Android Studio</td>
-      <td>Free</td>
-      <td>Developers</td>
-    </tr>
-    <tr>
-      <th scope="row"><a href="https://www.deque.com/android-accessibility/" target="_blank">Axe for Android</a></th>
-      <td>Android</td>
-      <td>Paid</td>
-      <td>Developers, testers</td>
-    </tr>
-    <tr>
-      <th scope="row"><a href="https://developer.apple.com/documentation/accessibility/accessibility-inspector" target="_blank">iOS Accessibility Inspector</a></th>
-      <td>Xcode on macOS</td>
-      <td>Free</td>
-      <td>Developers, testers</td>
     </tr>
   </tbody>
 </table>
