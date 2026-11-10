@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing text styles</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+.sample {
+  padding: 0.75em 0;
+  border-bottom: 1px solid #ccc;
+}
+.sample:last-child {
+  border-bottom: 0;
+}
+.label {
+  margin: 0 0 0.25em;
+  font: 14px/1.4 Arial, sans-serif;
+  color: #555;
+}
+.text {
+  margin: 0;
+}
+.mixed > * {
+  margin: 0.5em 0;
+}
+.monitor {
+  padding: 0.5em 1em;
+  border: 1px dashed #666;
+}
+.followed {
+  display: none;
+  padding: 0.25em 0.5em;
+  background: #fff3cd;
+}
+.followed:target {
+  display: block;
+}
+  </style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing text styles</h1>
+
+<p>Run the <q>Inspect text styles</q> bookmarklet, then click any sample. A panel should report the styles that apply to the element you clicked. Press Esc to stop.</p>
+
+<p>Each sample has a small grey label above it showing the CSS used and the values you should expect in the panel. Click the sample text, not the label.</p>
+
+<p>The panel rows are: Font, Size, Weight, Style, Line height, Letter sp., Word sp. and Colour. Background colour is not reported.</p>
+
+
+<!-- section -->
+
+
+<h2>Font family: installed fonts</h2>
+
+<p>Stacks where the first choice is installed. The panel should name the family that is rendering. Generic keywords are labelled <q>(generic)</q>. Named fonts assume a typical Mac or Windows machine. On a machine without one of them, expect the next entry in the stack and a <q>Not available</q> note.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label"><code>font-family: serif</code><br>Expect: Font <strong>serif (generic)</strong></p>
+    <p id="s1" class="text" style="font-family: serif">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-family: sans-serif</code><br>Expect: Font <strong>sans-serif (generic)</strong></p>
+    <p id="s2" class="text" style="font-family: sans-serif">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-family: monospace</code><br>Expect: Font <strong>monospace (generic)</strong></p>
+    <p id="s3" class="text" style="font-family: monospace">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-family: cursive</code><br>Expect: Font <strong>cursive (generic)</strong></p>
+    <p id="s4" class="text" style="font-family: cursive">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-family: fantasy</code><br>Expect: Font <strong>fantasy (generic)</strong></p>
+    <p id="s5" class="text" style="font-family: fantasy">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-family: system-ui</code><br>Expect: Font <strong>system-ui (generic)</strong></p>
+    <p id="s6" class="text" style="font-family: system-ui">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-family: Arial, sans-serif</code><br>Expect: Font <strong>Arial</strong>, no note (if the font is installed)</p>
+    <p id="s7" class="text" style="font-family: Arial, sans-serif">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-family: Georgia, serif</code><br>Expect: Font <strong>Georgia</strong>, no note (if the font is installed)</p>
+    <p id="s8" class="text" style="font-family: Georgia, serif">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-family: Verdana, sans-serif</code><br>Expect: Font <strong>Verdana</strong>, no note (if the font is installed)</p>
+    <p id="s9" class="text" style="font-family: Verdana, sans-serif">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-family: 'Times New Roman', serif</code><br>Expect: Font <strong>Times New Roman</strong>, no note (if the font is installed)</p>
+    <p id="s10" class="text" style="font-family: 'Times New Roman', serif">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-family: 'Courier New', monospace</code><br>Expect: Font <strong>Courier New</strong>, no note (if the font is installed)</p>
+    <p id="s11" class="text" style="font-family: 'Courier New', monospace">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-family: 'Trebuchet MS', sans-serif</code><br>Expect: Font <strong>Trebuchet MS</strong>, no note (if the font is installed)</p>
+    <p id="s12" class="text" style="font-family: 'Trebuchet MS', sans-serif">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-family: 'Comic Sans MS', cursive</code><br>Expect: Font <strong>Comic Sans MS</strong>, no note (if the font is installed)</p>
+    <p id="s13" class="text" style="font-family: 'Comic Sans MS', cursive">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-family: Impact, fantasy</code><br>Expect: Font <strong>Impact</strong>, no note (if the font is installed)</p>
+    <p id="s14" class="text" style="font-family: Impact, fantasy">The quick brown fox jumps over the lazy dog</p>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Font family: skipped and missing fonts</h2>
+
+<p>Stacks where earlier choices do not exist. <q>Zzyzx</q> names are made up, so they are never installed. The panel should report what is rendering and list the entries that were skipped.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label"><code>font-family: 'Zzyzx Sans', sans-serif</code><br>Expect: Font <strong>sans-serif (generic)</strong>. Note: <strong>Not available: Zzyzx Sans</strong></p>
+    <p id="s15" class="text" style="font-family: 'Zzyzx Sans', sans-serif">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-family: 'Zzyzx Sans', 'Zzyzx Display', Georgia, serif</code><br>Expect: Font <strong>Georgia</strong>. Note: <strong>Not available: Zzyzx Sans, Zzyzx Display</strong></p>
+    <p id="s16" class="text" style="font-family: 'Zzyzx Sans', 'Zzyzx Display', Georgia, serif">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-family: Zzyzx, Arial, sans-serif</code><br>Expect: Font <strong>Arial</strong>. Note: <strong>Not available: Zzyzx</strong></p>
+    <p id="s17" class="text" style="font-family: Zzyzx, Arial, sans-serif">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-family: 'Zzyzx One', 'Zzyzx Two'</code><br>Expect: No generic fallback. Note: <strong>No family in the stack is available: Zzyzx One, Zzyzx Two</strong></p>
+    <p id="s18" class="text" style="font-family: 'Zzyzx One', 'Zzyzx Two'">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-family: 'Zzyzx One', 'Zzyzx Two', serif</code><br>Expect: Font <strong>serif (generic)</strong>. Note: <strong>Not available: Zzyzx One, Zzyzx Two</strong></p>
+    <p id="s19" class="text" style="font-family: 'Zzyzx One', 'Zzyzx Two', serif">The quick brown fox jumps over the lazy dog</p>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Font family: edge cases</h2>
+
+<p>Cases that could trip up the family check.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label"><code>font-family: ARIAL, sans-serif</code><br>Expect: Font <strong>Arial</strong>, no note. Family names are case-insensitive, so this is not a missing font. The casing shown in the panel may vary</p>
+    <p id="s20" class="text" style="font-family: ARIAL, sans-serif">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif</code><br>Expect: <strong>Observe.</strong> A common system font stack. The result depends on the operating system and browser</p>
+    <p id="s21" class="text" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label">Inherited: <code>font-family: Arial, sans-serif</code> set on the parent, nothing set on the inner span. Click the inner text<br>Expect: Font <strong>Arial</strong>, because the child inherits the parent family</p>
+    <p id="s22" class="text" style="font-family: Arial, sans-serif">Parent text, then <span id="inh">inherited child text</span> inside it</p>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Size</h2>
+
+<p>The panel reports the computed size in pixels, however it was written.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label"><code>font-size: 8px</code><br>Expect: Size <strong>8px</strong></p>
+    <p id="s23" class="text" style="font-size: 8px">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 10px</code><br>Expect: Size <strong>10px</strong></p>
+    <p id="s24" class="text" style="font-size: 10px">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 12px</code><br>Expect: Size <strong>12px</strong></p>
+    <p id="s25" class="text" style="font-size: 12px">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 14px</code><br>Expect: Size <strong>14px</strong></p>
+    <p id="s26" class="text" style="font-size: 14px">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 16px</code><br>Expect: Size <strong>16px</strong></p>
+    <p id="s27" class="text" style="font-size: 16px">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 20px</code><br>Expect: Size <strong>20px</strong></p>
+    <p id="s28" class="text" style="font-size: 20px">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 24px</code><br>Expect: Size <strong>24px</strong></p>
+    <p id="s29" class="text" style="font-size: 24px">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 32px</code><br>Expect: Size <strong>32px</strong></p>
+    <p id="s30" class="text" style="font-size: 32px">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 48px</code><br>Expect: Size <strong>48px</strong></p>
+    <p id="s31" class="text" style="font-size: 48px">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 72px</code><br>Expect: Size <strong>72px</strong></p>
+    <p id="s32" class="text" style="font-size: 72px">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 13.5px</code><br>Expect: Size <strong>13.5px</strong></p>
+    <p id="s33" class="text" style="font-size: 13.5px">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 1.5rem</code><br>Expect: Size <strong>24px</strong> (if the root size is 16px)</p>
+    <p id="s34" class="text" style="font-size: 1.5rem">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 125%</code><br>Expect: Size <strong>20px</strong> (parent is 16px)</p>
+    <p id="s35" class="text" style="font-size: 125%">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: x-large</code><br>Expect: Size <strong>24px</strong></p>
+    <p id="s36" class="text" style="font-size: x-large">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: xx-small</code><br>Expect: Size <strong>9px</strong></p>
+    <p id="s37" class="text" style="font-size: xx-small">The quick brown fox jumps over the lazy dog</p>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Weight</h2>
+
+<p>Numbers from 100 to 900 should show the name from the list. Fonts like Arial only have regular and bold, so the page may look the same for several weights. The panel reports the computed value, not what is drawn.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label"><code>font-weight: 100</code><br>Expect: Weight <strong>100 (thin)</strong></p>
+    <p id="s38" class="text" style="font-weight: 100">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-weight: 200</code><br>Expect: Weight <strong>200 (extra light)</strong></p>
+    <p id="s39" class="text" style="font-weight: 200">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-weight: 300</code><br>Expect: Weight <strong>300 (light)</strong></p>
+    <p id="s40" class="text" style="font-weight: 300">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-weight: 400</code><br>Expect: Weight <strong>400 (normal)</strong></p>
+    <p id="s41" class="text" style="font-weight: 400">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-weight: 500</code><br>Expect: Weight <strong>500 (medium)</strong></p>
+    <p id="s42" class="text" style="font-weight: 500">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-weight: 600</code><br>Expect: Weight <strong>600 (semibold)</strong></p>
+    <p id="s43" class="text" style="font-weight: 600">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-weight: 700</code><br>Expect: Weight <strong>700 (bold)</strong></p>
+    <p id="s44" class="text" style="font-weight: 700">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-weight: 800</code><br>Expect: Weight <strong>800 (extra bold)</strong></p>
+    <p id="s45" class="text" style="font-weight: 800">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-weight: 900</code><br>Expect: Weight <strong>900 (black)</strong></p>
+    <p id="s46" class="text" style="font-weight: 900">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-weight: bold</code><br>Expect: Weight <strong>700 (bold)</strong></p>
+    <p id="s47" class="text" style="font-weight: bold">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-weight: bolder</code><br>Expect: Weight <strong>700 (bold)</strong> (parent is 400)</p>
+    <p id="s48" class="text" style="font-weight: bolder">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-weight: lighter</code><br>Expect: Weight <strong>100 (thin)</strong> (parent is 400)</p>
+    <p id="s49" class="text" style="font-weight: lighter">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-weight: 450</code><br>Expect: <strong>Observe.</strong> 450 sits between two named weights. Check the number and name the panel chooses</p>
+    <p id="s50" class="text" style="font-weight: 450">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>&lt;strong&gt;</code> with no CSS<br>Expect: Weight <strong>700 (bold)</strong> (default for strong)</p>
+    <p id="s51" class="text" style=""><strong id="strongtest">Strong text with no CSS</strong></p>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Style</h2>
+
+<p>The panel reports the computed value only. It does not compare the style with the markup. The last three samples are for you to compare what you see with what the markup says.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label"><code>font-style: normal</code><br>Expect: Style <strong>normal</strong></p>
+    <p id="s52" class="text" style="font-style: normal">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-style: italic</code><br>Expect: Style <strong>italic</strong></p>
+    <p id="s53" class="text" style="font-style: italic">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-style: oblique</code><br>Expect: Style <strong>oblique</strong> or <strong>italic</strong>. Chrome reports plain oblique as italic, so the answer depends on the browser</p>
+    <p id="s54" class="text" style="font-style: oblique">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-style: oblique 10deg</code><br>Expect: Style <strong>oblique 10deg</strong></p>
+    <p id="s55" class="text" style="font-style: oblique 10deg">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-style: oblique 20deg</code><br>Expect: Style <strong>oblique 20deg</strong></p>
+    <p id="s56" class="text" style="font-style: oblique 20deg">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>&lt;em&gt;</code> with no CSS<br>Expect: Style <strong>italic</strong>, from the browser default for em</p>
+    <p id="s57" class="text" style=""><em id="emtest">Emphasis from the em element</em></p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>&lt;i&gt;</code> with no CSS<br>Expect: Style <strong>italic</strong>, from the browser default for i</p>
+    <p id="s58" class="text" style=""><i id="itest">Italic from the i element</i></p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>&lt;span style="font-style: italic"&gt;</code><br>Expect: Style <strong>italic</strong>. The slant comes from CSS only, so there is no emphasis in the accessibility tree</p>
+    <p id="s59" class="text" style="font-style: italic"><span id="spanit" style="font-style: italic">Looks emphasised but is only a span</span></p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>&lt;em style="font-style: normal"&gt;</code><br>Expect: Style <strong>normal</strong>. The markup is em, so it is emphasised in the accessibility tree but not slanted</p>
+    <p id="s60" class="text" style="font-style: normal"><em id="emnorm" style="font-style: normal">Emphasised in markup, upright on screen</em></p>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Line height</h2>
+
+<p>Shown twice: pixels, and as a multiple of the font size. Each sample wraps over several lines so the spacing is visible.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label"><code>line-height: normal</code><br>Expect: Line height <strong>normal</strong></p>
+    <p id="s61" class="text" style="line-height: normal">The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump.</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>line-height: 1</code><br>Expect: Line height <strong>16px (1×)</strong></p>
+    <p id="s62" class="text" style="line-height: 1">The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump.</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>line-height: 1.2</code><br>Expect: Line height <strong>19.2px (1.2×)</strong></p>
+    <p id="s63" class="text" style="line-height: 1.2">The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump.</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>line-height: 1.5</code><br>Expect: Line height <strong>24px (1.5×)</strong> (the WCAG 1.4.12 minimum)</p>
+    <p id="s64" class="text" style="line-height: 1.5">The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump.</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>line-height: 2</code><br>Expect: Line height <strong>32px (2×)</strong></p>
+    <p id="s65" class="text" style="line-height: 2">The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump.</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>line-height: 24px</code><br>Expect: Line height <strong>24px (1.5×)</strong></p>
+    <p id="s66" class="text" style="line-height: 24px">The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump.</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>line-height: 150%</code><br>Expect: Line height <strong>24px (1.5×)</strong></p>
+    <p id="s67" class="text" style="line-height: 150%">The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump.</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 20px; line-height: 2em</code><br>Expect: Size 20px. Line height <strong>40px (2×)</strong></p>
+    <p id="s68" class="text" style="font-size: 20px; line-height: 2em">The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump.</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 32px; line-height: 0.9</code><br>Expect: Size 32px. Line height <strong>28.8px (0.9×)</strong>. Tight leading</p>
+    <p id="s69" class="text" style="font-size: 32px; line-height: 0.9">The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump.</p>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Letter spacing</h2>
+
+<p>Shown in pixels and in em. WCAG 2.2 1.4.12 asks that content survives letter spacing of at least 0.12em.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label"><code>font-size: 20px; letter-spacing: normal</code><br>Expect: Letter sp. <strong>normal (0em)</strong></p>
+    <p id="s70" class="text" style="font-size: 20px; letter-spacing: normal">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 20px; letter-spacing: 0</code><br>Expect: Letter sp. <strong>normal (0em)</strong> or <strong>0px (0em)</strong>. Chrome reports zero as normal, so the answer depends on the browser</p>
+    <p id="s71" class="text" style="font-size: 20px; letter-spacing: 0">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 20px; letter-spacing: 1px</code><br>Expect: Letter sp. <strong>1px (0.05em)</strong></p>
+    <p id="s72" class="text" style="font-size: 20px; letter-spacing: 1px">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 20px; letter-spacing: 2px</code><br>Expect: Letter sp. <strong>2px (0.1em)</strong></p>
+    <p id="s73" class="text" style="font-size: 20px; letter-spacing: 2px">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 20px; letter-spacing: 0.12em</code><br>Expect: Letter sp. <strong>2.4px (0.12em)</strong></p>
+    <p id="s74" class="text" style="font-size: 20px; letter-spacing: 0.12em">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 20px; letter-spacing: 0.5em</code><br>Expect: Letter sp. <strong>10px (0.5em)</strong></p>
+    <p id="s75" class="text" style="font-size: 20px; letter-spacing: 0.5em">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 20px; letter-spacing: -1px</code><br>Expect: Letter sp. <strong>-1px (-0.05em)</strong>. Negative value</p>
+    <p id="s76" class="text" style="font-size: 20px; letter-spacing: -1px">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 16px; letter-spacing: 0.12em</code><br>Expect: Letter sp. <strong>1.92px (0.12em)</strong>. The WCAG 1.4.12 value</p>
+    <p id="s77" class="text" style="font-size: 16px; letter-spacing: 0.12em">The quick brown fox jumps over the lazy dog</p>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Word spacing</h2>
+
+<p>Same idea as letter spacing. WCAG 1.4.12 asks for word spacing of at least 0.16em.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label"><code>font-size: 20px; word-spacing: normal</code><br>Expect: Word sp. <strong>normal (0em)</strong> or <strong>0px (0em)</strong>. Chrome reports normal as 0px, so the answer depends on the browser</p>
+    <p id="s78" class="text" style="font-size: 20px; word-spacing: normal">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 20px; word-spacing: 0</code><br>Expect: Word sp. <strong>0px (0em)</strong></p>
+    <p id="s79" class="text" style="font-size: 20px; word-spacing: 0">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 20px; word-spacing: 5px</code><br>Expect: Word sp. <strong>5px (0.25em)</strong></p>
+    <p id="s80" class="text" style="font-size: 20px; word-spacing: 5px">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 20px; word-spacing: 0.16em</code><br>Expect: Word sp. <strong>3.2px (0.16em)</strong></p>
+    <p id="s81" class="text" style="font-size: 20px; word-spacing: 0.16em">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 20px; word-spacing: 1em</code><br>Expect: Word sp. <strong>20px (1em)</strong></p>
+    <p id="s82" class="text" style="font-size: 20px; word-spacing: 1em">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 20px; word-spacing: -2px</code><br>Expect: Word sp. <strong>-2px (-0.1em)</strong>. Negative value</p>
+    <p id="s83" class="text" style="font-size: 20px; word-spacing: -2px">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-size: 16px; word-spacing: 0.16em</code><br>Expect: Word sp. <strong>2.56px (0.16em)</strong>. The WCAG 1.4.12 value</p>
+    <p id="s84" class="text" style="font-size: 16px; word-spacing: 0.16em">The quick brown fox jumps over the lazy dog</p>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Colour</h2>
+
+<p>Hex first, then the full rgb() value underneath. A swatch shows the colour over white. Where alpha is below 1 the panel should say so. Background colour is out of scope, so check that it is never reported.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label"><code>color: #000</code><br>Expect: Colour <strong>#000000</strong>, <q>rgb(0, 0, 0)</q> underneath. Opaque, so no alpha note</p>
+    <p id="s85" class="text" style="color: #000">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>color: rgb(0, 0, 0)</code><br>Expect: Colour <strong>#000000</strong>. Opaque black, not transparent</p>
+    <p id="s86" class="text" style="color: rgb(0, 0, 0)">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>color: #336699</code><br>Expect: Colour <strong>#336699</strong>, <q>rgb(51, 102, 153)</q> underneath</p>
+    <p id="s87" class="text" style="color: #336699">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>color: #0c2238</code><br>Expect: Colour <strong>#0C2238</strong>, <q>rgb(12, 34, 56)</q> underneath</p>
+    <p id="s88" class="text" style="color: #0c2238">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>color: rebeccapurple</code><br>Expect: Colour <strong>#663399</strong>, <q>rgb(102, 51, 153)</q> underneath</p>
+    <p id="s89" class="text" style="color: rebeccapurple">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>color: hsl(200, 80%, 40%)</code><br>Expect: Colour <strong>#1481B8</strong>, <q>rgb(20, 129, 184)</q> underneath</p>
+    <p id="s90" class="text" style="color: hsl(200, 80%, 40%)">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>color: rgba(0, 0, 0, 0.5)</code><br>Expect: Colour <strong>#000000</strong> with a note that alpha is <strong>0.5</strong>. Swatch looks mid grey</p>
+    <p id="s91" class="text" style="color: rgba(0, 0, 0, 0.5)">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>color: rgb(255 0 0 / 25%)</code><br>Expect: Colour <strong>#FF0000</strong> with alpha <strong>0.25</strong>. Swatch looks pale pink</p>
+    <p id="s92" class="text" style="color: rgb(255 0 0 / 25%)">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>color: rgba(0, 0, 0, 0); outline: 1px dashed #666</code><br>Expect: Colour <strong>#000000</strong> with alpha <strong>0</strong>. The text is invisible, so a dashed outline marks where to click</p>
+    <p id="s93" class="text" style="color: rgba(0, 0, 0, 0); outline: 1px dashed #666">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>color: oklch(60% 0.2 30)</code><br>Expect: <strong>Raw computed value</strong> such as <q>oklch(0.6 0.2 30)</q>, with no hex. Needs a browser that supports oklch</p>
+    <p id="s94" class="text" style="color: oklch(60% 0.2 30)">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>color: color(display-p3 1 0 0)</code><br>Expect: <strong>Raw computed value</strong> such as <q>color(display-p3 1 0 0)</q>, with no hex</p>
+    <p id="s95" class="text" style="color: color(display-p3 1 0 0)">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label">Inherited: <code>color: #336699</code> set on the parent, nothing set on the inner span<br>Expect: Colour <strong>#336699</strong>, because the child inherits it. Click the inner text</p>
+    <p id="s96" class="text" style="color: #336699">Parent text, then <span id="inhc">inherited child text</span> inside it</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>color: currentcolor</code> beside a red border<br>Expect: Colour <strong>#000000</strong> (the border colour is ignored)</p>
+    <p id="s97" class="text" style="color: currentcolor; border: 2px solid #b00020; padding: 4px">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>color: #fff; background: #222; padding: 8px</code><br>Expect: Colour <strong>#FFFFFF</strong>. The dark background is not reported</p>
+    <p id="s98" class="text" style="color: #fff; background: #222; padding: 8px">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>color: #000; opacity: 0.4</code><br>Expect: Colour <strong>#000000</strong>, with no alpha note. The opacity property is not part of the colour value, so it is not reported</p>
+    <p id="s99" class="text" style="color: #000; opacity: 0.4">The quick brown fox jumps over the lazy dog</p>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Everything at once</h2>
+
+<p>One element with every row filled in, and one with the WCAG 1.4.12 text spacing values.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label"><code>font-family: Arial, sans-serif; font-size: 18px; font-weight: 600; font-style: italic; line-height: 1.6; letter-spacing: 0.05em; word-spacing: 0.1em; color: #7a1f5c</code><br>Expect: Font <strong>Arial</strong>. Size <strong>18px</strong>. Weight <strong>600 (semibold)</strong>. Style <strong>italic</strong>. Line height <strong>28.8px (1.6×)</strong>. Letter sp. <strong>0.9px (0.05em)</strong>. Word sp. <strong>1.8px (0.1em)</strong>. Colour <strong>#7A1F5C</strong></p>
+    <p id="s100" class="text" style="font-family: Arial, sans-serif; font-size: 18px; font-weight: 600; font-style: italic; line-height: 1.6; letter-spacing: 0.05em; word-spacing: 0.1em; color: #7a1f5c">The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump.</p>
+  </div>
+  <div class="sample">
+    <p class="label"><code>font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5; letter-spacing: 0.12em; word-spacing: 0.16em; margin-bottom: 2em</code><br>Expect: Line height <strong>24px (1.5×)</strong>. Letter sp. <strong>1.92px (0.12em)</strong>. Word sp. <strong>2.56px (0.16em)</strong>. The full WCAG 1.4.12 set (paragraph spacing is not shown by the panel)</p>
+    <p id="s101" class="text" style="font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5; letter-spacing: 0.12em; word-spacing: 0.16em; margin-bottom: 2em">The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump.</p>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Elements and properties</h2>
+
+<p>Nested elements, form controls and properties the panel does not cover.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label">Click the outer text, then each styled word. The panel should report the element you click, not its parent.<br>Expect: <strong>Outer</strong> 20px, #222222. <strong>Bold word</strong> 700 (bold). <strong>Big word</strong> 36px. <strong>Red word</strong> #B00020</p>
+    <p id="nest" class="text" style="font-size: 20px; color: #222">Outer paragraph text with a <strong>bold word</strong>, a <span style="font-size: 36px">big word</span> and a <span style="color: #b00020">red word</span> inside it.</p>
+  </div>
+  <div class="sample">
+    <p class="label">Different elements. Click each one. The panel should report whatever computed styles apply. Default values differ by browser and system, so just check that each one reports sensible values.<br>Expect: <strong>Observe</strong></p>
+    <div class="text mixed">
+      <p class="text"><a href="#nowhere">A link</a></p>
+      <p class="text"><button type="button">A button</button></p>
+      <p class="text"><label for="mixedinput">A label</label> <input id="mixedinput" type="text" value="Text input value"></p>
+      <p class="text"><select aria-label="Select example"><option>Select option</option></select></p>
+      <p class="text"><textarea aria-label="Textarea example" rows="2">Textarea text</textarea></p>
+      <p class="text"><code>Code element</code> and <small>small element</small> and H<sub>2</sub>O and E=mc<sup>2</sup></p>
+      <blockquote class="text">A blockquote</blockquote>
+      <ul class="text"><li>A list item</li></ul>
+      <table class="text"><tr><th>Table header</th><td>Table cell</td></tr></table>
+    </div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>text-transform: uppercase; text-decoration: underline; font-variant: small-caps; text-shadow</code><br>Expect: Only the usual rows. <strong>Uppercase, underline, small caps and text shadow are not reported</strong></p>
+    <p id="s102" class="text" style="text-transform: uppercase; text-decoration: underline; font-variant: small-caps; text-shadow: 1px 1px 2px #888">The quick brown fox jumps over the lazy dog</p>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Pointer suppression</h2>
+
+<p>While the bookmarklet is active, pointer activation should be suppressed so clicking a control inspects it instead of using it. Try each control with the bookmarklet on, then press Esc and try again.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label">Link<br>Expect: <strong>Active:</strong> the page does not jump and no message appears. <strong>After Esc:</strong> the message appears</p>
+    <p class="text"><a href="#link-followed">Follow this link</a></p>
+    <p id="link-followed" class="followed text" role="status">The link was followed.</p>
+  </div>
+  <div class="sample">
+    <p class="label">Details toggle<br>Expect: <strong>Active:</strong> stays closed. <strong>After Esc:</strong> opens</p>
+    <details class="text">
+      <summary>Toggle this</summary>
+      <p>The details element opened.</p>
+    </details>
+  </div>
+  <div class="sample">
+    <p class="label">Checkbox and label<br>Expect: <strong>Active:</strong> stays unchecked, whether you click the box or the label. <strong>After Esc:</strong> toggles</p>
+    <p class="text"><input type="checkbox" id="suppress-check"> <label for="suppress-check">Check this box</label></p>
+  </div>
+  <div class="sample">
+    <p class="label">Event counter<br>Expect: <strong>Active:</strong> every count stays 0, including double-click. <strong>After Esc:</strong> counts go up</p>
+    <div id="monitor" class="text monitor">
+      <p><button type="button">Press, click or double-click here</button></p>
+      <ul>
+        <li>mousedown: <span id="count-mousedown">0</span></li>
+        <li>mouseup: <span id="count-mouseup">0</span></li>
+        <li>click: <span id="count-click">0</span></li>
+        <li>dblclick: <span id="count-dblclick">0</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+['mousedown', 'mouseup', 'click', 'dblclick'].forEach(function (type) {
+  var output = document.getElementById('count-' + type);
+  var count = 0;
+  document.getElementById('monitor').addEventListener(type, function () {
+    count++;
+    output.textContent = count;
+  });
+});
+</script>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+</body>
+</html>

@@ -3,8 +3,11 @@
 <head>
   <meta charset="utf-8">
   <title>axe-core code samples</title>
+  <meta name="description" content="Learn how to run axe-core from the command line, try some useful options, save the results to a file, and turn them into a readable report.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-a11y-dark.min.css" rel="stylesheet">
   <link href="assets/css/testing.css" rel="stylesheet">
   <style>
 .note {
@@ -13,6 +16,16 @@
   padding: 0.5em 1em;
   margin: 1em 0;
 }
+
+.copy-code-wrapper {
+  margin: .5em 0 1.5em;
+  font-size: .9em;
+}
+
+.copy-code-status {
+  margin-left: 0.75em;
+}
+
   </style>
 </head>
 <body>
@@ -22,17 +35,11 @@
   <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
 </a>
 
-<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo; <a href="testing.html">Back to home</a></p>
 
 <h1>axe-core code samples for the browser console</h1>
 
 <p>Copy and paste these samples into the browser console, in order, on the page you want to test. Samples 1 to 4 set things up. Samples 5 to 10 explore the results. Sample 11 combines loading and reporting into one snippet.</p>
-
-<div class="note">
-  <p>Browsers may block pasting into the console the first time. If so, type <code>allow pasting</code> and press Enter, then paste again.</p>
-  <p>The samples use <code>var</code> so you can run any of them again without a redeclaration error.</p>
-  <p>Refreshing the page wipes everything. You will need to load axe-core again.</p>
-</div>
 
 
 <!-- section -->
@@ -42,12 +49,10 @@
 
 <p>Adds a script element that pulls axe-core from a CDN. Wait a second or two for it to finish loading before moving on.</p>
 
-<div class="example">
 <pre><code>var script = document.createElement('script');
 script.src =
-  <span class="highlight">'https://cdn.jsdelivr.net/npm/axe-core@4.10.2/axe.min.js'</span>;
+  'https://cdn.jsdelivr.net/npm/axe-core@4.10.2/axe.min.js';
 document.head.appendChild(script);</code></pre>
-</div>
 
 <p>Expected result: Nothing is printed, or the console shows the script element. If a page blocks external scripts (a Content Security Policy), the load will fail. Try a different page.</p>
 
@@ -59,9 +64,7 @@ document.head.appendChild(script);</code></pre>
 
 <p>Asks axe-core which version it is.</p>
 
-<div class="example">
-<pre><code><span class="highlight">axe.version</span></code></pre>
-</div>
+<pre><code>axe.version</code></pre>
 
 <p>Expected result: The console prints the version number, for example <code>"4.10.2"</code>. If axe has not loaded, it prints <code>ReferenceError: axe is not defined</code>. Wait a moment and try again.</p>
 
@@ -73,9 +76,7 @@ document.head.appendChild(script);</code></pre>
 
 <p>Tests the page and stores everything axe finds in a variable called <code>results</code>.</p>
 
-<div class="example">
-<pre><code>var results = <span class="highlight">await axe.run()</span>;</code></pre>
-</div>
+<pre><code>var results = await axe.run();</code></pre>
 
 <p>Expected result: The console prints nothing while axe is working, then shows the results object when it finishes.</p>
 
@@ -87,14 +88,12 @@ document.head.appendChild(script);</code></pre>
 
 <p>The results object holds four lists. Check how many items are in each.</p>
 
-<div class="example">
 <pre><code>Object.keys(results)
-<span class="highlight">results.violations</span>.length
+results.violations.length
 results.passes.length
 results.incomplete.length
 results.inapplicable.length
 results.violations[0]</code></pre>
-</div>
 
 <p><strong>What each list holds</strong></p>
 <ul>
@@ -113,9 +112,7 @@ results.violations[0]</code></pre>
 
 <p>One number: how many rules failed.</p>
 
-<div class="example">
-<pre><code><span class="highlight">results.violations.length</span></code></pre>
-</div>
+<pre><code>results.violations.length</code></pre>
 
 <p>Expected result: The console prints a number. This counts failed rules, not failed elements. One rule can fail on many elements.</p>
 
@@ -127,15 +124,13 @@ results.violations[0]</code></pre>
 
 <p>One row per failed rule, with the rule name, how severe it is and how many elements failed.</p>
 
-<div class="example">
-<pre><code><span class="highlight">console.table</span>(
+<pre><code>console.table(
   results.violations.map(v =&gt; ({
     rule: v.id,
     impact: v.impact,
     elements: v.nodes.length
   }))
 );</code></pre>
-</div>
 
 <p>Expected result: The console prints a table with the columns <code>rule</code>, <code>impact</code> and <code>elements</code>.</p>
 
@@ -147,8 +142,7 @@ results.violations[0]</code></pre>
 
 <p>Keeps only the most severe failures, then shows them as a table.</p>
 
-<div class="example">
-<pre><code>var serious = results.violations<span class="highlight">.filter</span>(v =&gt;
+<pre><code>var serious = results.violations.filter(v =&gt;
   v.impact === 'critical' || v.impact === 'serious'
 );
 
@@ -159,7 +153,6 @@ console.table(
     elements: v.nodes.length
   }))
 );</code></pre>
-</div>
 
 <p>Expected result: The table only lists rules with an impact of <code>critical</code> or <code>serious</code>. The other levels are <code>moderate</code> and <code>minor</code>.</p>
 
@@ -171,14 +164,12 @@ console.table(
 
 <p>Lists each failed rule, then a selector for every element that failed it.</p>
 
-<div class="example">
 <pre><code>results.violations.forEach(v =&gt; {
   console.log(v.id);
   v.nodes.forEach(n =&gt; {
-    console.log('  ', <span class="highlight">n.target</span>.join(' '));
+    console.log('  ', n.target.join(' '));
   });
 });</code></pre>
-</div>
 
 <p>Expected result: Each rule name is followed by an indented list of CSS selectors, one per failing element.</p>
 
@@ -190,16 +181,14 @@ console.table(
 
 <p>Draws a red outline around every element that failed.</p>
 
-<div class="example">
 <pre><code>results.violations.forEach(v =&gt; {
   v.nodes.forEach(n =&gt; {
     var el = document.querySelector(n.target[0]);
     if (el) {
-      <span class="highlight">el.style.outline = '4px solid red';</span>
+      el.style.outline = '4px solid red';
     }
   });
 });</code></pre>
-</div>
 
 <p>Expected result: Failing elements get a red outline on the page. Refresh the page to remove the outlines. This simple version may miss elements inside iframes or shadow DOM.</p>
 
@@ -211,16 +200,14 @@ console.table(
 
 <p>Prints each failed rule with its plain-language help text, a link to the full rule description, and what to change on each failing element.</p>
 
-<div class="example">
 <pre><code>results.violations.forEach(v =&gt; {
   console.log(v.help);
   console.log(v.helpUrl);
   v.nodes.forEach(n =&gt; {
     console.log(n.target.join(' '));
-    console.log(<span class="highlight">n.failureSummary</span>);
+    console.log(n.failureSummary);
   });
 });</code></pre>
-</div>
 
 <p>Expected result: Each failing element is followed by text starting with <code>Fix any of the following:</code> or <code>Fix all of the following:</code>, then the specific changes needed.</p>
 
@@ -232,13 +219,12 @@ console.table(
 
 <p>Everything needed in a single copy and paste: load axe-core, run it when it has loaded, and show the violations as a table.</p>
 
-<div class="example">
 <pre><code>var script = document.createElement('script');
 script.src =
   'https://cdn.jsdelivr.net/npm/axe-core@4.10.2/axe.min.js';
-<span class="highlight">script.onload</span> = async () =&gt; {
+script.onload = async () =&gt; {
   var results = await axe.run();
-  <span class="comment">// keep the results for the other samples</span>
+  <span class="comment">// keep the results for the other samples
   window.results = results;
   console.table(
     results.violations.map(v =&gt; ({
@@ -249,12 +235,46 @@ script.src =
   );
 };
 document.head.appendChild(script);</code></pre>
-</div>
 
 <p>Expected result: After a short pause the console prints the violations table. The <code>results</code> variable is still available, so samples 4 to 10 will also work.</p>
 
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 </main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+<script>
+  // Add a "Copy code" button under each code example
+  document.querySelectorAll('pre > code').forEach(code => {
+    const pre = code.parentElement;
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'copy-code';
+    button.textContent = 'Copy code';
+
+    const status = document.createElement('span');
+    status.className = 'copy-code-status';
+    status.setAttribute('role', 'status');
+
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(code.textContent);
+        status.textContent = 'Copied';
+      } catch {
+        status.textContent = 'Copy failed. Select the code and copy it manually.';
+      }
+      setTimeout(() => { status.textContent = ''; }, 3000);
+    });
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'copy-code-wrapper';
+    wrapper.append(button, status);
+    pre.after(wrapper);
+  });
+</script>
 </body>
 </html>
