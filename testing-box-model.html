@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the box model</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+.sample {
+  padding: 0.75em 0;
+  border-bottom: 1px solid #ccc;
+}
+.sample:last-child {
+  border-bottom: 0;
+}
+.label {
+  margin: 0 0 0.25em;
+  font: 14px/1.4 Arial, sans-serif;
+  color: #555;
+}
+.stage {
+  display: flow-root;
+  padding: 24px;
+  background: #f1f1f1;
+}
+.subject {
+  background: #dbeafe;
+  color: #000;
+  font: 14px/1.3 Arial, sans-serif;
+  box-sizing: content-box;
+}
+.pair {
+  display: flow-root;
+  padding: 24px 0;
+  background: #f1f1f1;
+}
+.pairflex {
+  display: flex;
+  flex-direction: column;
+}
+.neighbour, .target {
+  box-sizing: border-box;
+  padding: 0;
+  font: 14px/30px Arial, sans-serif;
+  color: #000;
+}
+.neighbour {
+  background: #d1d5db;
+}
+.target {
+  background: #dbeafe;
+  text-align: right;
+}
+.monitor {
+  padding: 0.5em 1em;
+  border: 1px dashed #666;
+}
+.followed {
+  display: none;
+  padding: 0.25em 0.5em;
+  background: #fff3cd;
+}
+.followed:target {
+  display: block;
+}
+  </style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing the box model</h1>
+
+<p>Run the <q>Inspect box model</q> bookmarklet, then click any sample. A panel should report how the box of the element you clicked is put together. Press Esc to stop.</p>
+
+<p>Each sample has a small grey label above it showing the CSS used and the values you should expect in the panel. Click the coloured box, not the label.</p>
+
+<p>The panel reads from the inside out: box-sizing, Content, Padding, Reserved space (scrollbar gutter), Border, Outline, Margin, then Total and Gap above. Four-sided values collapse to shorthand, so <code>18px 24px</code> when the sides pair up and <code>1px 2px 3px 4px</code> when they do not. The highlight is a box-shadow, not an outline.</p>
+
+
+<!-- section -->
+
+
+<h2>box-sizing and content</h2>
+
+<p>Same declared width and height, different boxes. The panel should report the box-sizing value and the content area that results.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label"><code>width: 200px; height: 100px; padding: 20px; border: 5px solid #1e3a8a</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>200 × 100</strong>. Padding <strong>20px</strong>. Border <strong>5px</strong>. Total <strong>250 × 150</strong>. Total is larger than the declared 200 × 100, because padding and border are added outside the content</p>
+    <div class="stage" style=""><div id="b1" class="subject" style="width: 200px; height: 100px; padding: 20px; border: 5px solid #1e3a8a">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>box-sizing: border-box; width: 200px; height: 100px; padding: 20px; border: 5px solid #1e3a8a</code><br>Expect: box-sizing <strong>border-box</strong>. Content <strong>150 × 50</strong>. Padding <strong>20px</strong>. Border <strong>5px</strong>. Total <strong>200 × 100</strong>. Total matches the declared 200 × 100, because padding and border come out of it</p>
+    <div class="stage" style=""><div id="b2" class="subject" style="box-sizing: border-box; width: 200px; height: 100px; padding: 20px; border: 5px solid #1e3a8a">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>box-sizing: border-box; width: 20px; height: 20px; padding: 20px; border: 2px solid #1e3a8a</code><br>Expect: box-sizing <strong>border-box</strong>. Content <strong>0 × 0</strong>. Padding <strong>20px</strong>. Border <strong>2px</strong>. Total <strong>44 × 44</strong>. Content cannot go below zero, so the box is bigger than the declared 20 × 20</p>
+    <div class="stage" style=""><div id="b3" class="subject" style="box-sizing: border-box; width: 20px; height: 20px; padding: 20px; border: 2px solid #1e3a8a">&nbsp;</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>padding: 10px; border: 2px solid #1e3a8a; margin: 0 10px</code><br>Expect: box-sizing <strong>content-box</strong>. Padding <strong>10px</strong>. Border <strong>2px</strong>. Margin <strong>0 10px</strong>. <strong>Observe:</strong> inline element, so width and height do not apply. Content is the size of the text. Vertical padding and border do not push neighbours away</p>
+    <div class="stage" style=""><span id="b4" class="subject" style="padding: 10px; border: 2px solid #1e3a8a; margin: 0 10px">Inline span</span></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>padding: 10px; border: 2px solid #1e3a8a; margin: 8px</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 50</strong>. Padding <strong>10px</strong>. Border <strong>2px</strong>. Margin <strong>8px</strong>. Total <strong>140 × 90</strong>. A replaced element (image). Content is the image size</p>
+    <div class="stage" style=""><img id="b5" class="subject" style="padding: 10px; border: 2px solid #1e3a8a; margin: 8px" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='50'%3E%3Crect width='100' height='50' fill='%23999'/%3E%3C/svg%3E" width="100" height="50" alt="Grey placeholder"></div>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Padding</h2>
+
+<p>Four-sided values collapse to CSS shorthand. Zero rows may be hidden or shown as 0. Either is fine, as long as the numbers are right.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; padding: 10px</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Padding <strong>10px</strong>. Total <strong>120 × 60</strong>. All four sides match, so one value</p>
+    <div class="stage" style=""><div id="b6" class="subject" style="width: 100px; height: 40px; padding: 10px">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; padding: 18px 24px</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Padding <strong>18px 24px</strong>. Total <strong>148 × 76</strong>. Sides pair up, so two values</p>
+    <div class="stage" style=""><div id="b7" class="subject" style="width: 100px; height: 40px; padding: 18px 24px">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; padding: 1px 2px 3px 4px</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Padding <strong>1px 2px 3px 4px</strong>. Total <strong>106 × 44</strong>. Nothing pairs up, so four values</p>
+    <div class="stage" style=""><div id="b8" class="subject" style="width: 100px; height: 40px; padding: 1px 2px 3px 4px">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; padding: 5px 10px 15px</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Padding <strong>5px 10px 15px 10px</strong>. Total <strong>120 × 60</strong>. <strong>Observe:</strong> top and bottom differ but left and right match. The brief mentions only the pair and four-value forms, so check whether this shows as four values</p>
+    <div class="stage" style=""><div id="b9" class="subject" style="width: 100px; height: 40px; padding: 5px 10px 15px">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; padding-left: 12px</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Padding <strong>0 0 0 12px</strong>. Total <strong>112 × 40</strong>. One side only</p>
+    <div class="stage" style=""><div id="b10" class="subject" style="width: 100px; height: 40px; padding-left: 12px">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; padding: 0</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Total <strong>100 × 40</strong>. <strong>Observe:</strong> no padding at all. Check whether the row is hidden or shows 0</p>
+    <div class="stage" style=""><div id="b11" class="subject" style="width: 100px; height: 40px; padding: 0">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; padding: 5%</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Padding <strong>20px</strong>. Total <strong>140 × 80</strong>. Percentages are resolved to pixels (5% of the 400px wide parent)</p>
+    <div style="width: 400px"><div class="stage" style="padding: 0"><div id="b12" class="subject" style="width: 100px; height: 40px; padding: 5%">Inspect this box</div></div></div>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Border</h2>
+
+<p>Border widths, per side. A border only takes space when its style is not none.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; border: 4px solid #1e3a8a</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Border <strong>4px</strong>. Total <strong>108 × 48</strong></p>
+    <div class="stage" style=""><div id="b13" class="subject" style="width: 100px; height: 40px; border: 4px solid #1e3a8a">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; border-style: solid; border-color: #1e3a8a; border-width: 1px 2px 3px 4px</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Border <strong>1px 2px 3px 4px</strong>. Total <strong>106 × 44</strong></p>
+    <div class="stage" style=""><div id="b14" class="subject" style="width: 100px; height: 40px; border-style: solid; border-color: #1e3a8a; border-width: 1px 2px 3px 4px">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; border-left: 8px solid #1e3a8a</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Border <strong>0 0 0 8px</strong>. Total <strong>108 × 40</strong>. One side only</p>
+    <div class="stage" style=""><div id="b15" class="subject" style="width: 100px; height: 40px; border-left: 8px solid #1e3a8a">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; border: 6px double #1e3a8a</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Border <strong>6px</strong>. Total <strong>112 × 52</strong>. Double style, still 6px in total</p>
+    <div class="stage" style=""><div id="b16" class="subject" style="width: 100px; height: 40px; border: 6px double #1e3a8a">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; border: 3px dashed #1e3a8a</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Border <strong>3px</strong>. Total <strong>106 × 46</strong>. Style should be reported if the panel shows it</p>
+    <div class="stage" style=""><div id="b17" class="subject" style="width: 100px; height: 40px; border: 3px dashed #1e3a8a">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; border-width: 5px; border-style: none</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Total <strong>100 × 40</strong>. A width with no style takes no space, so the border is 0</p>
+    <div class="stage" style=""><div id="b18" class="subject" style="width: 100px; height: 40px; border-width: 5px; border-style: none">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; border: thick solid #1e3a8a</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Border <strong>5px</strong>. Total <strong>110 × 50</strong>. The keyword thick is 5px. thin is 1px and medium is 3px</p>
+    <div class="stage" style=""><div id="b19" class="subject" style="width: 100px; height: 40px; border: thick solid #1e3a8a">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; border: 4px solid #1e3a8a; border-radius: 12px</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Border <strong>4px</strong>. Total <strong>108 × 48</strong>. Border radius does not change the numbers</p>
+    <div class="stage" style=""><div id="b20" class="subject" style="width: 100px; height: 40px; border: 4px solid #1e3a8a; border-radius: 12px">Inspect this box</div></div>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Outline</h2>
+
+<p>Outline sits outside the border and takes no space. The tool draws its own highlight with a box-shadow, so it never covers the page's outline.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; outline: 3px solid #b00020</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Outline <strong>3px</strong>, offset <strong>0px</strong>. Total <strong>100 × 40</strong>. Outline takes no space, so Total is just the content</p>
+    <div class="stage" style=""><div id="b21" class="subject" style="width: 100px; height: 40px; outline: 3px solid #b00020">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; outline: 2px dashed #b00020; outline-offset: 6px</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Outline <strong>2px</strong>, offset <strong>6px</strong>. Total <strong>100 × 40</strong></p>
+    <div class="stage" style=""><div id="b22" class="subject" style="width: 100px; height: 40px; outline: 2px dashed #b00020; outline-offset: 6px">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; padding: 10px; outline: 2px solid #b00020; outline-offset: -6px</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Padding <strong>10px</strong>. Outline <strong>2px</strong>, offset <strong>-6px</strong>. Total <strong>120 × 60</strong>. Negative offset draws the outline inside the border edge</p>
+    <div class="stage" style=""><div id="b23" class="subject" style="width: 100px; height: 40px; padding: 10px; outline: 2px solid #b00020; outline-offset: -6px">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; outline-width: 4px; outline-style: none</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Total <strong>100 × 40</strong>. <strong>Observe:</strong> a width with no style. No outline is drawn, so the row should be hidden or show 0</p>
+    <div class="stage" style=""><div id="b24" class="subject" style="width: 100px; height: 40px; outline-width: 4px; outline-style: none">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; border: 2px solid #1e3a8a; outline: 3px solid #b00020</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Border <strong>2px</strong>. Outline <strong>3px</strong>, offset <strong>0px</strong>. Total <strong>104 × 44</strong>. Border and outline together. The two should be reported separately</p>
+    <div class="stage" style=""><div id="b25" class="subject" style="width: 100px; height: 40px; border: 2px solid #1e3a8a; outline: 3px solid #b00020">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; box-shadow: 0 0 0 4px #f4a300</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Total <strong>100 × 40</strong>. <strong>Observe:</strong> the page's own box-shadow, which is not an outline. Press Esc afterwards. The orange shadow should come back, because the tool restores what it replaced</p>
+    <div class="stage" style=""><div id="b26" class="subject" style="width: 100px; height: 40px; box-shadow: 0 0 0 4px #f4a300">Inspect this box</div></div>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Margin</h2>
+
+<p>Margin is the outermost layer and counts towards Total.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; margin: 20px</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Margin <strong>20px</strong>. Total <strong>140 × 80</strong></p>
+    <div class="stage" style=""><div id="b27" class="subject" style="width: 100px; height: 40px; margin: 20px">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; margin: 10px 30px</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Margin <strong>10px 30px</strong>. Total <strong>160 × 60</strong></p>
+    <div class="stage" style=""><div id="b28" class="subject" style="width: 100px; height: 40px; margin: 10px 30px">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; margin: 1px 2px 3px 4px</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Margin <strong>1px 2px 3px 4px</strong>. Total <strong>106 × 44</strong></p>
+    <div class="stage" style=""><div id="b29" class="subject" style="width: 100px; height: 40px; margin: 1px 2px 3px 4px">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; margin: -10px 0 0 20px</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Margin <strong>-10px 0 0 20px</strong>. Total <strong>120 × 30</strong>. Negative margins are reported with the minus sign. The box overlaps what is above</p>
+    <div class="stage" style=""><div id="b30" class="subject" style="width: 100px; height: 40px; margin: -10px 0 0 20px">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 200px; height: 40px; margin: 0 auto</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>200 × 40</strong>. Margin <strong>0 100px</strong>. Total <strong>400 × 40</strong>. Auto margins are reported as the pixels they resolve to (the 400px parent leaves 200px, shared evenly)</p>
+    <div style="width: 400px"><div class="stage" style="padding: 0"><div id="b31" class="subject" style="width: 200px; height: 40px; margin: 0 auto">Inspect this box</div></div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 40px; margin: 0</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 40</strong>. Total <strong>100 × 40</strong>. <strong>Observe:</strong> no margin at all. Check whether the row is hidden or shows 0</p>
+    <div class="stage" style=""><div id="b32" class="subject" style="width: 100px; height: 40px; margin: 0">Inspect this box</div></div>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Total</h2>
+
+<p>Total in these samples is the border box plus margin: content, padding, reserved space and border, then margin. Outline is never counted because it takes no space. If the panel defines Total another way, use the other rows to check the sum.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 50px; padding: 10px; border: 2px solid #1e3a8a; margin: 8px</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 50</strong>. Padding <strong>10px</strong>. Border <strong>2px</strong>. Margin <strong>8px</strong>. Total <strong>140 × 90</strong>. Border box 124 × 74, plus 8px margin on each side</p>
+    <div class="stage" style=""><div id="b33" class="subject" style="width: 100px; height: 50px; padding: 10px; border: 2px solid #1e3a8a; margin: 8px">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>box-sizing: border-box; width: 160px; height: 80px; padding: 10px; border: 2px solid #1e3a8a; margin: 4px 12px</code><br>Expect: box-sizing <strong>border-box</strong>. Content <strong>136 × 56</strong>. Padding <strong>10px</strong>. Border <strong>2px</strong>. Margin <strong>4px 12px</strong>. Total <strong>184 × 88</strong>. Border box stays 160 × 80, plus the margins</p>
+    <div class="stage" style=""><div id="b34" class="subject" style="box-sizing: border-box; width: 160px; height: 80px; padding: 10px; border: 2px solid #1e3a8a; margin: 4px 12px">Inspect this box</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 100px; height: 50px; padding: 10px; border: 2px solid #1e3a8a; margin: 8px; outline: 6px solid #b00020</code><br>Expect: box-sizing <strong>content-box</strong>. Content <strong>100 × 50</strong>. Padding <strong>10px</strong>. Border <strong>2px</strong>. Outline <strong>6px</strong>, offset <strong>0px</strong>. Margin <strong>8px</strong>. Total <strong>140 × 90</strong>. Same as the first sample, so the 6px outline does not change Total</p>
+    <div class="stage" style=""><div id="b35" class="subject" style="width: 100px; height: 50px; padding: 10px; border: 2px solid #1e3a8a; margin: 8px; outline: 6px solid #b00020">Inspect this box</div></div>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Reserved space and scrollbar gutter</h2>
+
+<p>Space taken by scrollbars, or reserved for them with <code>scrollbar-gutter</code>. The numbers depend on the operating system and its scrollbar setting. Overlay scrollbars, the macOS default, take no space at all, so check what your own machine does.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label"><code>width: 200px; height: 100px; border: 2px solid #1e3a8a; overflow: scroll</code><br>Expect: Reserved space <strong>15px</strong> on the right and bottom with classic scrollbars (Windows, Linux, macOS set to always show). <strong>0</strong> with macOS overlay scrollbars. Content shrinks by the same amount</p>
+    <div class="stage"><div id="b36" class="subject" style="width: 200px; height: 100px; border: 2px solid #1e3a8a; overflow: scroll" tabindex="0">Line one<br>Line two<br>Line three<br>Line four<br>Line five<br>Line six<br>Line seven<br>Line eight</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 200px; height: 100px; border: 2px solid #1e3a8a; overflow-y: auto</code><br>Expect: Reserved space <strong>15px</strong> on the right only, because the text overflows. <strong>0</strong> with overlay scrollbars</p>
+    <div class="stage"><div id="b37" class="subject" style="width: 200px; height: 100px; border: 2px solid #1e3a8a; overflow-y: auto" tabindex="0">Line one<br>Line two<br>Line three<br>Line four<br>Line five<br>Line six<br>Line seven<br>Line eight</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 200px; height: 100px; border: 2px solid #1e3a8a; overflow-x: scroll; overflow-y: hidden</code><br>Expect: Reserved space <strong>15px</strong> at the bottom only. <strong>0</strong> with overlay scrollbars</p>
+    <div class="stage"><div id="b38" class="subject" style="width: 200px; height: 100px; border: 2px solid #1e3a8a; overflow-x: scroll; overflow-y: hidden" tabindex="0">Line one<br>Line two<br>Line three<br>Line four<br>Line five<br>Line six<br>Line seven<br>Line eight</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 200px; height: 100px; border: 2px solid #1e3a8a; overflow: auto; height: 220px</code><br>Expect: <strong>0</strong>. Nothing overflows, so no scrollbar and no space reserved</p>
+    <div class="stage"><div id="b39" class="subject" style="width: 200px; height: 100px; border: 2px solid #1e3a8a; overflow: auto; height: 220px" tabindex="0">Line one<br>Line two<br>Line three<br>Line four<br>Line five<br>Line six<br>Line seven<br>Line eight</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 200px; height: 100px; border: 2px solid #1e3a8a; overflow: auto; height: 220px; scrollbar-gutter: stable</code><br>Expect: <strong>15px</strong> on the right even with no overflow, because the gutter is reserved. <strong>0</strong> with overlay scrollbars</p>
+    <div class="stage"><div id="b40" class="subject" style="width: 200px; height: 100px; border: 2px solid #1e3a8a; overflow: auto; height: 220px; scrollbar-gutter: stable" tabindex="0">Line one<br>Line two<br>Line three<br>Line four<br>Line five<br>Line six<br>Line seven<br>Line eight</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 200px; height: 100px; border: 2px solid #1e3a8a; overflow: auto; height: 220px; scrollbar-gutter: stable both-edges</code><br>Expect: <strong>15px</strong> on each side, 30px in all. <strong>0</strong> with overlay scrollbars</p>
+    <div class="stage"><div id="b41" class="subject" style="width: 200px; height: 100px; border: 2px solid #1e3a8a; overflow: auto; height: 220px; scrollbar-gutter: stable both-edges" tabindex="0">Line one<br>Line two<br>Line three<br>Line four<br>Line five<br>Line six<br>Line seven<br>Line eight</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 200px; height: 100px; border: 2px solid #1e3a8a; overflow: scroll; scrollbar-width: none</code><br>Expect: <strong>0</strong>. The scrollbar is hidden, so it takes no space</p>
+    <div class="stage"><div id="b42" class="subject" style="width: 200px; height: 100px; border: 2px solid #1e3a8a; overflow: scroll; scrollbar-width: none" tabindex="0">Line one<br>Line two<br>Line three<br>Line four<br>Line five<br>Line six<br>Line seven<br>Line eight</div></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>width: 200px; height: 100px; border: 2px solid #1e3a8a; overflow: scroll; scrollbar-width: thin</code><br>Expect: <strong>Observe.</strong> A thin scrollbar is narrower than 15px. The exact size depends on the browser</p>
+    <div class="stage"><div id="b43" class="subject" style="width: 200px; height: 100px; border: 2px solid #1e3a8a; overflow: scroll; scrollbar-width: thin" tabindex="0">Line one<br>Line two<br>Line three<br>Line four<br>Line five<br>Line six<br>Line seven<br>Line eight</div></div>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Gap above: positive margins</h2>
+
+<p>Gap above is the distance between the bottom edge of the box above and the top edge of the one you click. Sibling margins collapse in normal flow, so two margins do not simply add. In every pair below, click the second box.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label"><code>neighbour margin-bottom: 30px; target margin-top: 20px</code><br>Click the second box. Expect: Gap above <strong>30px</strong> (margins collapse to the larger, 30px)</p>
+    <div class="pair"><p class="neighbour" style="height: 30px; margin: 0 0 30px">Neighbour above</p><p id="b44" class="target" style="height: 30px; margin: 20px 0 0">Target</p></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>neighbour margin-bottom: 20px; target margin-top: 30px</code><br>Click the second box. Expect: Gap above <strong>30px</strong> (margins collapse to the larger, 30px)</p>
+    <div class="pair"><p class="neighbour" style="height: 30px; margin: 0 0 20px">Neighbour above</p><p id="b45" class="target" style="height: 30px; margin: 30px 0 0">Target</p></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>neighbour margin-bottom: 30px; target margin-top: 30px</code><br>Click the second box. Expect: Gap above <strong>30px</strong> (a tie: both margins are 30px, so the panel has specific wording)</p>
+    <div class="pair"><p class="neighbour" style="height: 30px; margin: 0 0 30px">Neighbour above</p><p id="b46" class="target" style="height: 30px; margin: 30px 0 0">Target</p></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>neighbour margin-bottom: 40px; target margin-top: 10px</code><br>Click the second box. Expect: Gap above <strong>40px</strong> (margins collapse to the larger, 40px)</p>
+    <div class="pair"><p class="neighbour" style="height: 30px; margin: 0 0 40px">Neighbour above</p><p id="b47" class="target" style="height: 30px; margin: 10px 0 0">Target</p></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>neighbour margin-bottom: 0; target margin-top: 20px</code><br>Click the second box. Expect: Gap above <strong>20px</strong> (margins collapse to the larger, 20px)</p>
+    <div class="pair"><p class="neighbour" style="height: 30px; margin: 0 0 0px">Neighbour above</p><p id="b48" class="target" style="height: 30px; margin: 20px 0 0">Target</p></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>neighbour margin-bottom: 20px; target margin-top: 0</code><br>Click the second box. Expect: Gap above <strong>20px</strong> (margins collapse to the larger, 20px)</p>
+    <div class="pair"><p class="neighbour" style="height: 30px; margin: 0 0 20px">Neighbour above</p><p id="b49" class="target" style="height: 30px; margin: 0px 0 0">Target</p></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>neighbour margin-bottom: 0; target margin-top: 0</code><br>Click the second box. Expect: Gap above <strong>0</strong>. <strong>Observe:</strong> no gap at all. Check whether the row is hidden or shows 0</p>
+    <div class="pair"><p class="neighbour" style="height: 30px; margin: 0 0 0px">Neighbour above</p><p id="b50" class="target" style="height: 30px; margin: 0px 0 0">Target</p></div>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Gap above: negative margins</h2>
+
+<p>Two negative margins collapse to the most negative one.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label"><code>neighbour margin-bottom: -8px; target margin-top: -20px</code><br>Click the second box. Expect: Gap above <strong>-20px</strong> (negative margins collapse to the most negative, -20px)</p>
+    <div class="pair"><p class="neighbour" style="height: 30px; margin: 0 0 -8px">Neighbour above</p><p id="b51" class="target" style="height: 30px; margin: -20px 0 0">Target</p></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>neighbour margin-bottom: -20px; target margin-top: -8px</code><br>Click the second box. Expect: Gap above <strong>-20px</strong> (negative margins collapse to the most negative, -20px)</p>
+    <div class="pair"><p class="neighbour" style="height: 30px; margin: 0 0 -20px">Neighbour above</p><p id="b52" class="target" style="height: 30px; margin: -8px 0 0">Target</p></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>neighbour margin-bottom: -8px; target margin-top: -8px</code><br>Click the second box. Expect: Gap above <strong>-8px</strong> (a tie: both margins are -8px, so the panel has specific wording)</p>
+    <div class="pair"><p class="neighbour" style="height: 30px; margin: 0 0 -8px">Neighbour above</p><p id="b53" class="target" style="height: 30px; margin: -8px 0 0">Target</p></div>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Gap above: mixed margins</h2>
+
+<p>One positive and one negative margin add together.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label"><code>neighbour margin-bottom: 30px; target margin-top: -8px</code><br>Click the second box. Expect: Gap above <strong>22px</strong> (positive and negative margins add: 30px + -8px)</p>
+    <div class="pair"><p class="neighbour" style="height: 30px; margin: 0 0 30px">Neighbour above</p><p id="b54" class="target" style="height: 30px; margin: -8px 0 0">Target</p></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>neighbour margin-bottom: -8px; target margin-top: 30px</code><br>Click the second box. Expect: Gap above <strong>22px</strong> (positive and negative margins add: 30px + -8px)</p>
+    <div class="pair"><p class="neighbour" style="height: 30px; margin: 0 0 -8px">Neighbour above</p><p id="b55" class="target" style="height: 30px; margin: 30px 0 0">Target</p></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>neighbour margin-bottom: 20px; target margin-top: -20px</code><br>Click the second box. Expect: Gap above <strong>0</strong> (positive and negative margins add: 20px + -20px). They cancel out, so the boxes touch</p>
+    <div class="pair"><p class="neighbour" style="height: 30px; margin: 0 0 20px">Neighbour above</p><p id="b56" class="target" style="height: 30px; margin: -20px 0 0">Target</p></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>neighbour margin-bottom: 10px; target margin-top: -30px</code><br>Click the second box. Expect: Gap above <strong>-20px</strong> (positive and negative margins add: 10px + -30px)</p>
+    <div class="pair"><p class="neighbour" style="height: 30px; margin: 0 0 10px">Neighbour above</p><p id="b57" class="target" style="height: 30px; margin: -30px 0 0">Target</p></div>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Gap above: overlap and the documented limit</h2>
+
+<p>A negative gap means the boxes overlap. When the overlap is larger than the neighbour's own height, the target ends up starting above the neighbour's top edge, so the tool shows no gap row. That is the documented limit, not a bug.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label"><code>neighbour margin-bottom: 0; target margin-top: -20px</code><br>Click the second box. Expect: Gap above <strong>-20px</strong>. Overlap of 20px. The target starts 10px below the neighbour's top edge</p>
+    <div class="pair"><p class="neighbour" style="height: 30px; margin: 0 0 0px">Neighbour above</p><p id="b58" class="target" style="height: 30px; margin: -20px 0 0">Target</p></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>neighbour margin-bottom: 0; target margin-top: -40px; heights 100px and 30px</code><br>Click the second box. Expect: Gap above <strong>-40px</strong>. The neighbour is 100px tall, so the target still starts inside it. A negative gap larger than the target's own height is fine when the neighbour is taller</p>
+    <div class="pair"><p class="neighbour" style="height: 100px; margin: 0 0 0px">Neighbour above</p><p id="b59" class="target" style="height: 30px; margin: -40px 0 0">Target</p></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>neighbour margin-bottom: 0; target margin-top: -30px</code><br>Click the second box. Expect: Gap above <strong>-30px</strong>. <strong>Observe:</strong> the target starts exactly at the neighbour's top edge, which is the boundary of the limit</p>
+    <div class="pair"><p class="neighbour" style="height: 30px; margin: 0 0 0px">Neighbour above</p><p id="b60" class="target" style="height: 30px; margin: -30px 0 0">Target</p></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>neighbour margin-bottom: 0; target margin-top: -40px</code><br>Click the second box. Expect: <strong>No Gap above row.</strong> The target would start above the neighbour's top edge, which the tool does not treat as a gap by design. Documented limit. Margin of -40px is bigger than the 30px neighbour</p>
+    <div class="pair"><p class="neighbour" style="height: 30px; margin: 0 0 0px">Neighbour above</p><p id="b61" class="target" style="height: 30px; margin: -40px 0 0">Target</p></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>neighbour margin-bottom: -40px; target margin-top: 0</code><br>Click the second box. Expect: <strong>No Gap above row.</strong> The target would start above the neighbour's top edge, which the tool does not treat as a gap by design. Documented limit. Same result when the negative margin is on the neighbour instead</p>
+    <div class="pair"><p class="neighbour" style="height: 30px; margin: 0 0 -40px">Neighbour above</p><p id="b62" class="target" style="height: 30px; margin: 0px 0 0">Target</p></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>neighbour margin-bottom: 0; target margin-top: -40px; heights 30px and 100px</code><br>Click the second box. Expect: Gap above <strong>-40px</strong>. <strong>Observe:</strong> the target is 100px tall and starts 10px above the neighbour's top edge. By the same rule there should be no Gap above row</p>
+    <div class="pair"><p class="neighbour" style="height: 30px; margin: 0 0 0px">Neighbour above</p><p id="b63" class="target" style="height: 100px; margin: -40px 0 0">Target</p></div>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Gap above: where margins do not collapse</h2>
+
+<p>Flex items and inline-blocks keep their margins separate. A box with nothing above it has no gap row.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label"><code>neighbour margin-bottom: 30px; target margin-top: 20px; flex column</code><br>Click the second box. Expect: Gap above <strong>50px</strong> (margins do not collapse here, so they add up)</p>
+    <div class="pair pairflex" style="gap: 0px"><p class="neighbour" style="height: 30px; margin: 0 0 30px">Neighbour above</p><p id="b64" class="target" style="height: 30px; margin: 20px 0 0">Target</p></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>neighbour margin-bottom: 0; target margin-top: 0; flex column, gap 12px</code><br>Click the second box. Expect: Gap above <strong>12px</strong> (margins do not collapse here, so they add up). Only the flex gap separates the boxes</p>
+    <div class="pair pairflex" style="gap: 12px"><p class="neighbour" style="height: 30px; margin: 0 0 0px">Neighbour above</p><p id="b65" class="target" style="height: 30px; margin: 0px 0 0">Target</p></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>neighbour margin-bottom: 30px; target margin-top: 20px; target is inline-block</code><br>Click the second box. Expect: Gap above <strong>50px</strong> (margins do not collapse here, so they add up). Inline-block does not collapse with a block above it</p>
+    <div class="pair"><p class="neighbour" style="height: 30px; margin: 0 0 30px">Neighbour above</p><p id="b66" class="target" style="display: inline-block; height: 30px; width: 60%; margin: 20px 0 0">Target</p></div>
+  </div>
+  <div class="sample">
+    <p class="label"><code>first child in its container</code><br>Click the box. Expect: <strong>No Gap above row</strong>, because there is nothing above it</p>
+    <div class="pair"><p id="firstchild" class="target" style="margin: 0; height: 30px">Only box</p></div>
+  </div>
+</div>
+
+
+<!-- section -->
+
+
+<h2>Pointer suppression</h2>
+
+<p>While the bookmarklet is active, pointer activation should be suppressed so clicking a control inspects it instead of using it. Try each control with the bookmarklet on, then press Esc and try again.</p>
+
+<div class="example">
+  <div class="sample">
+    <p class="label">Link<br>Expect: <strong>Active:</strong> the page does not jump and no message appears. <strong>After Esc:</strong> the message appears</p>
+    <p><a href="#link-followed">Follow this link</a></p>
+    <p id="link-followed" class="followed" role="status">The link was followed.</p>
+  </div>
+  <div class="sample">
+    <p class="label">Details toggle<br>Expect: <strong>Active:</strong> stays closed. <strong>After Esc:</strong> opens</p>
+    <details>
+      <summary>Toggle this</summary>
+      <p>The details element opened.</p>
+    </details>
+  </div>
+  <div class="sample">
+    <p class="label">Checkbox and label<br>Expect: <strong>Active:</strong> stays unchecked, whether you click the box or the label. <strong>After Esc:</strong> toggles</p>
+    <p><input type="checkbox" id="suppress-check"> <label for="suppress-check">Check this box</label></p>
+  </div>
+  <div class="sample">
+    <p class="label">Event counter<br>Expect: <strong>Active:</strong> every count stays 0, including double-click. <strong>After Esc:</strong> counts go up</p>
+    <div id="monitor" class="monitor">
+      <p><button type="button">Press, click or double-click here</button></p>
+      <ul>
+        <li>mousedown: <span id="count-mousedown">0</span></li>
+        <li>mouseup: <span id="count-mouseup">0</span></li>
+        <li>click: <span id="count-click">0</span></li>
+        <li>dblclick: <span id="count-dblclick">0</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+['mousedown', 'mouseup', 'click', 'dblclick'].forEach(function (type) {
+  var output = document.getElementById('count-' + type);
+  var count = 0;
+  document.getElementById('monitor').addEventListener(type, function () {
+    count++;
+    output.textContent = count;
+  });
+});
+</script>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+</body>
+</html>
