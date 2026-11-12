@@ -28,7 +28,7 @@ hr {
 .series-navigation {
   border: 2px solid #333;
   border-left-width: 8px;
-  background: #f9f9f9;
+  background: #f5f5f5;
   padding: 1em 1.5em;
   margin: 2em 0;
 }
@@ -57,6 +57,7 @@ hr {
 <p style="font-size: .9em; color: #555;">Published: <time datetime="2026-10-21">21 October 2026</time> | Author: Russ Weakley</p>
 
 <aside class="series-navigation" aria-labelledby="series-heading">
+  <h2 id="series-heading">About this series</h2>
   <p>This article is part of a series on accessibility testing with axe-core and Playwright.</p>
   <ol>
     <li><a href="axe-core-playwright-introduction.html">Introduction to axe-core and Playwright: A tutorial series</a></li>
@@ -91,7 +92,7 @@ hr {
 
 <h3>Before you start</h3>
 
-<p>Complete <a href="#">Setting up Node.js</a> first. You should have:</p>
+<p>Complete <a href="axe-setting-up-nodejs.html">Setting up Node.js</a> first. You should have:</p>
 
 <ul>
   <li>Node.js 22.12 or higher</li>
@@ -107,7 +108,7 @@ hr {
 
 <p>The command line lets you check pages without opening them, check several pages at once, save the results to a file, and make a check pass or fail. It's also a step towards how development teams run axe-core automatically.</p>
 
-<p>Most teams don’t run axe-core from the command line day to day either. Instead, they build it into their automated tests or their CI pipeline, so checks run every time code changes. Learning the command line first makes those setups much easier to understand.</p>
+<p>Most teams don't run axe-core from the command line day to day either. Instead, they build it into their automated tests or their CI pipeline, so checks run every time code changes. Learning the command line first makes those setups much easier to understand.</p>
 
 <!-- section -->
 
@@ -160,11 +161,11 @@ hr {
 
 <h3 id="1-open-your-project-folder">Step 1. Open your project folder</h3>
 
-<p>Open Terminal (Mac) or Command Prompt (Windows), then move into the <code>axe-learning</code> folder you made in <a href="#">Setting up Node.js</a>.</p>
+<p>Open Terminal (Mac) or Command Prompt (Windows), then move into the <code>axe-learning</code> folder you made in <a href="axe-setting-up-nodejs.html">Setting up Node.js</a>.</p>
 
 <p><strong>Mac:</strong></p>
 
-<pre><code class="language-bash">cd Documents/axe-learning</code></pre>
+<pre><code class="language-bash">cd ~/Documents/axe-learning</code></pre>
 
 <p><strong>Windows:</strong></p>
 
@@ -211,7 +212,7 @@ hr {
 <p>Watch out for:</p>
 
 <ul>
-  <li>An error mentioning "session not created" means Chrome has updated since you installed ChromeDriver. Repeat the ChromeDriver steps in <a href="#">Setting up Node.js</a> with your new Chrome version.</li>
+  <li>An error mentioning "session not created" means Chrome has updated since you installed ChromeDriver. Repeat the ChromeDriver steps in <a href="axe-setting-up-nodejs.html#10-find-your-chrome-version">Setting up Node.js</a> with your new Chrome version.</li>
   <li>Keep the quotes around the ChromeDriver path.</li>
   <li>You need an internet connection, because the test page is online.</li>
 </ul>
@@ -372,11 +373,11 @@ Testing complete of 1 pages</code></pre>
 <p>Watch out for:</p>
 
 <ul>
-  <li>The command line tool checks each page as it first loads. It can't log in, open a menu or fill in a form first. For that, you need a script, which is covered in a future tutorial.</li>
+  <li>The command line tool checks each page as it first loads. It can't log in, open a menu or fill in a form first. For that, you need a script, which is covered in <a href="axe-core-with-a-playwright-script.html">Running axe-core with a Playwright script</a>.</li>
   <li>It also doesn't find pages by itself. You need to list every page you want to check.</li>
 </ul>
 
-<h3 id="video-walkthrough1">Video walkthrough: Trying different options</h3>
+<h3 id="video-walkthrough2">Video walkthrough: Trying different options</h3>
 
 <video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/console2.mp4"></video>
 
@@ -476,11 +477,11 @@ Testing complete of 1 pages</code></pre>
 
 <ul>
   <li>The exit code only tells you whether the last command succeeded or failed. Run the <code>echo</code> command straight after the axe command, before running anything else.</li>
-  <li><code>--exit</code> reports a failure if <strong>any</strong> accessibility violations are found, regardless of their impact. The Playwright tutorial will show how to fail a test only when critical or serious issues are found.</li>
+  <li><code>--exit</code> reports a failure if <strong>any</strong> accessibility violations are found, regardless of their impact. <a href="axe-core-with-a-playwright-script.html">Running axe-core with a Playwright script</a> shows how to fail a test only when critical or serious issues are found.</li>
   <li>A non-zero exit code can also mean something went wrong while running the test. Check the results or error messages to understand why the command failed.</li>
 </ul>
 
-<h3 id="video-walkthrough1">Video walkthrough: Make accessibility tests fail when issues are found</h3>
+<h3 id="video-walkthrough3">Video walkthrough: Make accessibility tests fail when issues are found</h3>
 
 <video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/console3.mp4"></video>
 
@@ -788,7 +789,7 @@ start chrome "%cd%\report-full.html"</code></pre>
   <li>If you see <code>Missing script: "report"</code>, the change to <code>package.json</code> didn't save, or the name is spelled differently.</li>
 </ul>
 
-<h3 id="video-walkthrough1">Video walkthrough: Saving and reporting</h3>
+<h3 id="video-walkthrough4">Video walkthrough: Saving and reporting</h3>
 
 <video style="max-width: 100%; height: auto;" preload="none" width="1440" height="900" poster="assets/img/poster.png" controls src="assets/mp4/console4.mp4"></video>
 

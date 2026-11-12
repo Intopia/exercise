@@ -57,6 +57,7 @@ hr {
 <p style="font-size: .9em; color: #555;">Published: <time datetime="2026-10-20">20 October 2026</time> | Author: Russ Weakley</p>
 
 <aside class="series-navigation" aria-labelledby="series-heading">
+  <h2 id="series-heading">About this series</h2>
   <p>This article is part of a series on accessibility testing with axe-core and Playwright.</p>
   <ol>
     <li><a href="axe-core-playwright-introduction.html">Introduction to axe-core and Playwright: A tutorial series</a></li>
@@ -98,7 +99,7 @@ hr {
 
 <h3>Before you start</h3>
 
-<p>You'll need Google Chrome. There's nothing to install.</p>
+<p>You'll need Google Chrome.</p>
 
 <p>If you'd like to try the optional axe DevTools exercise at the end, you'll also need the <a href="https://www.deque.com/axe/devtools/" target="_blank">axe DevTools</a> browser extension.</p>
 
@@ -422,7 +423,7 @@ document.head.appendChild(script);</code></pre>
 
 <p>The console will show <code>undefined</code>. Now paste the results into a text editor using <strong>Command + V</strong> on Mac or <strong>Ctrl + V</strong> on Windows. You'll see the full results as JSON.</p>
 
-<p>This is the same kind of data that other axe tools work with. For example, the axe command-line tool can save accessibility test results as JSON. Both approaches use axe-core to run the tests.</p>
+<p>This is the same kind of data that other axe tools work with. For example, the axe command line tool can save accessibility test results as JSON, as you'll see in <a href="axe-core-from-the-command-line.html">Running axe-core from the command line</a>. Both approaches use axe-core to run the tests.</p>
 
 <p>Watch out for:</p>
 
@@ -591,7 +592,7 @@ const results = await axe.run();</code></pre>
   <ul>
     <li>Title: Trying another page</li>
     <li>Load and run axe-core on a new page</li>
-    <li>Check the results</li>    
+    <li>Check the results</li>
   </ul>
 </details>
 

@@ -57,6 +57,7 @@ hr {
 <p style="font-size: .9em; color: #555;">Published: <time datetime="2026-10-21">21 October 2026</time> | Author: Russ Weakley</p>
 
 <aside class="series-navigation" aria-labelledby="series-heading">
+  <h2 id="series-heading">About this series</h2>
   <p>This article is part of a series on accessibility testing with axe-core and Playwright.</p>
   <ol>
     <li><a href="axe-core-playwright-introduction.html">Introduction to axe-core and Playwright: A tutorial series</a></li>
@@ -152,6 +153,16 @@ hr {
   <li>You may see warnings containing words like <strong>warn</strong> or <strong>deprecated</strong>. These don't necessarily mean something has gone wrong. Check whether the command completed successfully before moving on.</li>
 </ul>
 
+<p><strong>Choosing an editor:</strong></p>
+
+<p>Later tutorials in this series ask you to create and edit code files.</p>
+
+<ul>
+  <li>A code editor, such as <a href="https://code.visualstudio.com" target="_blank">VS Code</a>, is a good way to create and edit code files on Mac and Windows.</li>
+  <li>On Mac, avoid TextEdit. It can save files as formatted text instead of plain text.</li>
+  <li>On Windows, Notepad works for editing existing code files. However, when creating a new file, <strong>Save As</strong> may add <code>.txt</code> to the name. To avoid this, choose <strong>All files</strong> under <strong>Save as type</strong>.</li>
+</ul>
+
 <p>Watch out for:</p>
 
 <ul>
@@ -221,10 +232,7 @@ hr {
 
 <p>The accessibility tools in this tutorial use Google Chrome to check web pages, so you'll need Chrome installed.</p>
 
-<ul>
-  <li><strong>Mac:</strong> if you don't have Chrome, download it from <a href="https://www.google.com/chrome" target="_blank">google.com/chrome</a>.</li>
-  <li><strong>Windows:</strong> if you don't have Chrome, download it from <a href="https://www.google.com/chrome" target="_blank">google.com/chrome</a>.</li>
-</ul>
+<p>If you don't have Chrome, download it from <a href="https://www.google.com/chrome" target="_blank">google.com/chrome</a>.</p>
 
 
 <h3 id="5-show-file-name-extensions">Step 5. Show file name extensions (Windows only)</h3>
@@ -250,14 +258,6 @@ hr {
   <li>Click the <strong>View</strong> tab at the top.</li>
   <li>Tick the <strong>File name extensions</strong> box.</li>
 </ol>
-
-<p>Watch out for:</p>
-
-<ul>
-  <li>A code editor, such as <a href="https://code.visualstudio.com" target="_blank">VS Code</a>, is a good way to create and edit code files on Mac and Windows.</li>
-  <li>On Mac, avoid TextEdit. It can save files as formatted text instead of plain text.</li>
-  <li>On Windows, Notepad works for editing existing code files. However, when creating a new file, <strong>Save As</strong> may add <code>.txt</code> to the name. To avoid this, choose <strong>All files</strong> under <strong>Save as type</strong>.</li>
-</ul>
 
 
 <!-- section -->
@@ -373,6 +373,8 @@ hr {
 <hr>
 <h2 id="connect-to-chrome">Connect to Chrome</h2>
 
+<p>These steps are only needed for the axe command line tool. Playwright uses its own browser, which you downloaded in step 9.</p>
+
 <h3 id="10-find-your-chrome-version">Step 10. Find your Chrome version</h3>
 
 <p>The axe command line tool uses a helper program called <strong>ChromeDriver</strong> to control Chrome. ChromeDriver needs to be compatible with your version of Chrome, so let's find out which version you have.</p>
@@ -429,7 +431,7 @@ hr {
   <li><code>--chromedriver-path</code> tells axe where to find the ChromeDriver you installed in step 11.</li>
 </ul>
 
-<p>You'll need to include <code>--chromedriver-path</code> each time you run an axe check in this tutorial.</p>
+<p>You'll need to include <code>--chromedriver-path</code> each time you run the axe command line tool.</p>
 
 <p>The test may take a few seconds to complete. When it's done, you'll see any accessibility issues axe-core found, along with the total number of violations.</p>
 

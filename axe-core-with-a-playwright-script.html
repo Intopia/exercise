@@ -70,6 +70,7 @@ hr {
 <p style="font-size: .9em; color: #555;">Published: <time datetime="2026-10-23">23 October 2026</time> | Author: Russ Weakley</p>
 
 <aside class="series-navigation" aria-labelledby="series-heading">
+  <h2 id="series-heading">About this series</h2>
   <p>This article is part of a series on accessibility testing with axe-core and Playwright.</p>
   <ol>
     <li><a href="axe-core-playwright-introduction.html">Introduction to axe-core and Playwright: A tutorial series</a></li>
@@ -97,7 +98,7 @@ hr {
 
 <p>Playwright is a free tool that controls a web browser with code. It can open pages, click buttons and fill in forms, just like a person would. The <code>@axe-core/playwright</code> add-on lets you run axe-core on any page Playwright opens.</p>
 
-<p>Of the three tutorials, this one is closest to how development teams use axe-core in practice. It can become part of their automated testing process, helping them find accessibility issues as they work and prevent new code from being released when tests fail.</p>
+<p>Of the axe-core tutorials in this series, this one is closest to how development teams use axe-core in practice. It can become part of their automated testing process, helping them find accessibility issues as they work and prevent new code from being released when tests fail.</p>
 
 <h3>Before you start</h3>
 
@@ -177,7 +178,7 @@ hr {
 
 <p><strong>Mac:</strong></p>
 
-<pre><code class="language-bash">cd Documents/axe-learning</code></pre>
+<pre><code class="language-bash">cd ~/Documents/axe-learning</code></pre>
 
 <p><strong>Windows:</strong></p>
 
@@ -247,7 +248,6 @@ notepad test-page.html</code></pre>
 
     &lt;!-- ERROR 3: image with no alt attribute --&gt;
     &lt;p&gt;&lt;img src="https://placehold.co/200x200"&gt;&lt;/p&gt;
-
 
     &lt;!-- ERROR 4: text input with no label --&gt;
     &lt;p&gt;&lt;input type="text"&gt;&lt;/p&gt;
@@ -620,7 +620,7 @@ const { pathToFileURL } = require('url');
 
 <pre><code class="language-bash">npm run watch</code></pre>
 
-<p>This starts watch mode, just like step 7. Press <strong>Control + C</strong> (Mac) or <strong>Ctrl + C</strong> (Windows) to stop it.</p>
+<p>This starts watch mode, just like step 8. Press <strong>Control + C</strong> (Mac) or <strong>Ctrl + C</strong> (Windows) to stop it.</p>
 
 <p>Watch out for:</p>
 
@@ -883,14 +883,15 @@ const fs = require('fs'); // NEW: Node's built-in file tools
   const escape = s =&gt; String(s ?? '')
     .replace(/&amp;/g, '&amp;amp;')
     .replace(/&lt;/g, '&amp;lt;')
-    .replace(/&gt;/g, '&amp;gt;');
+    .replace(/&gt;/g, '&amp;gt;')
+    .replace(/"/g, '&amp;quot;');
 
   const items = important.map(v =&gt; `
     &lt;li&gt;
       &lt;h2&gt;[${v.impact}] ${escape(v.id)}&lt;/h2&gt;
       &lt;p&gt;${escape(v.help)}&lt;/p&gt;
       &lt;ul&gt;${v.nodes.map(n =&gt; `&lt;li&gt;&lt;code&gt;${escape(n.html)}&lt;/code&gt;&lt;/li&gt;`).join('')}&lt;/ul&gt;
-      &lt;p&gt;&lt;a href="${v.helpUrl}"&gt;More about ${escape(v.id)}&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;&lt;a href="${escape(v.helpUrl)}"&gt;More about ${escape(v.id)}&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;`).join('');
 
   const report = `&lt;!DOCTYPE html&gt;
