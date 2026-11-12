@@ -45,6 +45,22 @@
 <!-- section -->
 
 
+<h2 id="clearing-the-console">Clearing the console</h2>
+
+<p>If the console gets too long or crowded, you can clear it using:</p>
+
+<ul>
+  <li><b>Keyboard</b>: <kbd>Ctrl</kbd> + <kbd>L</kbd> (Windows/Linux) or <kbd>Cmd</kbd> + <kbd>K</kbd> (Mac)</li>
+  <li><b>Command</b>: type <code>clear()</code> or <code>console.clear()</code> and press Enter</li>
+  <li><b>Button</b>: click the "Clear console" icon at the top-left of the Console panel</li>
+</ul>
+
+<p>Clearing the console only clears what's on screen. axe-core and your <code>results</code> are still there, so you can carry on with the next sample.</p>
+
+
+<!-- section -->
+
+
 <h2 id="sample-1">1. Load axe-core into the page</h2>
 
 <p>Adds a script element that pulls axe-core from a CDN. Wait a second or two for it to finish loading before moving on.</p>
@@ -119,13 +135,13 @@ console.log('inapplicable:', results.inapplicable.length);</code></pre>
 <!-- section -->
 
 
-<h2 id="sample-6">6. Count the failed rules</h2>
+<h2 id="sample-6">6. Look at every failed rule</h2>
 
-<p>One number: how many rules failed.</p>
+<p>Prints every item in the violations list, each labelled with its impact and rule name.</p>
 
-<pre><code class="language-javascript">results.violations.length</code></pre>
+<pre><code class="language-javascript">results.violations.forEach(v =&gt; console.log(v.impact, v.id, v));</code></pre>
 
-<p>Expected result: The console prints a number. This counts failed rules, not failed elements. One rule can fail on many elements.</p>
+<p>Expected result: One line per failed rule, starting with its impact and rule name, such as <code>critical button-name</code>, followed by the full result. Expand any line to see its details.</p>
 
 
 <!-- section -->
@@ -230,13 +246,13 @@ console.table(
 
 <p>Everything needed in a single copy and paste: load axe-core if it isn't already on the page, run it, and show the results. It's safe to paste more than once.</p>
 
-<pre><code class="language-javascript">(async () => {
+<pre><code class="language-javascript">(async () =&gt; {
   if (!window.axe) {
     const script = document.createElement('script');
     script.src = 'https://cdn.jsdelivr.net/npm/axe-core@4.14.0/axe.min.js';
-    const loaded = new Promise((resolve, reject) => {
+    const loaded = new Promise((resolve, reject) =&gt; {
       script.onload = resolve;
-      script.onerror = () => reject(new Error('axe-core failed to load (check CSP or version)'));
+      script.onerror = () =&gt; reject(new Error('axe-core failed to load (check CSP or version)'));
     });
     document.head.appendChild(script);
     await loaded;
@@ -244,13 +260,29 @@ console.table(
   const results = await axe.run();
   window.results = results;
   console.log(`${results.violations.length} violations`);
-  console.table(results.violations.map(v => ({ id: v.id, impact: v.impact, nodes: v.nodes.length })));
+  console.table(results.violations.map(v =&gt; ({ rule: v.id, impact: v.impact, elements: v.nodes.length })));
   console.log(results);
-})();
-</code></pre>
+})();</code></pre>
 
 <p>Expected result: After a short pause, the console prints the number of violations, a table of the failed rules, then the full results object. If axe-core can't load, you'll see the error <code>axe-core failed to load (check CSP or version)</code>. The <code>results</code> variable is still available, so samples 4 to 11 will also work.</p>
 
+
+<!-- section -->
+
+
+<h2 id="reusing-the-script">Reusing the script</h2>
+
+<p>Save sample 12 as a Snippet in Chrome, so you don't need to paste it each time:</p>
+
+<ol>
+  <li>In DevTools, open the <b>Sources</b> tab.</li>
+  <li>In the left panel, select <b>Snippets</b> (click <b>&raquo;</b> if you can't see it).</li>
+  <li>Click <b>+ New snippet</b>, and name it (for example, <code>axe-scan</code>).</li>
+  <li>Paste the script and save with <kbd>Ctrl</kbd> + <kbd>S</kbd> (Windows) or <kbd>Cmd</kbd> + <kbd>S</kbd> (Mac).</li>
+  <li>To run it, right-click the snippet and choose <b>Run</b>, or press <kbd>Ctrl</kbd> + <kbd>Enter</kbd> (Windows) or <kbd>Cmd</kbd> + <kbd>Enter</kbd> (Mac).</li>
+</ol>
+
+<p>Snippets are saved in your browser, so they're still there next time you open DevTools, on any page.</p>
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 </main>

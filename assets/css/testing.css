@@ -130,6 +130,22 @@ hr {
 }
 
 /* ---------------------
+Keyboard
+----------------------*/
+
+kbd {
+  border: 0.03em solid #ccc;
+  border-radius: 0.2em;
+  padding: 0.2em 0.2em 0.1em;
+  color: #555;
+  background-image: linear-gradient(#fff, #eee);
+  box-shadow: 0.05em 0.05em 0.1em #aaa;
+  font-family: consolas, courier, monospace;
+  font-size: .95em;
+  margin: 0 .1em 0 0;
+}
+
+/* ---------------------
 Horizontal rules
 ----------------------*/
 
