@@ -39,7 +39,7 @@
 
 <h1>axe-core code samples for the browser console</h1>
 
-<p>Copy and paste these samples into the browser console, in order, on the page you want to test. Samples 1 to 3 set things up. Samples 4 to 11 explore the results. Sample 12 combines loading and reporting into one snippet.</p>
+<p>Copy and paste these samples into the browser console, in order, on the page you want to test. Samples 1 to 3 set things up. Samples 4 to 10 explore the results. Sample 11 combines loading and reporting into one snippet.</p>
 
 
 <!-- section -->
@@ -123,19 +123,7 @@ console.log('inapplicable:', results.inapplicable.length);</code></pre>
 <!-- section -->
 
 
-<h2 id="sample-5">5. Look at the first failed rule</h2>
-
-<p>Prints the first item in the violations list, so you can see what a single result looks like.</p>
-
-<pre><code class="language-javascript">console.log(results.violations[0]);</code></pre>
-
-<p>Expected result: The console prints an object. Expand it to see the rule's <code>id</code>, <code>impact</code>, <code>help</code> text and the <code>nodes</code> (elements) that failed.</p>
-
-
-<!-- section -->
-
-
-<h2 id="sample-6">6. Look at every failed rule</h2>
+<h2 id="sample-5">5. Look at every failed rule</h2>
 
 <p>Prints every item in the violations list, each labelled with its impact and rule name.</p>
 
@@ -147,7 +135,7 @@ console.log('inapplicable:', results.inapplicable.length);</code></pre>
 <!-- section -->
 
 
-<h2 id="sample-7">7. Show the violations as a table</h2>
+<h2 id="sample-6">6. Show the violations as a table</h2>
 
 <p>One row per failed rule, with the rule name, how severe it is and how many elements failed.</p>
 
@@ -165,7 +153,7 @@ console.log('inapplicable:', results.inapplicable.length);</code></pre>
 <!-- section -->
 
 
-<h2 id="sample-8">8. Filter to critical and serious</h2>
+<h2 id="sample-7">7. Filter to critical and serious</h2>
 
 <p>Keeps only the most severe failures, then shows them as a table.</p>
 
@@ -187,7 +175,7 @@ console.table(
 <!-- section -->
 
 
-<h2 id="sample-9">9. See which elements failed</h2>
+<h2 id="sample-8">8. See which elements failed</h2>
 
 <p>Lists each failed rule, then a selector for every element that failed it.</p>
 
@@ -204,7 +192,7 @@ console.table(
 <!-- section -->
 
 
-<h2 id="sample-10">10. Highlight the failing elements</h2>
+<h2 id="sample-9">9. Highlight the failing elements</h2>
 
 <p>Draws a red outline around every element that failed.</p>
 
@@ -223,7 +211,7 @@ console.table(
 <!-- section -->
 
 
-<h2 id="sample-11">11. Show fixes</h2>
+<h2 id="sample-10">10. Show fixes</h2>
 
 <p>Prints each failed rule with its plain-language help text, a link to the full rule description, and what to change on each failing element.</p>
 
@@ -242,7 +230,7 @@ console.table(
 <!-- section -->
 
 
-<h2 id="sample-12">12. Load axe and show the table in one snippet</h2>
+<h2 id="sample-11">11. Load axe and show the table in one snippet</h2>
 
 <p>Everything needed in a single copy and paste: load axe-core if it isn't already on the page, run it, and show the results. It's safe to paste more than once.</p>
 
@@ -264,7 +252,7 @@ console.table(
   console.log(results);
 })();</code></pre>
 
-<p>Expected result: After a short pause, the console prints the number of violations, a table of the failed rules, then the full results object. If axe-core can't load, you'll see the error <code>axe-core failed to load (check CSP or version)</code>. The <code>results</code> variable is still available, so samples 4 to 11 will also work.</p>
+<p>Expected result: After a short pause, the console prints the number of violations, a table of the failed rules, then the full results object. If axe-core can't load, you'll see the error <code>axe-core failed to load (check CSP or version)</code>. The <code>results</code> variable is still available, so samples 4 to 10 will also work.</p>
 
 
 <!-- section -->
@@ -272,7 +260,7 @@ console.table(
 
 <h2 id="reusing-the-script">Reusing the script</h2>
 
-<p>Save sample 12 as a Snippet in Chrome, so you don't need to paste it each time:</p>
+<p>Save sample 11 as a Snippet in Chrome, so you don't need to paste it each time:</p>
 
 <ol>
   <li>In DevTools, open the <b>Sources</b> tab.</li>
