@@ -39,7 +39,7 @@
 
 <h1>axe-core code samples for the browser console</h1>
 
-<p>Copy and paste these samples into the browser console, in order, on the page you want to test. Samples 1 to 4 set things up. Samples 5 to 10 explore the results. Sample 11 combines loading and reporting into one snippet.</p>
+<p>Copy and paste these samples into the browser console, in order, on the page you want to test. Samples 1 to 3 set things up. Samples 4 to 11 explore the results. Sample 12 combines loading and reporting into one snippet.</p>
 
 
 <!-- section -->
@@ -84,15 +84,14 @@ document.head.appendChild(script);</code></pre>
 <!-- section -->
 
 
-<h2 id="sample-4">4. Look inside the results</h2>
+<h2 id="sample-4">4. Count each list</h2>
 
-<p>The results object holds four lists. Check how many items are in each, then look at the first failed rule.</p>
+<p>The results object holds four lists. Check how many items are in each.</p>
 
 <pre><code class="language-javascript">console.log('violations:', results.violations.length);
 console.log('passes:', results.passes.length);
 console.log('incomplete:', results.incomplete.length);
-console.log('inapplicable:', results.inapplicable.length);
-console.log(results.violations[0]);</code></pre>
+console.log('inapplicable:', results.inapplicable.length);</code></pre>
 
 <p><strong>What each list holds</strong></p>
 <ul>
@@ -102,13 +101,25 @@ console.log(results.violations[0]);</code></pre>
   <li><code>inapplicable</code>: rules with nothing on the page to test</li>
 </ul>
 
-<p>Expected result: Four lines, each with a list name and a count, then the first failed rule. Expand it to see its <code>id</code>, <code>impact</code>, <code>help</code> text and the <code>nodes</code> that failed.</p>
+<p>Expected result: Four lines, each with a list name and a count.</p>
 
 
 <!-- section -->
 
 
-<h2 id="sample-5">5. Count the failed rules</h2>
+<h2 id="sample-5">5. Look at the first failed rule</h2>
+
+<p>Prints the first item in the violations list, so you can see what a single result looks like.</p>
+
+<pre><code class="language-javascript">console.log(results.violations[0]);</code></pre>
+
+<p>Expected result: The console prints an object. Expand it to see the rule's <code>id</code>, <code>impact</code>, <code>help</code> text and the <code>nodes</code> (elements) that failed.</p>
+
+
+<!-- section -->
+
+
+<h2 id="sample-6">6. Count the failed rules</h2>
 
 <p>One number: how many rules failed.</p>
 
@@ -120,7 +131,7 @@ console.log(results.violations[0]);</code></pre>
 <!-- section -->
 
 
-<h2 id="sample-6">6. Show the violations as a table</h2>
+<h2 id="sample-7">7. Show the violations as a table</h2>
 
 <p>One row per failed rule, with the rule name, how severe it is and how many elements failed.</p>
 
@@ -138,7 +149,7 @@ console.log(results.violations[0]);</code></pre>
 <!-- section -->
 
 
-<h2 id="sample-7">7. Filter to critical and serious</h2>
+<h2 id="sample-8">8. Filter to critical and serious</h2>
 
 <p>Keeps only the most severe failures, then shows them as a table.</p>
 
@@ -160,7 +171,7 @@ console.table(
 <!-- section -->
 
 
-<h2 id="sample-8">8. See which elements failed</h2>
+<h2 id="sample-9">9. See which elements failed</h2>
 
 <p>Lists each failed rule, then a selector for every element that failed it.</p>
 
@@ -177,7 +188,7 @@ console.table(
 <!-- section -->
 
 
-<h2 id="sample-9">9. Highlight the failing elements</h2>
+<h2 id="sample-10">10. Highlight the failing elements</h2>
 
 <p>Draws a red outline around every element that failed.</p>
 
@@ -196,7 +207,7 @@ console.table(
 <!-- section -->
 
 
-<h2 id="sample-10">10. Show fixes</h2>
+<h2 id="sample-11">11. Show fixes</h2>
 
 <p>Prints each failed rule with its plain-language help text, a link to the full rule description, and what to change on each failing element.</p>
 
@@ -215,28 +226,30 @@ console.table(
 <!-- section -->
 
 
-<h2 id="sample-11">11. Load axe and show the table in one snippet</h2>
+<h2 id="sample-12">12. Load axe and show the table in one snippet</h2>
 
-<p>Everything needed in a single copy and paste: load axe-core, run it when it has loaded, and show the violations as a table.</p>
+<p>Everything needed in a single copy and paste: load axe-core if it isn't already on the page, run it, and show the results. It's safe to paste more than once.</p>
 
-<pre><code class="language-javascript">var script = document.createElement('script');
-script.src =
-  'https://cdn.jsdelivr.net/npm/axe-core@4.14.0/axe.min.js';
-script.onload = async () =&gt; {
-  var results = await axe.run();
-  // keep the results for the other samples
+<pre><code class="language-javascript">(async () => {
+  if (!window.axe) {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/axe-core@4.14.0/axe.min.js';
+    const loaded = new Promise((resolve, reject) => {
+      script.onload = resolve;
+      script.onerror = () => reject(new Error('axe-core failed to load (check CSP or version)'));
+    });
+    document.head.appendChild(script);
+    await loaded;
+  }
+  const results = await axe.run();
   window.results = results;
-  console.table(
-    results.violations.map(v =&gt; ({
-      rule: v.id,
-      impact: v.impact,
-      elements: v.nodes.length
-    }))
-  );
-};
-document.head.appendChild(script);</code></pre>
+  console.log(`${results.violations.length} violations`);
+  console.table(results.violations.map(v => ({ id: v.id, impact: v.impact, nodes: v.nodes.length })));
+  console.log(results);
+})();
+</code></pre>
 
-<p>Expected result: After a short pause the console prints the violations table. The <code>results</code> variable is still available, so samples 4 to 10 will also work.</p>
+<p>Expected result: After a short pause, the console prints the number of violations, a table of the failed rules, then the full results object. If axe-core can't load, you'll see the error <code>axe-core failed to load (check CSP or version)</code>. The <code>results</code> variable is still available, so samples 4 to 11 will also work.</p>
 
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
