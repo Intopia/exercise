@@ -1,0 +1,883 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing hints and errors on checkbox groups</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+h2 {
+  font-size: 1.75rem;
+  margin: 7rem 0 1rem;
+}
+
+h3 {
+  margin: 3rem 0 1rem;
+}
+
+.example h4 {
+  margin: 0 0 1rem;
+  color: #000;
+}
+
+.example {
+  margin: 1em 0;
+}
+
+p + .example {
+  margin: 1em 0;
+}
+
+.example p {
+  margin: 0 0 .5em;
+}
+
+.error {
+  color: #b00020;
+}
+
+.status {
+  padding: 0.5em 1em;
+  border-left: 6px solid;
+  color: #000;
+}
+
+.status-invalid {
+  background: #fde7e9;
+  border-color: #b00020;
+}
+
+.status-poor {
+  background: #fff1d6;
+  border-color: #b26a00;
+}
+
+.status-good {
+  background: #e3f4e6;
+  border-color: #1b5e20;
+}
+
+.status-control {
+  background: #eceff1;
+  border-color: #546e7a;
+}
+  </style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing hints and errors on checkbox groups</h1>
+
+<p>Hints and error messages for a group of checkboxes need to be programmatically associated with the group, not just placed near it. Hints and errors use the same method, so they are tested together. Every example is pre-set in the markup, so no JavaScript is needed.</p>
+
+<p class="status status-good"><strong>Simplest approach:</strong> link the hint or error to the group with <code>aria-describedby</code>. See <a href="#recommended">Recommended practice</a>.</p>
+
+<p>Every example has a coloured box showing how to read it:</p>
+
+<p class="status status-poor"><strong>Poor practice:</strong> allowed, but not recommended.</p>
+<p class="status status-good"><strong>Acceptable:</strong> allowed, and does part or all of the job. The box says what it does and does not give you.</p>
+<p class="status status-control"><strong>Control:</strong> a baseline.</p>
+
+
+<!-- section -->
+
+
+<h2>1. Controls</h2>
+
+<p>Baselines with no hint or error shown.</p>
+
+<!-- sub-section -->
+
+<h3>Example 1.1: <code>fieldset</code></h3>
+
+<p class="status status-control"><strong>Control:</strong> A group with no hint or error shown.</p>
+
+<form action="#" class="example">
+  <fieldset>
+    <legend>Which pets do you have?</legend>
+    <div>
+      <input type="checkbox" id="c1-dog" name="c1" value="dog">
+      <label for="c1-dog">Dog</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c1-cat" name="c1" value="cat">
+      <label for="c1-cat">Cat</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c1-rabbit" name="c1" value="rabbit">
+      <label for="c1-rabbit">Rabbit</label>
+    </div>
+  </fieldset>
+</form>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c1-dog" name="c1" value="dog"&gt;
+    &lt;label for="c1-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c1-cat" name="c1" value="cat"&gt;
+    &lt;label for="c1-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c1-rabbit" name="c1" value="rabbit"&gt;
+    &lt;label for="c1-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3>Example 1.2: <code>div</code> with <code>role="group"</code></h3>
+
+<p class="status status-control"><strong>Control:</strong> A group with no hint or error shown.</p>
+
+<form action="#" class="example">
+  <div role="group" aria-labelledby="c2-label">
+    <h4 id="c2-label">Which pets do you have?</h4>
+    <div>
+      <input type="checkbox" id="c2-dog" name="c2" value="dog">
+      <label for="c2-dog">Dog</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c2-cat" name="c2" value="cat">
+      <label for="c2-cat">Cat</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c2-rabbit" name="c2" value="rabbit">
+      <label for="c2-rabbit">Rabbit</label>
+    </div>
+  </div>
+</form>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="group" aria-labelledby="c2-label"&gt;
+  &lt;h4 id="c2-label"&gt;Which pets do you have?&lt;/h4&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c2-dog" name="c2" value="dog"&gt;
+    &lt;label for="c2-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c2-cat" name="c2" value="cat"&gt;
+    &lt;label for="c2-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c2-rabbit" name="c2" value="rabbit"&gt;
+    &lt;label for="c2-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>2. Text with no association</h2>
+
+<p>The hint or error is visible, but nothing links it to the group.</p>
+
+<p class="status status-poor"><strong>None of these options is good practice.</strong></p>
+
+<!-- sub-section -->
+
+<h3>Example 2.1: Hint, not linked</h3>
+
+<p class="status status-poor"><strong>Poor practice:</strong> The hint is in a paragraph inside the group. Nothing associates it with the group, so assistive technology users may not hear it.</p>
+
+<form action="#" class="example">
+  <fieldset>
+    <legend>Which pets do you have?</legend>
+    <p>Choose at least one pet.</p>
+    <div>
+      <input type="checkbox" id="c3-dog" name="c3" value="dog">
+      <label for="c3-dog">Dog</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c3-cat" name="c3" value="cat">
+      <label for="c3-cat">Cat</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c3-rabbit" name="c3" value="rabbit">
+      <label for="c3-rabbit">Rabbit</label>
+    </div>
+  </fieldset>
+</form>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
+  &lt;p&gt;Choose at least one pet.&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c3-dog" name="c3" value="dog"&gt;
+    &lt;label for="c3-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c3-cat" name="c3" value="cat"&gt;
+    &lt;label for="c3-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c3-rabbit" name="c3" value="rabbit"&gt;
+    &lt;label for="c3-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3>Example 2.2: Error, not linked</h3>
+
+<p class="status status-poor"><strong>Poor practice:</strong> The error is in a paragraph inside the group. Nothing associates it with the group, so assistive technology users may not hear it.</p>
+
+<form action="#" class="example">
+  <fieldset>
+    <legend>Which pets do you have?</legend>
+    <p class="error">Error: Choose at least one pet.</p>
+    <div>
+      <input type="checkbox" id="c4-dog" name="c4" value="dog">
+      <label for="c4-dog">Dog</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c4-cat" name="c4" value="cat">
+      <label for="c4-cat">Cat</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c4-rabbit" name="c4" value="rabbit">
+      <label for="c4-rabbit">Rabbit</label>
+    </div>
+  </fieldset>
+</form>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
+  &lt;p class="error"&gt;Error: Choose at least one pet.&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c4-dog" name="c4" value="dog"&gt;
+    &lt;label for="c4-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c4-cat" name="c4" value="cat"&gt;
+    &lt;label for="c4-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c4-rabbit" name="c4" value="rabbit"&gt;
+    &lt;label for="c4-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>3. Error as text in the group's name</h2>
+
+<p>The error message is written into the group's name: the legend, or the labelling element.</p>
+
+<p class="status status-poor"><strong>None of these options is good practice.</strong></p>
+
+<!-- sub-section -->
+
+<h3>Example 3.1: <code>fieldset</code></h3>
+
+<p class="status status-poor"><strong>Poor practice:</strong> The error is part of the group's accessible name, so it is announced when users enter the group. But it makes the name longer and changes it whenever there is an error. Prefer <code>aria-describedby</code>.</p>
+
+<form action="#" class="example">
+  <fieldset>
+    <legend>Which pets do you have? <span class="error">Error: Choose at least one pet.</span></legend>
+    <div>
+      <input type="checkbox" id="c5-dog" name="c5" value="dog">
+      <label for="c5-dog">Dog</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c5-cat" name="c5" value="cat">
+      <label for="c5-cat">Cat</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c5-rabbit" name="c5" value="rabbit">
+      <label for="c5-rabbit">Rabbit</label>
+    </div>
+  </fieldset>
+</form>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which pets do you have? <span class="highlight">&lt;span class="error"&gt;Error: Choose at least one pet.&lt;/span&gt;</span>&lt;/legend&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c5-dog" name="c5" value="dog"&gt;
+    &lt;label for="c5-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c5-cat" name="c5" value="cat"&gt;
+    &lt;label for="c5-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c5-rabbit" name="c5" value="rabbit"&gt;
+    &lt;label for="c5-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3>Example 3.2: <code>div</code> with <code>role="group"</code></h3>
+
+<p class="status status-poor"><strong>Poor practice:</strong> The error is part of the group's accessible name, so it is announced when users enter the group. But it makes the name longer and changes it whenever there is an error. Prefer <code>aria-describedby</code>.</p>
+
+<form action="#" class="example">
+  <div role="group" aria-labelledby="c6-label">
+    <h4 id="c6-label">Which pets do you have? <span class="error">Error: Choose at least one pet.</span></h4>
+    <div>
+      <input type="checkbox" id="c6-dog" name="c6" value="dog">
+      <label for="c6-dog">Dog</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c6-cat" name="c6" value="cat">
+      <label for="c6-cat">Cat</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c6-rabbit" name="c6" value="rabbit">
+      <label for="c6-rabbit">Rabbit</label>
+    </div>
+  </div>
+</form>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="group" aria-labelledby="c6-label"&gt;
+  &lt;h4 id="c6-label"&gt;Which pets do you have? <span class="highlight">&lt;span class="error"&gt;Error: Choose at least one pet.&lt;/span&gt;</span>&lt;/h4&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c6-dog" name="c6" value="dog"&gt;
+    &lt;label for="c6-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c6-cat" name="c6" value="cat"&gt;
+    &lt;label for="c6-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c6-rabbit" name="c6" value="rabbit"&gt;
+    &lt;label for="c6-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>4. Hint linked to the group</h2>
+
+<p>The hint is linked to the group with <code>aria-describedby</code>.</p>
+
+<!-- sub-section -->
+
+<h3>Example 4.1: <code>fieldset</code></h3>
+
+<p class="status status-good"><strong>Acceptable:</strong> The hint is associated with the group with <code>aria-describedby</code>, so assistive technology can announce it as the group's description.</p>
+
+<form action="#" class="example">
+  <fieldset aria-describedby="c7-hint">
+    <legend>Which pets do you have?</legend>
+    <p id="c7-hint">Choose at least one pet.</p>
+    <div>
+      <input type="checkbox" id="c7-dog" name="c7" value="dog">
+      <label for="c7-dog">Dog</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c7-cat" name="c7" value="cat">
+      <label for="c7-cat">Cat</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c7-rabbit" name="c7" value="rabbit">
+      <label for="c7-rabbit">Rabbit</label>
+    </div>
+  </fieldset>
+</form>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset <span class="highlight">aria-describedby="c7-hint"</span>&gt;
+  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
+  &lt;p <span class="highlight">id="c7-hint"</span>&gt;Choose at least one pet.&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c7-dog" name="c7" value="dog"&gt;
+    &lt;label for="c7-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c7-cat" name="c7" value="cat"&gt;
+    &lt;label for="c7-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c7-rabbit" name="c7" value="rabbit"&gt;
+    &lt;label for="c7-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3>Example 4.2: <code>div</code> with <code>role="group"</code></h3>
+
+<p class="status status-good"><strong>Acceptable:</strong> The hint is associated with the group with <code>aria-describedby</code>, so assistive technology can announce it as the group's description.</p>
+
+<form action="#" class="example">
+  <div role="group" aria-labelledby="c8-label" aria-describedby="c8-hint">
+    <h4 id="c8-label">Which pets do you have?</h4>
+    <p id="c8-hint">Choose at least one pet.</p>
+    <div>
+      <input type="checkbox" id="c8-dog" name="c8" value="dog">
+      <label for="c8-dog">Dog</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c8-cat" name="c8" value="cat">
+      <label for="c8-cat">Cat</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c8-rabbit" name="c8" value="rabbit">
+      <label for="c8-rabbit">Rabbit</label>
+    </div>
+  </div>
+</form>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="group" aria-labelledby="c8-label" <span class="highlight">aria-describedby="c8-hint"</span>&gt;
+  &lt;h4 id="c8-label"&gt;Which pets do you have?&lt;/h4&gt;
+  &lt;p <span class="highlight">id="c8-hint"</span>&gt;Choose at least one pet.&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c8-dog" name="c8" value="dog"&gt;
+    &lt;label for="c8-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c8-cat" name="c8" value="cat"&gt;
+    &lt;label for="c8-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c8-rabbit" name="c8" value="rabbit"&gt;
+    &lt;label for="c8-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>5. Error linked to the group</h2>
+
+<p>The error is linked to the group with <code>aria-describedby</code>.</p>
+
+<!-- sub-section -->
+
+<h3>Example 5.1: <code>fieldset</code></h3>
+
+<p class="status status-good"><strong>Acceptable:</strong> The error is associated with the group with <code>aria-describedby</code>, so assistive technology can announce it as the group's description.</p>
+
+<form action="#" class="example">
+  <fieldset aria-describedby="c9-error">
+    <legend>Which pets do you have?</legend>
+    <p class="error" id="c9-error">Error: Choose at least one pet.</p>
+    <div>
+      <input type="checkbox" id="c9-dog" name="c9" value="dog">
+      <label for="c9-dog">Dog</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c9-cat" name="c9" value="cat">
+      <label for="c9-cat">Cat</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c9-rabbit" name="c9" value="rabbit">
+      <label for="c9-rabbit">Rabbit</label>
+    </div>
+  </fieldset>
+</form>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset <span class="highlight">aria-describedby="c9-error"</span>&gt;
+  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
+  &lt;p class="error" <span class="highlight">id="c9-error"</span>&gt;Error: Choose at least one pet.&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c9-dog" name="c9" value="dog"&gt;
+    &lt;label for="c9-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c9-cat" name="c9" value="cat"&gt;
+    &lt;label for="c9-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c9-rabbit" name="c9" value="rabbit"&gt;
+    &lt;label for="c9-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3>Example 5.2: <code>div</code> with <code>role="group"</code></h3>
+
+<p class="status status-good"><strong>Acceptable:</strong> The error is associated with the group with <code>aria-describedby</code>, so assistive technology can announce it as the group's description.</p>
+
+<form action="#" class="example">
+  <div role="group" aria-labelledby="c10-label" aria-describedby="c10-error">
+    <h4 id="c10-label">Which pets do you have?</h4>
+    <p class="error" id="c10-error">Error: Choose at least one pet.</p>
+    <div>
+      <input type="checkbox" id="c10-dog" name="c10" value="dog">
+      <label for="c10-dog">Dog</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c10-cat" name="c10" value="cat">
+      <label for="c10-cat">Cat</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c10-rabbit" name="c10" value="rabbit">
+      <label for="c10-rabbit">Rabbit</label>
+    </div>
+  </div>
+</form>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="group" aria-labelledby="c10-label" <span class="highlight">aria-describedby="c10-error"</span>&gt;
+  &lt;h4 id="c10-label"&gt;Which pets do you have?&lt;/h4&gt;
+  &lt;p class="error" <span class="highlight">id="c10-error"</span>&gt;Error: Choose at least one pet.&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c10-dog" name="c10" value="dog"&gt;
+    &lt;label for="c10-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c10-cat" name="c10" value="cat"&gt;
+    &lt;label for="c10-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c10-rabbit" name="c10" value="rabbit"&gt;
+    &lt;label for="c10-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>6. Hint and error linked to the group</h2>
+
+<p>One <code>aria-describedby</code> lists both IDs, separated by a space.</p>
+
+<!-- sub-section -->
+
+<h3>Example 6.1: <code>fieldset</code></h3>
+
+<p class="status status-good"><strong>Acceptable:</strong> The hint and error are associated with the group with <code>aria-describedby</code>, so assistive technology can announce them as the group's description.</p>
+
+<form action="#" class="example">
+  <fieldset aria-describedby="c11-hint c11-error">
+    <legend>Which pets do you have?</legend>
+    <p id="c11-hint">Choose at least one pet.</p>
+    <p class="error" id="c11-error">Error: Choose at least one pet.</p>
+    <div>
+      <input type="checkbox" id="c11-dog" name="c11" value="dog">
+      <label for="c11-dog">Dog</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c11-cat" name="c11" value="cat">
+      <label for="c11-cat">Cat</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c11-rabbit" name="c11" value="rabbit">
+      <label for="c11-rabbit">Rabbit</label>
+    </div>
+  </fieldset>
+</form>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset <span class="highlight">aria-describedby="c11-hint c11-error"</span>&gt;
+  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
+  &lt;p <span class="highlight">id="c11-hint"</span>&gt;Choose at least one pet.&lt;/p&gt;
+  &lt;p class="error" <span class="highlight">id="c11-error"</span>&gt;Error: Choose at least one pet.&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c11-dog" name="c11" value="dog"&gt;
+    &lt;label for="c11-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c11-cat" name="c11" value="cat"&gt;
+    &lt;label for="c11-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c11-rabbit" name="c11" value="rabbit"&gt;
+    &lt;label for="c11-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3>Example 6.2: <code>div</code> with <code>role="group"</code></h3>
+
+<p class="status status-good"><strong>Acceptable:</strong> The hint and error are associated with the group with <code>aria-describedby</code>, so assistive technology can announce them as the group's description.</p>
+
+<form action="#" class="example">
+  <div role="group" aria-labelledby="c12-label" aria-describedby="c12-hint c12-error">
+    <h4 id="c12-label">Which pets do you have?</h4>
+    <p id="c12-hint">Choose at least one pet.</p>
+    <p class="error" id="c12-error">Error: Choose at least one pet.</p>
+    <div>
+      <input type="checkbox" id="c12-dog" name="c12" value="dog">
+      <label for="c12-dog">Dog</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c12-cat" name="c12" value="cat">
+      <label for="c12-cat">Cat</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c12-rabbit" name="c12" value="rabbit">
+      <label for="c12-rabbit">Rabbit</label>
+    </div>
+  </div>
+</form>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="group" aria-labelledby="c12-label" <span class="highlight">aria-describedby="c12-hint c12-error"</span>&gt;
+  &lt;h4 id="c12-label"&gt;Which pets do you have?&lt;/h4&gt;
+  &lt;p <span class="highlight">id="c12-hint"</span>&gt;Choose at least one pet.&lt;/p&gt;
+  &lt;p class="error" <span class="highlight">id="c12-error"</span>&gt;Error: Choose at least one pet.&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c12-dog" name="c12" value="dog"&gt;
+    &lt;label for="c12-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c12-cat" name="c12" value="cat"&gt;
+    &lt;label for="c12-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c12-rabbit" name="c12" value="rabbit"&gt;
+    &lt;label for="c12-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>7. <code>aria-describedby</code> on the checkboxes</h2>
+
+<p>The hint or error is linked to the checkboxes themselves.</p>
+
+<p class="status status-poor"><strong>None of these options is good practice.</strong></p>
+
+<!-- sub-section -->
+
+<h3>Example 7.1: <code>aria-describedby</code> on each checkbox</h3>
+
+<p class="status status-poor"><strong>Poor practice:</strong> The error is repeated on every checkbox, and it is not associated with the group itself.</p>
+
+<form action="#" class="example">
+  <fieldset>
+    <legend>Which pets do you have?</legend>
+    <p class="error" id="c13-error">Error: Choose at least one pet.</p>
+    <div>
+      <input type="checkbox" id="c13-dog" name="c13" value="dog" aria-describedby="c13-error">
+      <label for="c13-dog">Dog</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c13-cat" name="c13" value="cat" aria-describedby="c13-error">
+      <label for="c13-cat">Cat</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c13-rabbit" name="c13" value="rabbit" aria-describedby="c13-error">
+      <label for="c13-rabbit">Rabbit</label>
+    </div>
+  </fieldset>
+</form>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
+  &lt;p class="error" <span class="highlight">id="c13-error"</span>&gt;Error: Choose at least one pet.&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c13-dog" name="c13" value="dog" <span class="highlight">aria-describedby="c13-error"</span>&gt;
+    &lt;label for="c13-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c13-cat" name="c13" value="cat" <span class="highlight">aria-describedby="c13-error"</span>&gt;
+    &lt;label for="c13-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c13-rabbit" name="c13" value="rabbit" <span class="highlight">aria-describedby="c13-error"</span>&gt;
+    &lt;label for="c13-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3>Example 7.2: <code>aria-describedby</code> on one checkbox only</h3>
+
+<p class="status status-poor"><strong>Poor practice:</strong> Only that checkbox has the error description, so users may think only that checkbox is in error, not the group.</p>
+
+<form action="#" class="example">
+  <fieldset>
+    <legend>Which pets do you have?</legend>
+    <p class="error" id="c14-error">Error: Choose at least one pet.</p>
+    <div>
+      <input type="checkbox" id="c14-dog" name="c14" value="dog" aria-describedby="c14-error">
+      <label for="c14-dog">Dog</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c14-cat" name="c14" value="cat">
+      <label for="c14-cat">Cat</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c14-rabbit" name="c14" value="rabbit">
+      <label for="c14-rabbit">Rabbit</label>
+    </div>
+  </fieldset>
+</form>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
+  &lt;p class="error" <span class="highlight">id="c14-error"</span>&gt;Error: Choose at least one pet.&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c14-dog" name="c14" value="dog" <span class="highlight">aria-describedby="c14-error"</span>&gt;
+    &lt;label for="c14-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c14-cat" name="c14" value="cat"&gt;
+    &lt;label for="c14-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c14-rabbit" name="c14" value="rabbit"&gt;
+    &lt;label for="c14-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2 id="recommended">8. Recommended practice</h2>
+
+<p>The same examples as section 6, repeated here so they are easy to find.</p>
+
+<!-- sub-section -->
+
+<h3>Example 8.1: <code>fieldset</code></h3>
+
+<p class="status status-good"><strong>Acceptable:</strong> The hint and error are associated with the group with <code>aria-describedby</code>, so assistive technology can announce them as the group's description.</p>
+
+<form action="#" class="example">
+  <fieldset aria-describedby="c15-hint c15-error">
+    <legend>Which pets do you have?</legend>
+    <p id="c15-hint">Choose at least one pet.</p>
+    <p class="error" id="c15-error">Error: Choose at least one pet.</p>
+    <div>
+      <input type="checkbox" id="c15-dog" name="c15" value="dog">
+      <label for="c15-dog">Dog</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c15-cat" name="c15" value="cat">
+      <label for="c15-cat">Cat</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c15-rabbit" name="c15" value="rabbit">
+      <label for="c15-rabbit">Rabbit</label>
+    </div>
+  </fieldset>
+</form>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset <span class="highlight">aria-describedby="c15-hint c15-error"</span>&gt;
+  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
+  &lt;p <span class="highlight">id="c15-hint"</span>&gt;Choose at least one pet.&lt;/p&gt;
+  &lt;p class="error" <span class="highlight">id="c15-error"</span>&gt;Error: Choose at least one pet.&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c15-dog" name="c15" value="dog"&gt;
+    &lt;label for="c15-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c15-cat" name="c15" value="cat"&gt;
+    &lt;label for="c15-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c15-rabbit" name="c15" value="rabbit"&gt;
+    &lt;label for="c15-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3>Example 8.2: <code>div</code> with <code>role="group"</code></h3>
+
+<p class="status status-good"><strong>Acceptable:</strong> The hint and error are associated with the group with <code>aria-describedby</code>, so assistive technology can announce them as the group's description.</p>
+
+<form action="#" class="example">
+  <div role="group" aria-labelledby="c16-label" aria-describedby="c16-hint c16-error">
+    <h4 id="c16-label">Which pets do you have?</h4>
+    <p id="c16-hint">Choose at least one pet.</p>
+    <p class="error" id="c16-error">Error: Choose at least one pet.</p>
+    <div>
+      <input type="checkbox" id="c16-dog" name="c16" value="dog">
+      <label for="c16-dog">Dog</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c16-cat" name="c16" value="cat">
+      <label for="c16-cat">Cat</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c16-rabbit" name="c16" value="rabbit">
+      <label for="c16-rabbit">Rabbit</label>
+    </div>
+  </div>
+</form>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="group" aria-labelledby="c16-label" <span class="highlight">aria-describedby="c16-hint c16-error"</span>&gt;
+  &lt;h4 id="c16-label"&gt;Which pets do you have?&lt;/h4&gt;
+  &lt;p <span class="highlight">id="c16-hint"</span>&gt;Choose at least one pet.&lt;/p&gt;
+  &lt;p class="error" <span class="highlight">id="c16-error"</span>&gt;Error: Choose at least one pet.&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c16-dog" name="c16" value="dog"&gt;
+    &lt;label for="c16-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c16-cat" name="c16" value="cat"&gt;
+    &lt;label for="c16-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c16-rabbit" name="c16" value="rabbit"&gt;
+    &lt;label for="c16-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+</body>
+</html>

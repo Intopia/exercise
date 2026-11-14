@@ -10,12 +10,6 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-a11y-dark.min.css" rel="stylesheet">
   <link href="assets/css/testing.css" rel="stylesheet">
   <style>
-hr {
-  border: 0;
-  border-top: 2px solid #999;
-  margin: 2em 0;
-}
-
 .copy-code-wrapper {
   margin: .5em 0 1.5em;
   font-size: .9em;
@@ -26,8 +20,7 @@ hr {
 }
 
 .series-navigation {
-  border: 2px solid #333;
-  border-left-width: 8px;
+  border-left: 3px solid #aaa;
   background: #f5f5f5;
   padding: 1em 1.5em;
   margin: 2em 0;
@@ -96,7 +89,6 @@ hr {
 
 <p>Every axe tool, from browser extensions to automated test suites, follows these same three basic steps.</p>
 
-
 <h3>Before you start</h3>
 
 <p>You'll need Google Chrome.</p>
@@ -111,7 +103,6 @@ hr {
 <!-- section -->
 
 
-<hr>
 <h2 id="whats-in-this-tutorial">What's in this tutorial</h2>
 
 <h3>Getting started</h3>
@@ -148,7 +139,6 @@ hr {
 <!-- section -->
 
 
-<hr>
 <h2 id="getting-started">Getting started</h2>
 
 <h3 id="1-open-the-test-page">Step 1. Open the test page</h3>
@@ -310,7 +300,6 @@ document.head.appendChild(script);</code></pre>
 <!-- section -->
 
 
-<hr>
 <h2 id="exploring-the-results">Exploring the results</h2>
 
 <p>The following examples are optional. They show different ways to explore and present the results, and you can try them in any order.</p>
@@ -371,7 +360,6 @@ document.head.appendChild(script);</code></pre>
 <ul>
   <li>axe-core has four impact levels: critical, serious, moderate and minor. There's no "high".</li>
 </ul>
-
 
 <h3 id="see-which-elements-failed">See which elements failed</h3>
 
@@ -528,7 +516,6 @@ ${sections}
 <!-- section -->
 
 
-<hr>
 <h2 id="trying-another-page">Trying another page</h2>
 
 <h3 id="load-and-run-on-a-new-page">Load and run axe-core on a new page</h3>
@@ -600,7 +587,6 @@ const results = await axe.run();</code></pre>
 <!-- section -->
 
 
-<hr>
 <h2 id="try-it-in-axe-devtools">Try it in axe DevTools</h2>
 
 <p>If you have the axe DevTools browser extension, run it on both test pages and compare the results. You should see the same issues, because the extension uses axe-core too.</p>

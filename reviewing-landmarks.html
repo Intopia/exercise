@@ -9,6 +9,16 @@
   <link href="assets/css/testing.css" rel="stylesheet">
 <style>
 
+body {
+  max-width: 46em;
+  margin: 1em;
+  padding: 1.5rem;
+  background: var(--colour-main);
+  border: 1px solid var(--border-main);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 10px rgba(0, 0, 0, 0.04);
+}
+
 header,
 footer,
 main,
@@ -175,7 +185,7 @@ search form {
 
 <p>The <code>&lt;form&gt;</code> element generates a <code>form</code> landmark.</p>
 
-<form action="#" aria-label="Site search">
+<form action="#" class="example" aria-label="Site search">
   <div class="form-group">
     <label class="label" for="search-this-site2">Search this site</label>
     <input class="input" type="search" id="search-this-site2">

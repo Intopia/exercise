@@ -10,12 +10,6 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-a11y-dark.min.css" rel="stylesheet">
   <link href="assets/css/testing.css" rel="stylesheet">
   <style>
-hr {
-  border: 0;
-  border-top: 2px solid #999;
-  margin: 2em 0;
-}
-
 .copy-code-wrapper {
   margin: .5em 0 1.5em;
   font-size: .9em;
@@ -26,8 +20,7 @@ hr {
 }
 
 .series-navigation {
-  border: 2px solid #333;
-  border-left-width: 8px;
+  border-left: 3px solid #aaa;
   background: #f5f5f5;
   padding: 1em 1.5em;
   margin: 2em 0;
@@ -87,7 +80,6 @@ hr {
 <!-- section -->
 
 
-
 <h2 id="what-this-tutorial-is-about">What this tutorial is about</h2>
 
 <p>In <a href="axe-core-from-the-command-line.html">Running axe-core from the command line</a>, you ran axe-core with a single command. However, the command line tool can't filter by severity, and it only checks a page when you tell it to.</p>
@@ -123,7 +115,6 @@ hr {
 <!-- section -->
 
 
-<hr>
 <h2 id="whats-in-this-tutorial">What's in this tutorial</h2>
 
 <h3>Getting started</h3>
@@ -169,7 +160,6 @@ hr {
 <!-- section -->
 
 
-<hr>
 <h2 id="getting-started">Getting started</h2>
 
 <h3 id="1-open-your-project-folder">Step 1. Open your project folder</h3>
@@ -369,7 +359,6 @@ const { pathToFileURL } = require('url');
 <!-- section -->
 
 
-<hr>
 <h2 id="building-and-running-the-check">Building and running the check</h2>
 
 <h3 id="5-show-only-critical-and-serious">Step 5. Show only critical and serious</h3>
@@ -539,7 +528,6 @@ const { pathToFileURL } = require('url');
 <!-- section -->
 
 
-<hr>
 <h2 id="running-the-check-automatically">Running the check automatically</h2>
 
 <p>So far, you've run the check yourself, each time you wanted to test the page. Development teams don't usually work that way. Their checks run automatically whenever the code changes, often as part of a CI (continuous integration) pipeline.</p>
@@ -549,8 +537,6 @@ const { pathToFileURL } = require('url');
 <div class="key-point">
   <p><strong>Accessibility checks work best when nobody has to remember to run them.</strong> Running them automatically means issues are caught as soon as they're introduced.</p>
 </div>
-
-
 
 <h3 id="8-run-the-check-whenever-the-page-changes">Step 8. Run the check whenever the page changes</h3>
 
@@ -648,7 +634,6 @@ const { pathToFileURL } = require('url');
 <!-- section -->
 
 
-<hr>
 <h2 id="fixing-the-page">Fixing the page</h2>
 
 <h3 id="10-save-a-broken-copy-of-the-test-page">Step 10. Save a broken copy of the test page</h3>
@@ -767,7 +752,6 @@ const { pathToFileURL } = require('url');
 <!-- section -->
 
 
-<hr>
 <h2 id="optional-extras">Optional extras</h2>
 
 <p>These extras build on the script you created in Step 6. Each adds a new feature, so work through them in order.</p>
@@ -965,7 +949,6 @@ start chrome "%cd%\report.html"</code></pre>
 <!-- section -->
 
 
-<hr>
 <h2 id="next-steps">Next steps</h2>
 
 <p>In real projects, developers usually put checks like this inside Playwright's own test runner, alongside their other tests. These checks can then run automatically as developers work, or when new code is submitted for review.</p>

@@ -37,7 +37,7 @@ h1:focus {
 <div class="single-page">
   <h1 tabindex="-1">Step 1: Login details</h1>
   <p><b>Step 1</b> | Step 2 | Step 3</p>
-  <form id="step-form">
+  <form class="example" id="step-form">
     <div class="form-group-small">
       <label class="label" for="name">Name</label>
       <input class="input" type="text" id="name">
@@ -63,7 +63,7 @@ function handleStepSubmit(event) {
     document.querySelector('.single-page').innerHTML = `
       <h1 tabindex="-1">Step 2: Address</h1>
       <p>Step 1 | <b>Step 2</b> | Step 3</p>
-      <form id="step-form">
+      <form class="example" id="step-form">
         <div class="form-group-small">
           <label class="label" for="address1">Address line 1</label>
           <input class="input" type="text" id="address1">
@@ -81,7 +81,7 @@ function handleStepSubmit(event) {
     document.querySelector('.single-page').innerHTML = `
       <h1 tabindex="-1">Step 3: Info about your pet</h1>
       <p>Step 1 | Step 2 | <b>Step 3</b></p>
-      <form id="step-form">
+      <form class="example" id="step-form">
         <div class="form-group-small">
           <label class="label" for="pet-name">What is your pet's name</label>
           <input class="input" type="text" id="pet-name">

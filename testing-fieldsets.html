@@ -38,7 +38,7 @@
 
 <p><b>This is a serious accessibility issue</b>. Screen reader users have no way of knowing that these radio buttons form a group or what question they are intended to answer.</p>
 
-<form action="#">
+<form action="#" class="example">
   <ul class="form-list">
     <li>
       <input type="radio" id="dog1" name="example1">
@@ -83,7 +83,7 @@
 
 <p><b>This is an accessibility issue</b>. Screen reader users may need to leave forms mode and navigate around the page to discover the nearby heading that describes the radio group.</p>
 
-<form action="#">
+<form action="#" class="example">
   <h3>Favourite animal</h3>
   <ul class="form-list">
     <li>
@@ -130,7 +130,7 @@
 
 <p><b>This is an accessibility issue</b>. Although the radios are grouped, screen reader users may still need to leave forms mode to discover the question or heading that describes the group.</p>
 
-<form action="#">
+<form action="#" class="example">
   <fieldset>
     <ul class="form-list">
       <li>
@@ -179,7 +179,7 @@
 
 <p><b>Recommended</b>. The radio group has both a programmatic group and an accessible name, allowing screen reader users to understand the question while navigating the form.</p>
 
-<form action="#">
+<form action="#" class="example">
   <fieldset>
     <legend>Favourite animal</legend>
     <ul class="form-list">
@@ -230,7 +230,7 @@
 
 <p><b>Acceptable when needed</b>. This provides an accessible group and name, but a native <code>&lt;fieldset&gt;</code> and <code>&lt;legend&gt;</code> should be preferred whenever possible.</p>
 
-<form action="#">
+<form action="#" class="example">
   <div role="radiogroup" aria-labelledby="aaa">
     <h3 id="aaa">Favourite animal</h3>
     <ul class="form-list">

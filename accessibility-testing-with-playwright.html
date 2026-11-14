@@ -11,8 +11,7 @@
   <link href="assets/css/testing.css" rel="stylesheet">
 <style>
 .series-navigation {
-  border: 2px solid #333;
-  border-left-width: 8px;
+  border-left: 3px solid #aaa;
   background: #f5f5f5;
   padding: 1em 1.5em;
   margin: 2em 0;
@@ -58,7 +57,6 @@
 <!-- section -->
 
 
-<hr>
 <h2 id="contents">Contents</h2>
 
 <ul>
@@ -80,7 +78,6 @@
 <!-- section -->
 
 
-<hr>
 <h2 id="introduction">Introduction</h2>
 
 <p>Automated accessibility testing tools, such as WAVE, axe DevTools and Lighthouse, can identify many accessibility issues.</p>
@@ -105,7 +102,6 @@
 <!-- section -->
 
 
-<hr>
 <h2 id="playwright-vs-axe-core">Playwright vs axe-core</h2>
 
 <p>axe-core is an open-source accessibility testing engine that powers tools such as the axe DevTools browser extension.</p>
@@ -184,7 +180,6 @@
 <!-- section -->
 
 
-<hr>
 <h2 id="try-the-examples-yourself">Try the examples yourself</h2>
 
 <p>You can read this resource without running any tests. However, if you'd like to see the tests pass and fail for yourself, everything you need is provided.</p>
@@ -238,7 +233,6 @@
 <!-- section -->
 
 
-<hr>
 <h2 id="example-1-every-button-has-an-accessible-name">Example 1: Every button has an accessible name</h2>
 
 <p>Every button needs an accessible name so assistive technologies can identify it. Icon-only buttons are a common source of problems. The icon may be visually clear, but without an accessible name, screen reader users may not know what the button does.</p>
@@ -362,8 +356,6 @@ Received string:  ""</code></pre>
 <!-- section -->
 
 
-
-<hr>
 <h2 id="example-2-disclosures-communicate-their-expanded-state">Example 2: Disclosures communicate their expanded state</h2>
 
 <p>A disclosure is a button that shows and hides content, such as an accordion panel or a "Read more" section. The button's <code>aria-expanded</code> attribute tells assistive technologies whether the content is currently expanded (<code>"true"</code>) or collapsed (<code>"false"</code>).</p>
@@ -450,7 +442,6 @@ Received: "false"</code></pre>
 <!-- section -->
 
 
-<hr>
 <h2 id="example-3-every-control-can-be-reached-with-the-keyboard">Example 3: Every control can be reached with the keyboard</h2>
 
 <p>Keyboard users often navigate through interactive elements using the Tab key. Links, buttons and form controls should generally be reachable this way. If a control cannot receive keyboard focus, some people may be unable to use it.</p>
@@ -553,7 +544,6 @@ test('every interactive control can be reached with the Tab key', async ({ page,
 <!-- section -->
 
 
-<hr>
 <h2 id="example-4-dialogs-manage-focus">Example 4: Dialogs manage focus</h2>
 
 <p>When a modal dialog opens, keyboard and screen reader users need focus to move into it. When it closes, focus should generally return to the element that opened it, usually a button.</p>
@@ -657,7 +647,6 @@ Received: inactive</code></pre>
 <!-- section -->
 
 
-<hr>
 <h2 id="example-5-form-errors-are-marked-and-linked">Example 5: Form errors are marked and linked</h2>
 
 <p>When someone submits a form with errors, the affected fields may display error messages and visual indicators, such as coloured borders.</p>
@@ -787,7 +776,6 @@ Error: Book a call &gt; Phone: error message should be in its accessible descrip
 <!-- section -->
 
 
-<hr>
 <h2 id="example-6-accessibility-checks-are-reused-across-a-website">Example 6: Accessibility checks are reused across a website</h2>
 
 <p>So far, each example has tested one type of component on a single page. However, real websites contain many pages with different combinations of components.</p>
@@ -983,7 +971,6 @@ Error: Help &gt; Contact support &gt; Email: should have aria-invalid="true"</co
 <!-- section -->
 
 
-<hr>
 <h2 id="practical-notes">Practical notes</h2>
 
 <p>A few additional considerations when working with Playwright:</p>
@@ -998,7 +985,6 @@ Error: Help &gt; Contact support &gt; Email: should have aria-invalid="true"</co
 <!-- section -->
 
 
-<hr>
 <h2 id="further-exploration">Further exploration</h2>
 
 <h3>Testing individual components</h3>
@@ -1023,7 +1009,6 @@ Error: Help &gt; Contact support &gt; Email: should have aria-invalid="true"</co
 <!-- section -->
 
 
-<hr>
 <h2 id="conclusion">Conclusion</h2>
 
 <p>Playwright allows developers to test accessibility-related behaviour during development, including keyboard interactions, focus management and changes in component states.</p>

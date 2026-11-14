@@ -39,7 +39,7 @@
 
 <p><b>Not recommended</b>. Sighted users have no visual indication that the field is required.</p>
 
-<form action="#">
+<form action="#" class="example">
   <div class="form-group">
     <label class="label" for="q1">What is your family name?</label>
     <input class="input" id="q1" required>
@@ -60,7 +60,7 @@
 
 <p><b>Acceptable</b>. Sighted users can identify the field as required. However, some users may not notice or understand the asterisk.</p>
 
-<form action="#">
+<form action="#" class="example">
   <div class="form-group">
     <label class="label" for="q2">What is the name of your first pet? <span style="color: #CC0000;">*</span></label>
     <input class="input" id="q2" required>
@@ -81,7 +81,7 @@
 
 <p><b>Recommended</b>. Sighted users can clearly identify that the field is required.</p>
 
-<form action="#">
+<form action="#" class="example">
   <div class="form-group">
     <label class="label" for="q3">What is your favourite colour? <span class="required">(Required)</span></label>
     <input class="input" id="q3" required>
@@ -111,7 +111,7 @@
 
 <p><b>Not recommended</b>. Screen reader users receive no programmatic indication that it is required.</p>
 
-<form action="#">
+<form action="#" class="example">
   <div class="form-group">
     <label class="label" for="q4">What is your favourite song?</label>
     <input class="input" id="q4">
@@ -132,7 +132,7 @@
 
 <p><b>Acceptable</b>. Screen reader users can determine that the field is required.</p>
 
-<form action="#">
+<form action="#" class="example">
   <div class="form-group">
     <label class="label" for="q5">What is your favourite movie? </label>
     <input class="input" id="q5" aria-required="true">
@@ -153,7 +153,7 @@
 
 <p><b>Acceptable</b>. Screen reader users can determine that the field is required.</p>
 
-<form action="#">
+<form action="#" class="example">
   <div class="form-group">
     <label class="label" for="q6">What is your favourite soft drink? </label>
     <input class="input" id="q6" required>
@@ -174,7 +174,7 @@
 
 <p><b>Not recommended</b>. Screen reader users can determine that the field is required. However, using both <code>required</code> and <code>aria-required="true"</code> is redundant.</p>
 
-<form action="#">
+<form action="#" class="example">
   <div class="form-group">
     <label class="label" for="q7">What is your favourite video game? </label>
     <input class="input" id="q7" required aria-required="true">
@@ -195,7 +195,7 @@
 
 <p><b>Not recommended</b>. Form fields are optional by default, so adding <code>aria-required="false"</code> provides no benefit.</p>
 
-<form action="#">
+<form action="#" class="example">
   <div class="form-group">
     <label class="label" for="q8">What is your favourite season?</label>
     <input class="input" id="q8" aria-required="false">
