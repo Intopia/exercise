@@ -16,16 +16,8 @@
     }
 
     .character-text-error {
-      color: #bb0000;
+      color: var(--colour-error);
       font-weight: 600;
-    }
-
-    .note {
-      background: #fff3cd;
-      border: 1px solid #ffe69c;
-      padding: 0.75em 1em;
-      border-radius: 4px;
-      margin: 1.5em 0;
     }
   </style>
 </head>
@@ -51,7 +43,7 @@
   <span class="help-text" id="comment-help">Enter up to 100 characters</span>
   <textarea class="input" id="comment" aria-describedby="comment-help" data-maxlength="100"></textarea>
   <span class="character-text" id="comment-count-visible" aria-hidden="true"></span>
-  <span class="hidden" id="comment-count-live" aria-live="polite" aria-atomic="true"></span>
+  <span class="sr-only" id="comment-count-live" aria-live="polite" aria-atomic="true"></span>
 </div>
 
 <p><a href="#">Demo link after</a></p>
