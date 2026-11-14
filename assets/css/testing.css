@@ -1,26 +1,46 @@
 /* ---------------------
-Gobal styles
+Global styles
 ----------------------*/
+
+:root {
+  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-heading: var(--font-body);
+  --font-mono: Consolas, ui-monospace, Menlo, monospace;
+  --colour-heading: #c03c0c;
+  --colour-body: #fefefe;
+  --colour-main: #fff;
+  --border-main: #e4e7eb;
+}
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  max-width: 45em;
   margin: 0;
-  padding: 1em 2em 1.5em;
-  font-size: 1.125em;
+  padding: .5em;
   line-height: 1.5;
-  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, Frutiger, 'Frutiger Linotype', Univers, Calibri, 'Gill Sans', 'Gill Sans MT', 'Myriad Pro', Myriad, 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, sans-serif;
+  font-family: var(--font-body);
+  background: var(--colour-body);
 }
+
+main {
+  max-width: 46em;
+  margin-top: 0;
+  padding: 1.5rem;
+  background: var(--colour-main);
+  border: 1px solid var(--border-main);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 10px rgba(0, 0, 0, 0.04);
+}
+
 
 /* ---------------------
 Paragraphs
 ----------------------*/
 
 p {
-  margin: 1em 0 1.5em;
+  margin: 1rem 0 1.5rem;
 }
 
 /* ---------------------
@@ -29,45 +49,40 @@ Headings
 
 h1,
 h2,
-h3 {
-  ine-height: 1.2;
-  color: #C03C0C;
+h3,
+h4 {
+  color: var(--colour-heading);
   font-weight: 600;
-  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, Frutiger, 'Frutiger Linotype', Univers, Calibri, 'Gill Sans', 'Gill Sans MT', 'Myriad Pro', Myriad, 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, sans-serif;
+  font-family: var(--font-heading);
 }
 
-h1 code,
-h2 code,
-h3 code {
-  color: #C03C0C;
+:is(h1, h2, h3, h4) code {
+  color: inherit;
 }
 
 h1 {
-  margin: 0 0 .5em;
-  font-size: 2em;
-  line-height: 1.22222222222222;
+  font-size: 2.125rem;   /* 34px */
+  margin: 0 0 1rem;     /* 0 top, 0 sides, 16px bottom */
+  line-height: 1.23529412;    /* 42px */
 }
 
 h2 {
-  margin: 2em 0 0.642857142857143em;
-  font-size: 1.55555555555556em;
-  line-height: 1.21428571428571;
+  font-size: 1.625rem;   /* 26px */
+  margin: 4rem 0 1rem;  /* 64px top, 0 sides, 16px bottom */
+  line-height: 1.23076923;    /* 32px exactly */
 }
 
-h3 {
-  margin: 1em 0 0.818181818181818em;
-  font-size: 1.22222222222222em;
-  line-height: 1.22727272727273;
+h3,
+.h3 {
+  font-size: 1.25rem;   /* 20px */
+  margin: 1.5rem 0 1rem; /* 24px top, 0 sides, 16px bottom */
+  line-height: 1.2;     /* 24px */
 }
 
 h4 {
-  margin: 0 0 1em;
-  font-size: 1em;
-}
-
-h5 {
-  margin: 0 0 1em;
-  font-size: 1em;
+  font-size: 1rem;      /* 16px */
+  margin: 1.5rem 0 1rem; /* 24px top, 0 sides, 16px bottom */
+  line-height: 1.25;    /* 20px */
 }
 
 /* ---------------------
@@ -76,49 +91,78 @@ Lists
 
 ul,
 ol {
-  margin-top: 1em;
-  margin-bottom: 1em;
+  margin-top: 1rem;      /* 16px */
+  margin-bottom: 1.5rem; /* 24px, matches paragraphs */
 }
 
-ul li,
-ol li {
-  margin-bottom: .5em;
+li {
+  margin-bottom: .5rem;  /* 8px */
+}
+
+li > ul,
+li > ol {
+  margin-top: .5rem;     /* 8px */
+  margin-bottom: 0;
+}
+
+/* ---------------------
+Description lists
+----------------------*/
+
+dl {
+  margin: 1rem 0 1.5rem;     /* 16px top, 24px bottom, matches p */
+}
+
+dt {
+  font-weight: bold;
+}
+
+dt:not(:first-child) {
+  margin-top: 1rem;          /* 16px between groups */
+}
+
+dd {
+  margin: .25rem 0 0 1.5rem; /* 4px top, 24px indent */
 }
 
 /* ---------------------
 Links
 ----------------------*/
 
-a:link,
-a:link code {
-  color: #0A7399;
-  background: transparent;
+a code {
+  color: inherit;
 }
 
-a:visited,
-a:visited code {
-  color: #086D91;
-  background: transparent;
+a {
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: 0.1em;
 }
 
-a:hover,
-a:hover code {
-  color: #007700;
-  background: transparent;
+a:link {
+  color: #0a7399;            /* 5.4:1 */
 }
 
-a:focus,
-a:focus code {
+a:visited {
+  color: #6a1b9a;            /* 9.4:1 */
+}
+
+a:hover {
+  color: #007700;            /* 5.8:1 */
+}
+
+a:focus-visible {
   color: #fff;
   background: #000;
-  outline: none;
-  box-shadow: 0 0 0 2px #fff, 0 0 0 5px #000;
+  outline: 3px solid #000;   /* 3px ring */
+  outline-offset: 2px;       /* 2px gap */
 }
 
-a:active,
-a:active code {
-  color: #AA0000;
+a:focus-visible code {
   background: transparent;
+}
+
+a:active {
+  color: #aa0000;            /* 7.8:1 */
 }
 
 /* ---------------------
@@ -126,7 +170,9 @@ Horizontal rules
 ----------------------*/
 
 hr {
-  margin: 1em 0 3em;
+  margin: 2rem 0;   /* 32px top and bottom */
+  border: 0;
+  border-top: 1px solid #767676;
 }
 
 /* ---------------------
@@ -134,69 +180,93 @@ Keyboard
 ----------------------*/
 
 kbd {
-  border: 0.03em solid #ccc;
-  border-radius: 0.2em;
-  padding: 0.2em 0.2em 0.1em;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 3px 3px 1px;
+  margin: 0 2px 0 0;
   color: #555;
   background-image: linear-gradient(#fff, #eee);
-  box-shadow: 0.05em 0.05em 0.1em #aaa;
-  font-family: consolas, courier, monospace;
-  font-size: .95em;
-  margin: 0 .1em 0 0;
+  box-shadow: 1px 1px 2px #aaa;
+  font-family: Consolas, ui-monospace, Menlo, monospace;
+  font-size: .875em;   /* 14px in body text */
 }
 
 /* ---------------------
-Horizontal rules
+Figure, figcaption
 ----------------------*/
 
 figure {
-  margin: 2em 0;
+  margin: 2rem 0;
 }
 
 figcaption {
-  margin: .5em 0 0;
+  margin: .5rem 0 0;
+}
+
+/* ---------------------
+Details, summary
+----------------------*/
+
+details {
+  margin: 1rem 0 1.5rem;     /* 16px top, 24px bottom, matches p */
 }
 
 summary {
-  margin-bottom: .5em;
   cursor: pointer;
+  font-weight: bold;
+  padding: .25rem .25rem .25rem .5rem;   /* 4px, left 8px */
+  border-radius: 3px;
+  background: #ddd;
 }
 
+details[open] > summary {
+  margin-bottom: .5rem;      /* 8px */
+}
+
+summary:focus-visible {
+  color: #fff;
+  background: #000;
+  outline: 3px solid #000;   /* 3px ring */
+  outline-offset: 2px;       /* 2px gap */
+}
+
+/* ---------------------
+Video
+----------------------*/
+
 video {
-  margin: 1.5em 0;
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem 0;   /* 24px */
 }
 
 /* ---------------------
 Pre and code
 ----------------------*/
 
+code {
+  font-family: var(--font-mono);
+  color: green;
+}
+
 pre {
-  font-size: 1em;
-  display: block;
-  background: #222;
+  font-family: var(--font-mono);
+  font-size: .875rem;       /* 14px */
+  line-height: 1.5;         /* 21px */
   color: #fff;
-  padding: 1em;
-  margin: 1em 0 36px;
+  background: #222;
+  padding: 1rem;            /* 16px */
+  margin: 1rem 0 1.5rem;    /* 16px top, 24px bottom, matches p */
   overflow: auto;
 }
 
-h1 code {
-  font-size: 0.888888888888889em;
-}
-
-h2 code {
-  font-size: 0.857142857142857em;
-}
-
-code {
-  font-size: 0.944444444444444em;
-  color: green;
-  font-family: monaco, courier, monospace;
-}
-
 pre code {
-  line-height: 1.5;
-  color: #fff;
+  font-size: inherit;       /* stops 14px × .875 compounding */
+  color: inherit;
+  background: none;
+  padding: 0;
+  border-radius: 0;
 }
 
 /* ---------------------
@@ -205,49 +275,125 @@ Tables
 
 table {
   border-collapse: collapse;
-  margin: 0;
   width: 100%;
+  margin: 1rem 0 1.5rem;   /* 16px top, 24px bottom, matches p */
   background: #fff;
 }
 
 caption {
   text-align: left;
   font-weight: bold;
-  padding: 0 0 0.5em;
-  font-size: 1.1em;
+  font-size: 1.125em;      /* 18px */
+  padding: 0 0 .5rem;      /* 8px bottom */
 }
 
 th,
 td {
   text-align: left;
-  padding: 0.5em;
-  border: 1px solid #666;
   vertical-align: top;
+  padding: .5rem;          /* 8px */
+  border: 1px solid #666;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  margin: 1rem 0 1.5rem;
+}
+
+.table-wrap table {
+  margin: 0;               /* wrapper handles spacing */
 }
 
 /* ---------------------
-Forms
+Form elements
 ----------------------*/
 
 form {
-  margin: 2em 0;
-  padding: 1em;
+  margin: 2rem 0;            /* 32px */
+  padding: 1rem;             /* 16px */
   background: #eee;
 }
 
 p + form {
-  margin: 1em 0 2em;
+  margin: 1rem 0 2rem;       /* 16px top, 32px bottom */
 }
 
 fieldset {
   margin: 0;
-  padding: 1em;
-  border: 1px solid #999;
+  padding: 1rem;
+  border: 1px solid #767676;
 }
 
 legend {
   font-weight: bold;
 }
+
+/* ---------------------
+Form classes
+----------------------*/
+
+.required {
+  color: #BB0000;
+}
+
+.label {
+  display: block;
+  margin: 0 0 .25rem;        /* 4px */
+}
+
+.input {
+  display: block;
+  width: 100%;
+  padding: .5rem;            /* 8px */
+  border: 1px solid #767676; /* 3.9:1 on #eee, 4.5:1 on white */
+  font: inherit;
+  line-height: 1.25;         /* 20px */
+}
+
+.input:hover:not(:focus) {
+  outline: 2px solid green;
+}
+
+.input:focus {
+  border-color: #000;
+  outline: 3px solid #000;
+  outline-offset: 2px;
+}
+
+.button,
+button {
+  display: inline-block;
+  padding: .75rem 1rem;      /* 12px 16px */
+  border: 1px solid transparent; /* visible in forced colours */
+  border-radius: 3px;
+  background: blue;          /* 8.6:1 */
+  color: #fff !important;
+  text-decoration: none;
+  font: inherit;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.button:focus-visible,
+button:focus-visible {
+  background: #000;
+  outline: 3px solid #000;
+  outline-offset: 2px;
+}
+
+.button:hover,
+button:hover {
+  background: green;         /* 5.1:1 */
+}
+
+.button:active,
+button:active {
+  background: #aa0000;       /* 7.8:1 */
+}
+
+/* ---------------------
+Form groups and form lists - containers within forms
+----------------------*/
 
 .form-group {
   margin: 0;
@@ -267,68 +413,9 @@ legend {
   list-style: none;
 }
 
-.label {
-  display: block;
-  margin: 0 0 0.3em;
-}
-
-.input {
-  display: block;
-  width: 100%;
-  padding: 0.5em;
-  border: 1px solid #999;
-  font-size: 1em;
-  line-height: 1;
-  font-family: helvetica, arial, sans-serif;
-}
-
-.input:focus {
-  border: 1px solid #000;
-  outline: 0;
-  box-shadow: 0 0 0 2px #fff, 0 0 0 5px #000;
-}
-
-.input:hover {
-  outline: 2px solid green;
-}
-
-.button,
-button {
-  display: inline-block;
-  padding: 0.75em 1em;
-  border: 0;
-  background: blue;
-  color: #fff !important;
-  text-decoration: none;
-  border-radius: 0.2em;
-  font-size: 1em;
-  line-height: 1;
-  font-family: helvetica, arial, sans-serif;
-  cursor: pointer;
-}
-
-.button:focus,
-button:focus {
-  background: #000;
-  color: #fff;
-  outline: none;
-  box-shadow: 0 0 0 2px #fff, 0 0 0 5px #000;
-}
-
-.button:hover,
-button:hover {
-  background: green;
-  color: #fff;
-}
-
-.button:active,
-button:active {
-  background: red;
-  color: #fff;
-}
 
 /* ---------------------
-Help and errors
+Help text and error messages
 ----------------------*/
 
 .help-text {
@@ -345,6 +432,10 @@ Help and errors
   color: #BB0000;
 }
 
+/* ---------------------
+Code highlights and comments
+----------------------*/
+
 .codeHighlight,
 .highlight {
   background: rgba(255, 255, 0, .3);
@@ -355,6 +446,10 @@ Help and errors
 .comment {
   color: #999;
 }
+
+/* ---------------------
+Badges
+----------------------*/
 
 .fail {
   color: #CC0000;
@@ -372,10 +467,6 @@ Help and errors
 
 .green {
   color: #007700;
-}
-
-.required {
-  color: #BB0000;
 }
 
 /* ---------------------
@@ -439,6 +530,22 @@ Hidden
   clip-path: inset(50%) !important;
   border: 0 !important;
 }
+
+/*
+.sr-only-focusable:not(:focus):not(:focus-within) {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  border: 0 !important;
+}
+*/
+
 
 /* ---------------------
 Testing text contrast
@@ -554,23 +661,6 @@ Testing use of color
   background-repeat: no-repeat;
   background-position: center center;
 }
-
-/* ---------------------
-Testing headings
-----------------------*/
-
-.h3 {
-  margin: 1em 0 0.5em;
-  font-size: 1.1em;
-}
-
-.h3 {
-  line-height: 1.2;
-  color: #C03C0C;
-  font-weight: 600;
-  font-family: source sans pro,helvetica neue,Helvetica,Arial,Frutiger,frutiger linotype,Univers,Calibri,gill sans,gill sans mt,myriad pro,Myriad,dejavu sans condensed,liberation sans,nimbus sans l,Tahoma,Geneva,sans-serif;
-}
-
 
 /* ---------------------
 Testing images
@@ -741,29 +831,6 @@ a.bookmarklet:active {
 }
 
 /* ----------- 
-Details
------------ */
-
-details {
-  margin: 1em 0;
-}
-
-summary {
-  cursor: pointer;
-  font-weight: bold;
-  padding: 0.25em 0.25em 0.25em .5em;
-  border-radius: 0.2em;
-  background: #ddd;
-}
-
-summary:focus {
-  background: #000;
-  color: #fff;
-  outline: none;
-  box-shadow: 0 0 0 2px #fff, 0 0 0 5px #000;
-}
-
-/* ----------- 
 Intopia logo
 ----------- */
 
@@ -779,7 +846,7 @@ a.intopia-home-link:focus {
 }
 
 .intopia-logo {
-  width: 180px;
+  width: 140px;
 }
 
 /* ----------- 

@@ -1,0 +1,961 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing required on checkbox groups</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+h2 {
+  font-size: 32px;
+}
+h3 {
+  margin-top: 1.7em;
+}
+.example fieldset {
+  margin: 0 0 1em;
+}
+.example form p {
+  margin: 0.5em 0;
+}
+.error {
+  color: #b00020;
+}
+.status {
+  padding: 0.5em 1em;
+  border-left: 6px solid;
+  color: #000;
+}
+.status-invalid {
+  background: #fde7e9;
+  border-color: #b00020;
+}
+.status-poor {
+  background: #fff1d6;
+  border-color: #b26a00;
+}
+.status-good {
+  background: #e3f4e6;
+  border-color: #1b5e20;
+}
+.status-control {
+  background: #eceff1;
+  border-color: #546e7a;
+}
+  </style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing required on checkbox groups</h1>
+
+<p>There is no valid native HTML or ARIA way to mark a checkbox group as <q>at least one required</q>. The examples below show what each technique does and does not do. Submit each form to test native validation.</p>
+
+<p>Every example has a coloured box showing how to read it:</p>
+
+<p class="status status-invalid"><strong>Invalid:</strong> not allowed by the HTML or ARIA specifications.</p>
+<p class="status status-poor"><strong>Poor practice:</strong> allowed, but not recommended.</p>
+<p class="status status-good"><strong>Acceptable:</strong> allowed, and does part or all of the job. The box says what it does and does not give you.</p>
+<p class="status status-control"><strong>Control:</strong> a baseline with no requirement defined.</p>
+
+
+<!-- section -->
+
+
+<h2>Controls</h2>
+
+<p>Baselines with no requirement defined.</p>
+
+
+<!-- section -->
+
+
+<h3>Example 1: <code>fieldset</code></h3>
+
+<p class="status status-control"><strong>Control:</strong> A <code>fieldset</code> with a <code>legend</code>. No requirement is defined.</p>
+
+<div class="example">
+  <form action="#">
+    <fieldset>
+      <legend>Which pets do you have?</legend>
+      <div>
+        <input type="checkbox" id="c1-dog" name="c1" value="dog">
+        <label for="c1-dog">Dog</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c1-cat" name="c1" value="cat">
+        <label for="c1-cat">Cat</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c1-rabbit" name="c1" value="rabbit">
+        <label for="c1-rabbit">Rabbit</label>
+      </div>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c1-dog" name="c1" value="dog"&gt;
+    &lt;label for="c1-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c1-cat" name="c1" value="cat"&gt;
+    &lt;label for="c1-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c1-rabbit" name="c1" value="rabbit"&gt;
+    &lt;label for="c1-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 2: <code>div</code> with <code>role="group"</code></h3>
+
+<p class="status status-control"><strong>Control:</strong> A <code>div</code> named with <code>aria-labelledby</code>. No requirement is defined.</p>
+
+<div class="example">
+  <form action="#">
+    <div role="group" aria-labelledby="c2-label">
+      <p id="c2-label">Which pets do you have?</p>
+      <div>
+        <input type="checkbox" id="c2-dog" name="c2" value="dog">
+        <label for="c2-dog">Dog</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c2-cat" name="c2" value="cat">
+        <label for="c2-cat">Cat</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c2-rabbit" name="c2" value="rabbit">
+        <label for="c2-rabbit">Rabbit</label>
+      </div>
+    </div>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="group" aria-labelledby="c2-label"&gt;
+  &lt;p id="c2-label"&gt;Which pets do you have?&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c2-dog" name="c2" value="dog"&gt;
+    &lt;label for="c2-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c2-cat" name="c2" value="cat"&gt;
+    &lt;label for="c2-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c2-rabbit" name="c2" value="rabbit"&gt;
+    &lt;label for="c2-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Requirement as text</h2>
+
+<p>The requirement is written in the visible text.</p>
+
+
+<!-- section -->
+
+
+<h3>Example 3: <code>fieldset</code></h3>
+
+<p class="status status-good"><strong>Acceptable:</strong> The requirement is in the group's accessible name, so it is available in text and associated with the group (WCAG 1.3.1 and 3.3.2). It does not expose a required state to assistive technology.</p>
+
+<div class="example">
+  <form action="#">
+    <fieldset>
+      <legend>Which pets do you have? (required)</legend>
+      <div>
+        <input type="checkbox" id="c3-dog" name="c3" value="dog">
+        <label for="c3-dog">Dog</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c3-cat" name="c3" value="cat">
+        <label for="c3-cat">Cat</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c3-rabbit" name="c3" value="rabbit">
+        <label for="c3-rabbit">Rabbit</label>
+      </div>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which pets do you have? <span class="highlight">(required)</span>&lt;/legend&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c3-dog" name="c3" value="dog"&gt;
+    &lt;label for="c3-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c3-cat" name="c3" value="cat"&gt;
+    &lt;label for="c3-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c3-rabbit" name="c3" value="rabbit"&gt;
+    &lt;label for="c3-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 4: <code>div</code> with <code>role="group"</code></h3>
+
+<p class="status status-good"><strong>Acceptable:</strong> The requirement is in the group's accessible name, so it is available in text and associated with the group (WCAG 1.3.1 and 3.3.2). It does not expose a required state to assistive technology.</p>
+
+<div class="example">
+  <form action="#">
+    <div role="group" aria-labelledby="c4-label">
+      <p id="c4-label">Which pets do you have? (required)</p>
+      <div>
+        <input type="checkbox" id="c4-dog" name="c4" value="dog">
+        <label for="c4-dog">Dog</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c4-cat" name="c4" value="cat">
+        <label for="c4-cat">Cat</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c4-rabbit" name="c4" value="rabbit">
+        <label for="c4-rabbit">Rabbit</label>
+      </div>
+    </div>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="group" aria-labelledby="c4-label"&gt;
+  &lt;p id="c4-label"&gt;Which pets do you have? <span class="highlight">(required)</span>&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c4-dog" name="c4" value="dog"&gt;
+    &lt;label for="c4-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c4-cat" name="c4" value="cat"&gt;
+    &lt;label for="c4-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c4-rabbit" name="c4" value="rabbit"&gt;
+    &lt;label for="c4-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 5: Text outside the group</h3>
+
+<p class="status status-poor"><strong>Poor practice:</strong> The requirement is in a paragraph before the <code>fieldset</code>. Nothing associates it with the group.</p>
+
+<div class="example">
+  <form action="#">
+    <p>Required: Choose at least one pet.</p>
+    <fieldset>
+      <legend>Which pets do you have?</legend>
+      <div>
+        <input type="checkbox" id="c5-dog" name="c5" value="dog">
+        <label for="c5-dog">Dog</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c5-cat" name="c5" value="cat">
+        <label for="c5-cat">Cat</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c5-rabbit" name="c5" value="rabbit">
+        <label for="c5-rabbit">Rabbit</label>
+      </div>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code><span class="highlight">&lt;p&gt;Required: Choose at least one pet.&lt;/p&gt;</span>
+&lt;fieldset&gt;
+  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c5-dog" name="c5" value="dog"&gt;
+    &lt;label for="c5-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c5-cat" name="c5" value="cat"&gt;
+    &lt;label for="c5-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c5-rabbit" name="c5" value="rabbit"&gt;
+    &lt;label for="c5-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Requirement as a hint</h2>
+
+<p>The requirement is a hint linked to the group with <code>aria-describedby</code>.</p>
+
+
+<!-- section -->
+
+
+<h3>Example 6: <code>fieldset</code></h3>
+
+<p class="status status-good"><strong>Acceptable:</strong> The hint is associated with the group with <code>aria-describedby</code>, so the requirement is available in text (WCAG 1.3.1 and 3.3.2). It does not expose a required state to assistive technology.</p>
+
+<div class="example">
+  <form action="#">
+    <fieldset aria-describedby="c6-hint">
+      <legend>Which pets do you have?</legend>
+      <p id="c6-hint">Choose at least one pet.</p>
+      <div>
+        <input type="checkbox" id="c6-dog" name="c6" value="dog">
+        <label for="c6-dog">Dog</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c6-cat" name="c6" value="cat">
+        <label for="c6-cat">Cat</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c6-rabbit" name="c6" value="rabbit">
+        <label for="c6-rabbit">Rabbit</label>
+      </div>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset <span class="highlight">aria-describedby="c6-hint"</span>&gt;
+  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
+  <span class="highlight">&lt;p id="c6-hint"&gt;Choose at least one pet.&lt;/p&gt;</span>
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c6-dog" name="c6" value="dog"&gt;
+    &lt;label for="c6-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c6-cat" name="c6" value="cat"&gt;
+    &lt;label for="c6-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c6-rabbit" name="c6" value="rabbit"&gt;
+    &lt;label for="c6-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 7: <code>div</code> with <code>role="group"</code></h3>
+
+<p class="status status-good"><strong>Acceptable:</strong> The hint is associated with the group with <code>aria-describedby</code>, so the requirement is available in text (WCAG 1.3.1 and 3.3.2). It does not expose a required state to assistive technology.</p>
+
+<div class="example">
+  <form action="#">
+    <div role="group" aria-labelledby="c7-label" aria-describedby="c7-hint">
+      <p id="c7-label">Which pets do you have?</p>
+      <p id="c7-hint">Choose at least one pet.</p>
+      <div>
+        <input type="checkbox" id="c7-dog" name="c7" value="dog">
+        <label for="c7-dog">Dog</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c7-cat" name="c7" value="cat">
+        <label for="c7-cat">Cat</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c7-rabbit" name="c7" value="rabbit">
+        <label for="c7-rabbit">Rabbit</label>
+      </div>
+    </div>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="group" aria-labelledby="c7-label" <span class="highlight">aria-describedby="c7-hint"</span>&gt;
+  &lt;p id="c7-label"&gt;Which pets do you have?&lt;/p&gt;
+  <span class="highlight">&lt;p id="c7-hint"&gt;Choose at least one pet.&lt;/p&gt;</span>
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c7-dog" name="c7" value="dog"&gt;
+    &lt;label for="c7-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c7-cat" name="c7" value="cat"&gt;
+    &lt;label for="c7-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c7-rabbit" name="c7" value="rabbit"&gt;
+    &lt;label for="c7-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2><code>aria-required</code> on the container</h2>
+
+<p><code>aria-required</code> is not supported on the <code>group</code> role, which <code>fieldset</code> has implicitly.</p>
+
+<p class="status status-invalid"><strong>None of these options is valid.</strong></p>
+
+
+<!-- section -->
+
+
+<h3>Example 8: On the <code>fieldset</code></h3>
+
+<p class="status status-invalid"><strong>Invalid:</strong> <code>aria-required</code> is not supported on the <code>group</code> role, which <code>fieldset</code> has implicitly.</p>
+
+<div class="example">
+  <form action="#">
+    <fieldset aria-required="true">
+      <legend>Which pets do you have?</legend>
+      <div>
+        <input type="checkbox" id="c8-dog" name="c8" value="dog">
+        <label for="c8-dog">Dog</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c8-cat" name="c8" value="cat">
+        <label for="c8-cat">Cat</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c8-rabbit" name="c8" value="rabbit">
+        <label for="c8-rabbit">Rabbit</label>
+      </div>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset <span class="highlight">aria-required="true"</span>&gt;
+  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c8-dog" name="c8" value="dog"&gt;
+    &lt;label for="c8-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c8-cat" name="c8" value="cat"&gt;
+    &lt;label for="c8-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c8-rabbit" name="c8" value="rabbit"&gt;
+    &lt;label for="c8-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 9: On the <code>div</code> with <code>role="group"</code></h3>
+
+<p class="status status-invalid"><strong>Invalid:</strong> <code>aria-required</code> is not supported on the <code>group</code> role.</p>
+
+<div class="example">
+  <form action="#">
+    <div role="group" aria-labelledby="c9-label" aria-required="true">
+      <p id="c9-label">Which pets do you have?</p>
+      <div>
+        <input type="checkbox" id="c9-dog" name="c9" value="dog">
+        <label for="c9-dog">Dog</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c9-cat" name="c9" value="cat">
+        <label for="c9-cat">Cat</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c9-rabbit" name="c9" value="rabbit">
+        <label for="c9-rabbit">Rabbit</label>
+      </div>
+    </div>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="group" aria-labelledby="c9-label" <span class="highlight">aria-required="true"</span>&gt;
+  &lt;p id="c9-label"&gt;Which pets do you have?&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c9-dog" name="c9" value="dog"&gt;
+    &lt;label for="c9-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c9-cat" name="c9" value="cat"&gt;
+    &lt;label for="c9-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c9-rabbit" name="c9" value="rabbit"&gt;
+    &lt;label for="c9-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2><code>required</code> on the container</h2>
+
+<p><code>required</code> is an HTML attribute that is only valid on <code>input</code>, <code>select</code> and <code>textarea</code>. A role does not add HTML attributes.</p>
+
+<p class="status status-invalid"><strong>None of these options is valid.</strong></p>
+
+
+<!-- section -->
+
+
+<h3>Example 10: On the <code>fieldset</code></h3>
+
+<p class="status status-invalid"><strong>Invalid:</strong> <code>required</code> is only valid on <code>input</code>, <code>select</code> and <code>textarea</code>.</p>
+
+<div class="example">
+  <form action="#">
+    <fieldset required>
+      <legend>Which pets do you have?</legend>
+      <div>
+        <input type="checkbox" id="c10-dog" name="c10" value="dog">
+        <label for="c10-dog">Dog</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c10-cat" name="c10" value="cat">
+        <label for="c10-cat">Cat</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c10-rabbit" name="c10" value="rabbit">
+        <label for="c10-rabbit">Rabbit</label>
+      </div>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset <span class="highlight">required</span>&gt;
+  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c10-dog" name="c10" value="dog"&gt;
+    &lt;label for="c10-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c10-cat" name="c10" value="cat"&gt;
+    &lt;label for="c10-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c10-rabbit" name="c10" value="rabbit"&gt;
+    &lt;label for="c10-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 11: On the <code>div</code> with <code>role="group"</code></h3>
+
+<p class="status status-invalid"><strong>Invalid:</strong> <code>required</code> is only valid on <code>input</code>, <code>select</code> and <code>textarea</code>. A role does not add HTML attributes.</p>
+
+<div class="example">
+  <form action="#">
+    <div role="group" aria-labelledby="c11-label" required>
+      <p id="c11-label">Which pets do you have?</p>
+      <div>
+        <input type="checkbox" id="c11-dog" name="c11" value="dog">
+        <label for="c11-dog">Dog</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c11-cat" name="c11" value="cat">
+        <label for="c11-cat">Cat</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c11-rabbit" name="c11" value="rabbit">
+        <label for="c11-rabbit">Rabbit</label>
+      </div>
+    </div>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="group" aria-labelledby="c11-label" <span class="highlight">required</span>&gt;
+  &lt;p id="c11-label"&gt;Which pets do you have?&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c11-dog" name="c11" value="dog"&gt;
+    &lt;label for="c11-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c11-cat" name="c11" value="cat"&gt;
+    &lt;label for="c11-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c11-rabbit" name="c11" value="rabbit"&gt;
+    &lt;label for="c11-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Requirement on the checkboxes</h2>
+
+<p>Attributes on the checkboxes themselves. Each checkbox is its own control, so a requirement on a checkbox applies to that checkbox only.</p>
+
+<p class="status status-poor"><strong>None of these options is good practice.</strong></p>
+
+
+<!-- section -->
+
+
+<h3>Example 12: <code>aria-required</code> on each checkbox</h3>
+
+<p class="status status-poor"><strong>Poor practice:</strong> It marks every checkbox as required, which implies all of them must be ticked.</p>
+
+<div class="example">
+  <form action="#">
+    <fieldset>
+      <legend>Which pets do you have?</legend>
+      <div>
+        <input type="checkbox" id="c12-dog" name="c12" value="dog" aria-required="true">
+        <label for="c12-dog">Dog</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c12-cat" name="c12" value="cat" aria-required="true">
+        <label for="c12-cat">Cat</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c12-rabbit" name="c12" value="rabbit" aria-required="true">
+        <label for="c12-rabbit">Rabbit</label>
+      </div>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c12-dog" name="c12" value="dog" <span class="highlight">aria-required="true"</span>&gt;
+    &lt;label for="c12-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c12-cat" name="c12" value="cat" <span class="highlight">aria-required="true"</span>&gt;
+    &lt;label for="c12-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c12-rabbit" name="c12" value="rabbit" <span class="highlight">aria-required="true"</span>&gt;
+    &lt;label for="c12-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 13: <code>aria-required</code> on one checkbox only</h3>
+
+<p class="status status-poor"><strong>Poor practice:</strong> It marks only that checkbox as required. It says nothing about the group.</p>
+
+<div class="example">
+  <form action="#">
+    <fieldset>
+      <legend>Which pets do you have?</legend>
+      <div>
+        <input type="checkbox" id="c13-dog" name="c13" value="dog" aria-required="true">
+        <label for="c13-dog">Dog</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c13-cat" name="c13" value="cat">
+        <label for="c13-cat">Cat</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c13-rabbit" name="c13" value="rabbit">
+        <label for="c13-rabbit">Rabbit</label>
+      </div>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c13-dog" name="c13" value="dog" <span class="highlight">aria-required="true"</span>&gt;
+    &lt;label for="c13-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c13-cat" name="c13" value="cat"&gt;
+    &lt;label for="c13-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c13-rabbit" name="c13" value="rabbit"&gt;
+    &lt;label for="c13-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 14: <code>required</code> on each checkbox</h3>
+
+<p class="status status-poor"><strong>Poor practice:</strong> Native validation forces every checkbox to be ticked before the form submits.</p>
+
+<div class="example">
+  <form action="#">
+    <fieldset>
+      <legend>Which pets do you have?</legend>
+      <div>
+        <input type="checkbox" id="c14-dog" name="c14" value="dog" required>
+        <label for="c14-dog">Dog</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c14-cat" name="c14" value="cat" required>
+        <label for="c14-cat">Cat</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c14-rabbit" name="c14" value="rabbit" required>
+        <label for="c14-rabbit">Rabbit</label>
+      </div>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c14-dog" name="c14" value="dog" <span class="highlight">required</span>&gt;
+    &lt;label for="c14-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c14-cat" name="c14" value="cat" <span class="highlight">required</span>&gt;
+    &lt;label for="c14-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c14-rabbit" name="c14" value="rabbit" <span class="highlight">required</span>&gt;
+    &lt;label for="c14-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 15: <code>required</code> on one checkbox only</h3>
+
+<p class="status status-poor"><strong>Poor practice:</strong> Native validation only forces that one checkbox to be ticked. It does not make the group require at least one.</p>
+
+<div class="example">
+  <form action="#">
+    <fieldset>
+      <legend>Which pets do you have?</legend>
+      <div>
+        <input type="checkbox" id="c15-dog" name="c15" value="dog" required>
+        <label for="c15-dog">Dog</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c15-cat" name="c15" value="cat">
+        <label for="c15-cat">Cat</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c15-rabbit" name="c15" value="rabbit">
+        <label for="c15-rabbit">Rabbit</label>
+      </div>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c15-dog" name="c15" value="dog" <span class="highlight">required</span>&gt;
+    &lt;label for="c15-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c15-cat" name="c15" value="cat"&gt;
+    &lt;label for="c15-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c15-rabbit" name="c15" value="rabbit"&gt;
+    &lt;label for="c15-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Error states</h2>
+
+<p>The group is marked as invalid after a failed submission. The error text is pre-set, so no JavaScript is needed.</p>
+
+
+<!-- section -->
+
+
+<h3>Example 16: <code>aria-invalid</code> on the <code>fieldset</code></h3>
+
+<p class="status status-poor"><strong>Poor practice:</strong> <code>aria-invalid</code> is deprecated as a global attribute in ARIA 1.2 and is not supported on the <code>group</code> role. The error text is not linked to the group.</p>
+
+<div class="example">
+  <form action="#">
+    <fieldset aria-invalid="true">
+      <legend>Which pets do you have?</legend>
+      <p class="error">Error: Choose at least one pet.</p>
+      <div>
+        <input type="checkbox" id="c16-dog" name="c16" value="dog">
+        <label for="c16-dog">Dog</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c16-cat" name="c16" value="cat">
+        <label for="c16-cat">Cat</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c16-rabbit" name="c16" value="rabbit">
+        <label for="c16-rabbit">Rabbit</label>
+      </div>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset <span class="highlight">aria-invalid="true"</span>&gt;
+  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
+  &lt;p class="error"&gt;Error: Choose at least one pet.&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c16-dog" name="c16" value="dog"&gt;
+    &lt;label for="c16-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c16-cat" name="c16" value="cat"&gt;
+    &lt;label for="c16-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c16-rabbit" name="c16" value="rabbit"&gt;
+    &lt;label for="c16-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 17: <code>aria-invalid</code> on each checkbox</h3>
+
+<p class="status status-good"><strong>Acceptable:</strong> <code>aria-invalid</code> is valid on <code>checkbox</code>. Each checkbox is marked invalid and linked to the error with <code>aria-describedby</code>.</p>
+
+<div class="example">
+  <form action="#">
+    <fieldset>
+      <legend>Which pets do you have?</legend>
+      <p class="error" id="c17-error">Error: Choose at least one pet.</p>
+      <div>
+        <input type="checkbox" id="c17-dog" name="c17" value="dog" aria-invalid="true" aria-describedby="c17-error">
+        <label for="c17-dog">Dog</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c17-cat" name="c17" value="cat" aria-invalid="true" aria-describedby="c17-error">
+        <label for="c17-cat">Cat</label>
+      </div>
+      <div>
+        <input type="checkbox" id="c17-rabbit" name="c17" value="rabbit" aria-invalid="true" aria-describedby="c17-error">
+        <label for="c17-rabbit">Rabbit</label>
+      </div>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
+  &lt;p class="error" id="c17-error"&gt;Error: Choose at least one pet.&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c17-dog" name="c17" value="dog" <span class="highlight">aria-invalid="true" aria-describedby="c17-error"</span>&gt;
+    &lt;label for="c17-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c17-cat" name="c17" value="cat" <span class="highlight">aria-invalid="true" aria-describedby="c17-error"</span>&gt;
+    &lt;label for="c17-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" id="c17-rabbit" name="c17" value="rabbit" <span class="highlight">aria-invalid="true" aria-describedby="c17-error"</span>&gt;
+    &lt;label for="c17-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+</body>
+</html>

@@ -1,0 +1,1247 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing required on radio groups</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+
+h3 {
+  margin-top: 2em;
+}
+.example fieldset {
+  margin: 0 0 1em;
+}
+.example form p {
+  margin: 0.5em 0;
+}
+.error {
+  color: #b00020;
+}
+.status {
+  padding: 0.5em 1em;
+  border-left: 6px solid;
+  color: #000;
+}
+.status-invalid {
+  background: #fde7e9;
+  border-color: #b00020;
+}
+.status-poor {
+  background: #fff1d6;
+  border-color: #b26a00;
+}
+.status-good {
+  background: #e3f4e6;
+  border-color: #1b5e20;
+}
+.status-control {
+  background: #eceff1;
+  border-color: #546e7a;
+}
+  </style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing required on radio groups</h1>
+
+<p>A group of radio buttons can be a <code>fieldset</code>, a <code>div</code> with <code>role="group"</code>, or a <code>div</code> with <code>role="radiogroup"</code>. Only <code>radiogroup</code> supports <code>aria-required</code>. The examples below show what each technique does and does not do. Submit each form to test native validation.</p>
+
+<p>Every example has a coloured box showing how to read it:</p>
+
+<p class="status status-invalid"><strong>Invalid:</strong> not allowed by the HTML or ARIA specifications.</p>
+<p class="status status-poor"><strong>Poor practice:</strong> allowed, but not recommended.</p>
+<p class="status status-good"><strong>Acceptable:</strong> allowed, and does part or all of the job. The box says what it does and does not give you.</p>
+<p class="status status-control"><strong>Control:</strong> a baseline with no requirement defined.</p>
+
+
+<!-- section -->
+
+
+<h2>Controls</h2>
+
+<p>Baselines with no requirement defined.</p>
+
+
+<!-- section -->
+
+
+<h3>Example 1: <code>fieldset</code></h3>
+
+<p class="status status-control"><strong>Control:</strong> A <code>fieldset</code> with a <code>legend</code>. No requirement is defined.</p>
+
+<div class="example">
+  <form action="#">
+    <fieldset>
+      <legend>Which is your favourite pet?</legend>
+      <div>
+        <input type="radio" id="r1-dog" name="r1" value="dog">
+        <label for="r1-dog">Dog</label>
+      </div>
+      <div>
+        <input type="radio" id="r1-cat" name="r1" value="cat">
+        <label for="r1-cat">Cat</label>
+      </div>
+      <div>
+        <input type="radio" id="r1-rabbit" name="r1" value="rabbit">
+        <label for="r1-rabbit">Rabbit</label>
+      </div>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which is your favourite pet?&lt;/legend&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r1-dog" name="r1" value="dog"&gt;
+    &lt;label for="r1-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r1-cat" name="r1" value="cat"&gt;
+    &lt;label for="r1-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r1-rabbit" name="r1" value="rabbit"&gt;
+    &lt;label for="r1-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 2: <code>div</code> with <code>role="group"</code></h3>
+
+<p class="status status-control"><strong>Control:</strong> A <code>div</code> named with <code>aria-labelledby</code>. No requirement is defined.</p>
+
+<div class="example">
+  <form action="#">
+    <div role="group" aria-labelledby="r2-label">
+      <p id="r2-label">Which is your favourite pet?</p>
+      <div>
+        <input type="radio" id="r2-dog" name="r2" value="dog">
+        <label for="r2-dog">Dog</label>
+      </div>
+      <div>
+        <input type="radio" id="r2-cat" name="r2" value="cat">
+        <label for="r2-cat">Cat</label>
+      </div>
+      <div>
+        <input type="radio" id="r2-rabbit" name="r2" value="rabbit">
+        <label for="r2-rabbit">Rabbit</label>
+      </div>
+    </div>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="group" aria-labelledby="r2-label"&gt;
+  &lt;p id="r2-label"&gt;Which is your favourite pet?&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r2-dog" name="r2" value="dog"&gt;
+    &lt;label for="r2-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r2-cat" name="r2" value="cat"&gt;
+    &lt;label for="r2-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r2-rabbit" name="r2" value="rabbit"&gt;
+    &lt;label for="r2-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 3: <code>div</code> with <code>role="radiogroup"</code></h3>
+
+<p class="status status-control"><strong>Control:</strong> A <code>div</code> named with <code>aria-labelledby</code>. No requirement is defined.</p>
+
+<div class="example">
+  <form action="#">
+    <div role="radiogroup" aria-labelledby="r3-label">
+      <p id="r3-label">Which is your favourite pet?</p>
+      <div>
+        <input type="radio" id="r3-dog" name="r3" value="dog">
+        <label for="r3-dog">Dog</label>
+      </div>
+      <div>
+        <input type="radio" id="r3-cat" name="r3" value="cat">
+        <label for="r3-cat">Cat</label>
+      </div>
+      <div>
+        <input type="radio" id="r3-rabbit" name="r3" value="rabbit">
+        <label for="r3-rabbit">Rabbit</label>
+      </div>
+    </div>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="radiogroup" aria-labelledby="r3-label"&gt;
+  &lt;p id="r3-label"&gt;Which is your favourite pet?&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r3-dog" name="r3" value="dog"&gt;
+    &lt;label for="r3-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r3-cat" name="r3" value="cat"&gt;
+    &lt;label for="r3-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r3-rabbit" name="r3" value="rabbit"&gt;
+    &lt;label for="r3-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Requirement as text</h2>
+
+<p>The requirement is written in the visible text.</p>
+
+
+<!-- section -->
+
+
+<h3>Example 4: <code>fieldset</code></h3>
+
+<p class="status status-good"><strong>Acceptable:</strong> The requirement is in the group's accessible name, so it is available in text and associated with the group (WCAG 1.3.1 and 3.3.2). It does not expose a required state to assistive technology.</p>
+
+<div class="example">
+  <form action="#">
+    <fieldset>
+      <legend>Which is your favourite pet? (required)</legend>
+      <div>
+        <input type="radio" id="r4-dog" name="r4" value="dog">
+        <label for="r4-dog">Dog</label>
+      </div>
+      <div>
+        <input type="radio" id="r4-cat" name="r4" value="cat">
+        <label for="r4-cat">Cat</label>
+      </div>
+      <div>
+        <input type="radio" id="r4-rabbit" name="r4" value="rabbit">
+        <label for="r4-rabbit">Rabbit</label>
+      </div>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which is your favourite pet? <span class="highlight">(required)</span>&lt;/legend&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r4-dog" name="r4" value="dog"&gt;
+    &lt;label for="r4-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r4-cat" name="r4" value="cat"&gt;
+    &lt;label for="r4-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r4-rabbit" name="r4" value="rabbit"&gt;
+    &lt;label for="r4-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 5: <code>div</code> with <code>role="group"</code></h3>
+
+<p class="status status-good"><strong>Acceptable:</strong> The requirement is in the group's accessible name, so it is available in text and associated with the group (WCAG 1.3.1 and 3.3.2). It does not expose a required state to assistive technology.</p>
+
+<div class="example">
+  <form action="#">
+    <div role="group" aria-labelledby="r5-label">
+      <p id="r5-label">Which is your favourite pet? (required)</p>
+      <div>
+        <input type="radio" id="r5-dog" name="r5" value="dog">
+        <label for="r5-dog">Dog</label>
+      </div>
+      <div>
+        <input type="radio" id="r5-cat" name="r5" value="cat">
+        <label for="r5-cat">Cat</label>
+      </div>
+      <div>
+        <input type="radio" id="r5-rabbit" name="r5" value="rabbit">
+        <label for="r5-rabbit">Rabbit</label>
+      </div>
+    </div>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="group" aria-labelledby="r5-label"&gt;
+  &lt;p id="r5-label"&gt;Which is your favourite pet? <span class="highlight">(required)</span>&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r5-dog" name="r5" value="dog"&gt;
+    &lt;label for="r5-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r5-cat" name="r5" value="cat"&gt;
+    &lt;label for="r5-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r5-rabbit" name="r5" value="rabbit"&gt;
+    &lt;label for="r5-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 6: <code>div</code> with <code>role="radiogroup"</code></h3>
+
+<p class="status status-good"><strong>Acceptable:</strong> The requirement is in the group's accessible name, so it is available in text and associated with the group (WCAG 1.3.1 and 3.3.2). It does not expose a required state to assistive technology.</p>
+
+<div class="example">
+  <form action="#">
+    <div role="radiogroup" aria-labelledby="r6-label">
+      <p id="r6-label">Which is your favourite pet? (required)</p>
+      <div>
+        <input type="radio" id="r6-dog" name="r6" value="dog">
+        <label for="r6-dog">Dog</label>
+      </div>
+      <div>
+        <input type="radio" id="r6-cat" name="r6" value="cat">
+        <label for="r6-cat">Cat</label>
+      </div>
+      <div>
+        <input type="radio" id="r6-rabbit" name="r6" value="rabbit">
+        <label for="r6-rabbit">Rabbit</label>
+      </div>
+    </div>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="radiogroup" aria-labelledby="r6-label"&gt;
+  &lt;p id="r6-label"&gt;Which is your favourite pet? <span class="highlight">(required)</span>&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r6-dog" name="r6" value="dog"&gt;
+    &lt;label for="r6-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r6-cat" name="r6" value="cat"&gt;
+    &lt;label for="r6-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r6-rabbit" name="r6" value="rabbit"&gt;
+    &lt;label for="r6-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 7: Text outside the group</h3>
+
+<p class="status status-poor"><strong>Poor practice:</strong> The requirement is in a paragraph before the <code>fieldset</code>. Nothing associates it with the group.</p>
+
+<div class="example">
+  <form action="#">
+    <p>Required: Choose one pet.</p>
+    <fieldset>
+      <legend>Which is your favourite pet?</legend>
+      <div>
+        <input type="radio" id="r7-dog" name="r7" value="dog">
+        <label for="r7-dog">Dog</label>
+      </div>
+      <div>
+        <input type="radio" id="r7-cat" name="r7" value="cat">
+        <label for="r7-cat">Cat</label>
+      </div>
+      <div>
+        <input type="radio" id="r7-rabbit" name="r7" value="rabbit">
+        <label for="r7-rabbit">Rabbit</label>
+      </div>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code><span class="highlight">&lt;p&gt;Required: Choose one pet.&lt;/p&gt;</span>
+&lt;fieldset&gt;
+  &lt;legend&gt;Which is your favourite pet?&lt;/legend&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r7-dog" name="r7" value="dog"&gt;
+    &lt;label for="r7-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r7-cat" name="r7" value="cat"&gt;
+    &lt;label for="r7-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r7-rabbit" name="r7" value="rabbit"&gt;
+    &lt;label for="r7-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Requirement as a hint</h2>
+
+<p>The requirement is a hint linked to the group with <code>aria-describedby</code>.</p>
+
+
+<!-- section -->
+
+
+<h3>Example 8: <code>fieldset</code></h3>
+
+<p class="status status-good"><strong>Acceptable:</strong> The hint is associated with the group with <code>aria-describedby</code>, so the requirement is available in text (WCAG 1.3.1 and 3.3.2). It does not expose a required state to assistive technology.</p>
+
+<div class="example">
+  <form action="#">
+    <fieldset aria-describedby="r8-hint">
+      <legend>Which is your favourite pet?</legend>
+      <p id="r8-hint">Choose one pet.</p>
+      <div>
+        <input type="radio" id="r8-dog" name="r8" value="dog">
+        <label for="r8-dog">Dog</label>
+      </div>
+      <div>
+        <input type="radio" id="r8-cat" name="r8" value="cat">
+        <label for="r8-cat">Cat</label>
+      </div>
+      <div>
+        <input type="radio" id="r8-rabbit" name="r8" value="rabbit">
+        <label for="r8-rabbit">Rabbit</label>
+      </div>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset <span class="highlight">aria-describedby="r8-hint"</span>&gt;
+  &lt;legend&gt;Which is your favourite pet?&lt;/legend&gt;
+  <span class="highlight">&lt;p id="r8-hint"&gt;Choose one pet.&lt;/p&gt;</span>
+  &lt;div&gt;
+    &lt;input type="radio" id="r8-dog" name="r8" value="dog"&gt;
+    &lt;label for="r8-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r8-cat" name="r8" value="cat"&gt;
+    &lt;label for="r8-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r8-rabbit" name="r8" value="rabbit"&gt;
+    &lt;label for="r8-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 9: <code>div</code> with <code>role="group"</code></h3>
+
+<p class="status status-good"><strong>Acceptable:</strong> The hint is associated with the group with <code>aria-describedby</code>, so the requirement is available in text (WCAG 1.3.1 and 3.3.2). It does not expose a required state to assistive technology.</p>
+
+<div class="example">
+  <form action="#">
+    <div role="group" aria-labelledby="r9-label" aria-describedby="r9-hint">
+      <p id="r9-label">Which is your favourite pet?</p>
+      <p id="r9-hint">Choose one pet.</p>
+      <div>
+        <input type="radio" id="r9-dog" name="r9" value="dog">
+        <label for="r9-dog">Dog</label>
+      </div>
+      <div>
+        <input type="radio" id="r9-cat" name="r9" value="cat">
+        <label for="r9-cat">Cat</label>
+      </div>
+      <div>
+        <input type="radio" id="r9-rabbit" name="r9" value="rabbit">
+        <label for="r9-rabbit">Rabbit</label>
+      </div>
+    </div>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="group" aria-labelledby="r9-label" <span class="highlight">aria-describedby="r9-hint"</span>&gt;
+  &lt;p id="r9-label"&gt;Which is your favourite pet?&lt;/p&gt;
+  <span class="highlight">&lt;p id="r9-hint"&gt;Choose one pet.&lt;/p&gt;</span>
+  &lt;div&gt;
+    &lt;input type="radio" id="r9-dog" name="r9" value="dog"&gt;
+    &lt;label for="r9-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r9-cat" name="r9" value="cat"&gt;
+    &lt;label for="r9-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r9-rabbit" name="r9" value="rabbit"&gt;
+    &lt;label for="r9-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 10: <code>div</code> with <code>role="radiogroup"</code></h3>
+
+<p class="status status-good"><strong>Acceptable:</strong> The hint is associated with the group with <code>aria-describedby</code>, so the requirement is available in text (WCAG 1.3.1 and 3.3.2). It does not expose a required state to assistive technology.</p>
+
+<div class="example">
+  <form action="#">
+    <div role="radiogroup" aria-labelledby="r10-label" aria-describedby="r10-hint">
+      <p id="r10-label">Which is your favourite pet?</p>
+      <p id="r10-hint">Choose one pet.</p>
+      <div>
+        <input type="radio" id="r10-dog" name="r10" value="dog">
+        <label for="r10-dog">Dog</label>
+      </div>
+      <div>
+        <input type="radio" id="r10-cat" name="r10" value="cat">
+        <label for="r10-cat">Cat</label>
+      </div>
+      <div>
+        <input type="radio" id="r10-rabbit" name="r10" value="rabbit">
+        <label for="r10-rabbit">Rabbit</label>
+      </div>
+    </div>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="radiogroup" aria-labelledby="r10-label" <span class="highlight">aria-describedby="r10-hint"</span>&gt;
+  &lt;p id="r10-label"&gt;Which is your favourite pet?&lt;/p&gt;
+  <span class="highlight">&lt;p id="r10-hint"&gt;Choose one pet.&lt;/p&gt;</span>
+  &lt;div&gt;
+    &lt;input type="radio" id="r10-dog" name="r10" value="dog"&gt;
+    &lt;label for="r10-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r10-cat" name="r10" value="cat"&gt;
+    &lt;label for="r10-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r10-rabbit" name="r10" value="rabbit"&gt;
+    &lt;label for="r10-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2><code>aria-required</code> on the container</h2>
+
+<p>Only <code>radiogroup</code> supports <code>aria-required</code>. It is not supported on the <code>group</code> role.</p>
+
+
+<!-- section -->
+
+
+<h3>Example 11: On the <code>fieldset</code></h3>
+
+<p class="status status-invalid"><strong>Invalid:</strong> <code>aria-required</code> is not supported on the <code>group</code> role, which <code>fieldset</code> has implicitly.</p>
+
+<div class="example">
+  <form action="#">
+    <fieldset aria-required="true">
+      <legend>Which is your favourite pet?</legend>
+      <div>
+        <input type="radio" id="r11-dog" name="r11" value="dog">
+        <label for="r11-dog">Dog</label>
+      </div>
+      <div>
+        <input type="radio" id="r11-cat" name="r11" value="cat">
+        <label for="r11-cat">Cat</label>
+      </div>
+      <div>
+        <input type="radio" id="r11-rabbit" name="r11" value="rabbit">
+        <label for="r11-rabbit">Rabbit</label>
+      </div>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset <span class="highlight">aria-required="true"</span>&gt;
+  &lt;legend&gt;Which is your favourite pet?&lt;/legend&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r11-dog" name="r11" value="dog"&gt;
+    &lt;label for="r11-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r11-cat" name="r11" value="cat"&gt;
+    &lt;label for="r11-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r11-rabbit" name="r11" value="rabbit"&gt;
+    &lt;label for="r11-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 12: On the <code>div</code> with <code>role="group"</code></h3>
+
+<p class="status status-invalid"><strong>Invalid:</strong> <code>aria-required</code> is not supported on the <code>group</code> role.</p>
+
+<div class="example">
+  <form action="#">
+    <div role="group" aria-labelledby="r12-label" aria-required="true">
+      <p id="r12-label">Which is your favourite pet?</p>
+      <div>
+        <input type="radio" id="r12-dog" name="r12" value="dog">
+        <label for="r12-dog">Dog</label>
+      </div>
+      <div>
+        <input type="radio" id="r12-cat" name="r12" value="cat">
+        <label for="r12-cat">Cat</label>
+      </div>
+      <div>
+        <input type="radio" id="r12-rabbit" name="r12" value="rabbit">
+        <label for="r12-rabbit">Rabbit</label>
+      </div>
+    </div>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="group" aria-labelledby="r12-label" <span class="highlight">aria-required="true"</span>&gt;
+  &lt;p id="r12-label"&gt;Which is your favourite pet?&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r12-dog" name="r12" value="dog"&gt;
+    &lt;label for="r12-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r12-cat" name="r12" value="cat"&gt;
+    &lt;label for="r12-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r12-rabbit" name="r12" value="rabbit"&gt;
+    &lt;label for="r12-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 13: On the <code>div</code> with <code>role="radiogroup"</code></h3>
+
+<p class="status status-good"><strong>Acceptable:</strong> <code>radiogroup</code> is the only group role that supports <code>aria-required</code>, so this exposes a required state to assistive technology. It adds nothing visible, so it still needs visible text.</p>
+
+<div class="example">
+  <form action="#">
+    <div role="radiogroup" aria-labelledby="r13-label" aria-required="true">
+      <p id="r13-label">Which is your favourite pet?</p>
+      <div>
+        <input type="radio" id="r13-dog" name="r13" value="dog">
+        <label for="r13-dog">Dog</label>
+      </div>
+      <div>
+        <input type="radio" id="r13-cat" name="r13" value="cat">
+        <label for="r13-cat">Cat</label>
+      </div>
+      <div>
+        <input type="radio" id="r13-rabbit" name="r13" value="rabbit">
+        <label for="r13-rabbit">Rabbit</label>
+      </div>
+    </div>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="radiogroup" aria-labelledby="r13-label" <span class="highlight">aria-required="true"</span>&gt;
+  &lt;p id="r13-label"&gt;Which is your favourite pet?&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r13-dog" name="r13" value="dog"&gt;
+    &lt;label for="r13-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r13-cat" name="r13" value="cat"&gt;
+    &lt;label for="r13-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r13-rabbit" name="r13" value="rabbit"&gt;
+    &lt;label for="r13-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2><code>required</code> on the container</h2>
+
+<p><code>required</code> is an HTML attribute that is only valid on <code>input</code>, <code>select</code> and <code>textarea</code>. A role does not add HTML attributes.</p>
+
+<p class="status status-invalid"><strong>None of these options is valid.</strong></p>
+
+
+<!-- section -->
+
+
+<h3>Example 14: On the <code>fieldset</code></h3>
+
+<p class="status status-invalid"><strong>Invalid:</strong> <code>required</code> is only valid on <code>input</code>, <code>select</code> and <code>textarea</code>.</p>
+
+<div class="example">
+  <form action="#">
+    <fieldset required>
+      <legend>Which is your favourite pet?</legend>
+      <div>
+        <input type="radio" id="r14-dog" name="r14" value="dog">
+        <label for="r14-dog">Dog</label>
+      </div>
+      <div>
+        <input type="radio" id="r14-cat" name="r14" value="cat">
+        <label for="r14-cat">Cat</label>
+      </div>
+      <div>
+        <input type="radio" id="r14-rabbit" name="r14" value="rabbit">
+        <label for="r14-rabbit">Rabbit</label>
+      </div>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset <span class="highlight">required</span>&gt;
+  &lt;legend&gt;Which is your favourite pet?&lt;/legend&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r14-dog" name="r14" value="dog"&gt;
+    &lt;label for="r14-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r14-cat" name="r14" value="cat"&gt;
+    &lt;label for="r14-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r14-rabbit" name="r14" value="rabbit"&gt;
+    &lt;label for="r14-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 15: On the <code>div</code> with <code>role="group"</code></h3>
+
+<p class="status status-invalid"><strong>Invalid:</strong> <code>required</code> is only valid on <code>input</code>, <code>select</code> and <code>textarea</code>. A role does not add HTML attributes.</p>
+
+<div class="example">
+  <form action="#">
+    <div role="group" aria-labelledby="r15-label" required>
+      <p id="r15-label">Which is your favourite pet?</p>
+      <div>
+        <input type="radio" id="r15-dog" name="r15" value="dog">
+        <label for="r15-dog">Dog</label>
+      </div>
+      <div>
+        <input type="radio" id="r15-cat" name="r15" value="cat">
+        <label for="r15-cat">Cat</label>
+      </div>
+      <div>
+        <input type="radio" id="r15-rabbit" name="r15" value="rabbit">
+        <label for="r15-rabbit">Rabbit</label>
+      </div>
+    </div>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="group" aria-labelledby="r15-label" <span class="highlight">required</span>&gt;
+  &lt;p id="r15-label"&gt;Which is your favourite pet?&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r15-dog" name="r15" value="dog"&gt;
+    &lt;label for="r15-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r15-cat" name="r15" value="cat"&gt;
+    &lt;label for="r15-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r15-rabbit" name="r15" value="rabbit"&gt;
+    &lt;label for="r15-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 16: On the <code>div</code> with <code>role="radiogroup"</code></h3>
+
+<p class="status status-invalid"><strong>Invalid:</strong> <code>required</code> is only valid on <code>input</code>, <code>select</code> and <code>textarea</code>. A role does not add HTML attributes.</p>
+
+<div class="example">
+  <form action="#">
+    <div role="radiogroup" aria-labelledby="r16-label" required>
+      <p id="r16-label">Which is your favourite pet?</p>
+      <div>
+        <input type="radio" id="r16-dog" name="r16" value="dog">
+        <label for="r16-dog">Dog</label>
+      </div>
+      <div>
+        <input type="radio" id="r16-cat" name="r16" value="cat">
+        <label for="r16-cat">Cat</label>
+      </div>
+      <div>
+        <input type="radio" id="r16-rabbit" name="r16" value="rabbit">
+        <label for="r16-rabbit">Rabbit</label>
+      </div>
+    </div>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="radiogroup" aria-labelledby="r16-label" <span class="highlight">required</span>&gt;
+  &lt;p id="r16-label"&gt;Which is your favourite pet?&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r16-dog" name="r16" value="dog"&gt;
+    &lt;label for="r16-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r16-cat" name="r16" value="cat"&gt;
+    &lt;label for="r16-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r16-rabbit" name="r16" value="rabbit"&gt;
+    &lt;label for="r16-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Requirement on the radios</h2>
+
+<p>Attributes on the radio buttons themselves. Radios that share a <code>name</code> form one set.</p>
+
+
+<!-- section -->
+
+
+<h3>Example 17: <code>aria-required</code> on each radio</h3>
+
+<p class="status status-invalid"><strong>Invalid:</strong> <code>aria-required</code> is not supported on the <code>radio</code> role.</p>
+
+<div class="example">
+  <form action="#">
+    <fieldset>
+      <legend>Which is your favourite pet?</legend>
+      <div>
+        <input type="radio" id="r17-dog" name="r17" value="dog" aria-required="true">
+        <label for="r17-dog">Dog</label>
+      </div>
+      <div>
+        <input type="radio" id="r17-cat" name="r17" value="cat" aria-required="true">
+        <label for="r17-cat">Cat</label>
+      </div>
+      <div>
+        <input type="radio" id="r17-rabbit" name="r17" value="rabbit" aria-required="true">
+        <label for="r17-rabbit">Rabbit</label>
+      </div>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which is your favourite pet?&lt;/legend&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r17-dog" name="r17" value="dog" <span class="highlight">aria-required="true"</span>&gt;
+    &lt;label for="r17-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r17-cat" name="r17" value="cat" <span class="highlight">aria-required="true"</span>&gt;
+    &lt;label for="r17-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r17-rabbit" name="r17" value="rabbit" <span class="highlight">aria-required="true"</span>&gt;
+    &lt;label for="r17-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 18: <code>aria-required</code> on one radio only</h3>
+
+<p class="status status-invalid"><strong>Invalid:</strong> <code>aria-required</code> is not supported on the <code>radio</code> role, and one radio does not set a requirement for the group.</p>
+
+<div class="example">
+  <form action="#">
+    <fieldset>
+      <legend>Which is your favourite pet?</legend>
+      <div>
+        <input type="radio" id="r18-dog" name="r18" value="dog" aria-required="true">
+        <label for="r18-dog">Dog</label>
+      </div>
+      <div>
+        <input type="radio" id="r18-cat" name="r18" value="cat">
+        <label for="r18-cat">Cat</label>
+      </div>
+      <div>
+        <input type="radio" id="r18-rabbit" name="r18" value="rabbit">
+        <label for="r18-rabbit">Rabbit</label>
+      </div>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which is your favourite pet?&lt;/legend&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r18-dog" name="r18" value="dog" <span class="highlight">aria-required="true"</span>&gt;
+    &lt;label for="r18-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r18-cat" name="r18" value="cat"&gt;
+    &lt;label for="r18-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r18-rabbit" name="r18" value="rabbit"&gt;
+    &lt;label for="r18-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 19: <code>required</code> on every radio</h3>
+
+<p class="status status-good"><strong>Acceptable:</strong> Every radio has <code>required</code>, so native validation blocks submission until one is chosen. It does not tell users why.</p>
+
+<div class="example">
+  <form action="#">
+    <fieldset>
+      <legend>Which is your favourite pet?</legend>
+      <div>
+        <input type="radio" id="r19-dog" name="r19" value="dog" required>
+        <label for="r19-dog">Dog</label>
+      </div>
+      <div>
+        <input type="radio" id="r19-cat" name="r19" value="cat" required>
+        <label for="r19-cat">Cat</label>
+      </div>
+      <div>
+        <input type="radio" id="r19-rabbit" name="r19" value="rabbit" required>
+        <label for="r19-rabbit">Rabbit</label>
+      </div>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which is your favourite pet?&lt;/legend&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r19-dog" name="r19" value="dog" <span class="highlight">required</span>&gt;
+    &lt;label for="r19-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r19-cat" name="r19" value="cat" <span class="highlight">required</span>&gt;
+    &lt;label for="r19-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r19-rabbit" name="r19" value="rabbit" <span class="highlight">required</span>&gt;
+    &lt;label for="r19-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 20: <code>required</code> on one radio only</h3>
+
+<p class="status status-good"><strong>Acceptable:</strong> One required radio makes the whole named set required, so native validation blocks submission until one is chosen. It does not tell users why.</p>
+
+<div class="example">
+  <form action="#">
+    <fieldset>
+      <legend>Which is your favourite pet?</legend>
+      <div>
+        <input type="radio" id="r20-dog" name="r20" value="dog" required>
+        <label for="r20-dog">Dog</label>
+      </div>
+      <div>
+        <input type="radio" id="r20-cat" name="r20" value="cat">
+        <label for="r20-cat">Cat</label>
+      </div>
+      <div>
+        <input type="radio" id="r20-rabbit" name="r20" value="rabbit">
+        <label for="r20-rabbit">Rabbit</label>
+      </div>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which is your favourite pet?&lt;/legend&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r20-dog" name="r20" value="dog" <span class="highlight">required</span>&gt;
+    &lt;label for="r20-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r20-cat" name="r20" value="cat"&gt;
+    &lt;label for="r20-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r20-rabbit" name="r20" value="rabbit"&gt;
+    &lt;label for="r20-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>Error states</h2>
+
+<p>The group is marked as invalid after a failed submission. The error text is pre-set, so no JavaScript is needed.</p>
+
+
+<!-- section -->
+
+
+<h3>Example 21: <code>aria-invalid</code> on the <code>fieldset</code></h3>
+
+<p class="status status-poor"><strong>Poor practice:</strong> <code>aria-invalid</code> is deprecated as a global attribute in ARIA 1.2 and is not supported on the <code>group</code> role. The error text is not linked to the group.</p>
+
+<div class="example">
+  <form action="#">
+    <fieldset aria-invalid="true">
+      <legend>Which is your favourite pet?</legend>
+      <p class="error">Error: Choose one pet.</p>
+      <div>
+        <input type="radio" id="r21-dog" name="r21" value="dog">
+        <label for="r21-dog">Dog</label>
+      </div>
+      <div>
+        <input type="radio" id="r21-cat" name="r21" value="cat">
+        <label for="r21-cat">Cat</label>
+      </div>
+      <div>
+        <input type="radio" id="r21-rabbit" name="r21" value="rabbit">
+        <label for="r21-rabbit">Rabbit</label>
+      </div>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset <span class="highlight">aria-invalid="true"</span>&gt;
+  &lt;legend&gt;Which is your favourite pet?&lt;/legend&gt;
+  &lt;p class="error"&gt;Error: Choose one pet.&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r21-dog" name="r21" value="dog"&gt;
+    &lt;label for="r21-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r21-cat" name="r21" value="cat"&gt;
+    &lt;label for="r21-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r21-rabbit" name="r21" value="rabbit"&gt;
+    &lt;label for="r21-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 22: <code>aria-invalid</code> on the <code>div</code> with <code>role="radiogroup"</code></h3>
+
+<p class="status status-good"><strong>Acceptable:</strong> <code>aria-invalid</code> is valid on <code>radiogroup</code>, and the error is linked with <code>aria-describedby</code>.</p>
+
+<div class="example">
+  <form action="#">
+    <div role="radiogroup" aria-labelledby="r22-label" aria-invalid="true" aria-describedby="r22-error">
+      <p id="r22-label">Which is your favourite pet?</p>
+      <p class="error" id="r22-error">Error: Choose one pet.</p>
+      <div>
+        <input type="radio" id="r22-dog" name="r22" value="dog">
+        <label for="r22-dog">Dog</label>
+      </div>
+      <div>
+        <input type="radio" id="r22-cat" name="r22" value="cat">
+        <label for="r22-cat">Cat</label>
+      </div>
+      <div>
+        <input type="radio" id="r22-rabbit" name="r22" value="rabbit">
+        <label for="r22-rabbit">Rabbit</label>
+      </div>
+    </div>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="radiogroup" aria-labelledby="r22-label" <span class="highlight">aria-invalid="true" aria-describedby="r22-error"</span>&gt;
+  &lt;p id="r22-label"&gt;Which is your favourite pet?&lt;/p&gt;
+  &lt;p class="error" id="r22-error"&gt;Error: Choose one pet.&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r22-dog" name="r22" value="dog"&gt;
+    &lt;label for="r22-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r22-cat" name="r22" value="cat"&gt;
+    &lt;label for="r22-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r22-rabbit" name="r22" value="rabbit"&gt;
+    &lt;label for="r22-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h3>Example 23: <code>aria-invalid</code> on each radio</h3>
+
+<p class="status status-poor"><strong>Poor practice:</strong> <code>aria-invalid</code> is deprecated as a global attribute in ARIA 1.2 and is not supported on the <code>radio</code> role. The error text is not linked.</p>
+
+<div class="example">
+  <form action="#">
+    <fieldset>
+      <legend>Which is your favourite pet?</legend>
+      <p class="error">Error: Choose one pet.</p>
+      <div>
+        <input type="radio" id="r23-dog" name="r23" value="dog" aria-invalid="true">
+        <label for="r23-dog">Dog</label>
+      </div>
+      <div>
+        <input type="radio" id="r23-cat" name="r23" value="cat" aria-invalid="true">
+        <label for="r23-cat">Cat</label>
+      </div>
+      <div>
+        <input type="radio" id="r23-rabbit" name="r23" value="rabbit" aria-invalid="true">
+        <label for="r23-rabbit">Rabbit</label>
+      </div>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+  </form>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which is your favourite pet?&lt;/legend&gt;
+  &lt;p class="error"&gt;Error: Choose one pet.&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r23-dog" name="r23" value="dog" <span class="highlight">aria-invalid="true"</span>&gt;
+    &lt;label for="r23-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r23-cat" name="r23" value="cat" <span class="highlight">aria-invalid="true"</span>&gt;
+    &lt;label for="r23-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r23-rabbit" name="r23" value="rabbit" <span class="highlight">aria-invalid="true"</span>&gt;
+    &lt;label for="r23-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+</body>
+</html>
