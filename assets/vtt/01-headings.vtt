@@ -1,0 +1,33 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.000
+Step 1: Start on Intopia's accessibility testing bookmarklets page
+
+2
+00:00:07.000 --> 00:00:14.000
+Step 2: Find the "Highlight headings" bookmarklet
+
+3
+00:00:14.000 --> 00:00:21.000
+Step 3: Drag the bookmarklet to your browser's Bookmarks Bar
+
+4
+00:00:21.000 --> 00:00:29.000
+Step 4: Use the test page to review the bookmarklet
+
+5
+00:00:29.000 --> 00:00:37.000
+Step 5: Activate the bookmarklet
+
+6
+00:00:37.000 --> 00:00:45.000
+Step 6: Scroll through the page to review the highlighted headings
+
+7
+00:00:45.000 --> 00:00:52.000
+Notice the second H1 element near the bottom of the page has been flagged in red
+
+8
+00:00:52.000 --> 00:00:59.000
+Press the "Escape" key to remove the overlay.

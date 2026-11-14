@@ -3,17 +3,51 @@ Global styles
 ----------------------*/
 
 :root {
+  /* Fonts */
   --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-heading: var(--font-body);
   --font-mono: Consolas, ui-monospace, Menlo, monospace;
-  --colour-heading: #c03c0c; /* 5.39:1 */
+
+  /* Base colours */
+  --colour-white: #fff;
+  --colour-black: #000;
+  --colour-heading: #c03c0c;        /* 5.39:1 on white */
   --colour-body: #fefefe;
-  --colour-main: #fff;
-  --colour-code: #444; /* 9.73:1 */
+  --colour-main: var(--colour-white);
+  --colour-code: #444;              /* 9.74:1 on white */
+
+  /* Greys */
+  --colour-grey-light: #eee;
+  --colour-grey: #ddd;
+  --colour-grey-mid: #ccc;
+  --colour-grey-dark: #aaa;
+  --colour-text-muted: #555;
   --border-main: #e4e7eb;
+  --border-strong: #767676;         /* 4.54:1 on white, 3.91:1 on #eee */
+  --border-table: #666;
+
+  /* State colours */
+  --colour-green-dark: #255214;     /* 9.15:1 on white */
+  --colour-green: #008000;          /* 5.14:1 on white */
+  --colour-active: #aa0000;         /* 7.75:1 on white */
+  --colour-error: #cc0000;          /* 5.89:1 on white */
+  --colour-fail: var(--colour-error);
+  --colour-red: #f00;
+  --colour-card-hover: rgb(0 200 0);
+
+  /* Testing colours (deliberate values for contrast exercises) */
+  --colour-example1: #777;
+  --colour-example2: #3ea83e;
+  --colour-example3: #db8f00;
+  --colour-example4: #b07bdb;
+
+  /* Borders */
+  --border-accent-width: 5px;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -32,7 +66,7 @@ main {
   background: var(--colour-main);
   border: 1px solid var(--border-main);
   border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 10px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 3px rgb(0 0 0 / .06), 0 4px 10px rgb(0 0 0 / .04);
 }
 
 /* ---------------------
@@ -50,39 +84,41 @@ Headings
 h1,
 h2,
 h3,
-h4 {
+h4,
+h5,
+h6 {
   color: var(--colour-heading);
   font-weight: 600;
   font-family: var(--font-heading);
 }
 
-:is(h1, h2, h3, h4) code {
+:is(h1, h2, h3, h4, h5, h6) code {
   color: inherit;
 }
 
 h1 {
-  font-size: 2.125rem;   /* 34px */
-  margin: 0 0 1rem;     /* 0 top, 0 sides, 16px bottom */
+  font-size: 2.125rem;        /* 34px */
+  margin: 0 0 1rem;           /* 0 top, 0 sides, 16px bottom */
   line-height: 1.23529412;    /* 42px */
 }
 
 h2 {
-  font-size: 1.625rem;   /* 26px */
-  margin: 4rem 0 1rem;  /* 64px top, 0 sides, 16px bottom */
+  font-size: 1.625rem;        /* 26px */
+  margin: 4rem 0 1rem;        /* 64px top, 0 sides, 16px bottom */
   line-height: 1.23076923;    /* 32px exactly */
 }
 
 h3,
 .h3 {
-  font-size: 1.25rem;   /* 20px */
-  margin: 1.5rem 0 1rem; /* 24px top, 0 sides, 16px bottom */
-  line-height: 1.2;     /* 24px */
+  font-size: 1.25rem;         /* 20px */
+  margin: 1.5rem 0 1rem;      /* 24px top, 0 sides, 16px bottom */
+  line-height: 1.2;           /* 24px */
 }
 
 h4 {
-  font-size: 1rem;      /* 16px */
-  margin: 1.5rem 0 1rem; /* 24px top, 0 sides, 16px bottom */
-  line-height: 1.25;    /* 20px */
+  font-size: 1rem;            /* 16px */
+  margin: 1.5rem 0 1rem;      /* 24px top, 0 sides, 16px bottom */
+  line-height: 1.25;          /* 20px */
 }
 
 /* ---------------------
@@ -91,17 +127,17 @@ Lists
 
 ul,
 ol {
-  margin-top: 1rem;      /* 16px */
-  margin-bottom: 1.5rem; /* 24px, matches paragraphs */
+  margin-top: 1rem;           /* 16px */
+  margin-bottom: 1.5rem;      /* 24px, matches paragraphs */
 }
 
 li {
-  margin-bottom: .5rem;  /* 8px */
+  margin-bottom: .5rem;       /* 8px */
 }
 
 li > ul,
 li > ol {
-  margin-top: .5rem;     /* 8px */
+  margin-top: .5rem;          /* 8px */
   margin-bottom: 0;
 }
 
@@ -110,7 +146,7 @@ Description lists
 ----------------------*/
 
 dl {
-  margin: 1rem 0 1.5rem;     /* 16px top, 24px bottom, matches p */
+  margin: 1rem 0 1.5rem;      /* 16px top, 24px bottom, matches p */
 }
 
 dt {
@@ -118,11 +154,29 @@ dt {
 }
 
 dt:not(:first-child) {
-  margin-top: 1rem;          /* 16px between groups */
+  margin-top: 1rem;           /* 16px between groups */
 }
 
 dd {
-  margin: .25rem 0 0 1.5rem; /* 4px top, 24px indent */
+  margin: .25rem 0 0 1.5rem;  /* 4px top, 24px indent */
+}
+
+/* ---------------------
+Blockquote
+----------------------*/
+
+blockquote {
+  margin: 1.5rem 0;           /* 24px top and bottom */
+  padding: 0 1rem;
+  border-left: var(--border-accent-width) solid var(--colour-grey);
+}
+
+blockquote > :first-child {
+  margin-top: 0;
+}
+
+blockquote > :last-child {
+  margin-bottom: 0;
 }
 
 /* ---------------------
@@ -139,22 +193,22 @@ a {
 }
 
 a:link {
-  color: #003194;            /* 11.24:1 */
+  color: #003194;             /* 11.25:1 */
 }
 
 a:visited {
-  color: #07235A;            /* 15.03:1 */
+  color: #07235a;             /* 15.03:1 */
 }
 
 a:hover {
-  color: #255214;            /* 5.8:1 */
+  color: var(--colour-green-dark);
 }
 
 a:focus-visible {
-  color: #fff;
-  background: #000;
-  outline: 3px solid #000;   /* 3px ring */
-  outline-offset: 2px;       /* 2px gap */
+  color: var(--colour-white);
+  background-color: var(--colour-black);
+  outline: 3px solid var(--colour-black);  /* 3px ring */
+  outline-offset: 2px;                     /* 2px gap */
 }
 
 a:focus-visible code {
@@ -162,7 +216,7 @@ a:focus-visible code {
 }
 
 a:active {
-  color: #aa0000;            /* 7.8:1 */
+  color: var(--colour-active);
 }
 
 /* ---------------------
@@ -170,9 +224,9 @@ Horizontal rules
 ----------------------*/
 
 hr {
-  margin: 2rem 0;   /* 32px top and bottom */
+  margin: 2rem 0;             /* 32px top and bottom */
   border: 0;
-  border-top: 1px solid #767676;
+  border-top: 1px solid var(--border-strong);
 }
 
 /* ---------------------
@@ -180,15 +234,25 @@ Keyboard
 ----------------------*/
 
 kbd {
-  border: 1px solid #ccc;
+  border: 1px solid var(--colour-grey-mid);
   border-radius: 3px;
   padding: 3px 3px 1px;
   margin: 0 2px 0 0;
-  color: #555;
-  background-image: linear-gradient(#fff, #eee);
-  box-shadow: 1px 1px 2px #aaa;
-  font-family: Consolas, ui-monospace, Menlo, monospace;
-  font-size: .875em;   /* 14px in body text */
+  color: var(--colour-text-muted);
+  background-image: linear-gradient(var(--colour-white), var(--colour-grey-light));
+  box-shadow: 1px 1px 2px var(--colour-grey-dark);
+  font-family: var(--font-mono);
+  font-size: .875em;          /* 14px in body text */
+}
+
+/* ---------------------
+Images
+----------------------*/
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
 }
 
 /* ---------------------
@@ -208,7 +272,7 @@ Details, summary
 ----------------------*/
 
 details {
-  margin: 1rem 0 1.5rem;     /* 16px top, 24px bottom, matches p */
+  margin: 1rem 0 1.5rem;      /* 16px top, 24px bottom, matches p */
 }
 
 summary {
@@ -216,18 +280,18 @@ summary {
   font-weight: bold;
   padding: .25rem .25rem .25rem .5rem;   /* 4px, left 8px */
   border-radius: 3px;
-  background: #ddd;
+  background: var(--colour-grey);
 }
 
 details[open] > summary {
-  margin-bottom: .5rem;      /* 8px */
+  margin-bottom: .5rem;       /* 8px */
 }
 
 summary:focus-visible {
-  color: #fff;
-  background: #000;
-  outline: 3px solid #000;   /* 3px ring */
-  outline-offset: 2px;       /* 2px gap */
+  color: var(--colour-white);
+  background: var(--colour-black);
+  outline: 3px solid var(--colour-black);  /* 3px ring */
+  outline-offset: 2px;                     /* 2px gap */
 }
 
 /* ---------------------
@@ -236,9 +300,7 @@ Video
 
 video {
   display: block;
-  max-width: 100%;
-  height: auto;
-  margin: 1.5rem 0;   /* 24px */
+  margin: 1.5rem 0;           /* 24px */
 }
 
 /* ---------------------
@@ -252,17 +314,17 @@ code {
 
 pre {
   font-family: var(--font-mono);
-  font-size: .875rem;       /* 14px */
-  line-height: 1.5;         /* 21px */
-  color: #fff;
+  font-size: .875rem;         /* 14px */
+  line-height: 1.5;           /* 21px */
+  color: var(--colour-white);
   background: #222;
-  padding: 1rem;            /* 16px */
-  margin: 1rem 0 1.5rem;    /* 16px top, 24px bottom, matches p */
+  padding: 1rem;              /* 16px */
+  margin: 1rem 0 1.5rem;      /* 16px top, 24px bottom, matches p */
   overflow: auto;
 }
 
 pre code {
-  font-size: inherit;       /* stops 14px × .875 compounding */
+  font-size: inherit;         /* stops 14px × .875 compounding */
   color: inherit;
   background: none;
   padding: 0;
@@ -276,23 +338,23 @@ Tables
 table {
   border-collapse: collapse;
   width: 100%;
-  margin: 1rem 0 1.5rem;   /* 16px top, 24px bottom, matches p */
-  background: #fff;
+  margin: 1rem 0 1.5rem;      /* 16px top, 24px bottom, matches p */
+  background: var(--colour-white);
 }
 
 caption {
   text-align: left;
   font-weight: bold;
-  font-size: 1.125em;      /* 18px */
-  padding: 0 0 .5rem;      /* 8px bottom */
+  font-size: 1.125em;         /* 18px */
+  padding: 0 0 .5rem;         /* 8px bottom */
 }
 
 th,
 td {
   text-align: left;
   vertical-align: top;
-  padding: .5rem;          /* 8px */
-  border: 1px solid #666;
+  padding: .5rem;             /* 8px */
+  border: 1px solid var(--border-table);
 }
 
 .table-wrap {
@@ -301,7 +363,7 @@ td {
 }
 
 .table-wrap table {
-  margin: 0;               /* wrapper handles spacing */
+  margin: 0;                  /* wrapper handles spacing */
 }
 
 /* ---------------------
@@ -309,18 +371,17 @@ Form elements
 ----------------------*/
 
 form {
-  margin: 2rem 0;            /* 32px */
-  padding: 1rem;             /* 16px */
+  margin: 2rem 0;             /* 32px */
 }
 
 p + form {
-  margin: 1rem 0;       /* 16px top, 32px bottom */
+  margin: 1rem 0 2rem;        /* 16px top, 32px bottom */
 }
 
 fieldset {
   margin: 0;
   padding: 1rem;
-  border: 1px solid #767676;
+  border: 1px solid var(--border-strong);
 }
 
 legend {
@@ -332,62 +393,91 @@ Form classes
 ----------------------*/
 
 .required {
-  color: #BB0000;
+  color: var(--colour-error);
 }
 
 .label {
   display: block;
-  margin: 0 0 .25rem;        /* 4px */
+  margin: 0 0 .25rem;         /* 4px */
 }
 
 .input {
   display: block;
   width: 100%;
-  padding: .5rem;            /* 8px */
-  border: 1px solid #767676; /* 3.9:1 on #eee, 4.5:1 on white */
+  padding: .5rem;             /* 8px */
+  border: 1px solid var(--border-strong);
   font: inherit;
-  line-height: 1.25;         /* 20px */
+  line-height: 1.25;          /* 20px */
 }
 
-.input:hover:not(:focus) {
-  outline: 2px solid green;
+.input:hover:not(:focus, :disabled) {
+  outline: 2px solid var(--colour-green);
 }
 
 .input:focus {
-  border-color: #000;
-  outline: 3px solid #000;
+  border-color: var(--colour-black);
+  outline: 3px solid var(--colour-black);
   outline-offset: 2px;
+}
+
+.input[aria-invalid="true"]:focus {
+  outline: 3px solid var(--colour-error);
+}
+
+.input[aria-invalid="true"] {
+  border-color: var(--colour-error);
+  box-shadow: inset 0 0 0 1px var(--colour-error);
+}
+
+.input[aria-invalid="true"]:hover:not(:focus, :disabled) {
+  outline: 2px solid var(--colour-error);
 }
 
 .button,
 button {
   display: inline-block;
-  padding: .75rem 1rem;      /* 12px 16px */
+  padding: .75rem 1rem;       /* 12px 16px */
   border: 1px solid transparent; /* visible in forced colours */
   border-radius: 3px;
-  background: blue;          /* 8.6:1 */
-  color: #fff !important;
+  background: blue;           /* 8.59:1 */
+  color: var(--colour-white);
   text-decoration: none;
   font: inherit;
   line-height: 1;
   cursor: pointer;
 }
 
+/* Beats a:link and a:visited without needing !important */
+.button:link,
+.button:visited {
+  color: var(--colour-white);
+}
+
 .button:focus-visible,
 button:focus-visible {
-  background: #000;
-  outline: 3px solid #000;
+  background: var(--colour-black);
+  outline: 3px solid var(--colour-black);
   outline-offset: 2px;
 }
 
 .button:hover,
-button:hover {
-  background: green;         /* 5.1:1 */
+button:hover:not(:disabled) {
+  background: var(--colour-green);
 }
 
 .button:active,
 button:active {
-  background: #aa0000;       /* 7.8:1 */
+  background: var(--colour-active);
+}
+
+button:disabled {
+  background: var(--colour-grey);
+  color: var(--colour-text-muted);
+}
+
+.input:disabled,
+button:disabled {
+  cursor: not-allowed;
 }
 
 /* ---------------------
@@ -407,11 +497,10 @@ Form groups and form lists - containers within forms
 }
 
 .form-list {
-  margin: 0.5em 0;
+  margin: .5em 0;
   padding: 0;
   list-style: none;
 }
-
 
 /* ---------------------
 Help text and error messages
@@ -419,16 +508,16 @@ Help text and error messages
 
 .help-text {
   display: block;
-  margin: 0 0 0.3em;
-  color: #444;
+  margin: 0 0 .3em;
+  color: var(--colour-code);
   font-style: italic;
 }
 
 .error-message {
   display: block;
   margin: 0;
-  padding: 0.3em 0 0;
-  color: #BB0000;
+  padding: .3em 0 0;
+  color: var(--colour-error);
 }
 
 /* ---------------------
@@ -437,35 +526,32 @@ Code highlights and comments
 
 .codeHighlight,
 .highlight {
-  background: rgba(255, 255, 0, .3);
+  background: rgb(255 255 0 / .3);
   padding: .1em .3em;
   border-radius: .2em;
 }
 
 .comment {
-  color: #999;
+  color: #999;                /* 5.58:1 on #222 pre, only 2.85:1 on white */
 }
 
 /* ---------------------
 Badges
 ----------------------*/
 
-.fail {
-  color: #CC0000;
-  font-weight: bold;
-}
-
-.pass {
-  color: #255214;
-  font-weight: bold;
-}
-
+.fail,
 .red {
-  color: #CC0000;
+  color: var(--colour-fail);
 }
 
+.pass,
 .green {
-  color: #255214;
+  color: var(--colour-green-dark);
+}
+
+.fail,
+.pass {
+  font-weight: bold;
 }
 
 /* ---------------------
@@ -475,14 +561,10 @@ Example
 .example {
   margin: 2em 0;
   padding: 1em;
-  background: #EDEBEB;
+  background: var(--colour-grey-light);
 }
 
-.example h2,
-.example h3,
-.example h4,
-.example h5,
-.example h6 {
+.example :is(h2, h3, h4, h5, h6) {
   margin: 0;
 }
 
@@ -491,25 +573,25 @@ p + .example {
 }
 
 /* ---------------------
-footer link
+Header and footer links
 ----------------------*/
 
 .header-link {
   margin: 0 0 3em;
   line-height: 1;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .footer-link {
   margin: 5em 0 1em;
   line-height: 1;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .arrow {
   font-family: Arial, sans-serif;
   font-weight: 400;
-  color: #555;
+  color: var(--colour-text-muted);
 }
 
 /* ---------------------
@@ -525,13 +607,12 @@ Hidden
   padding: 0 !important;
   overflow: hidden !important;
   white-space: nowrap !important;
-  clip: rect(0 0 0 0) !important; /* legacy fallback, safe to keep */
   clip-path: inset(50%) !important;
   border: 0 !important;
 }
 
 /*
-.sr-only-focusable:not(:focus):not(:focus-within) {
+.sr-only-focusable:not(:focus, :focus-within) {
   position: absolute !important;
   width: 1px !important;
   height: 1px !important;
@@ -539,12 +620,10 @@ Hidden
   padding: 0 !important;
   overflow: hidden !important;
   white-space: nowrap !important;
-  clip: rect(0 0 0 0) !important;
   clip-path: inset(50%) !important;
   border: 0 !important;
 }
 */
-
 
 /* ---------------------
 Testing text contrast
@@ -556,27 +635,28 @@ Testing text contrast
 .colour-example4 {
   margin-top: .5em;
   padding: 1em;
-  background: #fff;
-  border: 1px solid #ddd;
+  background: var(--colour-white);
+  border: 1px solid var(--colour-grey);
 }
 
+/* px font sizes are deliberate here: they test the large text thresholds */
 .colour-example1 {
-  color: #777;
+  color: var(--colour-example1);
   font-size: 20px;
 }
 
 .colour-example2 {
-  color: #3EA83E;
+  color: var(--colour-example2);
   font-size: 26px;
 }
 
 .colour-example3 {
-  color: #DB8F00;
+  color: var(--colour-example3);
   font-size: 17px;
 }
 
 .colour-example4 {
-  color: #B07BDB;
+  color: var(--colour-example4);
   font-size: 24px;
 }
 
@@ -586,23 +666,23 @@ Testing text contrast
 }
 
 .colour-example1-box {
-  background: #777;
+  background: var(--colour-example1);
 }
 
 .colour-example2-box {
-  background: #3EA83E;
+  background: var(--colour-example2);
 }
 
 .colour-example3-box {
-  background: #DB8F00;
+  background: var(--colour-example3);
 }
 
 .colour-example4-box {
-  background: #B07BDB;
+  background: var(--colour-example4);
 }
 
 /* ---------------------
-Testing non-text-contrast
+Testing non-text contrast
 ----------------------*/
 
 .input1 {
@@ -610,15 +690,15 @@ Testing non-text-contrast
 }
 
 .input2 {
-  border: 2px solid #1B9823;
+  border: 2px solid #1b9823;
 }
 
 .input3 {
-  border: 2px solid #1E9DC8;
+  border: 2px solid #1e9dc8;
 }
 
 .input4 {
-  border: 2px solid #DF58C6;
+  border: 2px solid #df58c6;
 }
 
 /* ---------------------
@@ -634,31 +714,32 @@ Testing use of color
   margin: 0 auto;
   width: 26px;
   height: 26px;
-  border-radius: 26px;
+  border-radius: 50%;
 }
 
-.user-of-color-red {
-  background: red;
+.user-of-color-red,
+.user-of-color-red2 {
+  background-color: var(--colour-red);
 }
 
-.user-of-color-green {
-  background: green;
+.user-of-color-green,
+.user-of-color-green2 {
+  background-color: var(--colour-green);
+}
+
+.user-of-color-red2,
+.user-of-color-green2 {
+  background-size: 14px 14px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .user-of-color-red2 {
-  background: red;
   background-image: url("../img/icon-cross.png");
-  background-size: 14px 14px;
-  background-repeat: no-repeat;
-  background-position: center center;
 }
 
 .user-of-color-green2 {
-  background: green;
   background-image: url("../img/icon-tick.png");
-  background-size: 14px 14px;
-  background-repeat: no-repeat;
-  background-position: center center;
 }
 
 /* ---------------------
@@ -667,18 +748,18 @@ Testing images
 
 .testing-images {
   padding: 1em;
-  background: #eee;
+  background: var(--colour-grey-light);
 }
 
-/* ----------- 
+/* ---------------------
 Card styles
------------ */
+----------------------*/
 
 .card {
   max-width: 20em;
-  border: 2px solid #aaa;
+  border: 2px solid var(--colour-grey-dark);
   padding: 20px;
-  background: #fff;
+  background: var(--colour-white);
   margin: 1em 0;
 }
 
@@ -696,9 +777,9 @@ Card styles
   margin: 0;
 }
 
-/* ----------- 
+/* ---------------------
 Card variations
------------ */
+----------------------*/
 
 .card-link {
   display: block;
@@ -712,31 +793,28 @@ Card variations
 }
 
 .card-link:hover {
-  color: rgb(0,200,0);
+  color: var(--colour-green-dark);
 }
 
-.card-link:hover .card {
-  border: 2px solid rgb(0,200,0);
+.card-link:hover .card,
+.card-css:hover,
+.card-special:hover {
+  border: 2px solid var(--colour-card-hover);
 }
 
 .card-css:hover,
 .card-special:hover {
   cursor: pointer;
-  border: 2px solid rgb(0,200,0);
 }
 
 .card-css {
   position: relative;
 }
 
-.card-css a:after {
+.card-css a::after {
   position: absolute;
   content: '';
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  bottom: 0;
+  inset: 0;
 }
 
 .card-image-link {
@@ -744,7 +822,7 @@ Card variations
 }
 
 .card-image-link:hover {
-  outline: 2px solid rgb(0,200,0);
+  outline: 2px solid var(--colour-card-hover);
 }
 
 .card-special a {
@@ -753,9 +831,9 @@ Card variations
   padding: 5px;
 }
 
-/* ----------- 
+/* ---------------------
 Focus order nav
------------ */
+----------------------*/
 
 .focus-order-nav {
   margin: 1em 0;
@@ -768,59 +846,53 @@ Focus order nav
   margin-right: 1em;
 }
 
-/* ----------- 
+/* ---------------------
 External
------------ */
+----------------------*/
 
 a.external {
-  padding: 0 20px 0 0;
+  padding: 0 26px 0 0;
   background-image: url("../img/external-link-20.png");
   background-repeat: no-repeat;
   background-position: center right;
-  padding: 0 26px 0 0;
 }
 
-/* ----------- 
+/* ---------------------
 Bookmarklet
------------ */
+----------------------*/
 
 a.bookmarklet {
   display: inline-block;
-  background-image: url("../img/bookmark.png") !important;
-  background-repeat: no-repeat !important;
-  background-position: center left 10px !important;
-  padding: .5em 1em .5em 2em !important;
-  color: #000;
-  box-shadow: 4px 4px 4px 0 #ccc;
+  padding: .5em 1em .5em 2em;
+  color: var(--colour-black);
+  background-image: url("../img/bookmark.png");
+  background-repeat: no-repeat;
+  background-position: center left 10px;
+  box-shadow: 4px 4px 4px 0 var(--colour-grey-mid);
 }
 
-a.bookmarklet:link,
-a.bookmarklet:visited,
-a.bookmarklet:focus,
-a.bookmarklet:hover,
-a.bookmarklet:active {
+a.bookmarklet:is(:link, :visited, :focus, :hover, :active) {
   text-decoration: none;
 }
 
 a.bookmarklet:link,
 a.bookmarklet:visited {
-  background-color: #eee;
-  padding: .5em 1em;
-  border: 1px solid #666;
+  background-color: var(--colour-grey-light);
+  border: 1px solid var(--border-table);
   border-radius: .3em;
 }
 
 a.bookmarklet:hover {
-  background-color: rgba(0, 255, 0, .5);
+  background-color: rgb(0 255 0 / .5);
 }
 
-a.bookmarklet:focus {
-  background-color: rgba(0, 0, 0, .1);
-  outline: 2px solid #000;
+a.bookmarklet:focus-visible {
+  background-color: rgb(0 0 0 / .1);
+  outline: 2px solid var(--colour-black);
 }
 
 a.bookmarklet:active {
-  background-color: rgba(255, 0, 0, .3);
+  background-color: rgb(255 0 0 / .3);
 }
 
 .bookmarklet-credit {
@@ -829,46 +901,42 @@ a.bookmarklet:active {
   font-size: .9em;
 }
 
-/* ----------- 
+/* ---------------------
 Intopia logo
------------ */
+----------------------*/
 
 .intopia-home-link {
   display: inline-block;
   margin: 0 0 1em;
 }
 
-a.intopia-home-link:focus {
-  color: #fff;
-  background: transparent;
-  outline: 2px solid #000;
+a.intopia-home-link:focus-visible {
+  color: var(--colour-white);
+  background-color: transparent;
+  outline: 2px solid var(--colour-black);
 }
 
 .intopia-logo {
   width: 140px;
 }
 
-/* ----------- 
+/* ---------------------
 Note
------------ */
+----------------------*/
 
 .note {
-  background: #ffeeee;
+  background: #fee;
   padding: 1em;
   margin: 1em 0;
+  border-left: var(--border-accent-width) solid var(--colour-error);
 }
 
 .note h3 {
   margin: 0 0 .5em;
-  color: black;
+  color: var(--colour-black);
 }
 
-.note ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
+.note ul,
 .note li {
   margin: 0;
   padding: 0;
