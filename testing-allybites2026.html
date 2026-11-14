@@ -19,6 +19,10 @@
 
 <h1>Testing allybites examples</h1>
 
+
+<!-- section -->
+
+
 <h2>Example 1: what&rsquo;s the name of the button?</h2>
 
 <div class="example">
@@ -30,6 +34,8 @@
 <p><b>Answer</b>: No accessible name</p>
 <p>The button has no content and no labelling attribute, so there's nothing to announce.</p>
 
+
+<!-- section -->
 
 
 <h2>Example 2: what&rsquo;s the name of the button?</h2>
@@ -43,6 +49,8 @@
 <p><b>Answer</b>: Submit</p>
 <p>Visible text content inside a button is its accessible name by default.</p>
 
+
+<!-- section -->
 
 
 <h2>Example 3: what&rsquo;s the name of the link?</h2>
@@ -66,6 +74,8 @@
 <p>An SVG <code>&lt;title&gt;</code> acts as the text content of the SVG, so the browser treats it the same as visible text inside the link. The accessibility tree will show it as coming from <em>contents</em>.</p>
 
 
+<!-- section -->
+
 
 <h2>Example 4: what&rsquo;s the name of the button?</h2>
 
@@ -79,6 +89,8 @@
 <p><b>Answer</b>: Close</p>
 <p>The <code>aria-label</code> directly on the element sets the name, overriding the empty content.</p>
 
+
+<!-- section -->
 
 
 <h2>Example 5: what&rsquo;s the name of the link?</h2>
@@ -102,6 +114,8 @@
 <p>The <code>aria-label</code> outranks <code>&lt;title&gt;</code> inside a child SVG, so "Goodbye" beats "Hello".</p>
 
 
+<!-- section -->
+
 
 <h2>Example 6: what&rsquo;s the name of the input?</h2>
 
@@ -117,6 +131,7 @@
 <p>The <code>&lt;label&gt;</code> is not programmatically associated with the input (no for/id pairing), so it's ignored. The <code>placeholder</code> is the only thing left, so provides the name.</p>
 
 
+<!-- section -->
 
 
 <h2>Example 7: what&rsquo;s the name of the button?</h2>
@@ -134,6 +149,8 @@
 <p><b>Answer</b>: Delete</p>
 <p>The <code>aria-labelledby</code> beats the <code>aria-label</code> and the button's contents. It points to the <code>&lt;span&gt;</code> containing "Delete".</p>
 
+
+<!-- section -->
 
 
 <h2>Example 8: what&rsquo;s the name of the input?</h2>
@@ -160,6 +177,9 @@
 
 <p><b>Answer</b>: dog</p>
 <p>The <code>aria-label</code> beats names coming from the <code>&lt;label&gt;</code>, <code>title</code> and <code>placeholder</code>.</p>
+
+
+<!-- section -->
 
 
 <h2>Example 9: what&rsquo;s the name of the button?</h2>

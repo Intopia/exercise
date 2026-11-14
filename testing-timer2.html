@@ -32,6 +32,10 @@
 
 <p>This example demonstrates a more usable approach instead: the visible number still updates every second for sighted users, but the <code>aria-live</code> region is only updated at meaningful milestones, every 5 seconds, and once more when the timer finishes. Screen reader users hear periodic progress updates rather than a constant, unbroken stream of numbers.</p>
 
+
+<!-- section -->
+
+
 <h2>Example</h2>
 
 <button id="startButton">Start timer</button>
@@ -82,7 +86,6 @@
     resetButton.addEventListener('click', resetTimer);
 </script>
 
-
 <pre><code>&lt;button id="startButton"&gt;Start timer&lt;/button&gt;
 
 &lt;!-- Visible countdown, updates every second, hidden from AT --&gt;
@@ -92,6 +95,7 @@
 &lt;div id="eggtimer-announcer" <span class="highlight">aria-live="polite"</span> class="hidden"&gt;&lt;/div&gt;
 
 &lt;button id="resetButton"&gt;Reset timer&lt;/button&gt;</code></pre>
+
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 </main>

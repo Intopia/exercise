@@ -119,6 +119,10 @@ h1[tabindex="-1"].is-flashing {
 
 <p>You can test the "Back to top" link at the bottom of this page.</p>
 
+
+<!-- section -->
+
+
 <h2>The basics</h2>
 
 <p>The accessible version of this pattern is simple. It just needs a fragment link, an <code>id</code>, and <code>tabindex="-1"</code> so the heading can receive focus.</p>
@@ -138,6 +142,10 @@ h1[tabindex="-1"].is-flashing {
 
 <p>This test page adds smooth scrolling to that baseline, which is why it includes a small amount of JavaScript. The sections below look at the additional features and the trade-offs involved in each one.</p>
 
+
+<!-- section -->
+
+
 <h2>Required</h2>
 
 <ul>
@@ -147,6 +155,10 @@ h1[tabindex="-1"].is-flashing {
   <li>Keep a clear focus indicator on the target for as long as it has focus. This shows where focus has moved and remains useful if someone looks away and then returns to the page.</li>
   <li>Add <code>scroll-margin-top</code> if anything is fixed to the top of the viewport, so the target is not hidden underneath it. This relates to <a href="https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html" target="_blank">WCAG 2.4.11 Focus Not Obscured</a>.</li>
 </ul>
+
+
+<!-- section -->
+
 
 <h2>Good practice</h2>
 
@@ -185,6 +197,10 @@ h1[tabindex="-1"].is-flashing {
   <li>Do not let a CSS reset remove the outline from <code>[tabindex="-1"]</code>. This is a common reset rule and can remove the visible focus indicator.</li>
 </ul>
 
+
+<!-- section -->
+
+
 <h2>Optional: smooth scrolling</h2>
 
 <p>Smooth scrolling only needs a small amount of CSS and can help show how far the page has moved, rather than using an instant jump.</p>
@@ -195,6 +211,10 @@ h1[tabindex="-1"].is-flashing {
 </ul>
 
 <p>One thing to consider before adding it: smooth scrolling separates the moment focus moves from the moment the target comes into view. On its own, this is not necessarily a problem. However, if it is combined with the focus flash above, the flash may begin while the target is still off screen. The next section looks at how to coordinate the two.</p>
+
+
+<!-- section -->
+
 
 <h2>Optional: coordinating the cue with smooth scrolling</h2>
 

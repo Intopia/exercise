@@ -51,19 +51,35 @@
 
 <p>There could be an empty heading around here somewhere!</p>
 
+
+<!-- section -->
+
+
 <h2 style="margin: 0;"></h2>
 
 <p style="padding-top: 1em">Did you find it?</p>
 
 <p>A heading can be empty of text but not empty of meaning, if all it contains is a well-labelled image.</p>
 
+
+<!-- section -->
+
+
 <h2><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Acme Corp"></h2>
 
 <p>The heading above has no text content at all, but it does have an accessible name, "Acme Corp", from the image's <code>alt</code>. This one should not be treated as empty.</p>
 
+
+<!-- section -->
+
+
 <h2><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt=""></h2>
 
 <p>This heading also contains only an image, but the <code>alt</code> is empty, so unlike the one above, there's genuinely no accessible name here. This one should stay flagged as empty.</p>
+
+
+<!-- section -->
+
 
 <h2 style="display: none;">A heading nobody can see</h2>
 
