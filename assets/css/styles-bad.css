@@ -1,53 +1,105 @@
+/* =====================
+custom properties
+======================*/
+
+:root {
+  /* Fonts */
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  /* Palette: the raw colours.
+     Some of these DELIBERATELY FAIL colour contrast, for testing.
+     Ratios are on white unless stated. */
+  --colour-black: #000;
+  --colour-white: #fff;
+  --colour-grey-darkest: #222;
+  --colour-grey-dark: #555;
+  --colour-grey: #666;
+  --colour-grey-light: #999;
+  --colour-blue-light: #6b6bff;     /* 4.06:1, fails as text and as white text on it */
+  --colour-green: #008000;          /* 5.14:1 */
+  --colour-green-light: #00b300;    /* 2.82:1, fails even as large text */
+  --colour-green-mid: #00ad00;      /* 2.87:1 on #ebffeb, 3.01:1 with white text */
+  --colour-green-pale: #ebffeb;
+  --colour-red: #b00;
+  --colour-red-mid: #c00;
+  --colour-red-bright: #eb0000;
+  --colour-yellow: #ff0;
+
+  /* Roles: what the colours are used for */
+  --colour-text: var(--colour-grey-darkest);
+  --colour-text-muted: var(--colour-grey-dark);
+  --colour-heading: var(--colour-green-light);    /* FAIL */
+  --colour-link: var(--colour-blue-light);        /* FAIL */
+  --colour-link-hover: var(--colour-green);
+  --colour-button-bg: var(--colour-blue-light);   /* FAIL with white text */
+  --colour-active-bg: var(--colour-red-bright);
+  --colour-focus: var(--colour-black);
+  --colour-border: var(--colour-grey);
+  --colour-border-light: var(--colour-grey-light);
+  --colour-brand: var(--colour-green-mid);        /* FAIL with white text */
+  --colour-surface: var(--colour-green-pale);
+  --colour-error: var(--colour-red);
+  --colour-error-border: var(--colour-red-mid);
+  --colour-field-hover: var(--colour-green);
+  --colour-highlight: var(--colour-yellow);
+
+  /* Spacing */
+  --page-padding: 1.25rem;
+}
+
+/* =====================
+base
+======================*/
+
 * {
   box-sizing: border-box;
 }
 
-html {
-  font-size: 1em;
-}
-
 body {
   margin: 0;
-  padding: 0;
-  font-family: helvetica, arial, sans-serif;
-  font-size: 1em;
-  line-height: 1.2;
-  color: #222;
+  font-family: var(--font-body);
+  line-height: 1.5;
+  color: var(--colour-text);
 }
 
-/* ---------------------
+/* Form controls don't inherit fonts by default */
+input,
+select,
+textarea,
+button {
+  font: inherit;
+}
+
+/* =====================
 links
-----------------------*/
+======================*/
 
-a:link {
-  color: #6B6BFF;
-}
-
+a:link,
 a:visited {
-  color: #6B6BFF;
+  color: var(--colour-link);
 }
 
 a:focus {
-  color: #fff;
-  background: #000;
-  outline: none;
-  box-shadow:
-    0 0 0 2px #000;
+  color: var(--colour-white);
+  background: var(--colour-focus);
+  outline: 2px solid var(--colour-focus);
 }
 
 a:hover {
-  color: green;
+  color: var(--colour-link-hover);
 }
 
 a:active {
-  color: #fff;
-  background: #EB0000;
+  color: var(--colour-white);
+  background: var(--colour-active-bg);
 }
 
-/* ---------------------
-headings
-----------------------*/
+/* =====================
+fake headings
+======================*/
 
+/* This page uses divs with heading classes instead of real
+   headings, so they look like headings but aren't */
 h1,
 .h1,
 h2,
@@ -56,52 +108,97 @@ h3,
 .h3,
 h4,
 .h4 {
-  color: #00B300;
   font-weight: bold;
+  line-height: 1.2;
+  color: var(--colour-heading);
 }
 
 h1,
 .h1 {
   margin: 0 0 .75rem;
-  font-size: 2em; /* 32 */
+  font-size: 2rem;
 }
 
 h2,
 .h2 {
   margin: 2rem 0 .75rem;
-  font-size: 1.5em; /* 24 */
-}
-
-aside h2,
-aside .h2 {
-  margin: 0 0 1rem;
+  font-size: 1.5rem;
 }
 
 h3,
 .h3 {
   margin: 2rem 0 .75rem;
-  font-size: 1.1em;
+  font-size: 1.1rem;
+}
+
+h4,
+.h4 {
+  margin: 1.5rem 0 .75rem;
+  font-size: 1rem;
 }
 
 p {
   margin: 0 0 1.75rem;
-  line-height: 1.5;
 }
 
-/* ---------------------
-containers
-----------------------*/
+/* =====================
+page layout
+======================*/
 
 .header {
-  padding: 20px;
-  color: #00AD00;
-  background: #EBFFEB;
-  font-size: 2em;
+  padding: var(--page-padding);
+  font-size: 2rem;
+  line-height: 1.2;
+  color: var(--colour-brand);
+  background: var(--colour-surface);
 }
 
+.container {
+  max-width: 60rem;
+}
+
+.main,
+.aside {
+  padding: var(--page-padding);
+}
+
+.aside h2,
+.aside .h2 {
+  margin: 0 0 1rem;
+}
+
+.footer {
+  padding: var(--page-padding);
+  color: var(--colour-white);
+  background: var(--colour-brand);
+}
+
+/* =====================
+skip links
+======================*/
+
+.skip-links {
+  padding: .625rem var(--page-padding);
+}
+
+.skip-links ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skip-links li {
+  display: inline-block;
+  margin: 0 1em 0 0;
+}
+
+/* =====================
+nav and footer links
+======================*/
+
 .nav {
-  padding: 10px 20px;
-  background: #00AD00;
+  padding: .625rem var(--page-padding);
+  background: var(--colour-brand);
 }
 
 .nav ul {
@@ -118,414 +215,312 @@ containers
 .nav a,
 .footer a {
   text-decoration: none;
-  outline: none;
 }
 
 .nav a:link,
 .nav a:visited,
 .footer a:link,
 .footer a:visited {
-  color: #fff;
+  color: var(--colour-white);
 }
 
 .nav a:focus,
 .nav a:hover,
 .footer a:focus,
 .footer a:hover {
-  color: #000;
-  background: #fff;
-  outline: 0;
-  box-shadow:
-    0 0 0 2px #fff;
+  color: var(--colour-black);
+  background: var(--colour-white);
+  outline: 2px solid var(--colour-white);
 }
 
 .nav a:active,
 .footer a:active {
-  color: #fff;
-  background: #EB0000;
+  color: var(--colour-white);
+  background: var(--colour-active-bg);
 }
 
-.main {
-  padding: 20px;
-}
-
-.aside {
-  padding: 20px;
-}
-
-.footer {
-  clear: both;
-  padding: 20px;
-  color: #fff;
-  background: #00AD00;
-}
-
-.form-container {
-  margin: 0 0 1.5em;
-}
-
-/* ---------------------
-forms
-----------------------*/
-
-
-.label {
-  display: block;
-  margin: 0 0 .3em;
-}
-
-.input {
-  width: 100%;
-  border: 1px solid #666;
-  padding: .5em;
-  font-family: helvetica, arial, sans-serif;
-  font-size: 1em;
-  line-height: 1;
-}
-
-.input:focus {
-  border: 1px solid #000;
-  outline: 0;
-  box-shadow:
-    0 0 0 2px #fff,
-    0 0 0 5px #000;
-}
-
-.input-error {
-  border: 1px solid #CC0000;
-}
-
-.input-error:focus {
-  border: 1px solid #CC0000;
-  box-shadow:
-    0 0 0 2px #fff,
-    0 0 0 5px #CC0000;
-}
-
-.fieldset {
-  border: 0;
-  margin: 0 0 1.5em;
-  padding: 0;
-}
-
-legend {
-  margin: 0;
-  padding: 0 0 1em 0;
-  font-weight: bold;
-}
-
-.button {
-  border: 0;
-  border-radius: .3em;
-  padding: 1em 1.3em;
-  color: #fff;
-  background: #6B6BFF;
-  font-family: helvetica, arial, sans-serif;
-  font-size: 1em;
-  line-height: 1;
-  cursor: pointer;
-}
-
-.button:focus {
-  background: #000;
-  outline: none;
-  box-shadow:
-    0 0 0 2px #fff,
-    0 0 0 5px #000;
-}
-
-.button:hover {
-  color: #fff;
-  background: green;
-}
-
-.button:active {
-  color: #fff;
-  background: #BB0000;
-}
-
-/* ---------------------
-table
-----------------------*/
-
-.table {
-  width: 100%;
-  margin: 0 0 1.5em;
-  border-collapse: collapse;
-}
-
-caption {
-  margin: 1em 0 .5em;
-  text-align: left;
-  font-weight: bold;
-  font-size: 1.2em;
-}
-
-th,
-td {
-  border-bottom: 1px solid #aaa;
-  padding: .5em;
-  text-align: left;
-  vertical-align: top;
-}
-
-thead th {
-  background: #EBFFEB;
-  border-top: 1px solid #999;
-}
-
-/* ---------------------
+/* =====================
 figure
-----------------------*/
+======================*/
 
 figure {
-  padding: 1em;
-  background: #EBFFEB;
-  margin: 1em 0;
+  margin: 1rem 0;
+  padding: 1rem;
+  background: var(--colour-surface);
 }
 
 figure img {
   max-width: 100%;
+  height: auto;
 }
 
 figure p {
   margin: .5em 0 0;
 }
 
-/* ---------------------
-skip links
-----------------------*/
+/* =====================
+tables
+======================*/
 
-.skip-links {
-  margin: 0;
-  padding: 10px 20px;
+.table {
+  width: 100%;
+  margin: 0 0 1.5rem;
+  border-collapse: collapse;
 }
 
-.skip-links ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+caption {
+  margin: 1rem 0 .5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: left;
 }
 
-.skip-links li {
-  display: inline-block;
-  margin: 0 1em 0 0;
-  padding: 0;
+th,
+td {
+  padding: .5em;
+  border-bottom: 1px solid var(--colour-border-light);
+  text-align: left;
+  vertical-align: top;
 }
 
-/* ---------------------
-other styles
-----------------------*/
+thead th {
+  border-top: 1px solid var(--colour-border-light);
+  background: var(--colour-surface);
+}
 
-.visuallyhidden {
-  position: absolute;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  width: 1px;
-  height: 1px;
-  border: 0;
-  margin: -1px;
-  padding: 0;
+/* =====================
+forms
+======================*/
+
+.form-container {
+  margin: 0 0 1.5rem;
+}
+
+.label {
+  display: block;
+  margin: 0 0 .3em;
+}
+
+.required {
+  font-size: .8em;
+  color: var(--colour-error);
 }
 
 .help-text {
   display: block;
   margin: -.3em 0 .3em;
-  font-style: italic;
   font-size: .9em;
-  color: #555;
+  font-style: italic;
+  color: var(--colour-text-muted);
+}
+
+.input {
+  width: 100%;
+  padding: .5em;
+  border: 1px solid var(--colour-border);
+  line-height: 1.2;
+}
+
+/* Hover outlines help when teaching: students can see
+   which field is being pointed at. Skipped while focused,
+   so the focus outline always wins */
+.input:hover:not(:focus, :disabled) {
+  outline: 2px solid var(--colour-field-hover);
+}
+
+/* The outline (rather than a box-shadow) means focus is still
+   visible in Windows high contrast mode */
+.input:focus {
+  border-color: var(--colour-focus);
+  outline: 3px solid var(--colour-focus);
+  outline-offset: 2px;
+}
+
+/* =====================
+fake error states
+======================*/
+
+/* DELIBERATELY BAD: errors are visual only. The script adds
+   these classes, but no aria-invalid, and the messages are
+   not linked to their fields, so screen readers get nothing */
+.input-error {
+  border-color: var(--colour-error-border);
+}
+
+.input-error:hover:not(:focus, :disabled) {
+  outline-color: var(--colour-error-border);
+}
+
+.input-error:focus {
+  border-color: var(--colour-error-border);
+  outline-color: var(--colour-error-border);
 }
 
 .error-message {
   display: block;
-  margin: 0;
   padding: .3em 0 0;
-  font-style: italic;
   font-size: .9em;
-  color: #BB0000;
+  font-style: italic;
+  color: var(--colour-error);
 }
 
-.required {
-  font-size: .8em;
-  color: #BB0000;
-}
-
-/* ---------------------
-fieldset-list
-----------------------*/
+/* =====================
+radios and checkboxes
+======================*/
 
 .fieldset-list {
-  margin: 0;
+  margin: 0 0 1.5rem;
   padding: 0;
   list-style: none;
 }
 
 .fieldset-list li {
-  position: relative;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .4rem 0;
+}
+
+/* appearance: none lets us style the input itself,
+   instead of adding a pseudo-element to it */
+.input-radio,
+.input-checkbox {
+  appearance: none;
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
   margin: 0;
-  padding: 7px 0;
-}
-
-/* ---------------------
-radio
-----------------------*/
-
-.label-radio {
-  display: inline-block;
-  padding: 0 0 0 6px;
-  line-height: 1;
+  border: 2px solid var(--colour-border);
+  background: var(--colour-white);
   cursor: pointer;
 }
 
-.input-radio:before {
-  content: "";
-  position: absolute;
-  left: 5px;
-  top: 10px;
-  width: 14px;
-  height: 14px;
-  border-radius: 14px;
-  cursor: pointer;
-  background: #fff;
-  box-shadow:
-    0 0 0 3px #fff,
-    0 0 0 5px #666;
+.input-radio {
+  border-radius: 50%;
 }
 
-.input-radio:checked:before {
-  background: #6B6BFF;
+/* The inset shadow creates the white gap between
+   the border and the filled centre */
+.input-radio:checked {
+  background: var(--colour-link);
+  box-shadow: inset 0 0 0 3px var(--colour-white);
 }
 
-.input-radio:focus:before {
-  box-shadow:
-    0 0 0 3px #fff,
-    0 0 0 6px #000;
+.input-checkbox:checked {
+  border-color: var(--colour-link);
+  background: var(--colour-link) url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12.5l4.5 4.5L19 7.5'/></svg>") no-repeat center / .9rem;
 }
 
-.input-radio:focus:checked:before {
-  box-shadow:
-    0 0 0 3px #fff,
-    0 0 0 6px #000;
+.input-radio:hover:not(:focus, :disabled),
+.input-checkbox:hover:not(:focus, :disabled) {
+  outline: 2px solid var(--colour-field-hover);
+  outline-offset: 2px;
 }
 
-/* ---------------------
-checkbox
-----------------------*/
+.input-radio:focus,
+.input-checkbox:focus {
+  outline: 3px solid var(--colour-focus);
+  outline-offset: 2px;
+}
 
+.label-radio,
 .label-checkbox {
-  display: inline-block;
-  padding: 0 0 0 6px;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+/* In Windows high contrast mode, our custom checked styles
+   would be removed, so go back to the browser's own controls */
+@media (forced-colors: active) {
+  .input-radio,
+  .input-checkbox {
+    appearance: auto;
+  }
+}
+
+/* =====================
+buttons
+======================*/
+
+/* The transparent border becomes visible in Windows
+   high contrast mode, so the button keeps its edges */
+.button {
+  padding: calc(1em - 2px) calc(1.3em - 2px);
+  border: 2px solid transparent;
+  border-radius: .3em;
   line-height: 1;
+  color: var(--colour-white);
+  background: var(--colour-button-bg);
   cursor: pointer;
 }
 
-.input-checkbox:before {
-  content: "";
+.button:focus {
+  background: var(--colour-focus);
+  outline: 3px solid var(--colour-focus);
+  outline-offset: 2px;
+}
+
+.button:hover {
+  color: var(--colour-white);
+  background: var(--colour-link-hover);
+}
+
+.button:active {
+  color: var(--colour-white);
+  background: var(--colour-active-bg);
+}
+
+/* =====================
+utilities
+======================*/
+
+/* Hidden visually, but still read by screen readers */
+.visuallyhidden {
   position: absolute;
-  left: 5px;
-  top: 10px;
-  width: 14px;
-  height: 14px;
-  cursor: pointer;
-  background-color: #fff;
-  box-shadow:
-    0 0 0 3px #fff,
-    0 0 0 5px #666;
-}
-
-.input-checkbox:checked:before {
-  background: #6B6BFF;
-  background-image: url("../img/icon-tick.png");
-  background-size: 10px 10px;
-  background-position: center center;
-  background-repeat: no-repeat;
-}
-
-.input-checkbox:focus:before {
-  box-shadow:
-    0 0 0 3px #fff,
-    0 0 0 6px #000;
-}
-
-.input-checkbox:focus:checked:before {
-  box-shadow:
-    0 0 0 3px #fff,
-    0 0 0 6px #000;
-}
-
-.form-error {
-  padding: 1em;
-  margin: 0 0 2em;
-  background: rgba(255,0,0,.1);
-}
-
-.form-error-heading {
-  margin: 0 0 1em;
-  font-size: 1em;
-  color: #222;
-}
-
-.form-error-heading:focus {
-  outline: 2px dotted black;
-}
-
-.form-error ul {
-  margin: 0;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
   padding: 0;
-  list-style: none;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
-.form-error li {
-  margin: 0 0 .3em;
-}
+/* =====================
+skip link targets
+======================*/
 
-/* ---------------------
-wide
-----------------------*/
-
-@media (min-width: 600px) {
-  .container {
-    max-width: 60em;
-  }
-
-  .header {
-    padding:30px;
-  }
-
-  .nav {
-    padding: 10px 30px;
-  }
-
-  .main {
-    float: left;
-    width: 60%;
-    padding: 30px;
-  }
-
-  .aside {
-    float: right;
-    width: 38%;
-    padding: 30px;
-  }
-
-  .skip-links {
-    padding: 10px 30px;
-  }
-}
-
+/* Only the two skip link targets flash on this page */
 #main:target,
 #signupForm:target {
-  outline: 2px dotted black;
+  outline: 2px dotted var(--colour-focus);
   animation: fade 3s forwards;
 }
 
 @keyframes fade {
   0% {
-    background-color: #FFFF00;
-    outline-color: black;
+    background-color: var(--colour-highlight);
+    outline-color: var(--colour-focus);
   }
   100% {
     background-color: transparent;
     outline-color: transparent;
+  }
+}
+
+/* =====================
+wide screens
+======================*/
+
+@media (min-width: 600px) {
+  :root {
+    --page-padding: 1.875rem;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    column-gap: 2%;
   }
 }
