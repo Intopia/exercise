@@ -1,75 +1,127 @@
+/* =====================
+ZOOM EXAMPLE
+This page is DELIBERATELY BUILT TO BREAK when the browser
+is zoomed or the text size is increased. Anything marked
+"ZOOM TRAP" is a deliberate bad practice: leave it alone.
+
+Font sizes stay in em (not rem) so they scale with the
+"Add text zoom" button, which changes the body font size.
+======================*/
+
+/* =====================
+custom properties
+======================*/
+
+:root {
+  /* Fonts */
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  /* Palette: the raw colours */
+  --colour-black: #000;
+  --colour-white: #fff;
+  --colour-grey-darkest: #222;
+  --colour-blue: #00f;
+  --colour-green: #008000;
+  --colour-green-dark: #004200;
+  --colour-green-light: #ebffeb;
+  --colour-red-bright: #eb0000;
+  --colour-yellow: #ff0;
+
+  /* Roles: what the colours are used for */
+  --colour-text: var(--colour-grey-darkest);
+  --colour-heading: var(--colour-green);
+  --colour-link: var(--colour-blue);
+  --colour-link-hover: var(--colour-green);
+  --colour-active-bg: var(--colour-red-bright);
+  --colour-focus: var(--colour-black);
+  --colour-brand: var(--colour-green-dark);
+  --colour-surface: var(--colour-green-light);
+  --colour-highlight: var(--colour-yellow);
+}
+
+/* =====================
+base
+======================*/
+
 * {
   box-sizing: border-box;
 }
 
-html {
-  font-size: 1em;
-}
-
+/* line-height stays at 1.2 here: the fixed-height nav and
+   header are sized around it */
 body {
   margin: 0;
-  padding: 0;
-  font-family: helvetica, arial, sans-serif;
-  font-size: 1em;
+  font-family: var(--font-body);
   line-height: 1.2;
-  color: #222;
+  color: var(--colour-text);
 }
 
-/* ---------------------
+button {
+  font: inherit;
+}
+
+/* =====================
 links
-----------------------*/
+======================*/
 
-a:link {
-  color: blue;
-}
-
+a:link,
 a:visited {
-  color: blue;
+  color: var(--colour-link);
 }
 
 a:focus {
-  color: #fff;
-  background: #000;
-  outline: none;
-  box-shadow:
-    0 0 0 2px #000;
+  color: var(--colour-white);
+  background: var(--colour-focus);
+  outline: 2px solid var(--colour-focus);
 }
 
 a:hover {
-  color: green;
+  color: var(--colour-link-hover);
 }
 
 a:active {
-  color: #fff;
-  background: #EB0000;
+  color: var(--colour-white);
+  background: var(--colour-active-bg);
 }
 
-/* ---------------------
-headings
-----------------------*/
+/* External link icon. The mask is coloured with currentColor,
+   so the icon always matches the link text colour (including
+   hover, focus and active states). forced-color-adjust stops
+   Windows high contrast mode removing the background colour,
+   which would hide the icon. */
+a.external::after {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-left: .2em;
+  vertical-align: -.125em;
+  background-color: currentColor;
+  mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M10 5H8.2C7.08 5 6.52 5 6.09 5.22C5.72 5.41 5.41 5.72 5.22 6.09C5 6.52 5 7.08 5 8.2V15.8C5 16.92 5 17.48 5.22 17.91C5.41 18.28 5.72 18.59 6.09 18.78C6.52 19 7.08 19 8.2 19H15.8C16.92 19 17.48 19 17.91 18.78C18.28 18.59 18.59 18.28 18.78 17.91C19 17.48 19 16.92 19 15.8V14M20 9V4M20 4H15M20 4L13 11'/></svg>") no-repeat center / contain;
+  forced-color-adjust: none;
+}
+
+/* =====================
+headings and text
+======================*/
 
 h1,
 h2,
 h3,
 h4 {
-  color: #008000;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: var(--colour-heading);
+  overflow: hidden;              /* ZOOM TRAP: clips long words */
+  text-overflow: ellipsis;       /* ZOOM TRAP */
 }
-
 
 h1 {
   margin: 0 0 .75rem;
-  font-size: 2em; /* 32 */
+  font-size: 2em;
 }
 
 h2 {
   margin: 2rem 0 .75rem;
-  font-size: 1.5em; /* 24 */
-}
-
-aside h2 {
-  margin: 0 0 1rem;
+  font-size: 1.5em;
 }
 
 h3 {
@@ -82,69 +134,24 @@ p {
   line-height: 1.5;
 }
 
-/* ---------------------
-containers
-----------------------*/
+/* =====================
+page layout
+======================*/
 
 .header {
-  position: sticky;
+  position: sticky;              /* ZOOM TRAP: eats the screen when zoomed */
   top: 0;
-  height: 80px;              /* fixed pixel height */
-  overflow: hidden;          /* clips text at zoom */
   z-index: 1000;
+  height: 80px;                  /* ZOOM TRAP: fixed pixel height */
+  overflow: hidden;              /* ZOOM TRAP: clips text */
   padding: 10px;
-  color: #004200;
-  background: #EBFFEB;
   font-size: 2em;
+  color: var(--colour-brand);
+  background: var(--colour-surface);
 }
 
-.nav {
-  padding: 10px 20px;
-  background: #004200;
-  height: 40px;
-  white-space: nowrap;       /* prevents wrapping */
-  overflow-x: auto;          /* forces scroll at zoom */
-}
-
-.nav ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.nav li {
-  display: inline-block;
-  margin: 0 40px 0 0;
-}
-
-.nav a,
-.footer a {
-  text-decoration: none;
-  outline: none;
-}
-
-.nav a:link,
-.nav a:visited,
-.footer a:link,
-.footer a:visited {
-  color: #fff;
-}
-
-.nav a:focus,
-.nav a:hover,
-.footer a:focus,
-.footer a:hover {
-  color: #000;
-  background: #fff;
-  outline: 0;
-  box-shadow:
-    0 0 0 2px #fff;
-}
-
-.nav a:active,
-.footer a:active {
-  color: #fff;
-  background: #EB0000;
+.container {
+  max-width: 60em;
 }
 
 .main {
@@ -152,53 +159,17 @@ containers
 }
 
 .footer {
-  clear: both;
+  height: 60px;                  /* ZOOM TRAP: fixed pixel height */
   padding: 20px;
-  color: #fff;
-  height: 60px;
-  background: #004200;
+  color: var(--colour-white);
+  background: var(--colour-brand);
 }
 
-/* ---------------------
-button
-----------------------*/
-
-.button {
-  border: 0;
-  border-radius: .3em;
-  padding: 1em 1.3em;
-  color: #fff;
-  background: blue;
-  font-family: helvetica, arial, sans-serif;
-  font-size: 1em;
-  line-height: 1;
-  cursor: pointer;
-}
-
-.button:focus {
-  background: #000;
-  outline: none;
-  box-shadow:
-    0 0 0 2px #fff,
-    0 0 0 5px #000;
-}
-
-.button:hover {
-  color: #fff;
-  background: green;
-}
-
-.button:active {
-  color: #fff;
-  background: #BB0000;
-}
-
-/* ---------------------
+/* =====================
 skip links
-----------------------*/
+======================*/
 
 .skip-links {
-  margin: 0;
   padding: 10px 20px;
 }
 
@@ -211,31 +182,135 @@ skip links
 .skip-links li {
   display: inline-block;
   margin: 0 1em 0 0;
-  padding: 0;
 }
 
+/* =====================
+nav and footer links
+======================*/
+
+.nav {
+  height: 40px;                  /* ZOOM TRAP: fixed pixel height */
+  padding: 10px 20px;
+  white-space: nowrap;           /* ZOOM TRAP: prevents wrapping */
+  overflow-x: auto;              /* ZOOM TRAP: forces scrolling */
+  background: var(--colour-brand);
+}
+
+.nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav li {
+  display: inline-block;
+  margin: 0 40px 0 0;            /* ZOOM TRAP: fixed pixel gaps */
+}
+
+.nav a,
+.footer a {
+  text-decoration: none;
+}
+
+.nav a:link,
+.nav a:visited,
+.footer a:link,
+.footer a:visited {
+  color: var(--colour-white);
+}
+
+.nav a:focus,
+.nav a:hover,
+.footer a:focus,
+.footer a:hover {
+  color: var(--colour-black);
+  background: var(--colour-white);
+  outline: 2px solid var(--colour-white);
+}
+
+.nav a:active,
+.footer a:active {
+  color: var(--colour-white);
+  background: var(--colour-active-bg);
+}
+
+/* =====================
+buttons
+======================*/
+
+/* The transparent border becomes visible in Windows
+   high contrast mode, so the button keeps its edges */
+.button {
+  padding: calc(1em - 2px) calc(1.3em - 2px);
+  border: 2px solid transparent;
+  border-radius: .3em;
+  line-height: 1;
+  color: var(--colour-white);
+  background: var(--colour-link);
+  cursor: pointer;
+}
+
+.button:focus {
+  background: var(--colour-focus);
+  outline: 3px solid var(--colour-focus);
+  outline-offset: 2px;
+}
+
+.button:hover {
+  color: var(--colour-white);
+  background: var(--colour-link-hover);
+}
+
+.button:active {
+  color: var(--colour-white);
+  background: var(--colour-active-bg);
+}
+
+/* =====================
+utilities
+======================*/
+
+/* Hidden visually, but still read by screen readers */
 .visuallyhidden {
   position: absolute;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
   width: 1px;
   height: 1px;
-  border: 0;
   margin: -1px;
   padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
-/* ---------------------
-wide
-----------------------*/
+/* =====================
+skip link targets
+======================*/
+
+#main:target,
+#signupForm:target {
+  outline: 2px dotted var(--colour-focus);
+  animation: fade 3s forwards;
+}
+
+@keyframes fade {
+  0% {
+    background-color: var(--colour-highlight);
+    outline-color: var(--colour-focus);
+  }
+  100% {
+    background-color: transparent;
+    outline-color: transparent;
+  }
+}
+
+/* =====================
+wide screens
+======================*/
 
 @media (min-width: 600px) {
-  .container {
-    max-width: 60em;
-  }
-
   .header {
-    padding:30px;
+    padding: 30px;
   }
 
   .nav {
@@ -251,34 +326,10 @@ wide
   }
 
   .col-container {
-    overflow: hidden;
-    max-height: 20em;
-  }
-
-  .col1, .col2, .col3 {
-    float: left;
-    width: 30%;
-    margin: 0 3% 0 0;
-  }
-
-  .col3 {
-    margin: 0;
-  }
-}
-
-#main:target,
-#signupForm:target {
-  outline: 2px dotted black;
-  animation: fade 3s forwards;
-}
-
-@keyframes fade {
-  0% {
-    background-color: #FFFF00;
-    outline-color: black;
-  }
-  100% {
-    background-color: transparent;
-    outline-color: transparent;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 3%;
+    max-height: 20em;            /* ZOOM TRAP: content gets cut off */
+    overflow: hidden;            /* ZOOM TRAP */
   }
 }
