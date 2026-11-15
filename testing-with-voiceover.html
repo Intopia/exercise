@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Checklists for testing with VoiceOver</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Checklists for testing with VoiceOver</h1>
+
+
+<!-- section -->
+
+
+<h2 id="table-of-contents">Table of contents</h2>
+
+<ul>
+  <li><a href="#testing-the-document-title">Testing the document title</a></li>
+  <li><a href="#testing-headings">Testing headings</a></li>
+  <li><a href="#testing-links">Testing links</a></li>
+  <li><a href="#testing-landmarks">Testing landmarks</a></li>
+  <li><a href="#testing-images">Testing images</a></li>
+  <li><a href="#testing-lists">Testing lists</a></li>
+  <li><a href="#testing-tables">Testing tables</a></li>
+  <li><a href="#testing-labels-for-form-fields">Testing labels for form fields</a></li>
+  <li><a href="#testing-form-field-instructions">Testing form field instructions</a></li>
+  <li><a href="#testing-overall-labels-for-radio-and-checkbox-groups">Testing overall labels for radio and checkbox groups</a></li>
+  <li><a href="#testing-instructions-for-radio-and-checkbox-groups">Testing instructions for radio and checkbox groups</a></li>
+  <li><a href="#testing-required-fields">Testing required fields</a></li>
+  <li><a href="#testing-form-field-errors">Testing form field errors</a></li>
+  <li><a href="#testing-on-submit-errors">Testing on-submit errors</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="testing-the-document-title">Testing the document title</h2>
+
+<p>These tests check whether each page has a document title that VoiceOver can announce, and whether that title helps users know where they are.</p>
+
+<p>VoiceOver announces the document title as part of the window summary. Press VO+F2 to hear it. On most laptops, press VO+Fn+F2.</p>
+
+<!-- CHECK: confirm what VoiceOver announces for VO+F2 in Chrome (e.g. whether the browser name is included with the page title), and adjust the wording below if needed. -->
+
+<h3>Test 1: Does VoiceOver announce a document title?</h3>
+
+<p><strong>How to check:</strong> Press VO+F2 and listen for the page title in the window summary.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/page-titled">2.4.2 Page Titled (Level A)</a></li>
+</ul>
+
+<h3>Test 2: Does the document title describe the topic or purpose of the page?</h3>
+
+<p><strong>How to check:</strong> Press VO+F2 and compare what you hear with the main content of the page.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/page-titled">2.4.2 Page Titled (Level A)</a></li>
+</ul>
+
+<h3>Test 3: Does the document title distinguish this page from other pages on the site?</h3>
+
+<p><strong>How to check:</strong> Visit two or three different pages, press VO+F2 on each page, and compare the titles.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/page-titled">2.4.2 Page Titled (Level A)</a></li>
+</ul>
+
+<h3>Test 4: When the main content changes without a full page load, does the document title update?</h3>
+
+<p><strong>How to check:</strong> Trigger a change that displays a different page or view (for example, navigate within a single-page application), then press VO+F2.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/page-titled">2.4.2 Page Titled (Level A)</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="testing-headings">Testing headings</h2>
+
+<p>These tests check whether VoiceOver announces the headings on a page, and whether those headings provide a useful outline of the content.</p>
+
+<p>Headings are not in the Tab order, so these tests use single-key Quick Nav. Press VO+Q to turn it on. If you prefer, you can use VO+Command+H instead of H.</p>
+
+<h3>Test 1: Does the page contain at least one heading?</h3>
+
+<!-- CHECK: confirm what VoiceOver says (or plays) in Chrome when there are no more headings, and add the wording here if it's useful. -->
+<p><strong>How to check:</strong> Press H to navigate through headings. Check that VoiceOver identifies at least one heading on the page. If the page has no headings, VoiceOver will not move to a heading.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships">1.3.1 Info and Relationships (Level A)</a></li>
+</ul>
+
+<h3>Test 2: Does VoiceOver announce every visible heading as a heading?</h3>
+
+<p><strong>How to check:</strong> Press H to move through the headings and compare what VoiceOver announces with the headings you can see on screen.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships">1.3.1 Info and Relationships (Level A)</a></li>
+</ul>
+
+<h3>Test 3: Is everything VoiceOver announces as a heading actually a heading?</h3>
+
+<p><strong>How to check:</strong> Press H to move through the headings and check that each one identifies a section or subsection of content.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships">1.3.1 Info and Relationships (Level A)</a></li>
+</ul>
+
+<h3>Test 4: Does every heading contain text?</h3>
+
+<p><strong>How to check:</strong> Press H to move through the headings and listen for any that announce only a heading level, such as "heading level 2", without a name.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships">1.3.1 Info and Relationships (Level A)</a></li>
+</ul>
+
+<h3>Test 5: Do the heading levels reflect the structure of the page?</h3>
+
+<p><strong>How to check:</strong> Open the rotor (VO+U), use the Left Arrow or Right Arrow key to move to the Headings list, and check that the heading levels reflect the relationships between sections and subsections.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships">1.3.1 Info and Relationships (Level A)</a></li>
+</ul>
+
+<h3>Test 6: Does each heading describe the content that follows it?</h3>
+
+<p><strong>How to check:</strong> Open the rotor (VO+U), move to the Headings list, and review whether the headings provide a useful outline of the page. Where necessary, press Enter to move to a heading, then press VO+Right Arrow to read the content that follows.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/headings-and-labels">2.4.6 Headings and Labels (Level AA)</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="testing-links">Testing links</h2>
+
+<p>These tests check whether VoiceOver announces each link with a name that helps users understand its purpose.</p>
+
+<p>These tests use the Tab key. Tab also stops on buttons and form fields, so focus on the links as you go. If you prefer, you can press L with single-key Quick Nav on (VO+Q) to move through links only.</p>
+
+<p>If you are testing in Safari, make sure "Press Tab to highlight each item on a webpage" is turned on in Safari's Advanced settings, or Tab will skip links.</p>
+
+<h3>Test 1: Does VoiceOver announce every visible link as a link?</h3>
+
+<p><strong>How to check:</strong> Press Tab to move through the links and compare what VoiceOver announces with the links you can see on screen.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/name-role-value">4.1.2 Name, Role, Value (Level A)</a></li>
+</ul>
+
+<h3>Test 2: Does VoiceOver announce a name for every link?</h3>
+
+<p><strong>How to check:</strong> Press Tab to move through the links and listen for any announced without a name, such as just "link", or announced as a file name or web address.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/name-role-value">4.1.2 Name, Role, Value (Level A)</a></li>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-in-context">2.4.4 Link Purpose (In Context) (Level A)</a></li>
+</ul>
+
+<h3>Test 3: Does VoiceOver announce the visible link text as part of each link's name?</h3>
+
+<p><strong>How to check:</strong> Press Tab to move through the links and compare the announced names with the visible link text. The visible text should be included, although additional words may be announced.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/label-in-name">2.5.3 Label in Name (Level A)</a></li>
+</ul>
+
+<h3>Test 4: Can the purpose of each link be determined from its name or surrounding content?</h3>
+
+<p><strong>How to check:</strong> Press Tab to move through the links. Where a link is unclear on its own (such as "Read more"), press VO+Left Arrow and VO+Right Arrow to read the surrounding sentence, paragraph, list item or table cell.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-in-context">2.4.4 Link Purpose (In Context) (Level A)</a></li>
+</ul>
+
+<h3>Test 5 (Best practice): Are users informed when links have unusual behaviour?</h3>
+
+<p><strong>How to check:</strong> Press Tab to move through the links and listen for information about actions such as downloading a file, opening a new window or starting an email.</p>
+
+<p>Related WCAG criteria: None (best practice)</p>
+
+
+<!-- section -->
+
+
+<h2 id="testing-landmarks">Testing landmarks</h2>
+
+<p>These tests check whether the page has landmarks that help VoiceOver users move between its main sections. All landmark tests are best practice rather than WCAG requirements.</p>
+
+<p>Landmarks are not in the Tab order, so these tests use the rotor. Press VO+U to open the rotor, then use the Left Arrow or Right Arrow key to move to the Landmarks list.</p>
+
+<!-- CHECK: confirm how VoiceOver names each landmark type in the rotor in Chrome (e.g. "banner", "navigation", "main", "content information"), and adjust the examples below to match. -->
+
+<h3>Test 1 (Best practice): Does the page have landmarks that identify its main sections?</h3>
+
+<p><strong>How to check:</strong> Open the rotor (VO+U) and move to the Landmarks list. Listen for landmarks such as banner, navigation, main and content information (footer).</p>
+
+<p>Related WCAG criteria: None (best practice)</p>
+
+<h3>Test 2 (Best practice): When multiple landmarks of the same type are present, can they be distinguished by their names?</h3>
+
+<p><strong>How to check:</strong> Open the rotor (VO+U) and move to the Landmarks list. Where multiple landmarks of the same type are present, check that VoiceOver announces names that distinguish them, such as "Primary navigation" and "Footer navigation".</p>
+
+<p>Related WCAG criteria: None (best practice)</p>
+
+<h3>Test 3 (Best practice): Does the page have one main landmark?</h3>
+
+<p><strong>How to check:</strong> Open the rotor (VO+U), move to the Landmarks list, and check that there is exactly one main landmark.</p>
+
+<p>Related WCAG criteria: None (best practice)</p>
+
+
+<!-- section -->
+
+
+<h2 id="testing-images">Testing images</h2>
+
+<p>These tests check whether VoiceOver provides users with the information and functionality conveyed by images. Before you start, decide which images on the page are informative, functional or complex.</p>
+
+<p>Images are not in the Tab order, so most of these tests use VO+Command+G to move to the next image. Press VO+Command+Shift+G to move to the previous image.</p>
+
+<p>VoiceOver has a "Navigate images" setting in the Web category of VoiceOver Utility. If VoiceOver seems to skip images, check this setting.</p>
+
+<!-- CHECK: confirm what VoiceOver announces in Chrome for an image with no alt attribute, and for an image with no name (e.g. "image" or "unlabelled image"), and add the wording to Test 1 if useful. -->
+
+<h3>Test 1: Does VoiceOver announce every image without reading a file name or path?</h3>
+
+<p><strong>How to check:</strong> Press VO+Command+G to move through the images and listen for any announced as a file name or path, or as just "image".</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/non-text-content">1.1.1 Non-text Content (Level A)</a></li>
+</ul>
+
+<h3>Test 2: Does VoiceOver announce every informative image?</h3>
+
+<p><strong>How to check:</strong> Press VO+Command+G to move through the images and compare what VoiceOver announces with the images you can see on screen. Any informative image VoiceOver skips is a fail.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/non-text-content">1.1.1 Non-text Content (Level A)</a></li>
+</ul>
+
+<h3>Test 3: Does VoiceOver announce a text alternative that conveys the meaning of each informative image?</h3>
+
+<p><strong>How to check:</strong> Press VO+Command+G to move through the images. For each one, compare what VoiceOver announces with what the image shows.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/non-text-content">1.1.1 Non-text Content (Level A)</a></li>
+</ul>
+
+<h3>Test 4: Does VoiceOver announce a name for each image link or button that conveys its purpose?</h3>
+
+<p><strong>How to check:</strong> Press Tab to move through links and buttons. For any that contain an image, check that what VoiceOver announces describes what the link or button does, not what the image looks like.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/non-text-content">1.1.1 Non-text Content (Level A)</a></li>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/name-role-value">4.1.2 Name, Role, Value (Level A)</a></li>
+</ul>
+
+<h3>Test 5: Does each complex image have a longer description available?</h3>
+
+<p><strong>How to check:</strong> Press VO+Command+G to move to the complex image, such as a chart or diagram, then press VO+Left Arrow and VO+Right Arrow to read the content around it. Check for a description on the page, or a link to one.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/non-text-content">1.1.1 Non-text Content (Level A)</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="testing-lists">Testing lists</h2>
+
+<p>These tests check whether VoiceOver announces lists as lists, along with the correct number of items.</p>
+
+<p>Lists are not in the Tab order, so these tests use VO+Command+X to move to the next list. Press VO+Command+Shift+X to move to the previous list.</p>
+
+<h3>Test 1: Does VoiceOver announce every visible list as a list?</h3>
+
+<p><strong>How to check:</strong> Press VO+Command+X to move through the lists and compare what VoiceOver announces with the lists you can see on screen.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships">1.3.1 Info and Relationships (Level A)</a></li>
+</ul>
+
+<h3>Test 2: Does VoiceOver announce the correct number of items for each list?</h3>
+
+<!-- CHECK: confirm the exact wording VoiceOver uses for the item count in Chrome, and update the example below to match. -->
+<p><strong>How to check:</strong> Press VO+Command+X to move to each list and listen for the item count, such as "list, 5 items". Compare it with the number of items you can see on screen.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships">1.3.1 Info and Relationships (Level A)</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="testing-tables">Testing tables</h2>
+
+<p>These tests check whether VoiceOver announces data tables, their size, and their headers as you move through them. They apply to data tables only, not tables used for layout.</p>
+
+<p>Tables are not in the Tab order, so these tests use VO+Command+T to move to the next table. Press VO+Command+Shift+T to move to the previous table.</p>
+
+<p>To move between cells, use VO+Arrow keys. If this doesn't work, you may need to interact with the table first by pressing VO+Shift+Down Arrow. Press VO+Shift+Up Arrow to stop interacting.</p>
+
+<!-- CHECK: confirm the exact wording VoiceOver uses in Chrome for table size and headers, and update the examples below to match. -->
+
+<h3>Test 1: Does VoiceOver announce every visible data table as a table?</h3>
+
+<p><strong>How to check:</strong> Press VO+Command+T to move through the tables and compare what VoiceOver announces with the data tables you can see on screen.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships">1.3.1 Info and Relationships (Level A)</a></li>
+</ul>
+
+<h3>Test 2: Does VoiceOver announce the correct number of rows and columns for each table?</h3>
+
+<p><strong>How to check:</strong> Press VO+Command+T to move to each table and listen for the size, such as "table, 5 rows, 4 columns". Compare it with the rows and columns you can see on screen.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships">1.3.1 Info and Relationships (Level A)</a></li>
+</ul>
+
+<h3>Test 3: Does VoiceOver announce the column header when moving across a row?</h3>
+
+<p><strong>How to check:</strong> Move into a table, then press VO+Right Arrow to move across a row. As you move into each new column, VoiceOver should announce that column's header along with the cell content.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships">1.3.1 Info and Relationships (Level A)</a></li>
+</ul>
+
+<h3>Test 4: Does VoiceOver announce the row header when moving down a column?</h3>
+
+<p><strong>How to check:</strong> Move into a table, then press VO+Down Arrow to move down a column. As you move into each new row, VoiceOver should announce that row's header along with the cell content. This only applies to tables with row headers.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships">1.3.1 Info and Relationships (Level A)</a></li>
+</ul>
+
+<h3>Test 5 (Best practice): Does VoiceOver announce a name for each table?</h3>
+
+<p><strong>How to check:</strong> Press VO+Command+T to move to each table and listen for a name that describes the table's content, announced along with "table".</p>
+
+<p>Related WCAG criteria: None (best practice)</p>
+
+
+<!-- section -->
+
+
+<h2 id="testing-labels-for-form-fields">Testing labels for form fields</h2>
+
+<p>These tests check whether VoiceOver announces each form field with a name that matches its visible label and describes what users need to enter or select.</p>
+
+<p>These tests use the Tab key. Tab also stops on links and buttons, so focus on the form fields as you go.</p>
+
+<!-- CHECK: confirm how VoiceOver announces each field type in Chrome (e.g. "edit text" or "text field" for text inputs, and "pop-up button" or similar for select menus), and update the examples below to match. -->
+
+<h3>Test 1: Does VoiceOver announce every visible form field as a form field?</h3>
+
+<p><strong>How to check:</strong> Press Tab to move through the form fields and compare what VoiceOver announces with the fields you can see on screen. Listen for the field type, such as "edit text", "checkbox" or "pop-up button", and check it matches what you see.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/name-role-value">4.1.2 Name, Role, Value (Level A)</a></li>
+</ul>
+
+<h3>Test 2: Does VoiceOver announce a name for every form field?</h3>
+
+<p><strong>How to check:</strong> Press Tab to move through the form fields and listen for any announced without a name, such as just "edit text" or "pop-up button".</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/name-role-value">4.1.2 Name, Role, Value (Level A)</a></li>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships">1.3.1 Info and Relationships (Level A)</a></li>
+</ul>
+
+<h3>Test 3: Does VoiceOver announce the visible label as part of each form field's name?</h3>
+
+<p><strong>How to check:</strong> Press Tab to move through the form fields and compare the announced names with the visible labels. The visible label should be included, although additional words may be announced.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/label-in-name">2.5.3 Label in Name (Level A)</a></li>
+</ul>
+
+<h3>Test 4: Does each form field's name describe the information required?</h3>
+
+<p><strong>How to check:</strong> Press Tab to move through the form fields and check that each name makes clear what to enter or select, without needing to see the screen.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/headings-and-labels">2.4.6 Headings and Labels (Level AA)</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="testing-form-field-instructions">Testing form field instructions</h2>
+
+<p>These tests check whether VoiceOver announces a field's instructions, such as a date format or password rules, when you move to that field.</p>
+
+<p>VoiceOver often reads instructions <strong>after a short pause</strong>. After you press Tab, wait a moment before moving on, so you don't miss them.</p>
+
+<!-- CHECK: test whether turning off "Speak instructions for using the item in the VoiceOver cursor" (Verbosity > Hints) stops VoiceOver reading descriptions such as aria-describedby. If it does, add a note here telling students to turn hints back on for these tests. -->
+
+<h3>Test 1: Does VoiceOver announce the instructions for each form field when moving to that field?</h3>
+
+<p><strong>How to check:</strong> Press Tab to move through the form fields. For each field with visible instructions, such as a date format or password rules, listen for the instructions in the announcement.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions">3.3.2 Labels or Instructions (Level A)</a></li>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships">1.3.1 Info and Relationships (Level A)</a></li>
+</ul>
+
+<h3>Test 2: Does VoiceOver announce each set of instructions with the correct form field?</h3>
+
+<p><strong>How to check:</strong> Press Tab to move through the form fields and check that the instructions VoiceOver announces match the instructions shown next to that field on screen.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships">1.3.1 Info and Relationships (Level A)</a></li>
+</ul>
+
+<h3>Test 3: Does VoiceOver announce the instructions in full?</h3>
+
+<p><strong>How to check:</strong> Press Tab to move through the form fields and compare the announced instructions with the visible instructions. Listen for any that are cut short or missing part of the text.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions">3.3.2 Labels or Instructions (Level A)</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="testing-overall-labels-for-radio-and-checkbox-groups">Testing overall labels for radio and checkbox groups</h2>
+
+<p>These tests check whether VoiceOver announces the question or label for each group of radio buttons or checkboxes, not just the individual options.</p>
+
+<p>These tests use the Tab key. Remember that Tab moves into a radio group once. Use the arrow keys to move between the options inside it.</p>
+
+<!-- CHECK: confirm how VoiceOver announces a group in Chrome when you Tab into it (e.g. "Delivery method, group"), and update the examples below to match. -->
+
+<h3>Test 1: Does VoiceOver announce every visible radio and checkbox group as a group?</h3>
+
+<p><strong>How to check:</strong> Press Tab to move into the first option of each group. Listen for "group" or similar, and compare with the groups you can see on screen.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships">1.3.1 Info and Relationships (Level A)</a></li>
+</ul>
+
+<h3>Test 2: Does VoiceOver announce a name for every radio and checkbox group?</h3>
+
+<p><strong>How to check:</strong> Press Tab to move into each group and listen for a group name along with the first option, such as "Delivery method, group".</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships">1.3.1 Info and Relationships (Level A)</a></li>
+</ul>
+
+<h3>Test 3: Does VoiceOver announce the visible group label as part of each group's name?</h3>
+
+<p><strong>How to check:</strong> Compare the announced group name with the question or label shown above the group on screen.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships">1.3.1 Info and Relationships (Level A)</a></li>
+</ul>
+
+<h3>Test 4: Does each group's name describe the question being asked?</h3>
+
+<p><strong>How to check:</strong> Listen to the group name on its own and check that it makes clear what you're choosing, such as "Delivery method" rather than "Options".</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/headings-and-labels">2.4.6 Headings and Labels (Level AA)</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="testing-instructions-for-radio-and-checkbox-groups">Testing instructions for radio and checkbox groups</h2>
+
+<p>These tests check whether VoiceOver announces instructions for a group of radio buttons or checkboxes, such as "Select all that apply", when you move into the group.</p>
+
+<p>VoiceOver often reads instructions <strong>after a short pause</strong>. After you press Tab, wait a moment before moving on, so you don't miss them.</p>
+
+<!-- CHECK: as with Lesson 7.3, test whether turning off hints (Verbosity > Hints) affects whether group instructions are read. -->
+
+<h3>Test 1: Does VoiceOver announce the instructions for each radio and checkbox group when moving into the group?</h3>
+
+<p><strong>How to check:</strong> Press Tab to move into the first option of each group. For each group with visible instructions, such as "Select all that apply", listen for the instructions in the announcement.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions">3.3.2 Labels or Instructions (Level A)</a></li>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships">1.3.1 Info and Relationships (Level A)</a></li>
+</ul>
+
+<h3>Test 2: Does VoiceOver announce each set of instructions with the correct group?</h3>
+
+<p><strong>How to check:</strong> Press Tab to move into each group and check that the instructions VoiceOver announces match the instructions shown with that group on screen.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships">1.3.1 Info and Relationships (Level A)</a></li>
+</ul>
+
+<h3>Test 3: Does VoiceOver announce the group instructions in full?</h3>
+
+<p><strong>How to check:</strong> Press Tab to move into each group and compare the announced instructions with the visible instructions. Listen for any that are cut short or missing part of the text.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions">3.3.2 Labels or Instructions (Level A)</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="testing-required-fields">Testing required fields</h2>
+
+<p>These tests check whether VoiceOver users can identify which form fields are required, and whether optional fields are incorrectly announced as required.</p>
+
+<p>These tests use the Tab key. Tab also stops on links and buttons, so focus on the form fields as you go.</p>
+
+<h3>Test 1: Can VoiceOver users identify every required form field?</h3>
+
+<p><strong>How to check:</strong> Press Tab to move through the form fields and listen for "required" in each field's announcement. If it's missing, press VO+Left Arrow and VO+Right Arrow to read the content above the form for a statement such as "All fields are required".</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions">3.3.2 Labels or Instructions (Level A)</a></li>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships">1.3.1 Info and Relationships (Level A)</a></li>
+</ul>
+
+<h3>Test 2: Is every form field VoiceOver announces as required actually required?</h3>
+
+<p><strong>How to check:</strong> Press Tab to move through the form fields. For each field VoiceOver announces as "required", check that it's shown as required on screen.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships">1.3.1 Info and Relationships (Level A)</a></li>
+</ul>
+
+<h3>Test 3 (Best practice): Does VoiceOver announce "required" as a state for every required form field?</h3>
+
+<!-- CHECK: confirm the order VoiceOver uses in Chrome for a field with the required attribute (e.g. "First name, required, edit text" or "First name, edit text, required"), then compare with a field that only has "required" in its label text, and update this test to describe the difference. -->
+<p><strong>How to check:</strong> Press Tab to move through the form fields and listen for "required" announced separately from the field's name. If "required" is only read as part of the name, such as "First name required", it's part of the label text rather than a state.</p>
+
+<p>Related WCAG criteria: None (best practice)</p>
+
+
+<!-- section -->
+
+
+<h2 id="testing-form-field-errors">Testing form field errors</h2>
+
+<p>These tests check whether VoiceOver announces each error message with its field, and whether the message helps users fix the problem.</p>
+
+<p>VoiceOver often reads error messages <strong>after a short pause</strong>. After you press Tab, wait a moment before moving on, so you don't miss them.</p>
+
+<h3>Test 1: Does VoiceOver announce the error message for each form field with an error, when moving to that field?</h3>
+
+<p><strong>How to check:</strong> Submit the form with errors, then press Tab to move through the form fields. For each field showing an error on screen, listen for the error message in the announcement.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/error-identification">3.3.1 Error Identification (Level A)</a></li>
+</ul>
+
+<h3>Test 2: Does VoiceOver announce each error message with the correct form field?</h3>
+
+<p><strong>How to check:</strong> Press Tab to move through the form fields and check that the error VoiceOver announces matches the error shown next to that field on screen.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/error-identification">3.3.1 Error Identification (Level A)</a></li>
+</ul>
+
+<h3>Test 3: Does VoiceOver announce each error message in full?</h3>
+
+<p><strong>How to check:</strong> Press Tab to move through the form fields and compare the announced error with the visible error. Listen for any that are cut short or missing part of the text.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/error-identification">3.3.1 Error Identification (Level A)</a></li>
+</ul>
+
+<h3>Test 4: Does each error message describe how to fix the problem?</h3>
+
+<p><strong>How to check:</strong> Press Tab to move through the form fields and listen to each error. Check that it tells you what to do, such as "Enter a date in DD/MM/YYYY format", rather than just "Invalid date".</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/error-suggestion">3.3.3 Error Suggestion (Level AA)</a></li>
+</ul>
+
+<h3>Test 5: Does VoiceOver stop announcing the error once the field has been corrected?</h3>
+
+<p><strong>How to check:</strong> Correct the field, resubmit the form or move away from the field, then Tab back to it. Check that VoiceOver no longer announces the error.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/error-identification">3.3.1 Error Identification (Level A)</a></li>
+</ul>
+
+<h3>Test 6 (Best practice): Does VoiceOver announce "invalid data" for each form field with an error?</h3>
+
+<!-- CHECK: confirm the exact phrase VoiceOver uses in Chrome for a field with aria-invalid="true" (e.g. "invalid data"), and update the heading and test below to match. -->
+<p><strong>How to check:</strong> Press Tab to move through the form fields with errors and listen for "invalid data" in the announcement.</p>
+
+<p>Related WCAG criteria: None (best practice)</p>
+
+<h3>Test 7 (Best practice): Does VoiceOver avoid announcing errors before the user has finished with the field?</h3>
+
+<p><strong>How to check:</strong> Reload the form, then move to a form field for the first time and listen for any error message or "invalid data". Then type part of a value, such as the first few letters of an email address, and listen for any error announced while you're still typing. Errors announced after leaving the field or after submitting the form are fine.</p>
+
+<p>Related WCAG criteria: None (best practice)</p>
+
+
+<!-- section -->
+
+
+<h2 id="testing-on-submit-errors">Testing on-submit errors</h2>
+
+<p>These tests check how VoiceOver handles errors when a form is submitted, including where focus moves and how users can navigate to fields with errors. Tests 1, 2 and 4 are based on Intopia's recommendations rather than WCAG requirements.</p>
+
+<h3>Test 1: For forms with two fields or fewer, does focus move to the first field with an error when the form is submitted?</h3>
+
+<p><strong>How to check:</strong> Submit the form with errors. Listen for VoiceOver to announce the first field with an error, including its name and error message.</p>
+
+<p>Related WCAG criteria: None (Intopia recommendation)</p>
+
+<h3>Test 2: For forms with more than two fields, does focus move to an error summary above the form when the form is submitted?</h3>
+
+<p><strong>How to check:</strong> Submit the form with errors. Listen for VoiceOver to announce the error summary, rather than staying silent or announcing the submit button again.</p>
+
+<p>Related WCAG criteria: None (Intopia recommendation)</p>
+
+<h3>Test 3: Does the error summary list every error in the form?</h3>
+
+<p><strong>How to check:</strong> After submitting, press VO+Right Arrow to read through the error summary. Compare the errors announced with the errors shown next to the fields on screen.</p>
+
+<p>Related WCAG criteria:</p>
+<ul>
+  <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/error-identification">3.3.1 Error Identification (Level A)</a></li>
+</ul>
+
+<h3>Test 4: Does each error in the summary take you to the field it describes?</h3>
+
+<p><strong>How to check:</strong> Press Tab to move to each error link in the summary and press Enter to activate it. Listen for VoiceOver to announce the matching form field.</p>
+
+<p>Related WCAG criteria: None (Intopia recommendation)</p>
+
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+</main>
+</body>
+</html>
