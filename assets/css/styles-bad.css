@@ -168,9 +168,45 @@ page layout
 }
 
 .footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
   padding: var(--page-padding);
   color: var(--colour-white);
   background: var(--colour-brand);
+}
+
+.footer-logo {
+  display: inline-flex;
+  padding: 0.25rem;
+  border-radius: 4px;
+}
+
+.footer-logo img {
+  display: block;
+  width: auto;
+  height: 24px;
+}
+
+.footer-logo:focus-visible {
+  outline: 3px solid var(--colour-white);
+  outline-offset: 3px;
+}
+
+.footer .footer-logo:focus,
+.footer .footer-logo:hover {
+  background: transparent;
+  outline: 2px solid var(--colour-white);
+  outline-offset: 2px;
+}
+
+@media (forced-colors: active) {
+  .footer-logo {
+    forced-color-adjust: none;
+    background: var(--colour-brand);
+  }
 }
 
 /* =====================

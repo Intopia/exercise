@@ -1,0 +1,350 @@
+/* ==========================================================================
+   Checklist styles
+   Load after testing.css. Colours are in custom properties so they're easy
+   to swap for Intopia brand values.
+   ========================================================================== */
+
+:root {
+  --cl-ink: #1d1d2b;
+  --cl-muted: #4f5164;
+  --cl-accent: #5b2d90;
+  --cl-accent-soft: #f4effa;
+  --cl-border: #d6d3e0;
+  --cl-card: #ffffff;
+  --cl-panel: #f7f6fb;
+  --cl-bp-ink: #7a4300;
+  --cl-bp-bg: #fff3e0;
+  --cl-intopia-ink: #005b6e;
+  --cl-intopia-bg: #e4f3f6;
+  --cl-radius: 12px;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+/* Table of contents
+   ========================================================================== */
+
+.toc ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: 0.5rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.toc li {
+  margin: 0;
+}
+
+.toc a {
+  display: block;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--cl-border);
+  border-left: 4px solid var(--cl-accent);
+  border-radius: 8px;
+  background: var(--cl-card);
+  color: var(--cl-accent);
+  text-underline-offset: 0.2em;
+}
+
+.toc a:hover {
+  background: var(--cl-accent-soft);
+}
+
+
+/* Each set of tests
+   ========================================================================== */
+
+.test-set {
+  margin: 3rem 0;
+  border: 1px solid var(--cl-border);
+  border-radius: var(--cl-radius);
+  background: var(--cl-card);
+  color: var(--cl-ink);
+  box-shadow: 0 1px 3px rgb(29 29 43 / 0.06), 0 6px 18px rgb(29 29 43 / 0.05);
+}
+
+.test-set-header {
+  padding: 1.5rem 1.75rem 1.25rem;
+  border-bottom: 1px solid var(--cl-border);
+  border-radius: var(--cl-radius) var(--cl-radius) 0 0;
+  background: var(--cl-accent-soft);
+}
+
+.test-set-header h2 {
+  margin: 0 0 0.5rem;
+  scroll-margin-top: 1rem;
+}
+
+.test-set-header p {
+  margin: 0;
+  color: var(--cl-muted);
+  max-width: 60ch;
+}
+
+.tests {
+  padding: 1.75rem 1.75rem 0.5rem;
+}
+
+
+/* Each test: numbered circle on a vertical line
+   ========================================================================== */
+
+.test {
+  position: relative;
+  padding: 0 0 2rem 3.5rem;
+}
+
+/* The line joining one circle to the next. Uses a border rather than a
+   background so it survives forced colours mode. */
+.test::before {
+  content: "";
+  position: absolute;
+  top: 2.5rem;
+  bottom: 0.25rem;
+  left: calc(1.25rem - 1px);
+  border-left: 2px solid var(--cl-border);
+}
+
+.test:last-child::before {
+  display: none;
+}
+
+.test h3 {
+  margin: 0 0 0.85rem;
+  padding-top: 0.35rem;
+  font-size: 1.15rem;
+  line-height: 1.4;
+}
+
+.test-number {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  box-sizing: border-box;
+  border: 2px solid var(--cl-accent);
+  border-radius: 50%;
+  background: var(--cl-card);
+  color: var(--cl-accent);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+
+/* Tags
+   ========================================================================== */
+
+.tag {
+  display: inline-block;
+  margin: 0 0.35rem 0.25rem 0;
+  padding: 0.15rem 0.6rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.4;
+  vertical-align: 0.15em;
+  white-space: nowrap;
+}
+
+.tag-best-practice {
+  background: var(--cl-bp-bg);
+  color: var(--cl-bp-ink);
+}
+
+.tag-intopia {
+  background: var(--cl-intopia-bg);
+  color: var(--cl-intopia-ink);
+}
+
+
+/* How to check
+   ========================================================================== */
+
+.how-to-check {
+  margin: 0 0 0.9rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--cl-border);
+  border-left: 4px solid var(--cl-accent);
+  border-radius: 0 8px 8px 0;
+  background: var(--cl-panel);
+}
+
+.how-to-check p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.how-to-check strong {
+  color: var(--cl-accent);
+}
+
+kbd {
+  display: inline-block;
+  padding: 0.05em 0.45em;
+  border: 1px solid #a9a5bb;
+  border-bottom-width: 3px;
+  border-radius: 5px;
+  background: var(--cl-card);
+  color: var(--cl-ink);
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  font-size: 0.85em;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+
+/* Related WCAG criteria
+   ========================================================================== */
+
+.criteria {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+}
+
+.criteria-label {
+  margin: 0;
+  color: var(--cl-muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.criteria-none {
+  font-weight: 400;
+  font-style: italic;
+}
+
+.criteria ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.criteria li {
+  margin: 0;
+}
+
+.criteria a {
+  display: inline-block;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--cl-border);
+  border-radius: 999px;
+  background: var(--cl-card);
+  color: var(--cl-accent);
+  font-size: 0.9rem;
+  text-underline-offset: 0.2em;
+}
+
+.criteria a:hover {
+  border-color: var(--cl-accent);
+  background: var(--cl-accent-soft);
+}
+
+.sc-number {
+  font-weight: 700;
+}
+
+.sc-level {
+  color: var(--cl-muted);
+  font-size: 0.85em;
+}
+
+
+/* Focus
+   ========================================================================== */
+
+.toc a:focus-visible,
+.criteria a:focus-visible {
+  outline: 3px solid var(--cl-accent);
+  outline-offset: 2px;
+}
+
+
+/* Small screens
+   ========================================================================== */
+
+@media (max-width: 40em) {
+  .test-set-header {
+    padding: 1.25rem 1rem 1rem;
+  }
+
+  .tests {
+    padding: 1.25rem 1rem 0.25rem;
+  }
+
+  .test {
+    padding-left: 2.85rem;
+  }
+
+  .test-number {
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.9rem;
+  }
+
+  .test::before {
+    top: 2rem;
+    left: calc(1rem - 1px);
+  }
+}
+
+
+/* Forced colours (Windows high contrast)
+   ========================================================================== */
+
+@media (forced-colors: active) {
+  .test-number,
+  .tag,
+  .criteria a,
+  .toc a,
+  kbd {
+    border-color: CanvasText;
+  }
+
+  .test::before {
+    border-left-color: GrayText;
+  }
+}
+
+
+/* Print
+   ========================================================================== */
+
+@media print {
+  .test-set {
+    box-shadow: none;
+    break-inside: auto;
+  }
+
+  .test-set-header {
+    break-after: avoid;
+  }
+
+  .test {
+    break-inside: avoid;
+  }
+}
