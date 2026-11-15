@@ -346,24 +346,24 @@ body {
 <h2>Forms</h2>
 
 <form action="#" class="example">
-  <div class="form-group-small">
+  <div class="form-group-spaced">
     <label class="label" for="eee">Full name <span class="required" aria-hidden="true">(Required)</span></label>
     <span class="help-text" id="eee-help">Enter your first and last name.</span>
     <input class="input" id="eee" required aria-describedby="eee-help">
   </div>
 
-  <div class="form-group-small">
+  <div class="form-group-spaced">
     <label class="label" for="fff">Phone <span class="required" aria-hidden="true">(Required)</span></label>
     <input class="input" id="fff" type="tel" required aria-invalid="true" aria-describedby="fff-error">
     <span class="error-message" id="fff-error">Enter a phone number, like 0400 000 000.</span>
   </div>
 
-  <div class="form-group-small">
+  <div class="form-group-spaced">
     <label class="label" for="ggg">Disabled field</label>
     <input class="input" id="ggg" disabled value="Can't edit this">
   </div>
 
-  <div class="form-group-small">
+  <div class="form-group-spaced">
     <label class="label" for="ccc">Pick an option</label>
     <select class="input" id="ccc">
       <option value="">Choose one</option>
@@ -374,12 +374,12 @@ body {
     </select>
   </div>
 
-  <div class="form-group-small">
+  <div class="form-group-spaced">
     <label class="label" for="ddd">Comment</label>
     <textarea class="input" id="ddd" rows="4"></textarea>
   </div>
 
-  <div class="form-group-small">
+  <div class="form-group-spaced">
     <fieldset>
       <legend>Preferred contact method</legend>
       <ul class="form-list">
@@ -390,7 +390,7 @@ body {
     </fieldset>
   </div>
 
-  <div class="form-group-small">
+  <div class="form-group-spaced">
     <fieldset>
       <legend>Topics you're interested in</legend>
       <ul class="form-list">
@@ -410,7 +410,8 @@ body {
 <h3>Form directly after a paragraph (tests p + form)</h3>
 
 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-<form action="#">
+
+<form action="#" class="example">
   <div class="form-group">
     <label class="label" for="jjj">Search</label>
     <input class="input" id="jjj" type="search">

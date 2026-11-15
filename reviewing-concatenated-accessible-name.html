@@ -31,7 +31,7 @@
 
 <div class="example">
   <button>
-    <img src="assets/img/icon-cross.png" alt="Hello">
+    <svg aria-label="Hello" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M7 7l10 10M17 7L7 17"/></svg>
     <span class="sr-only">how are you</span>
     <span role="img" aria-label="doing"></span>
     <span role="img" aria-labelledby="aaa"></span>
@@ -42,7 +42,7 @@
 </div>
 
 <pre><code>&lt;button&gt;
-  &lt;img src="cross.png" alt="Hello"&gt;
+  &lt;svg aria-label="Hello"&gt;&lt;/svg&gt;
   &lt;span class="sr-only"&gt;how are you&lt;/span&gt;
   &lt;span role="img" aria-label="doing"&gt;&lt;/span&gt;
   &lt;span role="img" aria-labelledby="aaa"&gt;&lt;/span&gt;
@@ -57,25 +57,37 @@
 
 <h2>Explanation</h2>
 
+<h3>Line 1:</h3>
+
 <p>Buttons use “name from contents”, meaning their accessible name is built from the accessible text alternatives of descendant content. Different child elements can contribute text in different ways, and the final name is concatenated together.</p>
 
-<p>The image provides <code>alt</code> text: "Hello"</p>
+<p>The SVG provides an accessible name via <code>aria-label="Hello"</code></p>
 
-<pre><code>&lt;img src="cross.png" alt="Hello"&gt;</code></pre>
+<pre><code>&lt;svg aria-label="Hello"&gt;&lt;/svg&gt;</code></pre>
+
+<h3>Line 2:</h3>
 
 <p>Even though visually hidden, the first <code>&lt;span&gt;</code> provides text: "how are you". Buttons build their accessible name from descendant content, so visually hidden text can still participate in the button’s name calculation. This works because the content is visually hidden only. It would not work if the element used <code>display: none</code>, <code>visibility: hidden</code>, or <code>aria-hidden="true"</code>.</p>
 
 <pre><code>&lt;span class="sr-only"&gt;how are you&lt;/span&gt;</code></pre>
 
+<h3>Line 3:</h3>
+
 <p>The second <code>&lt;span&gt;</code> has a role of <code>img</code> and therefore provides a name via <code>aria-label</code>: "doing"</p>
 
 <pre><code>&lt;span role="img" aria-label="doing"&gt;&lt;/span&gt;</code></pre>
+
+<h3>Line 4:</h3>
 
 <p>The third <code>&lt;span&gt;</code> has a role of <code>img</code> and therefore provides a name via <code>aria-labelledby</code>: "today"</p>
 
 <pre><code>&lt;span role="img" aria-labelledby="aaa"&gt;&lt;/span&gt;
 ...
 &lt;p id="aaa" style="display: none;"&gt;today&lt;/p&gt;</code></pre>
+
+<p>Notice that the referenced <code>&lt;p&gt;</code> uses display: none, yet “today” is still included. Hidden content is normally ignored, but <code>aria-labelledby</code> is the exception: it can pull text from elements that are hidden.</p>
+
+<h3>Line 5:</h3>
 
 <p>The fourth <code>&lt;span&gt;</code> has a role of <code>img</code> and therefore provides a fallback accessible name via the <code>title</code>: "?"</p>
 
@@ -89,7 +101,26 @@
 
 <p><em><q>Hello how are you doing today ?</q></em></p>
 
-<p>The space comes from how the browser computes accessible names. Each child element’s contribution is usually separated by a space when the final name is concatenated together. So the <code>&lt;span role="img" title="?"&gt;</code> contributes its own separate text token, producing "today ?" rather than "today?".</p>
+<p>The space is added by the browser when it builds the accessible name. Each <code>&lt;span role="img"&gt;</code> gets its text from an attribute (<code>aria-labelledby</code> and <code>title</code>), not from text content inside it. Chrome treats each of these as a separate piece and joins them with a space, so the <code>title</code> on the last span produces "today ?" rather than "today?".</p>
+
+<p>Plain text is different. Inline text with no whitespace between elements runs together exactly as written.</p>
+
+<h3>Try it</h3>
+
+<p>Compare these two buttons in your browser's accessibility inspector. Both have no whitespace between their spans.</p>
+
+<div class="example">
+  <button>
+    <span role="img" aria-label="today"></span>
+    <span role="img" title="?"></span>
+  </button>
+
+  <button>
+    <span>today</span><span>?</span>
+  </button>
+</div>
+
+<p>The browser decides how these pieces are joined, and browsers aren't perfectly consistent, so always check the computed name in each browser rather than assuming.</p>
 
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>

@@ -721,13 +721,12 @@ Testing use of color
 }
 
 .user-of-color-red2 {
-  background-image: url("../img/icon-cross.png");
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round'><path d='M7 7l10 10M17 7L7 17'/></svg>");
 }
 
 .user-of-color-green2 {
-  background-image: url("../img/icon-tick.png");
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12.5l4.5 4.5L19 7.5'/></svg>");
 }
-
 /* ---------------------
 Testing images
 ----------------------*/
@@ -836,11 +835,16 @@ Focus order nav
 External
 ----------------------*/
 
-a.external {
-  padding: 0 26px 0 0;
-  background-image: url("../img/external-link-20.png");
-  background-repeat: no-repeat;
-  background-position: center right;
+a.external::after {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-left: .2em;
+  vertical-align: -.125em;
+  background-color: currentColor;
+  mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M10 5H8.2C7.08 5 6.52 5 6.09 5.22C5.72 5.41 5.41 5.72 5.22 6.09C5 6.52 5 7.08 5 8.2V15.8C5 16.92 5 17.48 5.22 17.91C5.41 18.28 5.72 18.59 6.09 18.78C6.52 19 7.08 19 8.2 19H15.8C16.92 19 17.48 19 17.91 18.78C18.28 18.59 18.59 18.28 18.78 17.91C19 17.48 19 16.92 19 15.8V14M20 9V4M20 4H15M20 4L13 11'/></svg>") no-repeat center / contain;
+  forced-color-adjust: none;
 }
 
 /* ---------------------
@@ -849,12 +853,21 @@ Bookmarklet
 
 a.bookmarklet {
   display: inline-block;
-  padding: .5em 1em .5em 2em;
+  padding: .5em 1em .5em .625em;    /* 10px left, matches the old icon position */
   color: var(--colour-black);
-  background-image: url("../img/bookmark.png");
-  background-repeat: no-repeat;
-  background-position: center left 10px;
   box-shadow: 4px 4px 4px 0 var(--colour-grey-mid);
+}
+
+a.bookmarklet::before {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-right: .4em;
+  vertical-align: -.125em;
+  background-color: currentColor;
+  mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'><path d='M6 3h12v18l-6-5-6 5z'/></svg>") no-repeat center / contain;
+  forced-color-adjust: none;
 }
 
 a.bookmarklet:is(:link, :visited, :focus, :hover, :active) {
