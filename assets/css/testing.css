@@ -59,7 +59,8 @@ body {
   background: var(--colour-body);
 }
 
-main {
+main,
+.page {
   max-inline-size: 48em;
   margin-inline: auto;
   padding: 1.5rem clamp(1rem, 4vw, 2rem);
@@ -951,4 +952,37 @@ Page meta
 .page-meta {
   font-size: .9em;
   color: var(--colour-text-muted);
+}
+
+/* ---------------------
+Series navigation
+----------------------*/
+
+.series-navigation {
+  border-left: 3px solid var(--colour-grey-dark);
+  background: var(--colour-body);
+  padding: 1em 1.5em;
+  margin: 2em 0;
+}
+
+.series-navigation h2 {
+  margin-top: 0;
+  font-size: 1.2em;
+}
+
+.series-navigation ol {
+  margin-bottom: 0;
+}
+
+/* ---------------------
+Copy code wrapper
+----------------------*/
+
+.copy-code-wrapper {
+  margin: .5em 0 1.5em;
+  font-size: .9em;
+}
+
+.copy-code-status {
+  margin-left: 0.75em;
 }

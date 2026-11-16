@@ -10,45 +10,6 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-a11y-dark.min.css" rel="stylesheet">
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
-  <style>
-.copy-code-wrapper {
-  margin: .5em 0 1.5em;
-  font-size: .9em;
-}
-
-.copy-code-status {
-  margin-left: 0.75em;
-}
-
-.series-navigation {
-  border-left: 3px solid #aaa;
-  background: #f5f5f5;
-  padding: 1em 1.5em;
-  margin: 2em 0;
-}
-
-.series-navigation h2 {
-  margin-top: 0;
-  font-size: 1.2em;
-}
-
-.series-navigation ol {
-  margin-bottom: 0;
-}
-
-.key-point {
-  border-left: 6px solid #000;
-  background: #fff8d6;
-  padding: .75em 1.25em;
-  margin: 1.5em 0;
-  font-size: 1.1em;
-}
-
-.key-point p {
-  margin: 0;
-}
-
-  </style>
 </head>
 <body>
 <main>
@@ -424,7 +385,7 @@ const { pathToFileURL } = require('url');
 
 <p>The catch was that <code>--exit</code> fails on <strong>any</strong> violation, even a minor one.</p>
 
-<div class="key-point">
+<div class="note">
   <p><strong>Writing your own script means you decide what counts as a failure.</strong> You can choose which issues should make a test fail, rather than treating every violation the same way.</p>
 </div>
 
@@ -538,7 +499,7 @@ const { pathToFileURL } = require('url');
 
 <p>In this section, you'll set up something similar on your own computer. The check will watch the test page, and run again every time you save a change.</p>
 
-<div class="key-point">
+<div class="note">
   <p><strong>Accessibility checks work best when nobody has to remember to run them.</strong> Running them automatically means issues are caught as soon as they're introduced.</p>
 </div>
 
