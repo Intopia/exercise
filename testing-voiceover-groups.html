@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing VoiceOver groups</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <style>
+h2 {
+  font-size: 1.75rem;
+  margin: 7rem 0 1rem;
+}
+
+h3 {
+  margin: 3rem 0 1rem;
+}
+
+.example h4 {
+  margin: 0 0 1rem;
+  color: #000;
+}
+
+.example {
+  margin: 1em 0;
+}
+
+p + .example {
+  margin: 1em 0;
+}
+
+.example p {
+  margin: 0 0 .5em;
+}
+
+.error {
+  color: #b00020;
+}
+
+.status {
+  padding: 0.5em 1em;
+  border-left: 6px solid;
+  color: #000;
+}
+
+.status-invalid {
+  background: #fde7e9;
+  border-color: #b00020;
+}
+
+.status-poor {
+  background: #fff1d6;
+  border-color: #b26a00;
+}
+
+.status-good {
+  background: #e3f4e6;
+  border-color: #1b5e20;
+}
+
+.status-control {
+  background: #eceff1;
+  border-color: #546e7a;
+}
+  table.demo {border-collapse:collapse; width:100%}
+table.demo caption {text-align:left; font-weight:bold; padding:0 0 .5em}
+table.demo th, table.demo td {border:1px solid #767676; padding:.4em .6em; text-align:left}
+.scroll {height:9em; overflow:auto; border:2px solid #546e7a; padding:.5em}
+.scroll pre {margin:0}
+.chat p {margin:0 0 .5em}
+iframe {width:100%; height:12em; border:2px solid #546e7a}
+[role="toolbar"] {display:flex; gap:.5rem}
+[role="tablist"] {display:flex; gap:.25rem; margin:0 0 -2px}
+[role="tab"] {padding:.4em .8em; border:2px solid #767676; background:#eceff1; cursor:pointer}
+[role="tab"][aria-selected="true"] {background:#fff; border-bottom-color:#fff}
+[role="tabpanel"] {border:2px solid #767676; padding:1em}
+[role="grid"] {border-collapse:collapse}
+[role="grid"] th, [role="grid"] td {border:1px solid #767676; padding:.4em .8em}
+</style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing VoiceOver groups</h1>
+
+<p>VoiceOver may treat some parts of a page as groups. A group is a container that VoiceOver moves past as one item until you choose to go inside it. Whether something is treated as a group can depend on your browser and VoiceOver settings.</p>
+
+<p>Move through each example and listen for whether VoiceOver treats it as one item. If it does, try entering and leaving it.</p>
+<ul>
+  <li>To enter a group: press <kbd>VO</kbd> + <kbd>Shift</kbd> + <kbd>Down Arrow</kbd> (interact).</li>
+  <li>To move through items inside a group: press <kbd>VO</kbd> + <kbd>Right Arrow</kbd> or <kbd>VO</kbd> + <kbd>Left Arrow</kbd>.</li>
+  <li>To leave a group: press <kbd>VO</kbd> + <kbd>Shift</kbd> + <kbd>Up Arrow</kbd> (stop interacting).</li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2>1. Table</h2>
+
+<p>VoiceOver treats a table as a group. Interact with it to move between cells.</p>
+
+<!-- sub-section -->
+
+<h3>Example 1.1: Data table</h3>
+
+<p>A table with a caption, column headers and row headers.</p>
+
+<div class="example">
+  <table class="demo">
+    <caption>Course schedule</caption>
+    <thead>
+      <tr>
+        <th scope="col">Day</th>
+        <th scope="col">Topic</th>
+        <th scope="col">Trainer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Monday</th>
+        <td>Screen reader basics</td>
+        <td>Russ</td>
+      </tr>
+      <tr>
+        <th scope="row">Tuesday</th>
+        <td>Forms and errors</td>
+        <td>Mary</td>
+      </tr>
+      <tr>
+        <th scope="row">Wednesday</th>
+        <td>Dynamic content</td>
+        <td>Peter</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;table class="demo"&gt;
+  &lt;caption&gt;Course schedule&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th scope="col"&gt;Day&lt;/th&gt;
+      &lt;th scope="col"&gt;Topic&lt;/th&gt;
+      &lt;th scope="col"&gt;Trainer&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th scope="row"&gt;Monday&lt;/th&gt;
+      &lt;td&gt;Screen reader basics&lt;/td&gt;
+      &lt;td&gt;Russ&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th scope="row"&gt;Tuesday&lt;/th&gt;
+      &lt;td&gt;Forms and errors&lt;/td&gt;
+      &lt;td&gt;Mary&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th scope="row"&gt;Wednesday&lt;/th&gt;
+      &lt;td&gt;Dynamic content&lt;/td&gt;
+      &lt;td&gt;Peter&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>2. Scrollable region</h2>
+
+<p>A region that scrolls, and can take keyboard focus, may be treated as a group.</p>
+
+<!-- sub-section -->
+
+<h3>Example 2.1: Code block</h3>
+
+<p>A <code>pre</code> that scrolls. It is a focusable <code>region</code> with a name, so keyboard users can scroll it.</p>
+
+<div class="example">
+  <div class="scroll" role="region" aria-label="Example code" tabindex="0">
+  <pre><code>function countFailures(results) {
+    var total = 0;
+    for (var i = 0; i &lt; results.length; i++) {
+      if (results[i].impact === 'critical') {
+        total = total + 1;
+      }
+    }
+    return total;
+  }
+
+  function showSummary(total) {
+    var message = 'Critical failures: ' + total;
+    console.log(message);
+    return message;
+  }
+
+  var results = runChecks();
+  showSummary(countFailures(results));</code></pre>
+  </div>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div class="scroll" <span class="highlight">role="region" aria-label="Example code" tabindex="0"</span>&gt;
+&lt;pre&gt;&lt;code&gt;function countFailures(results) {
+  var total = 0;
+  for (var i = 0; i &amp;lt; results.length; i++) {
+    if (results[i].impact === 'critical') {
+      total = total + 1;
+    }
+  }
+  return total;
+}
+
+function showSummary(total) {
+  var message = 'Critical failures: ' + total;
+  console.log(message);
+  return message;
+}
+
+var results = runChecks();
+showSummary(countFailures(results));&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3>Example 2.2: Chat panel</h3>
+
+<p>A chat history that scrolls. It is a focusable <code>log</code> with a name.</p>
+
+<div class="example">
+  <div class="scroll chat" role="log" aria-label="Chat messages" tabindex="0">
+      <p><strong>Peter:</strong> Morning, did the audit report go out?</p>
+      <p><strong>Mary:</strong> Yes, sent it at nine.</p>
+      <p><strong>Peter:</strong> Great. Any questions from the client?</p>
+      <p><strong>Mary:</strong> One about the colour contrast findings.</p>
+      <p><strong>Peter:</strong> I can jump on a call at two.</p>
+      <p><strong>Mary:</strong> Perfect, I will send an invite.</p>
+      <p><strong>Peter:</strong> Thanks. Can you attach the issue list?</p>
+      <p><strong>Mary:</strong> Done, it is in the invite.</p>
+      <p><strong>Peter:</strong> Brilliant, see you then.</p>
+  </div>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div class="scroll chat" <span class="highlight">role="log" aria-label="Chat messages" tabindex="0"</span>&gt;
+    &lt;p&gt;&lt;strong&gt;Peter:&lt;/strong&gt; Morning, did the audit report go out?&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Mary:&lt;/strong&gt; Yes, sent it at nine.&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Peter:&lt;/strong&gt; Great. Any questions from the client?&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Mary:&lt;/strong&gt; One about the colour contrast findings.&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Peter:&lt;/strong&gt; I can jump on a call at two.&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Mary:&lt;/strong&gt; Perfect, I will send an invite.&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Peter:&lt;/strong&gt; Thanks. Can you attach the issue list?&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Mary:&lt;/strong&gt; Done, it is in the invite.&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Peter:&lt;/strong&gt; Brilliant, see you then.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>3. Iframe</h2>
+
+<p>An iframe is treated as a group. These use <code>srcdoc</code> so they work without a network. Swap in a real video or map embed if you prefer.</p>
+
+<!-- sub-section -->
+
+<h3>Example 3.1: Embedded video</h3>
+
+<p>A video player inside an iframe with a <code>title</code>.</p>
+
+<div class="example">
+  <iframe title="Intro to screen readers video" srcdoc="&lt;!doctype html&gt;&lt;html lang=&quot;en&quot;&gt;&lt;body&gt;&lt;h1&gt;Intro to screen readers&lt;/h1&gt;&lt;p&gt;Video player (demo)&lt;/p&gt;&lt;button&gt;Play&lt;/button&gt; &lt;button&gt;Mute&lt;/button&gt; &lt;button&gt;Captions&lt;/button&gt;&lt;/body&gt;&lt;/html&gt;"></iframe>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;iframe <span class="highlight">title="Intro to screen readers video"</span> srcdoc="&amp;lt;!doctype html&amp;gt;&amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt;&amp;lt;body&amp;gt;&amp;lt;h1&amp;gt;Intro to screen readers&amp;lt;/h1&amp;gt;&amp;lt;p&amp;gt;Video player (demo)&amp;lt;/p&amp;gt;&amp;lt;button&amp;gt;Play&amp;lt;/button&amp;gt; &amp;lt;button&amp;gt;Mute&amp;lt;/button&amp;gt; &amp;lt;button&amp;gt;Captions&amp;lt;/button&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;"&gt;&lt;/iframe&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3>Example 3.2: Embedded map</h3>
+
+<p>A map inside an iframe with a <code>title</code>.</p>
+
+<div class="example">
+  <iframe title="Map of Sydney" srcdoc="&lt;!doctype html&gt;&lt;html lang=&quot;en&quot;&gt;&lt;body&gt;&lt;h1&gt;Map of Sydney&lt;/h1&gt;&lt;p&gt;Map (demo)&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;#&quot;&gt;Town Hall&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;#&quot;&gt;Circular Quay&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;button&gt;Zoom in&lt;/button&gt; &lt;button&gt;Zoom out&lt;/button&gt;&lt;/body&gt;&lt;/html&gt;"></iframe>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;iframe <span class="highlight">title="Map of Sydney"</span> srcdoc="&amp;lt;!doctype html&amp;gt;&amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt;&amp;lt;body&amp;gt;&amp;lt;h1&amp;gt;Map of Sydney&amp;lt;/h1&amp;gt;&amp;lt;p&amp;gt;Map (demo)&amp;lt;/p&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;Town Hall&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;Circular Quay&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;&amp;lt;button&amp;gt;Zoom in&amp;lt;/button&amp;gt; &amp;lt;button&amp;gt;Zoom out&amp;lt;/button&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;"&gt;&lt;/iframe&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>4. ARIA widgets</h2>
+
+<p>Some composite widgets with ARIA roles may be treated as groups.</p>
+
+<!-- sub-section -->
+
+<h3>Example 4.1: Toolbar</h3>
+
+<p>A <code>toolbar</code> with three buttons.</p>
+
+<div class="example">
+  <div role="toolbar" aria-label="Text formatting">
+    <button type="button">Bold</button>
+    <button type="button">Italic</button>
+    <button type="button">Underline</button>
+  </div>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div <span class="highlight">role="toolbar"</span> aria-label="Text formatting"&gt;
+  &lt;button type="button"&gt;Bold&lt;/button&gt;
+  &lt;button type="button"&gt;Italic&lt;/button&gt;
+  &lt;button type="button"&gt;Underline&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3>Example 4.2: Grid</h3>
+
+<p>A <code>grid</code> with column headers and cells. It is static, with no keyboard behaviour added.</p>
+
+<div class="example">
+  <table role="grid" aria-label="Quarterly sales">
+    <thead>
+      <tr>
+        <th scope="col">Region</th>
+        <th scope="col">Q1</th>
+        <th scope="col">Q2</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>North</td>
+        <td>120</td>
+        <td>135</td>
+      </tr>
+      <tr>
+        <td>South</td>
+        <td>98</td>
+        <td>110</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;table <span class="highlight">role="grid"</span> aria-label="Quarterly sales"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th scope="col"&gt;Region&lt;/th&gt;
+      &lt;th scope="col"&gt;Q1&lt;/th&gt;
+      &lt;th scope="col"&gt;Q2&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;North&lt;/td&gt;
+      &lt;td&gt;120&lt;/td&gt;
+      &lt;td&gt;135&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;South&lt;/td&gt;
+      &lt;td&gt;98&lt;/td&gt;
+      &lt;td&gt;110&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3>Example 4.3: Tab list</h3>
+
+<p>A <code>tablist</code> with three tabs and their panels. Arrow keys move between tabs.</p>
+
+<div class="example">
+  <div role="tablist" aria-label="Course information">
+    <button role="tab" id="tab-one" aria-selected="true" aria-controls="panel-one">Overview</button>
+    <button role="tab" id="tab-two" aria-selected="false" aria-controls="panel-two" tabindex="-1">Schedule</button>
+    <button role="tab" id="tab-three" aria-selected="false" aria-controls="panel-three" tabindex="-1">Resources</button>
+  </div>
+  <div role="tabpanel" id="panel-one" aria-labelledby="tab-one">
+    <p>Tab one content: an overview of the course.</p>
+  </div>
+  <div role="tabpanel" id="panel-two" aria-labelledby="tab-two" hidden>
+    <p>Tab two content: the course schedule.</p>
+  </div>
+  <div role="tabpanel" id="panel-three" aria-labelledby="tab-three" hidden>
+    <p>Tab three content: links and resources.</p>
+  </div>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="tablist" aria-label="Course information"&gt;
+  &lt;button role="tab" id="tab-one" aria-selected="true" aria-controls="panel-one"&gt;Overview&lt;/button&gt;
+  &lt;button role="tab" id="tab-two" aria-selected="false" aria-controls="panel-two" tabindex="-1"&gt;Schedule&lt;/button&gt;
+  &lt;button role="tab" id="tab-three" aria-selected="false" aria-controls="panel-three" tabindex="-1"&gt;Resources&lt;/button&gt;
+&lt;/div&gt;
+&lt;div role="tabpanel" id="panel-one" aria-labelledby="tab-one"&gt;
+  &lt;p&gt;Tab one content: an overview of the course.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div role="tabpanel" id="panel-two" aria-labelledby="tab-two" hidden&gt;
+  &lt;p&gt;Tab two content: the course schedule.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div role="tabpanel" id="panel-three" aria-labelledby="tab-three" hidden&gt;
+  &lt;p&gt;Tab three content: links and resources.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+<script>
+(function () {
+  var list = document.querySelector('[role="tablist"]');
+  var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+  function select(tab) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+    tab.focus();
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { select(t); });
+    t.addEventListener('keydown', function (e) {
+      var n = null;
+      if (e.key === 'ArrowRight') n = tabs[(i + 1) % tabs.length];
+      if (e.key === 'ArrowLeft') n = tabs[(i + tabs.length - 1) % tabs.length];
+      if (n) { e.preventDefault(); select(n); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
