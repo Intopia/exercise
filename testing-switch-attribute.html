@@ -7,6 +7,7 @@
   <link rel="icon" href="favicon.ico" sizes="32x32">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link href="assets/css/testing.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
   <style>
     .switch-track {
       position: relative;
@@ -72,7 +73,10 @@
 <main>
 
 <a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
-  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo. The word 'intopia' in black, with the 'o' made from four curved brush strokes in pink, orange, yellow and turquoise." class="intopia-logo">
+  </picture>
 </a>
 
 <p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>

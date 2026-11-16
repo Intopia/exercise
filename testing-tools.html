@@ -7,23 +7,16 @@
   <link rel="icon" href="favicon.ico" sizes="32x32">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link href="assets/css/testing.css" rel="stylesheet">
-  <style>
-    body { max-width: 55rem; }
-    h1, h2, h3, h4, p, ol, ul, hr { max-width: 45rem; }
-    .table-wrapper { overflow-x: auto; margin-bottom: 3rem; }
-    .table-wrapper:focus { outline: 3px solid #000; outline-offset: 2px; }
-    table { border-collapse: collapse; width: 100%; }
-    caption { text-align: left; font-weight: bold; padding-bottom: 0.5rem; }
-    th, td { border: 1px solid #767676; padding: 0.5rem 0.75rem; text-align: left; vertical-align: top; }
-    thead th { background-color: #f2f2f2; }
-    nav { margin-bottom: 3rem; }
-  </style>
+  <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
 </head>
 <body>
 <main>
 
 <a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
-  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo. The word 'intopia' in black, with the 'o' made from four curved brush strokes in pink, orange, yellow and turquoise." class="intopia-logo">
+  </picture>
 </a>
 
 <p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>

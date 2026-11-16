@@ -4,9 +4,11 @@
   <meta charset="utf-8">
   <title>Testing examples</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
   <link rel="icon" href="favicon.ico" sizes="32x32">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link href="assets/css/testing.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
   <style>
 .badge-new {
   display: inline-block;
@@ -24,12 +26,15 @@
 <main>
 
 <a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
-  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+  </picture>
 </a>
 
 <h1 style="margin-top: 1em;">Intopia testing examples</h1>
 
-<p style="font-size: .9em; color: #555;">Updated: <time datetime="2026-11-15">15 November 2026</time> | Author: Russ Weakley</p>
+<p class="page-meta">Updated: <time datetime="2026-11-15">15 November 2026</time> | Author: Russ Weakley</p>
 
 <p>A series of pages that can be used to test or review specific aspects about HTML markup and accessibility features.</p>
 

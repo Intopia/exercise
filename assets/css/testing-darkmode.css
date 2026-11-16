@@ -1,0 +1,199 @@
+/* ---------------------
+Dark mode
+Load after testing.css:
+<link rel="stylesheet" href="dark.css" media="(prefers-color-scheme: dark)">
+Ratios are approximate, against --colour-main (#1c1c1e) unless noted
+----------------------*/
+
+:root {
+  /* Base colours
+     --colour-white and --colour-black are NOT redefined: the contrast
+     test examples rely on real white */
+  --colour-text: #e8e8e8;           /* ~13.9:1 */
+  --colour-heading: #ff8a5c;        /* ~7.3:1 */
+  --colour-body: #121212;
+  --colour-main: #1c1c1e;
+  --colour-code: #ccc;              /* ~10.6:1 */
+
+  /* Greys (surfaces get lighter as they rise) */
+  --colour-grey-light: #2a2a2d;
+  --colour-grey: #3a3a3e;
+  --colour-grey-mid: #55555a;
+  --colour-grey-dark: #77777c;
+  --colour-text-muted: #aaa;        /* ~7.3:1 */
+  --border-main: #333336;
+  --border-strong: #8e8e93;         /* ~5.2:1, ~4.4:1 on #2a2a2d */
+  --border-table: #8a8a8a;
+
+  /* State colours */
+  --colour-green-dark: #7bd88f;     /* ~9.8:1 */
+  --colour-green: #3fb950;          /* ~6.7:1 */
+  --colour-active: #ff7b72;         /* ~6.8:1 */
+  --colour-error: #ff6b6b;          /* ~6.1:1, ~5.4:1 on .note */
+
+  /* Links */
+  --colour-link: #8ab4f8;           /* ~8.1:1 */
+  --colour-link-visited: #c4a7f5;   /* ~8.2:1 */
+
+  /* Code block */
+  --colour-pre: #111;
+}
+
+body {
+  color: var(--colour-text);
+}
+
+main {
+  box-shadow: 0 1px 3px rgb(0 0 0 / .5);
+}
+
+/* ---------------------
+Links
+----------------------*/
+
+a:link {
+  color: var(--colour-link);
+}
+
+a:visited {
+  color: var(--colour-link-visited);
+}
+
+a:hover {
+  color: var(--colour-green-dark);
+}
+
+a:active {
+  color: var(--colour-active);
+}
+
+/* Focus inverts: white block, black text, white ring */
+a:focus-visible,
+summary:focus-visible {
+  color: var(--colour-black);
+  background-color: var(--colour-white);
+  outline-color: var(--colour-white);
+}
+
+/* ---------------------
+Keyboard
+----------------------*/
+
+kbd {
+  background-image: linear-gradient(var(--colour-grey), var(--colour-grey-light));
+  box-shadow: 1px 1px 2px var(--colour-black);
+}
+
+/* ---------------------
+Pre and code
+----------------------*/
+
+pre {
+  background: var(--colour-pre);
+  border: 1px solid var(--border-main);
+}
+
+/* .comment #999 stays: ~6.6:1 on #111 */
+
+/* ---------------------
+Tables
+----------------------*/
+
+table {
+  background: transparent;
+}
+
+/* ---------------------
+Form classes
+----------------------*/
+
+.input:focus {
+  border-color: var(--colour-white);
+  outline-color: var(--colour-white);
+}
+
+/* Buttons keep white text, so their backgrounds stay dark enough for it */
+.button:focus-visible,
+button:focus-visible {
+  color: var(--colour-black);
+  background: var(--colour-white);
+  outline-color: var(--colour-white);
+}
+
+.button:hover,
+button:hover:not(:disabled) {
+  color: var(--colour-white);
+  background: #1a7f37;              /* white text ~5.1:1 */
+}
+
+.button:active,
+button:active {
+  color: var(--colour-white);
+  background: #aa0000;              /* white text 7.75:1 */
+}
+
+/* ---------------------
+Card styles
+----------------------*/
+
+.card {
+  background: var(--colour-main);
+}
+
+.card-link:link,
+.card-link:visited {
+  color: var(--colour-text);
+}
+
+.card-link:hover {
+  color: var(--colour-green-dark);
+}
+
+/* ---------------------
+Bookmarklet
+----------------------*/
+
+a.bookmarklet {
+  color: var(--colour-text);
+  box-shadow: 4px 4px 4px 0 var(--colour-black);
+}
+
+a.bookmarklet:hover {
+  background-color: rgb(0 255 0 / .25);   /* text ~6.3:1 */
+}
+
+a.bookmarklet:focus-visible {
+  color: var(--colour-text);
+  background-color: rgb(255 255 255 / .15);
+  outline-color: var(--colour-white);
+}
+
+/* ---------------------
+Intopia logo
+----------------------*/
+
+a.intopia-home-link:focus-visible {
+  background-color: transparent;
+  outline-color: var(--colour-white);
+}
+
+/* ---------------------
+Note
+----------------------*/
+
+.note {
+  background: #3a1f1f;              /* text ~12.3:1 */
+}
+
+.note h3 {
+  color: var(--colour-text);
+}
+
+/* ---------------------
+Page meta
+----------------------*/
+
+.page-meta {
+  font-size: .9em;
+  color: var(--colour-text-muted);
+}
