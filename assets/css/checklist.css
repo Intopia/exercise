@@ -1,350 +1,140 @@
-/* ==========================================================================
-   Checklist styles
-   Load after testing.css. Colours are in custom properties so they're easy
-   to swap for Intopia brand values.
-   ========================================================================== */
-
+/* VoiceOver testing checklist */
 :root {
-  --cl-ink: #1d1d2b;
-  --cl-muted: #4f5164;
-  --cl-accent: #5b2d90;
-  --cl-accent-soft: #f4effa;
-  --cl-border: #d6d3e0;
-  --cl-card: #ffffff;
-  --cl-panel: #f7f6fb;
-  --cl-bp-ink: #7a4300;
-  --cl-bp-bg: #fff3e0;
-  --cl-intopia-ink: #005b6e;
-  --cl-intopia-bg: #e4f3f6;
-  --cl-radius: 12px;
+  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-heading: var(--font-body);
+  --font-mono: Consolas, ui-monospace, Menlo, monospace;
+  --heading: #c03c0c;
+  --ink: #25282b;
+  --muted: #515960;
+  --link: #075b83;
+  --surface: #fff;
+  --background: #f5f5f3;
+  --line: #dcdedc;
+  --accent-light: #fff3ed;
+  --radius: 1rem;
 }
-
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--ink);
+  font: 1rem/1.65 var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+.page { width: min(100% - 2.5rem, 55em); margin-inline: auto; padding-block: 2.5rem 5rem; }
+.intopia-home-link { display: inline-block; }
+.intopia-logo { display: block; width: auto; max-width: 140px; max-height: 4.5rem; object-fit: contain; }
+.header-link { margin: 1.25rem 0 0; }
+.footer-link { margin: 2.5rem 0 0; }
+.arrow { display: inline-block; margin-right: .2rem; }
+h1,h2,h3 { font-family: var(--font-heading); line-height: 1.25; }
+h1 { font-size: clamp(2rem, 4.5vw, 3.1rem); letter-spacing: -.035em; margin: 1rem 0 2.5rem; color: var(--heading); }
+h2,h3 { color: var(--heading); }
+h2 { font-size: clamp(1.55rem, 3vw, 2rem); letter-spacing: -.025em; margin: 0 0 1.25rem; }
+h3 { font-size: 1.12rem; letter-spacing: -.01em; margin: 0 0 .75rem; }
+p { margin: 0 0 1rem; }
+a { color: var(--link); text-underline-offset: .18em; text-decoration-thickness: .08em; }
+a:hover { text-decoration-thickness: .14em; }
+a:focus-visible { outline: 3px solid var(--heading); outline-offset: 4px; border-radius: 3px; }
+.contents, .checklist-section {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(1.35rem, 3.5vw, 2.5rem);
+  box-shadow: 0 3px 14px rgb(32 30 26 / .035);
+  margin-block: 0 40px;
+}
+.contents h2 { margin-bottom: 1.1rem; }
+.contents ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  column-gap: 2.5rem;
+  row-gap: .2rem;
+}
+.contents li { margin: 0; min-width: 0; }
+.contents a { display: block; padding: .35rem 0; font-weight: 560; }
+.checklist-section { scroll-margin-top: 1.5rem; }
+.checklist-section > p { max-width: 75ch; color: var(--muted); }
+.checklist-section > p:last-of-type { margin-bottom: 1.7rem; }
+.test {
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0,1fr);
+  column-gap: 1.2rem;
+  align-items: start;
+  padding: 1.65rem 0;
+  border-top: 1px solid var(--line);
+}
+.test > :not(.test-number) { grid-column: 2; min-width: 0; }
+.test-number {
+  grid-column: 1;
+  grid-row: 1 / span 10;
+  display: inline-grid;
+  place-items: center;
+  width: 3.15rem;
+  aspect-ratio: 1;
+  border: 2px solid #c8cccf;
+  border-radius: 50%;
+  background: transparent;
+  color: #555;
+  font: 750 1.25rem/1 var(--font-heading);
+  font-variant-numeric: tabular-nums;
+}
+.test h3 { margin-top: .15rem; font-size: 1.2rem; }
+.test p { max-width: 76ch; }
+.test p:has(+ ul) { font-size: .9rem; font-weight: 650; color: var(--muted); margin-bottom: .2rem; }
+.test ul { margin: .1rem 0 0; padding-left: 1.3rem; font-size: .94rem; }
+.test li + li { margin-top: .18rem; }
+.test-qualifier {
+  display: inline-block;
+  margin-left: .25rem;
+  font-size: .73em;
+  line-height: 1.5;
+  font-weight: 650;
+  color: #764322;
+  background: var(--accent-light);
+  padding: .12rem .45rem;
+  border-radius: .35rem;
+  vertical-align: .08em;
+}
+kbd {
+  display: inline-block;
+  padding: .12em .42em;
+  margin: 0 .08em;
+  border: 1px solid #aab0b5;
+  border-radius: .38rem;
+  background: #fefefe;
+  color: #000;
+  font: 400 .9em/1.45 var(--font-mono);
+  white-space: nowrap;
+  vertical-align: baseline;
+}
 .visually-hidden {
-  position: absolute !important;
+  position: absolute;
   width: 1px;
   height: 1px;
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0 0 0 0);
+  clip: rect(0,0,0,0);
   white-space: nowrap;
   border: 0;
 }
-
-
-/* Table of contents
-   ========================================================================== */
-
-.toc ul {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
-  gap: 0.5rem;
-  margin: 1rem 0 0;
-  padding: 0;
-  list-style: none;
+@media (max-width: 660px) {
+  .page { width: min(100% - 1.25rem, 55em); padding-block: 1.5rem 3rem; }
+  .contents ul { grid-template-columns: 1fr; }
+  .test { grid-template-columns: 2.5rem minmax(0,1fr); column-gap: .8rem; }
+  .test-number { width: 2.4rem; font-size: 1.05rem; }
+  .test h3 { font-size: 1.08rem; }
 }
-
-.toc li {
-  margin: 0;
-}
-
-.toc a {
-  display: block;
-  height: 100%;
-  box-sizing: border-box;
-  padding: 0.7rem 0.9rem;
-  border: 1px solid var(--cl-border);
-  border-left: 4px solid var(--cl-accent);
-  border-radius: 8px;
-  background: var(--cl-card);
-  color: var(--cl-accent);
-  text-underline-offset: 0.2em;
-}
-
-.toc a:hover {
-  background: var(--cl-accent-soft);
-}
-
-
-/* Each set of tests
-   ========================================================================== */
-
-.test-set {
-  margin: 3rem 0;
-  border: 1px solid var(--cl-border);
-  border-radius: var(--cl-radius);
-  background: var(--cl-card);
-  color: var(--cl-ink);
-  box-shadow: 0 1px 3px rgb(29 29 43 / 0.06), 0 6px 18px rgb(29 29 43 / 0.05);
-}
-
-.test-set-header {
-  padding: 1.5rem 1.75rem 1.25rem;
-  border-bottom: 1px solid var(--cl-border);
-  border-radius: var(--cl-radius) var(--cl-radius) 0 0;
-  background: var(--cl-accent-soft);
-}
-
-.test-set-header h2 {
-  margin: 0 0 0.5rem;
-  scroll-margin-top: 1rem;
-}
-
-.test-set-header p {
-  margin: 0;
-  color: var(--cl-muted);
-  max-width: 60ch;
-}
-
-.tests {
-  padding: 1.75rem 1.75rem 0.5rem;
-}
-
-
-/* Each test: numbered circle on a vertical line
-   ========================================================================== */
-
-.test {
-  position: relative;
-  padding: 0 0 2rem 3.5rem;
-}
-
-/* The line joining one circle to the next. Uses a border rather than a
-   background so it survives forced colours mode. */
-.test::before {
-  content: "";
-  position: absolute;
-  top: 2.5rem;
-  bottom: 0.25rem;
-  left: calc(1.25rem - 1px);
-  border-left: 2px solid var(--cl-border);
-}
-
-.test:last-child::before {
-  display: none;
-}
-
-.test h3 {
-  margin: 0 0 0.85rem;
-  padding-top: 0.35rem;
-  font-size: 1.15rem;
-  line-height: 1.4;
-}
-
-.test-number {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: grid;
-  place-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  box-sizing: border-box;
-  border: 2px solid var(--cl-accent);
-  border-radius: 50%;
-  background: var(--cl-card);
-  color: var(--cl-accent);
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1;
-}
-
-
-/* Tags
-   ========================================================================== */
-
-.tag {
-  display: inline-block;
-  margin: 0 0.35rem 0.25rem 0;
-  padding: 0.15rem 0.6rem;
-  border: 1px solid currentColor;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  line-height: 1.4;
-  vertical-align: 0.15em;
-  white-space: nowrap;
-}
-
-.tag-best-practice {
-  background: var(--cl-bp-bg);
-  color: var(--cl-bp-ink);
-}
-
-.tag-intopia {
-  background: var(--cl-intopia-bg);
-  color: var(--cl-intopia-ink);
-}
-
-
-/* How to check
-   ========================================================================== */
-
-.how-to-check {
-  margin: 0 0 0.9rem;
-  padding: 0.8rem 1rem;
-  border: 1px solid var(--cl-border);
-  border-left: 4px solid var(--cl-accent);
-  border-radius: 0 8px 8px 0;
-  background: var(--cl-panel);
-}
-
-.how-to-check p {
-  margin: 0;
-  line-height: 1.6;
-}
-
-.how-to-check strong {
-  color: var(--cl-accent);
-}
-
-kbd {
-  display: inline-block;
-  padding: 0.05em 0.45em;
-  border: 1px solid #a9a5bb;
-  border-bottom-width: 3px;
-  border-radius: 5px;
-  background: var(--cl-card);
-  color: var(--cl-ink);
-  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
-  font-size: 0.85em;
-  line-height: 1.4;
-  white-space: nowrap;
-}
-
-
-/* Related WCAG criteria
-   ========================================================================== */
-
-.criteria {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem 0.75rem;
-}
-
-.criteria-label {
-  margin: 0;
-  color: var(--cl-muted);
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
-.criteria-none {
-  font-weight: 400;
-  font-style: italic;
-}
-
-.criteria ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.criteria li {
-  margin: 0;
-}
-
-.criteria a {
-  display: inline-block;
-  padding: 0.3rem 0.75rem;
-  border: 1px solid var(--cl-border);
-  border-radius: 999px;
-  background: var(--cl-card);
-  color: var(--cl-accent);
-  font-size: 0.9rem;
-  text-underline-offset: 0.2em;
-}
-
-.criteria a:hover {
-  border-color: var(--cl-accent);
-  background: var(--cl-accent-soft);
-}
-
-.sc-number {
-  font-weight: 700;
-}
-
-.sc-level {
-  color: var(--cl-muted);
-  font-size: 0.85em;
-}
-
-
-/* Focus
-   ========================================================================== */
-
-.toc a:focus-visible,
-.criteria a:focus-visible {
-  outline: 3px solid var(--cl-accent);
-  outline-offset: 2px;
-}
-
-
-/* Small screens
-   ========================================================================== */
-
-@media (max-width: 40em) {
-  .test-set-header {
-    padding: 1.25rem 1rem 1rem;
-  }
-
-  .tests {
-    padding: 1.25rem 1rem 0.25rem;
-  }
-
-  .test {
-    padding-left: 2.85rem;
-  }
-
-  .test-number {
-    width: 2rem;
-    height: 2rem;
-    font-size: 0.9rem;
-  }
-
-  .test::before {
-    top: 2rem;
-    left: calc(1rem - 1px);
-  }
-}
-
-
-/* Forced colours (Windows high contrast)
-   ========================================================================== */
-
-@media (forced-colors: active) {
-  .test-number,
-  .tag,
-  .criteria a,
-  .toc a,
-  kbd {
-    border-color: CanvasText;
-  }
-
-  .test::before {
-    border-left-color: GrayText;
-  }
-}
-
-
-/* Print
-   ========================================================================== */
-
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 @media print {
-  .test-set {
-    box-shadow: none;
-    break-inside: auto;
-  }
-
-  .test-set-header {
-    break-after: avoid;
-  }
-
-  .test {
-    break-inside: avoid;
-  }
+  body { background: #fff; }
+  .page { width: 100%; padding: 0; }
+  .contents, .checklist-section { box-shadow: none; break-inside: auto; }
+  .test { break-inside: avoid; }
+  a { color: inherit; }
 }
