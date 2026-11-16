@@ -1,0 +1,50 @@
+/* VoiceOver testing checklist: dark mode
+   Loaded after checklist.css via media="(prefers-color-scheme: dark)",
+   so this file only overrides colours. */
+
+/* ==========================================================
+   Custom properties
+   ========================================================== */
+
+:root {
+  color-scheme: dark;
+  --heading: #ff8a5c;
+  --ink: #e6e8ea;
+  --muted: #aeb5bb;
+  --link: #7cc4f0;
+  --surface: #212427;
+  --background: #17191b;
+  --line: #3a3f44;
+  --accent-light: #3a2a22;
+}
+
+
+/* ==========================================================
+   Panels
+   ========================================================== */
+
+.contents,
+.checklist-section {
+  box-shadow: 0 3px 14px rgb(0 0 0 / .35);
+}
+
+
+/* ==========================================================
+   Individual tests
+   ========================================================== */
+
+.test-number {
+  border-color: #5a6067;
+  color: #c4cad0;
+}
+
+
+/* ==========================================================
+   Keyboard keys
+   ========================================================== */
+
+kbd {
+  border-color: #6b7279;
+  background: #2c3034;
+  color: #f1f3f5;
+}
