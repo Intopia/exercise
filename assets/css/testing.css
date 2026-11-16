@@ -329,7 +329,8 @@ pre {
   background: #222;
   padding: 1rem;              /* 16px */
   margin: 1rem 0 1.5rem;      /* 16px top, 24px bottom, matches p */
-  overflow: auto;
+  white-space: pre-wrap;      /* keep indents and line breaks, but wrap long lines */
+  overflow-wrap: anywhere;    /* break long strings instead of scrolling */
 }
 
 pre code {
