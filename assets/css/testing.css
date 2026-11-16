@@ -3,6 +3,8 @@ Global styles
 ----------------------*/
 
 :root {
+  font-size: 112.5%; /* 18px with the default 16px browser setting */
+
   /* Fonts */
   --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-heading: var(--font-body);
@@ -94,33 +96,38 @@ h6 {
   font-family: var(--font-heading);
 }
 
+h1,
+h2 {
+  letter-spacing: -.025em;  
+}
+
 :is(h1, h2, h3, h4, h5, h6) code {
   color: inherit;
 }
 
 h1 {
-  font-size: 2.125rem;        /* 34px */
-  margin: 0 0 1rem;           /* 0 top, 0 sides, 16px bottom */
-  line-height: 1.23529412;    /* 42px */
+  font-size: 2.22222222rem;   /* 40px */
+  margin: 0 0 1rem;           /* 0 top, 0 sides, 18px bottom */
+  line-height: 1.25;          /* 50px */
 }
 
 h2 {
-  font-size: 1.625rem;        /* 26px */
-  margin: 4rem 0 1rem;        /* 64px top, 0 sides, 16px bottom */
-  line-height: 1.23076923;    /* 32px exactly */
+  font-size: 1.66666667rem;   /* 30px */
+  margin: 4rem 0 1rem;        /* 72px top, 0 sides, 18px bottom */
+  line-height: 1.26666667;    /* 38px */
 }
 
 h3,
 .h3 {
-  font-size: 1.25rem;         /* 20px */
+  font-size: 1.22222222rem;    /* 22px */
   margin: 1.5rem 0 1rem;      /* 24px top, 0 sides, 16px bottom */
-  line-height: 1.2;           /* 24px */
+  line-height: 1.27272727;    /* 28px */
 }
 
 h4 {
-  font-size: 1rem;            /* 16px */
+  font-size: 1rem;            /* 18px */
   margin: 1.5rem 0 1rem;      /* 24px top, 0 sides, 16px bottom */
-  line-height: 1.25;          /* 20px */
+  line-height: 1.22222222;    /* 22px */
 }
 
 /* ---------------------
