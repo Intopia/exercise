@@ -60,7 +60,7 @@ body {
 }
 
 main {
-  max-inline-size: 50em;
+  max-inline-size: 48em;
   margin-inline: auto;
   padding: 1.5rem clamp(1rem, 4vw, 2rem);
   background: var(--colour-main);
