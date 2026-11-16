@@ -1,4 +1,9 @@
 /* VoiceOver testing checklist */
+
+/* ==========================================================
+   Custom properties
+   ========================================================== */
+
 :root {
   --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-heading: var(--font-body);
@@ -13,8 +18,22 @@
   --accent-light: #fff3ed;
   --radius: 1rem;
 }
-*, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+
+
+/* ==========================================================
+   Base
+   ========================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   background: var(--background);
@@ -22,53 +41,186 @@ body {
   font: 1rem/1.65 var(--font-body);
   -webkit-font-smoothing: antialiased;
 }
-.page { width: min(100% - 2.5rem, 55em); margin-inline: auto; padding-block: 2.5rem 5rem; }
-.intopia-home-link { display: inline-block; }
-.intopia-logo { display: block; width: auto; max-width: 140px; max-height: 4.5rem; object-fit: contain; }
-.header-link { margin: 1.25rem 0 0; }
-.footer-link { margin: 2.5rem 0 0; }
-.arrow { display: inline-block; margin-right: .2rem; }
-h1,h2,h3 { font-family: var(--font-heading); line-height: 1.25; }
-h1 { font-size: clamp(2rem, 4.5vw, 3.1rem); letter-spacing: -.035em; margin: 1rem 0 2.5rem; color: var(--heading); }
-h2,h3 { color: var(--heading); }
-h2 { font-size: clamp(1.55rem, 3vw, 2rem); letter-spacing: -.025em; margin: 0 0 1.25rem; }
-h3 { font-size: 1.12rem; letter-spacing: -.01em; margin: 0 0 .75rem; }
-p { margin: 0 0 1rem; }
-a { color: var(--link); text-underline-offset: .18em; text-decoration-thickness: .08em; }
-a:hover { text-decoration-thickness: .14em; }
-a:focus-visible { outline: 3px solid var(--heading); outline-offset: 4px; border-radius: 3px; }
-.contents, .checklist-section {
+
+
+/* ==========================================================
+   Page layout
+   ========================================================== */
+
+.page {
+  width: min(100% - 2.5rem, 55em);
+  margin-inline: auto;
+  padding-block: 2.5rem 5rem;
+}
+
+.intopia-home-link {
+  display: inline-block;
+}
+
+.intopia-logo {
+  display: block;
+  width: auto;
+  max-width: 140px;
+  max-height: 4.5rem;
+  object-fit: contain;
+}
+
+.header-link {
+  margin: 1.25rem 0 0;
+}
+
+.footer-link {
+  margin: 2.5rem 0 0;
+}
+
+.arrow {
+  display: inline-block;
+  margin-right: .2rem;
+}
+
+
+/* ==========================================================
+   Typography
+   ========================================================== */
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: clamp(2rem, 4.5vw, 3.1rem);
+  letter-spacing: -.035em;
+  margin: 1rem 0 2.5rem;
+  color: var(--heading);
+}
+
+h2,
+h3 {
+  color: var(--heading);
+}
+
+h2 {
+  font-size: clamp(1.55rem, 3vw, 2rem);
+  letter-spacing: -.025em;
+  margin: 0 0 1.25rem;
+}
+
+h3 {
+  font-size: 1.12rem;
+  letter-spacing: -.01em;
+  margin: 0 0 .75rem;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+
+/* ==========================================================
+   Links
+   ========================================================== */
+
+a {
+  color: var(--link);
+  text-underline-offset: .18em;
+  text-decoration-thickness: .08em;
+}
+
+a:hover {
+  text-decoration-thickness: .14em;
+}
+
+a:focus-visible {
+  outline: 3px solid var(--heading);
+  outline-offset: 4px;
+  border-radius: 3px;
+}
+
+
+/* ==========================================================
+   Panels (contents and checklist sections)
+   ========================================================== */
+
+.contents,
+.checklist-section {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: clamp(1.35rem, 3.5vw, 2.5rem);
   box-shadow: 0 3px 14px rgb(32 30 26 / .035);
-  margin-block: 0 40px;
+  margin-block: 0 2.5rem;
 }
-.contents h2 { margin-bottom: 1.1rem; }
+
+
+/* ==========================================================
+   Table of contents
+   ========================================================== */
+
+.contents h2 {
+  margin-bottom: 1.1rem;
+}
+
 .contents ul {
   list-style: none;
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: 2.5rem;
   row-gap: .2rem;
 }
-.contents li { margin: 0; min-width: 0; }
-.contents a { display: block; padding: .35rem 0; font-weight: 560; }
-.checklist-section { scroll-margin-top: 1.5rem; }
-.checklist-section > p { max-width: 75ch; color: var(--muted); }
-.checklist-section > p:last-of-type { margin-bottom: 1.7rem; }
+
+.contents li {
+  margin: 0;
+  min-width: 0;
+}
+
+.contents a {
+  display: block;
+  padding: .35rem 0;
+  font-weight: 560;
+}
+
+
+/* ==========================================================
+   Checklist sections
+   ========================================================== */
+
+.checklist-section {
+  scroll-margin-top: 1.5rem;
+}
+
+.checklist-section > p {
+  max-width: 75ch;
+  color: var(--muted);
+}
+
+.checklist-section > p:last-of-type {
+  margin-bottom: 1.7rem;
+}
+
+
+/* ==========================================================
+   Individual tests
+   ========================================================== */
+
 .test {
   display: grid;
-  grid-template-columns: 3.25rem minmax(0,1fr);
+  grid-template-columns: 3.25rem minmax(0, 1fr);
   column-gap: 1.2rem;
   align-items: start;
   padding: 1.65rem 0;
   border-top: 1px solid var(--line);
 }
-.test > :not(.test-number) { grid-column: 2; min-width: 0; }
+
+.test > :not(.test-number) {
+  grid-column: 2;
+  min-width: 0;
+}
+
 .test-number {
   grid-column: 1;
   grid-row: 1 / span 10;
@@ -83,11 +235,33 @@ a:focus-visible { outline: 3px solid var(--heading); outline-offset: 4px; border
   font: 750 1.25rem/1 var(--font-heading);
   font-variant-numeric: tabular-nums;
 }
-.test h3 { margin-top: .15rem; font-size: 1.2rem; }
-.test p { max-width: 76ch; }
-.test p:has(+ ul) { font-size: .9rem; font-weight: 650; color: var(--muted); margin-bottom: .2rem; }
-.test ul { margin: .1rem 0 0; padding-left: 1.3rem; font-size: .94rem; }
-.test li + li { margin-top: .18rem; }
+
+.test h3 {
+  margin-top: .15rem;
+  font-size: 1.2rem;
+}
+
+.test p {
+  max-width: 76ch;
+}
+
+.test p:has(+ ul) {
+  font-size: .9rem;
+  font-weight: 650;
+  color: var(--muted);
+  margin-bottom: .2rem;
+}
+
+.test ul {
+  margin: .1rem 0 0;
+  padding-left: 1.3rem;
+  font-size: .94rem;
+}
+
+.test li + li {
+  margin-top: .18rem;
+}
+
 .test-qualifier {
   display: inline-block;
   margin-left: .25rem;
@@ -100,6 +274,12 @@ a:focus-visible { outline: 3px solid var(--heading); outline-offset: 4px; border
   border-radius: .35rem;
   vertical-align: .08em;
 }
+
+
+/* ==========================================================
+   Keyboard keys
+   ========================================================== */
+
 kbd {
   display: inline-block;
   padding: .12em .42em;
@@ -112,6 +292,12 @@ kbd {
   white-space: nowrap;
   vertical-align: baseline;
 }
+
+
+/* ==========================================================
+   Utilities
+   ========================================================== */
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -119,22 +305,79 @@ kbd {
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0,0,0,0);
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
   white-space: nowrap;
   border: 0;
 }
+
+
+/* ==========================================================
+   Small screens
+   ========================================================== */
+
 @media (max-width: 660px) {
-  .page { width: min(100% - 1.25rem, 55em); padding-block: 1.5rem 3rem; }
-  .contents ul { grid-template-columns: 1fr; }
-  .test { grid-template-columns: 2.5rem minmax(0,1fr); column-gap: .8rem; }
-  .test-number { width: 2.4rem; font-size: 1.05rem; }
-  .test h3 { font-size: 1.08rem; }
+  .page {
+    width: min(100% - 1.25rem, 55em);
+    padding-block: 1.5rem 3rem;
+  }
+
+  .contents ul {
+    grid-template-columns: 1fr;
+  }
+
+  .test {
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    column-gap: .8rem;
+  }
+
+  .test-number {
+    width: 2.4rem;
+    font-size: 1.05rem;
+  }
+
+  .test h3 {
+    font-size: 1.08rem;
+  }
 }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+
+/* ==========================================================
+   Reduced motion
+   ========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+
+/* ==========================================================
+   Print
+   ========================================================== */
+
 @media print {
-  body { background: #fff; }
-  .page { width: 100%; padding: 0; }
-  .contents, .checklist-section { box-shadow: none; break-inside: auto; }
-  .test { break-inside: avoid; }
-  a { color: inherit; }
+  body {
+    background: #fff;
+  }
+
+  .page {
+    width: 100%;
+    padding: 0;
+  }
+
+  .contents,
+  .checklist-section {
+    box-shadow: none;
+    break-inside: auto;
+  }
+
+  .test {
+    break-inside: avoid;
+  }
+
+  a {
+    color: inherit;
+  }
 }

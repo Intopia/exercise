@@ -7,6 +7,17 @@
   <link rel="icon" href="favicon.ico" sizes="32x32">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link href="assets/css/testing.css" rel="stylesheet">
+<style>
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.icon-button img {
+  flex-shrink: 0;
+}
+</style>
 </head>
 <body>
 <main>
@@ -99,17 +110,17 @@ Bridge and city skyline in the background."</span>&gt;</code></pre>
 <p>This does not need to be a functional image as there is text available that describes the function. So, it is a decorative image instead:</p>
 
 <div class="example">
-  <button>
-    <img src="assets/img/icon-tick.png" alt="">
-    Dismiss   
+  <button class="icon-button">
+    <img src="assets/img/down-arrow-transparent.png" alt="" width="20" height="20">
+    Open
   </button>
 </div>
 
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;button&gt;
-  &lt;img src="icon-tick.png" <span class="highlight">alt=""</span>&gt;
-  <span class="highlight">Dismiss</span>
+  &lt;img src="down-arrow-transparent.png" <span class="highlight">alt=""</span>&gt;
+  <span class="highlight">Open</span>
 &lt;/button&gt;</code></pre>
 </details>
 

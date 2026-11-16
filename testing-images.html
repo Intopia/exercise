@@ -7,6 +7,17 @@
   <link rel="icon" href="favicon.ico" sizes="32x32">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link href="assets/css/testing.css" rel="stylesheet">
+<style>
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em; /* space between icon and text */
+}
+
+.icon-link img {
+  flex-shrink: 0; /* keep the icon from shrinking if the text wraps */
+}
+</style>
 </head>
 <body>
 <main>
@@ -69,17 +80,17 @@ desert landscape."</span>&gt;</code></pre>
 <p>This image is inside a link that has visible text. The image is decorative in this context, so <code>alt=""</code> is correct — the link text provides the accessible name.</p>
 
 <div class="example">
-  <a href="#">
-    <img src="assets/img/icon-arrow-right.png" alt="">
-    Visit our website
+  <a href="#" class="icon-link">
+    <img src="assets/img/down-arrow.png" alt="" width="30" height="30">
+    Open
   </a>
 </div>
 
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;a href="#"&gt;
-  &lt;img src="icon-arrow-right.png" <span class="highlight">alt=""</span>&gt;
-  Visit our website
+  &lt;img src="down-arrow.png" <span class="highlight">alt=""</span>&gt;
+  Open
 &lt;/a&gt;</code></pre>
 </details>
 
