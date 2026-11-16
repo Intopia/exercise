@@ -91,16 +91,75 @@ h3 {
 <p>The expected results were checked by running axe-core 4.14.1 over this page. Look in both the axe <strong>issues</strong> list and the <strong>needs review</strong> list, because several missing ID cases only show up in needs review.</p>
 
 <table>
-    <caption>Number of test cases by expected axe result</caption>
-    <thead><tr><th scope="col">Expected result</th><th scope="col">Cases</th></tr></thead>
-    <tbody>
-      <tr><td>Fail</td><td>31</td></tr>
-      <tr><td>Needs review</td><td>12</td></tr>
-      <tr><td>Pass, but broken (axe misses it)</td><td>5</td></tr>
-      <tr><td>Pass (valid control cases)</td><td>5</td></tr>
-      <tr><td>Changes after interaction</td><td>2</td></tr>
-    </tbody>
-  </table>
+  <caption>Number of test cases by expected axe result</caption>
+  <thead><tr><th scope="col">Expected result</th><th scope="col">Cases</th></tr></thead>
+  <tbody>
+    <tr><td>Fail</td><td>31</td></tr>
+    <tr><td>Needs review</td><td>12</td></tr>
+    <tr><td>Pass, but broken (axe misses it)</td><td>5</td></tr>
+    <tr><td>Pass (valid control cases)</td><td>5</td></tr>
+    <tr><td>Changes after interaction</td><td>2</td></tr>
+  </tbody>
+</table>
+
+
+<!-- section -->
+
+
+<h2 id="how-to-read">What this page shows</h2>
+
+<p>The axe-core rule <code>aria-valid-attr-value</code> checks that the <strong>value</strong> of an ARIA attribute is allowed. It does not check whether the attribute suits the element. This page has 55 live examples, so you can run axe over them and compare what it reports with what the examples actually do.</p>
+
+<p>The examples fall into five groups. Each group tells you something different about what an automated check can and cannot find.</p>
+
+<h3>Fail (31 examples)</h3>
+
+<p>Axe reports a failure when a value is clearly invalid. There are three common causes:</p>
+
+<ul>
+  <li><strong>The wrong type of value.</strong> For example, words where a number is needed (<code>aria-level="two"</code>, <code>aria-valuenow="50%"</code>), <code>"yes"</code> or a misspelling where <code>true</code> or <code>false</code> is needed, or a keyword that does not exist (<code>aria-live="rude"</code>, <code>aria-sort="asc"</code>).</li>
+  <li><strong>A missing ID on the attributes axe checks strictly.</strong> These are <code>aria-activedescendant</code>, <code>aria-owns</code>, <code>aria-details</code>, <code>aria-flowto</code>, and <code>aria-controls</code> when the control is expanded.</li>
+  <li><strong>A broken <code>aria-errormessage</code>.</strong> It lists more than one ID, points to a hidden element, or points to a plain paragraph.</li>
+</ul>
+
+<h3>Needs review (12 examples)</h3>
+
+<p>Axe cannot be certain, so it asks a person to check. These results appear in the <strong>needs review</strong> list, not the issues list, so they are easy to miss. They include:</p>
+
+<ul>
+  <li><strong>A missing ID on <code>aria-labelledby</code> or <code>aria-describedby</code>.</strong> The target element may be added later. Typos, the wrong case, a leading <code>#</code> and comma-separated IDs all end up here.</li>
+  <li><strong><code>aria-controls</code> together with <code>aria-haspopup</code>.</strong> The popup may live elsewhere in the page.</li>
+  <li><strong>Values that browsers tolerate,</strong> such as an unknown <code>aria-current</code> value, or an <code>aria-level</code> above 6.</li>
+  <li><strong>Empty values,</strong> such as <code>aria-expanded=""</code>, <code>aria-hidden=""</code> and <code>aria-valuenow=""</code>.</li>
+</ul>
+
+<h3>Pass, but broken (5 examples)</h3>
+
+<p>These examples have real problems that axe passes. They show why a clean result does not mean the markup is correct:</p>
+
+<ul>
+  <li><strong>A list where one ID is valid.</strong> Axe only needs one of the IDs to exist, so the missing part of a name or a control is silently lost.</li>
+  <li><strong>Collapsed controls.</strong> Axe skips a missing <code>aria-controls</code> or <code>aria-owns</code> target when <code>aria-expanded="false"</code>, because many scripts only add the panel when it opens.</li>
+  <li><strong>A problem waiting to happen.</strong> A missing <code>aria-errormessage</code> ID is ignored while <code>aria-invalid="false"</code>, but it breaks as soon as a script marks the field invalid.</li>
+</ul>
+
+<h3>Pass, valid control cases (5 examples)</h3>
+
+<p>These are correct examples that should pass. They confirm that the rule does not flag everything. They include an ID that exists, <code>aria-required="TRUE"</code> (the case of a true or false value does not matter), <code>aria-setsize="-1"</code> (allowed, and means the total is unknown), an empty <code>aria-labelledby</code> (allowed), and a correctly built <code>aria-errormessage</code>.</p>
+
+<h3>Changes after interaction (2 examples)</h3>
+
+<p>Both examples pass when the page loads and fail after you use them. One toggle button writes <code>aria-pressed="null"</code>. One disclosure button builds its panel with a typo in the ID. Axe only tests the page as it is at the moment you run it, so open, press and toggle things, then run axe again.</p>
+
+<h3>The takeaway</h3>
+
+<p>Axe is good at catching clearly invalid values. It is honest about the cases it cannot judge, and it cannot see problems that only exist in a collapsed, partial or later state. Automated results are a starting point, and manual testing is still needed.</p>
+
+
+<!-- section -->
+
+
+<h2 id="result-code">Result code</h2>
 
 <p>Every example has a coloured box showing the expected axe result:</p>
 
