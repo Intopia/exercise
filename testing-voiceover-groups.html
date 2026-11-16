@@ -4,9 +4,11 @@
   <meta charset="utf-8">
   <title>Testing VoiceOver groups</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
   <link rel="icon" href="favicon.ico" sizes="32x32">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link href="assets/css/testing.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
   <style>
 h2 {
   font-size: 1.75rem;
@@ -83,7 +85,10 @@ iframe {width:100%; height:12em; border:2px solid #546e7a}
 <main>
 
 <a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
-  <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo. The word 'intopia' in black, with the 'o' made from four curved brush strokes in pink, orange, yellow and turquoise." class="intopia-logo">
+  </picture>
 </a>
 
 <p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
