@@ -9,42 +9,88 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
-<style>
-  :root { --ink: #1d1d1f; --muted: #555; --line: #d0d0d5; --bg: #f6f6f8; }
-  * { box-sizing: border-box; }
-  body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--ink); line-height: 1.5; margin: 0; background: #fff; }
-  main { max-width: 52rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
-  h1 { font-size: 2rem; margin: 0 0 .5rem; }
-  h2 { font-size: 1.5rem; margin: 3rem 0 .5rem; padding-top: 1rem; border-top: 3px solid var(--ink); }
-  h3 { font-size: 1.125rem; margin: 0 0 .5rem; }
-  .case { border: 1px solid var(--line); border-radius: 6px; padding: 1rem 1.25rem; margin: 1.25rem 0; }
-  .case-id { display: inline-block; font-size: .8rem; font-weight: 700; background: var(--ink); color: #fff; padding: .1rem .45rem; border-radius: 3px; margin-right: .4rem; vertical-align: middle; }
-  .example { background: var(--bg); border: 1px dashed var(--line); padding: .75rem 1rem; margin: .75rem 0; }
-  .example p { margin: .25rem 0; }
-  .example [role="slider"], .example [role="progressbar"] { height: 1rem; width: 10rem; background: #ddd; border-radius: 3px; }
-  .example [role="separator"] { border-top: 2px solid #999; margin: .5rem 0; }
-  pre { background: #1d1d1f; color: #f4f4f4; padding: .75rem 1rem; border-radius: 4px; overflow-x: auto; font-size: .875rem; }
-  .result { margin: .5rem 0 0; }
-  .badge { display: inline-block; font-weight: 600; font-size: .875rem; padding: .2rem .6rem; border-radius: 3px; border: 2px solid; }
-  .badge.fail { background: #fde8e8; border-color: #b3261e; color: #8a1c16; }
-  .badge.review { background: #fff4d6; border-color: #8a6100; color: #5e4200; }
-  .badge.miss { background: #ece6fb; border-color: #5b3cc4; color: #432a99; }
-  .badge.pass { background: #e3f4e8; border-color: #1e7b3a; color: #155c2b; }
-  .badge.dynamic { background: #e8eef9; border-color: #1a4f9c; color: #133b75; }
-  .note { color: var(--muted); font-size: .9375rem; margin: .5rem 0 0; }
-  table { border-collapse: collapse; }
-  th, td { border: 1px solid var(--line); padding: .25rem .5rem; text-align: left; }
-  .summary td, .summary th { padding: .4rem .75rem; }
-  :focus-visible { outline: 3px solid #1a5fd0; outline-offset: 2px; }
-</style>
+  <style>
+h2 {
+  font-size: 1.75rem;
+  margin: 7rem 0 1rem;
+}
+
+h3 {
+  margin: 3rem 0 1rem;
+}
+
+.example {
+  margin: 1em 0;
+}
+
+.example p {
+  margin: 0 0 .5em;
+}
+
+.example [role="slider"],
+.example [role="progressbar"] {
+  height: 1rem;
+  width: 10rem;
+  background: #ddd;
+  border-radius: 3px;
+}
+
+.example [role="separator"] {
+  border-top: 2px solid #999;
+  margin: .5rem 0;
+}
+
+.status {
+  padding: 0.5em 1em;
+  border-left: 6px solid;
+  color: #000;
+}
+
+.status-fail {
+  background: #fde7e9;
+  border-color: #b00020;
+}
+
+.status-review {
+  background: #fff1d6;
+  border-color: #b26a00;
+}
+
+.status-miss {
+  background: #ece6fb;
+  border-color: #5b3cc4;
+}
+
+.status-pass {
+  background: #e3f4e6;
+  border-color: #1b5e20;
+}
+
+.status-dynamic {
+  background: #e3ecf9;
+  border-color: #1a4f9c;
+}
+  </style>
 </head>
 <body>
 <main>
-  <h1>aria-valid-attr-value test cases</h1>
-  <p>Test cases for the axe-core rule <a href="https://dequeuniversity.com/rules/axe/4.14/aria-valid-attr-value"><code>aria-valid-attr-value</code></a> (axe-core 4.14). Every example below is live in the page, so you can run the axe extension straight over it.</p>
-  <p>The expected results were checked by running axe-core 4.14.1 over this page. Look in both the axe <strong>issues</strong> list and the <strong>needs review</strong> list, because several missing ID cases only show up in needs review.</p>
 
-  <table class="summary">
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo. The word 'intopia' in black, with the 'o' made from four curved brush strokes in pink, orange, yellow and turquoise." class="intopia-logo">
+  </picture>
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing <code>aria-valid-attr-value</code></h1>
+
+<p>Test cases for the axe-core rule <a href="https://dequeuniversity.com/rules/axe/4.14/aria-valid-attr-value" class="external"><code>aria-valid-attr-value</code><span class="sr-only"> (external site)</span></a> (axe-core 4.14). Every example below is live in the page, so you can run the axe extension straight over it.</p>
+
+<p>The expected results were checked by running axe-core 4.14.1 over this page. Look in both the axe <strong>issues</strong> list and the <strong>needs review</strong> list, because several missing ID cases only show up in needs review.</p>
+
+<table>
     <caption>Number of test cases by expected axe result</caption>
     <thead><tr><th scope="col">Expected result</th><th scope="col">Cases</th></tr></thead>
     <tbody>
@@ -56,634 +102,1118 @@
     </tbody>
   </table>
 
-  <nav aria-label="Sections">
-    <h2 style="border:0;margin-top:2rem;font-size:1.25rem">Sections</h2>
-    <ul>
-      <li><a href="#idref">Single ID references</a></li>
-      <li><a href="#idrefs">ID reference lists</a></li>
-      <li><a href="#errormessage">aria-errormessage</a></li>
-      <li><a href="#boolean">True/false values</a></li>
-      <li><a href="#token">Token values</a></li>
-      <li><a href="#number">Number values</a></li>
-      <li><a href="#empty">Empty values</a></li>
-      <li><a href="#dynamic-heading">Changes after interaction</a></li>
-    </ul>
-  </nav>
+<p>Every example has a coloured box showing the expected axe result:</p>
 
-<section aria-labelledby="idref">
-  <h2 id="idref">Single ID references</h2>
-  <p>These attributes take exactly one ID. If the ID doesn't exist, axe fails it outright.</p>
-  <article class="case" id="a1" aria-labelledby="a1-title">
-    <h3 id="a1-title"><span class="case-id">A1</span> aria-activedescendant points to a missing ID</h3>
-    <p>The listbox says the active option is <code>a1-apple</code>, but the only option has the ID <code>a1-banana</code>.</p>
-    <div class="example" data-case="a1">
+<p class="status status-fail"><strong>Expected axe result: fail.</strong> Axe reports it in the issues list.</p>
+<p class="status status-review"><strong>Expected axe result: needs review.</strong> Axe reports it in the needs review list.</p>
+<p class="status status-miss"><strong>Expected axe result: pass, but it's broken.</strong> Axe misses it, so check manually.</p>
+<p class="status status-pass"><strong>Expected axe result: pass (valid).</strong> A control case.</p>
+<p class="status status-dynamic"><strong>Expected axe result: pass on load, fail after interaction.</strong> Activate the control, then run axe again.</p>
+
+<nav aria-label="Sections">
+<p>Jump to a section:</p>
+<ul>
+  <li><a href="#idref">Single ID references</a></li>
+  <li><a href="#idrefs">ID reference lists</a></li>
+  <li><a href="#errormessage"><code>aria-errormessage</code></a></li>
+  <li><a href="#boolean">True/false values</a></li>
+  <li><a href="#token">Token values</a></li>
+  <li><a href="#number">Number values</a></li>
+  <li><a href="#empty">Empty values</a></li>
+  <li><a href="#dynamic-heading">Changes after interaction</a></li>
+</ul>
+</nav>
+
+
+<!-- section -->
+
+
+<h2 id="idref">Single ID references</h2>
+
+<p>These attributes take exactly one ID. If the ID doesn't exist, axe fails it outright.</p>
+
+<!-- sub-section -->
+
+<h3 id="a1">Example A1: <code>aria-activedescendant</code> points to a missing ID</h3>
+
+<p>The listbox says the active option is <code>a1-apple</code>, but the only option has the ID <code>a1-banana</code>.</p>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="a1">
 <div role="listbox" tabindex="0" aria-label="Fruit" aria-activedescendant="a1-apple">
   <div role="option" id="a1-banana">Banana</div>
 </div>
-    </div>
-    <pre><code>&lt;div role=&quot;listbox&quot; tabindex=&quot;0&quot; aria-label=&quot;Fruit&quot; aria-activedescendant=&quot;a1-apple&quot;&gt;
-  &lt;div role=&quot;option&quot; id=&quot;a1-banana&quot;&gt;Banana&lt;/div&gt;
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="listbox" tabindex="0" aria-label="Fruit" <span class="highlight">aria-activedescendant="a1-apple"</span>&gt;
+  &lt;div role="option" id="a1-banana"&gt;Banana&lt;/div&gt;
 &lt;/div&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="a2" aria-labelledby="a2-title">
-    <h3 id="a2-title"><span class="case-id">A2</span> aria-activedescendant points to a real ID</h3>
-    <p>Control case. The ID exists, so this passes.</p>
-    <div class="example" data-case="a2">
+</details>
+
+<!-- sub-section -->
+
+<h3 id="a2">Example A2: <code>aria-activedescendant</code> points to a real ID</h3>
+
+<p>Control case. The ID exists, so this passes.</p>
+
+<p class="status status-pass"><strong>Expected axe result: pass (valid).</strong></p>
+
+<div class="example" data-case="a2">
 <div role="listbox" tabindex="0" aria-label="Vegetables" aria-activedescendant="a2-carrot">
   <div role="option" id="a2-carrot">Carrot</div>
 </div>
-    </div>
-    <pre><code>&lt;div role=&quot;listbox&quot; tabindex=&quot;0&quot; aria-label=&quot;Vegetables&quot; aria-activedescendant=&quot;a2-carrot&quot;&gt;
-  &lt;div role=&quot;option&quot; id=&quot;a2-carrot&quot;&gt;Carrot&lt;/div&gt;
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="listbox" tabindex="0" aria-label="Vegetables" <span class="highlight">aria-activedescendant="a2-carrot"</span>&gt;
+  &lt;div role="option" id="a2-carrot"&gt;Carrot&lt;/div&gt;
 &lt;/div&gt;</code></pre>
-    <p class="result"><span class="badge pass">Expected axe result: pass (valid)</span></p>
-  </article>
-</section>
-<section aria-labelledby="idrefs">
-  <h2 id="idrefs">ID reference lists</h2>
-  <p>These attributes can take a space separated list of IDs. Axe only needs <strong>one</strong> of the IDs to exist, and it treats some attributes more gently than others.</p>
-  <article class="case" id="b1" aria-labelledby="b1-title">
-    <h3 id="b1-title"><span class="case-id">B1</span> aria-labelledby points to a missing ID</h3>
-    <p>The button is labelled by <code>b1-label</code>, which doesn't exist.</p>
-    <div class="example" data-case="b1">
+</details>
+
+
+<!-- section -->
+
+
+<h2 id="idrefs">ID reference lists</h2>
+
+<p>These attributes can take a space separated list of IDs. Axe only needs <strong>one</strong> of the IDs to exist, and it treats some attributes more gently than others.</p>
+
+<!-- sub-section -->
+
+<h3 id="b1">Example B1: <code>aria-labelledby</code> points to a missing ID</h3>
+
+<p>The button is labelled by <code>b1-label</code>, which doesn't exist.</p>
+
+<p class="status status-review"><strong>Expected axe result: needs review.</strong> Axe doesn't fail missing <code>aria-labelledby</code> IDs. It reports them as needs review.</p>
+
+<div class="example" data-case="b1">
 <button type="button" aria-labelledby="b1-label">Save</button>
-    </div>
-    <pre><code>&lt;button type=&quot;button&quot; aria-labelledby=&quot;b1-label&quot;&gt;Save&lt;/button&gt;</code></pre>
-    <p class="result"><span class="badge review">Expected axe result: needs review</span></p>
-    <p class="note">Axe doesn't fail missing <code>aria-labelledby</code> IDs. It reports them as needs review.</p>
-  </article>
-  <article class="case" id="b2" aria-labelledby="b2-title">
-    <h3 id="b2-title"><span class="case-id">B2</span> aria-labelledby with two IDs, one missing</h3>
-    <p>The first ID exists, the second doesn't.</p>
-    <div class="example" data-case="b2">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button type="button" <span class="highlight">aria-labelledby="b1-label"</span>&gt;Save&lt;/button&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="b2">Example B2: <code>aria-labelledby</code> with two IDs, one missing</h3>
+
+<p>The first ID exists, the second doesn't.</p>
+
+<p class="status status-miss"><strong>Expected axe result: pass, but it's broken. Check manually.</strong> Axe passes this because at least one ID exists. The second part of the name is silently lost.</p>
+
+<div class="example" data-case="b2">
 <span id="b2-first">Delivery</span>
 <input type="text" aria-labelledby="b2-first b2-second">
-    </div>
-    <pre><code>&lt;span id=&quot;b2-first&quot;&gt;Delivery&lt;/span&gt;
-&lt;input type=&quot;text&quot; aria-labelledby=&quot;b2-first b2-second&quot;&gt;</code></pre>
-    <p class="result"><span class="badge miss">Expected axe result: pass (but it's broken, check manually)</span></p>
-    <p class="note">Axe passes this because at least one ID exists. The second part of the name is silently lost.</p>
-  </article>
-  <article class="case" id="b3" aria-labelledby="b3-title">
-    <h3 id="b3-title"><span class="case-id">B3</span> aria-describedby ID has a typo</h3>
-    <p>The input points to <code>b3-hint</code> but the hint has the ID <code>b3-hints</code>.</p>
-    <div class="example" data-case="b3">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;span id="b2-first"&gt;Delivery&lt;/span&gt;
+&lt;input type="text" <span class="highlight">aria-labelledby="b2-first b2-second"</span>&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="b3">Example B3: <code>aria-describedby</code> ID has a typo</h3>
+
+<p>The input points to <code>b3-hint</code> but the hint has the ID <code>b3-hints</code>.</p>
+
+<p class="status status-review"><strong>Expected axe result: needs review.</strong> Like <code>aria-labelledby</code>, a missing <code>aria-describedby</code> ID is needs review, not a fail.</p>
+
+<div class="example" data-case="b3">
 <label for="b3-input">Postcode</label>
 <input type="text" id="b3-input" aria-describedby="b3-hint">
 <p id="b3-hints">Four digits, for example 2000.</p>
-    </div>
-    <pre><code>&lt;label for=&quot;b3-input&quot;&gt;Postcode&lt;/label&gt;
-&lt;input type=&quot;text&quot; id=&quot;b3-input&quot; aria-describedby=&quot;b3-hint&quot;&gt;
-&lt;p id=&quot;b3-hints&quot;&gt;Four digits, for example 2000.&lt;/p&gt;</code></pre>
-    <p class="result"><span class="badge review">Expected axe result: needs review</span></p>
-    <p class="note">Like <code>aria-labelledby</code>, a missing <code>aria-describedby</code> ID is needs review, not a fail.</p>
-  </article>
-  <article class="case" id="b4" aria-labelledby="b4-title">
-    <h3 id="b4-title"><span class="case-id">B4</span> aria-describedby ID uses the wrong case</h3>
-    <p>The input points to <code>b4-Hint</code> but the hint has the ID <code>b4-hint</code>. IDs are case sensitive.</p>
-    <div class="example" data-case="b4">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="b3-input"&gt;Postcode&lt;/label&gt;
+&lt;input type="text" id="b3-input" <span class="highlight">aria-describedby="b3-hint"</span>&gt;
+&lt;p id="b3-hints"&gt;Four digits, for example 2000.&lt;/p&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="b4">Example B4: <code>aria-describedby</code> ID uses the wrong case</h3>
+
+<p>The input points to <code>b4-Hint</code> but the hint has the ID <code>b4-hint</code>. IDs are case sensitive.</p>
+
+<p class="status status-review"><strong>Expected axe result: needs review.</strong></p>
+
+<div class="example" data-case="b4">
 <label for="b4-input">Phone</label>
 <input type="tel" id="b4-input" aria-describedby="b4-Hint">
 <p id="b4-hint">Include the area code.</p>
-    </div>
-    <pre><code>&lt;label for=&quot;b4-input&quot;&gt;Phone&lt;/label&gt;
-&lt;input type=&quot;tel&quot; id=&quot;b4-input&quot; aria-describedby=&quot;b4-Hint&quot;&gt;
-&lt;p id=&quot;b4-hint&quot;&gt;Include the area code.&lt;/p&gt;</code></pre>
-    <p class="result"><span class="badge review">Expected axe result: needs review</span></p>
-  </article>
-  <article class="case" id="b5" aria-labelledby="b5-title">
-    <h3 id="b5-title"><span class="case-id">B5</span> aria-describedby ID starts with a hash</h3>
-    <p>Someone has written the ID like a CSS selector or link: <code>#b5-hint</code>.</p>
-    <div class="example" data-case="b5">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="b4-input"&gt;Phone&lt;/label&gt;
+&lt;input type="tel" id="b4-input" <span class="highlight">aria-describedby="b4-Hint"</span>&gt;
+&lt;p id="b4-hint"&gt;Include the area code.&lt;/p&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="b5">Example B5: <code>aria-describedby</code> ID starts with a hash</h3>
+
+<p>Someone has written the ID like a CSS selector or link: <code>#b5-hint</code>.</p>
+
+<p class="status status-review"><strong>Expected axe result: needs review.</strong></p>
+
+<div class="example" data-case="b5">
 <label for="b5-input">Email</label>
 <input type="email" id="b5-input" aria-describedby="#b5-hint">
 <p id="b5-hint">We will never share your email.</p>
-    </div>
-    <pre><code>&lt;label for=&quot;b5-input&quot;&gt;Email&lt;/label&gt;
-&lt;input type=&quot;email&quot; id=&quot;b5-input&quot; aria-describedby=&quot;#b5-hint&quot;&gt;
-&lt;p id=&quot;b5-hint&quot;&gt;We will never share your email.&lt;/p&gt;</code></pre>
-    <p class="result"><span class="badge review">Expected axe result: needs review</span></p>
-  </article>
-  <article class="case" id="b6" aria-labelledby="b6-title">
-    <h3 id="b6-title"><span class="case-id">B6</span> aria-describedby IDs separated by a comma</h3>
-    <p>The list should be space separated. With a comma, the browser looks for a single ID called <code>b6-hint,b6-error</code>.</p>
-    <div class="example" data-case="b6">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="b5-input"&gt;Email&lt;/label&gt;
+&lt;input type="email" id="b5-input" <span class="highlight">aria-describedby="#b5-hint"</span>&gt;
+&lt;p id="b5-hint"&gt;We will never share your email.&lt;/p&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="b6">Example B6: <code>aria-describedby</code> IDs separated by a comma</h3>
+
+<p>The list should be space separated. With a comma, the browser looks for a single ID called <code>b6-hint,b6-error</code>.</p>
+
+<p class="status status-review"><strong>Expected axe result: needs review.</strong></p>
+
+<div class="example" data-case="b6">
 <label for="b6-input">Password</label>
 <input type="password" id="b6-input" aria-describedby="b6-hint,b6-error">
 <p id="b6-hint">At least 12 characters.</p>
 <p id="b6-error">Password is too short.</p>
-    </div>
-    <pre><code>&lt;label for=&quot;b6-input&quot;&gt;Password&lt;/label&gt;
-&lt;input type=&quot;password&quot; id=&quot;b6-input&quot; aria-describedby=&quot;b6-hint,b6-error&quot;&gt;
-&lt;p id=&quot;b6-hint&quot;&gt;At least 12 characters.&lt;/p&gt;
-&lt;p id=&quot;b6-error&quot;&gt;Password is too short.&lt;/p&gt;</code></pre>
-    <p class="result"><span class="badge review">Expected axe result: needs review</span></p>
-  </article>
-  <article class="case" id="b7" aria-labelledby="b7-title">
-    <h3 id="b7-title"><span class="case-id">B7</span> aria-controls points to a missing ID (expanded)</h3>
-    <p>The button says it's expanded and controls <code>b7-panel</code>, which doesn't exist.</p>
-    <div class="example" data-case="b7">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="b6-input"&gt;Password&lt;/label&gt;
+&lt;input type="password" id="b6-input" <span class="highlight">aria-describedby="b6-hint,b6-error"</span>&gt;
+&lt;p id="b6-hint"&gt;At least 12 characters.&lt;/p&gt;
+&lt;p id="b6-error"&gt;Password is too short.&lt;/p&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="b7">Example B7: <code>aria-controls</code> points to a missing ID (expanded)</h3>
+
+<p>The button says it's expanded and controls <code>b7-panel</code>, which doesn't exist.</p>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="b7">
 <button type="button" aria-expanded="true" aria-controls="b7-panel">Filters</button>
-    </div>
-    <pre><code>&lt;button type=&quot;button&quot; aria-expanded=&quot;true&quot; aria-controls=&quot;b7-panel&quot;&gt;Filters&lt;/button&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="b8" aria-labelledby="b8-title">
-    <h3 id="b8-title"><span class="case-id">B8</span> aria-controls points to a missing ID (collapsed)</h3>
-    <p>Same as above, but <code>aria-expanded="false"</code>.</p>
-    <div class="example" data-case="b8">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button type="button" aria-expanded="true" <span class="highlight">aria-controls="b7-panel"</span>&gt;Filters&lt;/button&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="b8">Example B8: <code>aria-controls</code> points to a missing ID (collapsed)</h3>
+
+<p>Same as above, but <code>aria-expanded="false"</code>.</p>
+
+<p class="status status-miss"><strong>Expected axe result: pass, but it's broken. Check manually.</strong> Axe deliberately skips this, because many scripts only add the panel to the DOM when it opens. Open it and check again.</p>
+
+<div class="example" data-case="b8">
 <button type="button" aria-expanded="false" aria-controls="b8-panel">Sort options</button>
-    </div>
-    <pre><code>&lt;button type=&quot;button&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;b8-panel&quot;&gt;Sort options&lt;/button&gt;</code></pre>
-    <p class="result"><span class="badge miss">Expected axe result: pass (but it's broken, check manually)</span></p>
-    <p class="note">Axe deliberately skips this, because many scripts only add the panel to the DOM when it opens. Open it and check again.</p>
-  </article>
-  <article class="case" id="b9" aria-labelledby="b9-title">
-    <h3 id="b9-title"><span class="case-id">B9</span> aria-controls points to a missing ID with aria-haspopup</h3>
-    <p>A menu button controlling <code>b9-menu</code>, which doesn't exist.</p>
-    <div class="example" data-case="b9">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button type="button" aria-expanded="false" <span class="highlight">aria-controls="b8-panel"</span>&gt;Sort options&lt;/button&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="b9">Example B9: <code>aria-controls</code> points to a missing ID with <code>aria-haspopup</code></h3>
+
+<p>A menu button controlling <code>b9-menu</code>, which doesn't exist.</p>
+
+<p class="status status-review"><strong>Expected axe result: needs review.</strong> With <code>aria-haspopup</code> set, axe assumes the popup may live elsewhere and asks you to check.</p>
+
+<div class="example" data-case="b9">
 <button type="button" aria-haspopup="menu" aria-expanded="true" aria-controls="b9-menu">Account</button>
-    </div>
-    <pre><code>&lt;button type=&quot;button&quot; aria-haspopup=&quot;menu&quot; aria-expanded=&quot;true&quot; aria-controls=&quot;b9-menu&quot;&gt;Account&lt;/button&gt;</code></pre>
-    <p class="result"><span class="badge review">Expected axe result: needs review</span></p>
-    <p class="note">With <code>aria-haspopup</code> set, axe assumes the popup may live elsewhere and asks you to check.</p>
-  </article>
-  <article class="case" id="b10" aria-labelledby="b10-title">
-    <h3 id="b10-title"><span class="case-id">B10</span> aria-controls with two IDs, one missing</h3>
-    <p>The first panel exists, the second doesn't.</p>
-    <div class="example" data-case="b10">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button type="button" <span class="highlight">aria-haspopup="menu"</span> aria-expanded="true" <span class="highlight">aria-controls="b9-menu"</span>&gt;Account&lt;/button&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="b10">Example B10: <code>aria-controls</code> with two IDs, one missing</h3>
+
+<p>The first panel exists, the second doesn't.</p>
+
+<p class="status status-miss"><strong>Expected axe result: pass, but it's broken. Check manually.</strong> One valid ID is enough for axe to pass it.</p>
+
+<div class="example" data-case="b10">
 <button type="button" aria-expanded="true" aria-controls="b10-panel-1 b10-panel-2">Show all</button>
 <div id="b10-panel-1">Panel one content.</div>
-    </div>
-    <pre><code>&lt;button type=&quot;button&quot; aria-expanded=&quot;true&quot; aria-controls=&quot;b10-panel-1 b10-panel-2&quot;&gt;Show all&lt;/button&gt;
-&lt;div id=&quot;b10-panel-1&quot;&gt;Panel one content.&lt;/div&gt;</code></pre>
-    <p class="result"><span class="badge miss">Expected axe result: pass (but it's broken, check manually)</span></p>
-    <p class="note">One valid ID is enough for axe to pass it.</p>
-  </article>
-  <article class="case" id="b11" aria-labelledby="b11-title">
-    <h3 id="b11-title"><span class="case-id">B11</span> aria-owns points to a missing ID</h3>
-    <p>The list says it owns <code>b11-item</code>, which doesn't exist.</p>
-    <div class="example" data-case="b11">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button type="button" aria-expanded="true" <span class="highlight">aria-controls="b10-panel-1 b10-panel-2"</span>&gt;Show all&lt;/button&gt;
+&lt;div id="b10-panel-1"&gt;Panel one content.&lt;/div&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="b11">Example B11: <code>aria-owns</code> points to a missing ID</h3>
+
+<p>The list says it owns <code>b11-item</code>, which doesn't exist.</p>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="b11">
 <ul aria-owns="b11-item">
   <li>First item</li>
 </ul>
-    </div>
-    <pre><code>&lt;ul aria-owns=&quot;b11-item&quot;&gt;
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;ul <span class="highlight">aria-owns="b11-item"</span>&gt;
   &lt;li&gt;First item&lt;/li&gt;
 &lt;/ul&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="b12" aria-labelledby="b12-title">
-    <h3 id="b12-title"><span class="case-id">B12</span> aria-owns points to a missing ID (collapsed)</h3>
-    <p>A collapsed combobox that owns a listbox that doesn't exist yet.</p>
-    <div class="example" data-case="b12">
+</details>
+
+<!-- sub-section -->
+
+<h3 id="b12">Example B12: <code>aria-owns</code> points to a missing ID (collapsed)</h3>
+
+<p>A collapsed combobox that owns a listbox that doesn't exist yet.</p>
+
+<p class="status status-miss"><strong>Expected axe result: pass, but it's broken. Check manually.</strong> As with <code>aria-controls</code>, axe skips <code>aria-owns</code> when <code>aria-expanded="false"</code>.</p>
+
+<div class="example" data-case="b12">
 <input type="text" role="combobox" aria-label="City" aria-expanded="false" aria-owns="b12-list">
-    </div>
-    <pre><code>&lt;input type=&quot;text&quot; role=&quot;combobox&quot; aria-label=&quot;City&quot; aria-expanded=&quot;false&quot; aria-owns=&quot;b12-list&quot;&gt;</code></pre>
-    <p class="result"><span class="badge miss">Expected axe result: pass (but it's broken, check manually)</span></p>
-    <p class="note">As with <code>aria-controls</code>, axe skips <code>aria-owns</code> when <code>aria-expanded="false"</code>.</p>
-  </article>
-  <article class="case" id="b13" aria-labelledby="b13-title">
-    <h3 id="b13-title"><span class="case-id">B13</span> aria-details points to a missing ID</h3>
-    <p>The image points to a longer description that doesn't exist.</p>
-    <div class="example" data-case="b13">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input type="text" role="combobox" aria-label="City" aria-expanded="false" <span class="highlight">aria-owns="b12-list"</span>&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="b13">Example B13: <code>aria-details</code> points to a missing ID</h3>
+
+<p>The image points to a longer description that doesn't exist.</p>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="b13">
 <img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Sales chart" aria-details="b13-details" width="40" height="40">
-    </div>
-    <pre><code>&lt;img src=&quot;data:image/gif;base64,R0lGODlhAQABAAAAACw=&quot; alt=&quot;Sales chart&quot; aria-details=&quot;b13-details&quot; width=&quot;40&quot; height=&quot;40&quot;&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="b14" aria-labelledby="b14-title">
-    <h3 id="b14-title"><span class="case-id">B14</span> aria-flowto points to a missing ID</h3>
-    <p>The section says reading should continue at <code>b14-next</code>, which doesn't exist.</p>
-    <div class="example" data-case="b14">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Sales chart" <span class="highlight">aria-details="b13-details"</span> width="40" height="40"&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="b14">Example B14: <code>aria-flowto</code> points to a missing ID</h3>
+
+<p>The section says reading should continue at <code>b14-next</code>, which doesn't exist.</p>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="b14">
 <div aria-flowto="b14-next">Read this first.</div>
-    </div>
-    <pre><code>&lt;div aria-flowto=&quot;b14-next&quot;&gt;Read this first.&lt;/div&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-</section>
-<section aria-labelledby="errormessage">
-  <h2 id="errormessage">aria-errormessage</h2>
-  <p>Axe checks <code>aria-errormessage</code> separately, and only when <code>aria-invalid</code> is set to something other than <code>false</code>.</p>
-  <article class="case" id="c1" aria-labelledby="c1-title">
-    <h3 id="c1-title"><span class="case-id">C1</span> aria-errormessage points to a missing ID</h3>
-    <p>The field is invalid and points to <code>c1-error</code>, which doesn't exist.</p>
-    <div class="example" data-case="c1">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div <span class="highlight">aria-flowto="b14-next"</span>&gt;Read this first.&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2 id="errormessage"><code>aria-errormessage</code></h2>
+
+<p>Axe checks <code>aria-errormessage</code> separately, and only when <code>aria-invalid</code> is set to something other than <code>false</code>.</p>
+
+<!-- sub-section -->
+
+<h3 id="c1">Example C1: <code>aria-errormessage</code> points to a missing ID</h3>
+
+<p>The field is invalid and points to <code>c1-error</code>, which doesn't exist.</p>
+
+<p class="status status-review"><strong>Expected axe result: needs review.</strong></p>
+
+<div class="example" data-case="c1">
 <label for="c1-input">Name</label>
 <input type="text" id="c1-input" aria-invalid="true" aria-errormessage="c1-error">
-    </div>
-    <pre><code>&lt;label for=&quot;c1-input&quot;&gt;Name&lt;/label&gt;
-&lt;input type=&quot;text&quot; id=&quot;c1-input&quot; aria-invalid=&quot;true&quot; aria-errormessage=&quot;c1-error&quot;&gt;</code></pre>
-    <p class="result"><span class="badge review">Expected axe result: needs review</span></p>
-  </article>
-  <article class="case" id="c2" aria-labelledby="c2-title">
-    <h3 id="c2-title"><span class="case-id">C2</span> aria-errormessage with two IDs</h3>
-    <p><code>aria-errormessage</code> only allows one ID.</p>
-    <div class="example" data-case="c2">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="c1-input"&gt;Name&lt;/label&gt;
+&lt;input type="text" id="c1-input" aria-invalid="true" <span class="highlight">aria-errormessage="c1-error"</span>&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="c2">Example C2: <code>aria-errormessage</code> with two IDs</h3>
+
+<p><code>aria-errormessage</code> only allows one ID.</p>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="c2">
 <label for="c2-input">Suburb</label>
 <input type="text" id="c2-input" aria-invalid="true" aria-errormessage="c2-error-1 c2-error-2">
 <p id="c2-error-1" role="alert">Enter a suburb.</p>
 <p id="c2-error-2" role="alert">Suburb not found.</p>
-    </div>
-    <pre><code>&lt;label for=&quot;c2-input&quot;&gt;Suburb&lt;/label&gt;
-&lt;input type=&quot;text&quot; id=&quot;c2-input&quot; aria-invalid=&quot;true&quot; aria-errormessage=&quot;c2-error-1 c2-error-2&quot;&gt;
-&lt;p id=&quot;c2-error-1&quot; role=&quot;alert&quot;&gt;Enter a suburb.&lt;/p&gt;
-&lt;p id=&quot;c2-error-2&quot; role=&quot;alert&quot;&gt;Suburb not found.&lt;/p&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="c3" aria-labelledby="c3-title">
-    <h3 id="c3-title"><span class="case-id">C3</span> aria-errormessage points to a hidden element</h3>
-    <p>The error message exists but is hidden with the <code>hidden</code> attribute.</p>
-    <div class="example" data-case="c3">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="c2-input"&gt;Suburb&lt;/label&gt;
+&lt;input type="text" id="c2-input" aria-invalid="true" <span class="highlight">aria-errormessage="c2-error-1 c2-error-2"</span>&gt;
+&lt;p id="c2-error-1" role="alert"&gt;Enter a suburb.&lt;/p&gt;
+&lt;p id="c2-error-2" role="alert"&gt;Suburb not found.&lt;/p&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="c3">Example C3: <code>aria-errormessage</code> points to a hidden element</h3>
+
+<p>The error message exists but is hidden with the <code>hidden</code> attribute.</p>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="c3">
 <label for="c3-input">Age</label>
 <input type="text" id="c3-input" aria-invalid="true" aria-errormessage="c3-error">
 <p id="c3-error" role="alert" hidden>Enter a number.</p>
-    </div>
-    <pre><code>&lt;label for=&quot;c3-input&quot;&gt;Age&lt;/label&gt;
-&lt;input type=&quot;text&quot; id=&quot;c3-input&quot; aria-invalid=&quot;true&quot; aria-errormessage=&quot;c3-error&quot;&gt;
-&lt;p id=&quot;c3-error&quot; role=&quot;alert&quot; hidden&gt;Enter a number.&lt;/p&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="c4" aria-labelledby="c4-title">
-    <h3 id="c4-title"><span class="case-id">C4</span> aria-errormessage points to a plain paragraph</h3>
-    <p>The error exists and is visible, but it isn't a live region and isn't also referenced by <code>aria-describedby</code>.</p>
-    <div class="example" data-case="c4">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="c3-input"&gt;Age&lt;/label&gt;
+&lt;input type="text" id="c3-input" aria-invalid="true" <span class="highlight">aria-errormessage="c3-error"</span>&gt;
+&lt;p id="c3-error" role="alert" hidden&gt;Enter a number.&lt;/p&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="c4">Example C4: <code>aria-errormessage</code> points to a plain paragraph</h3>
+
+<p>The error exists and is visible, but it isn't a live region and isn't also referenced by <code>aria-describedby</code>.</p>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="c4">
 <label for="c4-input">State</label>
 <input type="text" id="c4-input" aria-invalid="true" aria-errormessage="c4-error">
 <p id="c4-error">Choose a state.</p>
-    </div>
-    <pre><code>&lt;label for=&quot;c4-input&quot;&gt;State&lt;/label&gt;
-&lt;input type=&quot;text&quot; id=&quot;c4-input&quot; aria-invalid=&quot;true&quot; aria-errormessage=&quot;c4-error&quot;&gt;
-&lt;p id=&quot;c4-error&quot;&gt;Choose a state.&lt;/p&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="c5" aria-labelledby="c5-title">
-    <h3 id="c5-title"><span class="case-id">C5</span> Missing aria-errormessage ID, but aria-invalid=&quot;false&quot;</h3>
-    <p>The ID doesn't exist, but the field isn't invalid, so axe doesn't check it.</p>
-    <div class="example" data-case="c5">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="c4-input"&gt;State&lt;/label&gt;
+&lt;input type="text" id="c4-input" aria-invalid="true" <span class="highlight">aria-errormessage="c4-error"</span>&gt;
+&lt;p id="c4-error"&gt;Choose a state.&lt;/p&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="c5">Example C5: Missing <code>aria-errormessage</code> ID, but <code>aria-invalid="false"</code></h3>
+
+<p>The ID doesn't exist, but the field isn't invalid, so axe doesn't check it.</p>
+
+<p class="status status-miss"><strong>Expected axe result: pass, but it's broken. Check manually.</strong> This will break as soon as a script flips <code>aria-invalid</code> to <code>true</code>.</p>
+
+<div class="example" data-case="c5">
 <label for="c5-input">Country</label>
 <input type="text" id="c5-input" aria-invalid="false" aria-errormessage="c5-error">
-    </div>
-    <pre><code>&lt;label for=&quot;c5-input&quot;&gt;Country&lt;/label&gt;
-&lt;input type=&quot;text&quot; id=&quot;c5-input&quot; aria-invalid=&quot;false&quot; aria-errormessage=&quot;c5-error&quot;&gt;</code></pre>
-    <p class="result"><span class="badge miss">Expected axe result: pass (but it's broken, check manually)</span></p>
-    <p class="note">This will break as soon as a script flips <code>aria-invalid</code> to <code>true</code>.</p>
-  </article>
-  <article class="case" id="c6" aria-labelledby="c6-title">
-    <h3 id="c6-title"><span class="case-id">C6</span> aria-errormessage done right</h3>
-    <p>Control case. One ID, visible, and a live region.</p>
-    <div class="example" data-case="c6">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="c5-input"&gt;Country&lt;/label&gt;
+&lt;input type="text" id="c5-input" <span class="highlight">aria-invalid="false"</span> <span class="highlight">aria-errormessage="c5-error"</span>&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="c6">Example C6: <code>aria-errormessage</code> done right</h3>
+
+<p>Control case. One ID, visible, and a live region.</p>
+
+<p class="status status-pass"><strong>Expected axe result: pass (valid).</strong></p>
+
+<div class="example" data-case="c6">
 <label for="c6-input">Town</label>
 <input type="text" id="c6-input" aria-invalid="true" aria-errormessage="c6-error">
 <p id="c6-error" role="alert">Enter a town.</p>
-    </div>
-    <pre><code>&lt;label for=&quot;c6-input&quot;&gt;Town&lt;/label&gt;
-&lt;input type=&quot;text&quot; id=&quot;c6-input&quot; aria-invalid=&quot;true&quot; aria-errormessage=&quot;c6-error&quot;&gt;
-&lt;p id=&quot;c6-error&quot; role=&quot;alert&quot;&gt;Enter a town.&lt;/p&gt;</code></pre>
-    <p class="result"><span class="badge pass">Expected axe result: pass (valid)</span></p>
-  </article>
-</section>
-<section aria-labelledby="boolean">
-  <h2 id="boolean">True/false values</h2>
-  <p>These attributes only accept <code>true</code> or <code>false</code> (some also accept <code>undefined</code>). Axe ignores case, so <code>TRUE</code> is fine.</p>
-  <article class="case" id="d1" aria-labelledby="d1-title">
-    <h3 id="d1-title"><span class="case-id">D1</span> aria-hidden misspelled</h3>
-    <div class="example" data-case="d1">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="c6-input"&gt;Town&lt;/label&gt;
+&lt;input type="text" id="c6-input" aria-invalid="true" <span class="highlight">aria-errormessage="c6-error"</span>&gt;
+&lt;p id="c6-error" role="alert"&gt;Enter a town.&lt;/p&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2 id="boolean">True/false values</h2>
+
+<p>These attributes only accept <code>true</code> or <code>false</code> (some also accept <code>undefined</code>). Axe ignores case, so <code>TRUE</code> is fine.</p>
+
+<!-- sub-section -->
+
+<h3 id="d1">Example D1: <code>aria-hidden</code> misspelled</h3>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="d1">
 <p aria-hidden="rtue">Decorative text.</p>
-    </div>
-    <pre><code>&lt;p aria-hidden=&quot;rtue&quot;&gt;Decorative text.&lt;/p&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="d2" aria-labelledby="d2-title">
-    <h3 id="d2-title"><span class="case-id">D2</span> aria-required=&quot;required&quot;</h3>
-    <p>A very common mix-up with the HTML <code>required</code> attribute.</p>
-    <div class="example" data-case="d2">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;p <span class="highlight">aria-hidden="rtue"</span>&gt;Decorative text.&lt;/p&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="d2">Example D2: <code>aria-required="required"</code></h3>
+
+<p>A very common mix-up with the HTML <code>required</code> attribute.</p>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="d2">
 <label for="d2-input">Surname</label>
 <input type="text" id="d2-input" aria-required="required">
-    </div>
-    <pre><code>&lt;label for=&quot;d2-input&quot;&gt;Surname&lt;/label&gt;
-&lt;input type=&quot;text&quot; id=&quot;d2-input&quot; aria-required=&quot;required&quot;&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="d3" aria-labelledby="d3-title">
-    <h3 id="d3-title"><span class="case-id">D3</span> aria-disabled=&quot;disabled&quot;</h3>
-    <p>Same mix-up, this time with the HTML <code>disabled</code> attribute.</p>
-    <div class="example" data-case="d3">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="d2-input"&gt;Surname&lt;/label&gt;
+&lt;input type="text" id="d2-input" <span class="highlight">aria-required="required"</span>&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="d3">Example D3: <code>aria-disabled="disabled"</code></h3>
+
+<p>Same mix-up, this time with the HTML <code>disabled</code> attribute.</p>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="d3">
 <button type="button" aria-disabled="disabled">Submit</button>
-    </div>
-    <pre><code>&lt;button type=&quot;button&quot; aria-disabled=&quot;disabled&quot;&gt;Submit&lt;/button&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="d4" aria-labelledby="d4-title">
-    <h3 id="d4-title"><span class="case-id">D4</span> aria-busy=&quot;1&quot;</h3>
-    <p>Numbers aren't allowed in place of true/false.</p>
-    <div class="example" data-case="d4">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button type="button" <span class="highlight">aria-disabled="disabled"</span>&gt;Submit&lt;/button&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="d4">Example D4: <code>aria-busy="1"</code></h3>
+
+<p>Numbers aren't allowed in place of true/false.</p>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="d4">
 <div aria-busy="1">Loading results.</div>
-    </div>
-    <pre><code>&lt;div aria-busy=&quot;1&quot;&gt;Loading results.&lt;/div&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="d5" aria-labelledby="d5-title">
-    <h3 id="d5-title"><span class="case-id">D5</span> aria-modal=&quot;yes&quot;</h3>
-    <div class="example" data-case="d5">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div <span class="highlight">aria-busy="1"</span>&gt;Loading results.&lt;/div&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="d5">Example D5: <code>aria-modal="yes"</code></h3>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="d5">
 <div role="dialog" aria-label="Confirm" aria-modal="yes">Are you sure?</div>
-    </div>
-    <pre><code>&lt;div role=&quot;dialog&quot; aria-label=&quot;Confirm&quot; aria-modal=&quot;yes&quot;&gt;Are you sure?&lt;/div&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="d6" aria-labelledby="d6-title">
-    <h3 id="d6-title"><span class="case-id">D6</span> aria-required=&quot;TRUE&quot;</h3>
-    <p>Control case. Uppercase is allowed.</p>
-    <div class="example" data-case="d6">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="dialog" aria-label="Confirm" <span class="highlight">aria-modal="yes"</span>&gt;Are you sure?&lt;/div&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="d6">Example D6: <code>aria-required="TRUE"</code></h3>
+
+<p>Control case. Uppercase is allowed.</p>
+
+<p class="status status-pass"><strong>Expected axe result: pass (valid).</strong></p>
+
+<div class="example" data-case="d6">
 <label for="d6-input">Given name</label>
 <input type="text" id="d6-input" aria-required="TRUE">
-    </div>
-    <pre><code>&lt;label for=&quot;d6-input&quot;&gt;Given name&lt;/label&gt;
-&lt;input type=&quot;text&quot; id=&quot;d6-input&quot; aria-required=&quot;TRUE&quot;&gt;</code></pre>
-    <p class="result"><span class="badge pass">Expected axe result: pass (valid)</span></p>
-  </article>
-</section>
-<section aria-labelledby="token">
-  <h2 id="token">Token values</h2>
-  <p>These attributes accept a fixed list of keywords. Anything else is invalid.</p>
-  <article class="case" id="e1" aria-labelledby="e1-title">
-    <h3 id="e1-title"><span class="case-id">E1</span> aria-checked=&quot;checked&quot;</h3>
-    <p>Allowed values are <code>true</code>, <code>false</code> and <code>mixed</code>.</p>
-    <div class="example" data-case="e1">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="d6-input"&gt;Given name&lt;/label&gt;
+&lt;input type="text" id="d6-input" <span class="highlight">aria-required="TRUE"</span>&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2 id="token">Token values</h2>
+
+<p>These attributes accept a fixed list of keywords. Anything else is invalid.</p>
+
+<!-- sub-section -->
+
+<h3 id="e1">Example E1: <code>aria-checked="checked"</code></h3>
+
+<p>Allowed values are <code>true</code>, <code>false</code> and <code>mixed</code>.</p>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="e1">
 <div role="checkbox" tabindex="0" aria-checked="checked">Subscribe</div>
-    </div>
-    <pre><code>&lt;div role=&quot;checkbox&quot; tabindex=&quot;0&quot; aria-checked=&quot;checked&quot;&gt;Subscribe&lt;/div&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="e2" aria-labelledby="e2-title">
-    <h3 id="e2-title"><span class="case-id">E2</span> aria-pressed=&quot;on&quot;</h3>
-    <div class="example" data-case="e2">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="checkbox" tabindex="0" <span class="highlight">aria-checked="checked"</span>&gt;Subscribe&lt;/div&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="e2">Example E2: <code>aria-pressed="on"</code></h3>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="e2">
 <button type="button" aria-pressed="on">Bold</button>
-    </div>
-    <pre><code>&lt;button type=&quot;button&quot; aria-pressed=&quot;on&quot;&gt;Bold&lt;/button&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="e3" aria-labelledby="e3-title">
-    <h3 id="e3-title"><span class="case-id">E3</span> aria-expanded=&quot;open&quot;</h3>
-    <div class="example" data-case="e3">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button type="button" <span class="highlight">aria-pressed="on"</span>&gt;Bold&lt;/button&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="e3">Example E3: <code>aria-expanded="open"</code></h3>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="e3">
 <button type="button" aria-expanded="open">Menu</button>
-    </div>
-    <pre><code>&lt;button type=&quot;button&quot; aria-expanded=&quot;open&quot;&gt;Menu&lt;/button&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="e4" aria-labelledby="e4-title">
-    <h3 id="e4-title"><span class="case-id">E4</span> aria-selected=&quot;yes&quot;</h3>
-    <div class="example" data-case="e4">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button type="button" <span class="highlight">aria-expanded="open"</span>&gt;Menu&lt;/button&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="e4">Example E4: <code>aria-selected="yes"</code></h3>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="e4">
 <div role="tablist" aria-label="Plans">
   <button type="button" role="tab" aria-selected="yes">Monthly</button>
 </div>
-    </div>
-    <pre><code>&lt;div role=&quot;tablist&quot; aria-label=&quot;Plans&quot;&gt;
-  &lt;button type=&quot;button&quot; role=&quot;tab&quot; aria-selected=&quot;yes&quot;&gt;Monthly&lt;/button&gt;
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="tablist" aria-label="Plans"&gt;
+  &lt;button type="button" role="tab" <span class="highlight">aria-selected="yes"</span>&gt;Monthly&lt;/button&gt;
 &lt;/div&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="e5" aria-labelledby="e5-title">
-    <h3 id="e5-title"><span class="case-id">E5</span> aria-current=&quot;yes&quot;</h3>
-    <p>Allowed values are <code>page</code>, <code>step</code>, <code>location</code>, <code>date</code>, <code>time</code>, <code>true</code> and <code>false</code>.</p>
-    <div class="example" data-case="e5">
+</details>
+
+<!-- sub-section -->
+
+<h3 id="e5">Example E5: <code>aria-current="yes"</code></h3>
+
+<p>Allowed values are <code>page</code>, <code>step</code>, <code>location</code>, <code>date</code>, <code>time</code>, <code>true</code> and <code>false</code>.</p>
+
+<p class="status status-review"><strong>Expected axe result: needs review.</strong> Axe only flags invalid <code>aria-current</code> values as needs review, because browsers treat unknown values as <code>true</code>.</p>
+
+<div class="example" data-case="e5">
 <a href="#e5" aria-current="yes">Home</a>
-    </div>
-    <pre><code>&lt;a href=&quot;#e5&quot; aria-current=&quot;yes&quot;&gt;Home&lt;/a&gt;</code></pre>
-    <p class="result"><span class="badge review">Expected axe result: needs review</span></p>
-    <p class="note">Axe only flags invalid <code>aria-current</code> values as needs review, because browsers treat unknown values as <code>true</code>.</p>
-  </article>
-  <article class="case" id="e6" aria-labelledby="e6-title">
-    <h3 id="e6-title"><span class="case-id">E6</span> aria-live=&quot;rude&quot;</h3>
-    <p><code>rude</code> was dropped from ARIA long ago.</p>
-    <div class="example" data-case="e6">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;a href="#e5" <span class="highlight">aria-current="yes"</span>&gt;Home&lt;/a&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="e6">Example E6: <code>aria-live="rude"</code></h3>
+
+<p><code>rude</code> was dropped from ARIA long ago.</p>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="e6">
 <div aria-live="rude">Status messages.</div>
-    </div>
-    <pre><code>&lt;div aria-live=&quot;rude&quot;&gt;Status messages.&lt;/div&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="e7" aria-labelledby="e7-title">
-    <h3 id="e7-title"><span class="case-id">E7</span> aria-autocomplete=&quot;on&quot;</h3>
-    <p>Another mix-up with the HTML attribute. Allowed values are <code>inline</code>, <code>list</code>, <code>both</code> and <code>none</code>.</p>
-    <div class="example" data-case="e7">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div <span class="highlight">aria-live="rude"</span>&gt;Status messages.&lt;/div&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="e7">Example E7: <code>aria-autocomplete="on"</code></h3>
+
+<p>Another mix-up with the HTML attribute. Allowed values are <code>inline</code>, <code>list</code>, <code>both</code> and <code>none</code>.</p>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="e7">
 <input type="text" role="combobox" aria-label="Search" aria-expanded="false" aria-autocomplete="on">
-    </div>
-    <pre><code>&lt;input type=&quot;text&quot; role=&quot;combobox&quot; aria-label=&quot;Search&quot; aria-expanded=&quot;false&quot; aria-autocomplete=&quot;on&quot;&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="e8" aria-labelledby="e8-title">
-    <h3 id="e8-title"><span class="case-id">E8</span> aria-haspopup=&quot;popup&quot;</h3>
-    <div class="example" data-case="e8">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;input type="text" role="combobox" aria-label="Search" aria-expanded="false" <span class="highlight">aria-autocomplete="on"</span>&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="e8">Example E8: <code>aria-haspopup="popup"</code></h3>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="e8">
 <button type="button" aria-haspopup="popup">Options</button>
-    </div>
-    <pre><code>&lt;button type=&quot;button&quot; aria-haspopup=&quot;popup&quot;&gt;Options&lt;/button&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="e9" aria-labelledby="e9-title">
-    <h3 id="e9-title"><span class="case-id">E9</span> aria-sort=&quot;asc&quot;</h3>
-    <p>It must be the full word, <code>ascending</code>.</p>
-    <div class="example" data-case="e9">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button type="button" <span class="highlight">aria-haspopup="popup"</span>&gt;Options&lt;/button&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="e9">Example E9: <code>aria-sort="asc"</code></h3>
+
+<p>It must be the full word, <code>ascending</code>.</p>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="e9">
 <table>
   <tr><th aria-sort="asc">Name</th></tr>
   <tr><td>Alex</td></tr>
 </table>
-    </div>
-    <pre><code>&lt;table&gt;
-  &lt;tr&gt;&lt;th aria-sort=&quot;asc&quot;&gt;Name&lt;/th&gt;&lt;/tr&gt;
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;table&gt;
+  &lt;tr&gt;&lt;th <span class="highlight">aria-sort="asc"</span>&gt;Name&lt;/th&gt;&lt;/tr&gt;
   &lt;tr&gt;&lt;td&gt;Alex&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="e10" aria-labelledby="e10-title">
-    <h3 id="e10-title"><span class="case-id">E10</span> aria-invalid=&quot;error&quot;</h3>
-    <div class="example" data-case="e10">
+</details>
+
+<!-- sub-section -->
+
+<h3 id="e10">Example E10: <code>aria-invalid="error"</code></h3>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="e10">
 <label for="e10-input">Code</label>
 <input type="text" id="e10-input" aria-invalid="error">
-    </div>
-    <pre><code>&lt;label for=&quot;e10-input&quot;&gt;Code&lt;/label&gt;
-&lt;input type=&quot;text&quot; id=&quot;e10-input&quot; aria-invalid=&quot;error&quot;&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="e11" aria-labelledby="e11-title">
-    <h3 id="e11-title"><span class="case-id">E11</span> aria-orientation=&quot;landscape&quot;</h3>
-    <div class="example" data-case="e11">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;label for="e10-input"&gt;Code&lt;/label&gt;
+&lt;input type="text" id="e10-input" <span class="highlight">aria-invalid="error"</span>&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="e11">Example E11: <code>aria-orientation="landscape"</code></h3>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="e11">
 <div role="separator" aria-orientation="landscape"></div>
-    </div>
-    <pre><code>&lt;div role=&quot;separator&quot; aria-orientation=&quot;landscape&quot;&gt;&lt;/div&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="e12" aria-labelledby="e12-title">
-    <h3 id="e12-title"><span class="case-id">E12</span> aria-relevant with one bad token</h3>
-    <p><code>additions</code> is fine, <code>removed</code> isn't (it should be <code>removals</code>).</p>
-    <div class="example" data-case="e12">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="separator" <span class="highlight">aria-orientation="landscape"</span>&gt;&lt;/div&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="e12">Example E12: <code>aria-relevant</code> with one bad token</h3>
+
+<p><code>additions</code> is fine, <code>removed</code> isn't (it should be <code>removals</code>).</p>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="e12">
 <div aria-live="polite" aria-relevant="additions removed">Chat log.</div>
-    </div>
-    <pre><code>&lt;div aria-live=&quot;polite&quot; aria-relevant=&quot;additions removed&quot;&gt;Chat log.&lt;/div&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-</section>
-<section aria-labelledby="number">
-  <h2 id="number">Number values</h2>
-  <p>Some attributes need a whole number (with a minimum), others any number. Units and words aren't allowed.</p>
-  <article class="case" id="f1" aria-labelledby="f1-title">
-    <h3 id="f1-title"><span class="case-id">F1</span> aria-level=&quot;two&quot;</h3>
-    <div class="example" data-case="f1">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div aria-live="polite" <span class="highlight">aria-relevant="additions removed"</span>&gt;Chat log.&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2 id="number">Number values</h2>
+
+<p>Some attributes need a whole number (with a minimum), others any number. Units and words aren't allowed.</p>
+
+<!-- sub-section -->
+
+<h3 id="f1">Example F1: <code>aria-level="two"</code></h3>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="f1">
 <div role="heading" aria-level="two">Contact us</div>
-    </div>
-    <pre><code>&lt;div role=&quot;heading&quot; aria-level=&quot;two&quot;&gt;Contact us&lt;/div&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="f2" aria-labelledby="f2-title">
-    <h3 id="f2-title"><span class="case-id">F2</span> aria-level=&quot;0&quot;</h3>
-    <p>The lowest allowed level is 1.</p>
-    <div class="example" data-case="f2">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="heading" <span class="highlight">aria-level="two"</span>&gt;Contact us&lt;/div&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="f2">Example F2: <code>aria-level="0"</code></h3>
+
+<p>The lowest allowed level is 1.</p>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="f2">
 <div role="heading" aria-level="0">About us</div>
-    </div>
-    <pre><code>&lt;div role=&quot;heading&quot; aria-level=&quot;0&quot;&gt;About us&lt;/div&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="f3" aria-labelledby="f3-title">
-    <h3 id="f3-title"><span class="case-id">F3</span> aria-level=&quot;7&quot;</h3>
-    <p>Valid in ARIA, but some screen readers don't support heading levels above 6.</p>
-    <div class="example" data-case="f3">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="heading" <span class="highlight">aria-level="0"</span>&gt;About us&lt;/div&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="f3">Example F3: <code>aria-level="7"</code></h3>
+
+<p>Valid in ARIA, but some screen readers don't support heading levels above 6.</p>
+
+<p class="status status-review"><strong>Expected axe result: needs review.</strong></p>
+
+<div class="example" data-case="f3">
 <div role="heading" aria-level="7">Fine print</div>
-    </div>
-    <pre><code>&lt;div role=&quot;heading&quot; aria-level=&quot;7&quot;&gt;Fine print&lt;/div&gt;</code></pre>
-    <p class="result"><span class="badge review">Expected axe result: needs review</span></p>
-  </article>
-  <article class="case" id="f4" aria-labelledby="f4-title">
-    <h3 id="f4-title"><span class="case-id">F4</span> aria-valuenow=&quot;fifty&quot;</h3>
-    <div class="example" data-case="f4">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="heading" <span class="highlight">aria-level="7"</span>&gt;Fine print&lt;/div&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="f4">Example F4: <code>aria-valuenow="fifty"</code></h3>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="f4">
 <div role="slider" tabindex="0" aria-label="Volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="fifty"></div>
-    </div>
-    <pre><code>&lt;div role=&quot;slider&quot; tabindex=&quot;0&quot; aria-label=&quot;Volume&quot; aria-valuemin=&quot;0&quot; aria-valuemax=&quot;100&quot; aria-valuenow=&quot;fifty&quot;&gt;&lt;/div&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="f5" aria-labelledby="f5-title">
-    <h3 id="f5-title"><span class="case-id">F5</span> aria-valuenow=&quot;50%&quot;</h3>
-    <p>Use <code>aria-valuetext</code> if you want to add units.</p>
-    <div class="example" data-case="f5">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="slider" tabindex="0" aria-label="Volume" aria-valuemin="0" aria-valuemax="100" <span class="highlight">aria-valuenow="fifty"</span>&gt;&lt;/div&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="f5">Example F5: <code>aria-valuenow="50%"</code></h3>
+
+<p>Use <code>aria-valuetext</code> if you want to add units.</p>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="f5">
 <div role="progressbar" aria-label="Upload" aria-valuenow="50%"></div>
-    </div>
-    <pre><code>&lt;div role=&quot;progressbar&quot; aria-label=&quot;Upload&quot; aria-valuenow=&quot;50%&quot;&gt;&lt;/div&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="f6" aria-labelledby="f6-title">
-    <h3 id="f6-title"><span class="case-id">F6</span> aria-valuemin=&quot;0,5&quot;</h3>
-    <p>A comma as a decimal separator isn't allowed.</p>
-    <div class="example" data-case="f6">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="progressbar" aria-label="Upload" <span class="highlight">aria-valuenow="50%"</span>&gt;&lt;/div&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="f6">Example F6: <code>aria-valuemin="0,5"</code></h3>
+
+<p>A comma as a decimal separator isn't allowed.</p>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="f6">
 <div role="slider" tabindex="0" aria-label="Zoom" aria-valuemin="0,5" aria-valuemax="3" aria-valuenow="1"></div>
-    </div>
-    <pre><code>&lt;div role=&quot;slider&quot; tabindex=&quot;0&quot; aria-label=&quot;Zoom&quot; aria-valuemin=&quot;0,5&quot; aria-valuemax=&quot;3&quot; aria-valuenow=&quot;1&quot;&gt;&lt;/div&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="f7" aria-labelledby="f7-title">
-    <h3 id="f7-title"><span class="case-id">F7</span> aria-posinset=&quot;0&quot;</h3>
-    <p>Positions start at 1.</p>
-    <div class="example" data-case="f7">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="slider" tabindex="0" aria-label="Zoom" <span class="highlight">aria-valuemin="0,5"</span> aria-valuemax="3" aria-valuenow="1"&gt;&lt;/div&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="f7">Example F7: <code>aria-posinset="0"</code></h3>
+
+<p>Positions start at 1.</p>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="f7">
 <div role="listbox" aria-label="Sizes">
   <div role="option" aria-selected="false" aria-posinset="0" aria-setsize="3">Small</div>
 </div>
-    </div>
-    <pre><code>&lt;div role=&quot;listbox&quot; aria-label=&quot;Sizes&quot;&gt;
-  &lt;div role=&quot;option&quot; aria-selected=&quot;false&quot; aria-posinset=&quot;0&quot; aria-setsize=&quot;3&quot;&gt;Small&lt;/div&gt;
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="listbox" aria-label="Sizes"&gt;
+  &lt;div role="option" aria-selected="false" <span class="highlight">aria-posinset="0"</span> aria-setsize="3"&gt;Small&lt;/div&gt;
 &lt;/div&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="f8" aria-labelledby="f8-title">
-    <h3 id="f8-title"><span class="case-id">F8</span> aria-colindex=&quot;1.5&quot;</h3>
-    <p>Must be a whole number.</p>
-    <div class="example" data-case="f8">
+</details>
+
+<!-- sub-section -->
+
+<h3 id="f8">Example F8: <code>aria-colindex="1.5"</code></h3>
+
+<p>Must be a whole number.</p>
+
+<p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<div class="example" data-case="f8">
 <div role="grid" aria-label="Scores">
   <div role="row">
     <div role="gridcell" aria-colindex="1.5">10</div>
   </div>
 </div>
-    </div>
-    <pre><code>&lt;div role=&quot;grid&quot; aria-label=&quot;Scores&quot;&gt;
-  &lt;div role=&quot;row&quot;&gt;
-    &lt;div role=&quot;gridcell&quot; aria-colindex=&quot;1.5&quot;&gt;10&lt;/div&gt;
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="grid" aria-label="Scores"&gt;
+  &lt;div role="row"&gt;
+    &lt;div role="gridcell" <span class="highlight">aria-colindex="1.5"</span>&gt;10&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
-    <p class="result"><span class="badge fail">Expected axe result: fail</span></p>
-  </article>
-  <article class="case" id="f9" aria-labelledby="f9-title">
-    <h3 id="f9-title"><span class="case-id">F9</span> aria-setsize=&quot;-1&quot;</h3>
-    <p>Control case. <code>-1</code> is allowed and means the total is unknown.</p>
-    <div class="example" data-case="f9">
+</details>
+
+<!-- sub-section -->
+
+<h3 id="f9">Example F9: <code>aria-setsize="-1"</code></h3>
+
+<p>Control case. <code>-1</code> is allowed and means the total is unknown.</p>
+
+<p class="status status-pass"><strong>Expected axe result: pass (valid).</strong></p>
+
+<div class="example" data-case="f9">
 <div role="listbox" aria-label="Results">
   <div role="option" aria-selected="false" aria-posinset="1" aria-setsize="-1">Result one</div>
 </div>
-    </div>
-    <pre><code>&lt;div role=&quot;listbox&quot; aria-label=&quot;Results&quot;&gt;
-  &lt;div role=&quot;option&quot; aria-selected=&quot;false&quot; aria-posinset=&quot;1&quot; aria-setsize=&quot;-1&quot;&gt;Result one&lt;/div&gt;
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="listbox" aria-label="Results"&gt;
+  &lt;div role="option" aria-selected="false" aria-posinset="1" <span class="highlight">aria-setsize="-1"</span>&gt;Result one&lt;/div&gt;
 &lt;/div&gt;</code></pre>
-    <p class="result"><span class="badge pass">Expected axe result: pass (valid)</span></p>
-  </article>
-</section>
-<section aria-labelledby="empty">
-  <h2 id="empty">Empty values</h2>
-  <p>An empty value is fine for text and ID attributes, but not for true/false, token or number attributes.</p>
-  <article class="case" id="g1" aria-labelledby="g1-title">
-    <h3 id="g1-title"><span class="case-id">G1</span> aria-expanded=&quot;&quot;</h3>
-    <div class="example" data-case="g1">
+</details>
+
+
+<!-- section -->
+
+
+<h2 id="empty">Empty values</h2>
+
+<p>An empty value is fine for text and ID attributes, but not for true/false, token or number attributes.</p>
+
+<!-- sub-section -->
+
+<h3 id="g1">Example G1: <code>aria-expanded=""</code></h3>
+
+<p class="status status-review"><strong>Expected axe result: needs review.</strong> Axe reports empty non-text values as needs review rather than a fail.</p>
+
+<div class="example" data-case="g1">
 <button type="button" aria-expanded="">More</button>
-    </div>
-    <pre><code>&lt;button type=&quot;button&quot; aria-expanded=&quot;&quot;&gt;More&lt;/button&gt;</code></pre>
-    <p class="result"><span class="badge review">Expected axe result: needs review</span></p>
-    <p class="note">Axe reports empty non-text values as needs review rather than a fail.</p>
-  </article>
-  <article class="case" id="g2" aria-labelledby="g2-title">
-    <h3 id="g2-title"><span class="case-id">G2</span> aria-hidden=&quot;&quot;</h3>
-    <div class="example" data-case="g2">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button type="button" <span class="highlight">aria-expanded=""</span>&gt;More&lt;/button&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="g2">Example G2: <code>aria-hidden=""</code></h3>
+
+<p class="status status-review"><strong>Expected axe result: needs review.</strong></p>
+
+<div class="example" data-case="g2">
 <p aria-hidden="">Some text.</p>
-    </div>
-    <pre><code>&lt;p aria-hidden=&quot;&quot;&gt;Some text.&lt;/p&gt;</code></pre>
-    <p class="result"><span class="badge review">Expected axe result: needs review</span></p>
-  </article>
-  <article class="case" id="g3" aria-labelledby="g3-title">
-    <h3 id="g3-title"><span class="case-id">G3</span> aria-valuenow=&quot;&quot;</h3>
-    <div class="example" data-case="g3">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;p <span class="highlight">aria-hidden=""</span>&gt;Some text.&lt;/p&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="g3">Example G3: <code>aria-valuenow=""</code></h3>
+
+<p class="status status-review"><strong>Expected axe result: needs review.</strong></p>
+
+<div class="example" data-case="g3">
 <div role="progressbar" aria-label="Download" aria-valuenow=""></div>
-    </div>
-    <pre><code>&lt;div role=&quot;progressbar&quot; aria-label=&quot;Download&quot; aria-valuenow=&quot;&quot;&gt;&lt;/div&gt;</code></pre>
-    <p class="result"><span class="badge review">Expected axe result: needs review</span></p>
-  </article>
-  <article class="case" id="g4" aria-labelledby="g4-title">
-    <h3 id="g4-title"><span class="case-id">G4</span> aria-labelledby=&quot;&quot;</h3>
-    <p>An empty ID list is allowed, so this rule passes it. The button still has its text as a name.</p>
-    <div class="example" data-case="g4">
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="progressbar" aria-label="Download" <span class="highlight">aria-valuenow=""</span>&gt;&lt;/div&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="g4">Example G4: <code>aria-labelledby=""</code></h3>
+
+<p>An empty ID list is allowed, so this rule passes it. The button still has its text as a name.</p>
+
+<p class="status status-pass"><strong>Expected axe result: pass (valid).</strong></p>
+
+<div class="example" data-case="g4">
 <button type="button" aria-labelledby="">Print</button>
-    </div>
-    <pre><code>&lt;button type=&quot;button&quot; aria-labelledby=&quot;&quot;&gt;Print&lt;/button&gt;</code></pre>
-    <p class="result"><span class="badge pass">Expected axe result: pass (valid)</span></p>
-  </article>
-</section>
+</div>
 
-<section aria-labelledby="dynamic-heading">
-  <h2 id="dynamic-heading">Changes after interaction</h2>
-  <p>Axe only sees the page as it is when you run it. Both of these pass on page load. Activate each button, then run axe again.</p>
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button type="button" <span class="highlight">aria-labelledby=""</span>&gt;Print&lt;/button&gt;</code></pre>
+</details>
 
-  <article class="case" id="h1" aria-labelledby="h1-title">
-    <h3 id="h1-title"><span class="case-id">H1</span> Toggle writes aria-pressed="null"</h3>
-    <p>The script reads the state from a variable that is never set, so after the first press <code>aria-pressed</code> becomes the text <code>null</code>.</p>
-    <div class="example" data-case="h1">
-      <button type="button" id="h1-button" aria-pressed="false">Italic</button>
-    </div>
-    <p class="result"><span class="badge dynamic">On load: pass. After pressing: fail</span></p>
-  </article>
 
-  <article class="case" id="h2" aria-labelledby="h2-title">
-    <h3 id="h2-title"><span class="case-id">H2</span> Panel is added with the wrong ID</h3>
-    <p>The button starts collapsed, so axe skips the missing <code>aria-controls</code> target. When opened, the script adds the panel with the ID <code>h2-pannel</code> (typo) instead of <code>h2-panel</code>.</p>
-    <div class="example" data-case="h2">
-      <button type="button" id="h2-button" aria-expanded="false" aria-controls="h2-panel">Shipping details</button>
-      <div id="h2-container"></div>
-    </div>
-    <p class="result"><span class="badge dynamic">On load: pass. After opening: fail</span></p>
-  </article>
-</section>
+<!-- section -->
+
+
+<h2 id="dynamic-heading">Changes after interaction</h2>
+
+<p>Axe only sees the page as it is when you run it. Both of these pass on page load. Activate each button, then run axe again.</p>
+
+<!-- sub-section -->
+
+<h3 id="h1">Example H1: Toggle writes <code>aria-pressed="null"</code></h3>
+
+<p>The script reads the state from a variable that is never set, so after the first press <code>aria-pressed</code> becomes the text <code>null</code>.</p>
+
+<p class="status status-dynamic"><strong>Expected axe result: pass on load, fail after pressing.</strong></p>
+
+<div class="example" data-case="h1">
+<button type="button" id="h1-button" aria-pressed="false">Italic</button>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button type="button" id="h1-button" aria-pressed="false"&gt;Italic&lt;/button&gt;</code></pre>
+</details>
+
+<details>
+  <summary>JavaScript</summary>
+<pre><code>var pressedState;
+document.getElementById('h1-button').addEventListener('click', function () {
+  var current = this.getAttribute('aria-pressed') === 'true';
+  pressedState = current ? 'false' : null; // bug: should be 'true'
+  this.setAttribute('aria-pressed', String(pressedState));
+});</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3 id="h2">Example H2: Panel is added with the wrong ID</h3>
+
+<p>The button starts collapsed, so axe skips the missing <code>aria-controls</code> target. When opened, the script adds the panel with the ID <code>h2-pannel</code> (typo) instead of <code>h2-panel</code>.</p>
+
+<p class="status status-dynamic"><strong>Expected axe result: pass on load, fail after opening.</strong></p>
+
+<div class="example" data-case="h2">
+<button type="button" id="h2-button" aria-expanded="false" aria-controls="h2-panel">Shipping details</button>
+<div id="h2-container"></div>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button type="button" id="h2-button" aria-expanded="false" aria-controls="h2-panel"&gt;Shipping details&lt;/button&gt;
+&lt;div id="h2-container"&gt;&lt;/div&gt;</code></pre>
+</details>
+
+<details>
+  <summary>JavaScript</summary>
+<pre><code>document.getElementById('h2-button').addEventListener('click', function () {
+  var container = document.getElementById('h2-container');
+  var isOpen = this.getAttribute('aria-expanded') === 'true';
+  if (isOpen) {
+    this.setAttribute('aria-expanded', 'false');
+    container.innerHTML = '';
+  } else {
+    this.setAttribute('aria-expanded', 'true');
+    container.innerHTML = '&lt;div id="h2-pannel"&gt;&lt;p&gt;Standard shipping takes 3 to 5 days.&lt;/p&gt;&lt;/div&gt;';
+  }
+});</code></pre>
+</details>
+
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 
 </main>
 
