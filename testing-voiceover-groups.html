@@ -108,15 +108,7 @@ iframe {width:100%; height:12em; border:2px solid #546e7a}
 <!-- section -->
 
 
-<h2>1. Table</h2>
-
-<p>VoiceOver treats a table as a group. Interact with it to move between cells.</p>
-
-<!-- sub-section -->
-
-<h3>Example 1.1: Data table</h3>
-
-<p>A table with a caption, column headers and row headers.</p>
+<h2>Example 1: Data table</h2>
 
 <div class="example">
   <table class="demo">
@@ -183,111 +175,7 @@ iframe {width:100%; height:12em; border:2px solid #546e7a}
 <!-- section -->
 
 
-<h2>2. Scrollable region</h2>
-
-<p>A region that scrolls, and can take keyboard focus, may be treated as a group.</p>
-
-<!-- sub-section -->
-
-<h3>Example 2.1: Code block</h3>
-
-<p>A <code>pre</code> that scrolls. It is a focusable <code>region</code> with a name, so keyboard users can scroll it.</p>
-
-<div class="example">
-  <div class="scroll" role="region" aria-label="Example code" tabindex="0">
-  <pre><code>function countFailures(results) {
-    var total = 0;
-    for (var i = 0; i &lt; results.length; i++) {
-      if (results[i].impact === 'critical') {
-        total = total + 1;
-      }
-    }
-    return total;
-  }
-
-  function showSummary(total) {
-    var message = 'Critical failures: ' + total;
-    console.log(message);
-    return message;
-  }
-
-  var results = runChecks();
-  showSummary(countFailures(results));</code></pre>
-  </div>
-</div>
-
-<details>
-  <summary>HTML markup</summary>
-<pre><code>&lt;div class="scroll" <span class="highlight">role="region" aria-label="Example code" tabindex="0"</span>&gt;
-&lt;pre&gt;&lt;code&gt;function countFailures(results) {
-  var total = 0;
-  for (var i = 0; i &amp;lt; results.length; i++) {
-    if (results[i].impact === 'critical') {
-      total = total + 1;
-    }
-  }
-  return total;
-}
-
-function showSummary(total) {
-  var message = 'Critical failures: ' + total;
-  console.log(message);
-  return message;
-}
-
-var results = runChecks();
-showSummary(countFailures(results));&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</code></pre>
-</details>
-
-<!-- sub-section -->
-
-<h3>Example 2.2: Chat panel</h3>
-
-<p>A chat history that scrolls. It is a focusable <code>log</code> with a name.</p>
-
-<div class="example">
-  <div class="scroll chat" role="log" aria-label="Chat messages" tabindex="0">
-      <p><strong>Peter:</strong> Morning, did the audit report go out?</p>
-      <p><strong>Mary:</strong> Yes, sent it at nine.</p>
-      <p><strong>Peter:</strong> Great. Any questions from the client?</p>
-      <p><strong>Mary:</strong> One about the colour contrast findings.</p>
-      <p><strong>Peter:</strong> I can jump on a call at two.</p>
-      <p><strong>Mary:</strong> Perfect, I will send an invite.</p>
-      <p><strong>Peter:</strong> Thanks. Can you attach the issue list?</p>
-      <p><strong>Mary:</strong> Done, it is in the invite.</p>
-      <p><strong>Peter:</strong> Brilliant, see you then.</p>
-  </div>
-</div>
-
-<details>
-  <summary>HTML markup</summary>
-<pre><code>&lt;div class="scroll chat" <span class="highlight">role="log" aria-label="Chat messages" tabindex="0"</span>&gt;
-    &lt;p&gt;&lt;strong&gt;Peter:&lt;/strong&gt; Morning, did the audit report go out?&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Mary:&lt;/strong&gt; Yes, sent it at nine.&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Peter:&lt;/strong&gt; Great. Any questions from the client?&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Mary:&lt;/strong&gt; One about the colour contrast findings.&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Peter:&lt;/strong&gt; I can jump on a call at two.&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Mary:&lt;/strong&gt; Perfect, I will send an invite.&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Peter:&lt;/strong&gt; Thanks. Can you attach the issue list?&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Mary:&lt;/strong&gt; Done, it is in the invite.&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Peter:&lt;/strong&gt; Brilliant, see you then.&lt;/p&gt;
-&lt;/div&gt;</code></pre>
-</details>
-
-
-<!-- section -->
-
-
-<h2>3. Iframe</h2>
-
-<p>An iframe is treated as a group. These use <code>srcdoc</code> so they work without a network. Swap in a real video or map embed if you prefer.</p>
-
-<!-- sub-section -->
-
-<h3>Example 3.1: Embedded video</h3>
-
-<p>A video player inside an iframe with a <code>title</code>.</p>
+<h2>Example 2: Embedded video</h2>
 
 <div class="example">
   <iframe title="Intro to screen readers video" srcdoc="&lt;!doctype html&gt;&lt;html lang=&quot;en&quot;&gt;&lt;body&gt;&lt;h1&gt;Intro to screen readers&lt;/h1&gt;&lt;p&gt;Video player (demo)&lt;/p&gt;&lt;button&gt;Play&lt;/button&gt; &lt;button&gt;Mute&lt;/button&gt; &lt;button&gt;Captions&lt;/button&gt;&lt;/body&gt;&lt;/html&gt;"></iframe>
@@ -298,11 +186,11 @@ showSummary(countFailures(results));&lt;/code&gt;&lt;/pre&gt;
 <pre><code>&lt;iframe <span class="highlight">title="Intro to screen readers video"</span> srcdoc="&amp;lt;!doctype html&amp;gt;&amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt;&amp;lt;body&amp;gt;&amp;lt;h1&amp;gt;Intro to screen readers&amp;lt;/h1&amp;gt;&amp;lt;p&amp;gt;Video player (demo)&amp;lt;/p&amp;gt;&amp;lt;button&amp;gt;Play&amp;lt;/button&amp;gt; &amp;lt;button&amp;gt;Mute&amp;lt;/button&amp;gt; &amp;lt;button&amp;gt;Captions&amp;lt;/button&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;"&gt;&lt;/iframe&gt;</code></pre>
 </details>
 
-<!-- sub-section -->
 
-<h3>Example 3.2: Embedded map</h3>
+<!-- section -->
 
-<p>A map inside an iframe with a <code>title</code>.</p>
+
+<h2>Example 3: Embedded map</h2>
 
 <div class="example">
   <iframe title="Map of Sydney" srcdoc="&lt;!doctype html&gt;&lt;html lang=&quot;en&quot;&gt;&lt;body&gt;&lt;h1&gt;Map of Sydney&lt;/h1&gt;&lt;p&gt;Map (demo)&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;#&quot;&gt;Town Hall&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;#&quot;&gt;Circular Quay&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;button&gt;Zoom in&lt;/button&gt; &lt;button&gt;Zoom out&lt;/button&gt;&lt;/body&gt;&lt;/html&gt;"></iframe>
@@ -317,15 +205,7 @@ showSummary(countFailures(results));&lt;/code&gt;&lt;/pre&gt;
 <!-- section -->
 
 
-<h2>4. ARIA widgets</h2>
-
-<p>Some composite widgets with ARIA roles may be treated as groups.</p>
-
-<!-- sub-section -->
-
-<h3>Example 4.1: Toolbar</h3>
-
-<p>A <code>toolbar</code> with three buttons.</p>
+<h2>Example 4: Toolbar</h2>
 
 <div class="example">
   <div role="toolbar" aria-label="Text formatting">
@@ -344,66 +224,11 @@ showSummary(countFailures(results));&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;</code></pre>
 </details>
 
-<!-- sub-section -->
 
-<h3>Example 4.2: Grid</h3>
+<!-- section -->
 
-<p>A <code>grid</code> with column headers and cells. It is static, with no keyboard behaviour added.</p>
 
-<div class="example">
-  <table role="grid" aria-label="Quarterly sales">
-    <thead>
-      <tr>
-        <th scope="col">Region</th>
-        <th scope="col">Q1</th>
-        <th scope="col">Q2</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>North</td>
-        <td>120</td>
-        <td>135</td>
-      </tr>
-      <tr>
-        <td>South</td>
-        <td>98</td>
-        <td>110</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<details>
-  <summary>HTML markup</summary>
-<pre><code>&lt;table <span class="highlight">role="grid"</span> aria-label="Quarterly sales"&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th scope="col"&gt;Region&lt;/th&gt;
-      &lt;th scope="col"&gt;Q1&lt;/th&gt;
-      &lt;th scope="col"&gt;Q2&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;North&lt;/td&gt;
-      &lt;td&gt;120&lt;/td&gt;
-      &lt;td&gt;135&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;South&lt;/td&gt;
-      &lt;td&gt;98&lt;/td&gt;
-      &lt;td&gt;110&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;</code></pre>
-</details>
-
-<!-- sub-section -->
-
-<h3>Example 4.3: Tab list</h3>
-
-<p>A <code>tablist</code> with three tabs and their panels. Arrow keys move between tabs.</p>
+<h2>Example 5: Tab list</h2>
 
 <div class="example">
   <div role="tablist" aria-label="Course information">
@@ -439,38 +264,6 @@ showSummary(countFailures(results));&lt;/code&gt;&lt;/pre&gt;
   &lt;p&gt;Tab three content: links and resources.&lt;/p&gt;
 &lt;/div&gt;</code></pre>
 </details>
-
-
-<!-- section -->
-
-
-<h2>5. Visual sections</h2>
-
-<p>Boxed content that looks like separate sections. With &ldquo;Grouping items&rdquo; selected, VoiceOver may treat each card as a group.</p>
-
-<!-- sub-section -->
-
-<h3>Example 5.1: Cards</h3>
-
-<div class="example">
-  <div style="display:flex; gap:1rem">
-    <div style="border:2px solid #546e7a; padding:1em; flex:1">
-      <h4>Screen reader basics</h4>
-      <p>Learn how screen readers work.</p>
-      <a href="#">Find out more</a>
-    </div>
-    <div style="border:2px solid #546e7a; padding:1em; flex:1">
-      <h4>Forms and errors</h4>
-      <p>Test labels, instructions and errors.</p>
-      <a href="#">Find out more</a>
-    </div>
-    <div style="border:2px solid #546e7a; padding:1em; flex:1">
-      <h4>Dynamic content</h4>
-      <p>Test announcements and live regions.</p>
-      <a href="#">Find out more</a>
-    </div>
-  </div>
-</div>
 
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
