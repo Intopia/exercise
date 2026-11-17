@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the axe rule aria-conditional-attr</title>
+  <meta name="description" content="Test cases for the axe-core rule aria-conditional-attr, showing what axe catches and what it misses.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <style>
+  .case { border: 1px solid #c8c8cc; border-radius: 6px; padding: 1rem 1.25rem; margin: 1.25rem 0; }
+  .case h3 { margin-top: 0; }
+  .case-id { display: inline-block; font-size: .8rem; font-weight: 700; background: #1d1d1f; color: #fff; padding: .1rem .45rem; border-radius: 3px; margin-right: .4rem; vertical-align: middle; }
+  .example { border: 1px dashed #a0a0a8; padding: .75rem 1rem; margin: .75rem 0; }
+  .example p { margin: .25rem 0; }
+  .badge { display: inline-block; font-weight: 600; font-size: .875rem; padding: .2rem .6rem; border-radius: 3px; border: 2px solid; }
+  .badge.fail { background: #fde8e8; border-color: #b3261e; color: #8a1c16; }
+  .badge.review { background: #fff4d6; border-color: #8a6100; color: #5e4200; }
+  .badge.other { background: #e0f4f4; border-color: #0b6b6b; color: #084f4f; }
+  .badge.miss { background: #ece6fb; border-color: #5b3cc4; color: #432a99; }
+  .badge.pass { background: #e3f4e8; border-color: #1e7b3a; color: #155c2b; }
+  .badge.dynamic { background: #e8eef9; border-color: #1a4f9c; color: #133b75; }
+  .note { font-size: .9375rem; }
+</style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo. The word 'intopia' in black, with the 'o' made from four curved brush strokes in pink, orange, yellow and turquoise." class="intopia-logo">
+  </picture>
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing the axe rule <code>aria-conditional-attr</code></h1>
+
+<p>Test cases for the axe-core rule <a href="https://dequeuniversity.com/rules/axe/4.14/aria-conditional-attr"><code>aria-conditional-attr</code></a> (axe-core 4.14). The rule checks ARIA attributes that are only allowed under certain conditions. It looks at three things:</p>
+
+<ul>
+  <li><strong>Native checkboxes</strong>: <code>aria-checked</code> on <code>&lt;input type="checkbox"&gt;</code> must match the checkbox's real state.</li>
+  <li><strong>Native radio buttons</strong>: the same, for <code>&lt;input type="radio"&gt;</code>. The Deque page doesn't mention radios, but the rule checks them.</li>
+  <li><strong>Table rows</strong>: <code>aria-level</code>, <code>aria-expanded</code>, <code>aria-posinset</code> and <code>aria-setsize</code> are only allowed on rows inside a <code>treegrid</code>.</li>
+</ul>
+
+<p>One thing to know up front: the rule doesn't fail every <code>aria-checked</code> on a native checkbox. It only fails when the value <em>disagrees</em> with the real state, at the moment axe runs.</p>
+
+<p>Every example is live in the page, so you can run the axe extension straight over it. The expected results were checked by running axe-core 4.14.1 over this page. Look in both the axe <strong>issues</strong> list and the <strong>needs review</strong> list.</p>
+
+<table>
+  <caption>Number of test cases by expected result</caption>
+  <thead><tr><th scope="col">Expected result</th><th scope="col">Cases</th></tr></thead>
+  <tbody>
+      <tr><td>Fail</td><td>11</td></tr>
+      <tr><td>Flagged by a different rule instead</td><td>5</td></tr>
+      <tr><td>Passes, but broken (axe misses it)</td><td>2</td></tr>
+      <tr><td>Pass (valid control cases)</td><td>7</td></tr>
+      <tr><td>Changes after interaction</td><td>2</td></tr>
+  </tbody>
+</table>
+
+<h2 id="sections">Sections</h2>
+
+<ul>
+  <li><a href="#checkbox">Checkbox state disagrees</a></li>
+  <li><a href="#radio">Radio state disagrees</a></li>
+  <li><a href="#matching">States that match</a></li>
+  <li><a href="#rows">Row attributes outside a treegrid</a></li>
+  <li><a href="#rows-pass">Rows that pass</a></li>
+  <li><a href="#other-rules">Flagged by a different rule instead</a></li>
+  <li><a href="#missed">Missed completely</a></li>
+  <li><a href="#dynamic">Changes after interaction</a></li>
+</ul>
+
+<!-- section -->
+
+<h2 id="checkbox">Checkbox state disagrees</h2>
+
+<p>The checkbox says one thing, <code>aria-checked</code> says another. Screen readers may announce either.</p>
+<article class="case" id="a1" aria-labelledby="a1-title">
+  <h3 id="a1-title"><span class="case-id">A1</span> Unticked, but aria-checked=&quot;true&quot;</h3>
+  <div class="example" data-case="a1" data-expected="fail">
+<label><input type="checkbox" aria-checked="true"> Send me updates</label>
+  </div>
+  <pre><code class="language-html">&lt;label&gt;&lt;input type=&quot;checkbox&quot; aria-checked=&quot;true&quot;&gt; Send me updates&lt;/label&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article><article class="case" id="a2" aria-labelledby="a2-title">
+  <h3 id="a2-title"><span class="case-id">A2</span> Ticked, but aria-checked=&quot;false&quot;</h3>
+  <div class="example" data-case="a2" data-expected="fail">
+<label><input type="checkbox" checked aria-checked="false"> Remember me</label>
+  </div>
+  <pre><code class="language-html">&lt;label&gt;&lt;input type=&quot;checkbox&quot; checked aria-checked=&quot;false&quot;&gt; Remember me&lt;/label&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article><article class="case" id="a3" aria-labelledby="a3-title">
+  <h3 id="a3-title"><span class="case-id">A3</span> aria-checked=&quot;mixed&quot; on a normal checkbox</h3>
+  <p>A native checkbox is only mixed when its <code>indeterminate</code> property is set with JavaScript.</p>
+  <div class="example" data-case="a3" data-expected="fail">
+<label><input type="checkbox" aria-checked="mixed"> Select all</label>
+  </div>
+  <pre><code class="language-html">&lt;label&gt;&lt;input type=&quot;checkbox&quot; aria-checked=&quot;mixed&quot;&gt; Select all&lt;/label&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article>
+<!-- section -->
+
+<h2 id="radio">Radio state disagrees</h2>
+
+<p>Radio buttons get the same check, but they can't be mixed.</p>
+<article class="case" id="b1" aria-labelledby="b1-title">
+  <h3 id="b1-title"><span class="case-id">B1</span> Unselected, but aria-checked=&quot;true&quot;</h3>
+  <div class="example" data-case="b1" data-expected="fail">
+<fieldset>
+  <legend>Delivery</legend>
+  <label><input type="radio" name="b1" aria-checked="true"> Standard</label>
+  <label><input type="radio" name="b1"> Express</label>
+</fieldset>
+  </div>
+  <pre><code class="language-html">&lt;fieldset&gt;
+  &lt;legend&gt;Delivery&lt;/legend&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;b1&quot; aria-checked=&quot;true&quot;&gt; Standard&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;b1&quot;&gt; Express&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article>
+<!-- section -->
+
+<h2 id="matching">States that match</h2>
+
+<p>Control cases. These pass because <code>aria-checked</code> agrees with the real state. They're still redundant, and the Deque page recommends removing <code>aria-checked</code> from native checkboxes altogether. The interaction cases at the end show why.</p>
+<article class="case" id="c1" aria-labelledby="c1-title">
+  <h3 id="c1-title"><span class="case-id">C1</span> Ticked and aria-checked=&quot;true&quot;</h3>
+  <div class="example" data-case="c1" data-expected="pass">
+<label><input type="checkbox" checked aria-checked="true"> I agree</label>
+  </div>
+  <pre><code class="language-html">&lt;label&gt;&lt;input type=&quot;checkbox&quot; checked aria-checked=&quot;true&quot;&gt; I agree&lt;/label&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="c2" aria-labelledby="c2-title">
+  <h3 id="c2-title"><span class="case-id">C2</span> Unticked and aria-checked=&quot;false&quot;</h3>
+  <div class="example" data-case="c2" data-expected="pass">
+<label><input type="checkbox" aria-checked="false"> Add gift wrap</label>
+  </div>
+  <pre><code class="language-html">&lt;label&gt;&lt;input type=&quot;checkbox&quot; aria-checked=&quot;false&quot;&gt; Add gift wrap&lt;/label&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="c3" aria-labelledby="c3-title">
+  <h3 id="c3-title"><span class="case-id">C3</span> Indeterminate and aria-checked=&quot;mixed&quot;</h3>
+  <p>The script below sets <code>indeterminate</code> on page load, so the states match.</p>
+  <div class="example" data-case="c3" data-expected="pass">
+<label><input type="checkbox" id="c3-input" aria-checked="mixed"> All toppings</label>
+  </div>
+  <pre><code class="language-html">&lt;label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;c3-input&quot; aria-checked=&quot;mixed&quot;&gt; All toppings&lt;/label&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="c4" aria-labelledby="c4-title">
+  <h3 id="c4-title"><span class="case-id">C4</span> Selected radio and aria-checked=&quot;true&quot;</h3>
+  <div class="example" data-case="c4" data-expected="pass">
+<fieldset>
+  <legend>Size</legend>
+  <label><input type="radio" name="c4" checked aria-checked="true"> Small</label>
+  <label><input type="radio" name="c4"> Large</label>
+</fieldset>
+  </div>
+  <pre><code class="language-html">&lt;fieldset&gt;
+  &lt;legend&gt;Size&lt;/legend&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;c4&quot; checked aria-checked=&quot;true&quot;&gt; Small&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;c4&quot;&gt; Large&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="c5" aria-labelledby="c5-title">
+  <h3 id="c5-title"><span class="case-id">C5</span> Custom checkbox</h3>
+  <p>The rule only checks native inputs. On a custom checkbox, <code>aria-checked</code> is the only state there is.</p>
+  <div class="example" data-case="c5" data-expected="pass">
+<div role="checkbox" tabindex="0" aria-checked="true">Subscribe</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;checkbox&quot; tabindex=&quot;0&quot; aria-checked=&quot;true&quot;&gt;Subscribe&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article>
+<!-- section -->
+
+<h2 id="rows">Row attributes outside a treegrid</h2>
+
+<p><code>aria-level</code>, <code>aria-expanded</code>, <code>aria-posinset</code> and <code>aria-setsize</code> only make sense on rows in a <code>treegrid</code>. In a table or grid they do nothing.</p>
+<article class="case" id="d1" aria-labelledby="d1-title">
+  <h3 id="d1-title"><span class="case-id">D1</span> aria-level on a table row</h3>
+  <div class="example" data-case="d1" data-expected="fail">
+<table>
+  <tr aria-level="1"><td>My downloads</td></tr>
+</table>
+  </div>
+  <pre><code class="language-html">&lt;table&gt;
+  &lt;tr aria-level=&quot;1&quot;&gt;&lt;td&gt;My downloads&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article><article class="case" id="d2" aria-labelledby="d2-title">
+  <h3 id="d2-title"><span class="case-id">D2</span> aria-expanded on a table row</h3>
+  <div class="example" data-case="d2" data-expected="fail">
+<table>
+  <tr aria-expanded="false"><td>2025 invoices</td></tr>
+</table>
+  </div>
+  <pre><code class="language-html">&lt;table&gt;
+  &lt;tr aria-expanded=&quot;false&quot;&gt;&lt;td&gt;2025 invoices&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article><article class="case" id="d3" aria-labelledby="d3-title">
+  <h3 id="d3-title"><span class="case-id">D3</span> aria-posinset and aria-setsize on a table row</h3>
+  <div class="example" data-case="d3" data-expected="fail">
+<table>
+  <tr aria-posinset="1" aria-setsize="3"><td>Chapter one</td></tr>
+</table>
+  </div>
+  <pre><code class="language-html">&lt;table&gt;
+  &lt;tr aria-posinset=&quot;1&quot; aria-setsize=&quot;3&quot;&gt;&lt;td&gt;Chapter one&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article><article class="case" id="d4" aria-labelledby="d4-title">
+  <h3 id="d4-title"><span class="case-id">D4</span> aria-level on a row in a grid table</h3>
+  <div class="example" data-case="d4" data-expected="fail">
+<table role="grid" aria-label="Files">
+  <tr aria-level="1"><td>Reports</td></tr>
+</table>
+  </div>
+  <pre><code class="language-html">&lt;table role=&quot;grid&quot; aria-label=&quot;Files&quot;&gt;
+  &lt;tr aria-level=&quot;1&quot;&gt;&lt;td&gt;Reports&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article><article class="case" id="d5" aria-labelledby="d5-title">
+  <h3 id="d5-title"><span class="case-id">D5</span> aria-expanded on an ARIA grid row</h3>
+  <div class="example" data-case="d5" data-expected="fail">
+<div role="grid" aria-label="Orders">
+  <div role="row" aria-expanded="true">
+    <div role="gridcell">Order 1042</div>
+  </div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;grid&quot; aria-label=&quot;Orders&quot;&gt;
+  &lt;div role=&quot;row&quot; aria-expanded=&quot;true&quot;&gt;
+    &lt;div role=&quot;gridcell&quot;&gt;Order 1042&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article><article class="case" id="d6" aria-labelledby="d6-title">
+  <h3 id="d6-title"><span class="case-id">D6</span> aria-level on an ARIA table row</h3>
+  <div class="example" data-case="d6" data-expected="fail">
+<div role="table" aria-label="Contents">
+  <div role="row" aria-level="2">
+    <div role="cell">Introduction</div>
+  </div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;table&quot; aria-label=&quot;Contents&quot;&gt;
+  &lt;div role=&quot;row&quot; aria-level=&quot;2&quot;&gt;
+    &lt;div role=&quot;cell&quot;&gt;Introduction&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article><article class="case" id="d7" aria-labelledby="d7-title">
+  <h3 id="d7-title"><span class="case-id">D7</span> A table nested inside a treegrid</h3>
+  <p>The outer treegrid doesn't help. Axe looks at the nearest table, which is the inner one.</p>
+  <div class="example" data-case="d7" data-expected="fail">
+<div role="treegrid" aria-label="Projects">
+  <div role="row" aria-level="1">
+    <div role="gridcell">
+      <table>
+        <tr aria-level="2"><td>Budget</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;treegrid&quot; aria-label=&quot;Projects&quot;&gt;
+  &lt;div role=&quot;row&quot; aria-level=&quot;1&quot;&gt;
+    &lt;div role=&quot;gridcell&quot;&gt;
+      &lt;table&gt;
+        &lt;tr aria-level=&quot;2&quot;&gt;&lt;td&gt;Budget&lt;/td&gt;&lt;/tr&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="note">The outer row (inside the treegrid) passes. Only the inner one fails.</p>
+</article>
+<!-- section -->
+
+<h2 id="rows-pass">Rows that pass</h2>
+
+<p>Control cases.</p>
+<article class="case" id="e1" aria-labelledby="e1-title">
+  <h3 id="e1-title"><span class="case-id">E1</span> Row attributes in a treegrid</h3>
+  <div class="example" data-case="e1" data-expected="pass">
+<table role="treegrid" aria-label="Folders">
+  <tr aria-level="1" aria-expanded="false">
+    <td role="gridcell">Photos</td>
+  </tr>
+</table>
+  </div>
+  <pre><code class="language-html">&lt;table role=&quot;treegrid&quot; aria-label=&quot;Folders&quot;&gt;
+  &lt;tr aria-level=&quot;1&quot; aria-expanded=&quot;false&quot;&gt;
+    &lt;td role=&quot;gridcell&quot;&gt;Photos&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e2" aria-labelledby="e2-title">
+  <h3 id="e2-title"><span class="case-id">E2</span> Other row attributes in a plain table</h3>
+  <p><code>aria-selected</code> and <code>aria-rowindex</code> aren't on the list, so this rule doesn't care about them.</p>
+  <div class="example" data-case="e2" data-expected="pass">
+<table>
+  <tr aria-selected="true" aria-rowindex="1"><td>Invoice 7</td></tr>
+</table>
+  </div>
+  <pre><code class="language-html">&lt;table&gt;
+  &lt;tr aria-selected=&quot;true&quot; aria-rowindex=&quot;1&quot;&gt;&lt;td&gt;Invoice 7&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article>
+<!-- section -->
+
+<h2 id="other-rules">Flagged by a different rule instead</h2>
+
+<p>This rule doesn't flag these, but another one does.</p>
+<article class="case" id="f1" aria-labelledby="f1-title">
+  <h3 id="f1-title"><span class="case-id">F1</span> aria-checked=&quot;banana&quot; on an unticked checkbox</h3>
+  <p>This rule treats any unknown value as <code>false</code>, which happens to match.</p>
+  <div class="example" data-case="f1" data-expected="other" data-other="aria-valid-attr-value">
+<label><input type="checkbox" aria-checked="banana"> Fruit box</label>
+  </div>
+  <pre><code class="language-html">&lt;label&gt;&lt;input type=&quot;checkbox&quot; aria-checked=&quot;banana&quot;&gt; Fruit box&lt;/label&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-valid-attr-value</code> instead</span></p>
+</article><article class="case" id="f2" aria-labelledby="f2-title">
+  <h3 id="f2-title"><span class="case-id">F2</span> Empty aria-checked</h3>
+  <p>This rule ignores an empty value.</p>
+  <div class="example" data-case="f2" data-expected="other" data-other="aria-valid-attr-value">
+<label><input type="checkbox" checked aria-checked=""> Newsletter</label>
+  </div>
+  <pre><code class="language-html">&lt;label&gt;&lt;input type=&quot;checkbox&quot; checked aria-checked=&quot;&quot;&gt; Newsletter&lt;/label&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-valid-attr-value</code> instead</span></p>
+</article><article class="case" id="f3" aria-labelledby="f3-title">
+  <h3 id="f3-title"><span class="case-id">F3</span> aria-checked=&quot;TRUE&quot; on a ticked checkbox</h3>
+  <p>This rule ignores case, so it matches.</p>
+  <div class="example" data-case="f3" data-expected="other" data-other="aria-allowed-attr">
+<label><input type="checkbox" checked aria-checked="TRUE"> Terms</label>
+  </div>
+  <pre><code class="language-html">&lt;label&gt;&lt;input type=&quot;checkbox&quot; checked aria-checked=&quot;TRUE&quot;&gt; Terms&lt;/label&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-allowed-attr</code> instead</span></p>
+</article><article class="case" id="f4" aria-labelledby="f4-title">
+  <h3 id="f4-title"><span class="case-id">F4</span> A row with no table at all</h3>
+  <p>With no table, grid or treegrid around it, this rule has nothing to compare against.</p>
+  <div class="example" data-case="f4" data-expected="other" data-other="aria-required-parent">
+<div role="row" aria-level="1">
+  <div role="cell">Orphan row</div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;row&quot; aria-level=&quot;1&quot;&gt;
+  &lt;div role=&quot;cell&quot;&gt;Orphan row&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-required-parent</code> instead</span></p>
+</article><article class="case" id="f5" aria-labelledby="f5-title">
+  <h3 id="f5-title"><span class="case-id">F5</span> Row in a presentation table</h3>
+  <p><code>role="presentation"</code> removes the table semantics, so the row isn't a row any more.</p>
+  <div class="example" data-case="f5" data-expected="other" data-other="aria-allowed-attr">
+<table role="presentation">
+  <tr aria-level="1"><td>Layout cell</td></tr>
+</table>
+  </div>
+  <pre><code class="language-html">&lt;table role=&quot;presentation&quot;&gt;
+  &lt;tr aria-level=&quot;1&quot;&gt;&lt;td&gt;Layout cell&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-allowed-attr</code> instead</span></p>
+</article>
+<!-- section -->
+
+<h2 id="missed">Missed completely</h2>
+
+<p>Nothing in axe flags these.</p>
+<article class="case" id="g1" aria-labelledby="g1-title">
+  <h3 id="g1-title"><span class="case-id">G1</span> Native checkbox with role=&quot;switch&quot;</h3>
+  <p>The same mismatch as A1. But because the role is <code>switch</code>, not <code>checkbox</code>, this rule doesn't check it. Which state gets announced depends on the browser.</p>
+  <div class="example" data-case="g1" data-expected="miss">
+<label><input type="checkbox" role="switch" aria-checked="true"> Dark mode</label>
+  </div>
+  <pre><code class="language-html">&lt;label&gt;&lt;input type=&quot;checkbox&quot; role=&quot;switch&quot; aria-checked=&quot;true&quot;&gt; Dark mode&lt;/label&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+</article><article class="case" id="g2" aria-labelledby="g2-title">
+  <h3 id="g2-title"><span class="case-id">G2</span> aria-checked=&quot;mixed&quot; on a radio button</h3>
+  <p>Radios can't be mixed. The rule quietly treats <code>mixed</code> as <code>false</code>, which matches the unselected radio.</p>
+  <div class="example" data-case="g2" data-expected="miss">
+<fieldset>
+  <legend>Colour</legend>
+  <label><input type="radio" name="g2" aria-checked="mixed"> Red</label>
+  <label><input type="radio" name="g2"> Blue</label>
+</fieldset>
+  </div>
+  <pre><code class="language-html">&lt;fieldset&gt;
+  &lt;legend&gt;Colour&lt;/legend&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;g2&quot; aria-checked=&quot;mixed&quot;&gt; Red&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;g2&quot;&gt; Blue&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+</article>
+<!-- section -->
+
+<h2 id="dynamic">Changes after interaction</h2>
+
+<p>Axe only sees the page as it is when you run it. These pass on page load. Activate each button, then run axe again.</p>
+<article class="case" id="h1" aria-labelledby="h1-title">
+  <h3 id="h1-title"><span class="case-id">H1</span> Checkbox goes stale when ticked</h3>
+  <p><code>aria-checked="false"</code> matches on load. Tick the checkbox and the native state changes, but <code>aria-checked</code> doesn't. This is the best argument for never putting <code>aria-checked</code> on a native checkbox.</p>
+  <div class="example" data-case="h1" data-expected="dynamic">
+<label><input type="checkbox" id="h1-input" aria-checked="false"> Email me a receipt</label>
+  </div>
+  <pre><code class="language-html">&lt;label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;h1-input&quot; aria-checked=&quot;false&quot;&gt; Email me a receipt&lt;/label&gt;</code></pre>
+  <p class="result"><span class="badge dynamic">On load: pass. After ticking: fail</span></p>
+</article><article class="case" id="h2" aria-labelledby="h2-title">
+  <h3 id="h2-title"><span class="case-id">H2</span> Radio group goes stale</h3>
+  <p>Both radios match on load. Choose "Pick up" and both are now wrong: the first still says <code>true</code> and the second still says <code>false</code>.</p>
+  <div class="example" data-case="h2" data-expected="dynamic">
+<fieldset>
+  <legend>Collection</legend>
+  <label><input type="radio" name="h2" checked aria-checked="true"> Delivery</label>
+  <label><input type="radio" name="h2" id="h2-pickup" aria-checked="false"> Pick up</label>
+</fieldset>
+  </div>
+  <pre><code class="language-html">&lt;fieldset&gt;
+  &lt;legend&gt;Collection&lt;/legend&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;h2&quot; checked aria-checked=&quot;true&quot;&gt; Delivery&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;h2&quot; id=&quot;h2-pickup&quot; aria-checked=&quot;false&quot;&gt; Pick up&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+  <p class="result"><span class="badge dynamic">On load: pass. After choosing Pick up: fail</span></p>
+</article>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+<script>
+  // C3: native checkboxes can only be indeterminate through JavaScript
+  document.getElementById('c3-input').indeterminate = true;
+
+  // H1 and H2 need no script: the bug is that nothing updates aria-checked
+</script>
+</body>
+</html>

@@ -47,7 +47,9 @@ custom properties
 base
 ======================*/
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -64,6 +66,7 @@ select,
 textarea,
 button {
   font: inherit;
+  letter-spacing: inherit;
 }
 
 /* =====================
