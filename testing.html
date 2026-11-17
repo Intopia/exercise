@@ -10,6 +10,12 @@
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
   <style>
+h3 {
+  color: #000;
+  font-size: 1rem;
+  line-height: 1.1;
+}
+
 .badge-new {
   display: inline-block;
   font-size: .8em;
@@ -34,7 +40,7 @@
 
 <h1 style="margin-top: 1em;">Intopia testing examples</h1>
 
-<p class="page-meta">Updated: <time datetime="2026-11-15">15 November 2026</time> | Author: Russ Weakley</p>
+<p class="page-meta">Updated: <time datetime="2026-11-17">17 November 2026</time> | Author: Russ Weakley</p>
 
 <p>A series of pages that can be used to test or review specific aspects about HTML markup and accessibility features.</p>
 
@@ -59,12 +65,13 @@
 
 <h2>Resources: Intopia bookmarklets</h2>
 
-<p>Full list:</p>
+<h3>Full list:</h3>
+
 <ul>
   <li><a href="testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a></li>
 </ul>
 
-<p>Bookmarklets explained:</p>
+<h3>Bookmarklets explained:</h3>
 
 <ul>
   <li><a href="bookmarklets-01-page-structure.html">Page structure bookmarklets explained</a></li>
@@ -91,7 +98,8 @@
   <li><a href="accessibility-testing-with-playwright.html">Accessibility testing with Playwright</a></li>
 </ol>
 
-<p>Test pages:</p>
+<h3>Test pages:</h3>
+
 <ul>
   <li><a href="axe-core-test-page.html">axe test page - broken</a></li>
   <li><a href="axe-core-test-page-fixed.html">axe test page - fixed</a></li>
@@ -106,7 +114,8 @@
 
 <h2>Tests: Page title, language, encoding</h2>
 
-<p>Document title:</p>
+<h3>Document title:</h3>
+
 <ul>
   <li><a href="testing-title-correct.html">Testing document title - good example</a></li>
   <li><a href="testing-title-missing.html">Testing document title - missing example</a></li>
@@ -114,7 +123,7 @@
   <li><a href="testing-title-multiple.html">Testing document title - multiple example</a></li>
 </ul>
 
-<p>Page language:</p>
+<h3>Page language:</h3>
 
 <ul>
   <li><a href="testing-lang-good.html">Testing page language - good example</a></li>
@@ -122,7 +131,7 @@
   <li><a href="testing-lang-invalid.html">Testing page language - invalid example</a></li>
 </ul>
 
-<p>Character encoding:</p>
+<h3>Character encoding:</h3>
 
 <ul>
   <li><a href="testing-charset-correct.html">Testing character encoding - good example</a></li>
@@ -132,7 +141,7 @@
   <li><a href="testing-charset-conflicting.html">Testing character encoding - conflicting example</a></li>
 </ul>
 
-<p>Text style and box model:</p>
+<h3>Text style and box model:</h3>
 
 <ul>
   <li><a href="testing-text-styles.html">Testing text styles</a></li>
@@ -248,13 +257,34 @@
   <li><a href="reviewing-tabindex.html">Reviewing different <code>tabindex</code> methods</a></li>
   <li><a href="testing-back-to-top.html">Testing a "back to top" pattern</a></li>
   <li><a href="testing-focus-indication.html">Testing focus indication</a></li>
-  <li><a href="test-page-1-default.html">Focus test page 1 - browser default focus styles</a></li>
-  <li><a href="test-page-2-focus-visible.html">Focus test page 2 - <code>:focus-visible</code></a></li>
-  <li><a href="test-page-3-focus.html">Focus test page 3 - <code>:focus</code></a></li>
   <li><a href="testing-onsubmit-simple.html">Testing focus management onsubmit - form with two form fields</a></li>
   <li><a href="testing-onsubmit-complex.html">Testing focus management onsubmit - form with more than two form fields</a></li>
   <li><a href="testing-focus-management.html">Testing focus management - single page app</a></li>
   <li><a href="testing-aria-activedescendant.html">Testing <code>aria-activedescendant</code></a></li>
+</ul>
+
+<h3>Testing :focus vs :focus-visible</h3>
+
+<ul>
+  <li><a class="external" href="https://www.maxdesign.com.au/articles/testing-focus-focus-visible.html" target="_blank">Testing :focus vs :focus-visible</a></li>
+  <li><a href="test-page-1-default.html">Test page 1: browser defaults</a>
+    <ul>
+      <li><a href="results-browser-defaults-clicking.html">Clicking results for "Test page 1: browser defaults"</a></li>
+      <li><a href="results-browser-defaults-tabbing.html">Tabbing results for "Test page 1: browser defaults"</a></li>
+    </ul>
+  </li>
+  <li><a href="test-page-2-focus-visible.html">Test page 2: using :focus-visible</a>
+    <ul>
+      <li><a href="results-focus-visible-clicking.html">Clicking results for "Test page 2: focus-visible"</a></li>
+      <li><a href="results-focus-visible-tabbing.html">Tabbing results for "Test page 2: focus-visible"</a></li>
+    </ul>
+  </li>
+  <li><a href="test-page-3-focus.html">Test page 3: using :focus</a>
+    <ul>
+      <li><a href="results-focus-clicking.html">Clicking results for "Test page 3: focus"</a></li>
+      <li><a href="results-focus-tabbing.html">Tabbing results for "Test page 3: focus"</a></li>
+    </ul>
+  </li>
 </ul>
 
 
@@ -448,33 +478,11 @@
 <!-- section -->
 
 
-<h2>Testing :focus vs :focus-visible</h2>
+<h2>Testing axe-core rules</h2>
 
 <ul>
-
-  <li><a class="external" href="https://www.maxdesign.com.au/articles/testing-focus-focus-visible.html" target="_blank">Testing :focus vs :focus-visible</a></li>
-  <li><a href="test-page-1-default.html">Test page 1: browser defaults</a>
-    <ul>
-      <li><a href="results-browser-defaults-clicking.html">Clicking results for "Test page 1: browser defaults"</a></li>
-      <li><a href="results-browser-defaults-tabbing.html">Tabbing results for "Test page 1: browser defaults"</a></li>
-    </ul>
-  </li>
-  <li><a href="test-page-2-focus-visible.html">Test page 2: using :focus-visible</a>
-    <ul>
-      <li><a href="results-focus-visible-clicking.html">Clicking results for "Test page 2: focus-visible"</a></li>
-      <li><a href="results-focus-visible-tabbing.html">Tabbing results for "Test page 2: focus-visible"</a></li>
-    </ul>
-  </li>
-  <li><a href="test-page-3-focus.html">Test page 3: using :focus</a>
-    <ul>
-      <li><a href="results-focus-clicking.html">Clicking results for "Test page 3: focus"</a></li>
-      <li><a href="results-focus-tabbing.html">Tabbing results for "Test page 3: focus"</a></li>
-    </ul>
-  </li>
+  <li><a href="testing-aria-valid-attr-value.html" target="_blank">Testing <code>aria-valid-attr-value</code></a></li>
 </ul>
-
-
-<p><a href="testing-aria-valid-attr-value.html" target="_blank">Testing <code>aria-valid-attr-value</code></a></p>
 
 <p><a href="testing-xtemplate.html">Template</a></p>
 
