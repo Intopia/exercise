@@ -53,6 +53,13 @@ Global styles
   box-sizing: border-box;
 }
 
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
 body {
   margin: 0;
   padding: .5em;
@@ -417,7 +424,6 @@ Form classes
   width: 100%;
   padding: .5rem;             /* 8px */
   border: 1px solid var(--border-strong);
-  font: inherit;
   line-height: 1.25;          /* 20px */
 }
 
@@ -453,7 +459,6 @@ button {
   background: blue;           /* 8.59:1 */
   color: var(--colour-white);
   text-decoration: none;
-  font: inherit;
   line-height: 1;
   cursor: pointer;
 }

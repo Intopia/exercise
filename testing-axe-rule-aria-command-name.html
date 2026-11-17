@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the axe rule aria-command-name</title>
+  <meta name="description" content="Test cases for the axe-core rule aria-command-name, showing what axe catches and what it misses.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <style>
+  .case { border: 1px solid #c8c8cc; border-radius: 6px; padding: 1rem 1.25rem; margin: 1.25rem 0; }
+  .case h3 { margin-top: 0; }
+  .case-id { display: inline-block; font-size: .8rem; font-weight: 700; background: #1d1d1f; color: #fff; padding: .1rem .45rem; border-radius: 3px; margin-right: .4rem; vertical-align: middle; }
+  .example { border: 1px dashed #a0a0a8; padding: .75rem 1rem; margin: .75rem 0; }
+  .example p { margin: .25rem 0; }
+  .badge { display: inline-block; font-weight: 600; font-size: .875rem; padding: .2rem .6rem; border-radius: 3px; border: 2px solid; }
+  .badge.fail { background: #fde8e8; border-color: #b3261e; color: #8a1c16; }
+  .badge.review { background: #fff4d6; border-color: #8a6100; color: #5e4200; }
+  .badge.other { background: #e0f4f4; border-color: #0b6b6b; color: #084f4f; }
+  .badge.miss { background: #ece6fb; border-color: #5b3cc4; color: #432a99; }
+  .badge.pass { background: #e3f4e8; border-color: #1e7b3a; color: #155c2b; }
+  .badge.dynamic { background: #e8eef9; border-color: #1a4f9c; color: #133b75; }
+  .note { font-size: .9375rem; }
+</style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo. The word 'intopia' in black, with the 'o' made from four curved brush strokes in pink, orange, yellow and turquoise." class="intopia-logo">
+  </picture>
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing the axe rule <code>aria-command-name</code></h1>
+
+<p>Test cases for the axe-core rule <a href="https://dequeuniversity.com/rules/axe/4.14/aria-command-name"><code>aria-command-name</code></a> (axe-core 4.14). The rule checks that elements with <code>role="button"</code>, <code>role="link"</code> or <code>role="menuitem"</code> have an accessible name.</p>
+
+<p>The element passes if <strong>any one</strong> of these checks passes:</p>
+
+<ul>
+  <li><code>has-visible-text</code>: it has text content that is exposed to screen readers. Despite the name, visually hidden text counts.</li>
+  <li><code>aria-label</code>: it has a non-empty <code>aria-label</code>.</li>
+  <li><code>aria-labelledby</code>: it points to an element that has text.</li>
+  <li><code>non-empty-title</code>: it has a non-empty <code>title</code>.</li>
+</ul>
+
+<p>Native elements like <code>&lt;button&gt;</code> and <code>&lt;a href&gt;</code> are left to other rules (<code>button-name</code> and <code>link-name</code>), even when they have one of these roles.</p>
+
+<p>Every example is live in the page, so you can run the axe extension straight over it. The expected results were checked by running axe-core 4.14.1 over this page. Look in both the axe <strong>issues</strong> list and the <strong>needs review</strong> list.</p>
+
+<table>
+  <caption>Number of test cases by expected result</caption>
+  <thead><tr><th scope="col">Expected result</th><th scope="col">Cases</th></tr></thead>
+  <tbody>
+      <tr><td>Fail</td><td>16</td></tr>
+      <tr><td>Flagged by a different rule instead</td><td>5</td></tr>
+      <tr><td>Passes, but broken (axe misses it)</td><td>7</td></tr>
+      <tr><td>Pass (valid control cases)</td><td>9</td></tr>
+      <tr><td>Changes after interaction</td><td>2</td></tr>
+  </tbody>
+</table>
+
+<h2 id="sections">Sections</h2>
+
+<ul>
+  <li><a href="#no-name">No accessible name</a></li>
+  <li><a href="#names">Ways to give a name</a></li>
+  <li><a href="#not-tested">Not tested at all</a></li>
+  <li><a href="#other-rules">Flagged by a different rule instead</a></li>
+  <li><a href="#bad-names">Has a name, but it&#x27;s no good</a></li>
+  <li><a href="#dynamic">Changes after interaction</a></li>
+</ul>
+
+<!-- section -->
+
+<h2 id="no-name">No accessible name</h2>
+
+<p>These all fail. Each one is announced as just "button", "link" or "menu item".</p>
+<article class="case" id="a1" aria-labelledby="a1-title">
+  <h3 id="a1-title"><span class="case-id">A1</span> Empty element</h3>
+  <div class="example" data-case="a1" data-expected="fail">
+<div role="button" tabindex="0"></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button&quot; tabindex=&quot;0&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article><article class="case" id="a2" aria-labelledby="a2-title">
+  <h3 id="a2-title"><span class="case-id">A2</span> Empty aria-label</h3>
+  <div class="example" data-case="a2" data-expected="fail">
+<div role="button" tabindex="0" aria-label=""></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button&quot; tabindex=&quot;0&quot; aria-label=&quot;&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article><article class="case" id="a3" aria-labelledby="a3-title">
+  <h3 id="a3-title"><span class="case-id">A3</span> aria-label with only spaces</h3>
+  <div class="example" data-case="a3" data-expected="fail">
+<div role="button" tabindex="0" aria-label="   "></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button&quot; tabindex=&quot;0&quot; aria-label=&quot;   &quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article><article class="case" id="a4" aria-labelledby="a4-title">
+  <h3 id="a4-title"><span class="case-id">A4</span> Only a non-breaking space</h3>
+  <div class="example" data-case="a4" data-expected="fail">
+<div role="button" tabindex="0">&nbsp;</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button&quot; tabindex=&quot;0&quot;&gt;&amp;nbsp;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article><article class="case" id="a5" aria-labelledby="a5-title">
+  <h3 id="a5-title"><span class="case-id">A5</span> Only an aria-hidden icon</h3>
+  <p>The visible "X" is hidden from screen readers, so nothing is left.</p>
+  <div class="example" data-case="a5" data-expected="fail">
+<div role="button" tabindex="0"><span aria-hidden="true">X</span></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button&quot; tabindex=&quot;0&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;X&lt;/span&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article><article class="case" id="a6" aria-labelledby="a6-title">
+  <h3 id="a6-title"><span class="case-id">A6</span> Only an aria-hidden SVG</h3>
+  <div class="example" data-case="a6" data-expected="fail">
+<div role="button" tabindex="0">
+  <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3 L13 13 M13 3 L3 13" stroke="currentColor" stroke-width="2"/></svg>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button&quot; tabindex=&quot;0&quot;&gt;
+  &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M3 3 L13 13 M13 3 L3 13&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;/&gt;&lt;/svg&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article><article class="case" id="a7" aria-labelledby="a7-title">
+  <h3 id="a7-title"><span class="case-id">A7</span> Only an image with empty alt</h3>
+  <p>The image is marked as decorative, so it adds nothing to the name.</p>
+  <div class="example" data-case="a7" data-expected="fail">
+<div role="button" tabindex="0">
+  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" width="16" height="16">
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button&quot; tabindex=&quot;0&quot;&gt;
+  &lt;img src=&quot;data:image/gif;base64,R0lGODlhAQABAAAAACw=&quot; alt=&quot;&quot; width=&quot;16&quot; height=&quot;16&quot;&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article><article class="case" id="a8" aria-labelledby="a8-title">
+  <h3 id="a8-title"><span class="case-id">A8</span> Text hidden with visibility: hidden</h3>
+  <p>Hidden from everyone, so it isn't part of the name.</p>
+  <div class="example" data-case="a8" data-expected="fail">
+<div role="button" tabindex="0"><span style="visibility: hidden;">Save</span></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button&quot; tabindex=&quot;0&quot;&gt;&lt;span style=&quot;visibility: hidden;&quot;&gt;Save&lt;/span&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article><article class="case" id="a9" aria-labelledby="a9-title">
+  <h3 id="a9-title"><span class="case-id">A9</span> Text hidden with display: none</h3>
+  <div class="example" data-case="a9" data-expected="fail">
+<div role="button" tabindex="0"><span style="display: none;">Save</span></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button&quot; tabindex=&quot;0&quot;&gt;&lt;span style=&quot;display: none;&quot;&gt;Save&lt;/span&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article><article class="case" id="a10" aria-labelledby="a10-title">
+  <h3 id="a10-title"><span class="case-id">A10</span> aria-labelledby points to a missing ID</h3>
+  <p>On the <code>aria-valid-attr-value</code> page, a missing <code>aria-labelledby</code> ID was only needs review. Here it's a straight fail, because the element ends up with no name.</p>
+  <div class="example" data-case="a10" data-expected="fail">
+<div role="menu" aria-label="File">
+  <div role="menuitem" tabindex="-1" aria-labelledby="a10-label"></div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;menu&quot; aria-label=&quot;File&quot;&gt;
+  &lt;div role=&quot;menuitem&quot; tabindex=&quot;-1&quot; aria-labelledby=&quot;a10-label&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article><article class="case" id="a11" aria-labelledby="a11-title">
+  <h3 id="a11-title"><span class="case-id">A11</span> aria-labelledby points to an empty element</h3>
+  <div class="example" data-case="a11" data-expected="fail">
+<span id="a11-label"></span>
+<div role="link" tabindex="0" aria-labelledby="a11-label"></div>
+  </div>
+  <pre><code class="language-html">&lt;span id=&quot;a11-label&quot;&gt;&lt;/span&gt;
+&lt;div role=&quot;link&quot; tabindex=&quot;0&quot; aria-labelledby=&quot;a11-label&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article><article class="case" id="a12" aria-labelledby="a12-title">
+  <h3 id="a12-title"><span class="case-id">A12</span> aria-labelledby points to aria-hidden text</h3>
+  <p>The referenced element exists, but its only text is hidden from screen readers.</p>
+  <div class="example" data-case="a12" data-expected="fail">
+<span id="a12-label"><span aria-hidden="true">Edit</span></span>
+<div role="button" tabindex="0" aria-labelledby="a12-label"></div>
+  </div>
+  <pre><code class="language-html">&lt;span id=&quot;a12-label&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;Edit&lt;/span&gt;&lt;/span&gt;
+&lt;div role=&quot;button&quot; tabindex=&quot;0&quot; aria-labelledby=&quot;a12-label&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article><article class="case" id="a13" aria-labelledby="a13-title">
+  <h3 id="a13-title"><span class="case-id">A13</span> Only aria-describedby</h3>
+  <p>A description isn't a name.</p>
+  <div class="example" data-case="a13" data-expected="fail">
+<div role="link" tabindex="0" aria-describedby="a13-desc"></div>
+<span id="a13-desc">Opens the help centre</span>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;link&quot; tabindex=&quot;0&quot; aria-describedby=&quot;a13-desc&quot;&gt;&lt;/div&gt;
+&lt;span id=&quot;a13-desc&quot;&gt;Opens the help centre&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article><article class="case" id="a14" aria-labelledby="a14-title">
+  <h3 id="a14-title"><span class="case-id">A14</span> Only aria-description</h3>
+  <p>Same again, using <code>aria-description</code>.</p>
+  <div class="example" data-case="a14" data-expected="fail">
+<div role="button" tabindex="0" aria-description="Delete this item"></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button&quot; tabindex=&quot;0&quot; aria-description=&quot;Delete this item&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article><article class="case" id="a15" aria-labelledby="a15-title">
+  <h3 id="a15-title"><span class="case-id">A15</span> An a element without href</h3>
+  <p>Without <code>href</code>, an <code>&lt;a&gt;</code> isn't a link, so it falls to this rule rather than <code>link-name</code>.</p>
+  <div class="example" data-case="a15" data-expected="fail">
+<a role="button" tabindex="0"></a>
+  </div>
+  <pre><code class="language-html">&lt;a role=&quot;button&quot; tabindex=&quot;0&quot;&gt;&lt;/a&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article><article class="case" id="a16" aria-labelledby="a16-title">
+  <h3 id="a16-title"><span class="case-id">A16</span> Empty menu item</h3>
+  <div class="example" data-case="a16" data-expected="fail">
+<div role="menu" aria-label="Edit">
+  <div role="menuitem" tabindex="-1"></div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;menu&quot; aria-label=&quot;Edit&quot;&gt;
+  &lt;div role=&quot;menuitem&quot; tabindex=&quot;-1&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+</article>
+<!-- section -->
+
+<h2 id="names">Ways to give a name</h2>
+
+<p>Control cases. All of these pass.</p>
+<article class="case" id="b1" aria-labelledby="b1-title">
+  <h3 id="b1-title"><span class="case-id">B1</span> Text content</h3>
+  <div class="example" data-case="b1" data-expected="pass">
+<div role="button" tabindex="0">Save</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button&quot; tabindex=&quot;0&quot;&gt;Save&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="b2" aria-labelledby="b2-title">
+  <h3 id="b2-title"><span class="case-id">B2</span> aria-label</h3>
+  <div class="example" data-case="b2" data-expected="pass">
+<div role="button" tabindex="0" aria-label="Close">
+  <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3 L13 13 M13 3 L3 13" stroke="currentColor" stroke-width="2"/></svg>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button&quot; tabindex=&quot;0&quot; aria-label=&quot;Close&quot;&gt;
+  &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M3 3 L13 13 M13 3 L3 13&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;/&gt;&lt;/svg&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="b3" aria-labelledby="b3-title">
+  <h3 id="b3-title"><span class="case-id">B3</span> Visually hidden text</h3>
+  <p>The text is hidden visually, but screen readers still get it. This is why the check called <code>has-visible-text</code> is a bit misleading.</p>
+  <div class="example" data-case="b3" data-expected="pass">
+<div role="button" tabindex="0">
+  <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3 L13 13 M13 3 L3 13" stroke="currentColor" stroke-width="2"/></svg>
+  <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;">Close</span>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button&quot; tabindex=&quot;0&quot;&gt;
+  &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M3 3 L13 13 M13 3 L3 13&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;/&gt;&lt;/svg&gt;
+  &lt;span style=&quot;position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;&quot;&gt;Close&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="b4" aria-labelledby="b4-title">
+  <h3 id="b4-title"><span class="case-id">B4</span> Image with alt text</h3>
+  <div class="example" data-case="b4" data-expected="pass">
+<div role="button" tabindex="0">
+  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Print" width="16" height="16">
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button&quot; tabindex=&quot;0&quot;&gt;
+  &lt;img src=&quot;data:image/gif;base64,R0lGODlhAQABAAAAACw=&quot; alt=&quot;Print&quot; width=&quot;16&quot; height=&quot;16&quot;&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="b5" aria-labelledby="b5-title">
+  <h3 id="b5-title"><span class="case-id">B5</span> SVG with a title</h3>
+  <div class="example" data-case="b5" data-expected="pass">
+<div role="button" tabindex="0">
+  <svg width="16" height="16" viewBox="0 0 16 16"><title>Close</title><path d="M3 3 L13 13 M13 3 L3 13" stroke="currentColor" stroke-width="2"/></svg>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button&quot; tabindex=&quot;0&quot;&gt;
+  &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot;&gt;&lt;title&gt;Close&lt;/title&gt;&lt;path d=&quot;M3 3 L13 13 M13 3 L3 13&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;/&gt;&lt;/svg&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="b6" aria-labelledby="b6-title">
+  <h3 id="b6-title"><span class="case-id">B6</span> Child with role=&quot;img&quot; and aria-label</h3>
+  <div class="example" data-case="b6" data-expected="pass">
+<div role="button" tabindex="0">
+  <span role="img" aria-label="Close">X</span>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button&quot; tabindex=&quot;0&quot;&gt;
+  &lt;span role=&quot;img&quot; aria-label=&quot;Close&quot;&gt;X&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="b7" aria-labelledby="b7-title">
+  <h3 id="b7-title"><span class="case-id">B7</span> aria-labelledby with one empty and one good ID</h3>
+  <p>Only one of the referenced elements needs text.</p>
+  <div class="example" data-case="b7" data-expected="pass">
+<span id="b7-icon"></span>
+<span id="b7-text">Share</span>
+<div role="button" tabindex="0" aria-labelledby="b7-icon b7-text"></div>
+  </div>
+  <pre><code class="language-html">&lt;span id=&quot;b7-icon&quot;&gt;&lt;/span&gt;
+&lt;span id=&quot;b7-text&quot;&gt;Share&lt;/span&gt;
+&lt;div role=&quot;button&quot; tabindex=&quot;0&quot; aria-labelledby=&quot;b7-icon b7-text&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="b8" aria-labelledby="b8-title">
+  <h3 id="b8-title"><span class="case-id">B8</span> aria-labelledby pointing to hidden text</h3>
+  <p>Hidden text <em>can</em> be used as a name through <code>aria-labelledby</code>. That's part of the naming rules, not an axe quirk.</p>
+  <div class="example" data-case="b8" data-expected="pass">
+<span id="b8-label" hidden>Delete item</span>
+<div role="button" tabindex="0" aria-labelledby="b8-label"></div>
+  </div>
+  <pre><code class="language-html">&lt;span id=&quot;b8-label&quot; hidden&gt;Delete item&lt;/span&gt;
+&lt;div role=&quot;button&quot; tabindex=&quot;0&quot; aria-labelledby=&quot;b8-label&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="b9" aria-labelledby="b9-title">
+  <h3 id="b9-title"><span class="case-id">B9</span> Only a title</h3>
+  <p>Passes, but the <code>title</code> tooltip isn't available to touch or keyboard users, so it's a weak choice.</p>
+  <div class="example" data-case="b9" data-expected="pass">
+<div role="button" tabindex="0" title="Refresh"></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button&quot; tabindex=&quot;0&quot; title=&quot;Refresh&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article>
+<!-- section -->
+
+<h2 id="not-tested">Not tested at all</h2>
+
+<p>The rule only looks for an exact <code>role="button"</code>, <code>role="link"</code> or <code>role="menuitem"</code>. Anything else slips past, and no other axe rule picks these up.</p>
+<article class="case" id="c1" aria-labelledby="c1-title">
+  <h3 id="c1-title"><span class="case-id">C1</span> Uppercase role</h3>
+  <p>Browsers generally treat this as a button, but axe's selector doesn't match it.</p>
+  <div class="example" data-case="c1" data-expected="miss">
+<div role="Button" tabindex="0"></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;Button&quot; tabindex=&quot;0&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+</article><article class="case" id="c2" aria-labelledby="c2-title">
+  <h3 id="c2-title"><span class="case-id">C2</span> Trailing space in the role</h3>
+  <div class="example" data-case="c2" data-expected="miss">
+<div role="button " tabindex="0"></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button &quot; tabindex=&quot;0&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+</article><article class="case" id="c3" aria-labelledby="c3-title">
+  <h3 id="c3-title"><span class="case-id">C3</span> Fallback role list</h3>
+  <p>Browsers use the first role they recognise, which is <code>button</code>.</p>
+  <div class="example" data-case="c3" data-expected="miss">
+<div role="button link" tabindex="0"></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button link&quot; tabindex=&quot;0&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+</article>
+<!-- section -->
+
+<h2 id="other-rules">Flagged by a different rule instead</h2>
+
+<p>This rule doesn't flag these, but another one does. Worth knowing when you're reading a report.</p>
+<article class="case" id="d1" aria-labelledby="d1-title">
+  <h3 id="d1-title"><span class="case-id">D1</span> Empty link with role=&quot;button&quot;</h3>
+  <p>An <code>&lt;a href&gt;</code> is handled by <code>link-name</code>, even though it says it's a button.</p>
+  <div class="example" data-case="d1" data-expected="other" data-other="link-name">
+<a href="#d1" role="button"></a>
+  </div>
+  <pre><code class="language-html">&lt;a href=&quot;#d1&quot; role=&quot;button&quot;&gt;&lt;/a&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>link-name</code> instead</span></p>
+</article><article class="case" id="d2" aria-labelledby="d2-title">
+  <h3 id="d2-title"><span class="case-id">D2</span> Empty native button with role=&quot;menuitem&quot;</h3>
+  <p>A <code>&lt;button&gt;</code> is handled by <code>button-name</code>.</p>
+  <div class="example" data-case="d2" data-expected="other" data-other="button-name">
+<div role="menu" aria-label="View">
+  <button type="button" role="menuitem"></button>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;menu&quot; aria-label=&quot;View&quot;&gt;
+  &lt;button type=&quot;button&quot; role=&quot;menuitem&quot;&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>button-name</code> instead</span></p>
+</article><article class="case" id="d3" aria-labelledby="d3-title">
+  <h3 id="d3-title"><span class="case-id">D3</span> Empty menuitemcheckbox</h3>
+  <p><code>menuitemcheckbox</code> and <code>menuitemradio</code> aren't covered by this rule.</p>
+  <div class="example" data-case="d3" data-expected="other" data-other="aria-toggle-field-name">
+<div role="menu" aria-label="Format">
+  <div role="menuitemcheckbox" tabindex="-1" aria-checked="false"></div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;menu&quot; aria-label=&quot;Format&quot;&gt;
+  &lt;div role=&quot;menuitemcheckbox&quot; tabindex=&quot;-1&quot; aria-checked=&quot;false&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-toggle-field-name</code> instead</span></p>
+</article><article class="case" id="d4" aria-labelledby="d4-title">
+  <h3 id="d4-title"><span class="case-id">D4</span> Focusable button hidden with aria-hidden</h3>
+  <p>Axe skips <code>aria-hidden</code> elements, so this rule never sees it. But you can still tab to it.</p>
+  <div class="example" data-case="d4" data-expected="other" data-other="aria-hidden-focus">
+<div role="button" tabindex="0" aria-hidden="true"></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button&quot; tabindex=&quot;0&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-hidden-focus</code> instead</span></p>
+</article><article class="case" id="d5" aria-labelledby="d5-title">
+  <h3 id="d5-title"><span class="case-id">D5</span> Name doesn&#x27;t match the visible text</h3>
+  <p>It has a name, so this rule passes. But a voice control user saying "click Send" won't hit it.</p>
+  <div class="example" data-case="d5" data-expected="other" data-other="label-content-name-mismatch">
+<div role="button" tabindex="0" aria-label="Submit">Send</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button&quot; tabindex=&quot;0&quot; aria-label=&quot;Submit&quot;&gt;Send&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>label-content-name-mismatch</code> instead</span></p>
+</article>
+<!-- section -->
+
+<h2 id="bad-names">Has a name, but it&#x27;s no good</h2>
+
+<p>This rule only checks that a name <em>exists</em>, not that it makes sense. Nothing in axe flags these.</p>
+<article class="case" id="e1" aria-labelledby="e1-title">
+  <h3 id="e1-title"><span class="case-id">E1</span> A symbol as the name</h3>
+  <p>Screen readers will say "times" or "multiplication sign".</p>
+  <div class="example" data-case="e1" data-expected="miss">
+<div role="button" tabindex="0">×</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button&quot; tabindex=&quot;0&quot;&gt;×&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+</article><article class="case" id="e2" aria-labelledby="e2-title">
+  <h3 id="e2-title"><span class="case-id">E2</span> aria-label=&quot;button&quot;</h3>
+  <p>An icon button announced as "button, button".</p>
+  <div class="example" data-case="e2" data-expected="miss">
+<div role="button" tabindex="0" aria-label="button">
+  <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3 L13 13 M13 3 L3 13" stroke="currentColor" stroke-width="2"/></svg>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button&quot; tabindex=&quot;0&quot; aria-label=&quot;button&quot;&gt;
+  &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M3 3 L13 13 M13 3 L3 13&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;/&gt;&lt;/svg&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+</article><article class="case" id="e3" aria-labelledby="e3-title">
+  <h3 id="e3-title"><span class="case-id">E3</span> Vague link text</h3>
+  <div class="example" data-case="e3" data-expected="miss">
+<div role="link" tabindex="0">Click here</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;link&quot; tabindex=&quot;0&quot;&gt;Click here&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+</article><article class="case" id="e4" aria-labelledby="e4-title">
+  <h3 id="e4-title"><span class="case-id">E4</span> Not keyboard accessible</h3>
+  <p>The name is fine, but without <code>tabindex</code> you can't tab to it.</p>
+  <div class="example" data-case="e4" data-expected="miss">
+<div role="link">Read more</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;link&quot;&gt;Read more&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+</article>
+<!-- section -->
+
+<h2 id="dynamic">Changes after interaction</h2>
+
+<p>Axe only sees the page as it is when you run it. These pass on page load. Activate each button, then run axe again.</p>
+<article class="case" id="f1" aria-labelledby="f1-title">
+  <h3 id="f1-title"><span class="case-id">F1</span> Play button loses its name</h3>
+  <p>When pressed, the script is meant to change the label to "Pause", but it sets it to an empty string.</p>
+  <div class="example" data-case="f1" data-expected="dynamic">
+<div role="button" tabindex="0" id="f1-button" aria-label="Play">
+  <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2 L13 8 L4 14 Z" fill="currentColor"/></svg>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button&quot; tabindex=&quot;0&quot; id=&quot;f1-button&quot; aria-label=&quot;Play&quot;&gt;
+  &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M4 2 L13 8 L4 14 Z&quot; fill=&quot;currentColor&quot;/&gt;&lt;/svg&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge dynamic">On load: pass. After pressing: fail</span></p>
+</article><article class="case" id="f2" aria-labelledby="f2-title">
+  <h3 id="f2-title"><span class="case-id">F2</span> Menu with an empty item, hidden until opened</h3>
+  <p>Axe doesn't test hidden content. The empty menu item is only found once the menu is open.</p>
+  <div class="example" data-case="f2" data-expected="dynamic">
+<button type="button" id="f2-button" aria-expanded="false" aria-controls="f2-menu">Options</button>
+<div role="menu" id="f2-menu" aria-label="Options" hidden>
+  <div role="menuitem" tabindex="-1">Rename</div>
+  <div role="menuitem" tabindex="-1"></div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; id=&quot;f2-button&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;f2-menu&quot;&gt;Options&lt;/button&gt;
+&lt;div role=&quot;menu&quot; id=&quot;f2-menu&quot; aria-label=&quot;Options&quot; hidden&gt;
+  &lt;div role=&quot;menuitem&quot; tabindex=&quot;-1&quot;&gt;Rename&lt;/div&gt;
+  &lt;div role=&quot;menuitem&quot; tabindex=&quot;-1&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge dynamic">On load: pass. After opening: fail</span></p>
+</article>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+<script>
+  // F1: play/pause button (bug: should set aria-label to "Pause")
+  document.getElementById('f1-button').addEventListener('click', function () {
+    this.setAttribute('aria-label', '');
+  });
+
+  // F2: show or hide the menu
+  document.getElementById('f2-button').addEventListener('click', function () {
+    var menu = document.getElementById('f2-menu');
+    var open = this.getAttribute('aria-expanded') === 'true';
+    this.setAttribute('aria-expanded', open ? 'false' : 'true');
+    menu.hidden = open;
+  });
+</script>
+</body>
+</html>
