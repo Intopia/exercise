@@ -965,7 +965,7 @@ Error: Help &gt; Contact support &gt; Email: should have aria-invalid="true"</co
 
 <ul>
   <li><strong>Check that your tests can detect failures.</strong> A passing test doesn't necessarily mean it's working correctly. Test it against a known accessibility issue to confirm that it identifies the problem.</li>
-  <li><strong>Accessibility tree information.</strong> Playwright's HTML reports can include a snapshot of the accessibility tree, showing elements by their roles and accessible names. This can help identify problems such as buttons without accessible names.</li>
+  <li><strong>Accessibility tree information.</strong> When a test fails, the HTML report includes an &ldquo;error-context&rdquo; attachment, at the bottom of the failed test&rsquo;s page. It contains a snapshot of the page&rsquo;s accessibility tree at the moment of failure, showing elements by their roles and accessible names. This can help you spot problems such as buttons without accessible names. The same file is also saved in your project&rsquo;s <code>test-results</code> folder.</li>
   <li><strong>Investigating failures.</strong> When trace recording is enabled, Playwright's trace viewer lets you examine what happened during a test, including actions, page snapshots and errors. This is particularly useful when investigating failures from automated builds.</li>
 </ul>
 

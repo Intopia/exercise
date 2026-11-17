@@ -26,7 +26,7 @@
 
 <h1>axe-core code samples for the browser console</h1>
 
-<p>Copy and paste these samples into the browser console, in order, on the page you want to test. Samples 1 to 3 set things up. Samples 4 to 10 explore the results. Sample 11 combines loading and reporting into one snippet.</p>
+<p>Copy and paste these samples into the browser console, in order, on the page you want to test. Samples 1 to 3 set things up. Samples 4 to 10 explore the results. Sample 11 combines loading and reporting into one snippet, and sample 12 downloads a full HTML report.</p>
 
 
 <!-- section -->
@@ -258,6 +258,96 @@ console.table(
 </ol>
 
 <p>Snippets are saved in your browser, so they're still there next time you open DevTools, on any page.</p>
+
+
+<!-- section -->
+
+
+<h2 id="sample-12">12. Download a full HTML report</h2>
+
+<p>Everything in one copy and paste: load axe-core if it isn't already on the page, run it, then download the results as an HTML file called <code>axe-report.html</code>. It's safe to paste more than once.</p>
+
+<p>This snippet:</p>
+
+<ul>
+  <li>Loads axe-core if it isn't already on the page</li>
+  <li>Runs axe on the page</li>
+  <li>Makes text safe to put inside HTML</li>
+  <li>Builds one section for fails and one for needs review</li>
+  <li>Puts the whole report page together</li>
+  <li>Downloads it as a file</li>
+</ul>
+
+<pre><code class="language-javascript">(async () =&gt; {
+  // 0. Load axe-core if it isn't already on the page
+  if (!window.axe) {
+    await new Promise((resolve, reject) =&gt; {
+      const s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/axe-core@4.14.0/axe.min.js';
+      s.onload = resolve;
+      s.onerror = () =&gt; reject(new Error('Could not load axe-core. The site may block outside scripts.'));
+      document.head.appendChild(s);
+    });
+  }
+
+  // 1. Run axe on the page
+  const r = await axe.run();
+
+  // 2. Make text safe to put inside HTML
+  const esc = (s) =&gt; String(s ?? '').replace(/[&amp;&lt;&gt;"]/g, (c) =&gt;
+    ({ '&amp;': '&amp;amp;', '&lt;': '&amp;lt;', '&gt;': '&amp;gt;', '"': '&amp;quot;' }[c]));
+
+  // 3. Build one section (fails or needs review)
+  const section = (title, rules) =&gt; {
+    const count = rules.reduce((n, rule) =&gt; n + rule.nodes.length, 0);
+    let out = `&lt;h2&gt;${title} (${count})&lt;/h2&gt;`;
+    if (!rules.length) return out + '&lt;p&gt;None.&lt;/p&gt;';
+    for (const rule of rules) {
+      out += `&lt;h3&gt;${esc(rule.id)}: ${esc(rule.help)} (${rule.nodes.length})&lt;/h3&gt;
+        &lt;p&gt;Impact: ${esc(rule.impact)}. &lt;a href="${esc(rule.helpUrl)}"&gt;Rule details on Deque University&lt;/a&gt;&lt;/p&gt;
+        &lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;#&lt;/th&gt;&lt;th scope="col"&gt;Element&lt;/th&gt;&lt;th scope="col"&gt;Selector&lt;/th&gt;&lt;th scope="col"&gt;Problem&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;`;
+      rule.nodes.forEach((n, i) =&gt; {
+        const msgs = [...n.any, ...n.all, ...n.none].map((c) =&gt; esc(c.message)).join('&lt;br&gt;');
+        out += `&lt;tr&gt;&lt;td&gt;${i + 1}&lt;/td&gt;&lt;td&gt;&lt;code&gt;${esc(n.html)}&lt;/code&gt;&lt;/td&gt;&lt;td&gt;&lt;code&gt;${esc(n.target.join(' '))}&lt;/code&gt;&lt;/td&gt;&lt;td&gt;${msgs}&lt;/td&gt;&lt;/tr&gt;`;
+      });
+      out += '&lt;/tbody&gt;&lt;/table&gt;';
+    }
+    return out;
+  };
+
+  // 4. Put the whole page together
+  const html = `&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt;&lt;meta charset="utf-8"&gt;
+&lt;title&gt;axe report: ${esc(document.title)}&lt;/title&gt;
+&lt;style&gt;
+  body { font-family: system-ui, sans-serif; line-height: 1.5; margin: 2rem; color: #1d1d1f; }
+  table { border-collapse: collapse; width: 100%; margin-bottom: 2rem; }
+  th, td { border: 1px solid #ccc; padding: .4rem .6rem; text-align: left; vertical-align: top; }
+  th { background: #f2f2f2; }
+  code { font-size: .85rem; word-break: break-word; }
+  h2 { border-top: 3px solid #1d1d1f; padding-top: 1rem; margin-top: 2.5rem; }
+&lt;/style&gt;&lt;/head&gt;&lt;body&gt;
+&lt;h1&gt;axe report&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;Page: &lt;a href="${esc(r.url)}"&gt;${esc(document.title)}&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Run: ${new Date(r.timestamp).toLocaleString()}&lt;/li&gt;
+  &lt;li&gt;axe-core ${esc(r.testEngine.version)}&lt;/li&gt;
+  &lt;li&gt;Rules passed: ${r.passes.length}. Rules not applicable: ${r.inapplicable.length}.&lt;/li&gt;
+&lt;/ul&gt;
+${section('Fails', r.violations)}
+${section('Needs review', r.incomplete)}
+&lt;/body&gt;&lt;/html&gt;`;
+
+  // 5. Download it as a file
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+  a.download = 'axe-report.html';
+  a.click();
+})();</code></pre>
+
+<p>Expected result: The console prints a <code>Promise</code>, then the browser downloads <code>axe-report.html</code>. The report lists every failed and needs review rule, with a table of the elements and the exact problem for each. If axe-core can't load, you'll see the error <code>Could not load axe-core. The site may block outside scripts.</code></p>
+
+
+
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 </main>
