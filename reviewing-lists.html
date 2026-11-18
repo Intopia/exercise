@@ -41,6 +41,17 @@
 
 <h1>Reviewing lists</h1>
 
+<div class="note">
+  <h2 class="h3">All three list types have the same role</h2>
+  <p>In the HTML Accessibility API Mappings spec, <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code> and <code>&lt;dl&gt;</code> all map to the <code>list</code> role:</p>
+  <ul>
+    <li><a href="https://www.w3.org/TR/html-aam-1.0/#el-ul" class="external"><code>ul</code> in HTML-AAM<span class="sr-only"> (external site)</span></a></li>
+    <li><a href="https://www.w3.org/TR/html-aam-1.0/#el-ol" class="external"><code>ol</code> in HTML-AAM<span class="sr-only"> (external site)</span></a></li>
+    <li><a href="https://www.w3.org/TR/html-aam-1.0/#el-dl" class="external"><code>dl</code> in HTML-AAM<span class="sr-only"> (external site)</span></a></li>
+  </ul>
+  <p>So the type of list changes the markers and the presentation, not the role. Each <code>&lt;li&gt;</code> is a <code>listitem</code>, and in a description list each <code>&lt;dt&gt;</code> is a <code>term</code> and each <code>&lt;dd&gt;</code> is a <code>definition</code>.</p>
+</div>
+
 
 <!-- section -->
 
