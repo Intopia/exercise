@@ -149,6 +149,19 @@ ol {
   margin-bottom: 1.5rem;      /* 24px, matches paragraphs */
 }
 
+ul { 
+  padding-inline-start: 1.1em;
+}
+
+ol { 
+  padding-inline-start: 2ch;
+}
+
+ol.long { 
+  padding-inline-start: 3ch; 
+}
+
+
 li {
   margin-bottom: .5rem;       /* 8px */
 }
