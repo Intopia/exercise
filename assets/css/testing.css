@@ -988,26 +988,6 @@ Page meta
 }
 
 /* ---------------------
-Series navigation
-----------------------*/
-
-.series-navigation {
-  border-left: 3px solid var(--colour-grey-dark);
-  background: var(--colour-body);
-  padding: 1em 1.5em;
-  margin: 2em 0;
-}
-
-.series-navigation h2 {
-  margin-top: 0;
-  font-size: 1.2em;
-}
-
-.series-navigation ol {
-  margin-bottom: 0;
-}
-
-/* ---------------------
 Copy code wrapper
 ----------------------*/
 

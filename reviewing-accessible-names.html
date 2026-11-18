@@ -228,15 +228,9 @@
 &lt;/button&gt;</code></pre>
 </details>
 
-<p><code>title</code> is only used as the name if nothing else provides one. But if another name source is present, the <code>title</code> content isn&rsquo;t discarded, it becomes the accessible description instead.</p>
-
-<p>In the following example, "Close" would be announced twice:</p>
-
-<details>
-  <summary>HTML markup</summary>
-<pre><code>&lt;button aria-label="<span class="highlight">Close</span>" title="<span class="highlight">Close</span>"&gt;
-&lt;/button&gt;</code></pre>
-</details>
+<div class="note note-warning">
+  <p><code>title</code> is only used as the name if nothing else provides one. But if another name source is present, the <code>title</code> content isn&rsquo;t discarded, it becomes the accessible description instead.</p>
+</div>
 
 
 <!-- section -->
@@ -255,11 +249,11 @@
 <pre><code>&lt;input type="text" placeholder="<span class="highlight">Search</span>"&gt;</code></pre>
 </details>
 
-<p><code>placeholder</code> is often announced by screen readers even when a valid accessible name already exists from another source (labelledby, <code>aria-label</code>, or label content).</p>
+<div class="note note-warning">
+  <p><code>placeholder</code> is often announced by screen readers even when a valid accessible name already exists from another source (labelledby, <code>aria-label</code>, or label content).</p>
 
-<p>In testing across multiple screen reader and browser combinations, an input's <code>placeholder</code> text was announced in addition to the correct accessible name in almost every case. This causes verbosity and can confuse users about what the actual field label is.</p>
-
-<p>This is less consistent when the accessible name comes from the <code>title</code> attribute, where the same behaviour was only observed in Safari with VoiceOver.</p>
+  <p>In testing across multiple screen reader and browser combinations, an input's <code>placeholder</code> text was announced in addition to the correct accessible name in almost every case. This causes verbosity and can confuse users about what the actual field label is.</p>
+</div>
 
 
 <!-- section -->

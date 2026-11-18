@@ -28,7 +28,7 @@
 
 <p style="font-size: .9em; color: #555;">Published: <time datetime="2026-10-23">23 October 2026</time> | Author: Russ Weakley</p>
 
-<aside class="series-navigation" aria-labelledby="series-heading">
+<aside class="note" aria-labelledby="series-heading">
   <h2 id="series-heading">About this series</h2>
   <p>This article is part of a series on accessibility testing with axe-core and Playwright.</p>
   <ol>
@@ -386,7 +386,7 @@ const { pathToFileURL } = require('url');
 
 <p>The catch was that <code>--exit</code> fails on <strong>any</strong> violation, even a minor one.</p>
 
-<div class="note">
+<div class="note note-warning">
   <p><strong>Writing your own script means you decide what counts as a failure.</strong> You can choose which issues should make a test fail, rather than treating every violation the same way.</p>
 </div>
 
@@ -500,7 +500,7 @@ const { pathToFileURL } = require('url');
 
 <p>In this section, you'll set up something similar on your own computer. The check will watch the test page, and run again every time you save a change.</p>
 
-<div class="note">
+<div class="note note-warning">
   <p><strong>Accessibility checks work best when nobody has to remember to run them.</strong> Running them automatically means issues are caught as soon as they're introduced.</p>
 </div>
 
