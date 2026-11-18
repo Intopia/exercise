@@ -134,7 +134,9 @@
   <div id="ex1-panel" hidden></div>
 </div>
 
-<p><b>Expected result:</b> activating the button should announce the new expanded state, move focus to the heading inside the revealed panel, and screen reader users navigating by relationship (if supported) should be able to identify that the button controls this specific panel.</p>
+<div class="note">
+  <p><b>Expected result:</b> activating the button should announce the new expanded state, move focus to the heading inside the revealed panel, and screen reader users navigating by relationship (if supported) should be able to identify that the button controls this specific panel.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -173,7 +175,9 @@
   </button>
 </div>
 
-<p><b>Expected result:</b> on first activation, <code>aria-controls</code> points at an ID that doesn't exist yet. Worth checking whether this behaves differently to Example 1, where the target was always present, and differently again to the permanently broken reference in Example 8 further down, since here the reference becomes valid after interaction rather than staying broken.</p>
+<div class="note">
+  <p><b>Expected result:</b> on first activation, <code>aria-controls</code> points at an ID that doesn't exist yet. Worth checking whether this behaves differently to Example 1, where the target was always present, and differently again to the permanently broken reference in Example 8 further down, since here the reference becomes valid after interaction rather than staying broken.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -213,7 +217,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> each tab should be identifiable as controlling its matching panel. Arrow Left/Right move focus between tabs and switch the visible panel immediately. Home/End jump to the first/last tab. Since <code>role="tabpanel"</code> is a well-established pattern, this is a good baseline case, if <code>aria-controls</code> fails to announce anywhere, it's likely to fail here too.</p>
+<div class="note">
+  <p><b>Expected result:</b> each tab should be identifiable as controlling its matching panel. Arrow Left/Right move focus between tabs and switch the visible panel immediately. Home/End jump to the first/last tab. Since <code>role="tabpanel"</code> is a well-established pattern, this is a good baseline case, if <code>aria-controls</code> fails to announce anywhere, it's likely to fail here too.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -282,7 +288,9 @@
   </ul>
 </div>
 
-<p><b>Expected result:</b> this is the weakest signal case by design, no <code>aria-expanded</code>, no hidden state, just a bare relationship plus a content change. Worth noting whether any AT announces this relationship at all, and whether the content change itself is picked up without an explicit live region.</p>
+<div class="note">
+  <p><b>Expected result:</b> this is the weakest signal case by design, no <code>aria-expanded</code>, no hidden state, just a bare relationship plus a content change. Worth noting whether any AT announces this relationship at all, and whether the content change itself is picked up without an explicit live region.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -323,7 +331,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> confirm whether AT announces a relationship to two elements, one element, or none at all, this is untested territory for most testers.</p>
+<div class="note">
+  <p><b>Expected result:</b> confirm whether AT announces a relationship to two elements, one element, or none at all, this is untested territory for most testers.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -359,7 +369,9 @@
   </button>
 </div>
 
-<p><b>Expected result:</b> the ID resolves, to itself, so this should be treated as a valid, resolved reference, not an error. Worth confirming whether AT announces anything meaningful about an element that controls itself, versus staying silent on the relationship entirely.</p>
+<div class="note">
+  <p><b>Expected result:</b> the ID resolves, to itself, so this should be treated as a valid, resolved reference, not an error. Worth confirming whether AT announces anything meaningful about an element that controls itself, versus staying silent on the relationship entirely.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -391,7 +403,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> the relationship itself should be treated as valid, the ID resolves to a real element. Worth confirming whether AT announces this relationship or its content at all while the target is visibility-hidden, since it's technically present but not visible to anyone.</p>
+<div class="note">
+  <p><b>Expected result:</b> the relationship itself should be treated as valid, the ID resolves to a real element. Worth confirming whether AT announces this relationship or its content at all while the target is visibility-hidden, since it's technically present but not visible to anyone.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -413,7 +427,7 @@
 <!-- section -->
 
 
-<div class="note">
+<div class="note note-warning">
   <p><b>Broken examples from here on.</b> These are deliberately incorrect. They exist to test failure behaviour, not to be copied. Where possible, the visible show/hide behaviour still works correctly, so the demo remains usable, only the <code>aria-controls</code> relationship itself is broken, which is the specific thing being tested.</p>
 </div>
 
@@ -434,7 +448,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> confirm what, if anything, is announced, silence, an error, or no different to Example 1.</p>
+<div class="note">
+  <p><b>Expected result:</b> confirm what, if anything, is announced, silence, an error, or no different to Example 1.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -469,7 +485,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> exactly the kind of markup error an automated checker is built to catch, an empty, non-referencing value. The bookmarklet should label this "aria-controls: (empty)" and treat it as broken, not merely a missing ID. Worth confirming whether AT treats this the same as Example 8's broken reference, the same as the attribute being absent entirely, or something else.</p>
+<div class="note">
+  <p><b>Expected result:</b> exactly the kind of markup error an automated checker is built to catch, an empty, non-referencing value. The bookmarklet should label this "aria-controls: (empty)" and treat it as broken, not merely a missing ID. Worth confirming whether AT treats this the same as Example 8's broken reference, the same as the attribute being absent entirely, or something else.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -486,14 +504,6 @@
   ...
 &lt;/div&gt;</code></pre>
 </details>
-
-
-<!-- section -->
-
-
-<div class="note">
-  <p><b>Note for testing:</b> given the reputation <code>aria-controls</code> has for patchy support, this page is a good candidate for the full AT/browser matrix, Mac VoiceOver, Windows JAWS, Windows NVDA, iOS VoiceOver, Android TalkBack, across the browsers you'd normally pair with each, rather than a partial spot check.</p>
-</div>
 
 <script>
 (function () {

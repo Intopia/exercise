@@ -10,36 +10,28 @@
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
   <style>
-    .combo-wrapper {
-      position: relative;
-      max-width: 20em;
-    }
+.combo-wrapper {
+  position: relative;
+  max-width: 20em;
+}
 
-    [role="listbox"] {
-      list-style: none;
-      margin: 0.2em 0 0;
-      padding: 0.25em;
-      border: 1px solid #999;
-      background: #fff;
-    }
+[role="listbox"] {
+  list-style: none;
+  margin: 0.2em 0 0;
+  padding: 0.25em;
+  border: 1px solid #999;
+  background: #fff;
+}
 
-    [role="option"] {
-      padding: 0.5em;
-      border-radius: 0.2em;
-    }
+[role="option"] {
+  padding: 0.5em;
+  border-radius: 0.2em;
+}
 
-    [role="option"].active {
-      background: #1b5e20;
-      color: #fff;
-    }
-
-    .note {
-      background: #fff3cd;
-      border: 1px solid #ffe69c;
-      padding: 0.75em 1em;
-      border-radius: 4px;
-      margin: 1.5em 0;
-    }
+[role="option"].active {
+  background: #1b5e20;
+  color: #fff;
+}
   </style>
 </head>
 <body>
@@ -90,7 +82,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> arrow keys should move the visible highlight between options, but nothing should identify which option is active in the accessibility tree, a screen reader user arrowing through this would not know which option is currently highlighted.</p>
+<div class="note">
+  <p><b>Expected result:</b> arrow keys should move the visible highlight between options, but nothing should identify which option is active in the accessibility tree, a screen reader user arrowing through this would not know which option is currently highlighted.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -183,7 +177,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> the active option should be identified in the accessibility tree via <code>aria-activedescendant</code>, updating as arrow keys move between options. Worth confirming directly with your standard screen readers whether this is actually announced when it changes, this is exactly the kind of behaviour worth testing rather than assuming. Critically: check with devtools (or by watching the visible focus outline) that real keyboard focus never leaves the input, not on arrow key presses, and not on clicking an option with the mouse.</p>
+<div class="note">
+  <p><b>Expected result:</b> the active option should be identified in the accessibility tree via <code>aria-activedescendant</code>, updating as arrow keys move between options. Worth confirming directly with your standard screen readers whether this is actually announced when it changes, this is exactly the kind of behaviour worth testing rather than assuming. Critically: check with devtools (or by watching the visible focus outline) that real keyboard focus never leaves the input, not on arrow key presses, and not on clicking an option with the mouse.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -266,12 +262,6 @@
   });
 })();
 </script>
-
-
-<!-- section -->
-
-
-<p><b>Note for testing:</b> this is one of the more implementation-sensitive ARIA patterns on this site. Confirm with your standard browser and screen reader combinations that: the active option is actually announced as it changes, the input's own accessible name and role are still announced correctly alongside the active option, and that nothing about this pattern causes real focus to visibly or programmatically leave the input at any point.</p>
 
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>

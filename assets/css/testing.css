@@ -557,19 +557,27 @@ Code highlights and comments
 Badges
 ----------------------*/
 
-.fail,
 .red {
   color: var(--colour-fail);
 }
 
-.pass,
 .green {
   color: var(--colour-green-dark);
 }
 
 .fail,
 .pass {
-  font-weight: bold;
+  display: inline-block;
+  white-space: nowrap;
+  color: var(--colour-white);
+  background-color: var(--colour-fail);
+  padding: 0 .3rem;
+  border-radius: .3rem;
+  font-size: 0.83333333rem;
+}
+
+.pass {
+  background-color: var(--colour-green-dark);
 }
 
 /* ---------------------

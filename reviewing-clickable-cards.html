@@ -123,22 +123,24 @@
   <p>Known for its distinctive call, this large kingfisher is native to eastern Australia.</p>
 </div>
 
-<h3 class="feature-heading">Accessibility features</h3>
+<div class="note">
+  <h3>Accessibility features</h3>
+  <ul>
+    <li>Only one interactive element on the card, so its accessible name is unambiguous.</li>
+    <li>Completely standard keyboard behaviour: Tab to focus, Enter to activate.</li>
+    <li>All native link behaviours work automatically &ndash; open in new tab, copy link address, drag to bookmark, browser status bar preview.</li>
+    <li>Nothing to build or maintain; works even if CSS or JavaScript fails to load.</li>
+  </ul>
+</div>
 
-<ul>
-  <li>Only one interactive element on the card, so its accessible name is unambiguous.</li>
-  <li>Completely standard keyboard behaviour: Tab to focus, Enter to activate.</li>
-  <li>All native link behaviours work automatically &ndash; open in new tab, copy link address, drag to bookmark, browser status bar preview.</li>
-  <li>Nothing to build or maintain; works even if CSS or JavaScript fails to load.</li>
-</ul>
-
-<h3 class="issue-heading">Possible issues</h3>
-
-<ul>
-  <li>The clickable target is small &ndash; just the heading text &ndash; even though the whole card looks like a single unit.</li>
-  <li>Users may click the image or the paragraph expecting to navigate, and nothing happens.</li>
-  <li>On touch devices especially, a bigger hit target is usually expected for a "card" pattern.</li>
-</ul>
+<div class="note note-warning">
+  <h3>Possible issues</h3>
+  <ul>
+    <li>The clickable target is small &ndash; just the heading text &ndash; even though the whole card looks like a single unit.</li>
+    <li>Users may click the image or the paragraph expecting to navigate, and nothing happens.</li>
+    <li>On touch devices especially, a bigger hit target is usually expected for a "card" pattern.</li>
+  </ul>
+</div>
 
 
 <!-- section -->
@@ -156,21 +158,23 @@
   </div>
 </a>
 
-<h3 class="feature-heading">Accessibility features</h3>
+<div class="note">
+  <h3>Accessibility features</h3>
+  <ul>
+    <li>Large, obvious click/tap target covering the whole card.</li>
+    <li>Still uses a real <code>&lt;a&gt;</code>, so it is keyboard-focusable and works with assistive technology out of the box.</li>
+  </ul>
+</div>
 
-<ul>
-  <li>Large, obvious click/tap target covering the whole card.</li>
-  <li>Still uses a real <code>&lt;a&gt;</code>, so it is keyboard-focusable and works with assistive technology out of the box.</li>
-</ul>
-
-<h3 class="issue-heading">Possible issues</h3>
-
-<ul>
-  <li>A link inside another link (<code>&lt;a&gt;</code> nested in <code>&lt;a&gt;</code>) is invalid HTML. The content model does not allow interactive content inside a link.</li>
-  <li>Browsers don't reject this &ndash; they silently "fix" it during parsing, using the HTML parser's adoption agency algorithm. Inspect this card in devtools and the one outer link has been split into disconnected fragments: a clone wraps just the image, an empty clone sits next to the real heading link inside the <code>&lt;h3&gt;</code>, and the paragraph is left completely outside any link. The "click anywhere on the card" goal is silently broken by the browser itself, with no error or warning.</li>
-  <li>If the card contains any other interactive element (a second link, a button, a "read more"), it must sit outside the big link entirely, or it becomes unreachable/unusable.</li>
-  <li>The accessible name of the big link is the concatenation of everything inside it (image alt text, heading, paragraph), which can be a long, awkward announcement for screen reader users.</li>
-</ul>
+<div class="note note-warning">
+  <h3>Possible issues</h3>
+  <ul>
+    <li>A link inside another link (<code>&lt;a&gt;</code> nested in <code>&lt;a&gt;</code>) is invalid HTML. The content model does not allow interactive content inside a link.</li>
+    <li>Browsers don't reject this &ndash; they silently "fix" it during parsing, using the HTML parser's adoption agency algorithm. Inspect this card in devtools and the one outer link has been split into disconnected fragments: a clone wraps just the image, an empty clone sits next to the real heading link inside the <code>&lt;h3&gt;</code>, and the paragraph is left completely outside any link. The "click anywhere on the card" goal is silently broken by the browser itself, with no error or warning.</li>
+    <li>If the card contains any other interactive element (a second link, a button, a "read more"), it must sit outside the big link entirely, or it becomes unreachable/unusable.</li>
+    <li>The accessible name of the big link is the concatenation of everything inside it (image alt text, heading, paragraph), which can be a long, awkward announcement for screen reader users.</li>
+  </ul>
+</div>
 
 
 <!-- section -->
@@ -186,21 +190,23 @@
   <p>The emu is the second-tallest living bird after its ratite relative, the ostrich.</p>
 </div>
 
-<h3 class="feature-heading">Accessibility features</h3>
+<div class="note">
+  <h3>Accessibility features</h3>
+  <ul>
+    <li>Only one real link exists in the markup, so there is no nested-link problem and only one, clear accessible name.</li>
+    <li>Full native link behaviour (new tab, copy address, status bar preview) still works.</li>
+    <li>Large visual/click target without any JavaScript.</li>
+  </ul>
+</div>
 
-<ul>
-  <li>Only one real link exists in the markup, so there is no nested-link problem and only one, clear accessible name.</li>
-  <li>Full native link behaviour (new tab, copy address, status bar preview) still works.</li>
-  <li>Large visual/click target without any JavaScript.</li>
-</ul>
-
-<h3 class="issue-heading">Possible issues</h3>
-
-<ul>
-  <li>The card container (or another ancestor of the link) needs <code>position: relative</code>, and the link itself needs an <code>::after</code> pseudo-element with <code>position: absolute</code> and <code>inset: 0</code>, which is easy to get wrong if the card is later restyled.</li>
-  <li>Any other interactive element added to the card later (a second link, a "share" button) will sit underneath the stretched pseudo-element and become unclickable unless it is explicitly given a higher <code>z-index</code>.</li>
-  <li>Text inside the card (other than the heading) cannot be selected with a mouse, because the invisible layer intercepts the click/drag.</li>
-</ul>
+<div class="note note-warning">
+  <h3>Possible issues</h3>
+  <ul>
+    <li>The card container (or another ancestor of the link) needs <code>position: relative</code>, and the link itself needs an <code>::after</code> pseudo-element with <code>position: absolute</code> and <code>inset: 0</code>, which is easy to get wrong if the card is later restyled.</li>
+    <li>Any other interactive element added to the card later (a second link, a "share" button) will sit underneath the stretched pseudo-element and become unclickable unless it is explicitly given a higher <code>z-index</code>.</li>
+    <li>Text inside the card (other than the heading) cannot be selected with a mouse, because the invisible layer intercepts the click/drag.</li>
+  </ul>
+</div>
 
 
 <!-- section -->
@@ -216,22 +222,24 @@
   <p>This large, stocky marsupial is found in Australia and on scattered nearby islands.</p>
 </div>
 
-<h3 class="feature-heading">Accessibility features</h3>
+<div class="note">
+  <h3>Accessibility features</h3>
+  <ul>
+    <li>Only one real link in the markup &ndash; the card itself is not made focusable, so there are no duplicate tab stops.</li>
+    <li>Keyboard users tab straight to the real link and use it normally; nothing custom to get wrong.</li>
+    <li>If JavaScript fails to load, the heading link still works &ndash; the card just loses the "click anywhere" enhancement.</li>
+    <li>Can be written to ignore clicks on other interactive children, and to ignore click-drag text selection so it doesn't misfire.</li>
+  </ul>
+</div>
 
-<ul>
-  <li>Only one real link in the markup &ndash; the card itself is not made focusable, so there are no duplicate tab stops.</li>
-  <li>Keyboard users tab straight to the real link and use it normally; nothing custom to get wrong.</li>
-  <li>If JavaScript fails to load, the heading link still works &ndash; the card just loses the "click anywhere" enhancement.</li>
-  <li>Can be written to ignore clicks on other interactive children, and to ignore click-drag text selection so it doesn't misfire.</li>
-</ul>
-
-<h3 class="issue-heading">Possible issues</h3>
-
-<ul>
-  <li>Entirely dependent on correct, defensive JavaScript. It's easy to forget an edge case (text selection, middle-click, modifier-key click) and end up with confusing or broken behaviour.</li>
-  <li>Middle-click / ctrl-click / cmd-click "open in new tab" on the empty part of the card won't work, only a real click on the actual link supports that &ndash; this can surprise users who expect the whole card to behave like a link.</li>
-  <li>Adds maintenance cost and a script dependency for something CSS alone can usually do (see Method 3).</li>
-</ul>
+<div class="note note-warning">
+  <h3>Possible issues</h3>
+  <ul>
+    <li>Entirely dependent on correct, defensive JavaScript. It's easy to forget an edge case (text selection, middle-click, modifier-key click) and end up with confusing or broken behaviour.</li>
+    <li>Middle-click / ctrl-click / cmd-click "open in new tab" on the empty part of the card won't work, only a real click on the actual link supports that &ndash; this can surprise users who expect the whole card to behave like a link.</li>
+    <li>Adds maintenance cost and a script dependency for something CSS alone can usually do (see Method 3).</li>
+  </ul>
+</div>
 
 
 <!-- section -->
@@ -249,21 +257,23 @@
   </div>
 </a>
 
-<h3 class="feature-heading">Accessibility features</h3>
+<div class="note">
+  <h3>Accessibility features</h3>
+  <ul>
+    <li>Valid markup with no nested interactive elements, and a single, predictable accessible name and tab stop.</li>
+    <li>Large click/tap target, full native link behaviour, no JavaScript required.</li>
+    <li>Avoids Method 2's silent DOM breakage entirely, by design rather than by accident.</li>
+  </ul>
+</div>
 
-<ul>
-  <li>Valid markup with no nested interactive elements, and a single, predictable accessible name and tab stop.</li>
-  <li>Large click/tap target, full native link behaviour, no JavaScript required.</li>
-  <li>Avoids Method 2's silent DOM breakage entirely, by design rather than by accident.</li>
-</ul>
-
-<h3 class="issue-heading">Possible issues</h3>
-
-<ul>
-  <li>Only works cleanly for cards with a single destination. As soon as a card needs a second link or a button (e.g. "add to favourites"), that control has to be pulled outside the big link, which changes the visual layout.</li>
-  <li>The heading is no longer a link in its own right, so it can't be usefully listed in a screen reader's "links list" independently of the rest of the card content.</li>
-  <li>The whole card's accessible name is built from all of its content (image alt, heading, paragraph), which can be long-winded unless it is trimmed with <code>aria-label</code>.</li>
-</ul>
+<div class="note note-warning">
+  <h3>Possible issues</h3>
+  <ul>
+    <li>Only works cleanly for cards with a single destination. As soon as a card needs a second link or a button (e.g. "add to favourites"), that control has to be pulled outside the big link, which changes the visual layout.</li>
+    <li>The heading is no longer a link in its own right, so it can't be usefully listed in a screen reader's "links list" independently of the rest of the card content.</li>
+    <li>The whole card's accessible name is built from all of its content (image alt, heading, paragraph), which can be long-winded unless it is trimmed with <code>aria-label</code>.</li>
+  </ul>
+</div>
 
 
 <!-- section -->
@@ -279,23 +289,25 @@
   <p>A small wallaby often described as "the world's happiest animal" because of its friendly expression.</p>
 </div>
 
-<h3 class="feature-heading">Accessibility features</h3>
+<div class="note">
+  <h3>Accessibility features</h3>
+  <ul>
+    <li>Can be made to work with a screen reader if <code>role="link"</code> (or <code>role="button"</code>), <code>tabindex="0"</code>, and matching keydown handling are all added carefully.</li>
+    <li>Large click/tap target with full control over styling and behaviour.</li>
+  </ul>
+</div>
 
-<ul>
-  <li>Can be made to work with a screen reader if <code>role="link"</code> (or <code>role="button"</code>), <code>tabindex="0"</code>, and matching keydown handling are all added carefully.</li>
-  <li>Large click/tap target with full control over styling and behaviour.</li>
-</ul>
-
-<h3 class="issue-heading">Possible issues</h3>
-
-<ul>
-  <li>None of the native link behaviours exist unless you reimplement them yourself: no "open in new tab", no "copy link address", no status bar URL preview, no drag-to-bookmark, no middle-click.</li>
-  <li>Like Method 5, the accessible name is built from all of the card's content (image alt, heading, paragraph), which can be long-winded unless it is trimmed with <code>aria-label</code>.</li>
-  <li>Search engines and other automated tools that only follow real <code>&lt;a href&gt;</code> links won't discover the destination.</li>
-  <li>Every keyboard interaction (Enter <em>and</em> Space for a button role, Enter only for a link role) has to be coded and tested by hand &ndash; it is very easy to only handle click and forget keyboard users entirely.</li>
-  <li>If JavaScript fails to load, the card is completely non-functional &ndash; there is no underlying href to fall back on.</li>
-  <li>This pattern reinvents something the browser already provides for free with a plain <code>&lt;a&gt;</code>, for no real benefit &ndash; generally best avoided in favour of Methods 3 or 5.</li>
-</ul>
+<div class="note note-warning">
+  <h3>Possible issues</h3>
+  <ul>
+    <li>None of the native link behaviours exist unless you reimplement them yourself: no "open in new tab", no "copy link address", no status bar URL preview, no drag-to-bookmark, no middle-click.</li>
+    <li>Like Method 5, the accessible name is built from all of the card's content (image alt, heading, paragraph), which can be long-winded unless it is trimmed with <code>aria-label</code>.</li>
+    <li>Search engines and other automated tools that only follow real <code>&lt;a href&gt;</code> links won't discover the destination.</li>
+    <li>Every keyboard interaction (Enter <em>and</em> Space for a button role, Enter only for a link role) has to be coded and tested by hand &ndash; it is very easy to only handle click and forget keyboard users entirely.</li>
+    <li>If JavaScript fails to load, the card is completely non-functional &ndash; there is no underlying href to fall back on.</li>
+    <li>This pattern reinvents something the browser already provides for free with a plain <code>&lt;a&gt;</code>, for no real benefit &ndash; generally best avoided in favour of Methods 3 or 5.</li>
+  </ul>
+</div>
 
 <script>
 (function () {

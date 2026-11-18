@@ -10,15 +10,10 @@
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
   <style>
-    #message.warning {
-      padding: 1em;
-      outline: 2px solid rgba(255,170,0,1);
-      background: rgba(255,170,0,.1);
-    }
-
-    #message.warning p {
-      margin: 0;
-    }
+#message p {
+  margin: .5em 0 0;
+  background: pink;
+}
   </style>
 </head>
 <body>
@@ -49,7 +44,7 @@
 <h2>Example</h2>
 
 <div class="example">
-  <div id="message" class="warning" role="status">
+  <div id="message" role="status">
     <div>This is some text already in the container.</div>
   </div>
 </div>
@@ -80,25 +75,64 @@
 <!-- section -->
 
 
-<h2>Assistive technologies</h2>
+<h2 id="sr-results">Screen reader results</h2>
 
-<div class="note">
-  <h3>VoiceOver</h3>
-  <ul class="browser-list">
-    <li><b>Chrome:</b><br>
-      When reading: <span class="green">All content announced immediately</span>.<br>
-      When silent: <span class="green">All content announced at pause</span>.
-    </li>
-    <li><b>Firefox:</b><br>
-      When reading: <span class="red">Only newly added content announced immediately</span>.<br>
-      When silent: <span class="red">Only newly added content announced at pause</span>.
-    </li>
-    <li><b>Safari:</b><br>
-      When reading: <span class="green">All content announced immediately</span>.<br>
-      When silent: <span class="green">All content announced at pause</span>.
-    </li>
-  </ul>
-</div>
+<table aria-labelledby="sr-results">
+  <thead>
+    <tr>
+      <td></td>
+      <th scope="col">When reading</th>
+      <th scope="col">When silent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">VoiceOver with Chrome</th>
+      <td>All content announced immediately <span class="pass">PASS</span></td>
+      <td>All content announced at pause <span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <th scope="row">VoiceOver with Firefox</th>
+      <td>Only newly added content announced immediately <span class="fail">FAIL</span></td>
+      <td>Only newly added content announced at pause <span class="fail">FAIL</span></td>
+    </tr>
+    <tr>
+      <th scope="row">VoiceOver with Safari</th>
+      <td>All content announced immediately <span class="pass">PASS</span></td>
+      <td>All content announced at pause <span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <th scope="row">NVDA with Chrome</th>
+      <td>…</td>
+      <td>…</td>
+    </tr>
+    <tr>
+      <th scope="row">NVDA with Edge</th>
+      <td>…</td>
+      <td>…</td>
+    </tr>
+    <tr>
+      <th scope="row">NVDA with Firefox</th>
+      <td>…</td>
+      <td>…</td>
+    </tr>
+    <tr>
+      <th scope="row">JAWS with Chrome</th>
+      <td>…</td>
+      <td>…</td>
+    </tr>
+    <tr>
+      <th scope="row">JAWS with Edge</th>
+      <td>…</td>
+      <td>…</td>
+    </tr>
+    <tr>
+      <th scope="row">JAWS with Firefox</th>
+      <td>…</td>
+      <td>…</td>
+    </tr>
+  </tbody>
+</table>
 
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>

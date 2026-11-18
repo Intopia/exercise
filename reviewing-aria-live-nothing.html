@@ -10,12 +10,15 @@
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
   <style>
-    #message.info > p {
-      padding: 1em;
-      margin: 0;
-      outline: 2px solid rgba(0,0,255,1);
-      background: rgba(0,0,255,.1);
-    }
+#message p {
+  margin: 0;
+  background: pink;
+}
+
+#message p:focus-visible {
+  outline: 3px solid black;  /* 3px ring */
+  outline-offset: 2px;      
+}
   </style>
 </head>
 <body>
@@ -80,25 +83,64 @@
 <!-- section -->
 
 
-<h2>Assistive technologies</h2>
+<h2>Screen reader results</h2>
 
-<div class="note">
-  <h3>VoiceOver</h3>
-  <ul class="browser-list">
-    <li><b>Chrome:</b><br>
-      When reading: <span class="green">Message announced immediately</span>.<br>
-      When silent: <span class="green">Message announced immediately</span>.
-    </li>
-    <li><b>Firefox:</b><br>
-      When reading: <span class="green">Message announced immediately</span>.<br>
-      When silent: <span class="green">Message announced immediately</span>.
-    </li>
-    <li><b>Safari:</b><br>
-      When reading: <span class="green">Message announced immediately</span>.<br>
-      When silent: <span class="green">Message announced immediately</span>.
-    </li>
-  </ul>
-</div>
+<table aria-labelledby="sr-results">
+  <thead>
+    <tr>
+      <td></td>
+      <th scope="col">When reading</th>
+      <th scope="col">When silent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">VoiceOver with Chrome</th>
+      <td>Message announced immediately <span class="pass">PASS</span></td>
+      <td>Message announced immediately <span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <th scope="row">VoiceOver with Firefox</th>
+      <td>Message announced immediately <span class="pass">PASS</span></td>
+      <td>Message announced immediately <span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <th scope="row">VoiceOver with Safari</th>
+      <td>Message announced immediately <span class="pass">PASS</span></td>
+      <td>Message announced immediately <span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <th scope="row">NVDA with Chrome</th>
+      <td>Not yet tested</td>
+      <td>Not yet tested</td>
+    </tr>
+    <tr>
+      <th scope="row">NVDA with Edge</th>
+      <td>Not yet tested</td>
+      <td>Not yet tested</td>
+    </tr>
+    <tr>
+      <th scope="row">NVDA with Firefox</th>
+      <td>Not yet tested</td>
+      <td>Not yet tested</td>
+    </tr>
+    <tr>
+      <th scope="row">JAWS with Chrome</th>
+      <td>Not yet tested</td>
+      <td>Not yet tested</td>
+    </tr>
+    <tr>
+      <th scope="row">JAWS with Edge</th>
+      <td>Not yet tested</td>
+      <td>Not yet tested</td>
+    </tr>
+    <tr>
+      <th scope="row">JAWS with Firefox</th>
+      <td>Not yet tested</td>
+      <td>Not yet tested</td>
+    </tr>
+  </tbody>
+</table>
 
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>

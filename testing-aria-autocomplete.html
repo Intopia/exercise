@@ -10,36 +10,28 @@
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
   <style>
-    .combo-wrapper {
-      position: relative;
-      max-width: 20em;
-    }
+.combo-wrapper {
+  position: relative;
+  max-width: 20em;
+}
 
-    [role="listbox"] {
-      list-style: none;
-      margin: 0.2em 0 0;
-      padding: 0.25em;
-      border: 1px solid #999;
-      background: #fff;
-    }
+[role="listbox"] {
+  list-style: none;
+  margin: 0.2em 0 0;
+  padding: 0.25em;
+  border: 1px solid #999;
+  background: #fff;
+}
 
-    [role="option"] {
-      padding: 0.5em;
-      border-radius: 0.2em;
-    }
+[role="option"] {
+  padding: 0.5em;
+  border-radius: 0.2em;
+}
 
-    [role="option"].active {
-      background: #1b5e20;
-      color: #fff;
-    }
-
-    .note {
-      background: #fff3cd;
-      border: 1px solid #ffe69c;
-      padding: 0.75em 1em;
-      border-radius: 4px;
-      margin: 1.5em 0;
-    }
+[role="option"].active {
+  background: #1b5e20;
+  color: #fff;
+}
   </style>
 </head>
 <body>
@@ -71,7 +63,9 @@
   <input type="text" class="input" id="ac-none" role="combobox" aria-autocomplete="none" aria-expanded="false" autocomplete="off">
 </div>
 
-<p><b>Expected result:</b> no suggestions should appear or be offered, by design.</p>
+<div class="note">
+  <p><b>Expected result:</b> no suggestions should appear or be offered, by design.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -94,7 +88,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> typing "ap" should show Apple and Apricot in the popup. Arrow keys should move <code>aria-activedescendant</code> between them without moving real focus from the input.</p>
+<div class="note">
+  <p><b>Expected result:</b> typing "ap" should show Apple and Apricot in the popup. Arrow keys should move <code>aria-activedescendant</code> between them without moving real focus from the input.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -115,7 +111,9 @@
   <input type="text" class="input" id="ac-inline" role="combobox" aria-autocomplete="inline" aria-expanded="false" autocomplete="off">
 </div>
 
-<p><b>Expected result:</b> typing "ap" should complete the input's value to "apple", with "ple" shown as selected text. Typing "b" should complete to the first match, "banana".</p>
+<div class="note">
+  <p><b>Expected result:</b> typing "ap" should complete the input's value to "apple", with "ple" shown as selected text. Typing "b" should complete to the first match, "banana".</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -138,7 +136,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> typing "ap" should both complete the input's value inline to "apple" (selected remainder), and show Apple and Apricot in the popup list below.</p>
+<div class="note">
+  <p><b>Expected result:</b> typing "ap" should both complete the input's value inline to "apple" (selected remainder), and show Apple and Apricot in the popup list below.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>

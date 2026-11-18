@@ -159,7 +159,9 @@
   </nav>
 </div>
 
-<p><b>Expected result:</b> nothing should identify "Home" as the current page programmatically, a screen reader user has no way to know which link represents the page they are already on.</p>
+<div class="note">
+  <p><b>Expected result:</b> nothing should identify "Home" as the current page programmatically, a screen reader user has no way to know which link represents the page they are already on.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -190,7 +192,9 @@
   </nav>
 </div>
 
-<p><b>Expected result:</b> "Home" should be announced as the current page, in addition to being a link.</p>
+<div class="note">
+  <p><b>Expected result:</b> "Home" should be announced as the current page, in addition to being a link.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -224,7 +228,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> the step marked <code>aria-current="step"</code> should move with each click, and exactly one step should carry the attribute at all times. The Back and Next buttons should stop at the first and last steps rather than wrapping around.</p>
+<div class="note">
+  <p><b>Expected result:</b> the step marked <code>aria-current="step"</code> should move with each click, and exactly one step should carry the attribute at all times. The Back and Next buttons should stop at the first and last steps rather than wrapping around.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -272,7 +278,9 @@
   </table>
 </div>
 
-<p><b>Expected result:</b> the 5th should be announced as the current date, in addition to its position in the table.</p>
+<div class="note">
+  <p><b>Expected result:</b> the 5th should be announced as the current date, in addition to its position in the table.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -289,7 +297,9 @@
 
 <p>This is a genuinely different shape from Example 3's checkout steps, not just a different justification. A museum layout has no fixed order, you could walk from the entrance straight to the gift shop, skip a room entirely, or backtrack. There's no "step 3 of 5," no completion state, nothing forcing a sequence. That's why this uses a plain, unordered list rather than the numbered list used for the checkout steps, order isn't semantically meaningful here the way it was there.</p>
 
-<p><b>A note on this value specifically:</b> unlike <code>page</code> or <code>step</code>, which have obvious, near-canonical real-world examples, <code>location</code> is comparatively spec-vague. The specification's own illustration ("a flow chart") is abstract enough that reasonable people land on quite different concrete examples for it, an earlier version of this page used an order-tracking diagram instead, which turned out to be too structurally similar to <code>step</code> to make the distinction clear. If this example still doesn't feel like an obvious, settled case to you, that's a fair reaction, not a sign you're missing something.</p>
+<div class="note">
+  <p><b>A note on this value specifically:</b> unlike <code>page</code> or <code>step</code>, which have obvious, near-canonical real-world examples, <code>location</code> is comparatively spec-vague. The specification's own illustration ("a flow chart") is abstract enough that reasonable people land on quite different concrete examples for it, an earlier version of this page used an order-tracking diagram instead, which turned out to be too structurally similar to <code>step</code> to make the distinction clear. If this example still doesn't feel like an obvious, settled case to you, that's a fair reaction, not a sign you're missing something.</p>
+</div>
 
 <div class="example">
   <ul class="museum-list" aria-label="Museum floor plan">
@@ -301,7 +311,9 @@
   </ul>
 </div>
 
-<p><b>Expected result:</b> "Dinosaurs" should be announced as the current location, in addition to its position in the list.</p>
+<div class="note">
+  <p><b>Expected result:</b> "Dinosaurs" should be announced as the current location, in addition to its position in the list.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -331,7 +343,9 @@
   </ol>
 </div>
 
-<p><b>Expected result:</b> the "10:30am, Client call" entry should be announced as the current time, in addition to its position in the list.</p>
+<div class="note">
+  <p><b>Expected result:</b> the "10:30am, Client call" entry should be announced as the current time, in addition to its position in the list.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -362,7 +376,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> "Accessibility" should be announced as current, without implying any of the more specific meanings (not a page, not a step, not a location, date, or time).</p>
+<div class="note">
+  <p><b>Expected result:</b> "Accessibility" should be announced as current, without implying any of the more specific meanings (not a page, not a step, not a location, date, or time).</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -371,15 +387,6 @@
 &lt;button&gt;Development&lt;/button&gt;
 &lt;button&gt;Design&lt;/button&gt;</code></pre>
 </details>
-
-
-<!-- section -->
-
-
-<p><b>Note for testing:</b> unlike some other ARIA attributes covered on this site, <code>aria-current</code> is not deprecated in any current version of the spec, and published support data (a11ysupport.io) shows a comparatively strong pass rate for the <code>page</code> value specifically. The remaining values, <code>step</code>, <code>location</code>, <code>date</code>, <code>time</code>, and the generic <code>true</code>, have not been independently verified here, worth confirming each one with your own standard browser and screen reader combinations rather than assuming the same strong support extends to all of them equally.</p>
-
-<p><b>A lesson from testing this page:</b> the original version of Example 4 used <code>role="grid"</code> for a static calendar display, without the required <code>role="row"</code> structure and without any keyboard interactivity. VoiceOver could not navigate into it at all, treating the whole thing as a single unstructured block. This has been corrected by using a plain, native <code>&lt;table&gt;</code> instead, since <code>aria-current</code> does not need a grid role to work, and a static display should not be given an interactive composite role like <code>grid</code> in the first place.</p>
-
 
 <script>
   const steps = Array.from(document.querySelectorAll('#step-list li'));

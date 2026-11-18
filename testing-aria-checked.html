@@ -10,45 +10,45 @@
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
   <style>
-    .testing-checked-checkbox {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5em;
-      cursor: pointer;
-      user-select: none;
-    }
+.testing-checked-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  cursor: pointer;
+  user-select: none;
+}
 
-    .testing-checked-checkbox::before {
-      content: "";
-      display: inline-block;
-      width: 1.2em;
-      height: 1.2em;
-      border: 2px solid #333;
-      border-radius: 3px;
-      background-color: #fff;
-      flex-shrink: 0;
-    }
+.testing-checked-checkbox::before {
+  content: "";
+  display: inline-block;
+  width: 1.2em;
+  height: 1.2em;
+  border: 2px solid #333;
+  border-radius: 3px;
+  background-color: #fff;
+  flex-shrink: 0;
+}
 
-    .testing-checked-checkbox[aria-checked="true"]::before {
-      background-color: #1b5e20;
-      border-color: #1b5e20;
-      background-image: linear-gradient(45deg, transparent 40%, #fff 40%, #fff 55%, transparent 55%),
-                         linear-gradient(-45deg, transparent 55%, #fff 55%, #fff 70%, transparent 70%);
-    }
+.testing-checked-checkbox[aria-checked="true"]::before {
+  background-color: #1b5e20;
+  border-color: #1b5e20;
+  background-image: linear-gradient(45deg, transparent 40%, #fff 40%, #fff 55%, transparent 55%),
+                     linear-gradient(-45deg, transparent 55%, #fff 55%, #fff 70%, transparent 70%);
+}
 
-    .testing-checked-checkbox[aria-checked="mixed"]::before {
-      background-color: #0a558c;
-      border-color: #0a558c;
-      background-image: linear-gradient(#fff, #fff);
-      background-size: 60% 2px;
-      background-repeat: no-repeat;
-      background-position: center;
-    }
+.testing-checked-checkbox[aria-checked="mixed"]::before {
+  background-color: #0a558c;
+  border-color: #0a558c;
+  background-image: linear-gradient(#fff, #fff);
+  background-size: 60% 2px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 
-    .testing-checked-checkbox:focus-visible {
-      outline: 2px solid #000;
-      outline-offset: 2px;
-    }
+.testing-checked-checkbox:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
   </style>
 </head>
 <body>
@@ -79,7 +79,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> the accessibility tree should show <code>checked: true</code> for this element, and this never changes.</p>
+<div class="note">
+  <p><b>Expected result:</b> the accessibility tree should show <code>checked: true</code> for this element, and this never changes.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -111,7 +113,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> the accessibility tree should show <code>checked: false</code> initially, and <code>checked: true</code> once activated. This should toggle back and forth each time the element is activated.</p>
+<div class="note">
+  <p><b>Expected result:</b> the accessibility tree should show <code>checked: false</code> initially, and <code>checked: true</code> once activated. This should toggle back and forth each time the element is activated.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -157,7 +161,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> the accessibility tree should show <code>checked: mixed</code> for this element.</p>
+<div class="note">
+  <p><b>Expected result:</b> the accessibility tree should show <code>checked: mixed</code> for this element.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -184,7 +190,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> the bookmarklet should flag this as an invalid value.</p>
+<div class="note">
+  <p><b>Expected result:</b> the bookmarklet should flag this as an invalid value.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -211,7 +219,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> the bookmarklet should flag this as an invalid value.</p>
+<div class="note">
+  <p><b>Expected result:</b> the bookmarklet should flag this as an invalid value.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -238,7 +248,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> the accessibility tree should show no determinable checked state at all, this is not the same as <code>checked: false</code>, assistive technology has nothing to announce either way. The bookmarklet should flag this as undefined.</p>
+<div class="note">
+  <p><b>Expected result:</b> the accessibility tree should show no determinable checked state at all, this is not the same as <code>checked: false</code>, assistive technology has nothing to announce either way. The bookmarklet should flag this as undefined.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -265,7 +277,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> a valid value per spec, functionally equivalent to omitting the attribute, no determinable checked state either way. The bookmarklet should treat this as valid, not flag it as an error.</p>
+<div class="note">
+  <p><b>Expected result:</b> a valid value per spec, functionally equivalent to omitting the attribute, no determinable checked state either way. The bookmarklet should treat this as valid, not flag it as an error.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>

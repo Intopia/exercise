@@ -98,34 +98,16 @@
 
 <pre><code>&lt;span role="img" title="?"&gt;&lt;/span&gt;</code></pre>
 
+<div class="note">
+  <h3>Why is there a space before the question mark?</h3>
 
-<!-- section -->
+  <p><em><q>Hello how are you doing today ?</q></em></p>
 
+  <p>The space is added by the browser when it builds the accessible name. Each <code>&lt;span role="img"&gt;</code> gets its text from an attribute (<code>aria-labelledby</code> and <code>title</code>), not from text content inside it. Chrome treats each of these as a separate piece and joins them with a space, so the <code>title</code> on the last span produces "today ?" rather than "today?".</p>
 
-<h2>Why is there a space before the question mark?</h2>
-
-<p><em><q>Hello how are you doing today ?</q></em></p>
-
-<p>The space is added by the browser when it builds the accessible name. Each <code>&lt;span role="img"&gt;</code> gets its text from an attribute (<code>aria-labelledby</code> and <code>title</code>), not from text content inside it. Chrome treats each of these as a separate piece and joins them with a space, so the <code>title</code> on the last span produces "today ?" rather than "today?".</p>
-
-<p>Plain text is different. Inline text with no whitespace between elements runs together exactly as written.</p>
-
-<h3>Try it</h3>
-
-<p>Compare these two buttons in your browser's accessibility inspector. Both have no whitespace between their spans.</p>
-
-<div class="example">
-  <button>
-    <span role="img" aria-label="today"></span>
-    <span role="img" title="?"></span>
-  </button>
-
-  <button>
-    <span>today</span><span>?</span>
-  </button>
+  <p>Plain text is different. Inline text with no whitespace between elements runs together exactly as written.</p>
 </div>
 
-<p>The browser decides how these pieces are joined, and browsers aren't perfectly consistent, so always check the computed name in each browser rather than assuming.</p>
 
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
