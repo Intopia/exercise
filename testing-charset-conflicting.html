@@ -32,7 +32,9 @@
   <p>Café — naïve piñata costs €5.99, “today” only.</p>
 </div>
 
-<p><b>Expected result:</b> per spec, character encoding is determined during early parsing of <code>&lt;head&gt;</code>, before <code>&lt;body&gt;</code> is even reached, so the body-placed declaration should have no effect at all, and this page should behave identically to the correct example, rendering every character above exactly as authored. Worth confirming directly that browsers actually ignore it entirely rather than getting confused by the conflicting signal.</p>
+<div class="note">
+  <p><b>Expected result:</b> per spec, character encoding is determined during early parsing of <code>&lt;head&gt;</code>, before <code>&lt;body&gt;</code> is even reached, so the body-placed declaration should have no effect at all, and this page should behave identically to the correct example, rendering every character above exactly as authored. Worth confirming directly that browsers actually ignore it entirely rather than getting confused by the conflicting signal.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>

@@ -41,8 +41,6 @@
 
 <p>This radio group has no <q>group</q> <code>role</code> or name.</p>
 
-<p><b>This is a serious accessibility issue</b>. Screen reader users have no way of knowing that these radio buttons form a group or what question they are intended to answer.</p>
-
 <form action="#" class="example">
   <ul class="form-list">
     <li>
@@ -59,6 +57,10 @@
     </li>
   </ul>
 </form>
+
+<div class="status status-invalid">
+  <p><b>This is a serious accessibility issue</b>. Screen reader users have no way of knowing that these radio buttons form a group or what question they are intended to answer.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -86,8 +88,6 @@
 
 <p>This radio group has no <q>group</q> <code>role</code> and the name is not programmatically associated with the radios.</p>
 
-<p><b>This is an accessibility issue</b>. Screen reader users may need to leave forms mode and navigate around the page to discover the nearby heading that describes the radio group.</p>
-
 <form action="#" class="example">
   <h3>Favourite animal</h3>
   <ul class="form-list">
@@ -105,6 +105,10 @@
     </li>
   </ul>
 </form>
+
+<div class="status status-invalid">
+  <p><b>This is an accessibility issue</b>. Screen reader users may need to leave forms mode and navigate around the page to discover the nearby heading that describes the radio group.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -133,8 +137,6 @@
 
 <p>This radio group has <q>group</q> <code>role</code> via <code>&lt;fieldset&gt;</code> but no name.</p>
 
-<p><b>This is an accessibility issue</b>. Although the radios are grouped, screen reader users may still need to leave forms mode to discover the question or heading that describes the group.</p>
-
 <form action="#" class="example">
   <fieldset>
     <ul class="form-list">
@@ -153,6 +155,10 @@
     </ul>
   </fieldset>
 </form>
+
+<div class="status status-invalid">
+  <p><b>This is an accessibility issue</b>. Although the radios are grouped, screen reader users may still need to leave forms mode to discover the question or heading that describes the group.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -182,8 +188,6 @@
 
 <p>This radio group has <q>group</q> <code>role</code> via <code>&lt;fieldset&gt;</code> and name via <code>&lt;legend&gt;</code></p>
 
-<p><b>Recommended</b>. The radio group has both a programmatic group and an accessible name, allowing screen reader users to understand the question while navigating the form.</p>
-
 <form action="#" class="example">
   <fieldset>
     <legend>Favourite animal</legend>
@@ -203,6 +207,10 @@
     </ul>
   </fieldset>
 </form>
+
+<div class="status status-good">
+  <p><b>Recommended</b>. The radio group has both a programmatic group and an accessible name, allowing screen reader users to understand the question while navigating the form.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -233,8 +241,6 @@
 
 <p>This radio group has <q>group</q> <code>role</code> via <code>radiogroup</code> and name via <code>aria-labelledby</code></p>
 
-<p><b>Acceptable when needed</b>. This provides an accessible group and name, but a native <code>&lt;fieldset&gt;</code> and <code>&lt;legend&gt;</code> should be preferred whenever possible.</p>
-
 <form action="#" class="example">
   <div role="radiogroup" aria-labelledby="aaa">
     <h3 id="aaa">Favourite animal</h3>
@@ -254,6 +260,10 @@
     </ul>
   </div>
 </form>
+
+<div class="status status-good">
+  <p><b>Acceptable when needed</b>. This provides an accessible group and name, but a native <code>&lt;fieldset&gt;</code> and <code>&lt;legend&gt;</code> should be preferred whenever possible.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>

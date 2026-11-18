@@ -32,13 +32,15 @@
 
 <h2>Name from content</h2>
 
-<p><b>Recommended</b>. The visible button text becomes the accessible name, making it simple, reliable and consistent for everyone.</p>
-
 <div class="example">
   <button>Hello world</button>
 </div>
 
 <p>The accessible name for this <code>&lt;button&gt;</code> should be: <q>Hello world</q></p>
+
+<div class="status status-good">
+  <p><b>Recommended</b>. The visible button text becomes the accessible name, making it simple, reliable and consistent for everyone.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -51,8 +53,6 @@
 
 <h2>Name via <code>aria-labelledby</code></h2>
 
-<p><b>Use with care</b>. This overrides the button's own text and should only be used when another visible label needs to provide the accessible name.</p>
-
 <p>This example fails <q>WCAG 2.5.3 Label in Name</q> because the visible text ("Close") does not match the accessible name ("Dismiss").</p>
 
 <div class="example">
@@ -61,6 +61,10 @@
 </div>
 
 <p>The accessible name for this <code>&lt;button&gt;</code> should be: <q>Dismiss</q></p>
+
+<div class="status status-poor">
+  <p><b>Use with care</b>. This overrides the button's own text and should only be used when another visible label needs to provide the accessible name.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -74,8 +78,6 @@
 
 <h2>Name via <code>aria-label</code></h2>
 
-<p><b>Avoid when visible text exists</b>. This replaces the visible text as the accessible name, which can create inconsistencies for screen reader and voice control users. Use it only when the visible text needs additional context that is not appropriate to display on screen.</p>
-
 <p>This example fails <q>WCAG 2.5.3 Label in Name</q> because the visible text ("Add to cart") does not match the accessible name ("Save this item").</p>
 
 <div class="example">
@@ -83,6 +85,10 @@
 </div>
 
 <p>The accessible name for this <code>&lt;button&gt;</code> should be: <q>Save this item</q></p>
+
+<div class="status status-poor">
+  <p><b>Avoid when visible text exists</b>. This replaces the visible text as the accessible name, which can create inconsistencies for screen reader and voice control users. Use it only when the visible text needs additional context that is not appropriate to display on screen.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -95,13 +101,15 @@
 
 <h2>Name via <code>title</code></h2>
 
-<p><b>Avoid</b>. The <code>title</code> attribute is not reliably exposed or discoverable and should not be relied upon to provide the accessible name for a button.</p>
-
 <div class="example">
   <button title="Continue"></button>
 </div>
 
 <p>The accessible name for this <code>&lt;button&gt;</code> should be: <q>Continue</q></p>
+
+<div class="status status-poor">
+  <p><b>Avoid</b>. The <code>title</code> attribute is not reliably exposed or discoverable and should not be relied upon to provide the accessible name for a button.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -114,13 +122,15 @@
 
 <h2>Name via <code>value</code></h2>
 
-<p><b>Recommended for</b> <code>&lt;input type="button"&gt;</code>. The value attribute provides both the visible label and the accessible name.</p>
-
 <div class="example">
   <input class="button" type="button" value="Create account">
 </div>
 
 <p>The accessible name for this <code>&lt;button&gt;</code> should be: <q>Create account</q></p>
+
+<div class="status status-good">
+  <p><b>Recommended for</b> <code>&lt;input type="button"&gt;</code>. The value attribute provides both the visible label and the accessible name.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -133,14 +143,16 @@
 
 <h2><code>&lt;input type="submit"&gt;</code></h2>
 
-<p><b>Recommended</b>. Like <code>&lt;input type="button"&gt;</code>, the <code>value</code> attribute provides both the visible label and the accessible name. Without a <code>value</code>, the browser supplies its own default label, and that default isn't guaranteed to be the same string across browsers or locales.</p>
-
 <div class="example">
   <input class="button" type="submit" value="Create account">
   <input class="button" type="submit">
 </div>
 
 <p>The accessible name for the first button should be: <q>Create account</q>. The second has no <code>value</code> attribute, so its accessible name comes from the browser's own default label, confirm directly what that actually is in your standard browsers rather than assuming.</p>
+
+<div class="status status-good">
+  <p><b>Recommended</b>. Like <code>&lt;input type="button"&gt;</code>, the <code>value</code> attribute provides both the visible label and the accessible name. Without a <code>value</code>, the browser supplies its own default label, and that default isn't guaranteed to be the same string across browsers or locales.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -154,14 +166,16 @@
 
 <h2><code>&lt;input type="reset"&gt;</code></h2>
 
-<p><b>Recommended</b>. Same mechanism as <code>submit</code> and <code>button</code>, the <code>value</code> attribute provides both the visible label and the accessible name, with the same browser-default caveat when it's omitted.</p>
-
 <div class="example">
   <input class="button" type="reset" value="Clear form">
   <input class="button" type="reset">
 </div>
 
 <p>The accessible name for the first button should be: <q>Clear form</q>. The second has no <code>value</code> attribute, confirm directly what default label your standard browsers supply.</p>
+
+<div class="status status-good">
+  <p><b>Recommended</b>. Same mechanism as <code>submit</code> and <code>button</code>, the <code>value</code> attribute provides both the visible label and the accessible name, with the same browser-default caveat when it's omitted.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -175,13 +189,17 @@
 
 <h2><code>&lt;input type="image"&gt;</code></h2>
 
-<p><b>Recommended when used</b>, though a native <code>&lt;button&gt;</code> containing an <code>&lt;img&gt;</code> is usually more flexible. Unlike the other input button types, <code>&lt;input type="image"&gt;</code> takes its accessible name from the <code>alt</code> attribute, the same mechanism as a plain <code>&lt;img&gt;</code>, not from <code>value</code>.</p>
+
 
 <div class="example">
   <input class="button" type="image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Search">
 </div>
 
 <p>The accessible name for this <code>&lt;button&gt;</code> should be: <q>Search</q></p>
+
+<div class="status status-good">
+  <p><b>Recommended when used</b>, though a native <code>&lt;button&gt;</code> containing an <code>&lt;img&gt;</code> is usually more flexible. Unlike the other input button types, <code>&lt;input type="image"&gt;</code> takes its accessible name from the <code>alt</code> attribute, the same mechanism as a plain <code>&lt;img&gt;</code>, not from <code>value</code>.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -194,13 +212,17 @@
 
 <h2><code>&lt;input type="image"&gt;</code>, no accessible name</h2>
 
-<p><b>Never do this</b>. The same failure as a bare <code>&lt;button&gt;&lt;/button&gt;</code>, but here the missing piece is <code>alt</code>, since this element has no visible text of its own to fall back on at all.</p>
+
 
 <div class="example">
   <input class="button" type="image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==">
 </div>
 
 <p>There is no accessible name for this <code>&lt;button&gt;</code>.</p>
+
+<div class="status status-invalid">
+  <p><b>Never do this</b>. The same failure as a bare <code>&lt;button&gt;&lt;/button&gt;</code>, but here the missing piece is <code>alt</code>, since this element has no visible text of its own to fall back on at all.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -213,13 +235,15 @@
 
 <h2><code>&lt;input type="image"&gt;</code>, name via <code>title</code></h2>
 
-<p><b>Avoid</b>. If <code>alt</code> is missing, some browsers fall back to <code>title</code> to supply an accessible name, the same reliability problem as relying on <code>title</code> for a native <code>&lt;button&gt;</code>, not guaranteed, and not discoverable to sighted users.</p>
-
 <div class="example">
   <input class="button" type="image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" title="Search">
 </div>
 
 <p>The accessible name for this <code>&lt;button&gt;</code> should be: <q>Search</q>, worth confirming directly, this fallback isn't guaranteed across browsers.</p>
+
+<div class="status status-avoid">
+  <p><b>Avoid</b>. If <code>alt</code> is missing, some browsers fall back to <code>title</code> to supply an accessible name, the same reliability problem as relying on <code>title</code> for a native <code>&lt;button&gt;</code>, not guaranteed, and not discoverable to sighted users.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -232,13 +256,15 @@
 
 <h2>Name via <code>role="button"</code></h2>
 
-<p><b>Avoid where possible</b>. Use a native <code>&lt;button&gt;</code> instead, as custom buttons require additional keyboard interaction, focus management and state handling.</p>
-
 <div class="example">
   <div role="button" class="button" tabindex="0">Submit</div>
 </div>
 
 <p>The accessible name for this <code>&lt;button&gt;</code> should be: <q>Submit</q></p>
+
+<div class="status status-poor">
+  <p><b>Avoid where possible</b>. Use a native <code>&lt;button&gt;</code> instead, as custom buttons require additional keyboard interaction, focus management and state handling.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -251,13 +277,15 @@
 
 <h2>No accessible name</h2>
 
-<p><b>Never do this</b>. Buttons without an accessible name cannot be identified by assistive technologies, making them unusable for many people.</p>
-
 <div class="example">
   <button></button>
 </div>
 
 <p>There is no accessible name for this <code>&lt;button&gt;</code>.</p>
+
+<div class="status status-invalid">
+  <p><b>Never do this</b>. Buttons without an accessible name cannot be identified by assistive technologies, making them unusable for many people.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>

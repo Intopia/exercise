@@ -31,11 +31,6 @@
 
 <p>Each example uses a text character rather than an icon. Every arrow is purely decorative here, hidden via <code>aria-hidden="true"</code> to avoid additional noise or confusion for screen reader users, since the adjacent visible text ("Back to home") already conveys the link's purpose on its own.</p>
 
-<div class="note">
-  <p><b>What this page is actually testing:</b> the accessibility behaviour is identical and settled across every example below, none of these arrows should ever be announced, that part isn't in question. What varies, and what's worth checking, is how reliably each glyph <em>renders</em> as a recognisable arrow across different browsers, operating systems, and font stacks. The rarer characters here (Examples 4 and 8 in particular) are more likely to fall back to a missing-glyph box ("tofu") on systems with narrower font support than the common ones.</p>
-  <p><b>Scope limitation:</b> this pattern only works because the arrow sits next to visible text conveying the same meaning. An icon-only version of any of these, with no visible "Back to home" text, would need the opposite treatment: a real accessible name on the link itself (for example, via <code>aria-label</code>), not <code>aria-hidden</code> on the arrow. Copying this pattern into an icon-only link would produce a link with no accessible name at all.</p>
-</div>
-
 <h3>Example 1: ← U+2190 LEFTWARDS ARROW</h3>
 <p><span aria-hidden="true" class="arrow">←</span> <a href="/">Back to home</a></p> 
 <pre><code>&lt;span aria-hidden="true"&gt;←&lt;/span&gt; &lt;a href="/"&gt;Back to home&lt;/a&gt;</code></pre>

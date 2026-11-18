@@ -963,7 +963,7 @@ Note
 .note              { --box-bg: #e8f1fb; --box-border: #1565a8; }
 .note-warning      { --box-bg: #fff8d6; --box-border: #a67c00; }
 .status-invalid    { --box-bg: #fde7e9; --box-border: #b00020; }
-.status-poor       { --box-bg: #fff1d6; --box-border: #b26a00; }
+.status-poor       { --box-bg: #fff8d6; --box-border: #a67c00; }
 .status-good       { --box-bg: #e3f4e6; --box-border: #1b5e20; }
 .status-control    { --box-bg: #eceff1; --box-border: #546e7a; }
 

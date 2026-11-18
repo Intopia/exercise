@@ -68,7 +68,9 @@
   <progress id="volume1" value="75" max="100">75%</progress>
 </div>
 
-<p><b>Expected result:</b> the accessible value should be announced as a number or percentage (e.g. "75 percent"), derived from <code>value="75"</code> and <code>max="100"</code>.</p>
+<div class="note">
+  <p><b>Expected result:</b> the accessible value should be announced as a number or percentage (e.g. "75 percent"), derived from <code>value="75"</code> and <code>max="100"</code>.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -89,7 +91,9 @@
   <progress id="volume2" value="75" max="100" aria-valuetext="Loud">75%</progress>
 </div>
 
-<p><b>Expected result:</b> according to the ARIA specification, the accessible value should be presented as “Loud” instead of the number or percentage value.</p>
+<div class="note">
+  <p><b>Expected result:</b> according to the ARIA specification, the accessible value should be presented as “Loud” instead of the number or percentage value.</p>
+</div>
 
 <blockquote>
   <p><em>&ldquo;If <code>aria-valuetext</code> is specified, assistive technologies SHOULD render that value instead of the value of <code>aria-valuenow</code>.&rdquo;</em></p>
@@ -130,7 +134,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> as with Example 2, the accessible value should be presented as “Loud” instead of the number or percentage value. Comparing results here against Example 2 shows whether a valuetext bug is specific to native elements, or applies to ARIA valuetext handling more broadly.</p>
+<div class="note">
+  <p><b>Expected result:</b> as with Example 2, the accessible value should be presented as “Loud” instead of the number or percentage value. Comparing results here against Example 2 shows whether a valuetext bug is specific to native elements, or applies to ARIA valuetext handling more broadly.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
