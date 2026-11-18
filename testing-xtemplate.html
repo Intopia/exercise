@@ -9,6 +9,27 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+<style>
+/* Table of contents: 2 columns, smaller text */
+nav[aria-labelledby="toc-heading"] ul {
+  columns: 2;
+  column-gap: 2em;
+  font-size: 0.875rem; /* 14px at default root size */
+  padding-left: 1.25em;
+}
+
+nav[aria-labelledby="toc-heading"] li {
+  break-inside: avoid; /* keep long items from splitting across columns */
+  margin-bottom: 0.25em;
+}
+
+/* Collapse to one column on narrow screens */
+@media (max-width: 30em) {
+  nav[aria-labelledby="toc-heading"] ul {
+    columns: 1;
+  }
+}
+</style>
 </head>
 <body>
 <main>
@@ -22,15 +43,36 @@
 
 <p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 
-<h1>Heading level 1</h1>
+<h1>Testing template</h1>
 
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda vel tenetur esse accusantium animi porro est tempore saepe, laborum totam eum voluptate expedita cum dolorum quam alias reiciendis odit ipsum.</p>
+<nav aria-labelledby="toc-heading" class="note">
+  <h2 class="h3" id="toc-heading">On this page</h2>
+  <ul>
+    <li><a href="#heading-levels">Heading level review - level 2</a></li>
+    <li><a href="#inline-text-elements">Inline text elements</a></li>
+    <li><a href="#blockquote">Blockquote</a></li>
+    <li><a href="#links">Link</a></li>
+    <li><a href="#lists">Lists</a></li>
+    <li><a href="#horizontal-rules">Horizontal rule</a></li>
+    <li><a href="#inline-code">Inline code</a></li>
+    <li><a href="#pre-and-code">Pre and code</a></li>
+    <li><a href="#details">Details</a></li>
+    <li><a href="#images-and-figures">Images and figures</a></li>
+    <li><a href="#video">Video</a></li>
+    <li><a href="#notes-and-status">Notes and Status</a></li>
+    <li><a href="#tables">Tables</a></li>
+    <li><a href="#forms">Forms</a></li>
+    <li><a href="#colours">Colours</a></li>
+    <li><a href="#example-block">Example block</a></li>
+    <li><a href="#cards">Cards</a></li>
+  </ul>
+</nav>
 
 
 <!-- section -->
 
 
-<h2>Heading level 2</h2>
+<h2 id="heading-levels">Heading level review - level 2</h2>
 
 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda vel tenetur esse accusantium animi porro est tempore saepe, laborum totam eum voluptate expedita cum dolorum quam alias reiciendis odit ipsum.</p>
 
@@ -52,6 +94,8 @@
 
 <h3>Heading with <code>aria-label</code> code inside</h3>
 
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda vel tenetur esse accusantium animi porro est tempore saepe.</p>
+
 <p class="h3">Paragraph styled with the .h3 class</p>
 
 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda vel tenetur esse accusantium animi porro est tempore saepe.</p>
@@ -60,7 +104,7 @@
 <!-- section -->
 
 
-<h2>Inline text elements</h2>
+<h2 id="inline-text-elements">Inline text elements</h2>
 
 <p>This paragraph has <strong>strong text</strong>, <em>emphasised text</em>, <mark>marked text</mark>, <small>small text</small>, <abbr title="Web Content Accessibility Guidelines">WCAG</abbr>, <del>deleted text</del>, <ins>inserted text</ins>, H<sub>2</sub>O, E = mc<sup>2</sup>, and a <q>short inline quote</q>.</p>
 
@@ -74,7 +118,7 @@
 <!-- section -->
 
 
-<h2>Blockquote</h2>
+<h2 id="blockquote">Blockquote</h2>
 
 <p>Lorem ipsum dolor sit amet consectetur adipisicing, elit. Magni ut atque, veniam sequi distinctio sint doloribus, eligendi fugiat nam alias ipsam tempora animi, nihil blanditiis natus. Cum blanditiis ut quas?</p>
 
@@ -88,7 +132,7 @@
 <!-- section -->
 
 
-<h2>Link</h2>
+<h2 id="links">Link</h2>
 
 <p>This is an example of a <a href="#">link</a> inside a paragraph of text. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
 
@@ -102,7 +146,7 @@
 <!-- section -->
 
 
-<h2>Lists</h2>
+<h2 id="lists">Lists</h2>
 
 <h3>An unordered list:</h3>
 
@@ -162,7 +206,7 @@
 <!-- section -->
 
 
-<h2>Horizontal rule</h2>
+<h2 id="horizontal-rules">Horizontal rule</h2>
 
 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
 
@@ -174,7 +218,7 @@
 <!-- section -->
 
 
-<h2>Inline code</h2>
+<h2 id="inline-code">Inline code</h2>
 
 <p>This is an example of inline code: <code>aria-labelledby</code> inside a paragraph of content.</p>
 
@@ -184,7 +228,7 @@
 <!-- section -->
 
 
-<h2>Pre and code</h2>
+<h2 id="pre-and-code">Pre and code</h2>
 
 <pre><code><span class="comment">/* This is a comment */</span>
 
@@ -204,7 +248,7 @@ body {
 <!-- section -->
 
 
-<h2>Details</h2>
+<h2 id="details">Details</h2>
 
 <p>Lorem, ipsum dolor sit amet  elit. Necessitatibus voluptas assumenda aut pariatur error saepe laboriosam facilis, corporis in dicta consequatur accusantium earum laborum iste inventore possimus sint suscipit obcaecati?</p>
 
@@ -228,7 +272,7 @@ body {
 <!-- section -->
 
 
-<h2>Images and figures</h2>
+<h2 id="images-and-figures">Images and figures</h2>
 
 <h3>Image on its own</h3>
 
@@ -256,7 +300,7 @@ body {
 <!-- section -->
 
 
-<h2>Video</h2>
+<h2 id="video">Video</h2>
 
 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
 
@@ -271,7 +315,64 @@ body {
 <!-- section -->
 
 
-<h2>Tables</h2>
+<h2 id="notes-and-status">Notes and Status</h2>
+
+<p>note:</p>
+
+<div class="note">
+  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi possimus ea, quas maxime, numquam consectetur repellendus, ab perferendis porro fugit similique molestiae officiis. Qui doloremque repudiandae in, laudantium sint vel!</p>
+</div>
+
+<p>Note-warning:</p>
+
+<div class="note note-warning">
+  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi possimus ea, quas maxime, numquam consectetur repellendus, ab perferendis porro fugit similique molestiae officiis. Qui doloremque repudiandae in, laudantium sint vel!</p>
+</div>
+
+<p>status-invalid:</p>
+
+<div class="status status-invalid">
+  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi possimus ea, quas maxime, numquam consectetur repellendus, ab perferendis porro fugit similique molestiae officiis. Qui doloremque repudiandae in, laudantium sint vel!</p>
+</div>
+
+<p>status-poor:</p>
+
+<div class="status status-poor">
+  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi possimus ea, quas maxime, numquam consectetur repellendus, ab perferendis porro fugit similique molestiae officiis. Qui doloremque repudiandae in, laudantium sint vel!</p>
+</div>
+
+<p>status-good:</p>
+
+<div class="status status-good">
+  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi possimus ea, quas maxime, numquam consectetur repellendus, ab perferendis porro fugit similique molestiae officiis. Qui doloremque repudiandae in, laudantium sint vel!</p>
+</div>
+
+<p>status-control:</p>
+
+<div class="status status-control">
+  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi possimus ea, quas maxime, numquam consectetur repellendus, ab perferendis porro fugit similique molestiae officiis. Qui doloremque repudiandae in, laudantium sint vel!</p>
+</div>
+
+<p>Level 3 Headings inside</p>
+
+<div class="note">
+  <h3>Heading level 3</h3>
+  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi possimus ea, quas maxime, numquam consectetur repellendus, ab perferendis porro fugit similique molestiae officiis. Qui doloremque repudiandae in, laudantium sint vel!</p>
+</div>
+
+<p>Level 3 and 4 headings inside</p>
+
+<div class="note">
+  <h3>Heading level 2</h4>
+  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi possimus ea, quas maxime, numquam consectetur repellendus, ab perferendis porro fugit similique molestiae officiis. Qui doloremque repudiandae in, laudantium sint vel!</p>
+  <h4>Heading level 3</h4>
+  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi possimus ea, quas maxime, numquam consectetur repellendus, ab perferendis porro fugit similique molestiae officiis. Qui doloremque repudiandae in, laudantium sint vel!</p>
+</div>
+
+<!-- section -->
+
+
+<h2 id="tables">Tables</h2>
 
 <table>
   <caption>Land mammals</caption>
@@ -348,7 +449,7 @@ body {
 <!-- section -->
 
 
-<h2>Forms</h2>
+<h2 id="forms">Forms</h2>
 
 <form action="#" class="example">
   <div class="form-group-spaced">
@@ -427,7 +528,7 @@ body {
 <!-- section -->
 
 
-<h2>Colours</h2>
+<h2 id="colours">Colours</h2>
 
 <p>This is an example of <span class="fail">fail</span>.</p>
 
@@ -443,7 +544,7 @@ body {
 <!-- section -->
 
 
-<h2>Example block</h2>
+<h2 id="example-block">Example block</h2>
 
 <p>Paragraph directly before an example block (tests p + .example).</p>
 
@@ -456,96 +557,7 @@ body {
 <!-- section -->
 
 
-<h2>Note</h2>
-
-<div class="note">
-  <h3>Note heading</h3>
-  <ul>
-    <li>Note list item 1</li>
-    <li>Note list item 2</li>
-    <li>Note list item 3</li>
-  </ul>
-</div>
-
-
-<!-- section -->
-
-
-<h2>Testing text contrast</h2>
-
-<div class="colour-example1">Example text 1</div>
-<div class="colour-example-box colour-example1-box"></div>
-
-<div class="colour-example2">Example text 2</div>
-<div class="colour-example-box colour-example2-box"></div>
-
-<div class="colour-example3">Example text 3</div>
-<div class="colour-example-box colour-example3-box"></div>
-
-<div class="colour-example4">Example text 4</div>
-<div class="colour-example-box colour-example4-box"></div>
-
-
-<!-- section -->
-
-
-<h2>Testing non-text contrast</h2>
-
-<div class="form-group-small">
-  <label class="label" for="kkk1">Input 1</label>
-  <input class="input input1" id="kkk1">
-</div>
-<div class="form-group-small">
-  <label class="label" for="kkk2">Input 2</label>
-  <input class="input input2" id="kkk2">
-</div>
-<div class="form-group-small">
-  <label class="label" for="kkk3">Input 3</label>
-  <input class="input input3" id="kkk3">
-</div>
-<div class="form-group-small">
-  <label class="label" for="kkk4">Input 4</label>
-  <input class="input input4" id="kkk4">
-</div>
-
-
-<!-- section -->
-
-
-<h2>Testing use of color</h2>
-
-<div class="user-of-color1">
-  <p>This paragraph has a <a href="#">link with no underline</a> that relies on colour alone.</p>
-</div>
-
-<table>
-  <caption>Test results</caption>
-  <thead>
-    <tr>
-      <th scope="col">Test</th>
-      <th scope="col">Colour only</th>
-      <th scope="col">Colour and icon</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">Test 1</th>
-      <td><span class="user-of-color-circle user-of-color-green"><span class="sr-only">Pass</span></span></td>
-      <td><span class="user-of-color-circle user-of-color-green2"><span class="sr-only">Pass</span></span></td>
-    </tr>
-    <tr>
-      <th scope="row">Test 2</th>
-      <td><span class="user-of-color-circle user-of-color-red"><span class="sr-only">Fail</span></span></td>
-      <td><span class="user-of-color-circle user-of-color-red2"><span class="sr-only">Fail</span></span></td>
-    </tr>
-  </tbody>
-</table>
-
-
-<!-- section -->
-
-
-<h2>Cards</h2>
+<h2 id="cards">Cards</h2>
 
 <h3>Basic card (no link)</h3>
 
@@ -598,19 +610,6 @@ body {
   <p>First paragraph. Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
   <p>Last paragraph, which should have no bottom margin.</p>
 </div>
-
-
-<!-- section -->
-
-
-<h2>Focus order nav</h2>
-
-<ul class="focus-order-nav">
-  <li><a href="#">Home</a></li>
-  <li><a href="#">About</a></li>
-  <li><a href="#">Services</a></li>
-  <li><a href="#">Contact</a></li>
-</ul>
 
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>

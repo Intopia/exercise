@@ -98,7 +98,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+.h3 {
   color: var(--colour-heading);
   font-weight: 600;
   font-family: var(--font-heading);
@@ -940,33 +941,41 @@ a.intopia-home-link:focus-visible {
 Note
 ----------------------*/
 
-.note {
-  background: #fee;
+/* shape, shared by every box */
+.note,
+.status {
   padding: 1em;
   margin: 1.5em 0;
-  border-left: var(--border-accent-width) solid var(--colour-error);
+  border-left: var(--border-accent-width) solid var(--box-border);
+  background: var(--box-bg);
+  color: #000;
 }
 
-.note ul,
-.note li {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
+/* colours only */
+.note              { --box-bg: #e8f1fb; --box-border: #1565a8; }
+.note-warning      { --box-bg: #fff8d6; --box-border: #a67c00; }
+.status-invalid    { --box-bg: #fde7e9; --box-border: #b00020; }
+.status-poor       { --box-bg: #fff1d6; --box-border: #b26a00; }
+.status-good       { --box-bg: #e3f4e6; --box-border: #1b5e20; }
+.status-control    { --box-bg: #eceff1; --box-border: #546e7a; }
 
-.note h3 {
-  margin: 0 0 .5em;
-  color: var(--colour-black);
-}
-
-.note > h2,
-.note > h3,
-.note > .h3 {
+/* trim the first and last child so the box padding is the only space at the edges */
+:where(.note, .status) > :first-child {
   margin-top: 0;
 }
 
-.note > p:last-child {
+:where(.note, .status) > :last-child {
   margin-bottom: 0;
+}
+
+/* a heading in the middle of a box still needs some separation */
+:where(.note, .status) > :not(:first-child):is(h2, h3, h4, .h3) {
+  margin-top: 1em;
+}
+
+/* headings inside boxes take the box's text colour */
+:where(.note, .status) :is(h1, h2, h3, h4, h5, h6, .h3) {
+  color: inherit;
 }
 
 /* ---------------------

@@ -178,16 +178,20 @@ a.intopia-home-link:focus-visible {
 }
 
 /* ---------------------
-Note
+Note and status boxes
 ----------------------*/
 
-.note {
-  background: #3a1f1f;              /* text ~12.3:1 */
-}
-
-.note h3 {
+.note,
+.status {
   color: var(--colour-text);
 }
+
+.note           { --box-bg: #1d2a3a; --box-border: #6ea8e0; }
+.note-warning   { --box-bg: #33290f; --box-border: #d4a72c; }
+.status-invalid { --box-bg: #3a1f24; --box-border: #ff6b6b; }
+.status-poor    { --box-bg: #3a2a12; --box-border: #e0933a; }
+.status-good    { --box-bg: #1b3322; --box-border: #4cc26a; }
+.status-control { --box-bg: #2a2f33; --box-border: #8fa6b2; }
 
 /* ---------------------
 Page meta
