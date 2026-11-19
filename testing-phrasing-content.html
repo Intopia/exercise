@@ -9,6 +9,11 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+<style>
+  .example p {
+    margin: 0;
+  }
+</style>
 </head>
 <body>
 <main>
@@ -54,7 +59,9 @@
 <pre><code>&lt;p&gt;Warning: <span class="highlight">&lt;strong&gt;</span>do not disconnect the power supply<span class="highlight">&lt;/strong&gt;</span> during installation.&lt;/p&gt;</code></pre>
 </details>
 
-<p><b>Expected result:</b> worth confirming directly, whether <code>&lt;strong&gt;</code> receives any distinct vocal treatment (a change in pitch, emphasis, or an announced label) compared with <code>&lt;b&gt;</code>, or whether both are read identically.</p>
+<div class="note">
+  <p><b>Expected result:</b> worth confirming directly, whether <code>&lt;strong&gt;</code> receives any distinct vocal treatment (a change in pitch, emphasis, or an announced label) compared with <code>&lt;b&gt;</code>, or whether both are read identically.</p>
+</div>
 
 
 <!-- section -->
@@ -82,7 +89,9 @@
 <pre><code>&lt;p&gt;I <span class="highlight">&lt;em&gt;</span>did<span class="highlight">&lt;/em&gt;</span> send the email yesterday.&lt;/p&gt;</code></pre>
 </details>
 
-<p><b>Expected result:</b> worth confirming directly, whether <code>&lt;em&gt;</code> is read with any actual vocal stress, or whether it's read identically to plain text and <code>&lt;i&gt;</code>.</p>
+<div class="note">
+  <p><b>Expected result:</b> worth confirming directly, whether <code>&lt;em&gt;</code> is read with any actual vocal stress, or whether it's read identically to plain text and <code>&lt;i&gt;</code>.</p>
+</div>
 
 
 <!-- section -->
@@ -110,7 +119,9 @@
 <pre><code>&lt;p&gt;The event was <span class="highlight">&lt;del&gt;</span>cancelled<span class="highlight">&lt;/del&gt;</span> postponed.&lt;/p&gt;</code></pre>
 </details>
 
-<p><b>Expected result:</b> worth confirming directly, whether <code>&lt;del&gt;</code> is announced as a deletion (for example, "deletion, cancelled") or read with no indication anything was removed, identically to <code>&lt;s&gt;</code>.</p>
+<div class="note">
+  <p><b>Expected result:</b> worth confirming directly, whether <code>&lt;del&gt;</code> is announced as a deletion (for example, "deletion, cancelled") or read with no indication anything was removed, identically to <code>&lt;s&gt;</code>.</p>
+</div>
 
 
 <!-- section -->
@@ -138,7 +149,9 @@
 <pre><code>&lt;p&gt;The meeting is now scheduled for <span class="highlight">&lt;ins&gt;</span>Wednesday<span class="highlight">&lt;/ins&gt;</span> at 3pm.&lt;/p&gt;</code></pre>
 </details>
 
-<p><b>Expected result:</b> worth confirming directly, whether <code>&lt;ins&gt;</code> is announced as an insertion, or read identically to <code>&lt;u&gt;</code> with no indication anything was added.</p>
+<div class="note">
+  <p><b>Expected result:</b> worth confirming directly, whether <code>&lt;ins&gt;</code> is announced as an insertion, or read identically to <code>&lt;u&gt;</code> with no indication anything was added.</p>
+</div>
 
 
 <!-- section -->
@@ -157,8 +170,9 @@
 <pre><code>&lt;p&gt;The <span class="highlight">&lt;abbr title="World Health Organization"&gt;</span>WHO<span class="highlight">&lt;/abbr&gt;</span> issued new guidelines today.&lt;/p&gt;</code></pre>
 </details>
 
-<p><b>Expected result:</b> worth confirming directly, whether the <code>title</code> is announced at all, and if so, whether "WHO" is spelled out letter by letter, read as a word, or the expanded title is read instead or in addition.</p>
-
+<div class="note">
+  <p><b>Expected result:</b> worth confirming directly, whether the <code>title</code> is announced at all, and if so, whether "WHO" is spelled out letter by letter, read as a word, or the expanded title is read instead or in addition.</p>
+</div>
 
 <!-- section -->
 
@@ -176,7 +190,9 @@
 <pre><code>&lt;p&gt;As the saying goes, <span class="highlight">&lt;q&gt;</span>actions speak louder than words<span class="highlight">&lt;/q&gt;</span>.&lt;/p&gt;</code></pre>
 </details>
 
-<p><b>Expected result:</b> worth confirming directly, whether this is announced as a quotation (for example, "quote... end quote"), or whether only the browser-generated punctuation characters are read as plain text, or neither.</p>
+<div class="note">
+  <p><b>Expected result:</b> worth confirming directly, whether this is announced as a quotation (for example, "quote... end quote"), or whether only the browser-generated punctuation characters are read as plain text, or neither.</p>
+</div>
 
 
 <!-- section -->
@@ -195,7 +211,9 @@
 <pre><code>&lt;p&gt;Please review the <span class="highlight">&lt;mark&gt;</span>highlighted<span class="highlight">&lt;/mark&gt;</span> section before submitting.&lt;/p&gt;</code></pre>
 </details>
 
-<p><b>Expected result:</b> worth confirming directly, whether this is announced as highlighted content, or read with no indication at all.</p>
+<div class="note">
+  <p><b>Expected result:</b> worth confirming directly, whether this is announced as highlighted content, or read with no indication at all.</p>
+</div>
 
 
 <!-- section -->
@@ -223,7 +241,9 @@
 <pre><code>&lt;p&gt;The deadline is March 3<span class="highlight">&lt;sup&gt;</span>rd<span class="highlight">&lt;/sup&gt;</span>.&lt;/p&gt;</code></pre>
 </details>
 
-<p><b>Expected result:</b> worth confirming directly, whether the subscript/superscript positioning is conveyed in any way, or whether the text is simply read in line with no indication of its position.</p>
+<div class="note">
+  <p><b>Expected result:</b> worth confirming directly, whether the subscript/superscript positioning is conveyed in any way, or whether the text is simply read in line with no indication of its position.</p>
+</div>
 
 
 <!-- section -->
@@ -251,7 +271,9 @@
 <pre><code>&lt;p&gt;<span class="highlight">&lt;dfn&gt;</span>Accessibility<span class="highlight">&lt;/dfn&gt;</span> refers to the practice of making content usable by people with disabilities.&lt;/p&gt;</code></pre>
 </details>
 
-<p><b>Expected result:</b> worth confirming directly, whether either is announced with any distinct role or label, or read as plain text.</p>
+<div class="note">
+  <p><b>Expected result:</b> worth confirming directly, whether either is announced with any distinct role or label, or read as plain text.</p>
+</div>
 
 
 <!-- section -->
@@ -288,7 +310,9 @@
 <pre><code>&lt;p&gt;The formula is <span class="highlight">&lt;var&gt;</span>x<span class="highlight">&lt;/var&gt;</span> = <span class="highlight">&lt;var&gt;</span>y<span class="highlight">&lt;/var&gt;</span> + 2.&lt;/p&gt;</code></pre>
 </details>
 
-<p><b>Expected result:</b> no distinct announcement is expected for any of these three, they should be read as plain text. This is the deliberate control group for this page, if any of these do produce a distinct announcement, that would be a genuinely notable finding worth recording.</p>
+<div class="note">
+  <p><b>Expected result:</b> no distinct announcement is expected for any of these three, they should be read as plain text. This is the deliberate control group for this page, if any of these do produce a distinct announcement, that would be a genuinely notable finding worth recording.</p>
+</div>
 
 
 <!-- section -->

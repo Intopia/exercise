@@ -10,17 +10,12 @@
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
   <style>
-h2 {
-  font-size: 1.75rem;
-  margin: 7rem 0 1rem;
-}
-
 h3 {
   margin: 3rem 0 1rem;
 }
 
-.example {
-  margin: 1em 0;
+.note-extra {
+  margin-top: 4rem;
 }
 
 .example h4 {
@@ -57,18 +52,11 @@ h3 {
   <p><strong>Simplest approach:</strong> add <code>aria-invalid="true"</code> to each checkbox. See the <a href="#recommended">recommended example</a>.</p>
 </div>
 
-<p>Every example has a coloured box below it showing how to read it:</p>
-
-<p class="status status-poor"><strong>Poor practice:</strong> allowed, but not recommended.</p>
-<p class="status status-good"><strong>Recommended:</strong> the approach to use.</p>
-
 
 <!-- section -->
 
 
 <h2>1. <code>aria-invalid</code> on the group</h2>
-
-<p><code>aria-invalid</code> marks the group as being in error. It is deprecated as a global attribute in ARIA 1.2 and is not supported on the <code>group</code> role, which both <code>fieldset</code> and <code>div</code> with <code>role="group"</code> have.</p>
 
 <!-- sub-section -->
 
@@ -177,8 +165,6 @@ h3 {
 
 
 <h2 id="recommended">2. <code>aria-invalid</code> on the checkboxes</h2>
-
-<p><code>aria-invalid</code> is supported on the <code>checkbox</code> role.</p>
 
 <!-- sub-section -->
 

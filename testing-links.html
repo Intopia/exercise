@@ -10,28 +10,23 @@
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
   <style>
+.example p {
+  margin: 0;
+}
 
-    .note {
-      background: #fff3cd;
-      border: 1px solid #ffe69c;
-      padding: 0.75em 1em;
-      border-radius: 4px;
-      margin: 1.5em 0;
-    }
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2em;
+  height: 2em;
+  color: #333;
+}
 
-    .icon-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 2em;
-      height: 2em;
-      color: #333;
-    }
-
-    .icon-link svg {
-      width: 1.5em;
-      height: 1.5em;
-    }
+.icon-link svg {
+  width: 1.5em;
+  height: 1.5em;
+}
 
   </style>
 </head>
@@ -63,7 +58,9 @@
   <p><a href="https://example.com/pricing">View pricing</a></p>
 </div>
 
-<p><b>Expected result:</b> this link's accessible name is unique across the whole page, and it points to its own destination. Nothing here should trigger any warning from the bookmarklet.</p>
+<div class="note">
+  <p><b>Expected result:</b> this link's accessible name is unique across the whole page, and it points to its own destination. Nothing here should trigger any warning from the bookmarklet.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -87,7 +84,9 @@
   </ul>
 </div>
 
-<p><b>Expected result:</b> both links share the exact same accessible name and resolve to the exact same destination. This is a common, generally fine pattern, the same policy linked from two places doesn't confuse anyone, since both take you to the same place. The bookmarklet should badge both green.</p>
+<div class="note">
+  <p><b>Expected result:</b> both links share the exact same accessible name and resolve to the exact same destination. This is a common, generally fine pattern, the same policy linked from two places doesn't confuse anyone, since both take you to the same place. The bookmarklet should badge both green.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -113,7 +112,9 @@
   </ul>
 </div>
 
-<p><b>Expected result:</b> both links share the exact same accessible name, "see product details", but resolve to two different destinations. A screen reader user navigating by a list of links, or anyone relying on the link text alone, has no way to tell these apart before activating one. The bookmarklet should badge both red.</p>
+<div class="note">
+  <p><b>Expected result:</b> both links share the exact same accessible name, "see product details", but resolve to two different destinations. A screen reader user navigating by a list of links, or anyone relying on the link text alone, has no way to tell these apart before activating one. The bookmarklet should badge both red.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -134,7 +135,9 @@
   <p><a href="https://example.com/report" title="Download the annual report">Download the annual report</a></p>
 </div>
 
-<p><b>Expected result:</b> the accessible name already comes from the link text, "Download the annual report", the identical <code>title</code> adds nothing new. Some screen reader/browser combinations will still announce the title as a tooltip readout on top of the accessible name, meaning the same text may be spoken twice. Worth confirming directly whether your standard AT/browser combinations actually double up here, behaviour varies.</p>
+<div class="note">
+  <p><b>Expected result:</b> the accessible name already comes from the link text, "Download the annual report", the identical <code>title</code> adds nothing new. Some screen reader/browser combinations will still announce the title as a tooltip readout on top of the accessible name, meaning the same text may be spoken twice. Worth confirming directly whether your standard AT/browser combinations actually double up here, behaviour varies.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -154,7 +157,9 @@
   <p><a href="https://example.com/account/settings" title="Opens in a new section">View account settings</a></p>
 </div>
 
-<p><b>Expected result:</b> the accessible name still comes from the visible link text, "View account settings", per the accessible name computation, <code>title</code> only becomes the name when no other name source exists, so it doesn't overwrite it here. Instead it typically becomes the accessible description, and some AT will read both the name and this differing description back to back, two different, unrelated pieces of text for one link. Confirm directly what your standard combinations actually do.</p>
+<div class="note">
+  <p><b>Expected result:</b> the accessible name still comes from the visible link text, "View account settings", per the accessible name computation, <code>title</code> only becomes the name when no other name source exists, so it doesn't overwrite it here. Instead it typically becomes the accessible description, and some AT will read both the name and this differing description back to back, two different, unrelated pieces of text for one link. Confirm directly what your standard combinations actually do.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -178,7 +183,9 @@
   </a>
 </div>
 
-<p><b>Expected result:</b> with nothing else to draw from, the accessible name computation falls back to <code>title</code>, so screen reader users hear "Open live chat". Sighted users get no text at all, only an icon shape to interpret. This is the reverse of the usual discoverability problem, the name is presented to screen reader users, but not to sighted users.</p>
+<div class="note">
+  <p><b>Expected result:</b> with nothing else to draw from, the accessible name computation falls back to <code>title</code>, so screen reader users hear "Open live chat". Sighted users get no text at all, only an icon shape to interpret. This is the reverse of the usual discoverability problem, the name is presented to screen reader users, but not to sighted users.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -199,7 +206,9 @@
   <p><a href="">Continue to checkout</a></p>
 </div>
 
-<p><b>Expected result:</b> an empty <code>href</code> resolves to the current page's own URL, so activating it doesn't error, it just reloads the page. It still counts as broken, there's no genuine destination, and depending on the page, form state, scroll position, unsaved input, reloading may not be harmless either. The bookmarklet should badge this red even though it technically resolves.</p>
+<div class="note">
+  <p><b>Expected result:</b> an empty <code>href</code> resolves to the current page's own URL, so activating it doesn't error, it just reloads the page. It still counts as broken, there's no genuine destination, and depending on the page, form state, scroll position, unsaved input, reloading may not be harmless either. The bookmarklet should badge this red even though it technically resolves.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -218,7 +227,9 @@
   <p><a>Terms and conditions</a></p>
 </div>
 
-<p><b>Expected result:</b> without an <code>href</code>, this isn't interactive content per the HTML spec, it's not part of the tab order, it has no default keyboard interaction, and browsers don't treat it as a hyperlink at all. Anyone expecting an <code>&lt;a&gt;</code> element to always behave like a link will be caught out here. The bookmarklet should badge this red.</p>
+<div class="note">
+  <p><b>Expected result:</b> without an <code>href</code>, this isn't interactive content per the HTML spec, it's not part of the tab order, it has no default keyboard interaction, and browsers don't treat it as a hyperlink at all. Anyone expecting an <code>&lt;a&gt;</code> element to always behave like a link will be caught out here. The bookmarklet should badge this red.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>

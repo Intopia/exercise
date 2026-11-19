@@ -43,7 +43,9 @@
   </svg>
 </div>
 
-<p><b>Expected result:</b> no accessible name is expected. Confirmed: the name-prohibited-roles bookmarklet found no issue here, SVG's implicit role is not on that list. Still worth confirming with a screen reader directly whether this SVG is exposed as a meaningful object at all.</p>
+<div class="note">
+  <p><b>Expected result:</b> no accessible name is expected. Confirmed: the name-prohibited-roles bookmarklet found no issue here, SVG's implicit role is not on that list. Still worth confirming with a screen reader directly whether this SVG is exposed as a meaningful object at all.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -62,7 +64,9 @@
   </svg>
 </div>
 
-<p><b>Expected result:</b> "Close" should be the accessible name. Confirmed: the name-prohibited-roles bookmarklet found no issue with <code>aria-label</code> here, no role="img" needed to avoid that specific concern. Whether it's needed for reliable announcement is a separate question, see Example 5.</p>
+<div class="note">
+  <p><b>Expected result:</b> "Close" should be the accessible name. Confirmed: the name-prohibited-roles bookmarklet found no issue with <code>aria-label</code> here, no role="img" needed to avoid that specific concern. Whether it's needed for reliable announcement is a separate question, see Example 5.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -82,7 +86,9 @@
   </svg>
 </div>
 
-<p><b>Expected result:</b> "Close" should be the accessible name, via the native SVG <code>&lt;title&gt;</code> element, the SVG equivalent of <code>alt</code>. Confirmed: the name-prohibited-roles bookmarklet found no issue here either.</p>
+<div class="note">
+  <p><b>Expected result:</b> "Close" should be the accessible name, via the native SVG <code>&lt;title&gt;</code> element, the SVG equivalent of <code>alt</code>. Confirmed: the name-prohibited-roles bookmarklet found no issue here either.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -105,7 +111,9 @@
   </svg>
 </div>
 
-<p><b>Expected result:</b> this SVG should be entirely excluded from the accessibility tree and never announced. This is the one example on this page with a well-established, uncontested outcome, decorative content hidden via <code>aria-hidden</code> is a settled, reliable pattern.</p>
+<div class="note">
+  <p><b>Expected result:</b> this SVG should be entirely excluded from the accessibility tree and never announced. This is the one example on this page with a well-established, uncontested outcome, decorative content hidden via <code>aria-hidden</code> is a settled, reliable pattern.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -126,7 +134,9 @@
   </svg>
 </div>
 
-<p><b>Expected result:</b> "Close" should be the accessible name, the same outcome as Example 2. Testing confirms <code>role="img"</code> is not required here to avoid a name-prohibited role. Historically, <code>role="img"</code> was recommended for a different reason, inconsistent browser support for SVG's implicit role. Whether that's still true, and whether it makes any measurable difference to actual screen reader announcement compared with Example 2, is worth testing directly rather than assuming either way.</p>
+<div class="note">
+  <p><b>Expected result:</b> "Close" should be the accessible name, the same outcome as Example 2. Testing confirms <code>role="img"</code> is not required here to avoid a name-prohibited role. Historically, <code>role="img"</code> was recommended for a different reason, inconsistent browser support for SVG's implicit role. Whether that's still true, and whether it makes any measurable difference to actual screen reader announcement compared with Example 2, is worth testing directly rather than assuming either way.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>

@@ -10,17 +10,12 @@
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
   <style>
-h2 {
-  font-size: 1.75rem;
-  margin: 7rem 0 1rem;
-}
-
 h3 {
   margin: 3rem 0 1rem;
 }
 
-.example {
-  margin: 1em 0;
+.note-extra {
+  margin-top: 4rem;
 }
 
 .example h4 {
@@ -57,19 +52,11 @@ h3 {
   <p><strong>Simplest approach:</strong> for any group of checkboxes or radios, add the requirement to the <a href="#recommended-name">group's name</a>, or add it as a <a href="#recommended-hint">hint</a>.</p>
 </div>
 
-<p>Every example has a coloured box below it showing how to read it:</p>
-
-<p class="status status-invalid"><strong>Invalid:</strong> not allowed by the HTML or ARIA specifications.</p>
-<p class="status status-poor"><strong>Poor practice:</strong> allowed, but not recommended.</p>
-<p class="status status-good"><strong>Recommended:</strong> the approach to use.</p>
-
 
 <!-- section -->
 
 
 <h2>1. Requirement as text outside the group</h2>
-
-<p>The requirement is written in the visible text outside the group.</p>
 
 <!-- sub-section -->
 
@@ -125,8 +112,6 @@ h3 {
 
 
 <h2>2. <code>aria-required</code> on the container</h2>
-
-<p><code>aria-required</code> is not supported on the <code>group</code> role, which <code>fieldset</code> has implicitly.</p>
 
 <!-- sub-section -->
 
@@ -228,8 +213,6 @@ h3 {
 
 <h2>3. <code>required</code> on the container</h2>
 
-<p><code>required</code> is an HTML attribute that is only valid on <code>input</code>, <code>select</code> and <code>textarea</code>. A role does not add HTML attributes.</p>
-
 <!-- sub-section -->
 
 <h3>Example 3.1: On the <code>fieldset</code></h3>
@@ -324,17 +307,11 @@ h3 {
 &lt;/div&gt;</code></pre>
 </details>
 
-<div class="status status-invalid">
-  <p><strong>None of these options is valid.</strong></p>
-</div>
-
 
 <!-- section -->
 
 
 <h2>4. Requirement on the checkboxes</h2>
-
-<p>Attributes on the checkboxes themselves. Each checkbox is its own control, so a requirement on a checkbox applies to that checkbox only.</p>
 
 <!-- sub-section -->
 
@@ -524,17 +501,11 @@ h3 {
 &lt;/fieldset&gt;</code></pre>
 </details>
 
-<div class="status status-poor">
-  <p><strong>None of these options is good practice.</strong></p>
-</div>
-
 
 <!-- section -->
 
 
 <h2 id="recommended-name">5. Requirement as text in the group's name</h2>
-
-<p>The requirement is written in the visible text as part of the group's name: the legend, or the labelling element.</p>
 
 <!-- sub-section -->
 
@@ -635,8 +606,6 @@ h3 {
 
 
 <h2 id="recommended-hint">6. Requirement as a hint</h2>
-
-<p>The requirement is a hint linked to the group with <code>aria-describedby</code>.</p>
 
 <!-- sub-section -->
 

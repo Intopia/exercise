@@ -32,10 +32,12 @@
 
 <p>The accessible name for this <code>&lt;button&gt;</code> should be: <q>Goodbye world</q></p>
 
-<p><b>Not recommended</b>. The accessible name does not match the visible text, which can cause problems for screen reader and voice control users.</p>
-
 <div class="example">
   <button aria-label="Goodbye world">Hello</button>
+</div>
+
+<div class="status status-poor">
+  <p><b>Not recommended</b>. The accessible name does not match the visible text, which can cause problems for screen reader and voice control users.</p>
 </div>
 
 <pre><code>&lt;button <span class="highlight">aria-label="Goodbye world"</span>&gt;Hello&lt;/button&gt;</code></pre>
@@ -48,10 +50,12 @@
 
 <p>The accessible name for this <code>&lt;button&gt;</code> should be: <q>Close dialog</q></p>
 
-<p><b>Recommended</b>. The accessible name begins with the visible text and provides additional context, making it easier for screen reader and voice control users.</p>
-
 <div class="example">
   <button aria-label="Close dialog">Close</button>
+</div>
+
+<div class="status status-good">
+  <p><b>Recommended</b>. The accessible name begins with the visible text and provides additional context, making it easier for screen reader and voice control users.</p>
 </div>
 
 <pre><code>&lt;button <span class="highlight">aria-label="Close dialog"</span>&gt;Close&lt;/button&gt;</code></pre>
@@ -65,10 +69,12 @@
 
 <p>The accessible name for this <code>&lt;button&gt;</code> should be: <q>Submit</q></p>
 
-<p><b>Recommended</b>. The visible text provides the accessible name, so screen reader and voice control users receive the same label that appears on screen.</p>
-
 <div class="example">
   <button>Submit</button>
+</div>
+
+<div class="status status-good">
+  <p><b>Recommended</b>. The visible text provides the accessible name, so screen reader and voice control users receive the same label that appears on screen.</p>
 </div>
 
 <pre><code>&lt;button&gt;Submit&lt;/button&gt;</code></pre>

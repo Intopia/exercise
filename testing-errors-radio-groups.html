@@ -10,17 +10,12 @@
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
   <style>
-h2 {
-  font-size: 1.75rem;
-  margin: 7rem 0 1rem;
-}
-
 h3 {
   margin: 3rem 0 1rem;
 }
 
-.example {
-  margin: 1em 0;
+.note-extra {
+  margin-top: 4rem;
 }
 
 .example h4 {
@@ -57,18 +52,11 @@ h3 {
   <p><strong>Simplest approach:</strong> link the error to the group with <code>aria-describedby</code>. See the <a href="#recommended">recommended examples</a>.</p>
 </div>
 
-<p>Every example has a coloured box below it showing how to read it:</p>
-
-<p class="status status-poor"><strong>Poor practice:</strong> allowed, but not recommended.</p>
-<p class="status status-good"><strong>Recommended:</strong> the approach to use.</p>
-
 
 <!-- section -->
 
 
 <h2>1. Text with no association</h2>
-
-<p>The error is visible, but nothing links it to the group.</p>
 
 <!-- sub-section -->
 
@@ -124,8 +112,6 @@ h3 {
 
 
 <h2>2. Error as text in the group's name</h2>
-
-<p>The error message is written into the group's name: the legend, or the labelling element.</p>
 
 <!-- sub-section -->
 
@@ -268,17 +254,11 @@ h3 {
 &lt;/div&gt;</code></pre>
 </details>
 
-<div class="status status-poor">
-  <p><strong>None of these options is good practice.</strong></p>
-</div>
-
 
 <!-- section -->
 
 
 <h2>3. <code>aria-describedby</code> on the radios</h2>
-
-<p>The error is linked to the radios themselves.</p>
 
 <!-- sub-section -->
 
@@ -378,17 +358,11 @@ h3 {
 &lt;/fieldset&gt;</code></pre>
 </details>
 
-<div class="status status-poor">
-  <p><strong>None of these options is good practice.</strong></p>
-</div>
-
 
 <!-- section -->
 
 
 <h2 id="recommended">4. Error linked to the group</h2>
-
-<p>The error is linked to the group with <code>aria-describedby</code>.</p>
 
 <!-- sub-section -->
 
@@ -541,8 +515,8 @@ h3 {
 <!-- section -->
 
 
-<div class="note">
-  <h2>Using hints and errors together</h2>
+<div class="note note-extra">
+  <h3>Using hints and errors together</h3>
   <p>A group can have both a hint and an error. Hints and errors use the same method, so list both IDs in one <code>aria-describedby</code>, separated by a space. See <a href="testing-hints-radio-groups.html">Testing hints on radio groups</a>.</p>
 <pre><code>&lt;fieldset <span class="highlight">aria-describedby="pets-hint pets-error"</span>&gt;
   &lt;legend&gt;Which is your favourite pet?&lt;/legend&gt;

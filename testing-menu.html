@@ -119,18 +119,20 @@
   &lt;!-- Message for screen readers --&gt;
 &lt;/div&gt;</code></pre>
 
-<h3>Expected results for screen readers</h3>
+<div class="note">
+    <h3>Expected results for screen readers</h3>
+  <ol>
+    <li>The <code>&lt;menu&gt;</code> element should be announced as a list (for example, "list, 3 items") when the screen reader enters it. It should not be announced as a menu</li>
+    <li>All button names should be announced</li>
+    <li>Activating "Inject Hello" should present "Hello world" into container below</li>
+    <li>The injected information should be announced to screen readers</li>
+    <li>Activating "Inject Goodbye" should present "Goodbye world" into container below</li>
+    <li>The injected information should be announced to screen readers</li>
+    <li>Activating the "Clear" button should clear any information from the container below</li>
+    <li>"Your message has been cleared" should be announced</li>
+  </ol>
+</div>
 
-<ol>
-  <li>The <code>&lt;menu&gt;</code> element should be announced as a list (for example, "list, 3 items") when the screen reader enters it. It should not be announced as a menu</li>
-  <li>All button names should be announced</li>
-  <li>Activating "Inject Hello" should present "Hello world" into container below</li>
-  <li>The injected information should be announced to screen readers</li>
-  <li>Activating "Inject Goodbye" should present "Goodbye world" into container below</li>
-  <li>The injected information should be announced to screen readers</li>
-  <li>Activating the "Clear" button should clear any information from the container below</li>
-  <li>"Your message has been cleared" should be announced</li>
-</ol>
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 </main>

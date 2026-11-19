@@ -64,14 +64,16 @@ a.icon-link:focus-visible {
 
 <p>There is no accessible name for the <code>&lt;a&gt;</code> element.</p>
 
-<p><b>Avoid</b>. The link has no visible text or accessible name.</p>
-
 <div class="example">
   <a href="#" class="icon-link">
     <svg width="40" height="40" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path fill="currentColor" d="M7.004 23.087l7.08-7.081-7.07-7.071L8.929 7.02l7.067 7.069L23.084 7l1.912 1.913-7.089 7.093 7.075 7.077-1.912 1.913-7.074-7.073L8.917 25z"/>
     </svg>
   </a>
+</div>
+
+<div class="status status-invalid">
+  <p><b>Avoid</b>. The link has no visible text or accessible name.</p>
 </div>
 
 <details>
@@ -89,14 +91,16 @@ a.icon-link:focus-visible {
 
 <p>The accessible name for the <code>&lt;a&gt;</code> element should be: <q>Close</q>.</p>
 
-<p><b>Acceptable</b>. The SVG provides an accessible name for the link, although labelling the link itself is generally preferred.</p>
-
 <div class="example">
   <a href="#" class="icon-link">
     <svg aria-label="Close" width="40" height="40" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
       <path fill="currentColor" d="M7.004 23.087l7.08-7.081-7.07-7.071L8.929 7.02l7.067 7.069L23.084 7l1.912 1.913-7.089 7.093 7.075 7.077-1.912 1.913-7.074-7.073L8.917 25z"/>
     </svg>
   </a>
+</div>
+
+<div class="status status-good">
+  <p><b>Acceptable</b>. The SVG provides an accessible name for the link, although labelling the link itself is generally preferred.</p>
 </div>
 
 <details>
@@ -114,8 +118,6 @@ a.icon-link:focus-visible {
 
 <p>The accessible name for the <code>&lt;a&gt;</code> element should be: <q>Close</q>.</p>
 
-<p><b>Acceptable</b>. The SVG <code>&lt;title&gt;</code> provides an accessible name for the link, although labelling the link itself is generally preferred.</p>
-
 <div class="example">
   <a href="#" class="icon-link">
     <svg width="40" height="40" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -123,6 +125,10 @@ a.icon-link:focus-visible {
       <path fill="currentColor" d="M7.004 23.087l7.08-7.081-7.07-7.071L8.929 7.02l7.067 7.069L23.084 7l1.912 1.913-7.089 7.093 7.075 7.077-1.912 1.913-7.074-7.073L8.917 25z"/>
     </svg>
   </a>
+</div>
+
+<div class="status status-good">
+  <p><b>Acceptable</b>. The SVG <code>&lt;title&gt;</code> provides an accessible name for the link, although labelling the link itself is generally preferred.</p>
 </div>
 
 <details>
@@ -142,14 +148,16 @@ a.icon-link:focus-visible {
 
 <p>The accessible name for the <code>&lt;a&gt;</code> element should be: <q>Dismiss</q>.</p>
 
-<p><b>Recommended</b>. The link itself provides the accessible name, making the labelling explicit and independent of the SVG.</p>
-
 <div class="example">
   <a href="#" class="icon-link" aria-label="Dismiss">
     <svg width="40" height="40" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
       <path fill="currentColor" d="M7.004 23.087l7.08-7.081-7.07-7.071L8.929 7.02l7.067 7.069L23.084 7l1.912 1.913-7.089 7.093 7.075 7.077-1.912 1.913-7.074-7.073L8.917 25z"/>
     </svg>
   </a>
+</div>
+
+<div class="status status-good">
+  <p><b>Recommended</b>. The link itself provides the accessible name, making the labelling explicit and independent of the SVG.</p>
 </div>
 
 <details>
@@ -167,8 +175,6 @@ a.icon-link:focus-visible {
 
 <p>The accessible name for the <code>&lt;a&gt;</code> element should be: <q>Dismiss</q>.</p>
 
-<p><b>Acceptable</b>. The link's <code>aria-label</code> provides the accessible name. The SVG <code>&lt;title&gt;</code> is ignored because the link already has its own accessible name.</p>
-
 <div class="example">
   <a href="#" class="icon-link" aria-label="Dismiss">
     <svg width="40" height="40" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -176,6 +182,10 @@ a.icon-link:focus-visible {
       <path fill="currentColor" d="M7.004 23.087l7.08-7.081-7.07-7.071L8.929 7.02l7.067 7.069L23.084 7l1.912 1.913-7.089 7.093 7.075 7.077-1.912 1.913-7.074-7.073L8.917 25z"/>
     </svg>
   </a>
+</div>
+
+<div class="status status-good">
+  <p><b>Acceptable</b>. The link's <code>aria-label</code> provides the accessible name. The SVG <code>&lt;title&gt;</code> is ignored because the link already has its own accessible name.</p>
 </div>
 
 <details>
@@ -195,14 +205,16 @@ a.icon-link:focus-visible {
 
 <p>The accessible name for the <code>&lt;a&gt;</code> element should be: <q>Close</q>.</p>
 
-<p><b>Acceptable</b>.The SVG provides an accessible name for the link. However, labelling the link directly is generally preferred.</p>
-
 <div class="example">
   <a href="#" class="icon-link">
     <svg role="img" aria-label="Close" width="40" height="40" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
       <path fill="currentColor" d="M7.004 23.087l7.08-7.081-7.07-7.071L8.929 7.02l7.067 7.069L23.084 7l1.912 1.913-7.089 7.093 7.075 7.077-1.912 1.913-7.074-7.073L8.917 25z"/>
     </svg>
   </a>
+</div>
+
+<div class="status status-good">
+  <p><b>Acceptable</b>.The SVG provides an accessible name for the link. However, labelling the link directly is generally preferred.</p>
 </div>
 
 <details>
@@ -220,7 +232,6 @@ a.icon-link:focus-visible {
 
 <p>The accessible name for the <code>&lt;a&gt;</code> element should be: <q>Close</q>.</p>
 
-<p><b>Recommended</b>. The visible link text provides the accessible name, while the decorative SVG is ignored by assistive technologies.</p>
 
 <div class="example">
   <a href="#">
@@ -229,6 +240,10 @@ a.icon-link:focus-visible {
     </svg>
     Close
   </a>
+</div>
+
+<div class="status status-good">
+  <p><b>Recommended</b>. The visible link text provides the accessible name, while the decorative SVG is ignored by assistive technologies.</p>
 </div>
 
 <details>
@@ -247,8 +262,6 @@ a.icon-link:focus-visible {
 
 <p>The accessible name for the <code>&lt;a&gt;</code> element should be: <q>Close</q>.</p>
 
-<p><b>Acceptable, but possibly fragile</b>. The SVG receives its accessible name from <code>aria-labelledby</code>, which becomes the accessible name of the link. Unlike Example 2, the label text lives in a separate element outside the link, connected only by matching id values. This works correctly as written, but is easier to accidentally break during future edits with no visible symptom. Example 2's <code>aria-label</code> directly on the SVG achieves the same result with less risk.</p>
-
 <div class="example">
   <a href="#" class="icon-link">
     <svg aria-labelledby="link-svg-label" width="40" height="40" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -256,6 +269,10 @@ a.icon-link:focus-visible {
     </svg>
   </a>
   <p id="link-svg-label" class="sr-only">Close</p>
+</div>
+
+<div class="status status-poor">
+  <p><b>Acceptable, but possibly fragile</b>. The SVG receives its accessible name from <code>aria-labelledby</code>, which becomes the accessible name of the link. Unlike Example 2, the label text lives in a separate element outside the link, connected only by matching id values. This works correctly as written, but is easier to accidentally break during future edits with no visible symptom. Example 2's <code>aria-label</code> directly on the SVG achieves the same result with less risk.</p>
 </div>
 
 <details>

@@ -9,6 +9,15 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+<style>
+  .example {
+    margin: 1em 0;
+  }
+
+  .example p {
+    margin: 0;
+  }
+</style>
 </head>
 <body>
 <main>
@@ -61,9 +70,13 @@
 
 <h2>code</h2>
 
-<div style="margin-bottom: 2em;"><span role="code" aria-label="Hello">This element has a role of <code>code</code></span></div>
+<div class="example">
+  <span role="code" aria-label="Hello">This element has a role of <code>code</code></span>
+</div>
 
-<div><code aria-label="Hello">This is the &lt;code&gt; element</code></div>
+<div class="example">
+  <code aria-label="Hello">This is the &lt;code&gt; element</code>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -77,9 +90,13 @@
 
 <h2>deletion</h2>
 
-<div style="margin-bottom: 2em;"><span role="deletion" aria-label="Hello">This element has a role of <code>deletion</code></span></div>
+<div class="example">
+  <span role="deletion" aria-label="Hello">This element has a role of <code>deletion</code></span>
+</div>
 
-<div><del aria-label="Hello">This is the <code>&lt;del&gt;</code> element</del></div>
+<div class="example">
+  <del aria-label="Hello">This is the <code>&lt;del&gt;</code> element</del>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -93,9 +110,14 @@
 
 <h2>emphasis</h2>
 
-<div style="margin-bottom: 2em;"><span role="emphasis" aria-label="Hello">This element has a role of <code>emphasis</code></span></div>
+<div class="example">
+  <span role="emphasis" aria-label="Hello">This element has a role of <code>emphasis</code></span>
+</div>
 
-<div><em aria-label="Hello">This is the <code>&lt;em&gt;</code> element</em></div>
+<div class="example">
+  <em aria-label="Hello">This is the <code>&lt;em&gt;</code> element</em>
+</div>
+
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;span role="emphasis" aria-label="Hello"&gt;...&lt;/span&gt;
@@ -108,9 +130,13 @@
 
 <h2>generic</h2>
 
-<div style="margin-bottom: 2em;"><span aria-label="Hello">This is the <code>&lt;span&gt;</code> element, a generic element</span></div>
+<div class="example">
+  <span aria-label="Hello">This is the <code>&lt;span&gt;</code> element, a generic element</span>
+</div>
 
-<div aria-label="Hello">This is the <code>&lt;div&gt;</code> element, a generic element</div>
+<div class="example">
+  <div aria-label="Hello">This is the <code>&lt;div&gt;</code> element, a generic element</div>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -124,9 +150,13 @@
 
 <h2>insertion</h2>
 
-<div style="margin-bottom: 2em;"><span role="insertion" aria-label="Hello">This element has a role of <code>insertion</code></span></div>
+<div class="example">
+  <span role="insertion" aria-label="Hello">This element has a role of <code>insertion</code></span>
+</div>
 
-<div><ins aria-label="Hello">This is the <code>&lt;ins&gt;</code> element</ins></div>
+<div class="example">
+  <ins aria-label="Hello">This is the <code>&lt;ins&gt;</code> element</ins>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -140,9 +170,13 @@
 
 <h2>paragraph</h2>
 
-<div style="margin-bottom: 2em;"><span role="paragraph" aria-label="Hello">This element has a role of <code>paragraph</code></span></div>
+<div class="example">
+  <span role="paragraph" aria-label="Hello">This element has a role of <code>paragraph</code></span>
+</div>
 
-<p aria-label="Hello">This is the <code>&lt;p&gt;</code> element</p>
+<div class="example">
+  <p aria-label="Hello">This is the <code>&lt;p&gt;</code> element</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -156,7 +190,9 @@
 
 <h2>presentation</h2>
 
-<div><span role="presentation" aria-label="Hello">This element has a role of <code>presentation</code></span></div>
+<div class="example">
+  <span role="presentation" aria-label="Hello">This element has a role of <code>presentation</code></span>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -169,9 +205,13 @@
 
 <h2>strong</h2>
 
-<div style="margin-bottom: 2em;"><span role="strong" aria-label="Hello">This element has a role of <code>strong</code></span></div>
+<div class="example">
+  <span role="strong" aria-label="Hello">This element has a role of <code>strong</code></span>
+</div>
 
-<div><strong aria-label="Hello">This is the <code>&lt;strong&gt;</code> element</strong></div>
+<div class="example">
+  <strong aria-label="Hello">This is the <code>&lt;strong&gt;</code> element</strong>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -185,9 +225,13 @@
 
 <h2>subscript</h2>
 
-<div style="margin-bottom: 2em;"><span role="subscript" aria-label="Hello">This element has a role of <code>subscript</code></span></div>
+<div class="example">
+  <span role="subscript" aria-label="Hello">This element has a role of <code>subscript</code></span>
+</div>
 
-<div><sub aria-label="Hello">This is the <code>&lt;sub&gt;</code> element</sub></div>
+<div class="example">
+  <sub aria-label="Hello">This is the <code>&lt;sub&gt;</code> element</sub>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -201,9 +245,13 @@
 
 <h2>superscript</h2>
 
-<div style="margin-bottom: 2em;"><span role="superscript" aria-label="Hello">This element has a role of <code>superscript</code></span></div>
+<div class="example">
+  <span role="superscript" aria-label="Hello">This element has a role of <code>superscript</code></span>
+</div>
 
-<div><sup aria-label="Hello">This is the <code>&lt;sup&gt;</code> element</sup></div>
+<div class="example">
+  <sup aria-label="Hello">This is the <code>&lt;sup&gt;</code> element</sup>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -219,9 +267,13 @@
 
 <h2>definition</h2>
 
-<div style="margin-bottom: 2em;"><span role="definition" aria-label="Hello">This element has a role of <code>definition</code></span></div>
+<div class="example">
+  <span role="definition" aria-label="Hello">This element has a role of <code>definition</code></span>
+</div>
 
-<div><dfn aria-label="Hello">This is the <code>&lt;dfn&gt;</code> element</dfn></div>
+<div class="example">
+  <dfn aria-label="Hello">This is the <code>&lt;dfn&gt;</code> element</dfn>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -235,9 +287,13 @@
 
 <h2>mark</h2>
 
-<div style="margin-bottom: 2em;"><span role="mark" aria-label="Hello">This element has a role of <code>mark</code></span></div>
+<div class="example">
+  <span role="mark" aria-label="Hello">This element has a role of <code>mark</code></span>
+</div>
 
-<div><mark aria-label="Hello">This is the <code>&lt;mark&gt;</code> element</mark></div>
+<div class="example">
+  <mark aria-label="Hello">This is the <code>&lt;mark&gt;</code> element</mark>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -251,7 +307,9 @@
 
 <h2>none</h2>
 
-<div><span role="none" aria-label="Hello">This element has a role of <code>none</code></span></div>
+<div class="example">
+  <span role="none" aria-label="Hello">This element has a role of <code>none</code></span>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -264,7 +322,9 @@
 
 <h2>suggestion</h2>
 
-<div><span role="suggestion" aria-label="Hello">This element has a role of <code>suggestion</code></span></div>
+<div class="example">
+  <span role="suggestion" aria-label="Hello">This element has a role of <code>suggestion</code></span>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -277,7 +337,9 @@
 
 <h2>term</h2>
 
-<div><span role="term" aria-label="Hello">This element has a role of <code>term</code></span></div>
+<div class="example">
+  <span role="term" aria-label="Hello">This element has a role of <code>term</code></span>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -290,9 +352,13 @@
 
 <h2>time</h2>
 
-<div style="margin-bottom: 2em;"><span role="time" aria-label="Hello">This element has a role of <code>time</code></span></div>
+<div class="example">
+  <span role="time" aria-label="Hello">This element has a role of <code>time</code></span>
+</div>
 
-<div><time aria-label="Hello">This is the <code>&lt;time&gt;</code> element</time></div>
+<div class="example">
+  <time aria-label="Hello">This is the <code>&lt;time&gt;</code> element</time>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -306,7 +372,9 @@
 
 <h2>tooltip</h2>
 
-<div><span role="tooltip" aria-label="Hello">This element has a role of <code>tooltip</code></span></div>
+<div>
+  <span role="tooltip" aria-label="Hello">This element has a role of <code>tooltip</code></span>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -319,9 +387,13 @@
 
 <h2>invalid/made-up role</h2>
 
-<div role="fake" aria-label="Hello" style="margin-bottom: 2em;">This element has a made-up role of <code>fake</code></div>
+<div class="example">
+  <div role="fake" aria-label="Hello">This element has a made-up role of <code>fake</code></div>
+</div>
 
-<div><span role="madeup" aria-label="Hello">This element has a made-up role of <code>madeup</code></span></div>
+<div class="example">
+  <span role="madeup" aria-label="Hello">This element has a made-up role of <code>madeup</code></span>
+</div>
 
 <details>
   <summary>HTML markup</summary>

@@ -136,23 +136,21 @@
 
 <p>This page pairs with the "Highlight target size" bookmarklet, covering <a href="https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html" target="_blank">WCAG 2.2 2.5.8 Target Size (Minimum)</a>. The bookmarklet flags pointer targets smaller than 24 &times; 24 CSS pixels, draws a dashed 24px circle centred on each undersized target, and reports whether that circle overlaps another target.</p>
 
-<div class="note">
-  <p>What the bookmarklet reports:</p>
-  <table>
-    <thead>
-      <tr>
-        <th scope="col">Colour</th>
-        <th scope="col">Meaning</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>No badge</td><td>Meets 24 &times; 24, or excluded from measurement entirely</td></tr>
-      <tr><td>Amber</td><td>Under 24 &times; 24, spacing is clear</td></tr>
-      <tr><td>Red</td><td>Under 24 &times; 24, its 24px circle overlaps another target</td></tr>
-    </tbody>
-  </table>
-  <p>This is a warnings-only tool. 2.5.8 has exceptions that need human judgement, an inline text link, the same function available another way, or a control whose size the browser sets and the author never touched, and the bookmarklet can't evaluate any of those on its own. Where a warning might be one of these exceptions, the badge says so, it doesn't resolve it for you.</p>
-</div>
+<p>What the bookmarklet reports:</p>
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Colour</th>
+      <th scope="col">Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>No badge</td><td>Meets 24 &times; 24, or excluded from measurement entirely</td></tr>
+    <tr><td>Amber</td><td>Under 24 &times; 24, spacing is clear</td></tr>
+    <tr><td>Red</td><td>Under 24 &times; 24, its 24px circle overlaps another target</td></tr>
+  </tbody>
+</table>
+<p>This is a warnings-only tool. 2.5.8 has exceptions that need human judgement, an inline text link, the same function available another way, or a control whose size the browser sets and the author never touched, and the bookmarklet can't evaluate any of those on its own. Where a warning might be one of these exceptions, the badge says so, it doesn't resolve it for you.</p>
 
 
 <!-- section -->
@@ -166,7 +164,9 @@
   <button class="btn-pass" type="button">&times;</button>
 </div>
 
-<p><b>Expected result:</b> no badge at all. A genuine pass is silent, the summary panel at the bottom of the page is what confirms this target was actually measured and counted, not skipped.</p>
+<div class="note">
+  <p><b>Expected result:</b> no badge at all. A genuine pass is silent, the summary panel at the bottom of the page is what confirms this target was actually measured and counted, not skipped.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -185,7 +185,9 @@
   <button class="btn-tiny-alone" type="button" aria-label="Close">&times;</button>
 </div>
 
-<p><b>Expected result:</b> amber. Undersized, but its 24px circle doesn't overlap any other target, "16 &times; 16 &mdash; under 24 &times; 24. Spacing clear".</p>
+<div class="note">
+  <p><b>Expected result:</b> amber. Undersized, but its 24px circle doesn't overlap any other target, "16 &times; 16 &mdash; under 24 &times; 24. Spacing clear".</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -207,7 +209,9 @@
   </span>
 </div>
 
-<p><b>Expected result:</b> red, on both buttons. Each is undersized, and each one's 24px circle overlaps the other, "24px circle overlaps 1 other target".</p>
+<div class="note">
+  <p><b>Expected result:</b> red, on both buttons. Each is undersized, and each one's 24px circle overlaps the other, "24px circle overlaps 1 other target".</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -228,7 +232,9 @@
   <button class="btn-disabled-tiny" type="button" aria-label="Close" disabled>&times;</button>
 </div>
 
-<p><b>Expected result:</b> no badge, and not counted in the summary panel's total either. A disabled control can't receive a pointer action, so it isn't a target at all, this isn't a pass, it's an exclusion.</p>
+<div class="note">
+  <p><b>Expected result:</b> no badge, and not counted in the summary panel's total either. A disabled control can't receive a pointer action, so it isn't a target at all, this isn't a pass, it's an exclusion.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -248,7 +254,9 @@
   <button type="button" style="display: none;">Never shown</button>
 </div>
 
-<p><b>Expected result:</b> no badge, no entry in the summary panel's total, for either element. Correct, not a bug in this page, an <code>&lt;input type="hidden"&gt;</code> has no visible interface at all, and a <code>display: none</code> element has no box to measure.</p>
+<div class="note">
+  <p><b>Expected result:</b> no badge, no entry in the summary panel's total, for either element. Correct, not a bug in this page, an <code>&lt;input type="hidden"&gt;</code> has no visible interface at all, and a <code>display: none</code> element has no box to measure.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -268,7 +276,9 @@
   <p>For more information, read our <a href="#" class="inline-small-link">full policy</a> before continuing.</p>
 </div>
 
-<p><b>Expected result:</b> still flagged, the tool doesn't grant the exception itself, but the badge text adds "Inline text link, exception may apply", flagging that this is exactly the kind of case 2.5.8 excludes, a link that's part of running text, and needs a human decision rather than an automated one.</p>
+<div class="note">
+  <p><b>Expected result:</b> still flagged, the tool doesn't grant the exception itself, but the badge text adds "Inline text link, exception may apply", flagging that this is exactly the kind of case 2.5.8 excludes, a link that's part of running text, and needs a human decision rather than an automated one.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -290,7 +300,9 @@
   <input class="checkbox-tiny" type="checkbox" aria-label="Subscribe to updates">
 </div>
 
-<p><b>Expected result:</b> flagged, with "Native control, check whether the author changed its size" appended. This is a nudge, not a verdict, a native checkbox rendered at its own default size is a common, often accepted exception, but this one has no visible label to union with either, so it's worth a second look regardless.</p>
+<div class="note">
+  <p><b>Expected result:</b> flagged, with "Native control, check whether the author changed its size" appended. This is a nudge, not a verdict, a native checkbox rendered at its own default size is a common, often accepted exception, but this one has no visible label to union with either, so it's worth a second look regardless.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -310,7 +322,9 @@
   <label class="rescued-label" for="rescued-checkbox">Subscribe to updates</label>
 </div>
 
-<p><b>Expected result:</b> no badge. The checkbox alone is 14 &times; 14, but unioned with its label's padded box, the combined target clears 24 &times; 24 in both width and height, so it isn't undersized at all.</p>
+<div class="note">
+  <p><b>Expected result:</b> no badge. The checkbox alone is 14 &times; 14, but unioned with its label's padded box, the combined target clears 24 &times; 24 in both width and height, so it isn't undersized at all.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -333,7 +347,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> flagged on its own, at 14 &times; 14. The label is still programmatically associated and still activates the checkbox when clicked, but it's positioned too far away to be counted as part of the same visual target, so the union doesn't apply and the checkbox is measured alone.</p>
+<div class="note">
+  <p><b>Expected result:</b> flagged on its own, at 14 &times; 14. The label is still programmatically associated and still activates the checkbox when clicked, but it's positioned too far away to be counted as part of the same visual target, so the union doesn't apply and the checkbox is measured alone.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -358,7 +374,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> the card itself passes silently, comfortably over 24 &times; 24. The icon button is undersized at 16 &times; 16, and its 24px circle does overlap the card underneath it, but since the card contains the button, that overlap isn't counted as a spacing conflict. Amber, not red, "Spacing clear".</p>
+<div class="note">
+  <p><b>Expected result:</b> the card itself passes silently, comfortably over 24 &times; 24. The icon button is undersized at 16 &times; 16, and its 24px circle does overlap the card underneath it, but since the card contains the button, that overlap isn't counted as a spacing conflict. Amber, not red, "Spacing clear".</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -382,7 +400,9 @@
   <button class="tiny-with-overlay" type="button" aria-label="Info">i</button>
 </div>
 
-<p><b>Expected result:</b> flagged as undersized, 16 &times; 16, even though the real clickable area is closer to 32 &times; 32. This is a documented, genuine limitation, not a bug, the bookmarklet measures <code>getBoundingClientRect()</code> on the element itself, and a <code>::before</code> or <code>::after</code> overlay isn't part of that measurement. Worth checking by hand before treating this one as a real failure.</p>
+<div class="note">
+  <p><b>Expected result:</b> flagged as undersized, 16 &times; 16, even though the real clickable area is closer to 32 &times; 32. This is a documented, genuine limitation, not a bug, the bookmarklet measures <code>getBoundingClientRect()</code> on the element itself, and a <code>::before</code> or <code>::after</code> overlay isn't part of that measurement. Worth checking by hand before treating this one as a real failure.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>

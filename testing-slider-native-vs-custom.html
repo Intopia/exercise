@@ -105,7 +105,9 @@
   <output for="volume-native" id="volume-native-output">40</output>
 </div>
 
-<p><b>Expected result:</b> Arrow keys, Home, End, and Page Up/Down should all work immediately, with no JavaScript. The <code>&lt;output&gt;</code> is a small, optional addition, purely visual, showing sighted users the numeric value, since a bare slider thumb position alone can be hard to read precisely. It has no effect on what's announced to AT, that comes from the input's own native state.</p>
+<div class="note">
+  <p><b>Expected result:</b> Arrow keys, Home, End, and Page Up/Down should all work immediately, with no JavaScript. The <code>&lt;output&gt;</code> is a small, optional addition, purely visual, showing sighted users the numeric value, since a bare slider thumb position alone can be hard to read precisely. It has no effect on what's announced to AT, that comes from the input's own native state.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -205,16 +207,18 @@
   </tbody>
 </table>
 
-<p><b>Expected result:</b></p>
-<ul>
-  <li>Arrow Up / Arrow Right: increase by 1</li>
-  <li>Arrow Down / Arrow Left: decrease by 1</li>
-  <li>Page Up / Page Down: increase/decrease by 10</li>
-  <li>Home / End: jump to minimum / maximum</li>
-  <li>Clicking anywhere on the track: jump the thumb to that position</li>
-  <li>Dragging the thumb: move it with the mouse or touch, clamped between 0 and 100</li>
-  <li>All of the above should update the visible position, the visible number, and <code>aria-valuenow</code> together, in sync</li>
-</ul>
+<div class="note">
+  <p><b>Expected result:</b></p>
+  <ul>
+    <li>Arrow Up / Arrow Right: increase by 1</li>
+    <li>Arrow Down / Arrow Left: decrease by 1</li>
+    <li>Page Up / Page Down: increase/decrease by 10</li>
+    <li>Home / End: jump to minimum / maximum</li>
+    <li>Clicking anywhere on the track: jump the thumb to that position</li>
+    <li>Dragging the thumb: move it with the mouse or touch, clamped between 0 and 100</li>
+    <li>All of the above should update the visible position, the visible number, and <code>aria-valuenow</code> together, in sync</li>
+  </ul>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -235,9 +239,6 @@
 &lt;span id="volume-custom-output"&gt;40&lt;/span&gt;</code></pre>
 </details>
 
-<div class="note">
-  <p><b>Worth testing directly:</b> confirm with your standard screen reader and browser combinations that value changes are actually announced automatically while the thumb is focused, without any <code>aria-live</code> region. If any combination stays silent, that would be a genuinely useful, concrete finding, and would mean the "resolved" answer in the table above needs revisiting for that specific combination.</p>
-</div>
 
 <script>
 (function () {

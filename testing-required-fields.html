@@ -9,6 +9,11 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+<style>
+  h3 {
+    margin-top: 3rem;
+  }
+</style>
 </head>
 <body>
 <main>
@@ -42,8 +47,6 @@
 
 <p>This example has no visual identification.</p>
 
-<p><b>Not recommended</b>. Sighted users have no visual indication that the field is required.</p>
-
 <form action="#" class="example">
   <div class="form-group">
     <label class="label" for="q1">What is your family name?</label>
@@ -51,7 +54,11 @@
   </div>
 </form>
 
-<details open>
+<div class="status status-poor">
+  <p><b>Not recommended</b>. Sighted users have no visual indication that the field is required.</p>
+</div>
+
+<details>
   <summary>HTML markup</summary>
 <pre><code>&lt;label for="q1"&gt;What is your family name?&lt;/label&gt;
 &lt;input id="q1" required&gt;</code></pre>
@@ -63,8 +70,6 @@
 
 <p>This example has visual identification via (*) symbol.</p>
 
-<p><b>Acceptable</b>. Sighted users can identify the field as required. However, some users may not notice or understand the asterisk.</p>
-
 <form action="#" class="example">
   <div class="form-group">
     <label class="label" for="q2">What is the name of your first pet? <span style="color: #CC0000;">*</span></label>
@@ -72,7 +77,11 @@
   </div>
 </form>
 
-<details open>
+<div class="status status-good">
+  <p><b>Acceptable</b>. Sighted users can identify the field as required. However, some users may not notice or understand the asterisk.</p>
+</div>
+
+<details>
   <summary>HTML markup</summary>
 <pre><code>&lt;label for="q2"&gt;What is the name of your first pet? <span class="highlight">*</span>&lt;/label&gt;
 &lt;input id="q2" required&gt;</code></pre>
@@ -84,8 +93,6 @@
 
 <p>This example has visual identification via (Required).</p>
 
-<p><b>Recommended</b>. Sighted users can clearly identify that the field is required.</p>
-
 <form action="#" class="example">
   <div class="form-group">
     <label class="label" for="q3">What is your favourite colour? <span class="required">(Required)</span></label>
@@ -93,7 +100,11 @@
   </div>
 </form>
 
-<details open>
+<div class="status status-good">
+  <p><b>Recommended</b>. Sighted users can clearly identify that the field is required.</p>
+</div>
+
+<details>
   <summary>HTML markup</summary>
 <pre><code>&lt;label for="q3"&gt;What is your favourite colour?
   <span class="highlight">(Required)</span>&lt;/label&gt;
@@ -114,8 +125,6 @@
 
 <p>This example has no programmatic identification.</p>
 
-<p><b>Not recommended</b>. Screen reader users receive no programmatic indication that it is required.</p>
-
 <form action="#" class="example">
   <div class="form-group">
     <label class="label" for="q4">What is your favourite song?</label>
@@ -123,7 +132,11 @@
   </div>
 </form>
 
-<details open>
+<div class="status status-poor">
+  <p><b>Not recommended</b>. Screen reader users receive no programmatic indication that it is required.</p>
+</div>
+
+<details>
   <summary>HTML markup</summary>
 <pre><code>&lt;label for="q4"&gt;What is your favourite song?&lt;/label&gt;
 &lt;input id="q4"&gt;</code></pre>
@@ -135,8 +148,6 @@
 
 <p>This example has programmatic identification via <code>aria-required="true"</code>.</p>
 
-<p><b>Acceptable</b>. Screen reader users can determine that the field is required.</p>
-
 <form action="#" class="example">
   <div class="form-group">
     <label class="label" for="q5">What is your favourite movie? </label>
@@ -144,7 +155,11 @@
   </div>
 </form>
 
-<details open>
+<div class="status status-good">
+  <p><b>Acceptable</b>. Screen reader users can determine that the field is required.</p>
+</div>
+
+<details>
   <summary>HTML markup</summary>
 <pre><code>&lt;label for="q5"&gt;What is your favourite movie?&lt;/label&gt;
 &lt;input id="q5" <span class="highlight">aria-required="true"</span>&gt;</code></pre>
@@ -156,8 +171,6 @@
 
 <p>This example has programmatic identification via <code>required</code>.</p>
 
-<p><b>Acceptable</b>. Screen reader users can determine that the field is required.</p>
-
 <form action="#" class="example">
   <div class="form-group">
     <label class="label" for="q6">What is your favourite soft drink? </label>
@@ -165,7 +178,11 @@
   </div>
 </form>
 
-<details open>
+<div class="status status-good">
+  <p><b>Acceptable</b>. Screen reader users can determine that the field is required.</p>
+</div>
+
+<details>
   <summary>HTML markup</summary>
 <pre><code>&lt;label for="q6"&gt;What is your favourite soft drink?&lt;/label&gt;
 &lt;input id="q6" <span class="highlight">required</span>&gt;</code></pre>
@@ -177,8 +194,6 @@
 
 <p>This example has programmatic identification via <code>required</code> and <code>aria-required="true"</code>.</p>
 
-<p><b>Not recommended</b>. Screen reader users can determine that the field is required. However, using both <code>required</code> and <code>aria-required="true"</code> is redundant.</p>
-
 <form action="#" class="example">
   <div class="form-group">
     <label class="label" for="q7">What is your favourite video game? </label>
@@ -186,7 +201,11 @@
   </div>
 </form>
 
-<details open>
+<div class="status status-poor">
+  <p><b>Not recommended</b>. Screen reader users can determine that the field is required. However, using both <code>required</code> and <code>aria-required="true"</code> is redundant.</p>
+</div>
+
+<details>
   <summary>HTML markup</summary>
 <pre><code>&lt;label for="q7"&gt;What is your favourite video game? &lt;/label&gt;
 &lt;input id="q7" <span class="highlight">required</span> <span class="highlight">aria-required="true"</span>&gt;</code></pre>
@@ -198,8 +217,6 @@
 
 <p>This example has a field that is not required and uses <code>aria-required="false"</code>.</p>
 
-<p><b>Not recommended</b>. Form fields are optional by default, so adding <code>aria-required="false"</code> provides no benefit.</p>
-
 <form action="#" class="example">
   <div class="form-group">
     <label class="label" for="q8">What is your favourite season?</label>
@@ -207,7 +224,11 @@
   </div>
 </form>
 
-<details open>
+<div class="status status-poor">
+  <p><b>Not recommended</b>. Form fields are optional by default, so adding <code>aria-required="false"</code> provides no benefit.</p>
+</div>
+
+<details>
   <summary>HTML markup</summary>
 <pre><code>&lt;label for="q8"&gt;What is your favourite season?&lt;/label&gt;
 &lt;input id="q8" <span class="highlight">aria-required="false"</span>&gt;</code></pre>
