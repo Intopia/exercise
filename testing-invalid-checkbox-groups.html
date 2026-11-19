@@ -10,17 +10,22 @@
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
   <style>
-.example h4 {
-  margin: 0 0 1rem;
-  color: #000;
+h2 {
+  font-size: 1.75rem;
+  margin: 7rem 0 1rem;
+}
+
+h3 {
+  margin: 3rem 0 1rem;
 }
 
 .example {
   margin: 1em 0;
 }
 
-p + .example {
-  margin: 1em 0;
+.example h4 {
+  margin: 0 0 1rem;
+  color: inherit;
 }
 
 .example p {
@@ -28,33 +33,7 @@ p + .example {
 }
 
 .error {
-  color: #b00020;
-}
-
-.status {
-  padding: 0.5em 1em;
-  border-left: 6px solid;
-  color: #000;
-}
-
-.status-invalid {
-  background: #fde7e9;
-  border-color: #b00020;
-}
-
-.status-poor {
-  background: #fff1d6;
-  border-color: #b26a00;
-}
-
-.status-good {
-  background: #e3f4e6;
-  border-color: #1b5e20;
-}
-
-.status-control {
-  background: #eceff1;
-  border-color: #546e7a;
+  color: var(--colour-error);
 }
   </style>
 </head>
@@ -72,32 +51,33 @@ p + .example {
 
 <h1>Testing <code>aria-invalid</code> on checkbox groups</h1>
 
-<p>When a group of checkboxes is in error, assistive technology needs to be told that the group is invalid. The examples below test how to expose that invalid state. Every state is pre-set in the markup, so no JavaScript is needed.</p>
+<p>When a group of checkboxes is in error, assistive technology needs to be told that the group is invalid. The examples below test how to expose that invalid state. Every state is pre-set in the markup, so no JavaScript is needed. The same visible error text is in every example, and nothing links it to the group, so the examples test the invalid state only.</p>
 
-<p class="status status-good"><strong>Simplest approach:</strong> add <code>aria-invalid="true"</code> to each checkbox. See <a href="#recommended">Recommended practice</a>.</p>
+<div class="status status-good">
+  <p><strong>Simplest approach:</strong> add <code>aria-invalid="true"</code> to each checkbox. See the <a href="#recommended">recommended example</a>.</p>
+</div>
 
-<p>Every example has a coloured box showing how to read it:</p>
+<p>Every example has a coloured box below it showing how to read it:</p>
 
 <p class="status status-poor"><strong>Poor practice:</strong> allowed, but not recommended.</p>
-<p class="status status-good"><strong>Acceptable:</strong> allowed, and does part or all of the job. The box says what it does and does not give you.</p>
-<p class="status status-control"><strong>Control:</strong> a baseline.</p>
+<p class="status status-good"><strong>Recommended:</strong> the approach to use.</p>
 
 
 <!-- section -->
 
 
-<h2>1. Controls</h2>
+<h2>1. <code>aria-invalid</code> on the group</h2>
 
-<p>Baselines. The same visible error text is in every example on this page, and nothing links it to the group, so the examples test the invalid state only.</p>
+<p><code>aria-invalid</code> marks the group as being in error. It is deprecated as a global attribute in ARIA 1.2 and is not supported on the <code>group</code> role, which both <code>fieldset</code> and <code>div</code> with <code>role="group"</code> have.</p>
 
 <!-- sub-section -->
 
 <h3>Example 1.1: <code>fieldset</code></h3>
 
-<p class="status status-control"><strong>Control:</strong> The group with the error text shown and no invalid state.</p>
+<p><code>aria-invalid="true"</code> is added to the group.</p>
 
 <form action="#" class="example">
-  <fieldset>
+  <fieldset aria-invalid="true">
     <legend>Which pets do you have?</legend>
     <p class="error">Error: Choose at least one pet.</p>
     <div>
@@ -115,9 +95,13 @@ p + .example {
   </fieldset>
 </form>
 
+<div class="status status-poor">
+  <p><strong>Poor practice:</strong> The <code>group</code> role does not support <code>aria-invalid</code>.</p>
+</div>
+
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;fieldset&gt;
+<pre><code>&lt;fieldset <span class="highlight">aria-invalid="true"</span>&gt;
   &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
   &lt;p class="error"&gt;Error: Choose at least one pet.&lt;/p&gt;
   &lt;div&gt;
@@ -139,10 +123,10 @@ p + .example {
 
 <h3>Example 1.2: <code>div</code> with <code>role="group"</code></h3>
 
-<p class="status status-control"><strong>Control:</strong> The group with the error text shown and no invalid state.</p>
+<p><code>aria-invalid="true"</code> is added to the group.</p>
 
 <form action="#" class="example">
-  <div role="group" aria-labelledby="c2-label">
+  <div role="group" aria-labelledby="c2-label" aria-invalid="true">
     <h4 id="c2-label">Which pets do you have?</h4>
     <p class="error">Error: Choose at least one pet.</p>
     <div>
@@ -160,9 +144,13 @@ p + .example {
   </div>
 </form>
 
+<div class="status status-poor">
+  <p><strong>Poor practice:</strong> The <code>group</code> role does not support <code>aria-invalid</code>.</p>
+</div>
+
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;div role="group" aria-labelledby="c2-label"&gt;
+<pre><code>&lt;div role="group" aria-labelledby="c2-label" <span class="highlight">aria-invalid="true"</span>&gt;
   &lt;h4 id="c2-label"&gt;Which pets do you have?&lt;/h4&gt;
   &lt;p class="error"&gt;Error: Choose at least one pet.&lt;/p&gt;
   &lt;div&gt;
@@ -180,28 +168,30 @@ p + .example {
 &lt;/div&gt;</code></pre>
 </details>
 
+<div class="status status-poor">
+  <p><strong>None of these options is good practice.</strong></p>
+</div>
+
 
 <!-- section -->
 
 
-<h2>2. <code>aria-invalid</code> on the group</h2>
+<h2 id="recommended">2. <code>aria-invalid</code> on the checkboxes</h2>
 
-<p><code>aria-invalid</code> marks the group as being in error. It is deprecated as a global attribute in ARIA 1.2 and is not supported on the <code>group</code> role, which both <code>fieldset</code> and <code>div</code> with <code>role="group"</code> have.</p>
-
-<p class="status status-poor"><strong>None of these options is good practice.</strong></p>
+<p><code>aria-invalid</code> is supported on the <code>checkbox</code> role.</p>
 
 <!-- sub-section -->
 
-<h3>Example 2.1: On the <code>fieldset</code></h3>
+<h3>Example 2.1: <code>aria-invalid</code> on one checkbox only</h3>
 
-<p class="status status-poor"><strong>Poor practice:</strong> The <code>group</code> role does not support <code>aria-invalid</code>.</p>
+<p>Only the first checkbox has <code>aria-invalid="true"</code>.</p>
 
 <form action="#" class="example">
-  <fieldset aria-invalid="true">
+  <fieldset>
     <legend>Which pets do you have?</legend>
     <p class="error">Error: Choose at least one pet.</p>
     <div>
-      <input type="checkbox" id="c3-dog" name="c3" value="dog">
+      <input type="checkbox" id="c3-dog" name="c3" value="dog" aria-invalid="true">
       <label for="c3-dog">Dog</label>
     </div>
     <div>
@@ -215,13 +205,17 @@ p + .example {
   </fieldset>
 </form>
 
+<div class="status status-poor">
+  <p><strong>Poor practice:</strong> Only that checkbox is marked invalid, so users may think only that checkbox is in error, when the error is about the group.</p>
+</div>
+
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;fieldset <span class="highlight">aria-invalid="true"</span>&gt;
+<pre><code>&lt;fieldset&gt;
   &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
   &lt;p class="error"&gt;Error: Choose at least one pet.&lt;/p&gt;
   &lt;div&gt;
-    &lt;input type="checkbox" id="c3-dog" name="c3" value="dog"&gt;
+    &lt;input type="checkbox" id="c3-dog" name="c3" value="dog" <span class="highlight">aria-invalid="true"</span>&gt;
     &lt;label for="c3-dog"&gt;Dog&lt;/label&gt;
   &lt;/div&gt;
   &lt;div&gt;
@@ -237,202 +231,56 @@ p + .example {
 
 <!-- sub-section -->
 
-<h3>Example 2.2: On the <code>div</code> with <code>role="group"</code></h3>
+<h3>Example 2.2: <code>aria-invalid</code> on each checkbox</h3>
 
-<p class="status status-poor"><strong>Poor practice:</strong> The <code>group</code> role does not support <code>aria-invalid</code>.</p>
+<p>Every checkbox has <code>aria-invalid="true"</code>.</p>
 
 <form action="#" class="example">
-  <div role="group" aria-labelledby="c4-label" aria-invalid="true">
-    <h4 id="c4-label">Which pets do you have?</h4>
+  <fieldset>
+    <legend>Which pets do you have?</legend>
     <p class="error">Error: Choose at least one pet.</p>
     <div>
-      <input type="checkbox" id="c4-dog" name="c4" value="dog">
+      <input type="checkbox" id="c4-dog" name="c4" value="dog" aria-invalid="true">
       <label for="c4-dog">Dog</label>
     </div>
     <div>
-      <input type="checkbox" id="c4-cat" name="c4" value="cat">
+      <input type="checkbox" id="c4-cat" name="c4" value="cat" aria-invalid="true">
       <label for="c4-cat">Cat</label>
     </div>
     <div>
-      <input type="checkbox" id="c4-rabbit" name="c4" value="rabbit">
+      <input type="checkbox" id="c4-rabbit" name="c4" value="rabbit" aria-invalid="true">
       <label for="c4-rabbit">Rabbit</label>
     </div>
-  </div>
+  </fieldset>
 </form>
+
+<div class="status status-good">
+  <p><strong>Recommended:</strong> <code>aria-invalid</code> is supported on <code>checkbox</code>, so each checkbox exposes an invalid state.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;div role="group" aria-labelledby="c4-label" <span class="highlight">aria-invalid="true"</span>&gt;
-  &lt;h4 id="c4-label"&gt;Which pets do you have?&lt;/h4&gt;
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
   &lt;p class="error"&gt;Error: Choose at least one pet.&lt;/p&gt;
   &lt;div&gt;
-    &lt;input type="checkbox" id="c4-dog" name="c4" value="dog"&gt;
+    &lt;input type="checkbox" id="c4-dog" name="c4" value="dog" <span class="highlight">aria-invalid="true"</span>&gt;
     &lt;label for="c4-dog"&gt;Dog&lt;/label&gt;
   &lt;/div&gt;
   &lt;div&gt;
-    &lt;input type="checkbox" id="c4-cat" name="c4" value="cat"&gt;
+    &lt;input type="checkbox" id="c4-cat" name="c4" value="cat" <span class="highlight">aria-invalid="true"</span>&gt;
     &lt;label for="c4-cat"&gt;Cat&lt;/label&gt;
   &lt;/div&gt;
   &lt;div&gt;
-    &lt;input type="checkbox" id="c4-rabbit" name="c4" value="rabbit"&gt;
+    &lt;input type="checkbox" id="c4-rabbit" name="c4" value="rabbit" <span class="highlight">aria-invalid="true"</span>&gt;
     &lt;label for="c4-rabbit"&gt;Rabbit&lt;/label&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-</details>
-
-
-<!-- section -->
-
-
-<h2>3. <code>aria-invalid</code> on the checkboxes</h2>
-
-<p><code>aria-invalid</code> is supported on the <code>checkbox</code> role.</p>
-
-<!-- sub-section -->
-
-<h3>Example 3.1: <code>aria-invalid</code> on each checkbox</h3>
-
-<p class="status status-good"><strong>Acceptable:</strong> <code>aria-invalid</code> is supported on <code>checkbox</code>, so each checkbox exposes an invalid state.</p>
-
-<form action="#" class="example">
-  <fieldset>
-    <legend>Which pets do you have?</legend>
-    <p class="error">Error: Choose at least one pet.</p>
-    <div>
-      <input type="checkbox" id="c5-dog" name="c5" value="dog" aria-invalid="true">
-      <label for="c5-dog">Dog</label>
-    </div>
-    <div>
-      <input type="checkbox" id="c5-cat" name="c5" value="cat" aria-invalid="true">
-      <label for="c5-cat">Cat</label>
-    </div>
-    <div>
-      <input type="checkbox" id="c5-rabbit" name="c5" value="rabbit" aria-invalid="true">
-      <label for="c5-rabbit">Rabbit</label>
-    </div>
-  </fieldset>
-</form>
-
-<details>
-  <summary>HTML markup</summary>
-<pre><code>&lt;fieldset&gt;
-  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
-  &lt;p class="error"&gt;Error: Choose at least one pet.&lt;/p&gt;
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c5-dog" name="c5" value="dog" <span class="highlight">aria-invalid="true"</span>&gt;
-    &lt;label for="c5-dog"&gt;Dog&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c5-cat" name="c5" value="cat" <span class="highlight">aria-invalid="true"</span>&gt;
-    &lt;label for="c5-cat"&gt;Cat&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c5-rabbit" name="c5" value="rabbit" <span class="highlight">aria-invalid="true"</span>&gt;
-    &lt;label for="c5-rabbit"&gt;Rabbit&lt;/label&gt;
-  &lt;/div&gt;
-&lt;/fieldset&gt;</code></pre>
-</details>
-
-<!-- sub-section -->
-
-<h3>Example 3.2: <code>aria-invalid</code> on one checkbox only</h3>
-
-<p class="status status-poor"><strong>Poor practice:</strong> Only that checkbox is marked invalid, so users may think only that checkbox is in error, when the error is about the group.</p>
-
-<form action="#" class="example">
-  <fieldset>
-    <legend>Which pets do you have?</legend>
-    <p class="error">Error: Choose at least one pet.</p>
-    <div>
-      <input type="checkbox" id="c6-dog" name="c6" value="dog" aria-invalid="true">
-      <label for="c6-dog">Dog</label>
-    </div>
-    <div>
-      <input type="checkbox" id="c6-cat" name="c6" value="cat">
-      <label for="c6-cat">Cat</label>
-    </div>
-    <div>
-      <input type="checkbox" id="c6-rabbit" name="c6" value="rabbit">
-      <label for="c6-rabbit">Rabbit</label>
-    </div>
-  </fieldset>
-</form>
-
-<details>
-  <summary>HTML markup</summary>
-<pre><code>&lt;fieldset&gt;
-  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
-  &lt;p class="error"&gt;Error: Choose at least one pet.&lt;/p&gt;
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c6-dog" name="c6" value="dog" <span class="highlight">aria-invalid="true"</span>&gt;
-    &lt;label for="c6-dog"&gt;Dog&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c6-cat" name="c6" value="cat"&gt;
-    &lt;label for="c6-cat"&gt;Cat&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c6-rabbit" name="c6" value="rabbit"&gt;
-    &lt;label for="c6-rabbit"&gt;Rabbit&lt;/label&gt;
-  &lt;/div&gt;
-&lt;/fieldset&gt;</code></pre>
-</details>
-
-
-<!-- section -->
-
-
-<h2 id="recommended">4. Recommended practice</h2>
-
-<p>The same example as 3.1, repeated here so it is easy to find.</p>
-
-<!-- sub-section -->
-
-<h3>Example 4.1: <code>aria-invalid</code> on each checkbox</h3>
-
-<p class="status status-good"><strong>Acceptable:</strong> <code>aria-invalid</code> is supported on <code>checkbox</code>, so each checkbox exposes an invalid state.</p>
-
-<form action="#" class="example">
-  <fieldset>
-    <legend>Which pets do you have?</legend>
-    <p class="error">Error: Choose at least one pet.</p>
-    <div>
-      <input type="checkbox" id="c7-dog" name="c7" value="dog" aria-invalid="true">
-      <label for="c7-dog">Dog</label>
-    </div>
-    <div>
-      <input type="checkbox" id="c7-cat" name="c7" value="cat" aria-invalid="true">
-      <label for="c7-cat">Cat</label>
-    </div>
-    <div>
-      <input type="checkbox" id="c7-rabbit" name="c7" value="rabbit" aria-invalid="true">
-      <label for="c7-rabbit">Rabbit</label>
-    </div>
-  </fieldset>
-</form>
-
-<details>
-  <summary>HTML markup</summary>
-<pre><code>&lt;fieldset&gt;
-  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
-  &lt;p class="error"&gt;Error: Choose at least one pet.&lt;/p&gt;
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c7-dog" name="c7" value="dog" <span class="highlight">aria-invalid="true"</span>&gt;
-    &lt;label for="c7-dog"&gt;Dog&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c7-cat" name="c7" value="cat" <span class="highlight">aria-invalid="true"</span>&gt;
-    &lt;label for="c7-cat"&gt;Cat&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c7-rabbit" name="c7" value="rabbit" <span class="highlight">aria-invalid="true"</span>&gt;
-    &lt;label for="c7-rabbit"&gt;Rabbit&lt;/label&gt;
   &lt;/div&gt;
 &lt;/fieldset&gt;</code></pre>
 </details>
 
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
 </main>
 </body>
 </html>

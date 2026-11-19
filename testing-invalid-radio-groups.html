@@ -10,17 +10,22 @@
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
   <style>
-.example h4 {
-  margin: 0 0 1rem;
-  color: #000;
+h2 {
+  font-size: 1.75rem;
+  margin: 7rem 0 1rem;
+}
+
+h3 {
+  margin: 3rem 0 1rem;
 }
 
 .example {
   margin: 1em 0;
 }
 
-p + .example {
-  margin: 1em 0;
+.example h4 {
+  margin: 0 0 1rem;
+  color: inherit;
 }
 
 .example p {
@@ -28,33 +33,7 @@ p + .example {
 }
 
 .error {
-  color: #b00020;
-}
-
-.status {
-  padding: 0.5em 1em;
-  border-left: 6px solid;
-  color: #000;
-}
-
-.status-invalid {
-  background: #fde7e9;
-  border-color: #b00020;
-}
-
-.status-poor {
-  background: #fff1d6;
-  border-color: #b26a00;
-}
-
-.status-good {
-  background: #e3f4e6;
-  border-color: #1b5e20;
-}
-
-.status-control {
-  background: #eceff1;
-  border-color: #546e7a;
+  color: var(--colour-error);
 }
   </style>
 </head>
@@ -72,48 +51,53 @@ p + .example {
 
 <h1>Testing <code>aria-invalid</code> on radio groups</h1>
 
-<p>When a group of radios is in error, assistive technology needs to be told that the group is invalid. The examples below test how to expose that invalid state. Every state is pre-set in the markup, so no JavaScript is needed.</p>
+<p>When a group of radios is in error, assistive technology needs to be told that the group is invalid. The examples below test how to expose that invalid state. Every state is pre-set in the markup, so no JavaScript is needed. The same visible error text is in every example, and nothing links it to the group, so the examples test the invalid state only.</p>
 
-<p class="status status-good"><strong>Simplest approach:</strong> add <code>aria-invalid="true"</code> to a <code>div</code> with <code>role="radiogroup"</code>. See <a href="#recommended">Recommended practice</a>.</p>
+<div class="status status-good">
+  <p><strong>Simplest approach:</strong> add <code>aria-invalid="true"</code> to a <code>div</code> with <code>role="radiogroup"</code>. See the <a href="#recommended">recommended example</a>.</p>
+</div>
 
-<p>Every example has a coloured box showing how to read it:</p>
+<p>Every example has a coloured box below it showing how to read it:</p>
 
 <p class="status status-poor"><strong>Poor practice:</strong> allowed, but not recommended.</p>
-<p class="status status-good"><strong>Acceptable:</strong> allowed, and does part or all of the job. The box says what it does and does not give you.</p>
-<p class="status status-control"><strong>Control:</strong> a baseline.</p>
+<p class="status status-good"><strong>Recommended:</strong> the approach to use.</p>
 
 
 <!-- section -->
 
 
-<h2>1. Controls</h2>
+<h2>1. <code>aria-invalid</code> on the radios</h2>
 
-<p>Baselines. The same visible error text is in every example on this page, and nothing links it to the group, so the examples test the invalid state only.</p>
+<p><code>aria-invalid</code> on the radios themselves.</p>
 
 <!-- sub-section -->
 
-<h3>Example 1.1: <code>fieldset</code></h3>
+<h3>Example 1.1: <code>aria-invalid</code> on each radio</h3>
 
-<p class="status status-control"><strong>Control:</strong> The group with the error text shown and no invalid state.</p>
+<p>Every radio has <code>aria-invalid="true"</code>.</p>
 
 <form action="#" class="example">
   <fieldset>
     <legend>Which is your favourite pet?</legend>
     <p class="error">Error: Choose one pet.</p>
     <div>
-      <input type="radio" id="r1-dog" name="r1" value="dog">
+      <input type="radio" id="r1-dog" name="r1" value="dog" aria-invalid="true">
       <label for="r1-dog">Dog</label>
     </div>
     <div>
-      <input type="radio" id="r1-cat" name="r1" value="cat">
+      <input type="radio" id="r1-cat" name="r1" value="cat" aria-invalid="true">
       <label for="r1-cat">Cat</label>
     </div>
     <div>
-      <input type="radio" id="r1-rabbit" name="r1" value="rabbit">
+      <input type="radio" id="r1-rabbit" name="r1" value="rabbit" aria-invalid="true">
       <label for="r1-rabbit">Rabbit</label>
     </div>
   </fieldset>
 </form>
+
+<div class="status status-poor">
+  <p><strong>Poor practice:</strong> <code>aria-invalid</code> is deprecated as a global attribute in ARIA 1.2 and is not supported on the <code>radio</code> role. Every radio is marked invalid.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -121,15 +105,15 @@ p + .example {
   &lt;legend&gt;Which is your favourite pet?&lt;/legend&gt;
   &lt;p class="error"&gt;Error: Choose one pet.&lt;/p&gt;
   &lt;div&gt;
-    &lt;input type="radio" id="r1-dog" name="r1" value="dog"&gt;
+    &lt;input type="radio" id="r1-dog" name="r1" value="dog" <span class="highlight">aria-invalid="true"</span>&gt;
     &lt;label for="r1-dog"&gt;Dog&lt;/label&gt;
   &lt;/div&gt;
   &lt;div&gt;
-    &lt;input type="radio" id="r1-cat" name="r1" value="cat"&gt;
+    &lt;input type="radio" id="r1-cat" name="r1" value="cat" <span class="highlight">aria-invalid="true"</span>&gt;
     &lt;label for="r1-cat"&gt;Cat&lt;/label&gt;
   &lt;/div&gt;
   &lt;div&gt;
-    &lt;input type="radio" id="r1-rabbit" name="r1" value="rabbit"&gt;
+    &lt;input type="radio" id="r1-rabbit" name="r1" value="rabbit" <span class="highlight">aria-invalid="true"</span>&gt;
     &lt;label for="r1-rabbit"&gt;Rabbit&lt;/label&gt;
   &lt;/div&gt;
 &lt;/fieldset&gt;</code></pre>
@@ -137,16 +121,16 @@ p + .example {
 
 <!-- sub-section -->
 
-<h3>Example 1.2: <code>div</code> with <code>role="group"</code></h3>
+<h3>Example 1.2: <code>aria-invalid</code> on one radio only</h3>
 
-<p class="status status-control"><strong>Control:</strong> The group with the error text shown and no invalid state.</p>
+<p>Only the first radio has <code>aria-invalid="true"</code>.</p>
 
 <form action="#" class="example">
-  <div role="group" aria-labelledby="r2-label">
-    <h4 id="r2-label">Which is your favourite pet?</h4>
+  <fieldset>
+    <legend>Which is your favourite pet?</legend>
     <p class="error">Error: Choose one pet.</p>
     <div>
-      <input type="radio" id="r2-dog" name="r2" value="dog">
+      <input type="radio" id="r2-dog" name="r2" value="dog" aria-invalid="true">
       <label for="r2-dog">Dog</label>
     </div>
     <div>
@@ -157,16 +141,20 @@ p + .example {
       <input type="radio" id="r2-rabbit" name="r2" value="rabbit">
       <label for="r2-rabbit">Rabbit</label>
     </div>
-  </div>
+  </fieldset>
 </form>
+
+<div class="status status-poor">
+  <p><strong>Poor practice:</strong> <code>aria-invalid</code> is not supported on the <code>radio</code> role. Only that radio is marked invalid, so users may think only that radio is in error.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;div role="group" aria-labelledby="r2-label"&gt;
-  &lt;h4 id="r2-label"&gt;Which is your favourite pet?&lt;/h4&gt;
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which is your favourite pet?&lt;/legend&gt;
   &lt;p class="error"&gt;Error: Choose one pet.&lt;/p&gt;
   &lt;div&gt;
-    &lt;input type="radio" id="r2-dog" name="r2" value="dog"&gt;
+    &lt;input type="radio" id="r2-dog" name="r2" value="dog" <span class="highlight">aria-invalid="true"</span>&gt;
     &lt;label for="r2-dog"&gt;Dog&lt;/label&gt;
   &lt;/div&gt;
   &lt;div&gt;
@@ -177,18 +165,30 @@ p + .example {
     &lt;input type="radio" id="r2-rabbit" name="r2" value="rabbit"&gt;
     &lt;label for="r2-rabbit"&gt;Rabbit&lt;/label&gt;
   &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+&lt;/fieldset&gt;</code></pre>
 </details>
+
+<div class="status status-poor">
+  <p><strong>None of these options is good practice.</strong></p>
+</div>
+
+
+<!-- section -->
+
+
+<h2 id="recommended">2. <code>aria-invalid</code> on the group</h2>
+
+<p><code>aria-invalid</code> marks the group as being in error. It is supported on <code>radiogroup</code>, not on the <code>group</code> role.</p>
 
 <!-- sub-section -->
 
-<h3>Example 1.3: <code>div</code> with <code>role="radiogroup"</code></h3>
+<h3>Example 2.1: <code>fieldset</code></h3>
 
-<p class="status status-control"><strong>Control:</strong> The group with the error text shown and no invalid state.</p>
+<p><code>aria-invalid="true"</code> is added to the group.</p>
 
 <form action="#" class="example">
-  <div role="radiogroup" aria-labelledby="r3-label">
-    <h4 id="r3-label">Which is your favourite pet?</h4>
+  <fieldset aria-invalid="true">
+    <legend>Which is your favourite pet?</legend>
     <p class="error">Error: Choose one pet.</p>
     <div>
       <input type="radio" id="r3-dog" name="r3" value="dog">
@@ -202,13 +202,17 @@ p + .example {
       <input type="radio" id="r3-rabbit" name="r3" value="rabbit">
       <label for="r3-rabbit">Rabbit</label>
     </div>
-  </div>
+  </fieldset>
 </form>
+
+<div class="status status-poor">
+  <p><strong>Poor practice:</strong> <code>aria-invalid</code> is deprecated as a global attribute in ARIA 1.2 and is not supported on the <code>group</code> role.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;div role="radiogroup" aria-labelledby="r3-label"&gt;
-  &lt;h4 id="r3-label"&gt;Which is your favourite pet?&lt;/h4&gt;
+<pre><code>&lt;fieldset <span class="highlight">aria-invalid="true"</span>&gt;
+  &lt;legend&gt;Which is your favourite pet?&lt;/legend&gt;
   &lt;p class="error"&gt;Error: Choose one pet.&lt;/p&gt;
   &lt;div&gt;
     &lt;input type="radio" id="r3-dog" name="r3" value="dog"&gt;
@@ -222,26 +226,18 @@ p + .example {
     &lt;input type="radio" id="r3-rabbit" name="r3" value="rabbit"&gt;
     &lt;label for="r3-rabbit"&gt;Rabbit&lt;/label&gt;
   &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+&lt;/fieldset&gt;</code></pre>
 </details>
-
-
-<!-- section -->
-
-
-<h2>2. <code>aria-invalid</code> on the group</h2>
-
-<p><code>aria-invalid</code> marks the group as being in error. It is supported on <code>radiogroup</code>, not on the <code>group</code> role.</p>
 
 <!-- sub-section -->
 
-<h3>Example 2.1: On the <code>fieldset</code></h3>
+<h3>Example 2.2: <code>div</code> with <code>role="group"</code></h3>
 
-<p class="status status-poor"><strong>Poor practice:</strong> <code>aria-invalid</code> is deprecated as a global attribute in ARIA 1.2 and is not supported on the <code>group</code> role.</p>
+<p><code>aria-invalid="true"</code> is added to the group.</p>
 
 <form action="#" class="example">
-  <fieldset aria-invalid="true">
-    <legend>Which is your favourite pet?</legend>
+  <div role="group" aria-labelledby="r4-label" aria-invalid="true">
+    <h4 id="r4-label">Which is your favourite pet?</h4>
     <p class="error">Error: Choose one pet.</p>
     <div>
       <input type="radio" id="r4-dog" name="r4" value="dog">
@@ -255,13 +251,17 @@ p + .example {
       <input type="radio" id="r4-rabbit" name="r4" value="rabbit">
       <label for="r4-rabbit">Rabbit</label>
     </div>
-  </fieldset>
+  </div>
 </form>
+
+<div class="status status-poor">
+  <p><strong>Poor practice:</strong> <code>aria-invalid</code> is deprecated as a global attribute in ARIA 1.2 and is not supported on the <code>group</code> role.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;fieldset <span class="highlight">aria-invalid="true"</span>&gt;
-  &lt;legend&gt;Which is your favourite pet?&lt;/legend&gt;
+<pre><code>&lt;div role="group" aria-labelledby="r4-label" <span class="highlight">aria-invalid="true"</span>&gt;
+  &lt;h4 id="r4-label"&gt;Which is your favourite pet?&lt;/h4&gt;
   &lt;p class="error"&gt;Error: Choose one pet.&lt;/p&gt;
   &lt;div&gt;
     &lt;input type="radio" id="r4-dog" name="r4" value="dog"&gt;
@@ -275,17 +275,17 @@ p + .example {
     &lt;input type="radio" id="r4-rabbit" name="r4" value="rabbit"&gt;
     &lt;label for="r4-rabbit"&gt;Rabbit&lt;/label&gt;
   &lt;/div&gt;
-&lt;/fieldset&gt;</code></pre>
+&lt;/div&gt;</code></pre>
 </details>
 
 <!-- sub-section -->
 
-<h3>Example 2.2: On the <code>div</code> with <code>role="group"</code></h3>
+<h3>Example 2.3: <code>div</code> with <code>role="radiogroup"</code></h3>
 
-<p class="status status-poor"><strong>Poor practice:</strong> <code>aria-invalid</code> is deprecated as a global attribute in ARIA 1.2 and is not supported on the <code>group</code> role.</p>
+<p><code>aria-invalid="true"</code> is added to the group.</p>
 
 <form action="#" class="example">
-  <div role="group" aria-labelledby="r5-label" aria-invalid="true">
+  <div role="radiogroup" aria-labelledby="r5-label" aria-invalid="true">
     <h4 id="r5-label">Which is your favourite pet?</h4>
     <p class="error">Error: Choose one pet.</p>
     <div>
@@ -303,9 +303,13 @@ p + .example {
   </div>
 </form>
 
+<div class="status status-good">
+  <p><strong>Recommended:</strong> <code>aria-invalid</code> is supported on <code>radiogroup</code>, so the group exposes an invalid state.</p>
+</div>
+
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;div role="group" aria-labelledby="r5-label" <span class="highlight">aria-invalid="true"</span>&gt;
+<pre><code>&lt;div role="radiogroup" aria-labelledby="r5-label" <span class="highlight">aria-invalid="true"</span>&gt;
   &lt;h4 id="r5-label"&gt;Which is your favourite pet?&lt;/h4&gt;
   &lt;p class="error"&gt;Error: Choose one pet.&lt;/p&gt;
   &lt;div&gt;
@@ -323,206 +327,9 @@ p + .example {
 &lt;/div&gt;</code></pre>
 </details>
 
-<!-- sub-section -->
-
-<h3>Example 2.3: On the <code>div</code> with <code>role="radiogroup"</code></h3>
-
-<p class="status status-good"><strong>Acceptable:</strong> <code>aria-invalid</code> is supported on <code>radiogroup</code>, so the group exposes an invalid state.</p>
-
-<form action="#" class="example">
-  <div role="radiogroup" aria-labelledby="r6-label" aria-invalid="true">
-    <h4 id="r6-label">Which is your favourite pet?</h4>
-    <p class="error">Error: Choose one pet.</p>
-    <div>
-      <input type="radio" id="r6-dog" name="r6" value="dog">
-      <label for="r6-dog">Dog</label>
-    </div>
-    <div>
-      <input type="radio" id="r6-cat" name="r6" value="cat">
-      <label for="r6-cat">Cat</label>
-    </div>
-    <div>
-      <input type="radio" id="r6-rabbit" name="r6" value="rabbit">
-      <label for="r6-rabbit">Rabbit</label>
-    </div>
-  </div>
-</form>
-
-<details>
-  <summary>HTML markup</summary>
-<pre><code>&lt;div role="radiogroup" aria-labelledby="r6-label" <span class="highlight">aria-invalid="true"</span>&gt;
-  &lt;h4 id="r6-label"&gt;Which is your favourite pet?&lt;/h4&gt;
-  &lt;p class="error"&gt;Error: Choose one pet.&lt;/p&gt;
-  &lt;div&gt;
-    &lt;input type="radio" id="r6-dog" name="r6" value="dog"&gt;
-    &lt;label for="r6-dog"&gt;Dog&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="radio" id="r6-cat" name="r6" value="cat"&gt;
-    &lt;label for="r6-cat"&gt;Cat&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="radio" id="r6-rabbit" name="r6" value="rabbit"&gt;
-    &lt;label for="r6-rabbit"&gt;Rabbit&lt;/label&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-</details>
-
-
-<!-- section -->
-
-
-<h2>3. <code>aria-invalid</code> on the radios</h2>
-
-<p><code>aria-invalid</code> on the radios themselves.</p>
-
-<p class="status status-poor"><strong>None of these options is good practice.</strong></p>
-
-<!-- sub-section -->
-
-<h3>Example 3.1: <code>aria-invalid</code> on each radio</h3>
-
-<p class="status status-poor"><strong>Poor practice:</strong> <code>aria-invalid</code> is not supported on the <code>radio</code> role. Every radio is marked invalid.</p>
-
-<form action="#" class="example">
-  <fieldset>
-    <legend>Which is your favourite pet?</legend>
-    <p class="error">Error: Choose one pet.</p>
-    <div>
-      <input type="radio" id="r7-dog" name="r7" value="dog" aria-invalid="true">
-      <label for="r7-dog">Dog</label>
-    </div>
-    <div>
-      <input type="radio" id="r7-cat" name="r7" value="cat" aria-invalid="true">
-      <label for="r7-cat">Cat</label>
-    </div>
-    <div>
-      <input type="radio" id="r7-rabbit" name="r7" value="rabbit" aria-invalid="true">
-      <label for="r7-rabbit">Rabbit</label>
-    </div>
-  </fieldset>
-</form>
-
-<details>
-  <summary>HTML markup</summary>
-<pre><code>&lt;fieldset&gt;
-  &lt;legend&gt;Which is your favourite pet?&lt;/legend&gt;
-  &lt;p class="error"&gt;Error: Choose one pet.&lt;/p&gt;
-  &lt;div&gt;
-    &lt;input type="radio" id="r7-dog" name="r7" value="dog" <span class="highlight">aria-invalid="true"</span>&gt;
-    &lt;label for="r7-dog"&gt;Dog&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="radio" id="r7-cat" name="r7" value="cat" <span class="highlight">aria-invalid="true"</span>&gt;
-    &lt;label for="r7-cat"&gt;Cat&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="radio" id="r7-rabbit" name="r7" value="rabbit" <span class="highlight">aria-invalid="true"</span>&gt;
-    &lt;label for="r7-rabbit"&gt;Rabbit&lt;/label&gt;
-  &lt;/div&gt;
-&lt;/fieldset&gt;</code></pre>
-</details>
-
-<!-- sub-section -->
-
-<h3>Example 3.2: <code>aria-invalid</code> on one radio only</h3>
-
-<p class="status status-poor"><strong>Poor practice:</strong> <code>aria-invalid</code> is not supported on the <code>radio</code> role. Only that radio is marked invalid, so users may think only that radio is in error.</p>
-
-<form action="#" class="example">
-  <fieldset>
-    <legend>Which is your favourite pet?</legend>
-    <p class="error">Error: Choose one pet.</p>
-    <div>
-      <input type="radio" id="r8-dog" name="r8" value="dog" aria-invalid="true">
-      <label for="r8-dog">Dog</label>
-    </div>
-    <div>
-      <input type="radio" id="r8-cat" name="r8" value="cat">
-      <label for="r8-cat">Cat</label>
-    </div>
-    <div>
-      <input type="radio" id="r8-rabbit" name="r8" value="rabbit">
-      <label for="r8-rabbit">Rabbit</label>
-    </div>
-  </fieldset>
-</form>
-
-<details>
-  <summary>HTML markup</summary>
-<pre><code>&lt;fieldset&gt;
-  &lt;legend&gt;Which is your favourite pet?&lt;/legend&gt;
-  &lt;p class="error"&gt;Error: Choose one pet.&lt;/p&gt;
-  &lt;div&gt;
-    &lt;input type="radio" id="r8-dog" name="r8" value="dog" <span class="highlight">aria-invalid="true"</span>&gt;
-    &lt;label for="r8-dog"&gt;Dog&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="radio" id="r8-cat" name="r8" value="cat"&gt;
-    &lt;label for="r8-cat"&gt;Cat&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="radio" id="r8-rabbit" name="r8" value="rabbit"&gt;
-    &lt;label for="r8-rabbit"&gt;Rabbit&lt;/label&gt;
-  &lt;/div&gt;
-&lt;/fieldset&gt;</code></pre>
-</details>
-
-
-<!-- section -->
-
-
-<h2 id="recommended">4. Recommended practice</h2>
-
-<p>The same example as 2.3, repeated here so it is easy to find.</p>
-
-<!-- sub-section -->
-
-<h3>Example 4.1: On the <code>div</code> with <code>role="radiogroup"</code></h3>
-
-<p class="status status-good"><strong>Acceptable:</strong> <code>aria-invalid</code> is supported on <code>radiogroup</code>, so the group exposes an invalid state.</p>
-
-<form action="#" class="example">
-  <div role="radiogroup" aria-labelledby="r9-label" aria-invalid="true">
-    <h4 id="r9-label">Which is your favourite pet?</h4>
-    <p class="error">Error: Choose one pet.</p>
-    <div>
-      <input type="radio" id="r9-dog" name="r9" value="dog">
-      <label for="r9-dog">Dog</label>
-    </div>
-    <div>
-      <input type="radio" id="r9-cat" name="r9" value="cat">
-      <label for="r9-cat">Cat</label>
-    </div>
-    <div>
-      <input type="radio" id="r9-rabbit" name="r9" value="rabbit">
-      <label for="r9-rabbit">Rabbit</label>
-    </div>
-  </div>
-</form>
-
-<details>
-  <summary>HTML markup</summary>
-<pre><code>&lt;div role="radiogroup" aria-labelledby="r9-label" <span class="highlight">aria-invalid="true"</span>&gt;
-  &lt;h4 id="r9-label"&gt;Which is your favourite pet?&lt;/h4&gt;
-  &lt;p class="error"&gt;Error: Choose one pet.&lt;/p&gt;
-  &lt;div&gt;
-    &lt;input type="radio" id="r9-dog" name="r9" value="dog"&gt;
-    &lt;label for="r9-dog"&gt;Dog&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="radio" id="r9-cat" name="r9" value="cat"&gt;
-    &lt;label for="r9-cat"&gt;Cat&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="radio" id="r9-rabbit" name="r9" value="rabbit"&gt;
-    &lt;label for="r9-rabbit"&gt;Rabbit&lt;/label&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-</details>
-
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
 </main>
 </body>
 </html>

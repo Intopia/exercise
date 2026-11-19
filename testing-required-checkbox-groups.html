@@ -10,17 +10,22 @@
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
   <style>
-.example h4 {
-  margin: 0 0 1rem;
-  color: #000;
+h2 {
+  font-size: 1.75rem;
+  margin: 7rem 0 1rem;
+}
+
+h3 {
+  margin: 3rem 0 1rem;
 }
 
 .example {
   margin: 1em 0;
 }
 
-p + .example {
-  margin: 1em 0;
+.example h4 {
+  margin: 0 0 1rem;
+  color: inherit;
 }
 
 .example p {
@@ -28,33 +33,7 @@ p + .example {
 }
 
 .error {
-  color: #b00020;
-}
-
-.status {
-  padding: 0.5em 1em;
-  border-left: 6px solid;
-  color: #000;
-}
-
-.status-invalid {
-  background: #fde7e9;
-  border-color: #b00020;
-}
-
-.status-poor {
-  background: #fff1d6;
-  border-color: #b26a00;
-}
-
-.status-good {
-  background: #e3f4e6;
-  border-color: #1b5e20;
-}
-
-.status-control {
-  background: #eceff1;
-  border-color: #546e7a;
+  color: var(--colour-error);
 }
   </style>
 </head>
@@ -74,216 +53,29 @@ p + .example {
 
 <p>There is no valid native HTML or ARIA way to mark a checkbox group as <q>at least one required</q>. The examples below show what each technique does and does not do.</p>
 
-<p class="status status-good"><strong>Simplest approach:</strong> for any group of checkboxes or radios, add the requirement to the group's name, or add it as a hint. See <a href="#recommended">Recommended practice</a>.</p>
+<div class="status status-good">
+  <p><strong>Simplest approach:</strong> for any group of checkboxes or radios, add the requirement to the <a href="#recommended-name">group's name</a>, or add it as a <a href="#recommended-hint">hint</a>.</p>
+</div>
 
-<p>Every example has a coloured box showing how to read it:</p>
+<p>Every example has a coloured box below it showing how to read it:</p>
 
 <p class="status status-invalid"><strong>Invalid:</strong> not allowed by the HTML or ARIA specifications.</p>
 <p class="status status-poor"><strong>Poor practice:</strong> allowed, but not recommended.</p>
-<p class="status status-good"><strong>Acceptable:</strong> allowed, and does part or all of the job. The box says what it does and does not give you.</p>
-<p class="status status-control"><strong>Control:</strong> a baseline with no requirement defined.</p>
+<p class="status status-good"><strong>Recommended:</strong> the approach to use.</p>
 
 
 <!-- section -->
 
 
-<h2>1. Controls</h2>
-
-<p>Baselines with no requirement defined.</p>
-
-<!-- sub-section -->
-
-<h3>Example 1.1: <code>fieldset</code></h3>
-
-<p class="status status-control"><strong>Control:</strong> A <code>fieldset</code> with a <code>legend</code>. No requirement is defined.</p>
-
-<form action="#" class="example">
-  <fieldset>
-    <legend>Which pets do you have?</legend>
-    <div>
-      <input type="checkbox" id="c1-dog" name="c1" value="dog">
-      <label for="c1-dog">Dog</label>
-    </div>
-    <div>
-      <input type="checkbox" id="c1-cat" name="c1" value="cat">
-      <label for="c1-cat">Cat</label>
-    </div>
-    <div>
-      <input type="checkbox" id="c1-rabbit" name="c1" value="rabbit">
-      <label for="c1-rabbit">Rabbit</label>
-    </div>
-  </fieldset>
-</form>
-
-<details>
-  <summary>HTML markup</summary>
-<pre><code>&lt;fieldset&gt;
-  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c1-dog" name="c1" value="dog"&gt;
-    &lt;label for="c1-dog"&gt;Dog&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c1-cat" name="c1" value="cat"&gt;
-    &lt;label for="c1-cat"&gt;Cat&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c1-rabbit" name="c1" value="rabbit"&gt;
-    &lt;label for="c1-rabbit"&gt;Rabbit&lt;/label&gt;
-  &lt;/div&gt;
-&lt;/fieldset&gt;</code></pre>
-</details>
-
-<!-- sub-section -->
-
-<h3>Example 1.2: <code>div</code> with <code>role="group"</code></h3>
-
-<p class="status status-control"><strong>Control:</strong> A <code>div</code> named with <code>aria-labelledby</code>. No requirement is defined.</p>
-
-<form action="#" class="example">
-  <div role="group" aria-labelledby="c2-label">
-    <p id="c2-label">Which pets do you have?</p>
-    <div>
-      <input type="checkbox" id="c2-dog" name="c2" value="dog">
-      <label for="c2-dog">Dog</label>
-    </div>
-    <div>
-      <input type="checkbox" id="c2-cat" name="c2" value="cat">
-      <label for="c2-cat">Cat</label>
-    </div>
-    <div>
-      <input type="checkbox" id="c2-rabbit" name="c2" value="rabbit">
-      <label for="c2-rabbit">Rabbit</label>
-    </div>
-  </div>
-</form>
-
-<details>
-  <summary>HTML markup</summary>
-<pre><code>&lt;div role="group" aria-labelledby="c2-label"&gt;
-  &lt;p id="c2-label"&gt;Which pets do you have?&lt;/p&gt;
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c2-dog" name="c2" value="dog"&gt;
-    &lt;label for="c2-dog"&gt;Dog&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c2-cat" name="c2" value="cat"&gt;
-    &lt;label for="c2-cat"&gt;Cat&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c2-rabbit" name="c2" value="rabbit"&gt;
-    &lt;label for="c2-rabbit"&gt;Rabbit&lt;/label&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-</details>
-
-
-<!-- section -->
-
-
-<h2>2. Requirement as text in the group's name</h2>
-
-<p>The requirement is written in the visible text as part of the group's name: the legend, or the labelling element.</p>
-
-<!-- sub-section -->
-
-<h3>Example 2.1: <code>fieldset</code></h3>
-
-<p class="status status-good"><strong>Acceptable:</strong> The requirement is in the group's accessible name, so it is available in text and associated with the group (WCAG 1.3.1 and 3.3.2). It does not expose a required state to assistive technology.</p>
-
-<form action="#" class="example">
-  <fieldset>
-    <legend>Which pets do you have? (required)</legend>
-    <div>
-      <input type="checkbox" id="c3-dog" name="c3" value="dog">
-      <label for="c3-dog">Dog</label>
-    </div>
-    <div>
-      <input type="checkbox" id="c3-cat" name="c3" value="cat">
-      <label for="c3-cat">Cat</label>
-    </div>
-    <div>
-      <input type="checkbox" id="c3-rabbit" name="c3" value="rabbit">
-      <label for="c3-rabbit">Rabbit</label>
-    </div>
-  </fieldset>
-</form>
-
-<details>
-  <summary>HTML markup</summary>
-<pre><code>&lt;fieldset&gt;
-  &lt;legend&gt;Which pets do you have? <span class="highlight">(required)</span>&lt;/legend&gt;
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c3-dog" name="c3" value="dog"&gt;
-    &lt;label for="c3-dog"&gt;Dog&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c3-cat" name="c3" value="cat"&gt;
-    &lt;label for="c3-cat"&gt;Cat&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c3-rabbit" name="c3" value="rabbit"&gt;
-    &lt;label for="c3-rabbit"&gt;Rabbit&lt;/label&gt;
-  &lt;/div&gt;
-&lt;/fieldset&gt;</code></pre>
-</details>
-
-<!-- sub-section -->
-
-<h3>Example 2.2: <code>div</code> with <code>role="group"</code></h3>
-
-<p class="status status-good"><strong>Acceptable:</strong> The requirement is in the group's accessible name, so it is available in text and associated with the group (WCAG 1.3.1 and 3.3.2). It does not expose a required state to assistive technology.</p>
-
-<form action="#" class="example">
-  <div role="group" aria-labelledby="c4-label">
-    <p id="c4-label">Which pets do you have? (required)</p>
-    <div>
-      <input type="checkbox" id="c4-dog" name="c4" value="dog">
-      <label for="c4-dog">Dog</label>
-    </div>
-    <div>
-      <input type="checkbox" id="c4-cat" name="c4" value="cat">
-      <label for="c4-cat">Cat</label>
-    </div>
-    <div>
-      <input type="checkbox" id="c4-rabbit" name="c4" value="rabbit">
-      <label for="c4-rabbit">Rabbit</label>
-    </div>
-  </div>
-</form>
-
-<details>
-  <summary>HTML markup</summary>
-<pre><code>&lt;div role="group" aria-labelledby="c4-label"&gt;
-  &lt;p id="c4-label"&gt;Which pets do you have? <span class="highlight">(required)</span>&lt;/p&gt;
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c4-dog" name="c4" value="dog"&gt;
-    &lt;label for="c4-dog"&gt;Dog&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c4-cat" name="c4" value="cat"&gt;
-    &lt;label for="c4-cat"&gt;Cat&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c4-rabbit" name="c4" value="rabbit"&gt;
-    &lt;label for="c4-rabbit"&gt;Rabbit&lt;/label&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-</details>
-
-
-<!-- section -->
-
-
-<h2>3. Requirement as text outside the group</h2>
+<h2>1. Requirement as text outside the group</h2>
 
 <p>The requirement is written in the visible text outside the group.</p>
 
 <!-- sub-section -->
 
-<h3>Example 3.1: Text outside the group</h3>
+<h3>Example 1.1: Text outside the group</h3>
 
-<p class="status status-poor"><strong>Poor practice:</strong> The requirement is in a paragraph before the <code>fieldset</code>. Nothing associates it with the group.</p>
+<p>A paragraph before the <code>fieldset</code> gives the requirement.</p>
 
 <form action="#" class="example">
   <p>Required: Choose at least one pet.</p>
@@ -303,6 +95,10 @@ p + .example {
     </div>
   </fieldset>
 </form>
+
+<div class="status status-poor">
+  <p><strong>Poor practice:</strong> Nothing associates the paragraph with the group.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -328,115 +124,15 @@ p + .example {
 <!-- section -->
 
 
-<h2>4. Requirement as a hint</h2>
-
-<p>The requirement is a hint linked to the group with <code>aria-describedby</code>.</p>
-
-<!-- sub-section -->
-
-<h3>Example 4.1: <code>fieldset</code></h3>
-
-<p class="status status-good"><strong>Acceptable:</strong> The hint is associated with the group with <code>aria-describedby</code>, so the requirement is available in text (WCAG 1.3.1 and 3.3.2). It does not expose a required state to assistive technology.</p>
-
-<form action="#" class="example">
-  <fieldset aria-describedby="c6-hint">
-    <legend>Which pets do you have?</legend>
-    <p id="c6-hint">Choose at least one pet.</p>
-    <div>
-      <input type="checkbox" id="c6-dog" name="c6" value="dog">
-      <label for="c6-dog">Dog</label>
-    </div>
-    <div>
-      <input type="checkbox" id="c6-cat" name="c6" value="cat">
-      <label for="c6-cat">Cat</label>
-    </div>
-    <div>
-      <input type="checkbox" id="c6-rabbit" name="c6" value="rabbit">
-      <label for="c6-rabbit">Rabbit</label>
-    </div>
-  </fieldset>
-</form>
-
-<details>
-  <summary>HTML markup</summary>
-<pre><code>&lt;fieldset <span class="highlight">aria-describedby="c6-hint"</span>&gt;
-  &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
-  <span class="highlight">&lt;p id="c6-hint"&gt;Choose at least one pet.&lt;/p&gt;</span>
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c6-dog" name="c6" value="dog"&gt;
-    &lt;label for="c6-dog"&gt;Dog&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c6-cat" name="c6" value="cat"&gt;
-    &lt;label for="c6-cat"&gt;Cat&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c6-rabbit" name="c6" value="rabbit"&gt;
-    &lt;label for="c6-rabbit"&gt;Rabbit&lt;/label&gt;
-  &lt;/div&gt;
-&lt;/fieldset&gt;</code></pre>
-</details>
-
-<!-- sub-section -->
-
-<h3>Example 4.2: <code>div</code> with <code>role="group"</code></h3>
-
-<p class="status status-good"><strong>Acceptable:</strong> The hint is associated with the group with <code>aria-describedby</code>, so the requirement is available in text (WCAG 1.3.1 and 3.3.2). It does not expose a required state to assistive technology.</p>
-
-<form action="#" class="example">
-  <div role="group" aria-labelledby="c7-label" aria-describedby="c7-hint">
-    <h4 id="c7-label">Which pets do you have?</h4>
-    <p id="c7-hint">Choose at least one pet.</p>
-    <div>
-      <input type="checkbox" id="c7-dog" name="c7" value="dog">
-      <label for="c7-dog">Dog</label>
-    </div>
-    <div>
-      <input type="checkbox" id="c7-cat" name="c7" value="cat">
-      <label for="c7-cat">Cat</label>
-    </div>
-    <div>
-      <input type="checkbox" id="c7-rabbit" name="c7" value="rabbit">
-      <label for="c7-rabbit">Rabbit</label>
-    </div>
-  </div>
-</form>
-
-<details>
-  <summary>HTML markup</summary>
-<pre><code>&lt;div role="group" aria-labelledby="c7-label" <span class="highlight">aria-describedby="c7-hint"</span>&gt;
-  &lt;h4 id="c7-label"&gt;Which pets do you have?&lt;/h4&gt;
-  <span class="highlight">&lt;p id="c7-hint"&gt;Choose at least one pet.&lt;/p&gt;</span>
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c7-dog" name="c7" value="dog"&gt;
-    &lt;label for="c7-dog"&gt;Dog&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c7-cat" name="c7" value="cat"&gt;
-    &lt;label for="c7-cat"&gt;Cat&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div&gt;
-    &lt;input type="checkbox" id="c7-rabbit" name="c7" value="rabbit"&gt;
-    &lt;label for="c7-rabbit"&gt;Rabbit&lt;/label&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-</details>
-
-
-<!-- section -->
-
-
-<h2>5. <code>aria-required</code> on the container</h2>
+<h2>2. <code>aria-required</code> on the container</h2>
 
 <p><code>aria-required</code> is not supported on the <code>group</code> role, which <code>fieldset</code> has implicitly.</p>
 
-<p class="status status-invalid"><strong>None of these options is valid.</strong></p>
-
 <!-- sub-section -->
 
-<h3>Example 5.1: On the <code>fieldset</code></h3>
+<h3>Example 2.1: On the <code>fieldset</code></h3>
 
-<p class="status status-invalid"><strong>Invalid:</strong> <code>aria-required</code> is not supported on the <code>group</code> role, which <code>fieldset</code> has implicitly.</p>
+<p><code>aria-required="true"</code> is added to the <code>fieldset</code>.</p>
 
 <form action="#" class="example">
   <fieldset aria-required="true">
@@ -455,6 +151,10 @@ p + .example {
     </div>
   </fieldset>
 </form>
+
+<div class="status status-invalid">
+  <p><strong>Invalid:</strong> <code>aria-required</code> is not supported on the <code>group</code> role, which <code>fieldset</code> has implicitly.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -477,9 +177,9 @@ p + .example {
 
 <!-- sub-section -->
 
-<h3>Example 5.2: On the <code>div</code> with <code>role="group"</code></h3>
+<h3>Example 2.2: On the <code>div</code> with <code>role="group"</code></h3>
 
-<p class="status status-invalid"><strong>Invalid:</strong> <code>aria-required</code> is not supported on the <code>group</code> role.</p>
+<p><code>aria-required="true"</code> is added to the <code>div</code> with <code>role="group"</code>.</p>
 
 <form action="#" class="example">
   <div role="group" aria-labelledby="c9-label" aria-required="true">
@@ -498,6 +198,10 @@ p + .example {
     </div>
   </div>
 </form>
+
+<div class="status status-invalid">
+  <p><strong>Invalid:</strong> <code>aria-required</code> is not supported on the <code>group</code> role.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -522,17 +226,15 @@ p + .example {
 <!-- section -->
 
 
-<h2>6. <code>required</code> on the container</h2>
+<h2>3. <code>required</code> on the container</h2>
 
 <p><code>required</code> is an HTML attribute that is only valid on <code>input</code>, <code>select</code> and <code>textarea</code>. A role does not add HTML attributes.</p>
 
-<p class="status status-invalid"><strong>None of these options is valid.</strong></p>
-
 <!-- sub-section -->
 
-<h3>Example 6.1: On the <code>fieldset</code></h3>
+<h3>Example 3.1: On the <code>fieldset</code></h3>
 
-<p class="status status-invalid"><strong>Invalid:</strong> <code>required</code> is only valid on <code>input</code>, <code>select</code> and <code>textarea</code>.</p>
+<p>The <code>required</code> attribute is added to the <code>fieldset</code>.</p>
 
 <form action="#" class="example">
   <fieldset required>
@@ -551,6 +253,10 @@ p + .example {
     </div>
   </fieldset>
 </form>
+
+<div class="status status-invalid">
+  <p><strong>Invalid:</strong> <code>required</code> is only valid on <code>input</code>, <code>select</code> and <code>textarea</code>.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -573,9 +279,9 @@ p + .example {
 
 <!-- sub-section -->
 
-<h3>Example 6.2: On the <code>div</code> with <code>role="group"</code></h3>
+<h3>Example 3.2: On the <code>div</code> with <code>role="group"</code></h3>
 
-<p class="status status-invalid"><strong>Invalid:</strong> <code>required</code> is only valid on <code>input</code>, <code>select</code> and <code>textarea</code>. A role does not add HTML attributes.</p>
+<p>The <code>required</code> attribute is added to the <code>div</code> with <code>role="group"</code>.</p>
 
 <form action="#" class="example">
   <div role="group" aria-labelledby="c11-label" required>
@@ -594,6 +300,10 @@ p + .example {
     </div>
   </div>
 </form>
+
+<div class="status status-invalid">
+  <p><strong>Invalid:</strong> <code>required</code> is only valid on <code>input</code>, <code>select</code> and <code>textarea</code>. A role does not add HTML attributes.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -614,21 +324,23 @@ p + .example {
 &lt;/div&gt;</code></pre>
 </details>
 
+<div class="status status-invalid">
+  <p><strong>None of these options is valid.</strong></p>
+</div>
+
 
 <!-- section -->
 
 
-<h2>7. Requirement on the checkboxes</h2>
+<h2>4. Requirement on the checkboxes</h2>
 
 <p>Attributes on the checkboxes themselves. Each checkbox is its own control, so a requirement on a checkbox applies to that checkbox only.</p>
 
-<p class="status status-poor"><strong>None of these options is good practice.</strong></p>
-
 <!-- sub-section -->
 
-<h3>Example 7.1: <code>aria-required</code> on each checkbox</h3>
+<h3>Example 4.1: <code>aria-required</code> on each checkbox</h3>
 
-<p class="status status-poor"><strong>Poor practice:</strong> It marks every checkbox as required, which implies all of them must be ticked.</p>
+<p>Every checkbox has <code>aria-required="true"</code>.</p>
 
 <form action="#" class="example">
   <fieldset>
@@ -647,6 +359,10 @@ p + .example {
     </div>
   </fieldset>
 </form>
+
+<div class="status status-poor">
+  <p><strong>Poor practice:</strong> It marks every checkbox as required, which implies all of them must be ticked.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -669,9 +385,9 @@ p + .example {
 
 <!-- sub-section -->
 
-<h3>Example 7.2: <code>aria-required</code> on one checkbox only</h3>
+<h3>Example 4.2: <code>aria-required</code> on one checkbox only</h3>
 
-<p class="status status-poor"><strong>Poor practice:</strong> It marks only that checkbox as required. It says nothing about the group.</p>
+<p>Only the first checkbox has <code>aria-required="true"</code>.</p>
 
 <form action="#" class="example">
   <fieldset>
@@ -690,6 +406,10 @@ p + .example {
     </div>
   </fieldset>
 </form>
+
+<div class="status status-poor">
+  <p><strong>Poor practice:</strong> It marks only that checkbox as required. It says nothing about the group.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -712,9 +432,9 @@ p + .example {
 
 <!-- sub-section -->
 
-<h3>Example 7.3: <code>required</code> on each checkbox</h3>
+<h3>Example 4.3: <code>required</code> on each checkbox</h3>
 
-<p class="status status-poor"><strong>Poor practice:</strong> Native validation forces every checkbox to be ticked before the form submits.</p>
+<p>Every checkbox has <code>required</code>.</p>
 
 <form action="#" class="example">
   <fieldset>
@@ -733,6 +453,10 @@ p + .example {
     </div>
   </fieldset>
 </form>
+
+<div class="status status-poor">
+  <p><strong>Poor practice:</strong> Native validation forces every checkbox to be ticked before the form submits.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -755,9 +479,9 @@ p + .example {
 
 <!-- sub-section -->
 
-<h3>Example 7.4: <code>required</code> on one checkbox only</h3>
+<h3>Example 4.4: <code>required</code> on one checkbox only</h3>
 
-<p class="status status-poor"><strong>Poor practice:</strong> Native validation only forces that one checkbox to be ticked. It does not make the group require at least one.</p>
+<p>Only the first checkbox has <code>required</code>.</p>
 
 <form action="#" class="example">
   <fieldset>
@@ -776,6 +500,10 @@ p + .example {
     </div>
   </fieldset>
 </form>
+
+<div class="status status-poor">
+  <p><strong>Poor practice:</strong> Native validation only forces that one checkbox to be ticked. It does not make the group require at least one.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -796,192 +524,221 @@ p + .example {
 &lt;/fieldset&gt;</code></pre>
 </details>
 
+<div class="status status-poor">
+  <p><strong>None of these options is good practice.</strong></p>
+</div>
+
 
 <!-- section -->
 
 
-<h2 id="recommended">8. Recommended practice</h2>
+<h2 id="recommended-name">5. Requirement as text in the group's name</h2>
 
-<p>The same examples as sections 2 and 4, repeated here so they are easy to find.</p>
+<p>The requirement is written in the visible text as part of the group's name: the legend, or the labelling element.</p>
 
 <!-- sub-section -->
 
-<h3>Example 8.1: <code>fieldset</code></h3>
+<h3>Example 5.1: <code>fieldset</code></h3>
 
-<p class="status status-good"><strong>Acceptable:</strong> The requirement is in the group's accessible name, so it is available in text and associated with the group (WCAG 1.3.1 and 3.3.2). It does not expose a required state to assistive technology.</p>
+<p>The legend includes <q>(required)</q>.</p>
 
 <form action="#" class="example">
   <fieldset>
     <legend>Which pets do you have? (required)</legend>
     <div>
-      <input type="checkbox" id="c3rec-dog" name="c3rec" value="dog">
-      <label for="c3rec-dog">Dog</label>
+      <input type="checkbox" id="c3-dog" name="c3" value="dog">
+      <label for="c3-dog">Dog</label>
     </div>
     <div>
-      <input type="checkbox" id="c3rec-cat" name="c3rec" value="cat">
-      <label for="c3rec-cat">Cat</label>
+      <input type="checkbox" id="c3-cat" name="c3" value="cat">
+      <label for="c3-cat">Cat</label>
     </div>
     <div>
-      <input type="checkbox" id="c3rec-rabbit" name="c3rec" value="rabbit">
-      <label for="c3rec-rabbit">Rabbit</label>
+      <input type="checkbox" id="c3-rabbit" name="c3" value="rabbit">
+      <label for="c3-rabbit">Rabbit</label>
     </div>
   </fieldset>
 </form>
+
+<div class="status status-good">
+  <p><strong>Recommended:</strong> The requirement is in the group's accessible name, so it is available in text and associated with the group (WCAG 1.3.1 and 3.3.2). It does not expose a required state to assistive technology.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;fieldset&gt;
   &lt;legend&gt;Which pets do you have? <span class="highlight">(required)</span>&lt;/legend&gt;
   &lt;div&gt;
-    &lt;input type="checkbox" id="c3rec-dog" name="c3rec" value="dog"&gt;
-    &lt;label for="c3rec-dog"&gt;Dog&lt;/label&gt;
+    &lt;input type="checkbox" id="c3-dog" name="c3" value="dog"&gt;
+    &lt;label for="c3-dog"&gt;Dog&lt;/label&gt;
   &lt;/div&gt;
   &lt;div&gt;
-    &lt;input type="checkbox" id="c3rec-cat" name="c3rec" value="cat"&gt;
-    &lt;label for="c3rec-cat"&gt;Cat&lt;/label&gt;
+    &lt;input type="checkbox" id="c3-cat" name="c3" value="cat"&gt;
+    &lt;label for="c3-cat"&gt;Cat&lt;/label&gt;
   &lt;/div&gt;
   &lt;div&gt;
-    &lt;input type="checkbox" id="c3rec-rabbit" name="c3rec" value="rabbit"&gt;
-    &lt;label for="c3rec-rabbit"&gt;Rabbit&lt;/label&gt;
+    &lt;input type="checkbox" id="c3-rabbit" name="c3" value="rabbit"&gt;
+    &lt;label for="c3-rabbit"&gt;Rabbit&lt;/label&gt;
   &lt;/div&gt;
 &lt;/fieldset&gt;</code></pre>
 </details>
 
 <!-- sub-section -->
 
-<h3>Example 8.2: <code>div</code> with <code>role="group"</code></h3>
+<h3>Example 5.2: <code>div</code> with <code>role="group"</code></h3>
 
-<p class="status status-good"><strong>Acceptable:</strong> The requirement is in the group's accessible name, so it is available in text and associated with the group (WCAG 1.3.1 and 3.3.2). It does not expose a required state to assistive technology.</p>
+<p>The labelling element includes <q>(required)</q>.</p>
 
 <form action="#" class="example">
-  <div role="group" aria-labelledby="c4rec-label">
-    <p id="c4rec-label">Which pets do you have? (required)</p>
+  <div role="group" aria-labelledby="c4-label">
+    <p id="c4-label">Which pets do you have? (required)</p>
     <div>
-      <input type="checkbox" id="c4rec-dog" name="c4rec" value="dog">
-      <label for="c4rec-dog">Dog</label>
+      <input type="checkbox" id="c4-dog" name="c4" value="dog">
+      <label for="c4-dog">Dog</label>
     </div>
     <div>
-      <input type="checkbox" id="c4rec-cat" name="c4rec" value="cat">
-      <label for="c4rec-cat">Cat</label>
+      <input type="checkbox" id="c4-cat" name="c4" value="cat">
+      <label for="c4-cat">Cat</label>
     </div>
     <div>
-      <input type="checkbox" id="c4rec-rabbit" name="c4rec" value="rabbit">
-      <label for="c4rec-rabbit">Rabbit</label>
+      <input type="checkbox" id="c4-rabbit" name="c4" value="rabbit">
+      <label for="c4-rabbit">Rabbit</label>
     </div>
   </div>
 </form>
 
+<div class="status status-good">
+  <p><strong>Recommended:</strong> The requirement is in the group's accessible name, so it is available in text and associated with the group (WCAG 1.3.1 and 3.3.2). It does not expose a required state to assistive technology.</p>
+</div>
+
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;div role="group" aria-labelledby="c4rec-label"&gt;
-  &lt;p id="c4rec-label"&gt;Which pets do you have? <span class="highlight">(required)</span>&lt;/p&gt;
+<pre><code>&lt;div role="group" aria-labelledby="c4-label"&gt;
+  &lt;p id="c4-label"&gt;Which pets do you have? <span class="highlight">(required)</span>&lt;/p&gt;
   &lt;div&gt;
-    &lt;input type="checkbox" id="c4rec-dog" name="c4rec" value="dog"&gt;
-    &lt;label for="c4rec-dog"&gt;Dog&lt;/label&gt;
+    &lt;input type="checkbox" id="c4-dog" name="c4" value="dog"&gt;
+    &lt;label for="c4-dog"&gt;Dog&lt;/label&gt;
   &lt;/div&gt;
   &lt;div&gt;
-    &lt;input type="checkbox" id="c4rec-cat" name="c4rec" value="cat"&gt;
-    &lt;label for="c4rec-cat"&gt;Cat&lt;/label&gt;
+    &lt;input type="checkbox" id="c4-cat" name="c4" value="cat"&gt;
+    &lt;label for="c4-cat"&gt;Cat&lt;/label&gt;
   &lt;/div&gt;
   &lt;div&gt;
-    &lt;input type="checkbox" id="c4rec-rabbit" name="c4rec" value="rabbit"&gt;
-    &lt;label for="c4rec-rabbit"&gt;Rabbit&lt;/label&gt;
+    &lt;input type="checkbox" id="c4-rabbit" name="c4" value="rabbit"&gt;
+    &lt;label for="c4-rabbit"&gt;Rabbit&lt;/label&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
 </details>
 
+
+<!-- section -->
+
+
+<h2 id="recommended-hint">6. Requirement as a hint</h2>
+
+<p>The requirement is a hint linked to the group with <code>aria-describedby</code>.</p>
+
 <!-- sub-section -->
 
-<h3>Example 8.3: <code>fieldset</code></h3>
+<h3>Example 6.1: <code>fieldset</code></h3>
 
-<p class="status status-good"><strong>Acceptable:</strong> The hint is associated with the group with <code>aria-describedby</code>, so the requirement is available in text (WCAG 1.3.1 and 3.3.2). It does not expose a required state to assistive technology.</p>
+<p>A hint paragraph inside the group is linked to it with <code>aria-describedby</code>.</p>
 
 <form action="#" class="example">
-  <fieldset aria-describedby="c6rec-hint">
+  <fieldset aria-describedby="c6-hint">
     <legend>Which pets do you have?</legend>
-    <p id="c6rec-hint">Choose at least one pet.</p>
+    <p id="c6-hint">Choose at least one pet.</p>
     <div>
-      <input type="checkbox" id="c6rec-dog" name="c6rec" value="dog">
-      <label for="c6rec-dog">Dog</label>
+      <input type="checkbox" id="c6-dog" name="c6" value="dog">
+      <label for="c6-dog">Dog</label>
     </div>
     <div>
-      <input type="checkbox" id="c6rec-cat" name="c6rec" value="cat">
-      <label for="c6rec-cat">Cat</label>
+      <input type="checkbox" id="c6-cat" name="c6" value="cat">
+      <label for="c6-cat">Cat</label>
     </div>
     <div>
-      <input type="checkbox" id="c6rec-rabbit" name="c6rec" value="rabbit">
-      <label for="c6rec-rabbit">Rabbit</label>
+      <input type="checkbox" id="c6-rabbit" name="c6" value="rabbit">
+      <label for="c6-rabbit">Rabbit</label>
     </div>
   </fieldset>
 </form>
 
+<div class="status status-good">
+  <p><strong>Recommended:</strong> The hint is associated with the group with <code>aria-describedby</code>, so the requirement is available in text (WCAG 1.3.1 and 3.3.2). It does not expose a required state to assistive technology.</p>
+</div>
+
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;fieldset <span class="highlight">aria-describedby="c6rec-hint"</span>&gt;
+<pre><code>&lt;fieldset <span class="highlight">aria-describedby="c6-hint"</span>&gt;
   &lt;legend&gt;Which pets do you have?&lt;/legend&gt;
-  <span class="highlight">&lt;p id="c6rec-hint"&gt;Choose at least one pet.&lt;/p&gt;</span>
+  <span class="highlight">&lt;p id="c6-hint"&gt;Choose at least one pet.&lt;/p&gt;</span>
   &lt;div&gt;
-    &lt;input type="checkbox" id="c6rec-dog" name="c6rec" value="dog"&gt;
-    &lt;label for="c6rec-dog"&gt;Dog&lt;/label&gt;
+    &lt;input type="checkbox" id="c6-dog" name="c6" value="dog"&gt;
+    &lt;label for="c6-dog"&gt;Dog&lt;/label&gt;
   &lt;/div&gt;
   &lt;div&gt;
-    &lt;input type="checkbox" id="c6rec-cat" name="c6rec" value="cat"&gt;
-    &lt;label for="c6rec-cat"&gt;Cat&lt;/label&gt;
+    &lt;input type="checkbox" id="c6-cat" name="c6" value="cat"&gt;
+    &lt;label for="c6-cat"&gt;Cat&lt;/label&gt;
   &lt;/div&gt;
   &lt;div&gt;
-    &lt;input type="checkbox" id="c6rec-rabbit" name="c6rec" value="rabbit"&gt;
-    &lt;label for="c6rec-rabbit"&gt;Rabbit&lt;/label&gt;
+    &lt;input type="checkbox" id="c6-rabbit" name="c6" value="rabbit"&gt;
+    &lt;label for="c6-rabbit"&gt;Rabbit&lt;/label&gt;
   &lt;/div&gt;
 &lt;/fieldset&gt;</code></pre>
 </details>
 
 <!-- sub-section -->
 
-<h3>Example 8.4: <code>div</code> with <code>role="group"</code></h3>
+<h3>Example 6.2: <code>div</code> with <code>role="group"</code></h3>
 
-<p class="status status-good"><strong>Acceptable:</strong> The hint is associated with the group with <code>aria-describedby</code>, so the requirement is available in text (WCAG 1.3.1 and 3.3.2). It does not expose a required state to assistive technology.</p>
+<p>A hint paragraph inside the group is linked to it with <code>aria-describedby</code>.</p>
 
 <form action="#" class="example">
-  <div role="group" aria-labelledby="c7rec-label" aria-describedby="c7rec-hint">
-    <h4 id="c7rec-label">Which pets do you have?</h4>
-    <p id="c7rec-hint">Choose at least one pet.</p>
+  <div role="group" aria-labelledby="c7-label" aria-describedby="c7-hint">
+    <h4 id="c7-label">Which pets do you have?</h4>
+    <p id="c7-hint">Choose at least one pet.</p>
     <div>
-      <input type="checkbox" id="c7rec-dog" name="c7rec" value="dog">
-      <label for="c7rec-dog">Dog</label>
+      <input type="checkbox" id="c7-dog" name="c7" value="dog">
+      <label for="c7-dog">Dog</label>
     </div>
     <div>
-      <input type="checkbox" id="c7rec-cat" name="c7rec" value="cat">
-      <label for="c7rec-cat">Cat</label>
+      <input type="checkbox" id="c7-cat" name="c7" value="cat">
+      <label for="c7-cat">Cat</label>
     </div>
     <div>
-      <input type="checkbox" id="c7rec-rabbit" name="c7rec" value="rabbit">
-      <label for="c7rec-rabbit">Rabbit</label>
+      <input type="checkbox" id="c7-rabbit" name="c7" value="rabbit">
+      <label for="c7-rabbit">Rabbit</label>
     </div>
   </div>
 </form>
 
+<div class="status status-good">
+  <p><strong>Recommended:</strong> The hint is associated with the group with <code>aria-describedby</code>, so the requirement is available in text (WCAG 1.3.1 and 3.3.2). It does not expose a required state to assistive technology.</p>
+</div>
+
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;div role="group" aria-labelledby="c7rec-label" <span class="highlight">aria-describedby="c7rec-hint"</span>&gt;
-  &lt;h4 id="c7rec-label"&gt;Which pets do you have?&lt;/h4&gt;
-  <span class="highlight">&lt;p id="c7rec-hint"&gt;Choose at least one pet.&lt;/p&gt;</span>
+<pre><code>&lt;div role="group" aria-labelledby="c7-label" <span class="highlight">aria-describedby="c7-hint"</span>&gt;
+  &lt;h4 id="c7-label"&gt;Which pets do you have?&lt;/h4&gt;
+  <span class="highlight">&lt;p id="c7-hint"&gt;Choose at least one pet.&lt;/p&gt;</span>
   &lt;div&gt;
-    &lt;input type="checkbox" id="c7rec-dog" name="c7rec" value="dog"&gt;
-    &lt;label for="c7rec-dog"&gt;Dog&lt;/label&gt;
+    &lt;input type="checkbox" id="c7-dog" name="c7" value="dog"&gt;
+    &lt;label for="c7-dog"&gt;Dog&lt;/label&gt;
   &lt;/div&gt;
   &lt;div&gt;
-    &lt;input type="checkbox" id="c7rec-cat" name="c7rec" value="cat"&gt;
-    &lt;label for="c7rec-cat"&gt;Cat&lt;/label&gt;
+    &lt;input type="checkbox" id="c7-cat" name="c7" value="cat"&gt;
+    &lt;label for="c7-cat"&gt;Cat&lt;/label&gt;
   &lt;/div&gt;
   &lt;div&gt;
-    &lt;input type="checkbox" id="c7rec-rabbit" name="c7rec" value="rabbit"&gt;
-    &lt;label for="c7rec-rabbit"&gt;Rabbit&lt;/label&gt;
+    &lt;input type="checkbox" id="c7-rabbit" name="c7" value="rabbit"&gt;
+    &lt;label for="c7-rabbit"&gt;Rabbit&lt;/label&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
 </details>
 
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
 </main>
 </body>
 </html>

@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing hints on radio groups</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <style>
+h2 {
+  font-size: 1.75rem;
+  margin: 7rem 0 1rem;
+}
+
+h3 {
+  margin: 3rem 0 1rem;
+}
+
+.example {
+  margin: 1em 0;
+}
+
+.example h4 {
+  margin: 0 0 1rem;
+  color: inherit;
+}
+
+.example p {
+  margin: 0 0 .5em;
+}
+
+.error {
+  color: var(--colour-error);
+}
+  </style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo. The word 'intopia' in black, with the 'o' made from four curved brush strokes in pink, orange, yellow and turquoise." class="intopia-logo">
+  </picture>
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing hints on radio groups</h1>
+
+<p>Hints for a group of radios need to be programmatically associated with the group, not just placed near it. Every example is pre-set in the markup, so no JavaScript is needed.</p>
+
+<div class="status status-good">
+  <p><strong>Simplest approach:</strong> link the hint to the group with <code>aria-describedby</code>. See the <a href="#recommended">recommended examples</a>.</p>
+</div>
+
+<p>Every example has a coloured box below it showing how to read it:</p>
+
+<p class="status status-poor"><strong>Poor practice:</strong> allowed, but not recommended.</p>
+<p class="status status-good"><strong>Acceptable:</strong> allowed, and does part of the job. The box says what it does and does not give you.</p>
+<p class="status status-good"><strong>Recommended:</strong> the approach to use.</p>
+
+
+<!-- section -->
+
+
+<h2>1. Text with no association</h2>
+
+<p>The hint is visible, but nothing links it to the group.</p>
+
+<!-- sub-section -->
+
+<h3>Example 1.1: Hint, not linked</h3>
+
+<p>A <code>fieldset</code> with the hint in a paragraph inside it.</p>
+
+<form action="#" class="example">
+  <fieldset>
+    <legend>Which is your favourite pet?</legend>
+    <p>Choose one pet.</p>
+    <div>
+      <input type="radio" id="r1-dog" name="r1" value="dog">
+      <label for="r1-dog">Dog</label>
+    </div>
+    <div>
+      <input type="radio" id="r1-cat" name="r1" value="cat">
+      <label for="r1-cat">Cat</label>
+    </div>
+    <div>
+      <input type="radio" id="r1-rabbit" name="r1" value="rabbit">
+      <label for="r1-rabbit">Rabbit</label>
+    </div>
+  </fieldset>
+</form>
+
+<div class="status status-poor">
+  <p><strong>Poor practice:</strong> Nothing associates the hint with the group, so assistive technology users may not hear it.</p>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which is your favourite pet?&lt;/legend&gt;
+  &lt;p&gt;Choose one pet.&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r1-dog" name="r1" value="dog"&gt;
+    &lt;label for="r1-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r1-cat" name="r1" value="cat"&gt;
+    &lt;label for="r1-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r1-rabbit" name="r1" value="rabbit"&gt;
+    &lt;label for="r1-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>2. Hint as text in the group's name</h2>
+
+<p>The hint is written into the group's name: the legend, or the labelling element.</p>
+
+<!-- sub-section -->
+
+<h3>Example 2.1: <code>fieldset</code></h3>
+
+<p>The hint is added to the group's name.</p>
+
+<form action="#" class="example">
+  <fieldset>
+    <legend>Which is your favourite pet? (choose one)</legend>
+    <div>
+      <input type="radio" id="r2-dog" name="r2" value="dog">
+      <label for="r2-dog">Dog</label>
+    </div>
+    <div>
+      <input type="radio" id="r2-cat" name="r2" value="cat">
+      <label for="r2-cat">Cat</label>
+    </div>
+    <div>
+      <input type="radio" id="r2-rabbit" name="r2" value="rabbit">
+      <label for="r2-rabbit">Rabbit</label>
+    </div>
+  </fieldset>
+</form>
+
+<div class="status status-good">
+  <p><strong>Acceptable:</strong> The hint is part of the group's accessible name, so it is announced when users enter the group. It makes the name longer, and linking the hint with <code>aria-describedby</code> keeps the name short.</p>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which is your favourite pet? <span class="highlight">(choose one)</span>&lt;/legend&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r2-dog" name="r2" value="dog"&gt;
+    &lt;label for="r2-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r2-cat" name="r2" value="cat"&gt;
+    &lt;label for="r2-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r2-rabbit" name="r2" value="rabbit"&gt;
+    &lt;label for="r2-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3>Example 2.2: <code>div</code> with <code>role="group"</code></h3>
+
+<p>The hint is added to the group's name.</p>
+
+<form action="#" class="example">
+  <div role="group" aria-labelledby="r3-label">
+    <h4 id="r3-label">Which is your favourite pet? (choose one)</h4>
+    <div>
+      <input type="radio" id="r3-dog" name="r3" value="dog">
+      <label for="r3-dog">Dog</label>
+    </div>
+    <div>
+      <input type="radio" id="r3-cat" name="r3" value="cat">
+      <label for="r3-cat">Cat</label>
+    </div>
+    <div>
+      <input type="radio" id="r3-rabbit" name="r3" value="rabbit">
+      <label for="r3-rabbit">Rabbit</label>
+    </div>
+  </div>
+</form>
+
+<div class="status status-good">
+  <p><strong>Acceptable:</strong> The hint is part of the group's accessible name, so it is announced when users enter the group. It makes the name longer, and linking the hint with <code>aria-describedby</code> keeps the name short.</p>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="group" aria-labelledby="r3-label"&gt;
+  &lt;h4 id="r3-label"&gt;Which is your favourite pet? <span class="highlight">(choose one)</span>&lt;/h4&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r3-dog" name="r3" value="dog"&gt;
+    &lt;label for="r3-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r3-cat" name="r3" value="cat"&gt;
+    &lt;label for="r3-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r3-rabbit" name="r3" value="rabbit"&gt;
+    &lt;label for="r3-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3>Example 2.3: <code>div</code> with <code>role="radiogroup"</code></h3>
+
+<p>The hint is added to the group's name.</p>
+
+<form action="#" class="example">
+  <div role="radiogroup" aria-labelledby="r4-label">
+    <h4 id="r4-label">Which is your favourite pet? (choose one)</h4>
+    <div>
+      <input type="radio" id="r4-dog" name="r4" value="dog">
+      <label for="r4-dog">Dog</label>
+    </div>
+    <div>
+      <input type="radio" id="r4-cat" name="r4" value="cat">
+      <label for="r4-cat">Cat</label>
+    </div>
+    <div>
+      <input type="radio" id="r4-rabbit" name="r4" value="rabbit">
+      <label for="r4-rabbit">Rabbit</label>
+    </div>
+  </div>
+</form>
+
+<div class="status status-good">
+  <p><strong>Acceptable:</strong> The hint is part of the group's accessible name, so it is announced when users enter the group. It makes the name longer, and linking the hint with <code>aria-describedby</code> keeps the name short.</p>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="radiogroup" aria-labelledby="r4-label"&gt;
+  &lt;h4 id="r4-label"&gt;Which is your favourite pet? <span class="highlight">(choose one)</span>&lt;/h4&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r4-dog" name="r4" value="dog"&gt;
+    &lt;label for="r4-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r4-cat" name="r4" value="cat"&gt;
+    &lt;label for="r4-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r4-rabbit" name="r4" value="rabbit"&gt;
+    &lt;label for="r4-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2>3. <code>aria-describedby</code> on the radios</h2>
+
+<p>The hint is linked to the radios themselves.</p>
+
+<!-- sub-section -->
+
+<h3>Example 3.1: <code>aria-describedby</code> on each radio</h3>
+
+<p>Every radio has <code>aria-describedby</code> pointing to the hint.</p>
+
+<form action="#" class="example">
+  <fieldset>
+    <legend>Which is your favourite pet?</legend>
+    <p id="r5-hint">Choose one pet.</p>
+    <div>
+      <input type="radio" id="r5-dog" name="r5" value="dog" aria-describedby="r5-hint">
+      <label for="r5-dog">Dog</label>
+    </div>
+    <div>
+      <input type="radio" id="r5-cat" name="r5" value="cat" aria-describedby="r5-hint">
+      <label for="r5-cat">Cat</label>
+    </div>
+    <div>
+      <input type="radio" id="r5-rabbit" name="r5" value="rabbit" aria-describedby="r5-hint">
+      <label for="r5-rabbit">Rabbit</label>
+    </div>
+  </fieldset>
+</form>
+
+<div class="status status-poor">
+  <p><strong>Poor practice:</strong> The hint is repeated on every radio, and it is not associated with the group itself.</p>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which is your favourite pet?&lt;/legend&gt;
+  &lt;p <span class="highlight">id="r5-hint"</span>&gt;Choose one pet.&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r5-dog" name="r5" value="dog" <span class="highlight">aria-describedby="r5-hint"</span>&gt;
+    &lt;label for="r5-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r5-cat" name="r5" value="cat" <span class="highlight">aria-describedby="r5-hint"</span>&gt;
+    &lt;label for="r5-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r5-rabbit" name="r5" value="rabbit" <span class="highlight">aria-describedby="r5-hint"</span>&gt;
+    &lt;label for="r5-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3>Example 3.2: <code>aria-describedby</code> on one radio only</h3>
+
+<p>Only the first radio has <code>aria-describedby</code> pointing to the hint.</p>
+
+<form action="#" class="example">
+  <fieldset>
+    <legend>Which is your favourite pet?</legend>
+    <p id="r6-hint">Choose one pet.</p>
+    <div>
+      <input type="radio" id="r6-dog" name="r6" value="dog" aria-describedby="r6-hint">
+      <label for="r6-dog">Dog</label>
+    </div>
+    <div>
+      <input type="radio" id="r6-cat" name="r6" value="cat">
+      <label for="r6-cat">Cat</label>
+    </div>
+    <div>
+      <input type="radio" id="r6-rabbit" name="r6" value="rabbit">
+      <label for="r6-rabbit">Rabbit</label>
+    </div>
+  </fieldset>
+</form>
+
+<div class="status status-poor">
+  <p><strong>Poor practice:</strong> Only that radio has the hint description, so users may think it applies to that radio only, not the group.</p>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Which is your favourite pet?&lt;/legend&gt;
+  &lt;p <span class="highlight">id="r6-hint"</span>&gt;Choose one pet.&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r6-dog" name="r6" value="dog" <span class="highlight">aria-describedby="r6-hint"</span>&gt;
+    &lt;label for="r6-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r6-cat" name="r6" value="cat"&gt;
+    &lt;label for="r6-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r6-rabbit" name="r6" value="rabbit"&gt;
+    &lt;label for="r6-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+<div class="status status-poor">
+  <p><strong>None of these options is good practice.</strong></p>
+</div>
+
+
+<!-- section -->
+
+
+<h2 id="recommended">4. Hint linked to the group</h2>
+
+<p>The hint is linked to the group with <code>aria-describedby</code>.</p>
+
+<!-- sub-section -->
+
+<h3>Example 4.1: <code>fieldset</code></h3>
+
+<p>The group has <code>aria-describedby</code> pointing to the hint.</p>
+
+<form action="#" class="example">
+  <fieldset aria-describedby="r7-hint">
+    <legend>Which is your favourite pet?</legend>
+    <p id="r7-hint">Choose one pet.</p>
+    <div>
+      <input type="radio" id="r7-dog" name="r7" value="dog">
+      <label for="r7-dog">Dog</label>
+    </div>
+    <div>
+      <input type="radio" id="r7-cat" name="r7" value="cat">
+      <label for="r7-cat">Cat</label>
+    </div>
+    <div>
+      <input type="radio" id="r7-rabbit" name="r7" value="rabbit">
+      <label for="r7-rabbit">Rabbit</label>
+    </div>
+  </fieldset>
+</form>
+
+<div class="status status-good">
+  <p><strong>Recommended:</strong> The hint is associated with the group with <code>aria-describedby</code>, so assistive technology can announce it as the group's description.</p>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;fieldset <span class="highlight">aria-describedby="r7-hint"</span>&gt;
+  &lt;legend&gt;Which is your favourite pet?&lt;/legend&gt;
+  &lt;p <span class="highlight">id="r7-hint"</span>&gt;Choose one pet.&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r7-dog" name="r7" value="dog"&gt;
+    &lt;label for="r7-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r7-cat" name="r7" value="cat"&gt;
+    &lt;label for="r7-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r7-rabbit" name="r7" value="rabbit"&gt;
+    &lt;label for="r7-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3>Example 4.2: <code>div</code> with <code>role="group"</code></h3>
+
+<p>The group has <code>aria-describedby</code> pointing to the hint.</p>
+
+<form action="#" class="example">
+  <div role="group" aria-labelledby="r8-label" aria-describedby="r8-hint">
+    <h4 id="r8-label">Which is your favourite pet?</h4>
+    <p id="r8-hint">Choose one pet.</p>
+    <div>
+      <input type="radio" id="r8-dog" name="r8" value="dog">
+      <label for="r8-dog">Dog</label>
+    </div>
+    <div>
+      <input type="radio" id="r8-cat" name="r8" value="cat">
+      <label for="r8-cat">Cat</label>
+    </div>
+    <div>
+      <input type="radio" id="r8-rabbit" name="r8" value="rabbit">
+      <label for="r8-rabbit">Rabbit</label>
+    </div>
+  </div>
+</form>
+
+<div class="status status-good">
+  <p><strong>Recommended:</strong> The hint is associated with the group with <code>aria-describedby</code>, so assistive technology can announce it as the group's description.</p>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="group" aria-labelledby="r8-label" <span class="highlight">aria-describedby="r8-hint"</span>&gt;
+  &lt;h4 id="r8-label"&gt;Which is your favourite pet?&lt;/h4&gt;
+  &lt;p <span class="highlight">id="r8-hint"</span>&gt;Choose one pet.&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r8-dog" name="r8" value="dog"&gt;
+    &lt;label for="r8-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r8-cat" name="r8" value="cat"&gt;
+    &lt;label for="r8-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r8-rabbit" name="r8" value="rabbit"&gt;
+    &lt;label for="r8-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+<!-- sub-section -->
+
+<h3>Example 4.3: <code>div</code> with <code>role="radiogroup"</code></h3>
+
+<p>The group has <code>aria-describedby</code> pointing to the hint.</p>
+
+<form action="#" class="example">
+  <div role="radiogroup" aria-labelledby="r9-label" aria-describedby="r9-hint">
+    <h4 id="r9-label">Which is your favourite pet?</h4>
+    <p id="r9-hint">Choose one pet.</p>
+    <div>
+      <input type="radio" id="r9-dog" name="r9" value="dog">
+      <label for="r9-dog">Dog</label>
+    </div>
+    <div>
+      <input type="radio" id="r9-cat" name="r9" value="cat">
+      <label for="r9-cat">Cat</label>
+    </div>
+    <div>
+      <input type="radio" id="r9-rabbit" name="r9" value="rabbit">
+      <label for="r9-rabbit">Rabbit</label>
+    </div>
+  </div>
+</form>
+
+<div class="status status-good">
+  <p><strong>Recommended:</strong> The hint is associated with the group with <code>aria-describedby</code>, so assistive technology can announce it as the group's description.</p>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;div role="radiogroup" aria-labelledby="r9-label" <span class="highlight">aria-describedby="r9-hint"</span>&gt;
+  &lt;h4 id="r9-label"&gt;Which is your favourite pet?&lt;/h4&gt;
+  &lt;p <span class="highlight">id="r9-hint"</span>&gt;Choose one pet.&lt;/p&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r9-dog" name="r9" value="dog"&gt;
+    &lt;label for="r9-dog"&gt;Dog&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r9-cat" name="r9" value="cat"&gt;
+    &lt;label for="r9-cat"&gt;Cat&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="r9-rabbit" name="r9" value="rabbit"&gt;
+    &lt;label for="r9-rabbit"&gt;Rabbit&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<div class="note">
+  <h2>Using hints and errors together</h2>
+  <p>A group can have both a hint and an error. Hints and errors use the same method, so list both IDs in one <code>aria-describedby</code>, separated by a space. See <a href="testing-errors-radio-groups.html">Testing errors on radio groups</a>.</p>
+<pre><code>&lt;fieldset <span class="highlight">aria-describedby="pets-hint pets-error"</span>&gt;
+  &lt;legend&gt;Which is your favourite pet?&lt;/legend&gt;
+  &lt;p id="pets-hint"&gt;Choose the pet you like best.&lt;/p&gt;
+  &lt;p id="pets-error"&gt;Error: Choose one pet.&lt;/p&gt;
+  &lt;!-- radio inputs and labels --&gt;
+&lt;/fieldset&gt;</code></pre>
+</div>
+
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+</main>
+</body>
+</html>
