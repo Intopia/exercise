@@ -72,7 +72,9 @@
   <input class="input" type="text" id="ex1-field" value="ABC-123-XYZ" readonly>
 </div>
 
-<p><b>Expected result:</b> the field should be announced as read-only. It should remain focusable, and its value should be selectable and copyable, but not editable, this is the baseline every other example is compared against.</p>
+<div class="note">
+  <p><b>Expected result:</b> the field should be announced as read-only. It should remain focusable, and its value should be selectable and copyable, but not editable, this is the baseline every other example is compared against.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -92,7 +94,9 @@
   <input class="input" type="text" id="ex2-field" value="ABC-123-XYZ" aria-readonly="true">
 </div>
 
-<p><b>Expected result:</b> the field remains fully editable, typing and pasting both work normally. Assistive technology should still announce it as read-only, since that's all this attribute does, worth confirming directly whether every AT/browser combination actually surfaces this announcement, ARIA state support is never guaranteed.</p>
+<div class="note">
+  <p><b>Expected result:</b> the field remains fully editable, typing and pasting both work normally. Assistive technology should still announce it as read-only, since that's all this attribute does, worth confirming directly whether every AT/browser combination actually surfaces this announcement, ARIA state support is never guaranteed.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -112,7 +116,9 @@
   <input class="input" type="text" id="ex3-field" value="ABC-123-XYZ" aria-readonly="false">
 </div>
 
-<p><b>Expected result:</b> behaves identically to an ordinary field with no <code>aria-readonly</code> attribute at all, editable, and announced as editable. No difference from omitting the attribute entirely.</p>
+<div class="note">
+  <p><b>Expected result:</b> behaves identically to an ordinary field with no <code>aria-readonly</code> attribute at all, editable, and announced as editable. No difference from omitting the attribute entirely.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -132,7 +138,9 @@
   <input class="input" type="text" id="ex4-field" value="ABC-123-XYZ" readonly aria-readonly="true">
 </div>
 
-<p><b>Expected result:</b> behaves identically to Example 1, typing and paste are rejected, and it's announced as read-only. The <code>aria-readonly="true"</code> adds nothing on top of native <code>readonly</code>.</p>
+<div class="note">
+  <p><b>Expected result:</b> behaves identically to Example 1, typing and paste are rejected, and it's announced as read-only. The <code>aria-readonly="true"</code> adds nothing on top of native <code>readonly</code>.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -152,7 +160,9 @@
   <input class="input" type="text" id="ex5-field" value="ABC-123-XYZ" readonly aria-readonly="false">
 </div>
 
-<p><b>Expected result:</b> the field stays browser-enforced read-only, typing and paste are still rejected, native <code>readonly</code> wins functionally. Whether assistive technology announces it as read-only (matching actual behaviour) or as editable (matching the ARIA state) is genuinely unsettled and needs confirming directly across AT/browser combinations, don't assume either outcome.</p>
+<div class="note">
+  <p><b>Expected result:</b> the field stays browser-enforced read-only, typing and paste are still rejected, native <code>readonly</code> wins functionally. Whether assistive technology announces it as read-only (matching actual behaviour) or as editable (matching the ARIA state) is genuinely unsettled and needs confirming directly across AT/browser combinations, don't assume either outcome.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -172,7 +182,9 @@
   <div role="textbox" aria-labelledby="ex6-label" aria-readonly="true" contenteditable="false" tabindex="0">ABC-123-XYZ</div>
 </div>
 
-<p><b>Expected result:</b> the field should be announced as read-only, the same as Example 1. It should remain focusable, and typing should be blocked by <code>contenteditable="false"</code>, not by <code>aria-readonly</code>.</p>
+<div class="note">
+  <p><b>Expected result:</b> the field should be announced as read-only, the same as Example 1. It should remain focusable, and typing should be blocked by <code>contenteditable="false"</code>, not by <code>aria-readonly</code>.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -198,7 +210,9 @@
   <div role="textbox" aria-labelledby="ex7-label" aria-readonly="false" contenteditable="true" tabindex="0">ABC-123-XYZ</div>
 </div>
 
-<p><b>Expected result:</b> behaves as an ordinary editable custom widget, typing works normally, and it should be announced as editable. No functional difference from omitting the attribute entirely, the same as Example 3's native case.</p>
+<div class="note">
+  <p><b>Expected result:</b> behaves as an ordinary editable custom widget, typing works normally, and it should be announced as editable. No functional difference from omitting the attribute entirely, the same as Example 3's native case.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -224,7 +238,9 @@
   <input class="input" type="text" id="ex8-field" value="ABC-123-XYZ" aria-readonly="readonly">
 </div>
 
-<p><b>Expected result:</b> per spec, an invalid token on a boolean ARIA property should fall back to the default (<code>false</code>), so the field should behave and be announced as ordinary and editable. Invalid-value handling is inconsistent across implementations though, worth confirming directly rather than assuming spec-correct fallback behaviour.</p>
+<div class="note">
+  <p><b>Expected result:</b> per spec, an invalid token on a boolean ARIA property should fall back to the default (<code>false</code>), so the field should behave and be announced as ordinary and editable. Invalid-value handling is inconsistent across implementations though, worth confirming directly rather than assuming spec-correct fallback behaviour.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -235,11 +251,9 @@
 <!-- section -->
 
 
-<div class="note">
+<div class="note note-warning">
   <p><b>Readonly is not the same as disabled.</b> A read-only field stays focusable, its value can still be selected and copied, and for native form fields, it's still submitted with the form. A disabled field is removed from the tab order, its value typically cannot be selected, and it's excluded from form submission entirely. If a value should still be readable and copyable, but not editable, readonly is usually the correct choice, not disabled.</p>
 </div>
-
-<p><b>Note for testing:</b> confirm with your standard browser and screen reader combinations that Examples 1 and 6 are announced as read-only, that Examples 2 and 7's announcements hold even though the field stays editable, that Example 5's conflicting combination doesn't produce an unpredictable announcement, and that the distinction from a disabled field (still focusable, still selectable) actually holds in practice.</p>
 
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>

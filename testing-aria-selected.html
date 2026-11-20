@@ -73,7 +73,9 @@
   </select>
 </div>
 
-<p><b>Expected result:</b> "Banana" should be exposed as the selected option, with no <code>aria-selected</code> attribute anywhere in the markup.</p>
+<div class="note">
+  <p><b>Expected result:</b> "Banana" should be exposed as the selected option, with no <code>aria-selected</code> attribute anywhere in the markup.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -107,7 +109,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> exactly one option should have <code>aria-selected="true"</code> at all times. Moving focus with arrow keys should move selection with it, and only the focused option should have <code>tabindex="0"</code>, every other option should have <code>tabindex="-1"</code>.</p>
+<div class="note">
+  <p><b>Expected result:</b> exactly one option should have <code>aria-selected="true"</code> at all times. Moving focus with arrow keys should move selection with it, and only the focused option should have <code>tabindex="0"</code>, every other option should have <code>tabindex="-1"</code>.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -187,7 +191,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> any number of options, including zero or all three, should be able to have <code>aria-selected="true"</code> at the same time. Moving focus with arrow keys should never change selection on its own, only Space should toggle the focused option's selected state.</p>
+<div class="note">
+  <p><b>Expected result:</b> any number of options, including zero or all three, should be able to have <code>aria-selected="true"</code> at the same time. Moving focus with arrow keys should never change selection on its own, only Space should toggle the focused option's selected state.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -270,7 +276,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> worth confirming directly, since there is no supporting container role, <code>aria-selected</code> may not be exposed or announced consistently.</p>
+<div class="note">
+  <p><b>Expected result:</b> worth confirming directly, since there is no supporting container role, <code>aria-selected</code> may not be exposed or announced consistently.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -278,12 +286,6 @@
   Apple
 &lt;/div&gt;</code></pre>
 </details>
-
-
-<!-- section -->
-
-
-<p><b>Note for testing:</b> confirm all four results above with your standard browser and screen reader combinations before treating them as settled. Selection announcements for single-select vs. multi-select listboxes, and the misuse case in Example 4, have not been verified here.</p>
 
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>

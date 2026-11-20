@@ -117,7 +117,9 @@
   <button type="button" aria-haspopup="false">Plain button</button>
 </div>
 
-<p><b>Expected result:</b> no popup indication should be announced, this button should behave exactly like any ordinary button.</p>
+<div class="note">
+  <p><b>Expected result:</b> no popup indication should be announced, this button should behave exactly like any ordinary button.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -146,7 +148,9 @@
   <span id="menu1-result" role="status" class="sr-only"></span>
 </div>
 
-<p><b>Expected result:</b> hovering, clicking, or pressing Enter/Space/Arrow Down on the button should open the menu. Arrow keys should move focus between items, looping from last to first. Enter or Space activates the focused item and closes the menu. Escape closes and returns focus to the button.</p>
+<div class="note">
+  <p><b>Expected result:</b> hovering, clicking, or pressing Enter/Space/Arrow Down on the button should open the menu. Arrow keys should move focus between items, looping from last to first. Enter or Space activates the focused item and closes the menu. Escape closes and returns focus to the button.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -182,7 +186,9 @@
   <span id="menu2-result" role="status" class="sr-only"></span>
 </div>
 
-<p><b>Expected result:</b> identical interaction to Example 2.</p>
+<div class="note">
+  <p><b>Expected result:</b> identical interaction to Example 2.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -218,7 +224,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> opens on hover, click, or Enter/Space/Arrow Down. Arrow keys move the selection (select-follows-focus). Enter, Space, or clicking an option confirms the selection, closes the popup, updates the button text, and returns focus to the button. Escape closes without changing the selection.</p>
+<div class="note">
+  <p><b>Expected result:</b> opens on hover, click, or Enter/Space/Arrow Down. Arrow keys move the selection (select-follows-focus). Enter, Space, or clicking an option confirms the selection, closes the popup, updates the button text, and returns focus to the button. Escape closes without changing the selection.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -265,7 +273,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> opens on hover, click, or Enter/Space/Arrow Down, already expanded, both categories and all four sub-items visible immediately. Arrow Down/Up move between visible items. Arrow Right on an expanded category moves into its first child; Arrow Left on a child moves back to its parent, or collapses an expanded category if focus is already there. Enter or Space on a leaf item selects it, closes the popup, updates the button, and returns focus to the button. Escape closes without selecting.</p>
+<div class="note">
+  <p><b>Expected result:</b> opens on hover, click, or Enter/Space/Arrow Down, already expanded, both categories and all four sub-items visible immediately. Arrow Down/Up move between visible items. Arrow Right on an expanded category moves into its first child; Arrow Left on a child moves back to its parent, or collapses an expanded category if focus is already there. Enter or Space on a leaf item selects it, closes the popup, updates the button, and returns focus to the button. Escape closes without selecting.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -321,7 +331,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> opens on hover, click, or Enter/Space/Arrow Down. Arrow keys move focus in two dimensions, up/down between weeks, left/right between days. Enter or Space selects the focused date, closes the popup, updates the button, and returns focus to the button. Escape closes without selecting.</p>
+<div class="note">
+  <p><b>Expected result:</b> opens on hover, click, or Enter/Space/Arrow Down. Arrow keys move focus in two dimensions, up/down between weeks, left/right between days. Enter or Space selects the focused date, closes the popup, updates the button, and returns focus to the button. Escape closes without selecting.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -358,7 +370,9 @@
   <button type="button" id="dialog-cancel">Cancel</button>
 </div>
 
-<p><b>Expected result:</b> opens on click or Enter/Space on the button, not on hover. Focus moves to the dialog heading. Tab is trapped within the dialog while open. Escape, clicking the backdrop, or clicking Cancel closes the dialog and returns focus to the trigger button.</p>
+<div class="note">
+  <p><b>Expected result:</b> opens on click or Enter/Space on the button, not on hover. Focus moves to the dialog heading. Tab is trapped within the dialog while open. Escape, clicking the backdrop, or clicking Cancel closes the dialog and returns focus to the trigger button.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -385,7 +399,9 @@
   <button type="button" aria-haspopup="tooltip">Invalid value example</button>
 </div>
 
-<p><b>Expected result:</b> this is exactly the kind of markup error the bookmarklet is built to catch, an invalid, unrecognised token. Worth confirming what AT does with an invalid value too, whether it's silently ignored (treated as if <code>aria-haspopup</code> weren't present at all), or something else, that's a separate, real question from whether the bookmarklet flags it.</p>
+<div class="note">
+  <p><b>Expected result:</b> this is exactly the kind of markup error the bookmarklet is built to catch, an invalid, unrecognised token. Worth confirming what AT does with an invalid value too, whether it's silently ignored (treated as if <code>aria-haspopup</code> weren't present at all), or something else, that's a separate, real question from whether the bookmarklet flags it.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -404,7 +420,9 @@
   <button type="button" aria-haspopup="">Empty value example</button>
 </div>
 
-<p><b>Expected result:</b> another case the bookmarklet should flag. Worth confirming directly whether AT treats an empty value the same way as an invalid one (Example 8), the same as <code>false</code> (the spec default), or some third behaviour, this isn't something to assume either way.</p>
+<div class="note">
+  <p><b>Expected result:</b> another case the bookmarklet should flag. Worth confirming directly whether AT treats an empty value the same way as an invalid one (Example 8), the same as <code>false</code> (the spec default), or some third behaviour, this isn't something to assume either way.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>

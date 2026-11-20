@@ -27,7 +27,9 @@
 
 <p>This page's <code>&lt;html&gt;</code> element uses the full word <code>"english"</code> instead of a valid language code.</p>
 
-<p><b>Expected result, document level:</b> Red banner, <code>Document lang: "english", did you mean "en"?</code></p>
+<div class="note">
+  <p><b>Expected result, document level:</b> Red banner, <code>Document lang: "english", did you mean "en"?</code></p>
+</div>
 
 <details>
   <summary>HTML markup (document level)</summary>
@@ -46,7 +48,9 @@
 
 <p><span lang="de">Guten Tag, wie geht es Ihnen?</span></p>
 
-<p><b>Expected result:</b> Blue badge, "lang: de" (valid inline switch).</p>
+<div class="note">
+  <p><b>Expected result:</b> Blue badge, "lang: de" (valid inline switch).</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -63,7 +67,9 @@
 
 <p><span lang="">This text has an empty lang attribute.</span></p>
 
-<p><b>Expected result:</b> Amber badge, lang attribute present but has no value.</p>
+<div class="note">
+  <p><b>Expected result:</b> Amber badge, lang attribute present but has no value.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -80,7 +86,9 @@
 
 <p><span lang="xyz">This text has an unrecognised lang code.</span></p>
 
-<p><b>Expected result:</b> Amber badge, unrecognised code, no confident suggestion available.</p>
+<div class="note">
+  <p><b>Expected result:</b> Amber badge, unrecognised code, no confident suggestion available.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -97,7 +105,9 @@
 
 <p><span lang="English">This text has an invalid lang code.</span></p>
 
-<p><b>Expected result:</b> Amber badge, unrecognised code, no confident suggestion available.</p>
+<div class="note">
+  <p><b>Expected result:</b> Amber badge, unrecognised code, no confident suggestion available.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>

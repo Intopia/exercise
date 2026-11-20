@@ -41,7 +41,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> the role should be announced as "group".</p>
+<div class="note">
+  <p><b>Expected result:</b> the role should be announced as "group".</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -64,7 +66,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> the role should be announced as "slide" instead of "group", while the element continues to behave as a group in every other respect.</p>
+<div class="note">
+  <p><b>Expected result:</b> the role should be announced as "slide" instead of "group", while the element continues to behave as a group in every other respect.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -105,7 +109,9 @@
   </fieldset>
 </div>
 
-<p><b>Expected result:</b> without <code>aria-roledescription</code>, this fieldset would be announced only as "group". With it, the role should be announced as "checkboxgroup" instead, giving screen reader users more specific context than ARIA's role vocabulary alone can provide, without changing how the individual checkboxes behave or are navigated.</p>
+<div class="note">
+  <p><b>Expected result:</b> without <code>aria-roledescription</code>, this fieldset would be announced only as "group". With it, the role should be announced as "checkboxgroup" instead, giving screen reader users more specific context than ARIA's role vocabulary alone can provide, without changing how the individual checkboxes behave or are navigated.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -135,7 +141,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> per spec, this <code>aria-roledescription</code> should be stripped and not exposed to assistive technology at all, since it isn't permitted on the <code>generic</code> role this element implicitly has. Confirm directly what your standard AT/browser combinations actually do, implementation of this specific prohibition has historically been inconsistent.</p>
+<div class="note">
+  <p><b>Expected result:</b> per spec, this <code>aria-roledescription</code> should be stripped and not exposed to assistive technology at all, since it isn't permitted on the <code>generic</code> role this element implicitly has. Confirm directly what your standard AT/browser combinations actually do, implementation of this specific prohibition has historically been inconsistent.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -159,7 +167,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> the same outcome as Example 4, per spec this <code>aria-roledescription</code> should be stripped and not exposed to assistive technology, since <code>generic</code> explicitly prohibits it. Confirm directly what your standard AT/browser combinations actually do.</p>
+<div class="note">
+  <p><b>Expected result:</b> the same outcome as Example 4, per spec this <code>aria-roledescription</code> should be stripped and not exposed to assistive technology, since <code>generic</code> explicitly prohibits it. Confirm directly what your standard AT/browser combinations actually do.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -182,7 +192,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> the element has a valid underlying role but the roledescription value is empty, so no custom role name will be announced. The role will fall back to the underlying "group".</p>
+<div class="note">
+  <p><b>Expected result:</b> the element has a valid underlying role but the roledescription value is empty, so no custom role name will be announced. The role will fall back to the underlying "group".</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -194,12 +206,6 @@
   Slide 1 of 3
 &lt;/div&gt;</code></pre>
 </details>
-
-
-<!-- section -->
-
-
-<p><b>Note for testing:</b> confirm all results above with your standard browser and screen reader combinations before treating them as settled. <code>aria-roledescription</code> support, and behaviour for the two misuse cases in Examples 4 and 5 specifically, has not been verified here.</p>
 
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>

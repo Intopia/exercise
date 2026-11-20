@@ -58,7 +58,9 @@ script.src =
   'https://cdn.jsdelivr.net/npm/axe-core@4.14.0/axe.min.js';
 document.head.appendChild(script);</code></pre>
 
-<p>Expected result: Nothing is printed, or the console shows the script element. If a page blocks external scripts (a Content Security Policy), the load will fail. Try a different page.</p>
+<div class="note">
+  <p><b>Expected result</b>: Nothing is printed, or the console shows the script element. If a page blocks external scripts (a Content Security Policy), the load will fail. Try a different page.</p>
+</div>
 
 
 <!-- section -->
@@ -70,8 +72,9 @@ document.head.appendChild(script);</code></pre>
 
 <pre><code class="language-javascript">axe.version</code></pre>
 
-<p>Expected result: The console prints the version number, <code>'4.14.0'</code>. If axe has not loaded, it prints <code>ReferenceError: axe is not defined</code>. Wait a moment and try again.</p>
-
+<div class="note">
+  <p><b>Expected result</b>: The console prints the version number, <code>'4.14.0'</code>. If axe has not loaded, it prints <code>ReferenceError: axe is not defined</code>. Wait a moment and try again.</p>
+</div>
 
 <!-- section -->
 
@@ -82,7 +85,9 @@ document.head.appendChild(script);</code></pre>
 
 <pre><code class="language-javascript">var results = await axe.run();</code></pre>
 
-<p>Expected result: The console prints <code>undefined</code>. That's normal. The results have been stored in <code>results</code>, ready for the next samples.</p>
+<div class="note">
+  <p><b>Expected result</b>: The console prints <code>undefined</code>. That's normal. The results have been stored in <code>results</code>, ready for the next samples.</p>
+</div>
 
 
 <!-- section -->
@@ -105,8 +110,9 @@ console.log('inapplicable:', results.inapplicable.length);</code></pre>
   <li><code>inapplicable</code>: rules with nothing on the page to test</li>
 </ul>
 
-<p>Expected result: Four lines, each with a list name and a count.</p>
-
+<div class="note">
+  <p><b>Expected result</b>: Four lines, each with a list name and a count.</p>
+</div>
 
 <!-- section -->
 
@@ -117,8 +123,9 @@ console.log('inapplicable:', results.inapplicable.length);</code></pre>
 
 <pre><code class="language-javascript">results.violations.forEach(v =&gt; console.log(v.impact, v.id, v));</code></pre>
 
-<p>Expected result: One line per failed rule, starting with its impact and rule name, such as <code>critical button-name</code>, followed by the full result. Expand any line to see its details.</p>
-
+<div class="note">
+  <p><b>Expected result</b>: One line per failed rule, starting with its impact and rule name, such as <code>critical button-name</code>, followed by the full result. Expand any line to see its details.</p>
+</div>
 
 <!-- section -->
 
@@ -135,7 +142,9 @@ console.log('inapplicable:', results.inapplicable.length);</code></pre>
   }))
 );</code></pre>
 
-<p>Expected result: The console prints a table with the columns <code>rule</code>, <code>impact</code> and <code>elements</code>.</p>
+<div class="note">
+  <p><b>Expected result</b>: The console prints a table with the columns <code>rule</code>, <code>impact</code> and <code>elements</code>.</p>
+</div>
 
 
 <!-- section -->
@@ -157,7 +166,9 @@ console.table(
   }))
 );</code></pre>
 
-<p>Expected result: The table only lists rules with an impact of <code>critical</code> or <code>serious</code>. The other levels are <code>moderate</code> and <code>minor</code>.</p>
+<div class="note">
+  <p><b>Expected result</b>: The table only lists rules with an impact of <code>critical</code> or <code>serious</code>. The other levels are <code>moderate</code> and <code>minor</code>.</p>
+</div>
 
 
 <!-- section -->
@@ -174,7 +185,9 @@ console.table(
   });
 });</code></pre>
 
-<p>Expected result: Each rule name is followed by an indented list of CSS selectors, one per failing element.</p>
+<div class="note">
+  <p><b>Expected result</b>: Each rule name is followed by an indented list of CSS selectors, one per failing element.</p>
+</div>
 
 
 <!-- section -->
@@ -193,7 +206,9 @@ console.table(
   });
 });</code></pre>
 
-<p>Expected result: Failing elements get a red outline on the page. Refresh the page to remove the outlines. This simple version may miss elements inside iframes or shadow DOM.</p>
+<div class="note">
+  <p><b>Expected result</b>: Failing elements get a red outline on the page. Refresh the page to remove the outlines. This simple version may miss elements inside iframes or shadow DOM.</p>
+</div>
 
 
 <!-- section -->
@@ -212,7 +227,9 @@ console.table(
   });
 });</code></pre>
 
-<p>Expected result: Each failing element is followed by text starting with <code>Fix any of the following:</code> or <code>Fix all of the following:</code>, then the specific changes needed.</p>
+<div class="note">
+  <p><b>Expected result</b>: Each failing element is followed by text starting with <code>Fix any of the following:</code> or <code>Fix all of the following:</code>, then the specific changes needed.</p>
+</div>
 
 
 <!-- section -->
@@ -240,7 +257,9 @@ console.table(
   console.log(results);
 })();</code></pre>
 
-<p>Expected result: After a short pause, the console prints the number of violations, a table of the failed rules, then the full results object. If axe-core can't load, you'll see the error <code>axe-core failed to load (check CSP or version)</code>. The <code>results</code> variable is still available, so samples 4 to 10 will also work.</p>
+<div class="note">
+  <p><b>Expected result</b>: After a short pause, the console prints the number of violations, a table of the failed rules, then the full results object. If axe-core can't load, you'll see the error <code>axe-core failed to load (check CSP or version)</code>. The <code>results</code> variable is still available, so samples 4 to 10 will also work.</p>
+</div>
 
 
 <!-- section -->
@@ -345,9 +364,9 @@ ${section('Needs review', r.incomplete)}
   a.click();
 })();</code></pre>
 
-<p>Expected result: The console prints a <code>Promise</code>, then the browser downloads <code>axe-report.html</code>. The report lists every failed and needs review rule, with a table of the elements and the exact problem for each. If axe-core can't load, you'll see the error <code>Could not load axe-core. The site may block outside scripts.</code></p>
-
-
+<div class="note">
+  <p><b>Expected result</b>: The console prints a <code>Promise</code>, then the browser downloads <code>axe-report.html</code>. The report lists every failed and needs review rule, with a table of the elements and the exact problem for each. If axe-core can't load, you'll see the error <code>Could not load axe-core. The site may block outside scripts.</code></p>
+</div>
 
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
