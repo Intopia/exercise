@@ -11,6 +11,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-a11y-dark.min.css" rel="stylesheet">
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <script src="assets/js/table-wrap.js" defer></script>
 </head>
 <body>
 <main>
@@ -106,6 +107,7 @@
 
 <p>For example, a Playwright report might show that a test failed because keyboard focus did not move to a dialog when it opened.</p>
 
+<div class="table-wrap">
 <table>
   <thead>
     <tr>
@@ -142,6 +144,7 @@
     </tr>
   </tbody>
 </table>
+</div>
 
 <h3>Catching accessibility issues after code changes</h3>
 
@@ -903,6 +906,7 @@ for (const sitePage of sitePages) {
 
 <p>This produces 36 results: three pages, four checks per page, across three browsers. Most tests pass, but two accessibility issues are identified:</p>
 
+<div class="table-wrap">
 <table>
   <thead>
     <tr>
@@ -933,6 +937,7 @@ for (const sitePage of sitePages) {
     </tr>
   </tbody>
 </table>
+</div>
 
 <p>Example failure messages:</p>
 

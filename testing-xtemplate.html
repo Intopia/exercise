@@ -9,6 +9,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <script src="assets/js/table-wrap.js" defer></script>
 <style>
 /* Table of contents: 2 columns, smaller text */
 nav[aria-labelledby="toc-heading"] ul {
@@ -383,43 +384,45 @@ body {
 
 <h2 id="tables">Tables</h2>
 
-<table>
-  <caption>Land mammals</caption>
-  <thead>
-    <tr>
-      <th>Australia</th>
-      <th>Asia</th>
-      <th>America</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Gould's Bat</td>
-      <td>Hairless bat</td>
-      <td>Canyon bat</td>
-    </tr>
-    <tr>
-      <td>Dromedary camel</td>
-      <td>Bactrian camel</td>
-      <td>Cama camel</td>
-    </tr>
-    <tr>
-      <td>Labrador</td>
-      <td>Rottweiler</td>
-      <td>Beagle</td>
-    </tr>
-    <tr>
-      <td>Siamese</td>
-      <td>Persian</td>
-      <td>Ragdoll</td>
-    </tr>
-    <tr>
-      <td>Panda bear</td>
-      <td>Brown bear</td>
-      <td>Polar bear</td>
-    </tr>
-  </tbody>
-</table>
+<div class="table-wrap">
+  <table>
+    <caption>Land mammals</caption>
+    <thead>
+      <tr>
+        <th>Australia</th>
+        <th>Asia</th>
+        <th>America</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Gould's Bat</td>
+        <td>Hairless bat</td>
+        <td>Canyon bat</td>
+      </tr>
+      <tr>
+        <td>Dromedary camel</td>
+        <td>Bactrian camel</td>
+        <td>Cama camel</td>
+      </tr>
+      <tr>
+        <td>Labrador</td>
+        <td>Rottweiler</td>
+        <td>Beagle</td>
+      </tr>
+      <tr>
+        <td>Siamese</td>
+        <td>Persian</td>
+        <td>Ragdoll</td>
+      </tr>
+      <tr>
+        <td>Panda bear</td>
+        <td>Brown bear</td>
+        <td>Polar bear</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <h3>Wide table with row headers, inside .table-wrap</h3>
 

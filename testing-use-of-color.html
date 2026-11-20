@@ -9,6 +9,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <script src="assets/js/table-wrap.js" defer></script>
   <style>
     .input {
       border-color: red;
@@ -109,58 +110,63 @@
 
 <div class="example">
   <h3>Example 3.1: Features table using colour-alone</h3>
-  <table>
-    <thead>
-      <tr>
-        <td></td>
-        <th>Product 1</th>
-        <th>Product 2</th>
-        <th>Product 3</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th>Feature 1</th>
-        <td><span class="user-of-color-circle user-of-color-red"></span></td>
-        <td><span class="user-of-color-circle user-of-color-red"></span></td>
-        <td><span class="user-of-color-circle user-of-color-green"></span></td>
-      </tr>
-      <tr>
-        <th>Feature 1</th>
-        <td><span class="user-of-color-circle user-of-color-red"></span></td>
-        <td><span class="user-of-color-circle user-of-color-green"></span></td>
-        <td><span class="user-of-color-circle user-of-color-green"></span></td>
-      </tr>
-    </tbody>
-  </table>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <td></td>
+          <th>Product 1</th>
+          <th>Product 2</th>
+          <th>Product 3</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Feature 1</th>
+          <td><span class="user-of-color-circle user-of-color-red"></span></td>
+          <td><span class="user-of-color-circle user-of-color-red"></span></td>
+          <td><span class="user-of-color-circle user-of-color-green"></span></td>
+        </tr>
+        <tr>
+          <th>Feature 1</th>
+          <td><span class="user-of-color-circle user-of-color-red"></span></td>
+          <td><span class="user-of-color-circle user-of-color-green"></span></td>
+          <td><span class="user-of-color-circle user-of-color-green"></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <div class="example">
   <h3>Example 3.2: Features table using colour and shape</h3>
-  <table>
-    <thead>
-      <tr>
-        <td></td>
-        <th>Product 1</th>
-        <th>Product 2</th>
-        <th>Product 3</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th>Feature 1</th>
-        <td><span class="user-of-color-circle user-of-color-red2"></span></td>
-        <td><span class="user-of-color-circle user-of-color-red2"></span></td>
-        <td><span class="user-of-color-circle user-of-color-green2"></span></td>
-      </tr>
-      <tr>
-        <th>Feature 1</th>
-        <td><span class="user-of-color-circle user-of-color-red2"></span></td>
-        <td><span class="user-of-color-circle user-of-color-green2"></span></td>
-        <td><span class="user-of-color-circle user-of-color-green2"></span></td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <td></td>
+          <th>Product 1</th>
+          <th>Product 2</th>
+          <th>Product 3</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Feature 1</th>
+          <td><span class="user-of-color-circle user-of-color-red2"></span></td>
+          <td><span class="user-of-color-circle user-of-color-red2"></span></td>
+          <td><span class="user-of-color-circle user-of-color-green2"></span></td>
+        </tr>
+        <tr>
+          <th>Feature 1</th>
+          <td><span class="user-of-color-circle user-of-color-red2"></span></td>
+          <td><span class="user-of-color-circle user-of-color-green2"></span></td>
+          <td><span class="user-of-color-circle user-of-color-green2"></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 

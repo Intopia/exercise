@@ -9,6 +9,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <script src="assets/js/table-wrap.js" defer></script>
   <style>
     .popup-wrapper {
       position: relative;
@@ -297,23 +298,25 @@
       Choose a date: <span id="grid-current">none selected</span>
     </button>
     <div id="grid-popup" class="popup-panel grid-popup" hidden>
-      <table role="grid" aria-labelledby="grid-button">
-        <caption>March 2026</caption>
-        <thead>
-          <tr>
-            <th scope="col">Su</th>
-            <th scope="col">Mo</th>
-            <th scope="col">Tu</th>
-            <th scope="col">We</th>
-            <th scope="col">Th</th>
-            <th scope="col">Fr</th>
-            <th scope="col">Sa</th>
-          </tr>
-        </thead>
-        <tbody id="grid-body">
-          <!-- populated by JS -->
-        </tbody>
-      </table>
+      <div class="table-wrap">
+        <table role="grid" aria-labelledby="grid-button">
+          <caption>March 2026</caption>
+          <thead>
+            <tr>
+              <th scope="col">Su</th>
+              <th scope="col">Mo</th>
+              <th scope="col">Tu</th>
+              <th scope="col">We</th>
+              <th scope="col">Th</th>
+              <th scope="col">Fr</th>
+              <th scope="col">Sa</th>
+            </tr>
+          </thead>
+          <tbody id="grid-body">
+            <!-- populated by JS -->
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

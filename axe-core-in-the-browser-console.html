@@ -11,6 +11,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-a11y-dark.min.css" rel="stylesheet">
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <script src="assets/js/table-wrap.js" defer></script>
 </head>
 <body>
 <main>
@@ -126,6 +127,7 @@
 
 <p>The page has 7 deliberately planted accessibility errors. The table below explains each issue, so you can compare them with axe-core's results.</p>
 
+<div class="table-wrap">
 <table>
   <thead>
     <tr>
@@ -164,6 +166,7 @@
     </tr>
   </tbody>
 </table>
+</div>
 
 <p>You should see a heading, a placeholder image, an empty text box, an empty button and an empty link, and some faint grey text. The button and link have red borders, so you can see where they are, even though they have no text.</p>
 

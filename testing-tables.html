@@ -9,6 +9,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <script src="assets/js/table-wrap.js" defer></script>
   <style>
 .fake-header {
   font-weight: bold;
@@ -48,6 +49,7 @@ table {
 
 <p>This example uses a <code>&lt;caption&gt;</code> to label the <code>&lt;table&gt;</code> and <code>&lt;th&gt;</code> for column and row headers.</p>
 
+<div class="table-wrap">
 <table>
   <caption>
     Animals found in different habitats
@@ -87,6 +89,7 @@ table {
     </tr>
   </tbody>
 </table>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -140,6 +143,8 @@ table {
 <p>This example uses only <code>&lt;td&gt;</code> elements. It does not include a <code>&lt;caption&gt;</code> or <code>&lt;th&gt;</code> header cells.</p>
 
 <h3>Birds found in different habitats</h3>
+
+<div class="table-wrap">
 <table>
   <thead>
     <tr>
@@ -176,6 +181,7 @@ table {
     </tr>
   </tbody>
 </table>
+</div>
 
 <details>
   <summary>HTML markup</summary>

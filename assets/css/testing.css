@@ -186,6 +186,7 @@ ol > li::marker {
 
 ul ul {
   list-style-type: square;
+  margin-bottom: .5em;
 }
 
 li {
@@ -195,7 +196,7 @@ li {
 li > ul,
 li > ol {
   margin-top: .5rem;
-  margin-bottom: 0;
+  margin-bottom: .6em;
 }
 
 /* ---------------------
@@ -393,26 +394,58 @@ pre code {
 Tables
 ----------------------*/
 
+:root {
+  --table-head-bg: #f3f5f8;         /* subtle tint for th */
+  --table-stripe-bg: #fafbfc;       /* optional zebra rows */
+  --table-head-border: #8a94a3;     /* stronger line under thead */
+}
+
 table {
   border-collapse: collapse;
   width: 100%;
-  margin: 1rem 0 1.5rem;      /* 16px top, 24px bottom, matches p */
+  margin: 1rem 0 1.5rem;
   background: var(--colour-white);
+  font-variant-numeric: tabular-nums;   /* numbers line up in columns */
 }
 
 caption {
   text-align: left;
   font-weight: bold;
-  font-size: 1.125em;         /* 18px */
-  padding: 0 0 .5rem;         /* 8px bottom */
+  font-size: 1.125em;
+  padding: 0 0 .5rem;
 }
 
 th,
 td {
   text-align: left;
   vertical-align: top;
-  padding: .5rem;             /* 8px */
+  padding: .625rem .75rem;      /* 10px 12px, a little more breathing room */
   border: 1px solid var(--border-table);
+}
+
+/* Header cells: tint + weight */
+th {
+  background: var(--table-head-bg);
+}
+
+thead th {
+  border-bottom: 2px solid var(--table-head-border);
+  vertical-align: bottom;       /* headers sit on the line */
+}
+
+/* Row headers (th scope="row") get a lighter touch */
+tbody th {
+  font-weight: 600;
+}
+
+/* Optional: zebra striping for long tables */
+.table-striped tbody tr:nth-child(even) td {
+  background: var(--table-stripe-bg);
+}
+
+/* Right-align numeric columns */
+.num {
+  text-align: right;
 }
 
 .table-wrap {
@@ -421,7 +454,12 @@ td {
 }
 
 .table-wrap table {
-  margin: 0;                  /* wrapper handles spacing */
+  margin: 0;
+}
+
+.table-wrap:focus-visible {
+  outline: 2px solid #1565A8;
+  outline-offset: 2px;
 }
 
 /* ---------------------

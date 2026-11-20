@@ -9,6 +9,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <script src="assets/js/table-wrap.js" defer></script>
   <style>
 .example p {
   margin: 0 0 .5em;
@@ -77,6 +78,7 @@
 
 <p>The expected results were checked by running axe-core 4.14.1 over this page. Look in both the axe <strong>issues</strong> list and the <strong>needs review</strong> list, because several missing ID cases only show up in needs review.</p>
 
+<div class="table-wrap">
 <table>
   <caption>Number of test cases by expected axe result</caption>
   <thead><tr><th scope="col">Expected result</th><th scope="col">Cases</th></tr></thead>
@@ -88,6 +90,7 @@
     <tr><td>Changes after interaction</td><td>2</td></tr>
   </tbody>
 </table>
+</div>
 
 
 <!-- section -->
@@ -883,10 +886,12 @@
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
 
 <div class="example" data-case="e9">
+<div class="table-wrap">
 <table>
   <tr><th aria-sort="asc">Name</th></tr>
   <tr><td>Alex</td></tr>
 </table>
+</div>
 </div>
 
 <details>

@@ -9,6 +9,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <script src="assets/js/table-wrap.js" defer></script>
   <style>
 
 
@@ -137,6 +138,8 @@
 <p>This page pairs with the "Highlight target size" bookmarklet, covering <a href="https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html" target="_blank">WCAG 2.2 2.5.8 Target Size (Minimum)</a>. The bookmarklet flags pointer targets smaller than 24 &times; 24 CSS pixels, draws a dashed 24px circle centred on each undersized target, and reports whether that circle overlaps another target.</p>
 
 <p>What the bookmarklet reports:</p>
+
+<div class="table-wrap">
 <table>
   <thead>
     <tr>
@@ -150,6 +153,8 @@
     <tr><td>Red</td><td>Under 24 &times; 24, its 24px circle overlaps another target</td></tr>
   </tbody>
 </table>
+</div>
+
 <p>This is a warnings-only tool. 2.5.8 has exceptions that need human judgement, an inline text link, the same function available another way, or a control whose size the browser sets and the author never touched, and the bookmarklet can't evaluate any of those on its own. Where a warning might be one of these exceptions, the badge says so, it doesn't resolve it for you.</p>
 
 

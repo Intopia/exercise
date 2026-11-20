@@ -9,6 +9,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <script src="assets/js/table-wrap.js" defer></script>
 </head>
 <body>
 <main>
@@ -89,7 +90,7 @@
 <p><strong>Good for:</strong> running automated checks, scanning multiple pages, monitoring sites over time, and reporting issues across teams. Capabilities vary between tools.</p>
 <p><strong>Limitations:</strong> automated checks detect only a portion of accessibility issues. They cannot judge whether content is meaningful, such as whether alt text accurately describes an image. Results still need manual review.</p>
 
-<div class="table-wrapper" role="region" aria-labelledby="automated-platforms" tabindex="0">
+<div class="table-wrap">
 <table>
   <caption>Automated accessibility scanning tools and platforms</caption>
   <thead>
@@ -146,7 +147,7 @@
 <p><strong>Good for:</strong> catching issues early and preventing regressions before code is deployed.</p>
 <p><strong>Limitations:</strong> they share the limits of all automated testing, and require developer setup and maintenance.</p>
 
-<div class="table-wrapper" role="region" aria-labelledby="developer-tools" tabindex="0">
+<div class="table-wrap">
 <table>
   <caption>Developer and CI tools</caption>
   <thead>
@@ -197,7 +198,7 @@
 <p><strong>Good for:</strong> checking native apps for issues like missing labels, small touch targets and low contrast.</p>
 <p><strong>Limitations:</strong> like the automated web tools above, they find only a portion of issues. Apps should also be tested with VoiceOver and TalkBack.</p>
 
-<div class="table-wrapper" role="region" aria-labelledby="mobile-tools" tabindex="0">
+<div class="table-wrap">
 <table>
   <caption>Automated mobile tools</caption>
   <thead>
@@ -248,7 +249,7 @@
 <p><strong>Good for:</strong> quick checks of a single page, highlighting issues visually on the page, and learning about common issues.</p>
 <p><strong>Limitations:</strong> they test one page or state at a time. Different extensions use different rules, so results may vary between tools.</p>
 
-<div class="table-wrapper" role="region" aria-labelledby="browser-extensions" tabindex="0">
+<div class="table-wrap">
 <table>
   <caption>Browser extensions</caption>
   <thead>
@@ -323,7 +324,7 @@
 <p><strong>Good for:</strong> inspecting the accessibility tree, and checking the names, roles and states that are passed to assistive technologies.</p>
 <p><strong>Limitations:</strong> they show what the browser exposes, not how a specific screen reader will announce it. Some technical knowledge is needed to interpret results.</p>
 
-<div class="table-wrapper" role="region" aria-labelledby="built-in-browser-tools" tabindex="0">
+<div class="table-wrap">
 <table>
   <caption>Built-in browser tools</caption>
   <thead>
@@ -374,7 +375,7 @@
 <p><strong>Good for:</strong> highlighting one specific feature on a page, such as headings, focus order or alt text. They work in most browsers and need no installation.</p>
 <p><strong>Limitations:</strong> they show what is on the page but do not decide whether it is correct. Some websites block bookmarklets from running.</p>
 
-<div class="table-wrapper" role="region" aria-labelledby="bookmarklets" tabindex="0">
+<div class="table-wrap">
 <table>
   <caption>Bookmarklets</caption>
   <thead>
@@ -425,7 +426,7 @@
 <p><strong>Good for:</strong> precise contrast ratio checks, including on design files before anything is built.</p>
 <p><strong>Limitations:</strong> most test one colour pair at a time. Text over images, gradients and transparent colours can be difficult to measure accurately.</p>
 
-<div class="table-wrapper" role="region" aria-labelledby="colour-contrast" tabindex="0">
+<div class="table-wrap">
 <table>
   <caption>Colour contrast tools</caption>
   <thead>
@@ -470,7 +471,7 @@
 <p><strong>Good for:</strong> spotting long sentences, complex words and passive voice, and estimating reading level.</p>
 <p><strong>Limitations:</strong> readability formulas measure word and sentence length, not real understanding. Most are designed for English. They do not replace testing content with real users.</p>
 
-<div class="table-wrapper" role="region" aria-labelledby="content-testing" tabindex="0">
+<div class="table-wrap">
 <table>
   <caption>Content testing tools</caption>
   <thead>
@@ -521,7 +522,7 @@
 <p><strong>Good for:</strong> checking that everything can be reached and used without a mouse, that focus order is logical, that focus is always visible, and that there are no keyboard traps.</p>
 <p><strong>Limitations:</strong> it does not tell you what a screen reader announces.</p>
 
-<div class="table-wrapper" role="region" aria-labelledby="keyboard-testing" tabindex="0">
+<div class="table-wrap">
 <table>
   <caption>Keyboard testing</caption>
   <thead>
@@ -554,7 +555,7 @@
 <p><strong>Good for:</strong> confirming that headings, labels, roles and states actually work for screen reader users, especially for complex components such as menus, dialogs and forms.</p>
 <p><strong>Limitations:</strong> there is a learning curve, and testing takes longer. Behaviour can differ between screen reader and browser combinations, so testing with one screen reader does not cover them all.</p>
 
-<div class="table-wrapper" role="region" aria-labelledby="screen-readers" tabindex="0">
+<div class="table-wrap">
 <table>
   <caption>Screen readers</caption>
   <thead>
@@ -605,7 +606,7 @@
 <p><strong>Good for:</strong> checking that content reflows, text resizes without loss of content, and nothing is cut off or overlaps when zoomed.</p>
 <p><strong>Limitations:</strong> they show the experience of zooming, but low vision needs vary widely. Results should be combined with other testing.</p>
 
-<div class="table-wrapper" role="region" aria-labelledby="magnification" tabindex="0">
+<div class="table-wrap">
 <table>
   <caption>Screen magnification and low vision tools</caption>
   <thead>
@@ -656,7 +657,7 @@
 <p><strong>Good for:</strong> turning accessibility requirements into clear, shared acceptance criteria. They help designers, product owners, testers and developers describe the same behaviour in the same way.</p>
 <p><strong>Limitations:</strong> a test is only as good as what it describes. Writing good scenarios still needs accessibility knowledge, and automated runs still need to be checked with assistive technology.</p>
 
-<div class="table-wrapper" role="region" aria-labelledby="languages" tabindex="0">
+<div class="table-wrap">
 <table>
   <caption>Languages and formats for describing accessibility</caption>
   <thead>
