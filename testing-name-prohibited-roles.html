@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Testing name-prohibited roles - Intopia</title>
+  <meta name="description" content="Test roles that cannot be given an accessible name in ARIA 1.2 and 1.3, using aria-label on ARIA roles, native elements and made-up roles.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="favicon.ico" sizes="32x32">
@@ -64,7 +65,8 @@
 
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;caption aria-label="Hello"&gt;This is a caption&lt;/caption&gt;</code></pre>
+<pre><code>&lt;div role="caption" aria-label="Hello"&gt;...&lt;/div&gt;
+&lt;caption aria-label="Hello"&gt;This is a caption&lt;/caption&gt;</code></pre>
 </details>
 
 
@@ -375,7 +377,7 @@
 
 <h2>tooltip</h2>
 
-<div>
+<div class="example">
   <span role="tooltip" aria-label="Hello">This element has a role of <code>tooltip</code></span>
 </div>
 

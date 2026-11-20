@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Testing the output element - Intopia</title>
+  <meta name="description" content="Test how the output element announces a calculated result, with two number inputs, an implicit status role and a debounced aria-live backup.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="favicon.ico" sizes="32x32">
@@ -102,7 +103,7 @@
   <h2 class="h3">Expected results</h2>
   <ol>
     <li>The first field should have an accessible name of "Value 1" and role of <code>stepper</code> or similar</li>
-    <li>The first field should have an accessible name of "Value 1" and role of <code>stepper</code> or similar</li>
+    <li>The second field should have an accessible name of "Value 2"</li>
     <li>When a number is entered into the first field, the number should be announced</li>
     <li>When a number is entered into the second field, the number should be announced</li>
     <li>The output value should be announced as a number</li>

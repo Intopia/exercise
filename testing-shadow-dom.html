@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Testing shadow DOM - Intopia</title>
+  <meta name="description" content="Test which elements use shadow DOM and whether JavaScript can detect them, comparing open, closed and declarative shadow roots on custom and standard elements.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="favicon.ico" sizes="32x32">
@@ -27,7 +28,9 @@
 
 <p>Which of the examples below use shadow DOM, and can JavaScript detect them?</p>
 
-<p><b>Important note for auditors:</b> shadow DOM is not limited to custom elements (hyphenated tag names). A fixed set of standard elements — including <code>&lt;div&gt;</code>, <code>&lt;span&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>, and several others — can also host a shadow root via <code>attachShadow()</code>. A detection method that only checks for hyphenated tag names will miss shadow DOM attached to standard elements entirely. A more reliable check tests <code>element.shadowRoot !== null</code> across <em>all</em> elements on the page, not just custom ones, though this still cannot detect a closed shadow root, only that an open one exists.</p>
+<p><b>Important note for auditors:</b> shadow DOM is not limited to custom elements (hyphenated tag names). A fixed set of standard elements can also host a shadow root via <code>attachShadow()</code>. This includes <code>&lt;div&gt;</code>, <code>&lt;span&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>, and several others.</p>
+
+<p>A detection method that only checks for hyphenated tag names will miss shadow DOM attached to standard elements entirely. A more reliable check tests <code>element.shadowRoot !== null</code> across <em>all</em> elements on the page, not just custom ones, though this still cannot detect a closed shadow root, only that an open one exists.</p>
 
 
 <!-- section -->
@@ -182,7 +185,7 @@
   <div id="declarative-host">
     <template shadowrootmode="open">
       <style>
-        p { color: #4527a0; border: 2px solid #4527a0; padding: 8px; border-radius: 4px; }
+        p { border: 2px solid #4527a0; padding: 1em; }
       </style>
       <p>I am inside a <strong>declarative</strong> shadow DOM. No JavaScript created me.</p>
     </template>
@@ -224,7 +227,7 @@
       const shadow = this.attachShadow({ mode: 'open' });
       shadow.innerHTML = `
         <style>
-          p { color: #1b5e20; border: 2px solid #1b5e20; padding: 8px; border-radius: 4px; }
+          p { border: 2px solid #777; padding: 1em; }
         </style>
         <p>I am inside an <strong>open</strong> shadow DOM. JavaScript can access my shadow root.</p>
       `;
@@ -239,7 +242,7 @@
       const shadow = this.attachShadow({ mode: 'closed' });
       shadow.innerHTML = `
         <style>
-          p { color: #b00020; border: 2px solid #b00020; padding: 8px; border-radius: 4px; }
+          p { border: 2px solid #777; padding: 1em; }
         </style>
         <p>I am inside a <strong>closed</strong> shadow DOM. JavaScript cannot access my shadow root.</p>
       `;
@@ -251,7 +254,7 @@
   class NoShadowComponent extends HTMLElement {
     constructor() {
       super();
-      this.innerHTML = `<p style="border: 2px solid #e65100; padding: 8px; border-radius: 4px; color: #e65100;">I am a custom element with no shadow DOM at all.</p>`;
+      this.innerHTML = `<p style="border: 2px solid #777; padding: 1em;">I am a custom element with no shadow DOM at all.</p>`;
     }
   }
   customElements.define('no-shadow-component', NoShadowComponent);
@@ -261,7 +264,7 @@
   const openStandardShadow = openStandardHost.attachShadow({ mode: 'open' });
   openStandardShadow.innerHTML = `
     <style>
-      p { color: #00695c; border: 2px solid #00695c; padding: 8px; border-radius: 4px; }
+      p { border: 2px solid #777; padding: 1em; }
     </style>
     <p>I am inside an <strong>open</strong> shadow DOM attached to a plain &lt;div&gt;. No custom element was used.</p>
   `;
@@ -271,7 +274,7 @@
   const closedStandardShadow = closedStandardHost.attachShadow({ mode: 'closed' });
   closedStandardShadow.innerHTML = `
     <style>
-      p { color: #ad1457; border: 2px solid #ad1457; padding: 8px; border-radius: 4px; }
+      p { border: 2px solid #777; padding: 1em; }
     </style>
     <p>I am inside a <strong>closed</strong> shadow DOM attached to a plain &lt;div&gt;. No custom element was used.</p>
   `;

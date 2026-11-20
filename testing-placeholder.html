@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Testing the placeholder attribute - Intopia</title>
+  <meta name="description" content="Test the placeholder attribute, comparing date format instructions in placeholder text with persistent help text linked using aria-describedby.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="favicon.ico" sizes="32x32">
@@ -25,7 +26,7 @@
 
 <h1>Testing the <code>placeholder</code> attribute</h1>
 
-<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/placeholder" target="Intopia"><code>placeholder</code></a> attribute defines the text displayed in a form control when the control has no value. The placeholder text should provide a brief hint to the user as to the expected type of data that should be entered into the control.</p>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/placeholder" target="_blank"><code>placeholder</code></a> attribute defines the text displayed in a form control when the control has no value. The placeholder text should provide a brief hint to the user as to the expected type of data that should be entered into the control.</p>
 
 <p>The <code>placeholder</code> attribute should not be used for labelling form controls, or to provide instructions as it is not persistent. It disappears as soon as the user begins typing.</p>
 
@@ -51,13 +52,13 @@
 
 <form action="#" class="example">
   <label class="label" for="choose-a-date2">Choose a date</label>
-  <div class="help-text" id="comment-help">DD/MM/YY</div>
-  <input class="input" id="choose-a-date2" aria-describedby="comment-help">
+  <div class="help-text" id="date-help">DD/MM/YY</div>
+  <input class="input" id="choose-a-date2" aria-describedby="date-help">
 </form>
 
 <pre><code>&lt;label for="choose-a-date2"&gt;Choose a date&lt;/label&gt;
-&lt;div id="comment-help"&gt;DD/MM/YY&lt;/div&gt;
-&lt;input id="choose-a-date2" aria-describedby="comment-help"&gt;</code></pre>
+&lt;div id="date-help"&gt;DD/MM/YY&lt;/div&gt;
+&lt;input id="choose-a-date2" aria-describedby="date-help"&gt;</code></pre>
 
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>

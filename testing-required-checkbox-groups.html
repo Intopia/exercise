@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Testing required on checkbox groups - Intopia</title>
+  <meta name="description" content="Test ways to mark a checkbox group as at least one required, comparing aria-required and required on the group or checkboxes with text in the name or a hint.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="favicon.ico" sizes="32x32">
@@ -169,7 +170,7 @@ h3 {
 
 <form action="#" class="example">
   <div role="group" aria-labelledby="c9-label" aria-required="true">
-    <p id="c9-label">Which pets do you have?</p>
+    <h4 id="c9-label">Which pets do you have?</h4>
     <div>
       <input type="checkbox" id="c9-dog" name="c9" value="dog">
       <label for="c9-dog">Dog</label>
@@ -192,7 +193,7 @@ h3 {
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;div role="group" aria-labelledby="c9-label" <span class="highlight">aria-required="true"</span>&gt;
-  &lt;p id="c9-label"&gt;Which pets do you have?&lt;/p&gt;
+  &lt;h4 id="c9-label"&gt;Which pets do you have?&lt;/h4&gt;
   &lt;div&gt;
     &lt;input type="checkbox" id="c9-dog" name="c9" value="dog"&gt;
     &lt;label for="c9-dog"&gt;Dog&lt;/label&gt;
@@ -269,7 +270,7 @@ h3 {
 
 <form action="#" class="example">
   <div role="group" aria-labelledby="c11-label" required>
-    <p id="c11-label">Which pets do you have?</p>
+    <h4 id="c11-label">Which pets do you have?</h4>
     <div>
       <input type="checkbox" id="c11-dog" name="c11" value="dog">
       <label for="c11-dog">Dog</label>
@@ -292,7 +293,7 @@ h3 {
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;div role="group" aria-labelledby="c11-label" <span class="highlight">required</span>&gt;
-  &lt;p id="c11-label"&gt;Which pets do you have?&lt;/p&gt;
+  &lt;h4 id="c11-label"&gt;Which pets do you have?&lt;/h4&gt;
   &lt;div&gt;
     &lt;input type="checkbox" id="c11-dog" name="c11" value="dog"&gt;
     &lt;label for="c11-dog"&gt;Dog&lt;/label&gt;
@@ -563,7 +564,7 @@ h3 {
 
 <form action="#" class="example">
   <div role="group" aria-labelledby="c4-label">
-    <p id="c4-label">Which pets do you have? (required)</p>
+    <h4 id="c4-label">Which pets do you have? (required)</h4>
     <div>
       <input type="checkbox" id="c4-dog" name="c4" value="dog">
       <label for="c4-dog">Dog</label>
@@ -586,7 +587,7 @@ h3 {
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;div role="group" aria-labelledby="c4-label"&gt;
-  &lt;p id="c4-label"&gt;Which pets do you have? <span class="highlight">(required)</span>&lt;/p&gt;
+  &lt;h4 id="c4-label"&gt;Which pets do you have? <span class="highlight">(required)</span>&lt;/h4&gt;
   &lt;div&gt;
     &lt;input type="checkbox" id="c4-dog" name="c4" value="dog"&gt;
     &lt;label for="c4-dog"&gt;Dog&lt;/label&gt;
