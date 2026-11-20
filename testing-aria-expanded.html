@@ -39,7 +39,9 @@
   </button>
 </div>
 
-<p><b>Expected result:</b> the accessibility tree should show <code>expanded: true</code> for this button, and this never changes.</p>
+<div class="note">
+  <p><b>Expected result:</b> the accessibility tree should show <code>expanded: true</code> for this button, and this never changes.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -65,7 +67,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> the accessibility tree should show <code>expanded: false</code> initially, and <code>expanded: true</code> once activated. This should toggle back and forth each time the button is activated.</p>
+<div class="note">
+  <p><b>Expected result:</b> the accessibility tree should show <code>expanded: false</code> initially, and <code>expanded: true</code> once activated. This should toggle back and forth each time the button is activated.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -110,7 +114,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> the accessibility tree should show no determinable expanded state at all, this is not the same as <code>expanded: false</code>, assistive technology has nothing to announce either way, even though the content visibly toggles. The bookmarklet should flag this as undefined.</p>
+<div class="note">
+  <p><b>Expected result:</b> the accessibility tree should show no determinable expanded state at all, this is not the same as <code>expanded: false</code>, assistive technology has nothing to announce either way, even though the content visibly toggles. The bookmarklet should flag this as undefined.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -152,7 +158,9 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> a valid value per spec, functionally equivalent to omitting the attribute, no determinable expanded state either way. The bookmarklet should treat this as valid, not flag it as an error.</p>
+<div class="note">
+  <p><b>Expected result:</b> a valid value per spec, functionally equivalent to omitting the attribute, no determinable expanded state either way. The bookmarklet should treat this as valid, not flag it as an error.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>

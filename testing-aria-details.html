@@ -56,7 +56,9 @@
   </figcaption>
 </figure>
 
-<p><b>Expected result:</b> the disclosure should still be discoverable and usable, since it is real, visible content in normal reading order, but there is no programmatic link telling a screen reader user that this specific disclosure is the image's extended description.</p>
+<div class="note">
+  <p><b>Expected result:</b> the disclosure should still be discoverable and usable, since it is real, visible content in normal reading order, but there is no programmatic link telling a screen reader user that this specific disclosure is the image's extended description.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -103,7 +105,9 @@
   </figcaption>
 </figure>
 
-<p><b>Expected result:</b> worth confirming directly, per spec this should let a screen reader user discover that a detailed description exists for this specific image, and support jumping to or conveying that content, but real support for each part of this behaviour varies significantly, see the note below.</p>
+<div class="note">
+  <p><b>Expected result:</b> worth confirming directly, per spec this should let a screen reader user discover that a detailed description exists for this specific image, and support jumping to or conveying that content, but real support for each part of this behaviour varies significantly, see the note below.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -128,7 +132,7 @@
 
 <h2>Example 3: multiple values</h2>
 
-<p>Per the <a href="https://w3c.github.io/aria/#aria-details" target="_blank">WAI-ARIA 1.3 specification</a>, <code>aria-details</code> supports referring to more than one element, useful when several independent pieces of extended information relate to the same content, rather than a single description. The example below is a paragraph with two unrelated comments attached.</p>
+<p>Per the <a href="https://w3c.github.io/aria/#aria-details" target="_blank">WAI-ARIA 1.3 working draft</a>, <code>aria-details</code> supports referring to more than one element, useful when several independent pieces of extended information relate to the same content, rather than a single description. The example below is a paragraph with two unrelated comments attached.</p>
 
 <p>The spec also defines what should happen when a screen reader's underlying accessibility API can't expose more than one relation at once: it <b>SHOULD</b> fall back to exposing only the first referenced element, not merge the two, not drop the attribute entirely, specifically the first one listed.</p>
 
@@ -142,7 +146,13 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> worth confirming directly, and worth treating with more caution than Example 2, single-value <code>aria-details</code> support is already documented as inconsistent above, multiple values is a newer, even less-tested capability layered on top of that. Per spec, both comments should be discoverable, or, on an AT that can't support multiple relations, only the first ("Should this retention period be reviewed?") should be exposed as the documented fallback. Confirm which of these, if either, actually happens with your standard testing set.</p>
+<div class="note">
+  <p><b>Expected result:</b> worth confirming directly, and worth treating with more caution than Example 2, single-value <code>aria-details</code> support is already documented as inconsistent above, multiple values is a newer, even less-tested capability layered on top of that. Per spec, both comments should be discoverable, or, on an AT that can't support multiple relations, only the first ("Should this retention period be reviewed?") should be exposed as the documented fallback. Confirm which of these, if either, actually happens with your standard testing set.</p>
+</div>
+
+<div class="note note-warning">
+  <p><b>Validator note:</b> the W3C HTML validator currently flags this as an error ("An ID must not contain whitespace"). It checks against WAI-ARIA 1.2, the current Recommendation, which only allows a single ID. Multiple IDs are only valid under the WAI-ARIA 1.3 working draft.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -174,7 +184,9 @@
   <img src="assets/img/image-complex.png" alt="Venn diagram depicting content category relationships." aria-details="">
 </figure>
 
-<p><b>Expected result:</b> the bookmarklet should label this "aria-details: (empty)" and treat it as broken, not merely a missing ID.</p>
+<div class="note">
+  <p><b>Expected result:</b> the bookmarklet should label this "aria-details: (empty)" and treat it as broken, not merely a missing ID.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -196,7 +208,9 @@
   </details>
 </div>
 
-<p><b>Expected result:</b> the ID resolves, to itself, so this should be treated as a valid, resolved reference, not an error, labelled "(self)" rather than flagged as missing.</p>
+<div class="note">
+  <p><b>Expected result:</b> the ID resolves, to itself, so this should be treated as a valid, resolved reference, not an error, labelled "(self)" rather than flagged as missing.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -221,7 +235,13 @@
   </div>
 </div>
 
-<p><b>Expected result:</b> per the bookmarklet, when some but not all referenced IDs are missing, the badge should be amber, not red, distinct from a reference that fails completely.</p>
+<div class="note">
+  <p><b>Expected result:</b> per the bookmarklet, when some but not all referenced IDs are missing, the badge should be amber, not red, distinct from a reference that fails completely.</p>
+</div>
+
+<div class="note note-warning">
+  <p><b>Validator note:</b> the W3C HTML validator currently flags this as an error ("An ID must not contain whitespace"), for the same reason as Example 3: it checks against WAI-ARIA 1.2, which only allows a single ID. Because it rejects the whitespace first, it never checks whether each ID exists, so the missing ID being tested here isn't reported at all.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
@@ -250,7 +270,9 @@
   <p style="visibility: hidden;" id="hidden-description">Extended description text that is never visually shown.</p>
 </div>
 
-<p><b>Expected result:</b> the relationship itself should be treated as valid, the ID resolves to a real element, but the referenced element shouldn't get its own outline or badge, since it isn't visibly rendered.</p>
+<div class="note">
+  <p><b>Expected result:</b> the relationship itself should be treated as valid, the ID resolves to a real element, but the referenced element shouldn't get its own outline or badge, since it isn't visibly rendered.</p>
+</div>
 
 <details>
   <summary>HTML markup</summary>
