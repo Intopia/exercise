@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing scrollable tables - Intopia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <script src="assets/js/table-wrap.js" defer></script>
+<style>
+/* Narrow main so the table always needs to scroll */
+main {
+  max-inline-size: 30em;
+}
+</style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo. The word 'intopia' in black, with the 'o' made from four curved brush strokes in pink, orange, yellow and turquoise." class="intopia-logo">
+  </picture>
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing scrollable tables</h1>
+
+<div class="table-wrap">
+  <table>
+    <caption>Screen reader results</caption>
+    <thead>
+      <tr>
+        <th scope="col">Test</th>
+        <th scope="col">NVDA + Chrome</th>
+        <th scope="col">NVDA + Firefox</th>
+        <th scope="col">JAWS + Chrome</th>
+        <th scope="col">JAWS + Edge</th>
+        <th scope="col">VoiceOver + Safari</th>
+        <th scope="col">VoiceOver + Chrome</th>
+        <th scope="col">TalkBack + Chrome</th>
+        <th scope="col">Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Table name announced</th>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td>Name comes from the caption</td>
+      </tr>
+      <tr>
+        <th scope="row">Region announced on focus</th>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="fail">Fail</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td>VoiceOver + Chrome adds "empty"</td>
+      </tr>
+      <tr>
+        <th scope="row">Row and column count</th>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td>Counts include the header row</td>
+      </tr>
+      <tr>
+        <th scope="row">Column headers announced</th>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td>When moving between columns</td>
+      </tr>
+      <tr>
+        <th scope="row">Keyboard scrolling</th>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td><span class="pass">Pass</span></td>
+        <td>Arrow keys scroll the focused wrapper</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+</main>
+</body>
+</html>
