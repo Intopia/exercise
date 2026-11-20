@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Testing the slot element - Intopia</title>
+  <meta name="description" content="Test how the slot element places light DOM content into a web component's shadow DOM, with named title and content slots that stay fully inspectable.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="favicon.ico" sizes="32x32">
@@ -10,6 +11,10 @@
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
   <script src="assets/js/table-wrap.js" defer></script>
+<style>
+my-component h3 { margin: 0 0 .5em; }
+my-component p { margin: 0; }
+</style>
 </head>
 <body>
 <main>
@@ -38,14 +43,14 @@
 <p>In this example, a <code>&lt;my-component&gt;</code> web component is added to the page, and it can be treated like a separate document, with its own styles. The slots are defined in JavaScript.</p>
 
 <my-component>
-  <h2 slot="title">Hello, World!</h2>
+  <h3 slot="title">Hello, World!</h3>
   <p slot="content">This is a paragraph inside the custom component.</p>
 </my-component>
 
 <h3>HTML markup:</h3>
 
 <pre><code>&lt;my-component&gt;
-  &lt;h2 slot="title"&gt;Hello, World!&lt;/h2&gt;
+  &lt;h3 slot="title"&gt;Hello, World!&lt;/h3&gt;
   &lt;p slot="content"&gt;This is a paragraph...&lt;/p&gt;
 &lt;/my-component&gt;</code></pre>
 
@@ -60,16 +65,12 @@
         shadow.innerHTML = `
             &lt;style&gt;
                 .container {
-                    border: 2px solid #000;
-                    padding: 10px;
-                    border-radius: 5px;
+                    border: 2px solid #777;
+                    padding: 1em;
                     width: 300px;
                 }
-                ::slotted(h2) {
-                    color: blue;
-                }
-                ::slotted(p) {
-                    color: green;
+                ::slotted(h3) {
+                    margin: 0 0 .5em;
                 }
             &lt;/style&gt;
             &lt;div class="container"&gt;
@@ -92,16 +93,12 @@ customElements.define('my-component', MyComponent);</code></pre>
           shadow.innerHTML = `
               <style>
                   .container {
-                      border: 2px solid #000;
-                      padding: 10px;
-                      border-radius: 5px;
+                      border: 2px solid #777;
+                      padding: 1em;
                       width: 300px;
                   }
-                  ::slotted(h2) {
-                      color: blue;
-                  }
-                  ::slotted(p) {
-                      color: green;
+                  ::slotted(h3) {
+                      margin: 0 0 .5em;
                   }
               </style>
               <div class="container">

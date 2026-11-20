@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Testing SVG - Intopia</title>
+  <meta name="description" content="Test accessible names for standalone SVGs, comparing no name, aria-label, title, aria-hidden for decorative icons, and role=img with aria-label.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="favicon.ico" sizes="32x32">
@@ -10,12 +11,18 @@
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
   <script src="assets/js/table-wrap.js" defer></script>
-  <style>
+<style>
+  svg {
+    display: block;
+    color: #000;
+  }
+
+  @media (prefers-color-scheme: dark) {
     svg {
-      display: block;
-      color: #000;
+      color: #fff;
     }
-  </style>
+  }
+</style>
 </head>
 <body>
 <main>

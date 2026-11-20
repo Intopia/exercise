@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>Hover vs focus - Intopia</title>
+  <meta charset="utf-8">
+  <title>Testing a CSS-only tooltip - Intopia</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="favicon.ico" sizes="32x32">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="styles.css">
   <link href="assets/css/testing.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
   <script src="assets/js/table-wrap.js" defer></script>
@@ -108,6 +107,15 @@
 <!-- section -->
 
 
+<div class="note note-warning">
+  <h2 class="h3">Important caveats</h2>
+  <p>These examples are not intended for real production use. This is about exploring limits and trade-offs, not recommending a pattern. The content shown is deliberately simple - a single text string. Anything complex should not be a tooltip.</p>
+</div>
+
+
+<!-- section -->
+
+
 <h2>Example 1: using <code>aria-label</code></h2>
 
 <div class="example">
@@ -157,17 +165,6 @@
   <li>Will the tooltip close if the user clicks elsewhere?</li>
   <li>Will the tooltip close if focus moves?</li>
   <li>Is the tooltip announced when activated?</li>
-</ol>
-
-
-<!-- section -->
-
-
-<h2>Important caveats:</h2>
-
-<ol>
-  <li>These examples are not intended for real production use. This is about exploring limits and trade-offs, not recommending a pattern.</li>
-  <li>The content shown is deliberately simple. Anything complex should not be a tooltip.</li>
 </ol>
 
 

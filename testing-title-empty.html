@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <title></title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Test a page with an empty title element, checking what each browser shows in the tab and what assistive technology announces on load.">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="favicon.ico" sizes="32x32">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -28,7 +29,7 @@
 <p>The <code>&lt;title&gt;</code> element is present in <code>&lt;head&gt;</code>, but has no text content. Distinct from the missing-title case, the element exists, it's just empty, and browsers/AT may treat that differently from the element being absent entirely.</p>
 
 <div class="note">
-  <p><b>Expected result:</b> Chrome is known to fall back to generating a tab title from the page's <code>&lt;h1&gt;</code> rather than showing the URL or a blank tab, worth checking whether the tab text below actually matches this page's own <code>&lt;h1&gt;</code>, and whether it behaves any differently from the missing-title case now that both may resolve to the same fallback. Other browsers may still fall back to the URL or a blank tab instead, this needs confirming per browser rather than assumed to be universal. What assistive technology announces on page load is a separate question again, and needs its own confirmation.</p>
+  <p><b>Expected result:</b> Most browsers fall back to the file name (Chrome and Safari) or the full URL (Firefox).</p>
 </div>
 
 <details>

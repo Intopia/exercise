@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Testing the timer role - version 2 - Intopia</title>
+  <meta name="description" content="Test a 20 second countdown using an aria-live region that only announces at 5 second milestones and when time is up, rather than every second.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="favicon.ico" sizes="32x32">
@@ -11,11 +12,17 @@
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
   <script src="assets/js/table-wrap.js" defer></script>
   <style>
-    #eggtimer {
-      margin: 1em 0;
-      padding: .5em;
-      background: #eee;
-    }
+#eggtimer {
+  margin: 1em 0;
+  padding: .5em;
+  background: #eee;
+}
+
+@media (prefers-color-scheme: dark) {
+  #eggtimer {
+    background: #333;
+  }
+}
   </style>
 </head>
 <body>

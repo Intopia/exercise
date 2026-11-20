@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Testing the timer role - version 1 - Intopia</title>
+  <meta name="description" content="Test a 20 second countdown using role=timer, which has an implicit aria-live of off, so screen readers only hear the value when they navigate to it.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="favicon.ico" sizes="32x32">
@@ -11,11 +12,17 @@
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
   <script src="assets/js/table-wrap.js" defer></script>
   <style>
-    #eggtimer {
-      margin: 1em 0;
-      padding: .5em;
-      background: #eee;
-    }
+#eggtimer {
+  margin: 1em 0;
+  padding: .5em;
+  background: #eee;
+}
+
+@media (prefers-color-scheme: dark) {
+  #eggtimer {
+    background: #333;
+  }
+}
   </style>
 </head>
 <body>
@@ -32,7 +39,7 @@
 
 <h1>Testing the <code>timer</code> role - version 1</h1>
 
-<p>This test uses <a href="https://www.w3.org/TR/wai-aria-1.2/#timer" target="_blank"><code>role="timer"</code></a> for timed information. As this role has inplicit <code>aria-live="off"</code>, the information is not available to screen readers unless they navigate across this content.</p>
+<p>This test uses <a href="https://www.w3.org/TR/wai-aria-1.2/#timer" target="_blank"><code>role="timer"</code></a> for timed information. As this role has implicit <code>aria-live="off"</code>, the information is not available to screen readers unless they navigate across this content.</p>
 
 
 <!-- section -->

@@ -396,8 +396,29 @@ Tables
 
 :root {
   --table-head-bg: #f3f5f8;         /* subtle tint for th */
+  --table-head-text: #000;          /* ~19:1 on #f3f5f8 */
   --table-stripe-bg: #fafbfc;       /* optional zebra rows */
   --table-head-border: #8a94a3;     /* stronger line under thead */
+  --table-bg: var(--colour-white);
+  --table-text: #000;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --table-head-bg: #2b3038;
+    --table-head-text: #f5f5f3;     /* ~12:1 on #2b3038 */
+    --table-stripe-bg: #1e2227;
+    --table-bg: #16191d;
+    --table-text: #f5f5f3;
+  }
+
+  table a:link    { color: #8ab4f8; }   /* ~8.4:1 on #16191d */
+  table a:visited { color: #c3a6f5; }   /* ~8.5:1 */
+  table a:hover   { color: #b5f0a0; }   /* light green, ~13:1 */
+  table a:focus-visible { color: var(--colour-white); }
+  table a:active  { color: #ff9e9e; }   /* light red, ~9:1 */
+  table code      { color: inherit; }
+  table :is(th, td) { border-color: #8a94a3; }
 }
 
 table {
@@ -405,7 +426,8 @@ table {
   width: 100%;
   font-size: 0.88888889rem;
   margin: 1rem 0 1.5rem;
-  background: var(--colour-white);
+  background: var(--table-bg);
+  color: var(--table-text);
   font-variant-numeric: tabular-nums;   /* numbers line up in columns */
 }
 
@@ -427,6 +449,7 @@ td {
 /* Header cells: tint + weight */
 th {
   background: var(--table-head-bg);
+  color: var(--table-head-text); 
 }
 
 thead th {
@@ -795,11 +818,11 @@ Testing non-text contrast
 Testing use of color
 ----------------------*/
 
-.user-of-color1 a:link {
+.use-of-color1 a:link {
   text-decoration: none;
 }
 
-.user-of-color-circle {
+.use-of-color-circle {
   display: block;
   margin: 0 auto;
   width: 26px;
@@ -807,28 +830,28 @@ Testing use of color
   border-radius: 50%;
 }
 
-.user-of-color-red,
-.user-of-color-red2 {
+.use-of-color-red,
+.use-of-color-red2 {
   background-color: var(--colour-red);
 }
 
-.user-of-color-green,
-.user-of-color-green2 {
+.use-of-color-green,
+.use-of-color-green2 {
   background-color: var(--colour-green);
 }
 
-.user-of-color-red2,
-.user-of-color-green2 {
+.use-of-color-red2,
+.use-of-color-green2 {
   background-size: 14px 14px;
   background-repeat: no-repeat;
   background-position: center;
 }
 
-.user-of-color-red2 {
+.use-of-color-red2 {
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round'><path d='M7 7l10 10M17 7L7 17'/></svg>");
 }
 
-.user-of-color-green2 {
+.use-of-color-green2 {
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12.5l4.5 4.5L19 7.5'/></svg>");
 }
 /* ---------------------

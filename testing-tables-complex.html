@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Complex table examples - Intopia</title>
+  <meta name="description" content="Test a complex table where data cells use headers and id to link to four headers, compared with a simplified version that uses only row and column headers.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="favicon.ico" sizes="32x32">
@@ -14,15 +15,6 @@
 th.right,
 td {
   text-align: right;
-}
-
-thead th {
-  font-weight: bold;
-}
-
-.totals th,
-.totals td {
-  border-top: 3px solid #000;
 }
   </style>
 </head>
@@ -78,10 +70,10 @@ thead th {
       <th colspan="2" id="local">Local</th>
     </tr>
     <tr>
-      <th class="right" id="international-2023">2023<br>$000</th>
-      <th class="right" id="international-2022">2022<br>$000</th>
-      <th class="right" id="local-2023">2023<br>$000</th>
-      <th class="right" id="local-2022">2022<br>$000</th>
+      <th class="right" id="international-2023">2023</th>
+      <th class="right" id="international-2022">2022</th>
+      <th class="right" id="local-2023">2023</th>
+      <th class="right" id="local-2022">2022</th>
     </tr>
   </thead>
   <tbody>
@@ -136,14 +128,14 @@ thead th {
 
 <div class="table-wrap">
 <table>
-  <caption>international and Local revenue</caption>
+  <caption>International and Local revenue</caption>
   <thead>
     <tr>
       <td></td>
-      <th class="right" scope="col">International<br>2023<br>$000</th>
-      <th class="right" scope="col">International<br>2022<br>$000</th>
-      <th class="right" scope="col">Local<br>2023<br>$000</th>
-      <th class="right" scope="col">Local<br>2022<br>$000</th>
+      <th class="right" scope="col">International<br>2023</th>
+      <th class="right" scope="col">International<br>2022</th>
+      <th class="right" scope="col">Local<br>2023</th>
+      <th class="right" scope="col">Local<br>2022</th>
     </tr>
   </thead>
   <tbody>
