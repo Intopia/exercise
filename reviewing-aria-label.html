@@ -23,10 +23,6 @@ nav {
   border: 2px solid red;
 }
 
-table {
-margin: 1.5em 0 2em;
-}
-
 .example32 {
   display: inline-block;
   width: 50px;
@@ -35,7 +31,7 @@ margin: 1.5em 0 2em;
 }
 
 .example32:focus {
-  outline: 0;
+  outline: 2px solid transparent;
   box-shadow: 0 0 0 2px #fff, 0 0 0 5px #000;
 }
 
@@ -191,7 +187,7 @@ margin: 1.5em 0 2em;
 
 <div class="table-wrap">
 <table>
-  <caption>2. Results</caption>
+  <caption>2 Results</caption>
   <thead>
     <tr>
       <th>OS</th>
@@ -235,7 +231,7 @@ margin: 1.5em 0 2em;
 
 <h2>Group 3. Static element with a role and aria-label</h2>
 
-<h3>3.1. Role="menu"</h3>
+<h3>3.1 Role="menu"</h3>
 
 <div class="example">
   <ul role="menu" aria-label="Actions" class="menulist">
@@ -262,7 +258,7 @@ margin: 1.5em 0 2em;
 
 <div class="table-wrap">
 <table>
-  <caption>3.1. Results</caption>
+  <caption>3.1 Results</caption>
   <thead>
     <tr>
       <th>OS</th>
@@ -300,7 +296,7 @@ margin: 1.5em 0 2em;
 </table>
 </div>
 
-<h3>3.2. Role="img"</h3>
+<h3>3.2 Role="img"</h3>
 
 <div class="example">
   <span role="img" aria-label="Rating: 4 out of 5 stars">
@@ -331,7 +327,7 @@ margin: 1.5em 0 2em;
 
 <div class="table-wrap">
 <table>
-  <caption>3.2. Results</caption>
+  <caption>3.2 Results</caption>
   <thead>
     <tr>
       <th>OS</th>
@@ -392,7 +388,7 @@ margin: 1.5em 0 2em;
 
 <div class="table-wrap">
 <table>
-  <caption>4. Results</caption>
+  <caption>4 Results</caption>
   <thead>
     <tr>
       <th>OS</th>
@@ -439,7 +435,7 @@ margin: 1.5em 0 2em;
 
 <h2>Group 5. Non-interactive element with aria-label</h2>
 
-<h3>5.1 Non-interactive without role or focus:</h3>
+<h3>5.1 Non-interactive without role or focus</h3>
 
 <div class="example">
   <span aria-label="Contact" class="example32"></span>
@@ -457,7 +453,7 @@ margin: 1.5em 0 2em;
 
 <div class="table-wrap">
 <table>
-  <caption>5.1. Results</caption>
+  <caption>5.1 Results</caption>
   <thead>
     <tr>
       <th>OS</th>
@@ -517,7 +513,7 @@ margin: 1.5em 0 2em;
 
 <div class="table-wrap">
 <table>
-  <caption>5.2. Results</caption>
+  <caption>5.2 Results</caption>
   <thead>
     <tr>
       <th>OS</th>
@@ -583,7 +579,7 @@ margin: 1.5em 0 2em;
 
 <div class="table-wrap">
 <table>
-  <caption>6.1. Results</caption>
+  <caption>6.1 Results</caption>
   <thead>
     <tr>
       <th>OS</th>
@@ -621,7 +617,9 @@ margin: 1.5em 0 2em;
 </table>
 </div>
 
-<p>This is invalid HTML. The element's role, explicit or implicit, is on the list of roles that must not be given an accessible name (generic, presentation, etc. per the current ARIA-in-HTML spec). Browsers may still expose a name in practice, but this pattern should not be used in production.</p>
+<div class="note note-warning">
+  <p><b>This is invalid HTML</b>. The element's role, explicit or implicit, is on the list of roles that must not be given an accessible name (generic, presentation, etc. per the current ARIA-in-HTML spec). Browsers may still expose a name in practice, but this pattern should not be used in production.</p>
+</div>
 
 <h3>6.2 Element hidden</h3>
 
@@ -641,7 +639,7 @@ margin: 1.5em 0 2em;
 
 <div class="table-wrap">
 <table>
-  <caption>6.2. Results</caption>
+  <caption>6.2 Results</caption>
   <thead>
     <tr>
       <th>OS</th>
