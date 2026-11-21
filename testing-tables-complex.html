@@ -53,6 +53,10 @@ td {
 <p>This page does not cover interactive complexity, such as sortable columns, editable cells or drag-and-drop behaviour. Those features introduce different accessibility considerations and are typically implemented using ARIA grid patterns rather than native tables.</p>
 
 
+<p>This page does not cover interactive complexity, such as sortable columns, editable cells or drag-and-drop behaviour. Sortable columns can still be built with a native table, using buttons in the column headers and <code>aria-sort</code>. See <a href="testing-tables-aria.html">ARIA table examples</a>. Editable cells and drag-and-drop introduce different accessibility considerations, and may need an ARIA grid pattern, with full keyboard navigation between cells.</p>
+
+
+
 <!-- section -->
 
 
@@ -171,6 +175,9 @@ td {
 </table>
 </div>
 
+<div class="note">
+  <p>Splitting headers into separate columns, as in this example, can make a table wider. For ways to handle wide tables on small screens and at high zoom levels, see <a href="testing-tables-scrollable.html">Testing scrollable tables</a>.</p>
+</div>
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 </main>

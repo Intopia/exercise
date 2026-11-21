@@ -1,0 +1,117 @@
+/* Testing sticky headers
+
+   This page is designed to fail. The fixed header and footer
+   are meant to take over the screen at high zoom levels, and
+   the navigation is meant to overflow and hide focused links.
+   Please don't "fix" the bits marked INTENTIONAL. */
+
+
+/* ==========================================================
+   Base
+   ========================================================== */
+
+body {
+  margin: 0;
+  /* INTENTIONAL: fixed px reserve that doesn't grow when the header wraps */
+  padding: 120px 0 50px;
+  font-size: 1em;
+  font-family: helvetica, arial, sans-serif;
+  line-height: 1.2;
+  color: #333;
+  background: #fff;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.6em;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+p {
+  margin: 1em 0 1.5em;
+  line-height: 1.5;
+}
+
+
+/* ==========================================================
+   Header
+   ========================================================== */
+
+/* INTENTIONAL: fixed to the top of the viewport */
+header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: 1em;
+  background: #edff66;
+  box-shadow: 0 3px 3px #ccc;
+}
+
+.company-name {
+  font-weight: bold;
+  font-size: 1.6em;
+  padding: 0 0 20px;
+}
+
+
+/* ==========================================================
+   Main content
+   ========================================================== */
+
+main {
+  padding: 1em;
+  max-width: 38em;
+}
+
+
+/* ==========================================================
+   Footer
+   ========================================================== */
+
+/* INTENTIONAL: fixed to the bottom of the viewport */
+footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1em;
+  background: #ff66ed;
+}
+
+/* Darker links so the footer passes contrast (about 6.4:1)
+   and doesn't distract from the real lesson */
+footer a,
+footer a:visited {
+  color: #000080;
+}
+
+
+/* ==========================================================
+   Navigation
+   ========================================================== */
+
+/* INTENTIONAL: clips anything past the viewport edge */
+.navigation-header,
+.navigation-footer {
+  overflow: hidden;
+}
+
+/* INTENTIONAL: fixed width so items never wrap */
+.navigation-header ul,
+.navigation-footer ul {
+  width: 1000px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navigation-header li,
+.navigation-footer li {
+  float: left;
+  margin: 0 1em 0 0;
+}

@@ -26,7 +26,9 @@
 
 <h1>Testing character encoding: correct example</h1>
 
-<p><code>&lt;meta charset="utf-8"&gt;</code> is declared as the very first element inside <code>&lt;head&gt;</code>, matching the encoding the file is actually saved in. Encoding is both a rendering and an accessibility issue, garbled text isn't just visually wrong, assistive technology will read whatever garbled substitute characters result too. The test string below uses literal multi-byte characters, not HTML entities, so a genuine encoding mismatch would actually be visible.</p>
+<p><code>&lt;meta charset="utf-8"&gt;</code>  is the first element inside <code>&lt;head&gt;</code> and matches the file's encoding. Incorrect encoding can cause text to display incorrectly and affect what screen readers announce.</p>
+
+<p>The example below uses special characters rather than HTML entities to help identify encoding problems.</p>
 
 <div class="example">
   <p>Café — naïve piñata costs €5.99, “today” only.</p>
