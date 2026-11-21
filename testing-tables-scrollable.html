@@ -33,7 +33,27 @@ main.narrow {
 
 <h1>Testing scrollable tables</h1>
 
+
+<!-- section -->
+
+
+<h2>What's the problem?</h2>
+
 <p>Data tables can have lots of columns. On smaller screens, wide tables may not fit within the available space. This can cause content to be cut off or force the entire page to scroll sideways. The same problem can happen on desktop screens when people zoom in.</p>
+
+<h3>Possible accessibility issues</h3>
+
+<p>When tables are wider than the available space, some users may have difficulty accessing the content:</p>
+
+<ul>
+  <li>People who zoom in may lose access to columns that extend beyond the visible area.</li>
+  <li>Keyboard users may not be able to reach hidden columns if the table cannot be scrolled horizontally.</li>
+  <li>People using screen magnification may need to scroll back and forth to compare information across columns.</li>
+  <li>People with low vision may find it difficult to follow rows and columns when parts of the table are out of view.</li>
+  <li>Some users may not realise that additional columns are available outside the visible area.</li>
+</ul>
+
+<h3>Solutions</h3>
 
 <p>There are several ways to deal with wide tables:</p>
 
@@ -141,11 +161,11 @@ main.narrow {
 
 <p>Start by placing the table inside a <code>div</code> element.</p>
 
-<pre><code>&lt;div class="table-wrap"&gt;
+<pre><code><span class="highlight">&lt;div class="table-wrap"&gt;</span>
   &lt;table&gt;
     ...
   &lt;/table&gt;
-&lt;/div&gt;</code></pre>
+<span class="highlight">&lt;/div&gt;</span></code></pre>
 
 <p>The <code>div</code> acts as a container for the table. We can use CSS to allow the table to scroll horizontally without affecting the rest of the page.</p>
 
@@ -178,12 +198,12 @@ main.narrow {
 <p>Here is the complete HTML pattern:</p>
 
 <pre><code>&lt;div class="table-wrap"
-  tabindex="0"
-  role="region"
-  aria-labelledby="cap-sales"
+  <span class="highlight">tabindex="0"</span>
+  <span class="highlight">role="region"</span>
+  <span class="highlight">aria-labelledby="cap-sales"</span>
 &gt;
   &lt;table&gt;
-    &lt;caption id="cap-sales"&gt;Sales by quarter&lt;/caption&gt;
+    &lt;caption <span class="highlight">id="cap-sales"</span>&gt;Sales by quarter&lt;/caption&gt;
     ...
   &lt;/table&gt;
 &lt;/div&gt;</code></pre>
@@ -253,12 +273,12 @@ main.narrow {
 
 <p>Start with the original HTML:</p>
 
-<pre><code>&lt;div class="table-wrap"&gt;
+<pre><code><span class="highlight">&lt;div class="table-wrap"&gt;</span>
   &lt;table&gt;
     &lt;caption&gt;Sales by quarter&lt;/caption&gt;
     ...
   &lt;/table&gt;
-&lt;/div&gt;</code></pre>
+<span class="highlight">&lt;/div&gt;</span></code></pre>
 
 <p>The JavaScript can then:</p>
 
@@ -329,7 +349,7 @@ document.querySelectorAll('.table-wrap').forEach((wrap) =&gt; {
 
 <p>The JavaScript can be saved in a separate file and loaded using a <code>script</code> element.</p>
 
-<pre><code>&lt;script src="table-wrap.js" defer&gt;&lt;/script&gt;</code></pre>
+<pre><code>&lt;script src="table-wrap.js" <span class="highlight">defer</span>&gt;&lt;/script&gt;</code></pre>
 
 <p>The <code>defer</code> attribute is important.</p>
 
