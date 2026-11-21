@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the axe rule aria-required-attr</title>
+  <meta name="description" content="Test cases for the axe-core rule aria-required-attr, showing what axe catches and what it misses.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <style>
+  .case { border: 1px solid #c8c8cc; border-radius: 6px; padding: 1rem 1.25rem; margin: 1.25rem 0; }
+  .case h3 { margin-top: 0; }
+  .case-id { display: inline-block; font-size: .8rem; font-weight: 700; background: #1d1d1f; color: #fff; padding: .1rem .45rem; border-radius: 3px; margin-right: .4rem; vertical-align: middle; }
+  .example { border: 1px dashed #a0a0a8; padding: .75rem 1rem; margin: .75rem 0; }
+  .example p { margin: .25rem 0; }
+  .badge { display: inline-block; font-weight: 600; font-size: .875rem; padding: .2rem .6rem; border-radius: 3px; border: 2px solid; }
+  .badge.fail { background: #fde8e8; border-color: #b3261e; color: #8a1c16; }
+  .badge.review { background: #fff4d6; border-color: #8a6100; color: #5e4200; }
+  .badge.other { background: #e0f4f4; border-color: #0b6b6b; color: #084f4f; }
+  .badge.miss { background: #ece6fb; border-color: #5b3cc4; color: #432a99; }
+  .badge.pass { background: #e3f4e8; border-color: #1e7b3a; color: #155c2b; }
+  .badge.dynamic { background: #e8eef9; border-color: #1a4f9c; color: #133b75; }
+  .note { font-size: .9375rem; }
+  .route { font-size: .875rem; border-left: 3px solid #a0a0a8; padding-left: .6rem; }
+</style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo. The word 'intopia' in black, with the 'o' made from four curved brush strokes in pink, orange, yellow and turquoise." class="intopia-logo">
+  </picture>
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing the axe rule <code>aria-required-attr</code></h1>
+
+<p>Test cases for the axe-core rule <a href="https://dequeuniversity.com/rules/axe/4.14/aria-required-attr"><code>aria-required-attr</code></a> (axe-core 4.14). Some roles need a state or value to make sense. A checkbox needs to say whether it's checked, and a heading needs a level. The rule checks that elements with these roles have the attributes they need.</p>
+
+<table>
+  <caption>Roles with required attributes in axe-core 4.14</caption>
+  <thead><tr><th scope="col">Role</th><th scope="col">Requires</th></tr></thead>
+  <tbody>
+    <tr><td><code>checkbox</code>, <code>radio</code>, <code>switch</code>, <code>menuitemcheckbox</code>, <code>menuitemradio</code></td><td><code>aria-checked</code></td></tr>
+    <tr><td><code>combobox</code></td><td><code>aria-expanded</code> and <code>aria-controls</code></td></tr>
+    <tr><td><code>heading</code></td><td><code>aria-level</code></td></tr>
+    <tr><td><code>slider</code>, <code>meter</code>, <code>scrollbar</code>, <code>separator</code></td><td><code>aria-valuenow</code></td></tr>
+  </tbody>
+</table>
+
+<p>The rule only checks explicit roles. Native elements, like <code>&lt;input type="checkbox"&gt;</code> and <code>&lt;h2&gt;</code>, already provide these states, so they always pass. An empty value counts as missing.</p>
+
+<p>Each case also shows the axe <strong>message key</strong> and which Intopia issue template the result would go to under the current assembly rules. Results on this page were checked in Chrome.</p>
+
+<p class="report-link"><strong>axe-core results:</strong> <a href="x-axe-core-rules/12-axe-report-aria-required-attr.html">See the HTML report from running axe-core 4.14.0 over this page</a>.</p>
+
+<p>Every example is live in the page, so you can run the axe extension straight over it. The expected results were checked by running axe-core 4.14.1 over this page. Look in both the axe <strong>issues</strong> list and the <strong>needs review</strong> list.</p>
+
+<table>
+  <caption>Number of test cases by expected result</caption>
+  <thead><tr><th scope="col">Expected result</th><th scope="col">Cases</th></tr></thead>
+  <tbody>
+      <tr><td>Fail</td><td>11</td></tr>
+      <tr><td>Flagged by a different rule instead</td><td>2</td></tr>
+      <tr><td>Passes, but broken (axe misses it)</td><td>1</td></tr>
+      <tr><td>Pass (valid control cases)</td><td>8</td></tr>
+      <tr><td>Changes after interaction</td><td>1</td></tr>
+  </tbody>
+</table>
+
+<h2 id="sections">Sections</h2>
+
+<ul>
+  <li><a href="#missing">Required attributes missing</a></li>
+  <li><a href="#skipped">Skipped by axe on purpose</a></li>
+  <li><a href="#not-tested">Not tested at all</a></li>
+  <li><a href="#other-rules">Flagged by a different rule instead</a></li>
+  <li><a href="#passing">Ways to pass</a></li>
+  <li><a href="#dynamic">Changes after interaction</a></li>
+</ul>
+
+<!-- section -->
+
+<h2 id="missing">Required attributes missing</h2>
+
+<p>These fail with "Required ARIA attribute not present".</p>
+<article class="case" id="a1" aria-labelledby="a1-title">
+  <h3 id="a1-title"><span class="case-id">A1</span> A checkbox without aria-checked</h3>
+  <div class="example" data-case="a1" data-expected="fail">
+<div role="checkbox" tabindex="0">Subscribe to updates</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;checkbox&quot; tabindex=&quot;0&quot;&gt;Subscribe to updates&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-43.</p>
+</article><article class="case" id="a2" aria-labelledby="a2-title">
+  <h3 id="a2-title"><span class="case-id">A2</span> A radio button without aria-checked</h3>
+  <div class="example" data-case="a2" data-expected="fail">
+<div role="radiogroup" aria-label="Size">
+  <div role="radio" tabindex="0">Small</div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;radiogroup&quot; aria-label=&quot;Size&quot;&gt;
+  &lt;div role=&quot;radio&quot; tabindex=&quot;0&quot;&gt;Small&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-43.</p>
+</article><article class="case" id="a3" aria-labelledby="a3-title">
+  <h3 id="a3-title"><span class="case-id">A3</span> A menu item checkbox without aria-checked</h3>
+  <div class="example" data-case="a3" data-expected="fail">
+<div role="menu" aria-label="View">
+  <div role="menuitemcheckbox" tabindex="-1">Show grid</div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;menu&quot; aria-label=&quot;View&quot;&gt;
+  &lt;div role=&quot;menuitemcheckbox&quot; tabindex=&quot;-1&quot;&gt;Show grid&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-43.</p>
+</article><article class="case" id="a4" aria-labelledby="a4-title">
+  <h3 id="a4-title"><span class="case-id">A4</span> A heading without aria-level</h3>
+  <div class="example" data-case="a4" data-expected="fail">
+<div role="heading">Our story</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;heading&quot;&gt;Our story&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-43.</p>
+</article><article class="case" id="a5" aria-labelledby="a5-title">
+  <h3 id="a5-title"><span class="case-id">A5</span> A slider without aria-valuenow</h3>
+  <div class="example" data-case="a5" data-expected="fail">
+<div role="slider" tabindex="0" aria-label="Volume"></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;slider&quot; tabindex=&quot;0&quot; aria-label=&quot;Volume&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-43.</p>
+</article><article class="case" id="a6" aria-labelledby="a6-title">
+  <h3 id="a6-title"><span class="case-id">A6</span> A meter without aria-valuenow</h3>
+  <div class="example" data-case="a6" data-expected="fail">
+<div role="meter" aria-label="Storage used"></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;meter&quot; aria-label=&quot;Storage used&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-43.</p>
+</article><article class="case" id="a7" aria-labelledby="a7-title">
+  <h3 id="a7-title"><span class="case-id">A7</span> A focusable separator without aria-valuenow</h3>
+  <p>A separator that can receive focus can be dragged, like a splitter between two panes, so it needs a value. Compare with B2.</p>
+  <div class="example" data-case="a7" data-expected="fail">
+<div role="separator" tabindex="0" aria-label="Resize panels"></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;separator&quot; tabindex=&quot;0&quot; aria-label=&quot;Resize panels&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-43.</p>
+</article><article class="case" id="a8" aria-labelledby="a8-title">
+  <h3 id="a8-title"><span class="case-id">A8</span> A combobox without aria-expanded</h3>
+  <p>Without <code>aria-expanded</code>, axe also needs <code>aria-controls</code>. Compare with B3.</p>
+  <div class="example" data-case="a8" data-expected="fail">
+<input type="text" role="combobox" aria-label="City">
+  </div>
+  <pre><code class="language-html">&lt;input type=&quot;text&quot; role=&quot;combobox&quot; aria-label=&quot;City&quot;&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-43.</p>
+</article><article class="case" id="a9" aria-labelledby="a9-title">
+  <h3 id="a9-title"><span class="case-id">A9</span> An open combobox without aria-controls</h3>
+  <div class="example" data-case="a9" data-expected="fail">
+<input type="text" role="combobox" aria-label="Suburb" aria-expanded="true">
+  </div>
+  <pre><code class="language-html">&lt;input type=&quot;text&quot; role=&quot;combobox&quot; aria-label=&quot;Suburb&quot; aria-expanded=&quot;true&quot;&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-43.</p>
+</article><article class="case" id="a10" aria-labelledby="a10-title">
+  <h3 id="a10-title"><span class="case-id">A10</span> A role in capitals</h3>
+  <p>Role names aren't case sensitive, so this is still a checkbox.</p>
+  <div class="example" data-case="a10" data-expected="fail">
+<div role="Checkbox" tabindex="0">Accept terms</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;Checkbox&quot; tabindex=&quot;0&quot;&gt;Accept terms&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-43.</p>
+</article><article class="case" id="a11" aria-labelledby="a11-title">
+  <h3 id="a11-title"><span class="case-id">A11</span> An empty aria-checked</h3>
+  <p>An empty value counts as missing.</p>
+  <div class="example" data-case="a11" data-expected="fail">
+<div role="switch" tabindex="0" aria-checked="">Wi-Fi</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;switch&quot; tabindex=&quot;0&quot; aria-checked=&quot;&quot;&gt;Wi-Fi&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="note">This also shows up as needs review under <code>aria-valid-attr-value</code>, for the empty value.</p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-43. The <code>aria-valid-attr-value</code> result routes to NEW-38.</p>
+</article>
+<!-- section -->
+
+<h2 id="skipped">Skipped by axe on purpose</h2>
+
+<p>These pass, because axe relaxes the rule where the missing attribute isn't needed.</p>
+<article class="case" id="b1" aria-labelledby="b1-title">
+  <h3 id="b1-title"><span class="case-id">B1</span> A slider with aria-valuetext</h3>
+  <p><code>aria-valuetext</code> gives the value as text, so <code>aria-valuenow</code> isn't needed.</p>
+  <div class="example" data-case="b1" data-expected="pass">
+<div role="slider" tabindex="0" aria-label="Spice level" aria-valuetext="Medium"></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;slider&quot; tabindex=&quot;0&quot; aria-label=&quot;Spice level&quot; aria-valuetext=&quot;Medium&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="b2" aria-labelledby="b2-title">
+  <h3 id="b2-title"><span class="case-id">B2</span> A separator that can&#x27;t receive focus</h3>
+  <p>A plain dividing line doesn't have a value. Compare with A7.</p>
+  <div class="example" data-case="b2" data-expected="pass">
+<div role="separator"></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;separator&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="b3" aria-labelledby="b3-title">
+  <h3 id="b3-title"><span class="case-id">B3</span> A closed combobox without aria-controls</h3>
+  <p>ARIA 1.2 requires <code>aria-controls</code>, but axe doesn't while the combobox is closed, because the popup may not exist yet.</p>
+  <div class="example" data-case="b3" data-expected="pass">
+<input type="text" role="combobox" aria-label="Country" aria-expanded="false">
+  </div>
+  <pre><code class="language-html">&lt;input type=&quot;text&quot; role=&quot;combobox&quot; aria-label=&quot;Country&quot; aria-expanded=&quot;false&quot;&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="b4" aria-labelledby="b4-title">
+  <h3 id="b4-title"><span class="case-id">B4</span> A native checkbox with role=&quot;switch&quot;</h3>
+  <p>The native checkbox already provides the checked state.</p>
+  <div class="example" data-case="b4" data-expected="pass">
+<label><input type="checkbox" role="switch"> Dark mode</label>
+  </div>
+  <pre><code class="language-html">&lt;label&gt;&lt;input type=&quot;checkbox&quot; role=&quot;switch&quot;&gt; Dark mode&lt;/label&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="b5" aria-labelledby="b5-title">
+  <h3 id="b5-title"><span class="case-id">B5</span> A native heading with role=&quot;heading&quot;</h3>
+  <p>The <code>&lt;h2&gt;</code> already provides the level.</p>
+  <div class="example" data-case="b5" data-expected="pass">
+<h2 role="heading">Contact</h2>
+  </div>
+  <pre><code class="language-html">&lt;h2 role=&quot;heading&quot;&gt;Contact&lt;/h2&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article>
+<!-- section -->
+
+<h2 id="not-tested">Not tested at all</h2>
+
+<p></p>
+<article class="case" id="c1" aria-labelledby="c1-title">
+  <h3 id="c1-title"><span class="case-id">C1</span> A role list</h3>
+  <p>Axe doesn't check required attributes on role lists, so the missing <code>aria-checked</code> isn't reported.</p>
+  <div class="example" data-case="c1" data-expected="miss">
+<div role="checkbox button" tabindex="0">Remember me</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;checkbox button&quot; tabindex=&quot;0&quot;&gt;Remember me&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="note">Confirmed in Chrome: it's exposed as a checkbox with no checked state, the same as A1.</p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+</article>
+<!-- section -->
+
+<h2 id="other-rules">Flagged by a different rule instead</h2>
+
+<p>The attribute is there, so this rule passes. But its value is wrong.</p>
+<article class="case" id="d1" aria-labelledby="d1-title">
+  <h3 id="d1-title"><span class="case-id">D1</span> An invalid aria-checked value</h3>
+  <div class="example" data-case="d1" data-expected="other" data-other="aria-valid-attr-value">
+<div role="checkbox" tabindex="0" aria-checked="banana">Gift wrap</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;checkbox&quot; tabindex=&quot;0&quot; aria-checked=&quot;banana&quot;&gt;Gift wrap&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-valid-attr-value</code> instead</span></p>
+  <p class="route"><strong>Template routing:</strong> <code>aria-valid-attr-value</code>, message key: none. Routes to: NEW-27.</p>
+</article><article class="case" id="d2" aria-labelledby="d2-title">
+  <h3 id="d2-title"><span class="case-id">D2</span> aria-checked in capitals</h3>
+  <div class="example" data-case="d2" data-expected="other" data-other="aria-allowed-attr">
+<div role="checkbox" tabindex="0" aria-checked="TRUE">Text me</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;checkbox&quot; tabindex=&quot;0&quot; aria-checked=&quot;TRUE&quot;&gt;Text me&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-allowed-attr</code> instead</span></p>
+  <p class="route"><strong>Template routing:</strong> <code>aria-allowed-attr</code>, message key: <code>caseSensitive</code>. Routes to: NEW-39.</p>
+</article>
+<!-- section -->
+
+<h2 id="passing">Ways to pass</h2>
+
+<p>Control cases.</p>
+<article class="case" id="e1" aria-labelledby="e1-title">
+  <h3 id="e1-title"><span class="case-id">E1</span> A checkbox with aria-checked</h3>
+  <div class="example" data-case="e1" data-expected="pass">
+<div role="checkbox" tabindex="0" aria-checked="false">Email me</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;checkbox&quot; tabindex=&quot;0&quot; aria-checked=&quot;false&quot;&gt;Email me&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e2" aria-labelledby="e2-title">
+  <h3 id="e2-title"><span class="case-id">E2</span> A heading with aria-level</h3>
+  <div class="example" data-case="e2" data-expected="pass">
+<div role="heading" aria-level="2">Opening hours</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;heading&quot; aria-level=&quot;2&quot;&gt;Opening hours&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e3" aria-labelledby="e3-title">
+  <h3 id="e3-title"><span class="case-id">E3</span> A slider with a value</h3>
+  <div class="example" data-case="e3" data-expected="pass">
+<div role="slider" tabindex="0" aria-label="Brightness" aria-valuemin="0" aria-valuemax="100" aria-valuenow="60"></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;slider&quot; tabindex=&quot;0&quot; aria-label=&quot;Brightness&quot; aria-valuemin=&quot;0&quot; aria-valuemax=&quot;100&quot; aria-valuenow=&quot;60&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article>
+<!-- section -->
+
+<h2 id="dynamic">Changes after interaction</h2>
+
+<p>Axe only sees the page as it is when you run it. These pass on page load. Activate each button, then run axe again.</p>
+<article class="case" id="f1" aria-labelledby="f1-title">
+  <h3 id="f1-title"><span class="case-id">F1</span> A checkbox that loses its state</h3>
+  <p>When unticked, the script removes <code>aria-checked</code> instead of setting it to <code>false</code>.</p>
+  <div class="example" data-case="f1" data-expected="dynamic">
+<div role="checkbox" tabindex="0" id="f1-box" aria-checked="true">Keep me signed in</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;checkbox&quot; tabindex=&quot;0&quot; id=&quot;f1-box&quot; aria-checked=&quot;true&quot;&gt;Keep me signed in&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge dynamic">On load: pass. After clicking: fail</span></p>
+  <p class="note">After clicking, the message key is none, so it routes to NEW-43.</p>
+</article>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+<script>
+  // F1: toggle (bug: removes aria-checked instead of setting it to "false")
+  document.getElementById('f1-box').addEventListener('click', function () {
+    if (this.getAttribute('aria-checked') === 'true') {
+      this.removeAttribute('aria-checked');
+    } else {
+      this.setAttribute('aria-checked', 'true');
+    }
+  });
+</script>
+</body>
+</html>

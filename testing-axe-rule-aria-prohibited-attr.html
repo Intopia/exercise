@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the axe rule aria-prohibited-attr</title>
+  <meta name="description" content="Test cases for the axe-core rule aria-prohibited-attr, showing what axe catches and what it misses.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <style>
+  .case { border: 1px solid #c8c8cc; border-radius: 6px; padding: 1rem 1.25rem; margin: 1.25rem 0; }
+  .case h3 { margin-top: 0; }
+  .case-id { display: inline-block; font-size: .8rem; font-weight: 700; background: #1d1d1f; color: #fff; padding: .1rem .45rem; border-radius: 3px; margin-right: .4rem; vertical-align: middle; }
+  .example { border: 1px dashed #a0a0a8; padding: .75rem 1rem; margin: .75rem 0; }
+  .example p { margin: .25rem 0; }
+  .badge { display: inline-block; font-weight: 600; font-size: .875rem; padding: .2rem .6rem; border-radius: 3px; border: 2px solid; }
+  .badge.fail { background: #fde8e8; border-color: #b3261e; color: #8a1c16; }
+  .badge.review { background: #fff4d6; border-color: #8a6100; color: #5e4200; }
+  .badge.other { background: #e0f4f4; border-color: #0b6b6b; color: #084f4f; }
+  .badge.miss { background: #ece6fb; border-color: #5b3cc4; color: #432a99; }
+  .badge.pass { background: #e3f4e8; border-color: #1e7b3a; color: #155c2b; }
+  .badge.dynamic { background: #e8eef9; border-color: #1a4f9c; color: #133b75; }
+  .note { font-size: .9375rem; }
+  .route { font-size: .875rem; border-left: 3px solid #a0a0a8; padding-left: .6rem; }
+</style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo. The word 'intopia' in black, with the 'o' made from four curved brush strokes in pink, orange, yellow and turquoise." class="intopia-logo">
+  </picture>
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing the axe rule <code>aria-prohibited-attr</code></h1>
+
+<p>Test cases for the axe-core rule <a href="https://dequeuniversity.com/rules/axe/4.14/aria-prohibited-attr"><code>aria-prohibited-attr</code></a> (axe-core 4.14). Some roles can't be given a name. ARIA prohibits <code>aria-label</code> and <code>aria-labelledby</code> on them, and many screen readers ignore the name.</p>
+
+<p>These include elements with no role, like <code>&lt;div&gt;</code> and <code>&lt;span&gt;</code>, and text-level elements, like <code>&lt;p&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;code&gt;</code>, <code>&lt;mark&gt;</code>, <code>&lt;del&gt;</code> and <code>&lt;sup&gt;</code>. It also includes <code>role="none"</code> and <code>role="presentation"</code>.</p>
+
+<p>The key thing to know: <strong>the rule only fails an element if it's empty.</strong> If the element has any text inside it, the result is needs review, because the text is still read even if the name is ignored. So most real-world cases show up under needs review.</p>
+
+<p>Each case also shows the axe <strong>message key</strong> and which Intopia issue template the result would go to under the current assembly rules. Results on this page were checked in Chrome.</p>
+
+<p class="report-link"><strong>axe-core results:</strong> <a href="x-axe-core-rules/13-axe-report-aria-prohibited-attr.html">See the HTML report from running axe-core 4.14.0 over this page</a>.</p>
+
+<p>Every example is live in the page, so you can run the axe extension straight over it. The expected results were checked by running axe-core 4.14.1 over this page. Look in both the axe <strong>issues</strong> list and the <strong>needs review</strong> list.</p>
+
+<table>
+  <caption>Number of test cases by expected result</caption>
+  <thead><tr><th scope="col">Expected result</th><th scope="col">Cases</th></tr></thead>
+  <tbody>
+      <tr><td>Fail</td><td>5</td></tr>
+      <tr><td>Needs review</td><td>13</td></tr>
+      <tr><td>Pass (valid control cases)</td><td>5</td></tr>
+      <tr><td>Changes after interaction</td><td>1</td></tr>
+  </tbody>
+</table>
+
+<h2 id="sections">Sections</h2>
+
+<ul>
+  <li><a href="#empty">Empty elements with a prohibited name</a></li>
+  <li><a href="#with-text">Elements with text and a prohibited name</a></li>
+  <li><a href="#labelledby">Needs review, with no template</a></li>
+  <li><a href="#passing">Ways to pass</a></li>
+  <li><a href="#dynamic">Changes after interaction</a></li>
+</ul>
+
+<!-- section -->
+
+<h2 id="empty">Empty elements with a prohibited name</h2>
+
+<p>These fail. With no text inside, the name is the only content, so if it's ignored nothing is announced.</p>
+<article class="case" id="a1" aria-labelledby="a1-title">
+  <h3 id="a1-title"><span class="case-id">A1</span> An empty div with aria-label</h3>
+  <p>Often used for a map or chart drawn by a script.</p>
+  <div class="example" data-case="a1" data-expected="fail">
+<div aria-label="Map of our stores"></div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-label=&quot;Map of our stores&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>noRoleSingular</code>. Routes to: NEW-44.</p>
+</article><article class="case" id="a2" aria-labelledby="a2-title">
+  <h3 id="a2-title"><span class="case-id">A2</span> An empty paragraph with aria-label</h3>
+  <div class="example" data-case="a2" data-expected="fail">
+<p aria-label="Note"></p>
+  </div>
+  <pre><code class="language-html">&lt;p aria-label=&quot;Note&quot;&gt;&lt;/p&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>noRoleSingular</code>. Routes to: NEW-44.</p>
+</article><article class="case" id="a3" aria-labelledby="a3-title">
+  <h3 id="a3-title"><span class="case-id">A3</span> An empty em with aria-label</h3>
+  <div class="example" data-case="a3" data-expected="fail">
+<em aria-label="stress"></em>
+  </div>
+  <pre><code class="language-html">&lt;em aria-label=&quot;stress&quot;&gt;&lt;/em&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>noRoleSingular</code>. Routes to: NEW-44.</p>
+</article><article class="case" id="a4" aria-labelledby="a4-title">
+  <h3 id="a4-title"><span class="case-id">A4</span> role=&quot;presentation&quot; with aria-label</h3>
+  <div class="example" data-case="a4" data-expected="fail">
+<div role="presentation" aria-label="Layout"></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;presentation&quot; aria-label=&quot;Layout&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>noRoleSingular</code>. Routes to: NEW-44.</p>
+</article><article class="case" id="a5" aria-labelledby="a5-title">
+  <h3 id="a5-title"><span class="case-id">A5</span> A div that only contains a decorative image</h3>
+  <p>The image has <code>alt=""</code>, so there's still no text.</p>
+  <div class="example" data-case="a5" data-expected="fail">
+<div aria-label="Company logo">
+  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" width="20" height="20">
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-label=&quot;Company logo&quot;&gt;
+  &lt;img src=&quot;data:image/gif;base64,R0lGODlhAQABAAAAACw=&quot; alt=&quot;&quot; width=&quot;20&quot; height=&quot;20&quot;&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>noRoleSingular</code>. Routes to: NEW-44.</p>
+</article>
+<!-- section -->
+
+<h2 id="with-text">Elements with text and a prohibited name</h2>
+
+<p>These are needs review, with the message "aria-label attribute is not well supported on ... elements with no valid role attribute". The text is read, but the name is likely to be ignored.</p>
+<article class="case" id="b1" aria-labelledby="b1-title">
+  <h3 id="b1-title"><span class="case-id">B1</span> A span with aria-label</h3>
+  <p>The name is meant to add context, but it's likely to be ignored, so screen reader users just hear "$25".</p>
+  <div class="example" data-case="b1" data-expected="review">
+<span aria-label="Price">$25</span>
+  </div>
+  <pre><code class="language-html">&lt;span aria-label=&quot;Price&quot;&gt;$25&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: <code>noRoleSingular</code>. Routes to: NEW-44.</p>
+</article><article class="case" id="b2" aria-labelledby="b2-title">
+  <h3 id="b2-title"><span class="case-id">B2</span> A paragraph with aria-label</h3>
+  <div class="example" data-case="b2" data-expected="review">
+<p aria-label="Important">Applications close on Friday.</p>
+  </div>
+  <pre><code class="language-html">&lt;p aria-label=&quot;Important&quot;&gt;Applications close on Friday.&lt;/p&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: <code>noRoleSingular</code>. Routes to: NEW-44.</p>
+</article><article class="case" id="b3" aria-labelledby="b3-title">
+  <h3 id="b3-title"><span class="case-id">B3</span> strong with aria-label</h3>
+  <div class="example" data-case="b3" data-expected="review">
+<strong aria-label="Warning">Hot surface</strong>
+  </div>
+  <pre><code class="language-html">&lt;strong aria-label=&quot;Warning&quot;&gt;Hot surface&lt;/strong&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: <code>noRoleSingular</code>. Routes to: NEW-44.</p>
+</article><article class="case" id="b4" aria-labelledby="b4-title">
+  <h3 id="b4-title"><span class="case-id">B4</span> code with aria-label</h3>
+  <div class="example" data-case="b4" data-expected="review">
+<code aria-label="Install command">npm install</code>
+  </div>
+  <pre><code class="language-html">&lt;code aria-label=&quot;Install command&quot;&gt;npm install&lt;/code&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: <code>noRoleSingular</code>. Routes to: NEW-44.</p>
+</article><article class="case" id="b5" aria-labelledby="b5-title">
+  <h3 id="b5-title"><span class="case-id">B5</span> mark with aria-label</h3>
+  <div class="example" data-case="b5" data-expected="review">
+<p>Now <mark aria-label="Highlight">on sale</mark></p>
+  </div>
+  <pre><code class="language-html">&lt;p&gt;Now &lt;mark aria-label=&quot;Highlight&quot;&gt;on sale&lt;/mark&gt;&lt;/p&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: <code>noRoleSingular</code>. Routes to: NEW-44.</p>
+</article><article class="case" id="b6" aria-labelledby="b6-title">
+  <h3 id="b6-title"><span class="case-id">B6</span> sup with aria-label</h3>
+  <p>A common pattern for footnotes.</p>
+  <div class="example" data-case="b6" data-expected="review">
+<p>Free delivery<sup aria-label="footnote 1">1</sup></p>
+  </div>
+  <pre><code class="language-html">&lt;p&gt;Free delivery&lt;sup aria-label=&quot;footnote 1&quot;&gt;1&lt;/sup&gt;&lt;/p&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: <code>noRoleSingular</code>. Routes to: NEW-44.</p>
+</article><article class="case" id="b7" aria-labelledby="b7-title">
+  <h3 id="b7-title"><span class="case-id">B7</span> del with aria-label</h3>
+  <div class="example" data-case="b7" data-expected="review">
+<p><del aria-label="Old price">$30</del> $25</p>
+  </div>
+  <pre><code class="language-html">&lt;p&gt;&lt;del aria-label=&quot;Old price&quot;&gt;$30&lt;/del&gt; $25&lt;/p&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: <code>noRoleSingular</code>. Routes to: NEW-44.</p>
+</article><article class="case" id="b8" aria-labelledby="b8-title">
+  <h3 id="b8-title"><span class="case-id">B8</span> A label with aria-label</h3>
+  <div class="example" data-case="b8" data-expected="review">
+<label for="b8-input" aria-label="Your name">Name</label>
+<input type="text" id="b8-input">
+  </div>
+  <pre><code class="language-html">&lt;label for=&quot;b8-input&quot; aria-label=&quot;Your name&quot;&gt;Name&lt;/label&gt;
+&lt;input type=&quot;text&quot; id=&quot;b8-input&quot;&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: <code>noRoleSingular</code>. Routes to: NEW-44.</p>
+</article><article class="case" id="b9" aria-labelledby="b9-title">
+  <h3 id="b9-title"><span class="case-id">B9</span> A focusable span with aria-label</h3>
+  <p>Making it focusable doesn't give it a role that can be named.</p>
+  <div class="example" data-case="b9" data-expected="review">
+<span tabindex="0" aria-label="More information">i</span>
+  </div>
+  <pre><code class="language-html">&lt;span tabindex=&quot;0&quot; aria-label=&quot;More information&quot;&gt;i&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: <code>noRoleSingular</code>. Routes to: NEW-44.</p>
+</article><article class="case" id="b10" aria-labelledby="b10-title">
+  <h3 id="b10-title"><span class="case-id">B10</span> role=&quot;none&quot; with aria-label</h3>
+  <p>The <code>aria-label</code> cancels <code>role="none"</code>, so the div is treated as a plain div again.</p>
+  <div class="example" data-case="b10" data-expected="review">
+<div role="none" aria-label="Layout">Two column layout</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;none&quot; aria-label=&quot;Layout&quot;&gt;Two column layout&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: <code>noRoleSingular</code>. Routes to: NEW-44.</p>
+</article><article class="case" id="b11" aria-labelledby="b11-title">
+  <h3 id="b11-title"><span class="case-id">B11</span> aria-labelledby pointing to hidden text</h3>
+  <div class="example" data-case="b11" data-expected="review">
+<span id="b11-label" hidden>Order total</span>
+<p aria-labelledby="b11-label">$40</p>
+  </div>
+  <pre><code class="language-html">&lt;span id=&quot;b11-label&quot; hidden&gt;Order total&lt;/span&gt;
+&lt;p aria-labelledby=&quot;b11-label&quot;&gt;$40&lt;/p&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: <code>noRoleSingular</code>. Routes to: NEW-44.</p>
+</article>
+<!-- section -->
+
+<h2 id="labelledby">Needs review, with no template</h2>
+
+<p>Two <code>aria-labelledby</code> cases have their own message keys, and the rule map gives them no template on purpose.</p>
+<article class="case" id="c1" aria-labelledby="c1-title">
+  <h3 id="c1-title"><span class="case-id">C1</span> aria-labelledby pointing to visible text</h3>
+  <p>The referenced text is already on the page, so nothing is lost if the name is ignored.</p>
+  <div class="example" data-case="c1" data-expected="review">
+<span id="c1-label">Order total</span>
+<p aria-labelledby="c1-label">$40</p>
+  </div>
+  <pre><code class="language-html">&lt;span id=&quot;c1-label&quot;&gt;Order total&lt;/span&gt;
+&lt;p aria-labelledby=&quot;c1-label&quot;&gt;$40&lt;/p&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: <code>visibleLabelSingular</code>. Routes to: no template (decided, because the text is read anyway).</p>
+</article><article class="case" id="c2" aria-labelledby="c2-title">
+  <h3 id="c2-title"><span class="case-id">C2</span> aria-labelledby pointing to a missing ID</h3>
+  <div class="example" data-case="c2" data-expected="review">
+<p aria-labelledby="c2-missing">$40</p>
+  </div>
+  <pre><code class="language-html">&lt;p aria-labelledby=&quot;c2-missing&quot;&gt;$40&lt;/p&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="note">This also shows up under <code>aria-valid-attr-value</code> for the missing ID.</p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: <code>unresolvedLabel</code>. Routes to: no template (decided). The <code>aria-valid-attr-value</code> result routes to NEW-36.</p>
+</article>
+<!-- section -->
+
+<h2 id="passing">Ways to pass</h2>
+
+<p>Control cases.</p>
+<article class="case" id="d1" aria-labelledby="d1-title">
+  <h3 id="d1-title"><span class="case-id">D1</span> An aria-label with only spaces</h3>
+  <p>Ignored, because there's no actual name.</p>
+  <div class="example" data-case="d1" data-expected="pass">
+<div aria-label="   ">Plain text</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-label=&quot;   &quot;&gt;Plain text&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="d2" aria-labelledby="d2-title">
+  <h3 id="d2-title"><span class="case-id">D2</span> A region with a name</h3>
+  <div class="example" data-case="d2" data-expected="pass">
+<div role="region" aria-label="Special offers">Free delivery this week.</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;region&quot; aria-label=&quot;Special offers&quot;&gt;Free delivery this week.&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="d3" aria-labelledby="d3-title">
+  <h3 id="d3-title"><span class="case-id">D3</span> An image role with a name</h3>
+  <div class="example" data-case="d3" data-expected="pass">
+<span role="img" aria-label="Four stars">****</span>
+  </div>
+  <pre><code class="language-html">&lt;span role=&quot;img&quot; aria-label=&quot;Four stars&quot;&gt;****&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="d4" aria-labelledby="d4-title">
+  <h3 id="d4-title"><span class="case-id">D4</span> A paragraph with role=&quot;note&quot;</h3>
+  <p>The <code>note</code> role can be named.</p>
+  <div class="example" data-case="d4" data-expected="pass">
+<p role="note" aria-label="Tip">Save your work often.</p>
+  </div>
+  <pre><code class="language-html">&lt;p role=&quot;note&quot; aria-label=&quot;Tip&quot;&gt;Save your work often.&lt;/p&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="d5" aria-labelledby="d5-title">
+  <h3 id="d5-title"><span class="case-id">D5</span> aria-describedby on a span</h3>
+  <p>Only naming is prohibited. A description is fine.</p>
+  <div class="example" data-case="d5" data-expected="pass">
+<span aria-describedby="d5-desc">Delivery fee</span>
+<span id="d5-desc">Free over $50</span>
+  </div>
+  <pre><code class="language-html">&lt;span aria-describedby=&quot;d5-desc&quot;&gt;Delivery fee&lt;/span&gt;
+&lt;span id=&quot;d5-desc&quot;&gt;Free over $50&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article>
+<!-- section -->
+
+<h2 id="dynamic">Changes after interaction</h2>
+
+<p>Axe only sees the page as it is when you run it. These pass on page load. Activate each button, then run axe again.</p>
+<article class="case" id="e1" aria-labelledby="e1-title">
+  <h3 id="e1-title"><span class="case-id">E1</span> A loading message that leaves an empty element behind</h3>
+  <p>On load, the span has text, so it's needs review. The button clears the text, which leaves only the <code>aria-label</code>, and it becomes a fail.</p>
+  <div class="example" data-case="e1" data-expected="dynamic">
+<button type="button" id="e1-button">Finish loading</button>
+<span id="e1-status" aria-label="Loading complete">Loading...</span>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; id=&quot;e1-button&quot;&gt;Finish loading&lt;/button&gt;
+&lt;span id=&quot;e1-status&quot; aria-label=&quot;Loading complete&quot;&gt;Loading...&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge dynamic">On load: needs review. After clicking: fail</span></p>
+  <p class="note">After clicking, the message key is still <code>noRoleSingular</code>, so it routes to NEW-44 as a fail rather than needs review.</p>
+</article>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+<script>
+  // E1: clear the loading text (bug: leaves an empty span with a prohibited name)
+  document.getElementById('e1-button').addEventListener('click', function () {
+    document.getElementById('e1-status').textContent = '';
+  });
+</script>
+</body>
+</html>
