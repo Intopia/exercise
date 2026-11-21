@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the axe rule presentation-role-conflict</title>
+  <meta name="description" content="Test cases for the axe-core rule presentation-role-conflict, showing what axe catches and what it misses.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <style>
+  .case { border: 1px solid #c8c8cc; border-radius: 6px; padding: 1rem 1.25rem; margin: 1.25rem 0; }
+  .case h3 { margin-top: 0; }
+  .case-id { display: inline-block; font-size: .8rem; font-weight: 700; background: #1d1d1f; color: #fff; padding: .1rem .45rem; border-radius: 3px; margin-right: .4rem; vertical-align: middle; }
+  .example { border: 1px dashed #a0a0a8; padding: .75rem 1rem; margin: .75rem 0; }
+  .example p { margin: .25rem 0; }
+  .badge { display: inline-block; font-weight: 600; font-size: .875rem; padding: .2rem .6rem; border-radius: 3px; border: 2px solid; }
+  .badge.fail { background: #fde8e8; border-color: #b3261e; color: #8a1c16; }
+  .badge.review { background: #fff4d6; border-color: #8a6100; color: #5e4200; }
+  .badge.other { background: #e0f4f4; border-color: #0b6b6b; color: #084f4f; }
+  .badge.miss { background: #ece6fb; border-color: #5b3cc4; color: #432a99; }
+  .badge.pass { background: #e3f4e8; border-color: #1e7b3a; color: #155c2b; }
+  .badge.dynamic { background: #e8eef9; border-color: #1a4f9c; color: #133b75; }
+  .note { font-size: .9375rem; }
+  .route { font-size: .875rem; border-left: 3px solid #a0a0a8; padding-left: .6rem; }
+</style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo. The word 'intopia' in black, with the 'o' made from four curved brush strokes in pink, orange, yellow and turquoise." class="intopia-logo">
+  </picture>
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing the axe rule <code>presentation-role-conflict</code></h1>
+
+<p>Test cases for the axe-core rule <a href="https://dequeuniversity.com/rules/axe/4.14/presentation-role-conflict"><code>presentation-role-conflict</code></a> (axe-core 4.14). <code>role="none"</code> and <code>role="presentation"</code> tell browsers to ignore an element's meaning, so a <code>&lt;ul&gt;</code> stops being a list. But browsers won't ignore an element that:</p>
+
+<ul>
+  <li>can receive focus, or</li>
+  <li>has a global ARIA attribute, such as <code>aria-label</code> or <code>aria-describedby</code>.</li>
+</ul>
+
+<p>When that happens, the browser keeps the element's own role, and <code>role="none"</code> does nothing. The rule flags these conflicts. It's a best practice rule, so it isn't tied to a WCAG success criterion.</p>
+
+<p>The rule checks three things: <code>img</code> with <code>alt=""</code>, and elements whose role attribute is exactly <code>none</code> or exactly <code>presentation</code>. It also skips elements that have no role of their own to keep, such as a <code>&lt;div&gt;</code> or <code>&lt;span&gt;</code>.</p>
+
+<p><strong>Two things to know before reading the results:</strong></p>
+
+<ul>
+  <li><strong>The messages read backwards.</strong> Axe reports "Element does not have global ARIA attribute" on an element that <em>does</em> have one, and "Element is not focusable" on one that <em>is</em> focusable. Both are the wrong wording for the result, so ignore the message and look at the element.</li>
+  <li><strong>The attribute names are in <code>data</code>, not <code>data.values</code>.</strong> For <code>has-global-aria-attribute</code>, axe's JSON has <code>"data": ["aria-label"]</code>. NEW-35's assembly notes say <code>data.values</code>, which would come out empty.</li>
+</ul>
+
+<p>Each case shows the check that found the conflict and how NEW-35 would fill its <strong>[conflict]</strong> placeholder. The accessibility tree notes come from Chrome.</p>
+
+<p class="report-link"><strong>axe-core results:</strong> <a href="x-axe-core-rules/15-axe-report-presentation-role-conflict.html">See the HTML report from running axe-core 4.14.0 over this page</a>.</p>
+
+<p>Every example is live in the page, so you can run the axe extension straight over it. The expected results were checked by running axe-core 4.14.1 over this page. Look in both the axe <strong>issues</strong> list and the <strong>needs review</strong> list.</p>
+
+<table>
+  <caption>Number of test cases by expected result</caption>
+  <thead><tr><th scope="col">Expected result</th><th scope="col">Cases</th></tr></thead>
+  <tbody>
+      <tr><td>Fail</td><td>19</td></tr>
+      <tr><td>Flagged by a different rule instead</td><td>6</td></tr>
+      <tr><td>Passes, but broken (axe misses it)</td><td>1</td></tr>
+      <tr><td>Pass (valid control cases)</td><td>4</td></tr>
+      <tr><td>Changes after interaction</td><td>2</td></tr>
+  </tbody>
+</table>
+
+<h2 id="sections">Sections</h2>
+
+<ul>
+  <li><a href="#global">Global ARIA attribute</a></li>
+  <li><a href="#focusable">Focusable</a></li>
+  <li><a href="#both">Both at once</a></li>
+  <li><a href="#arguable">Fails, but Chrome still ignores the element</a></li>
+  <li><a href="#passing">Ways to pass</a></li>
+  <li><a href="#missed">Not caught by this rule</a></li>
+  <li><a href="#dynamic">Changes after interaction</a></li>
+</ul>
+
+<!-- section -->
+
+<h2 id="global">Global ARIA attribute</h2>
+
+<p>These fail through <code>has-global-aria-attribute</code>. In each one, Chrome ignores <code>role="none"</code> and keeps the element's own role.</p>
+<article class="case" id="a1" aria-labelledby="a1-title">
+  <h3 id="a1-title"><span class="case-id">A1</span> List with role=&quot;none&quot; and aria-label</h3>
+  <p>Chrome shows a list named "Styles".</p>
+  <div class="example" data-case="a1" data-expected="fail">
+<ul role="none" aria-label="Styles">
+  <li>Bold</li>
+  <li>Italic</li>
+</ul>
+  </div>
+  <pre><code class="language-html">&lt;ul role=&quot;none&quot; aria-label=&quot;Styles&quot;&gt;
+  &lt;li&gt;Bold&lt;/li&gt;
+  &lt;li&gt;Italic&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="note"><code>aria-prohibited-attr</code> also asks for review, and its message gives the game away: "not well supported with role list".</p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>has-global-aria-attribute</code>, message key: none, data: <code>["aria-label"]</code>. Routes to: NEW-35, with [conflict] as "has the aria-label attribute".</p>
+</article><article class="case" id="a2" aria-labelledby="a2-title">
+  <h3 id="a2-title"><span class="case-id">A2</span> Decorative image with aria-label</h3>
+  <p><code>alt=""</code> says the image is decorative, but the <code>aria-label</code> brings it back as an image called "Intopia".</p>
+  <div class="example" data-case="a2" data-expected="fail">
+<img src="assets/images/intopia-logo.svg" alt="" aria-label="Intopia" width="120">
+  </div>
+  <pre><code class="language-html">&lt;img src=&quot;assets/images/intopia-logo.svg&quot; alt=&quot;&quot; aria-label=&quot;Intopia&quot; width=&quot;120&quot;&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>has-global-aria-attribute</code>, message key: none, data: <code>["aria-label"]</code>. Routes to: NEW-35, with [conflict] as "has the aria-label attribute".</p>
+</article><article class="case" id="a3" aria-labelledby="a3-title">
+  <h3 id="a3-title"><span class="case-id">A3</span> Layout table with aria-describedby</h3>
+  <p>Chrome shows a table again, so screen readers may announce rows and columns.</p>
+  <div class="example" data-case="a3" data-expected="fail">
+<table role="presentation" aria-describedby="a3-note">
+  <tr><td>Name</td><td>Alex</td></tr>
+</table>
+<p id="a3-note">Contact details.</p>
+  </div>
+  <pre><code class="language-html">&lt;table role=&quot;presentation&quot; aria-describedby=&quot;a3-note&quot;&gt;
+  &lt;tr&gt;&lt;td&gt;Name&lt;/td&gt;&lt;td&gt;Alex&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p id=&quot;a3-note&quot;&gt;Contact details.&lt;/p&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>has-global-aria-attribute</code>, message key: none, data: <code>["aria-describedby"]</code>. Routes to: NEW-35, with [conflict] as "has the aria-describedby attribute".</p>
+</article><article class="case" id="a4" aria-labelledby="a4-title">
+  <h3 id="a4-title"><span class="case-id">A4</span> Heading with role=&quot;none&quot; and aria-live</h3>
+  <div class="example" data-case="a4" data-expected="fail">
+<h4 role="none" aria-live="polite">Order status</h4>
+  </div>
+  <pre><code class="language-html">&lt;h4 role=&quot;none&quot; aria-live=&quot;polite&quot;&gt;Order status&lt;/h4&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>has-global-aria-attribute</code>, message key: none, data: <code>["aria-live"]</code>. Routes to: NEW-35, with [conflict] as "has the aria-live attribute".</p>
+</article><article class="case" id="a5" aria-labelledby="a5-title">
+  <h3 id="a5-title"><span class="case-id">A5</span> Navigation with role=&quot;none&quot; and aria-labelledby</h3>
+  <p>Chrome shows a navigation landmark called "Main".</p>
+  <div class="example" data-case="a5" data-expected="fail">
+<nav role="none" aria-labelledby="a5-label">
+  <span id="a5-label">Main</span>
+</nav>
+  </div>
+  <pre><code class="language-html">&lt;nav role=&quot;none&quot; aria-labelledby=&quot;a5-label&quot;&gt;
+  &lt;span id=&quot;a5-label&quot;&gt;Main&lt;/span&gt;
+&lt;/nav&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="note"><code>aria-prohibited-attr</code> also asks for review (<code>visibleLabelSingular</code>).</p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>has-global-aria-attribute</code>, message key: none, data: <code>["aria-labelledby"]</code>. Routes to: NEW-35, with [conflict] as "has the aria-labelledby attribute".</p>
+</article><article class="case" id="a6" aria-labelledby="a6-title">
+  <h3 id="a6-title"><span class="case-id">A6</span> Empty aria-label</h3>
+  <p>Even an empty <code>aria-label</code> is enough. Chrome shows a list with no name.</p>
+  <div class="example" data-case="a6" data-expected="fail">
+<ul role="none" aria-label="">
+  <li>Small</li>
+</ul>
+  </div>
+  <pre><code class="language-html">&lt;ul role=&quot;none&quot; aria-label=&quot;&quot;&gt;
+  &lt;li&gt;Small&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>has-global-aria-attribute</code>, message key: none, data: <code>["aria-label"]</code>. Routes to: NEW-35, with [conflict] as "has the aria-label attribute".</p>
+</article><article class="case" id="a7" aria-labelledby="a7-title">
+  <h3 id="a7-title"><span class="case-id">A7</span> aria-busy</h3>
+  <div class="example" data-case="a7" data-expected="fail">
+<ul role="none" aria-busy="true">
+  <li>Loading</li>
+</ul>
+  </div>
+  <pre><code class="language-html">&lt;ul role=&quot;none&quot; aria-busy=&quot;true&quot;&gt;
+  &lt;li&gt;Loading&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>has-global-aria-attribute</code>, message key: none, data: <code>["aria-busy"]</code>. Routes to: NEW-35, with [conflict] as "has the aria-busy attribute".</p>
+</article><article class="case" id="a8" aria-labelledby="a8-title">
+  <h3 id="a8-title"><span class="case-id">A8</span> aria-roledescription</h3>
+  <div class="example" data-case="a8" data-expected="fail">
+<ul role="none" aria-roledescription="slides">
+  <li>Slide one</li>
+</ul>
+  </div>
+  <pre><code class="language-html">&lt;ul role=&quot;none&quot; aria-roledescription=&quot;slides&quot;&gt;
+  &lt;li&gt;Slide one&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>has-global-aria-attribute</code>, message key: none, data: <code>["aria-roledescription"]</code>. Routes to: NEW-35, with [conflict] as "has the aria-roledescription attribute".</p>
+</article><article class="case" id="a9" aria-labelledby="a9-title">
+  <h3 id="a9-title"><span class="case-id">A9</span> SVG with role=&quot;none&quot; and aria-label</h3>
+  <div class="example" data-case="a9" data-expected="fail">
+<svg role="none" aria-label="Star" width="16" height="16" viewBox="0 0 16 16">
+  <circle cx="8" cy="8" r="6"></circle>
+</svg>
+  </div>
+  <pre><code class="language-html">&lt;svg role=&quot;none&quot; aria-label=&quot;Star&quot; width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot;&gt;
+  &lt;circle cx=&quot;8&quot; cy=&quot;8&quot; r=&quot;6&quot;&gt;&lt;/circle&gt;
+&lt;/svg&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="note"><code>aria-prohibited-attr</code> also fails this one.</p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>has-global-aria-attribute</code>, message key: none, data: <code>["aria-label"]</code>. Routes to: NEW-35, with [conflict] as "has the aria-label attribute".</p>
+</article>
+<!-- section -->
+
+<h2 id="focusable">Focusable</h2>
+
+<p>These fail through <code>is-element-focusable</code>. A keyboard user can reach the element, so the browser has to say what it is.</p>
+<article class="case" id="b1" aria-labelledby="b1-title">
+  <h3 id="b1-title"><span class="case-id">B1</span> Button with role=&quot;none&quot;</h3>
+  <p>Chrome still shows a button.</p>
+  <div class="example" data-case="b1" data-expected="fail">
+<button type="button" role="none">Save</button>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; role=&quot;none&quot;&gt;Save&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="note"><code>aria-allowed-role</code> also fails it, because <code>none</code> isn't allowed on a button.</p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>is-element-focusable</code>, message key: none, no data. Routes to: NEW-35, with [conflict] as "can receive focus".</p>
+</article><article class="case" id="b2" aria-labelledby="b2-title">
+  <h3 id="b2-title"><span class="case-id">B2</span> Link with role=&quot;presentation&quot;</h3>
+  <div class="example" data-case="b2" data-expected="fail">
+<a href="#b2" role="presentation">Home</a>
+  </div>
+  <pre><code class="language-html">&lt;a href=&quot;#b2&quot; role=&quot;presentation&quot;&gt;Home&lt;/a&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="note"><code>aria-allowed-role</code> also fails it.</p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>is-element-focusable</code>, message key: none, no data. Routes to: NEW-35, with [conflict] as "can receive focus".</p>
+</article><article class="case" id="b3" aria-labelledby="b3-title">
+  <h3 id="b3-title"><span class="case-id">B3</span> List with role=&quot;none&quot; and tabindex=&quot;-1&quot;</h3>
+  <p><code>tabindex="-1"</code> keeps it out of the Tab order, but it can still receive focus from a script, so it counts.</p>
+  <div class="example" data-case="b3" data-expected="fail">
+<ul role="none" tabindex="-1">
+  <li>Bold</li>
+</ul>
+  </div>
+  <pre><code class="language-html">&lt;ul role=&quot;none&quot; tabindex=&quot;-1&quot;&gt;
+  &lt;li&gt;Bold&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>is-element-focusable</code>, message key: none, no data. Routes to: NEW-35, with [conflict] as "can receive focus".</p>
+</article><article class="case" id="b4" aria-labelledby="b4-title">
+  <h3 id="b4-title"><span class="case-id">B4</span> Decorative image in the Tab order</h3>
+  <p>Chrome shows a focusable image with no name.</p>
+  <div class="example" data-case="b4" data-expected="fail">
+<img src="assets/images/intopia-logo.svg" alt="" tabindex="0" width="120">
+  </div>
+  <pre><code class="language-html">&lt;img src=&quot;assets/images/intopia-logo.svg&quot; alt=&quot;&quot; tabindex=&quot;0&quot; width=&quot;120&quot;&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>is-element-focusable</code>, message key: none, no data. Routes to: NEW-35, with [conflict] as "can receive focus".</p>
+</article>
+<!-- section -->
+
+<h2 id="both">Both at once</h2>
+
+<p>One result, with both checks listed.</p>
+<article class="case" id="c1" aria-labelledby="c1-title">
+  <h3 id="c1-title"><span class="case-id">C1</span> Text field with role=&quot;none&quot; and aria-label</h3>
+  <div class="example" data-case="c1" data-expected="fail">
+<input type="text" role="none" aria-label="Search">
+  </div>
+  <pre><code class="language-html">&lt;input type=&quot;text&quot; role=&quot;none&quot; aria-label=&quot;Search&quot;&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="note">Also fails <code>aria-allowed-role</code> and <code>aria-prohibited-attr</code>.</p>
+  <p class="route"><strong>Template routing:</strong> Checks: <code>is-element-focusable</code> and <code>has-global-aria-attribute</code>, data: <code>["aria-label"]</code>. Routes to: NEW-35, with [conflict] as "can receive focus and has the aria-label attribute".</p>
+</article><article class="case" id="c2" aria-labelledby="c2-title">
+  <h3 id="c2-title"><span class="case-id">C2</span> Button with role=&quot;none&quot; and aria-label</h3>
+  <div class="example" data-case="c2" data-expected="fail">
+<button type="button" role="none" aria-label="Close">X</button>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; role=&quot;none&quot; aria-label=&quot;Close&quot;&gt;X&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="note">Also fails <code>aria-allowed-role</code>, and asks for review from <code>aria-prohibited-attr</code> and <code>label-content-name-mismatch</code>.</p>
+  <p class="route"><strong>Template routing:</strong> Checks: <code>is-element-focusable</code> and <code>has-global-aria-attribute</code>, data: <code>["aria-label"]</code>. Routes to: NEW-35, with [conflict] as "can receive focus and has the aria-label attribute".</p>
+</article>
+<!-- section -->
+
+<h2 id="arguable">Fails, but Chrome still ignores the element</h2>
+
+<p>Axe counts these attributes as global, but ARIA 1.2 no longer does (or, for <code>aria-hidden="false"</code>, there's nothing to conflict). Chrome honours <code>role="none"</code> and leaves these lists out of the accessibility tree. These are arguably false alarms.</p>
+<article class="case" id="d1" aria-labelledby="d1-title">
+  <h3 id="d1-title"><span class="case-id">D1</span> aria-disabled</h3>
+  <div class="example" data-case="d1" data-expected="fail">
+<ul role="none" aria-disabled="true">
+  <li>Option</li>
+</ul>
+  </div>
+  <pre><code class="language-html">&lt;ul role=&quot;none&quot; aria-disabled=&quot;true&quot;&gt;
+  &lt;li&gt;Option&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>has-global-aria-attribute</code>, message key: none, data: <code>["aria-disabled"]</code>. Routes to: NEW-35, with [conflict] as "has the aria-disabled attribute".</p>
+</article><article class="case" id="d2" aria-labelledby="d2-title">
+  <h3 id="d2-title"><span class="case-id">D2</span> aria-invalid</h3>
+  <div class="example" data-case="d2" data-expected="fail">
+<ul role="none" aria-invalid="true">
+  <li>Option</li>
+</ul>
+  </div>
+  <pre><code class="language-html">&lt;ul role=&quot;none&quot; aria-invalid=&quot;true&quot;&gt;
+  &lt;li&gt;Option&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>has-global-aria-attribute</code>, message key: none, data: <code>["aria-invalid"]</code>. Routes to: NEW-35, with [conflict] as "has the aria-invalid attribute".</p>
+</article><article class="case" id="d3" aria-labelledby="d3-title">
+  <h3 id="d3-title"><span class="case-id">D3</span> aria-haspopup</h3>
+  <div class="example" data-case="d3" data-expected="fail">
+<ul role="none" aria-haspopup="true">
+  <li>Option</li>
+</ul>
+  </div>
+  <pre><code class="language-html">&lt;ul role=&quot;none&quot; aria-haspopup=&quot;true&quot;&gt;
+  &lt;li&gt;Option&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>has-global-aria-attribute</code>, message key: none, data: <code>["aria-haspopup"]</code>. Routes to: NEW-35, with [conflict] as "has the aria-haspopup attribute".</p>
+</article><article class="case" id="d4" aria-labelledby="d4-title">
+  <h3 id="d4-title"><span class="case-id">D4</span> aria-hidden=&quot;false&quot;</h3>
+  <div class="example" data-case="d4" data-expected="fail">
+<ul role="none" aria-hidden="false">
+  <li>Option</li>
+</ul>
+  </div>
+  <pre><code class="language-html">&lt;ul role=&quot;none&quot; aria-hidden=&quot;false&quot;&gt;
+  &lt;li&gt;Option&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>has-global-aria-attribute</code>, message key: none, data: <code>["aria-hidden"]</code>. Routes to: NEW-35, with [conflict] as "has the aria-hidden attribute".</p>
+</article>
+<!-- section -->
+
+<h2 id="passing">Ways to pass</h2>
+
+<p>Control cases.</p>
+<article class="case" id="e1" aria-labelledby="e1-title">
+  <h3 id="e1-title"><span class="case-id">E1</span> Decorative image</h3>
+  <div class="example" data-case="e1" data-expected="pass">
+<img src="assets/images/intopia-logo.svg" alt="" width="120">
+  </div>
+  <pre><code class="language-html">&lt;img src=&quot;assets/images/intopia-logo.svg&quot; alt=&quot;&quot; width=&quot;120&quot;&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e2" aria-labelledby="e2-title">
+  <h3 id="e2-title"><span class="case-id">E2</span> List with role=&quot;none&quot; and only non-ARIA attributes</h3>
+  <p><code>class</code>, <code>title</code> and <code>data-</code> attributes don't count.</p>
+  <div class="example" data-case="e2" data-expected="pass">
+<ul role="none" class="plain" title="Styles" data-group="text">
+  <li>Bold</li>
+</ul>
+  </div>
+  <pre><code class="language-html">&lt;ul role=&quot;none&quot; class=&quot;plain&quot; title=&quot;Styles&quot; data-group=&quot;text&quot;&gt;
+  &lt;li&gt;Bold&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e3" aria-labelledby="e3-title">
+  <h3 id="e3-title"><span class="case-id">E3</span> Layout table with role=&quot;presentation&quot;</h3>
+  <div class="example" data-case="e3" data-expected="pass">
+<table role="presentation">
+  <tr><td>Name</td><td>Alex</td></tr>
+</table>
+  </div>
+  <pre><code class="language-html">&lt;table role=&quot;presentation&quot;&gt;
+  &lt;tr&gt;&lt;td&gt;Name&lt;/td&gt;&lt;td&gt;Alex&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e4" aria-labelledby="e4-title">
+  <h3 id="e4-title"><span class="case-id">E4</span> Hidden list with a conflict</h3>
+  <p>Axe doesn't test hidden elements, and there's nothing for users to find.</p>
+  <div class="example" data-case="e4" data-expected="pass">
+<ul role="none" aria-label="Styles" hidden>
+  <li>Bold</li>
+</ul>
+  </div>
+  <pre><code class="language-html">&lt;ul role=&quot;none&quot; aria-label=&quot;Styles&quot; hidden&gt;
+  &lt;li&gt;Bold&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article>
+<!-- section -->
+
+<h2 id="missed">Not caught by this rule</h2>
+
+<p></p>
+<article class="case" id="f1" aria-labelledby="f1-title">
+  <h3 id="f1-title"><span class="case-id">F1</span> role=&quot;None&quot; in capitals</h3>
+  <p>The rule only checks a role attribute that is exactly <code>none</code>. Chrome still shows a list called "Styles". The conflict is only hinted at by a needs review from <code>aria-prohibited-attr</code>.</p>
+  <div class="example" data-case="f1" data-expected="other" data-other="aria-prohibited-attr">
+<ul role="None" aria-label="Styles">
+  <li>Bold</li>
+</ul>
+  </div>
+  <pre><code class="language-html">&lt;ul role=&quot;None&quot; aria-label=&quot;Styles&quot;&gt;
+  &lt;li&gt;Bold&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-prohibited-attr</code> instead</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: <code>hasRoleSingular</code>. Routes to: NEW-44, not NEW-35.</p>
+</article><article class="case" id="f2" aria-labelledby="f2-title">
+  <h3 id="f2-title"><span class="case-id">F2</span> role=&quot;none &quot; with a trailing space</h3>
+  <p>Same again.</p>
+  <div class="example" data-case="f2" data-expected="other" data-other="aria-prohibited-attr">
+<ul role="none " aria-label="Styles">
+  <li>Bold</li>
+</ul>
+  </div>
+  <pre><code class="language-html">&lt;ul role=&quot;none &quot; aria-label=&quot;Styles&quot;&gt;
+  &lt;li&gt;Bold&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-prohibited-attr</code> instead</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: <code>hasRoleSingular</code>. Routes to: NEW-44, not NEW-35.</p>
+</article><article class="case" id="f3" aria-labelledby="f3-title">
+  <h3 id="f3-title"><span class="case-id">F3</span> role=&quot;none presentation&quot;</h3>
+  <p>A fallback list of both roles, sometimes used for older browsers. Not checked, and Chrome still shows a list.</p>
+  <div class="example" data-case="f3" data-expected="other" data-other="aria-prohibited-attr">
+<ul role="none presentation" aria-label="Styles">
+  <li>Bold</li>
+</ul>
+  </div>
+  <pre><code class="language-html">&lt;ul role=&quot;none presentation&quot; aria-label=&quot;Styles&quot;&gt;
+  &lt;li&gt;Bold&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-prohibited-attr</code> instead</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: <code>hasRoleSingular</code>. Routes to: NEW-44, not NEW-35.</p>
+</article><article class="case" id="f4" aria-labelledby="f4-title">
+  <h3 id="f4-title"><span class="case-id">F4</span> Button with role=&quot;presentation none&quot;</h3>
+  <p>Not checked by this rule. <code>aria-allowed-role</code> fails it instead.</p>
+  <div class="example" data-case="f4" data-expected="other" data-other="aria-allowed-role">
+<button type="button" role="presentation none">Go</button>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; role=&quot;presentation none&quot;&gt;Go&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-allowed-role</code> instead</span></p>
+  <p class="route"><strong>Template routing:</strong> Routes to: NEW-31, not NEW-35.</p>
+</article><article class="case" id="f5" aria-labelledby="f5-title">
+  <h3 id="f5-title"><span class="case-id">F5</span> Paragraph with role=&quot;none&quot; and aria-label</h3>
+  <p>Axe doesn't treat <code>&lt;p&gt;</code> as having a role to keep, so it skips it. Chrome shows a paragraph called "Opening hours".</p>
+  <div class="example" data-case="f5" data-expected="other" data-other="aria-prohibited-attr">
+<p role="none" aria-label="Opening hours">Monday to Friday, 9 to 5.</p>
+  </div>
+  <pre><code class="language-html">&lt;p role=&quot;none&quot; aria-label=&quot;Opening hours&quot;&gt;Monday to Friday, 9 to 5.&lt;/p&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-prohibited-attr</code> instead</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: <code>noRoleSingular</code>. Routes to: NEW-44, not NEW-35.</p>
+</article><article class="case" id="f6" aria-labelledby="f6-title">
+  <h3 id="f6-title"><span class="case-id">F6</span> Misspelled aria-labeledby</h3>
+  <p>Chrome accepts the misspelling <code>aria-labeledby</code>, so it cancels <code>role="none"</code> and Chrome shows a list. Axe doesn't know the attribute, so this rule passes. <code>aria-valid-attr</code> flags the spelling.</p>
+  <div class="example" data-case="f6" data-expected="other" data-other="aria-valid-attr">
+<ul role="none" aria-labeledby="f6-label">
+  <li>Bold</li>
+</ul>
+<span id="f6-label">Styles</span>
+  </div>
+  <pre><code class="language-html">&lt;ul role=&quot;none&quot; aria-labeledby=&quot;f6-label&quot;&gt;
+  &lt;li&gt;Bold&lt;/li&gt;
+&lt;/ul&gt;
+&lt;span id=&quot;f6-label&quot;&gt;Styles&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-valid-attr</code> instead</span></p>
+  <p class="route"><strong>Template routing:</strong> Routes to: NEW-26, not NEW-35.</p>
+</article><article class="case" id="f7" aria-labelledby="f7-title">
+  <h3 id="f7-title"><span class="case-id">F7</span> Focusable div with role=&quot;none&quot;</h3>
+  <p>A div has no role to keep, so the rule skips it. Chrome shows a focusable element with no role and no name, and nothing flags it.</p>
+  <div class="example" data-case="f7" data-expected="miss">
+<div role="none" tabindex="0">Next</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;none&quot; tabindex=&quot;0&quot;&gt;Next&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+</article>
+<!-- section -->
+
+<h2 id="dynamic">Changes after interaction</h2>
+
+<p>Axe only sees the page as it is when you run it. These pass on page load. Activate each button, then run axe again.</p>
+<article class="case" id="g1" aria-labelledby="g1-title">
+  <h3 id="g1-title"><span class="case-id">G1</span> Description added to a layout table</h3>
+  <p>On load, the layout table is fine. The button adds <code>aria-describedby</code>, which turns it back into a table.</p>
+  <div class="example" data-case="g1" data-expected="dynamic">
+<button type="button" id="g1-button">Add description</button>
+<table role="presentation" id="g1-table">
+  <tr><td>Total</td><td>$40</td></tr>
+</table>
+<p id="g1-note">Includes delivery.</p>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; id=&quot;g1-button&quot;&gt;Add description&lt;/button&gt;
+&lt;table role=&quot;presentation&quot; id=&quot;g1-table&quot;&gt;
+  &lt;tr&gt;&lt;td&gt;Total&lt;/td&gt;&lt;td&gt;$40&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p id=&quot;g1-note&quot;&gt;Includes delivery.&lt;/p&gt;</code></pre>
+  <p class="result"><span class="badge dynamic">On load: pass. After clicking: fail</span></p>
+  <p class="note">After clicking, it routes to NEW-35 with data <code>["aria-describedby"]</code>.</p>
+</article><article class="case" id="g2" aria-labelledby="g2-title">
+  <h3 id="g2-title"><span class="case-id">G2</span> Decorative image made focusable</h3>
+  <p>On load, the image is decorative. The button adds <code>tabindex="0"</code>, as a carousel script might.</p>
+  <div class="example" data-case="g2" data-expected="dynamic">
+<button type="button" id="g2-button">Make focusable</button>
+<img src="assets/images/intopia-logo.svg" alt="" id="g2-img" width="120">
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; id=&quot;g2-button&quot;&gt;Make focusable&lt;/button&gt;
+&lt;img src=&quot;assets/images/intopia-logo.svg&quot; alt=&quot;&quot; id=&quot;g2-img&quot; width=&quot;120&quot;&gt;</code></pre>
+  <p class="result"><span class="badge dynamic">On load: pass. After clicking: fail</span></p>
+  <p class="note">After clicking, it routes to NEW-35 with [conflict] as "can receive focus".</p>
+</article>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+<script>
+  // G1: add a description to the layout table
+  document.getElementById('g1-button').addEventListener('click', function () {
+    document.getElementById('g1-table').setAttribute('aria-describedby', 'g1-note');
+  });
+
+  // G2: make the decorative image focusable
+  document.getElementById('g2-button').addEventListener('click', function () {
+    document.getElementById('g2-img').setAttribute('tabindex', '0');
+  });
+</script>
+</body>
+</html>
