@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<title>axe report: Testing the axe rule aria-hidden-focus</title>
+<style>
+  body { font-family: system-ui, sans-serif; line-height: 1.5; margin: 2rem; color: #1d1d1f; }
+  table { border-collapse: collapse; width: 100%; margin-bottom: 2rem; }
+  th, td { border: 1px solid #ccc; padding: .4rem .6rem; text-align: left; vertical-align: top; }
+  th { background: #f2f2f2; }
+  code { font-size: .85rem; word-break: break-word; }
+  h2 { border-top: 3px solid #1d1d1f; padding-top: 1rem; margin-top: 2.5rem; }
+</style></head><body>
+<h1>axe report</h1>
+<ul>
+  <li>Page: <a href="https://intopia.github.io/exercise/testing-axe-rule-aria-hidden-focus.html">Testing the axe rule aria-hidden-focus</a></li>
+  <li>Run: 21/11/2026, 20:04:15</li>
+  <li>axe-core 4.14.0</li>
+  <li>Rules passed: 37. Rules not applicable: 53.</li>
+</ul>
+<h2>Fails (8)</h2><h3>aria-hidden-focus: ARIA hidden element must not be focusable or contain focusable elements (8)</h3>
+        <p>Impact: serious. <a href="https://dequeuniversity.com/rules/axe/4.14/aria-hidden-focus?application=axeAPI">Rule details on Deque University</a></p>
+        <table><thead><tr><th scope="col">#</th><th scope="col">Element</th><th scope="col">Selector</th><th scope="col">Problem</th></tr></thead><tbody><tr><td>1</td><td><code>&lt;ul class=&quot;menu&quot; aria-hidden=&quot;true&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#a1&quot;&gt;My orders&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></td><td><code>.menu</code></td><td>Focusable content should have tabindex=&quot;-1&quot;, be removed from the DOM, or not be hidden with aria-hidden</td></tr><tr><td>2</td><td><code>&lt;div aria-hidden=&quot;true&quot;&gt;
+  &lt;div tabindex=&quot;0&quot;&gt;Product card&lt;/div&gt;
+&lt;/div&gt;</code></td><td><code>div[data-case=&quot;a2&quot;] &gt; div[aria-hidden=&quot;true&quot;]</code></td><td>Focusable content should have tabindex=&quot;-1&quot;, be removed from the DOM, or not be hidden with aria-hidden</td></tr><tr><td>3</td><td><code>&lt;div aria-hidden=&quot;true&quot;&gt;
+  &lt;details&gt;
+    &lt;summary&gt;Show delivery options&lt;/summary&gt;
+    Standard or express.
+  &lt;/details&gt;
+&lt;/div&gt;</code></td><td><code>div[data-case=&quot;a3&quot;] &gt; div[aria-hidden=&quot;true&quot;]</code></td><td>Focusable content should have tabindex=&quot;-1&quot;, be removed from the DOM, or not be hidden with aria-hidden</td></tr><tr><td>4</td><td><code>&lt;div aria-hidden=&quot;true&quot;&gt;
+  &lt;a href=&quot;#a4&quot; style=&quot;position: absolute; left: -9999px;&quot;&gt;Skip to content&lt;/a&gt;
+&lt;/div&gt;</code></td><td><code>div[data-case=&quot;a4&quot;] &gt; div[aria-hidden=&quot;true&quot;]</code></td><td>Focusable content should have tabindex=&quot;-1&quot;, be removed from the DOM, or not be hidden with aria-hidden</td></tr><tr><td>5</td><td><code>&lt;div aria-hidden=&quot;true&quot;&gt;
+  &lt;div aria-hidden=&quot;true&quot;&gt;
+    &lt;a href=&quot;#a5&quot;&gt;Account&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></td><td><code>div[data-case=&quot;a5&quot;] &gt; div[aria-hidden=&quot;true&quot;]</code></td><td>Focusable content should have tabindex=&quot;-1&quot;, be removed from the DOM, or not be hidden with aria-hidden</td></tr><tr><td>6</td><td><code>&lt;div aria-hidden=&quot;true&quot;&gt;
+  &lt;button type=&quot;button&quot;&gt;Close&lt;/button&gt;
+&lt;/div&gt;</code></td><td><code>div[data-case=&quot;b1&quot;] &gt; div[aria-hidden=&quot;true&quot;]</code></td><td>Focusable content should be disabled, be removed from the DOM, or not be hidden with aria-hidden</td></tr><tr><td>7</td><td><code>&lt;button type=&quot;button&quot; aria-hidden=&quot;true&quot;&gt;Add to cart&lt;/button&gt;</code></td><td><code>div[data-case=&quot;b2&quot;] &gt; button</code></td><td>Focusable content should be disabled, be removed from the DOM, or not be hidden with aria-hidden</td></tr><tr><td>8</td><td><code>&lt;div aria-hidden=&quot;true&quot;&gt;
+  &lt;input type=&quot;text&quot; aria-label=&quot;Order number&quot; value=&quot;1042&quot; readonly=&quot;&quot;&gt;
+&lt;/div&gt;</code></td><td><code>div[data-case=&quot;b3&quot;] &gt; div[aria-hidden=&quot;true&quot;]</code></td><td>Focusable content should be disabled, be removed from the DOM, or not be hidden with aria-hidden</td></tr></tbody></table>
+<h2>Needs review (2)</h2><h3>aria-hidden-focus: ARIA hidden element must not be focusable or contain focusable elements (2)</h3>
+        <p>Impact: serious. <a href="https://dequeuniversity.com/rules/axe/4.14/aria-hidden-focus?application=axeAPI">Rule details on Deque University</a></p>
+        <table><thead><tr><th scope="col">#</th><th scope="col">Element</th><th scope="col">Selector</th><th scope="col">Problem</th></tr></thead><tbody><tr><td>1</td><td><code>&lt;div aria-hidden=&quot;true&quot;&gt;
+  &lt;a href=&quot;#c1&quot; onfocus=&quot;void 0&quot;&gt;Back to top&lt;/a&gt;
+&lt;/div&gt;</code></td><td><code>div[data-case=&quot;c1&quot;] &gt; div[aria-hidden=&quot;true&quot;]</code></td><td>Check if the focusable elements immediately move the focus indicator</td></tr><tr><td>2</td><td><code>&lt;div aria-hidden=&quot;true&quot;&gt;
+  &lt;button type=&quot;button&quot; style=&quot;width: 0; height: 0; padding: 0; border: 0; pointer-events: none;&quot;&gt;&lt;/button&gt;
+&lt;/div&gt;</code></td><td><code>div[data-case=&quot;c2&quot;] &gt; div[aria-hidden=&quot;true&quot;]</code></td><td>Check if the focusable elements immediately move the focus indicator</td></tr></tbody></table>
+</body></html>

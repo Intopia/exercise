@@ -1,0 +1,32 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<title>axe report: Testing the axe rule aria-text</title>
+<style>
+  body { font-family: system-ui, sans-serif; line-height: 1.5; margin: 2rem; color: #1d1d1f; }
+  table { border-collapse: collapse; width: 100%; margin-bottom: 2rem; }
+  th, td { border: 1px solid #ccc; padding: .4rem .6rem; text-align: left; vertical-align: top; }
+  th { background: #f2f2f2; }
+  code { font-size: .85rem; word-break: break-word; }
+  h2 { border-top: 3px solid #1d1d1f; padding-top: 1rem; margin-top: 2.5rem; }
+</style></head><body>
+<h1>axe report</h1>
+<ul>
+  <li>Page: <a href="https://intopia.github.io/exercise/testing-axe-rule-aria-text.html">Testing the axe rule aria-text</a></li>
+  <li>Run: 21/11/2026, 20:03:31</li>
+  <li>axe-core 4.14.0</li>
+  <li>Rules passed: 49. Rules not applicable: 41.</li>
+</ul>
+<h2>Fails (12)</h2><h3>aria-allowed-role: ARIA role should be appropriate for the element (2)</h3>
+        <p>Impact: minor. <a href="https://dequeuniversity.com/rules/axe/4.14/aria-allowed-role?application=axeAPI">Rule details on Deque University</a></p>
+        <table><thead><tr><th scope="col">#</th><th scope="col">Element</th><th scope="col">Selector</th><th scope="col">Problem</th></tr></thead><tbody><tr><td>1</td><td><code>&lt;a href=&quot;#e1&quot; role=&quot;text&quot;&gt;Now &lt;span&gt;$24.99&lt;/span&gt;&lt;/a&gt;</code></td><td><code>a[href$=&quot;#e1&quot;]</code></td><td>ARIA role text is not allowed for given element</td></tr><tr><td>2</td><td><code>&lt;button type=&quot;button&quot; role=&quot;text&quot;&gt;Buy &lt;span&gt;$24.99&lt;/span&gt;&lt;/button&gt;</code></td><td><code>div[data-case=&quot;e2&quot;] &gt; button</code></td><td>ARIA role text is not allowed for given element</td></tr></tbody></table><h3>aria-text: &quot;role=text&quot; should have no focusable descendants (10)</h3>
+        <p>Impact: serious. <a href="https://dequeuniversity.com/rules/axe/4.14/aria-text?application=axeAPI">Rule details on Deque University</a></p>
+        <table><thead><tr><th scope="col">#</th><th scope="col">Element</th><th scope="col">Selector</th><th scope="col">Problem</th></tr></thead><tbody><tr><td>1</td><td><code>&lt;span role=&quot;text&quot;&gt;$24.99 per month. &lt;a href=&quot;#a1&quot;&gt;See all prices&lt;/a&gt;&lt;/span&gt;</code></td><td><code>div[data-case=&quot;a1&quot;] &gt; span[role=&quot;text&quot;]</code></td><td>Element has focusable descendants. Move them outside of the element, or remove them.</td></tr><tr><td>2</td><td><code>&lt;span role=&quot;text&quot;&gt;Your basket is empty. &lt;button type=&quot;button&quot;&gt;Browse products&lt;/button&gt;&lt;/span&gt;</code></td><td><code>div[data-case=&quot;a2&quot;] &gt; span[role=&quot;text&quot;]</code></td><td>Element has focusable descendants. Move them outside of the element, or remove them.</td></tr><tr><td>3</td><td><code>&lt;span role=&quot;text&quot;&gt;Postcode: &lt;input type=&quot;text&quot; aria-label=&quot;Postcode&quot;&gt;&lt;/span&gt;</code></td><td><code>div[data-case=&quot;a3&quot;] &gt; span[role=&quot;text&quot;]</code></td><td>Element has focusable descendants. Move them outside of the element, or remove them.</td></tr><tr><td>4</td><td><code>&lt;span role=&quot;text&quot;&gt;&lt;input type=&quot;checkbox&quot; id=&quot;a4-input&quot;&gt; &lt;label for=&quot;a4-input&quot;&gt;Email me updates&lt;/label&gt;&lt;/span&gt;</code></td><td><code>div[data-case=&quot;a4&quot;] &gt; span[role=&quot;text&quot;]</code></td><td>Element has focusable descendants. Move them outside of the element, or remove them.</td></tr><tr><td>5</td><td><code>&lt;span role=&quot;text&quot;&gt;Sort by &lt;select aria-label=&quot;Sort by&quot;&gt;&lt;option&gt;Price&lt;/option&gt;&lt;option&gt;Name&lt;/option&gt;&lt;/select&gt;&lt;/span&gt;</code></td><td><code>div[data-case=&quot;a5&quot;] &gt; span[role=&quot;text&quot;]</code></td><td>Element has focusable descendants. Move them outside of the element, or remove them.</td></tr><tr><td>6</td><td><code>&lt;div role=&quot;text&quot;&gt;
+  &lt;details&gt;
+    &lt;summary&gt;Delivery options&lt;/summary&gt;
+    Standard or express.
+  &lt;/details&gt;
+&lt;/div&gt;</code></td><td><code>div[role=&quot;text&quot;]</code></td><td>Element has focusable descendants. Move them outside of the element, or remove them.</td></tr><tr><td>7</td><td><code>&lt;span role=&quot;text&quot;&gt;Save for later &lt;span role=&quot;button&quot; tabindex=&quot;0&quot;&gt;Save&lt;/span&gt;&lt;/span&gt;</code></td><td><code>div[data-case=&quot;a7&quot;] &gt; span[role=&quot;text&quot;]</code></td><td>Element has focusable descendants. Move them outside of the element, or remove them.</td></tr><tr><td>8</td><td><code>&lt;span role=&quot;text&quot;&gt;
+  Terms apply.
+  &lt;span class=&quot;small&quot;&gt;&lt;span class=&quot;link-wrap&quot;&gt;&lt;a href=&quot;#a8&quot;&gt;Read the terms&lt;/a&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/span&gt;</code></td><td><code>div[data-case=&quot;a8&quot;] &gt; span[role=&quot;text&quot;]</code></td><td>Element has focusable descendants. Move them outside of the element, or remove them.</td></tr><tr><td>9</td><td><code>&lt;span role=&quot;text&quot;&gt;$19.99 per month. &lt;a href=&quot;#b1&quot; tabindex=&quot;-1&quot;&gt;See all prices&lt;/a&gt;&lt;/span&gt;</code></td><td><code>div[data-case=&quot;b1&quot;] &gt; span[role=&quot;text&quot;]</code></td><td>Using a negative tabindex on an element inside an interactive control does not prevent assistive technologies from focusing the element (even with aria-hidden=&quot;true&quot;)</td></tr><tr><td>10</td><td><code>&lt;span role=&quot;text&quot;&gt;Out of stock. &lt;button type=&quot;button&quot; tabindex=&quot;-1&quot;&gt;Notify me&lt;/button&gt;&lt;/span&gt;</code></td><td><code>div[data-case=&quot;b2&quot;] &gt; span[role=&quot;text&quot;]</code></td><td>Using a negative tabindex on an element inside an interactive control does not prevent assistive technologies from focusing the element (even with aria-hidden=&quot;true&quot;)</td></tr></tbody></table>
+<h2>Needs review (0)</h2><p>None.</p>
+</body></html>

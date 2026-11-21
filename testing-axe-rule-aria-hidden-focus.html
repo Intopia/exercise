@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the axe rule aria-hidden-focus</title>
+  <meta name="description" content="Test cases for the axe-core rule aria-hidden-focus, showing what axe catches and what it misses.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <style>
+  .case { border: 1px solid #c8c8cc; border-radius: 6px; padding: 1rem 1.25rem; margin: 1.25rem 0; }
+  .case h3 { margin-top: 0; }
+  .case-id { display: inline-block; font-size: .8rem; font-weight: 700; background: #1d1d1f; color: #fff; padding: .1rem .45rem; border-radius: 3px; margin-right: .4rem; vertical-align: middle; }
+  .example { border: 1px dashed #a0a0a8; padding: .75rem 1rem; margin: .75rem 0; }
+  .example p { margin: .25rem 0; }
+  .badge { display: inline-block; font-weight: 600; font-size: .875rem; padding: .2rem .6rem; border-radius: 3px; border: 2px solid; }
+  .badge.fail { background: #fde8e8; border-color: #b3261e; color: #8a1c16; }
+  .badge.review { background: #fff4d6; border-color: #8a6100; color: #5e4200; }
+  .badge.other { background: #e0f4f4; border-color: #0b6b6b; color: #084f4f; }
+  .badge.miss { background: #ece6fb; border-color: #5b3cc4; color: #432a99; }
+  .badge.pass { background: #e3f4e8; border-color: #1e7b3a; color: #155c2b; }
+  .badge.dynamic { background: #e8eef9; border-color: #1a4f9c; color: #133b75; }
+  .note { font-size: .9375rem; }
+  .route { font-size: .875rem; border-left: 3px solid #a0a0a8; padding-left: .6rem; }
+</style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo. The word 'intopia' in black, with the 'o' made from four curved brush strokes in pink, orange, yellow and turquoise." class="intopia-logo">
+  </picture>
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing the axe rule <code>aria-hidden-focus</code></h1>
+
+<p>Test cases for the axe-core rule <a href="https://dequeuniversity.com/rules/axe/4.14/aria-hidden-focus"><code>aria-hidden-focus</code></a> (axe-core 4.14). <code>aria-hidden="true"</code> hides content from screen readers. If something inside it can still be reached with the Tab key, keyboard users land on something a screen reader won't announce.</p>
+
+<p>The rule only counts content in the Tab order. It runs three checks:</p>
+
+<ul>
+  <li><code>focusable-disabled</code>: buttons and form controls that can still be reached with Tab.</li>
+  <li><code>focusable-not-tabbable</code>: links and anything else that can still be reached with Tab.</li>
+  <li><code>focusable-modal-open</code>: if a dialog is open anywhere on the page, every failure from this rule becomes needs review instead. See G2.</li>
+</ul>
+
+<p>The rule only tests the outermost element with <code>aria-hidden="true"</code>. <code>aria-hidden</code> on the <code>&lt;body&gt;</code> is checked by a different rule, <code>aria-hidden-body</code>.</p>
+
+<p>Results on this page were checked in Chrome.</p>
+
+<p class="report-link"><strong>axe-core results:</strong> <a href="x-axe-core-rules/07-axe-report-aria-hidden-focus.html">See the HTML report from running axe-core 4.14.0 over this page</a>.</p>
+
+<p>Every example is live in the page, so you can run the axe extension straight over it. The expected results were checked by running axe-core 4.14.1 over this page. Look in both the axe <strong>issues</strong> list and the <strong>needs review</strong> list.</p>
+
+<table>
+  <caption>Number of test cases by expected result</caption>
+  <thead><tr><th scope="col">Expected result</th><th scope="col">Cases</th></tr></thead>
+  <tbody>
+      <tr><td>Fail</td><td>8</td></tr>
+      <tr><td>Needs review</td><td>2</td></tr>
+      <tr><td>Passes, but broken (axe misses it)</td><td>5</td></tr>
+      <tr><td>Pass (valid control cases)</td><td>7</td></tr>
+      <tr><td>Changes after interaction</td><td>2</td></tr>
+  </tbody>
+</table>
+
+<h2 id="sections">Sections</h2>
+
+<ul>
+  <li><a href="#not-tabbable">Links and other content that can still be reached</a></li>
+  <li><a href="#disabled">Buttons and form controls that can still be reached</a></li>
+  <li><a href="#review">Needs review</a></li>
+  <li><a href="#missed">Can still be reached, but axe passes it</a></li>
+  <li><a href="#passing">Ways to pass</a></li>
+  <li><a href="#dynamic">Changes after interaction</a></li>
+</ul>
+
+<!-- section -->
+
+<h2 id="not-tabbable">Links and other content that can still be reached</h2>
+
+<p>These fail with "Focusable content should have tabindex="-1", be removed from the DOM, or not be hidden with aria-hidden".</p>
+<article class="case" id="a1" aria-labelledby="a1-title">
+  <h3 id="a1-title"><span class="case-id">A1</span> A link inside aria-hidden</h3>
+  <p>A closed menu hidden with <code>aria-hidden</code>, but its link still in the Tab order.</p>
+  <div class="example" data-case="a1" data-expected="fail">
+<ul class="menu" aria-hidden="true">
+  <li><a href="#a1">My orders</a></li>
+</ul>
+  </div>
+  <pre><code class="language-html">&lt;ul class=&quot;menu&quot; aria-hidden=&quot;true&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#a1&quot;&gt;My orders&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>focusable-not-tabbable</code>. Routes to: NEW-48.</p>
+</article><article class="case" id="a2" aria-labelledby="a2-title">
+  <h3 id="a2-title"><span class="case-id">A2</span> A div with tabindex=&quot;0&quot;</h3>
+  <div class="example" data-case="a2" data-expected="fail">
+<div aria-hidden="true">
+  <div tabindex="0">Product card</div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-hidden=&quot;true&quot;&gt;
+  &lt;div tabindex=&quot;0&quot;&gt;Product card&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>focusable-not-tabbable</code>. Routes to: NEW-48.</p>
+</article><article class="case" id="a3" aria-labelledby="a3-title">
+  <h3 id="a3-title"><span class="case-id">A3</span> A summary element</h3>
+  <div class="example" data-case="a3" data-expected="fail">
+<div aria-hidden="true">
+  <details>
+    <summary>Show delivery options</summary>
+    Standard or express.
+  </details>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-hidden=&quot;true&quot;&gt;
+  &lt;details&gt;
+    &lt;summary&gt;Show delivery options&lt;/summary&gt;
+    Standard or express.
+  &lt;/details&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>focusable-not-tabbable</code>. Routes to: NEW-48.</p>
+</article><article class="case" id="a4" aria-labelledby="a4-title">
+  <h3 id="a4-title"><span class="case-id">A4</span> An off-screen link</h3>
+  <p>Moving a link off screen doesn't take it out of the Tab order.</p>
+  <div class="example" data-case="a4" data-expected="fail">
+<div aria-hidden="true">
+  <a href="#a4" style="position: absolute; left: -9999px;">Skip to content</a>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-hidden=&quot;true&quot;&gt;
+  &lt;a href=&quot;#a4&quot; style=&quot;position: absolute; left: -9999px;&quot;&gt;Skip to content&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>focusable-not-tabbable</code>. Routes to: NEW-48.</p>
+</article><article class="case" id="a5" aria-labelledby="a5-title">
+  <h3 id="a5-title"><span class="case-id">A5</span> Nested aria-hidden</h3>
+  <p>Only the outer element is tested, but the link still fails.</p>
+  <div class="example" data-case="a5" data-expected="fail">
+<div aria-hidden="true">
+  <div aria-hidden="true">
+    <a href="#a5">Account</a>
+  </div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-hidden=&quot;true&quot;&gt;
+  &lt;div aria-hidden=&quot;true&quot;&gt;
+    &lt;a href=&quot;#a5&quot;&gt;Account&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>focusable-not-tabbable</code>. Routes to: NEW-48.</p>
+</article>
+<!-- section -->
+
+<h2 id="disabled">Buttons and form controls that can still be reached</h2>
+
+<p>These fail with "Focusable content should be disabled, be removed from the DOM, or not be hidden with aria-hidden".</p>
+<article class="case" id="b1" aria-labelledby="b1-title">
+  <h3 id="b1-title"><span class="case-id">B1</span> A button inside aria-hidden</h3>
+  <div class="example" data-case="b1" data-expected="fail">
+<div aria-hidden="true">
+  <button type="button">Close</button>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-hidden=&quot;true&quot;&gt;
+  &lt;button type=&quot;button&quot;&gt;Close&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>focusable-disabled</code>. Routes to: NEW-48.</p>
+</article><article class="case" id="b2" aria-labelledby="b2-title">
+  <h3 id="b2-title"><span class="case-id">B2</span> A button that is itself aria-hidden</h3>
+  <div class="example" data-case="b2" data-expected="fail">
+<button type="button" aria-hidden="true">Add to cart</button>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; aria-hidden=&quot;true&quot;&gt;Add to cart&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>focusable-disabled</code>. Routes to: NEW-48.</p>
+</article><article class="case" id="b3" aria-labelledby="b3-title">
+  <h3 id="b3-title"><span class="case-id">B3</span> A read only input</h3>
+  <p>Read only fields can still receive focus.</p>
+  <div class="example" data-case="b3" data-expected="fail">
+<div aria-hidden="true">
+  <input type="text" aria-label="Order number" value="1042" readonly>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-hidden=&quot;true&quot;&gt;
+  &lt;input type=&quot;text&quot; aria-label=&quot;Order number&quot; value=&quot;1042&quot; readonly&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>focusable-disabled</code>. Routes to: NEW-48.</p>
+</article>
+<!-- section -->
+
+<h2 id="review">Needs review</h2>
+
+<p>Axe isn't sure, because these look like they might move focus straight away.</p>
+<article class="case" id="c1" aria-labelledby="c1-title">
+  <h3 id="c1-title"><span class="case-id">C1</span> A link with a focus handler</h3>
+  <p>Axe can't tell whether the script moves focus somewhere else as soon as the link gets it.</p>
+  <div class="example" data-case="c1" data-expected="review">
+<div aria-hidden="true">
+  <a href="#c1" onfocus="void 0">Back to top</a>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-hidden=&quot;true&quot;&gt;
+  &lt;a href=&quot;#c1&quot; onfocus=&quot;void 0&quot;&gt;Back to top&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: none. Routes to: no template, because needs review results for this rule aren't in the rule map.</p>
+</article><article class="case" id="c2" aria-labelledby="c2-title">
+  <h3 id="c2-title"><span class="case-id">C2</span> An invisible focus trap button</h3>
+  <p>Zero size with <code>pointer-events: none</code>. This is a common pattern for keeping focus inside a dialog.</p>
+  <div class="example" data-case="c2" data-expected="review">
+<div aria-hidden="true">
+  <button type="button" style="width: 0; height: 0; padding: 0; border: 0; pointer-events: none;"></button>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-hidden=&quot;true&quot;&gt;
+  &lt;button type=&quot;button&quot; style=&quot;width: 0; height: 0; padding: 0; border: 0; pointer-events: none;&quot;&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: none. Routes to: no template, because needs review results for this rule aren't in the rule map.</p>
+</article>
+<!-- section -->
+
+<h2 id="missed">Can still be reached, but axe passes it</h2>
+
+<p>Nothing in axe flags these.</p>
+<article class="case" id="d1" aria-labelledby="d1-title">
+  <h3 id="d1-title"><span class="case-id">D1</span> An editable region</h3>
+  <div class="example" data-case="d1" data-expected="miss">
+<div aria-hidden="true">
+  <span contenteditable="true">Type a note</span>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-hidden=&quot;true&quot;&gt;
+  &lt;span contenteditable=&quot;true&quot;&gt;Type a note&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="note">Confirmed in Chrome: it can be reached with the Tab key, even though it's hidden from screen readers.</p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+</article><article class="case" id="d2" aria-labelledby="d2-title">
+  <h3 id="d2-title"><span class="case-id">D2</span> An iframe</h3>
+  <div class="example" data-case="d2" data-expected="miss">
+<div aria-hidden="true">
+  <iframe title="Store map" srcdoc="&lt;p&gt;Map of our stores&lt;/p&gt;" width="200" height="60"></iframe>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-hidden=&quot;true&quot;&gt;
+  &lt;iframe title=&quot;Store map&quot; srcdoc=&quot;&amp;lt;p&amp;gt;Map of our stores&amp;lt;/p&amp;gt;&quot; width=&quot;200&quot; height=&quot;60&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="note">Confirmed in Chrome: it can be reached with the Tab key, even though it's hidden from screen readers.</p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+</article><article class="case" id="d3" aria-labelledby="d3-title">
+  <h3 id="d3-title"><span class="case-id">D3</span> A video player</h3>
+  <div class="example" data-case="d3" data-expected="miss">
+<div aria-hidden="true">
+  <video controls width="200" src="data:,"></video>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-hidden=&quot;true&quot;&gt;
+  &lt;video controls width=&quot;200&quot; src=&quot;data:,&quot;&gt;&lt;/video&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="note">Confirmed in Chrome: it can be reached with the Tab key, even though it's hidden from screen readers.</p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+</article><article class="case" id="d4" aria-labelledby="d4-title">
+  <h3 id="d4-title"><span class="case-id">D4</span> aria-hidden=&quot;TRUE&quot;</h3>
+  <p>Chrome treats this as hidden, but axe only tests an exact <code>aria-hidden="true"</code>.</p>
+  <div class="example" data-case="d4" data-expected="miss">
+<div aria-hidden="TRUE">
+  <a href="#d4">Gift cards</a>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-hidden=&quot;TRUE&quot;&gt;
+  &lt;a href=&quot;#d4&quot;&gt;Gift cards&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="note">Confirmed in Chrome: the link isn't in the accessibility tree, but can still be reached with the Tab key.</p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+</article><article class="case" id="d5" aria-labelledby="d5-title">
+  <h3 id="d5-title"><span class="case-id">D5</span> A trailing space in aria-hidden</h3>
+  <div class="example" data-case="d5" data-expected="miss">
+<div aria-hidden="true ">
+  <a href="#d5">Store finder</a>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-hidden=&quot;true &quot;&gt;
+  &lt;a href=&quot;#d5&quot;&gt;Store finder&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="note">Confirmed in Chrome: the link isn't in the accessibility tree, but can still be reached with the Tab key.</p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+</article>
+<!-- section -->
+
+<h2 id="passing">Ways to pass</h2>
+
+<p>Control cases. These show the right ways to hide content that can receive focus.</p>
+<article class="case" id="e1" aria-labelledby="e1-title">
+  <h3 id="e1-title"><span class="case-id">E1</span> tabindex=&quot;-1&quot; on the link</h3>
+  <div class="example" data-case="e1" data-expected="pass">
+<div aria-hidden="true">
+  <a href="#e1" tabindex="-1">My orders</a>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-hidden=&quot;true&quot;&gt;
+  &lt;a href=&quot;#e1&quot; tabindex=&quot;-1&quot;&gt;My orders&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e2" aria-labelledby="e2-title">
+  <h3 id="e2-title"><span class="case-id">E2</span> A disabled button</h3>
+  <div class="example" data-case="e2" data-expected="pass">
+<div aria-hidden="true">
+  <button type="button" disabled>Close</button>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-hidden=&quot;true&quot;&gt;
+  &lt;button type=&quot;button&quot; disabled&gt;Close&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e3" aria-labelledby="e3-title">
+  <h3 id="e3-title"><span class="case-id">E3</span> A disabled fieldset</h3>
+  <p>Disabling the fieldset disables everything inside it.</p>
+  <div class="example" data-case="e3" data-expected="pass">
+<div aria-hidden="true">
+  <fieldset disabled>
+    <legend>Delivery</legend>
+    <input type="text" aria-label="Postcode">
+  </fieldset>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-hidden=&quot;true&quot;&gt;
+  &lt;fieldset disabled&gt;
+    &lt;legend&gt;Delivery&lt;/legend&gt;
+    &lt;input type=&quot;text&quot; aria-label=&quot;Postcode&quot;&gt;
+  &lt;/fieldset&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e4" aria-labelledby="e4-title">
+  <h3 id="e4-title"><span class="case-id">E4</span> The inert attribute</h3>
+  <p><code>inert</code> takes everything inside out of the Tab order.</p>
+  <div class="example" data-case="e4" data-expected="pass">
+<div aria-hidden="true" inert>
+  <a href="#e4">Wish list</a>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-hidden=&quot;true&quot; inert&gt;
+  &lt;a href=&quot;#e4&quot;&gt;Wish list&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e5" aria-labelledby="e5-title">
+  <h3 id="e5-title"><span class="case-id">E5</span> A link hidden with display: none</h3>
+  <div class="example" data-case="e5" data-expected="pass">
+<div aria-hidden="true">
+  <a href="#e5" style="display: none;">Returns</a>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-hidden=&quot;true&quot;&gt;
+  &lt;a href=&quot;#e5&quot; style=&quot;display: none;&quot;&gt;Returns&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e6" aria-labelledby="e6-title">
+  <h3 id="e6-title"><span class="case-id">E6</span> A link hidden with visibility: hidden</h3>
+  <div class="example" data-case="e6" data-expected="pass">
+<div aria-hidden="true">
+  <a href="#e6" style="visibility: hidden;">Contact</a>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-hidden=&quot;true&quot;&gt;
+  &lt;a href=&quot;#e6&quot; style=&quot;visibility: hidden;&quot;&gt;Contact&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e7" aria-labelledby="e7-title">
+  <h3 id="e7-title"><span class="case-id">E7</span> A duplicate icon link</h3>
+  <p>A common pattern: the image link is hidden and taken out of the Tab order, because the text link next to it goes to the same place.</p>
+  <div class="example" data-case="e7" data-expected="pass">
+<a href="#e7" aria-hidden="true" tabindex="-1"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" width="20" height="20"></a>
+<a href="#e7">Blue kettle</a>
+  </div>
+  <pre><code class="language-html">&lt;a href=&quot;#e7&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;img src=&quot;data:image/gif;base64,R0lGODlhAQABAAAAACw=&quot; alt=&quot;&quot; width=&quot;20&quot; height=&quot;20&quot;&gt;&lt;/a&gt;
+&lt;a href=&quot;#e7&quot;&gt;Blue kettle&lt;/a&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article>
+<!-- section -->
+
+<h2 id="dynamic">Changes after interaction</h2>
+
+<p>Axe only sees the page as it is when you run it. These pass on page load. Activate each button, then run axe again.</p>
+<article class="case" id="g1" aria-labelledby="g1-title">
+  <h3 id="g1-title"><span class="case-id">G1</span> A menu that&#x27;s closed with aria-hidden</h3>
+  <p>The menu starts open. Closing it sets <code>aria-hidden="true"</code>, but its links stay in the Tab order.</p>
+  <div class="example" data-case="g1" data-expected="dynamic">
+<button type="button" id="g1-button" aria-expanded="true" aria-controls="g1-menu">Close menu</button>
+<ul id="g1-menu">
+  <li><a href="#g1">Home</a></li>
+  <li><a href="#g1">Shop</a></li>
+</ul>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; id=&quot;g1-button&quot; aria-expanded=&quot;true&quot; aria-controls=&quot;g1-menu&quot;&gt;Close menu&lt;/button&gt;
+&lt;ul id=&quot;g1-menu&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#g1&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#g1&quot;&gt;Shop&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <p class="result"><span class="badge dynamic">On load: pass. After closing: fail</span></p>
+  <p class="note">After closing, the check is <code>focusable-not-tabbable</code>, so it routes to NEW-48.</p>
+</article><article class="case" id="g2" aria-labelledby="g2-title">
+  <h3 id="g2-title"><span class="case-id">G2</span> Opening a dialog changes the whole page</h3>
+  <p>While a dialog is open, axe assumes the content behind it may be hidden on purpose. Open this dialog, then run axe again: every failure from this rule on the page becomes needs review.</p>
+  <div class="example" data-case="g2" data-expected="dynamic">
+<button type="button" id="g2-button">Open dialog</button>
+<div role="dialog" id="g2-dialog" aria-label="Newsletter" hidden>
+  <p>Sign up for our newsletter.</p>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; id=&quot;g2-button&quot;&gt;Open dialog&lt;/button&gt;
+&lt;div role=&quot;dialog&quot; id=&quot;g2-dialog&quot; aria-label=&quot;Newsletter&quot; hidden&gt;
+  &lt;p&gt;Sign up for our newsletter.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge dynamic">After opening: every fail on this page becomes needs review</span></p>
+  <p class="note">After opening, the check is <code>focusable-modal-open</code>, so every result routes to no template. Reload the page to close the dialog.</p>
+</article>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+<script>
+  // G1: closing the menu hides it with aria-hidden (bug: the links stay in the Tab order)
+  document.getElementById('g1-button').addEventListener('click', function () {
+    var menu = document.getElementById('g1-menu');
+    var open = this.getAttribute('aria-expanded') === 'true';
+    this.setAttribute('aria-expanded', open ? 'false' : 'true');
+    this.textContent = open ? 'Open menu' : 'Close menu';
+    if (open) {
+      menu.setAttribute('aria-hidden', 'true');
+    } else {
+      menu.removeAttribute('aria-hidden');
+    }
+  });
+
+  // G2: show the dialog
+  document.getElementById('g2-button').addEventListener('click', function () {
+    document.getElementById('g2-dialog').hidden = false;
+  });
+</script>
+</body>
+</html>

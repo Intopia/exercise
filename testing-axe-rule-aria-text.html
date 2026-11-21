@@ -49,6 +49,8 @@
 
 <p>Some cases include results from testing with VoiceOver in Safari and Chrome on macOS.</p>
 
+<p class="report-link"><strong>axe-core results:</strong> <a href="x-axe-core-rules/06-axe-report-aria-text.html">See the HTML report from running axe-core 4.14.0 over this page</a>.</p>
+
 <p>Every example is live in the page, so you can run the axe extension straight over it. The expected results were checked by running axe-core 4.14.1 over this page. Look in both the axe <strong>issues</strong> list and the <strong>needs review</strong> list.</p>
 
 <table>
@@ -245,9 +247,9 @@
 </article><article class="case" id="d3" aria-labelledby="d3-title">
   <h3 id="d3-title"><span class="case-id">D3</span> Focusable image</h3>
   <div class="example" data-case="d3" data-expected="miss">
-<span role="text">Sales this year <span role="img" aria-label="Sales chart" tabindex="0">&#9650;</span></span>
+<span role="text">Sales this year <span role="img" aria-label="Sales chart" tabindex="0">Up 12%</span></span>
   </div>
-  <pre><code class="language-html">&lt;span role=&quot;text&quot;&gt;Sales this year &lt;span role=&quot;img&quot; aria-label=&quot;Sales chart&quot; tabindex=&quot;0&quot;&gt;&amp;#9650;&lt;/span&gt;&lt;/span&gt;</code></pre>
+  <pre><code class="language-html">&lt;span role=&quot;text&quot;&gt;Sales this year &lt;span role=&quot;img&quot; aria-label=&quot;Sales chart&quot; tabindex=&quot;0&quot;&gt;Up 12%&lt;/span&gt;&lt;/span&gt;</code></pre>
   <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
   <p class="note">Not yet tested with VoiceOver.</p>
   <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
@@ -258,7 +260,7 @@
   </div>
   <pre><code class="language-html">&lt;span role=&quot;text&quot;&gt;Listen to the welcome message: &lt;audio controls src=&quot;data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=&quot;&gt;&lt;/audio&gt;&lt;/span&gt;</code></pre>
   <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
-  <p class="note">Tested with VoiceOver in Safari: reading reads just "Listen to the welcome message: Audio Controls", without the play, time and volume controls. Tab still reaches them. This expected result is from a simulated browser, so it needs confirming with a live axe run.</p>
+  <p class="note">Tested with VoiceOver in Safari: reading reads just "Listen to the welcome message: Audio Controls", without the play, time and volume controls. Tab still reaches them. Confirmed in Chrome: axe passes it.</p>
   <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
 </article>
 <!-- section -->
