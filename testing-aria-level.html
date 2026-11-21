@@ -151,7 +151,10 @@
 
 <h1>Testing <code>aria-level</code></h1>
 
-<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-level" target="_blank"><code>aria-level</code></a> defines the hierarchical level of an element within its structure. Its most common real-world use is alongside <code>role="heading"</code>, giving a non-native element a heading level that a real <code>&lt;h1&gt;</code>–<code>&lt;h6&gt;</code> can't provide: one that can be set dynamically, useful for components reused at different depths in a page, such as a card title that might need to act as an h2 on one page and an h3 on another.</p>
+<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-level" target="_blank"><code>aria-level</code></a> defines an element's level within a hierarchy. It is commonly used with <code>role="heading"</code> to give an element a heading level without using a native <code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code> element.</p>
+
+<p>This can be useful for components that need different heading levels depending on where they appear on a page.</p>
+
 
 
 <!-- section -->
@@ -159,7 +162,7 @@
 
 <h2 id="example-1">Example 1: <code>role="heading"</code> with <code>aria-level="2"</code></h2>
 
-<p>This shows up in the wild most often when content arrives without structure and structure has to be faked back in: a CMS field, a syndicated feed, or an API response that hands the page a title string with no indication of where it sits in the outline. A card component built to render that title might get reused in a sidebar (where it should behave like an h3) and on a landing page (where it should behave like an h2), so the level can't be hardcoded into the component's markup, it has to be set dynamically by whatever context drops the component in, and <code>role="heading"</code> with <code>aria-level</code> is what lets the level travel with that decision instead of being baked into a fixed element type.</p>
+<p>This example uses <code>role="heading"</code> to identify an element as a heading, and <code>aria-level="2"</code> to give it a level 2 heading.</p>
 
 <div class="example">
   <div role="heading" aria-level="2">This behaves like a heading, level 2</div>
@@ -179,9 +182,9 @@
 <!-- section -->
 
 
-<h2 id="example-2">Example 2: same card, two different levels</h2>
+<h2 id="example-2">Example 2: Same card, two different levels</h2>
 
-<p>This is the CMS/feed scenario made concrete. Imagine a "related content" card component: it renders a title from data with no structural information attached, just a string. The exact same component gets dropped into two different contexts on this page, a sidebar and a landing-page section, and each context needs the card's title to sit at a different depth in the outline. A native <code>&lt;h2&gt;</code>-<code>&lt;h6&gt;</code> element is fixed the moment it's written, so it can't do this, the component has no way to know its level until the page tells it. <code>role="heading"</code> with a dynamically-set <code>aria-level</code> is what lets the same markup serve both contexts correctly.</p>
+<p>This example shows how the same card component can use different heading levels depending on where it appears on a page. The <code>aria-level</code> value can be changed to match the heading structure.</p>
 
 <div class="example">
   <div class="card-context">
@@ -202,7 +205,7 @@
 </div>
 
 <div class="note">
-  <p><b>Expected result:</b> the first card's title should be announced as a level 4 heading, and the second, identical, component should be announced as a level 2 heading. Confirm both appear correctly in a screen reader's headings list at their respective, different levels, despite being the same component with the same markup shape.</p>
+  <p><b>Expected result:</b> The first card's title should be announced as a level 4 heading, and the second as a level 2 heading. Both should appear at the correct levels in a screen reader's headings list.</p>
 </div>
 
 <details>
@@ -226,7 +229,7 @@
 
 <h2 id="example-3">Example 3: <code>aria-level</code> in a treegrid</h2>
 
-<p>Away from headings, <code>aria-level</code> also applies to <code>row</code> in a <code>treegrid</code>. Treegrid rows are conventionally flat siblings in the DOM, so that arrow-key navigation moves predictably in two dimensions, which means depth can't be inferred from DOM ancestry the way it can in a nested tree. <code>aria-level</code> is what communicates the hierarchy instead. The example below is a small file browser: "Reports" and "Archive" are folders at levels 1 and 2, their contents sit one level deeper, and none of that nesting exists in the DOM, only in the <code>aria-level</code> value on each row.</p>
+<p>The <code>aria-level</code> attribute can also identify the level of rows in a <code>treegrid</code>. This example shows a file browser where <code>aria-level</code> identifies the hierarchy of folders and files.</p>
 
 <div class="example treegrid-demo">
   <div role="treegrid" aria-label="Project files" aria-rowcount="7">
@@ -294,24 +297,30 @@
   </div>
 </div>
 
+
 <h3>Why not a native table?</h3>
 
-<p>A native <code>&lt;table&gt;</code> has no concept of one row containing another, rows are flat and peer-level by definition. That rules out three things a table alone can't do: hierarchy (no attribute says "this row is nested inside that row", which is what <code>aria-level</code> provides), collapse state (no attribute says "this row's children are currently hidden", which is what <code>aria-expanded</code> provides), and 2D arrow-key navigation between cells, which <code>treegrid</code> implies and a plain table doesn't.</p>
-  <p>That said, treegrid is a narrow tool, not a fancier table. If the data is flat, use a native table. If it's hierarchical but doesn't need cell-by-cell keyboard navigation, a nested list or <code>role="tree"</code> is usually the better, simpler fit. Treegrid earns its place only when hierarchy, multiple columns, and per-cell interaction are all genuinely needed at once, which in practice is a fairly small set of cases (file browsers, spreadsheet-like tools).</p>
+<p>A native <code>&lt;table&gt;</code> does not support hierarchical rows or expanding and collapsing groups of rows. A <code>treegrid</code> supports these features, along with arrow-key navigation between rows and cells.</p>
 
-<p>Headings describe the content that follows them, that's their whole job, a heading with nothing underneath it is meaningless, and a real heading should never sit on a page with no content beneath it. There's no such content here: "Reports" and "Archive" aren't titles introducing a following passage, they're row labels sitting next to data cells in the same row. That's a fundamentally different shape from what headings model, so this isn't a case of headings being technically unable to nest (<code>aria-level</code> handles that fine on <code>role="heading"</code>, see Examples 1 and 2 above), it's that headings are the wrong semantic for row/cell data in the first place.</p>
+<p>Use a native table for ordinary tabular data. A <code>treegrid</code> is better suited to interactive, hierarchical data, such as a file browser.</p>
 
-<h3>No cap at 6 in the spec, though support varies.</h3>
-<p>Native headings only go to <code>h6</code>, that's an HTML limitation, not an ARIA one. <code>aria-level</code> itself is just <code>&lt;integer&gt;</code> with no spec-defined upper bound. In practice, though, support for values above 6 is inconsistent, and that's documented for headings specifically: Windows' UI Automation accessibility API caps heading levels at 9, and Chromium falls back to 6 for anything higher. Whether that same constraint applies to <code>aria-level</code> on treegrid rows is untested, worth verifying directly rather than assuming a deep hierarchy will be honoured. See "Is there really no limit?" in the companion article for the fuller picture.</p>
-  
-<h3>Setsize/posinset numbering</h3>
-  
-<p>Reading straight down the markup, the <code>aria-posinset</code> values look out of order, <code>1, 1, 2, 1, 2, 2</code> rather than counting up cleanly. That's because <code>aria-setsize</code>/<code>aria-posinset</code> are scoped to a sibling group, same parent, same level, not to the treegrid as a whole. Each group restarts its own count. The <code>R</code> labels on the left show the other coordinate system running alongside it, absolute position in the grid, which is what <code>aria-rowcount</code> is counting:</p>
+<p>Headings are not appropriate here because the folder names are row labels, not headings for sections of content.</p>
+
+<h3>Can <code>aria-level</code> go beyond 6?</h3>
+
+<p>Yes. Unlike native headings, which range from <code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code>, <code>aria-level</code> has no defined maximum. However, screen reader and browser support for levels above 6 can vary, particularly for headings.</p>
+
+<p>Support for deeper levels in <code>treegrid</code> rows should be tested rather than assumed.</p>
+
+<h3>Setsize and position numbering</h3>
+
+<p>The <code>aria-posinset</code> values may appear out of order: <code>1, 1, 2, 1, 2, 2</code>. This is because <code>aria-setsize</code> and <code>aria-posinset</code> describe an item's position within its group, not the entire treegrid. Each group starts counting from 1.</p>
+
+<p>The <code>R</code> labels show each row's position in the overall grid, which is separate from its position within a group.</p>
 
 <div class="note">
-  <p><b>Expected result:</b> arrowing through the rows, level should be announced for each row (wording and position in the announcement varies by screen reader). Collapsing "Archive" via its toggle should hide its level-3 children from the accessibility tree entirely, and re-expanding "Reports" should not leave "Archive" incorrectly pre-expanded. Confirm <code>aria-setsize</code>/<code>aria-posinset</code> are announced sensibly (e.g. "2 of 2") given not all rows are present at once.</p>
+  <p><b>Expected result:</b> Screen readers should announce each row's level and position within its group. Collapsing "Archive" should hide its child rows, and expanding "Reports" should not affect the state of "Archive".</p>
 </div>
-
 
 <pre class="setsize-tree"><code>R1: aria-rowcount: 7
 R2:     Reports (Level 1, 1 of 2)
@@ -321,9 +330,9 @@ R5:             Q1 report.docx (Level 3, 1 of 2)
 R6:             Q2 report.docx (Level 3, 2 of 2)
 R7:     budget.xlsx (Level 1, 2 of 2)</code></pre>
 
-<p>Each row is telling AT "I'm the Nth of M items at <em>this</em> level, under <em>this</em> parent," not "I'm the Nth row overall." Absolute row position is a separate attribute, <code>aria-rowindex</code>, which isn't set anywhere in this example since every row is genuinely present in the DOM (just sometimes CSS-hidden), so a browser can already calculate it itself, but the R1–R7 labels above show what those values would be if we had.</p>
+<p><code>aria-posinset</code> and <code>aria-setsize</code> describe each item's position within its group. <code>aria-rowindex</code> identifies its position in the overall grid.</p>
 
-<p><b>Why <code>aria-rowcount</code> is 7, not 6:</b> the spec counts the header row as part of the total. R1 in the diagram above is the header row (Name / Type / Modified), then R2 through R7 are the six data rows. So <code>aria-rowcount="7"</code> is 1 header row + 6 data rows, not a count of data rows alone.</p>
+<p><code>aria-rowcount="7"</code> includes the header row (R1) and six data rows (R2–R7).</p>
 
 <details>
   <summary>HTML markup</summary>
@@ -360,9 +369,6 @@ R7:     budget.xlsx (Level 1, 2 of 2)</code></pre>
   <p><b>Note:</b> <code>aria-level</code> only has an effect within a small set of roles that support it, chiefly <code>heading</code>, but also <code>row</code>, <code>listitem</code>, and <code>treeitem</code> in some structural contexts. Adding it to an element with no supporting role does nothing.</p>
 </div>
 
-<div class="note">
-  <p><b>Note for testing:</b> confirm with your standard browser and screen reader combinations that Examples 1 and 2 appear correctly in the headings list/navigation feature, at the expected levels, alongside real native headings.</p>
-</div>
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 

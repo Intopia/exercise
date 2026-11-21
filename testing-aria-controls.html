@@ -117,9 +117,9 @@
 
 <h1>Testing <code>aria-controls</code></h1>
 
-<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-controls" target="_blank"><code>aria-controls</code></a> identifies the element or elements that a given element controls. It's set on the controlling element and points, by ID, to whatever it affects. It doesn't move focus and doesn't trigger anything on its own, it's a relationship, not a behaviour.</p>
+<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-controls" target="_blank"><code>aria-controls</code></a> identifies one or more elements controlled by another element. It uses IDs to establish the relationship but does not change behaviour or move focus.</p>
 
-<p>Support for actually announcing that relationship is patchy across screen reader and browser combinations, and a chunk of the accessibility community treats it as effectively decorative. The examples below cover the common working patterns first, then a set of deliberately broken cases, so we can test what's real rather than repeat what's assumed.</p>
+<p>Screen reader support varies, and the relationship may not be announced. The examples below include common uses and deliberately incorrect implementations for testing.</p>
 
 
 <!-- section -->

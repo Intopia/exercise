@@ -100,10 +100,10 @@
 
 <h1>Testing <code>aria-haspopup</code></h1>
 
-<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-haspopup" target="_blank"><code>aria-haspopup</code></a> indicates that an element triggers a popup, and identifies its type: <code>menu</code>, <code>listbox</code>, <code>tree</code>, <code>grid</code>, or <code>dialog</code>. <code>true</code> is an alias for <code>menu</code>. <code>false</code> is the default, no popup at all. Examples 8 and 9 cover two common markup errors, an invalid value and an empty value, exactly what the companion bookmarklet is built to catch.</p>
+<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-haspopup" target="_blank"><code>aria-haspopup</code></a> indicates that an element opens a popup and identifies its type: <code>menu</code>, <code>listbox</code>, <code>tree</code>, <code>grid</code> or <code>dialog</code>. The value <code>true</code> is equivalent to <code>menu</code>, while <code>false</code> indicates no popup.</p>
 
 <div class="note">
-  <p>Every example below except the dialog (Example 7) opens on hover, click, and keyboard activation. Hover-to-open is standard, expected behaviour for <code>menu</code>, <code>listbox</code>, <code>tree</code>, and <code>grid</code>, hovering only previews, nothing is committed, and moving the mouse away costs nothing. A modal dialog is a different category of interaction: it makes the rest of the page inert and forcibly relocates focus the instant it opens, consequences disproportionate to a cursor passing near a button with no real intent behind it. Opening a destructive-action confirmation from incidental mouse movement is a genuine UX failure, not just a lesser version of the same trade-off the other four make safely, so it's deliberately excluded here rather than included as a cautioned-about example.</p>
+  <p>Most examples open on hover, click or keyboard activation. The dialog example only opens on click or keyboard activation, because opening a modal dialog on hover would unexpectedly move focus and block interaction with the rest of the page.</p>
 </div>
 
 

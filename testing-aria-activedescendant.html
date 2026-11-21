@@ -50,9 +50,11 @@
 
 <h1>Testing <code>aria-activedescendant</code></h1>
 
-<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-activedescendant" target="_blank"><code>aria-activedescendant</code></a> identifies the currently "active" element within a composite widget, without moving real DOM focus to it. This is often called virtual focus. The classic example is a combobox: a text input keeps real keyboard focus at all times, while <code>aria-activedescendant</code> tracks which option in a separate listbox is currently highlighted.</p>
+<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-activedescendant" target="_blank"><code>aria-activedescendant</code></a> identifies the currently active element without moving keyboard focus to it. This is often called virtual focus.</p>
 
-<p>This page deliberately does not filter the list as you type, to keep the example focused on <code>aria-activedescendant</code> itself, rather than building a full autocomplete pattern.</p>
+<p>For example, in a combobox, keyboard focus remains on the text input while <code>aria-activedescendant</code> identifies the currently highlighted option in a listbox.</p>
+
+<p>This example does not filter the list as you type. This keeps the focus on how <code>aria-activedescendant</code> works, rather than demonstrating a complete autocomplete pattern.</p>
 
 
 <!-- section -->
