@@ -37,14 +37,19 @@ h3 {
 
 .badge-report a {
   display: inline-block;
+  background: #eee;
   font-size: .8em;
-  color: #fff;
-  background: blue;
   border-radius: .3em;
+  margin: 0 0 0 .5em;
   padding: .2em .6em;
   line-height: 1;
   letter-spacing: .03em;
-  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .badge-report a {
+  background: #333;
+  }
 }
   </style>
 </head>
@@ -530,9 +535,7 @@ h3 {
 </ul>
 
 
-
 <p><a href="testing-xtemplate.html">Template</a></p>
-
 </main>
 </body>
 </html>
