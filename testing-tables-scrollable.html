@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Testing scrollable tables - Intopia</title>
-  <meta name="description" content="Test a horizontally scrolling table in a focusable wrapper, checking table name, region, row and column counts, headers and keyboard scrolling across screen readers.">
+  <meta name="description" content="Learn how to make a horizontally scrolling table accessible, using a focusable region wrapper named by the caption, and JavaScript that only applies it when needed.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="favicon.ico" sizes="32x32">
@@ -12,14 +12,15 @@
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
   <script src="assets/js/table-wrap.js" defer></script>
 <style>
-/* Narrow main so the table always needs to scroll */
-main {
+/* Narrow main so the table always needs to scroll.
+   Applied by the "Make page narrow" button. */
+main.narrow {
   max-inline-size: 30em;
 }
 </style>
 </head>
 <body>
-<main>
+<main id="page">
 
 <a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
   <picture>
@@ -31,6 +32,30 @@ main {
 <p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 
 <h1>Testing scrollable tables</h1>
+
+<p>Data tables can have lots of columns. On smaller screens, wide tables may not fit within the available space. This can cause content to be cut off or force the entire page to scroll sideways. The same problem can happen on desktop screens when people zoom in.</p>
+
+<p>There are several ways to deal with wide tables:</p>
+
+<ul>
+  <li>Turn each row into a stacked card.</li>
+  <li>Hide less important columns.</li>
+  <li>Allow the table to scroll horizontally within a container.</li>
+</ul>
+
+<p>Each approach has advantages and disadvantages.</p>
+
+<p>This page looks at the third option: placing a table inside a container that can scroll horizontally when needed.</p>
+
+
+<!-- section -->
+
+
+<h2>Example 1: scrollable table</h2>
+
+<p>On a wide screen, this table may fit without scrolling. Use the button below to narrow the page, so the table has to scroll. Then press it again to reset the page width.</p>
+
+<p><button type="button" id="width-toggle">Make page narrow</button></p>
 
 <div class="table-wrap">
   <table>
@@ -108,8 +133,252 @@ main {
   </table>
 </div>
 
-<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 
+<!-- section -->
+
+
+<h2 id="step-1-add-a-wrapper-around-the-table">Step 1: Add a wrapper around the table</h2>
+
+<p>Start by placing the table inside a <code>div</code> element.</p>
+
+<pre><code>&lt;div class="table-wrap"&gt;
+  &lt;table&gt;
+    ...
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+
+<p>The <code>div</code> acts as a container for the table. We can use CSS to allow the table to scroll horizontally without affecting the rest of the page.</p>
+
+<pre><code>.table-wrap {
+  overflow-x: auto;
+}</code></pre>
+
+<p>The <code>overflow-x: auto</code> property allows horizontal scrolling when the table is wider than its container.</p>
+
+<p>If the table fits, no scrolling is needed.</p>
+
+
+<!-- section -->
+
+
+<h2 id="step-2-make-the-scrolling-container-accessible">Step 2: Make the scrolling container accessible</h2>
+
+<p>There is one potential problem with this approach.</p>
+
+<p>In some browsers, keyboard users may not be able to scroll the table horizontally unless the container can receive keyboard focus.</p>
+
+<p>We can address this by adding three attributes to the <code>div</code>:</p>
+
+<ul>
+  <li><code>tabindex="0"</code> makes the container keyboard focusable.</li>
+  <li><code>role="region"</code> identifies the container as a region for screen reader users.</li>
+  <li><code>aria-labelledby</code> gives the region an accessible name.</li>
+</ul>
+
+<p>Here is the complete HTML pattern:</p>
+
+<pre><code>&lt;div class="table-wrap"
+  tabindex="0"
+  role="region"
+  aria-labelledby="cap-sales"
+&gt;
+  &lt;table&gt;
+    &lt;caption id="cap-sales"&gt;Sales by quarter&lt;/caption&gt;
+    ...
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+
+<p>Let's look at these attributes in more detail.</p>
+
+
+<!-- section -->
+
+
+<h3 id="tabindex0"><code>tabindex="0"</code></h3>
+
+<p>This allows keyboard users to move focus to the container using the Tab key.</p>
+
+<p>Once the container has focus, users can use the arrow keys to scroll horizontally.</p>
+
+<p>Without this attribute, some keyboard users may have no way to reach content that is outside the visible area.</p>
+
+<p>Because the container can now receive focus, it also needs a visible focus indicator, so keyboard users can see where they are.</p>
+
+<pre><code>.table-wrap:focus-visible {
+  outline: 2px solid #1565A8;
+  outline-offset: 2px;
+}</code></pre>
+
+
+<!-- section -->
+
+
+<h3 id="roleregion"><code>role="region"</code></h3>
+
+<p>This identifies the container as a region.</p>
+
+<p>When a screen reader user moves focus to the container, the role helps them understand what they have reached.</p>
+
+
+<!-- section -->
+
+
+<h3 id="aria-labelledby"><code>aria-labelledby</code></h3>
+
+<p>This gives the region an accessible name.</p>
+
+<p>In our example, <code>aria-labelledby="cap-sales"</code> points to the table's caption, which has the matching ID.</p>
+
+<p>The region is therefore named "Sales by quarter".</p>
+
+<p>This means we can reuse the existing table caption rather than writing another label.</p>
+
+<p>Captions are a good habit anyway, and this technique gives you one more reason to use them.</p>
+
+
+<!-- section -->
+
+
+<h2 id="step-3-only-add-these-attributes-when-needed">Step 3: Only add these attributes when needed</h2>
+
+<p>There is a disadvantage to adding these three attributes to every table.</p>
+
+<p>If a table already fits within its container, it doesn't need to scroll. But the <code>tabindex</code> attribute still adds an extra stop when someone navigates through the page using the Tab key.</p>
+
+<p>Screen reader users may also hear additional information about the region, even though it serves no useful purpose.</p>
+
+<p>For this reason, it's better to add these attributes only when a table actually needs to scroll.</p>
+
+<p>We can use JavaScript to do this.</p>
+
+<p>Start with the original HTML:</p>
+
+<pre><code>&lt;div class="table-wrap"&gt;
+  &lt;table&gt;
+    &lt;caption&gt;Sales by quarter&lt;/caption&gt;
+    ...
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+
+<p>The JavaScript can then:</p>
+
+<ol>
+  <li>Find every element with the class <code>table-wrap</code>.</li>
+  <li>Give the table caption a unique ID if it doesn't already have one.</li>
+  <li>Check whether the table is wider than its container.</li>
+  <li>If the table needs to scroll, add <code>tabindex</code> and <code>role</code>, plus a name: <code>aria-labelledby</code> pointing to the caption, or a fallback <code>aria-label</code> if there is no caption.</li>
+  <li>If the table doesn't need to scroll, remove these attributes.</li>
+  <li>Check again when the container or table changes size.</li>
+</ol>
+
+<p>Here is the complete script:</p>
+
+<pre><code>let captionNumber = 0;
+
+document.querySelectorAll('.table-wrap').forEach((wrap) =&gt; {
+  const table = wrap.querySelector('table');
+  if (!table) return;
+
+  const caption = table.querySelector('caption');
+
+  // Give the caption a unique ID if it needs one
+  if (caption &amp;&amp; !caption.id) {
+    let id;
+    do {
+      id = 'table-caption-' + (++captionNumber);
+    } while (document.getElementById(id));
+    caption.id = id;
+  }
+
+  const update = () =&gt; {
+    const scrolls = wrap.scrollWidth &gt; wrap.clientWidth;
+
+    if (scrolls) {
+      wrap.setAttribute('tabindex', '0');
+      wrap.setAttribute('role', 'region');
+      if (caption) {
+        wrap.setAttribute('aria-labelledby', caption.id);
+      } else {
+        // Fallback name if the table has no caption
+        wrap.setAttribute('aria-label', 'Scrollable table');
+      }
+    } else {
+      wrap.removeAttribute('tabindex');
+      wrap.removeAttribute('role');
+      wrap.removeAttribute('aria-labelledby');
+      wrap.removeAttribute('aria-label');
+    }
+  };
+
+  const observer = new ResizeObserver(update);
+  observer.observe(wrap);
+  observer.observe(table);
+});</code></pre>
+
+<p>This means the table can adapt to different screen sizes and zoom levels.</p>
+
+<p>On a wide screen, the table may fit without scrolling, so there is no extra Tab stop.</p>
+
+<p>On a smaller screen, or when someone zooms in, the table may need to scroll. The JavaScript then makes the container keyboard focusable and provides a region role and accessible name.</p>
+
+
+<!-- section -->
+
+
+<h2 id="step-4-load-the-javascript">Step 4: Load the JavaScript</h2>
+
+<p>The JavaScript can be saved in a separate file and loaded using a <code>script</code> element.</p>
+
+<pre><code>&lt;script src="table-wrap.js" defer&gt;&lt;/script&gt;</code></pre>
+
+<p>The <code>defer</code> attribute is important.</p>
+
+<p>It tells the browser to download the JavaScript while the HTML is being processed, but wait until the HTML has been parsed before running the script.</p>
+
+<p>This means the tables will be available when the JavaScript looks for them.</p>
+
+<p>It also avoids blocking HTML parsing while the script downloads.</p>
+
+<p>The same JavaScript file can be used across multiple pages, so there is no need to add separate scripts for individual tables.</p>
+
+
+<!-- section -->
+
+
+<h2 id="summary">Summary</h2>
+
+<p>Allowing wide tables to scroll horizontally is one way to make them work on smaller screens and at higher zoom levels.</p>
+
+<p>The basic approach is simple:</p>
+
+<ul>
+  <li>Wrap the table in a <code>div</code>.</li>
+  <li>Use <code>overflow-x: auto</code> to allow horizontal scrolling.</li>
+  <li>Make the container keyboard focusable when scrolling is needed, with a visible focus style.</li>
+  <li>Give the container a region role and an accessible name, taken from the table's caption where possible.</li>
+  <li>Use JavaScript to add or remove these attributes depending on whether the table needs to scroll.</li>
+</ul>
+
+<p>This avoids unnecessary Tab stops while allowing keyboard users to reach horizontally scrolling table content.</p>
+
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 </main>
+
+<script>
+// Toggle the narrow page width, so the table has to scroll.
+// The label changes to describe what the button will do next.
+// table-wrap.js watches the table with a ResizeObserver,
+// so it adds or removes the region attributes automatically.
+(function () {
+  var page = document.getElementById('page');
+  var toggle = document.getElementById('width-toggle');
+
+  toggle.addEventListener('click', function () {
+    var isNarrow = page.classList.toggle('narrow');
+    toggle.textContent = isNarrow ? 'Reset page width' : 'Make page narrow';
+  });
+})();
+</script>
 </body>
 </html>

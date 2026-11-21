@@ -13,7 +13,10 @@
   <script src="assets/js/table-wrap.js" defer></script>
   <style>
     canvas {
-      border: 1px solid black;
+      display: block;
+      max-width: 100%;
+      height: auto;
+      border: 1px solid currentColor;
     }
   </style>
 </head>
@@ -31,15 +34,17 @@
 
 <h1>Testing movement</h1>
 
+<p>Moving content that starts automatically and lasts more than five seconds needs a way to pause, stop or hide it, to pass <a href="https://www.w3.org/TR/WCAG22/#pause-stop-hide" target="_blank">Success Criterion 2.2.2 Pause, Stop, Hide</a>. If your operating system is set to reduce motion, this animation starts paused.</p>
+
 <canvas id="canvas" width="600" height="400" aria-hidden="true"></canvas>
 
-<p><button id="pauseButton" aria-pressed="false">Pause animation</button></p>
+<p><button type="button" id="pauseButton">Pause animation</button></p>
 
 <script>
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
     const pauseButton = document.getElementById("pauseButton");
-    let circles = [];
+    const circles = [];
 
     // Respect the user's OS-level reduced motion setting. If they've asked
     // for reduced motion, start paused rather than auto-playing and making
@@ -50,10 +55,13 @@
     let isPaused = prefersReducedMotion;
 
     function createCircle() {
+        const radius = Math.random() * 40 + 10;
         return {
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            radius: Math.random() * 40 + 10,
+            // Keep each circle fully inside the canvas when it's created,
+            // so it can't get stuck bouncing against an edge.
+            x: radius + Math.random() * (canvas.width - radius * 2),
+            y: radius + Math.random() * (canvas.height - radius * 2),
+            radius: radius,
             color: `hsl(${Math.random() * 360}, 100%, 50%)`,
             dx: (Math.random() - 0.5) * 4,
             dy: (Math.random() - 0.5) * 4,
@@ -98,9 +106,12 @@
     drawCircles();
     animate();
 
+    // The button label changes to describe the action it will perform next.
+    // aria-pressed is not used as well, because a changing label plus a
+    // pressed state can produce confusing announcements such as
+    // "Resume animation, toggle button, pressed".
     function updatePauseButton() {
         pauseButton.textContent = isPaused ? "Resume animation" : "Pause animation";
-        pauseButton.setAttribute("aria-pressed", String(isPaused));
     }
     updatePauseButton();
 

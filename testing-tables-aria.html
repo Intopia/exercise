@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>ARIA table examples - Intopia</title>
-  <meta name="description" content="Test ARIA table roles that recreate a native table, plus a sortable role=grid example with aria-sort, sort buttons and a live region announcing changes.">
+  <meta name="description" content="Test ARIA table roles that recreate a native table, plus a sortable ARIA table with sort buttons, aria-sort and a live region announcing changes.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="favicon.ico" sizes="32x32">
@@ -17,6 +17,8 @@ h3 {
   margin: 2em 0 0;
 }
 
+/* table-layout: fixed gives every column an equal width,
+   so the same rules work for both the 4 and 3 column tables */
 [role="table"] {
   display: table;
   width: 100%;
@@ -37,63 +39,20 @@ h3 {
 [role="table"] [role="rowheader"] {
   display: table-cell;
   padding: 0.5em;
-  width: 25%;
-}
-
-[role="cell"],
-[role="columnheader"],
-[role="rowheader"] {
   border-right: 1px solid #aaa;
   border-bottom: 1px solid #aaa;
 }
 
-[role="row"] > :first-child {
+[role="table"] [role="row"] > :first-child {
   border-left: 1px solid #aaa;
 }
 
-[role="rowgroup"]:first-child [role="row"] > * {
+[role="table"] [role="rowgroup"]:first-child [role="row"] > * {
   border-top: 1px solid #aaa;
 }
 
 [role="table"] [role="columnheader"],
 [role="table"] [role="rowheader"] {
-  font-weight: bold;
-}
-
-[role="grid"] {
-  display: table;
-  width: 100%;
-  margin: 1em 0;
-  table-layout: fixed;
-}
-
-[role="grid"] [role="rowgroup"] {
-  display: table-row-group;
-}
-
-[role="grid"] [role="row"] {
-  display: table-row;
-}
-
-[role="grid"] [role="gridcell"],
-[role="grid"] [role="columnheader"],
-[role="grid"] [role="rowheader"] {
-  display: table-cell;
-  padding: 0.5em;
-  width: 33%;
-  border-right: 1px solid #aaa;
-  border-bottom: 1px solid #aaa;
-}
-
-[role="grid"] [role="row"] > :first-child {
-  border-left: 1px solid #aaa;
-}
-
-[role="grid"] [role="rowgroup"]:first-child [role="row"] > * {
-  border-top: 1px solid #aaa;
-}
-
-[role="grid"] [role="rowheader"] {
   font-weight: bold;
 }
 
@@ -107,11 +66,12 @@ h3 {
   display: inline-flex;
   align-items: center;
   gap: 0.3em;
-  color: #000 !important;
+  /* inherit the text colour, so the buttons work in light and dark mode */
+  color: inherit !important;
 }
 
 [role="columnheader"] button:focus-visible {
-  outline: 2px solid #000;
+  outline: 2px solid currentColor;
   outline-offset: 2px;
 }
 
@@ -124,7 +84,7 @@ h3 {
 
 [role="columnheader"][aria-sort="ascending"] .sort-icon::after,
 [role="columnheader"][aria-sort="descending"] .sort-icon::after {
-  color: #000;
+  color: currentColor;
   font-size: 1em;
   letter-spacing: normal;
 }
@@ -257,50 +217,50 @@ h3 {
 <!-- section -->
 
 
-<h2>Example 2: Sortable table (<code>role="grid"</code>)</h2>
+<h2>Example 2: Sortable table</h2>
 
-<p>This example uses <code>role="grid"</code> instead of <code>role="table"</code>, since the columns can be sorted, an interactive behaviour static tables don't have. Activate a column header to sort by that column. <code>aria-sort</code> is updated on the active <code>columnheader</code> to reflect the current sort direction.</p>
+<p>This example uses the same ARIA table roles as Example 1, with a sort button inside each column header. Activate a column header button to sort by that column. <code>aria-sort</code> is added to the sorted <code>columnheader</code> to reflect the current sort direction.</p>
 
-<p><b>Note:</b> a fully spec-complete grid also supports arrow-key navigation between individual cells. That behaviour is not implemented in this simplified example, keyboard interaction here is limited to activating the sort buttons in the header row.</p>
+<p>Users read this table the same way as Example 1, using their screen reader's table navigation. The only interactive elements are the sort buttons, which are reached with <kbd>Tab</kbd> like any other button.</p>
 
 <h3 id="bbb">Species count and average temperature by habitat</h3>
 
 <div id="sort-announcer" class="sr-only" role="status"></div>
 
-<div role="grid" aria-labelledby="bbb" id="sortable-grid">
+<div role="table" aria-labelledby="bbb" id="sortable-table">
   <div role="rowgroup">
     <div role="row">
-      <span role="columnheader" aria-sort="none" data-column="habitat" data-type="text">
-        <button aria-label="Habitat - activate to sort">Habitat <span class="sort-icon" aria-hidden="true"></span></button>
+      <span role="columnheader" data-type="text">
+        <button type="button" aria-label="Habitat - activate to sort">Habitat <span class="sort-icon" aria-hidden="true"></span></button>
       </span>
-      <span role="columnheader" aria-sort="none" data-column="species" data-type="number">
-        <button aria-label="Number of species - activate to sort">Number of species <span class="sort-icon" aria-hidden="true"></span></button>
+      <span role="columnheader" data-type="number">
+        <button type="button" aria-label="Number of species - activate to sort">Number of species <span class="sort-icon" aria-hidden="true"></span></button>
       </span>
-      <span role="columnheader" aria-sort="none" data-column="temperature" data-type="number">
-        <button aria-label="Average temp - activate to sort">Average temp <span class="sort-icon" aria-hidden="true"></span></button>
+      <span role="columnheader" data-type="number">
+        <button type="button" aria-label="Average temp - activate to sort">Average temp <span class="sort-icon" aria-hidden="true"></span></button>
       </span>
     </div>
   </div>
-  <div role="rowgroup" id="sortable-grid-body">
+  <div role="rowgroup" id="sortable-table-body">
     <div role="row">
       <span role="rowheader">Forest</span>
-      <span role="gridcell">120</span>
-      <span role="gridcell">12</span>
+      <span role="cell">120</span>
+      <span role="cell">12</span>
     </div>
     <div role="row">
       <span role="rowheader">Ocean</span>
-      <span role="gridcell">230</span>
-      <span role="gridcell">17</span>
+      <span role="cell">230</span>
+      <span role="cell">17</span>
     </div>
     <div role="row">
       <span role="rowheader">Desert</span>
-      <span role="gridcell">45</span>
-      <span role="gridcell">38</span>
+      <span role="cell">45</span>
+      <span role="cell">38</span>
     </div>
     <div role="row">
       <span role="rowheader">Wetland</span>
-      <span role="gridcell">88</span>
-      <span role="gridcell">22</span>
+      <span role="cell">88</span>
+      <span role="cell">22</span>
     </div>
   </div>
 </div>
@@ -309,56 +269,44 @@ h3 {
   <summary>HTML markup</summary>
 <pre><code>&lt;h3 id="bbb"&gt;Species count...&lt;/h3&gt;
 
-&lt;div id="sort-announcer" class="sr-only" role="status"&gt;&lt;/div&gt;
+&lt;div id="sort-announcer" class="sr-only" <span class="highlight">role="status"</span>&gt;&lt;/div&gt;
 
-&lt;div <span class="highlight">role="grid"</span> aria-labelledby="bbb" id="sortable-grid"&gt;
+&lt;div <span class="highlight">role="table"</span> aria-labelledby="bbb" id="sortable-table"&gt;
   &lt;div role="rowgroup"&gt;
     &lt;div role="row"&gt;
-      &lt;span
-        <span class="highlight">role="columnheader"</span>
-        <span class="highlight">aria-sort="none"</span>
-        <span class="highlight">data-column="habitat"</span>
-        data-type="text"
-      &gt;
-        &lt;button aria-label="Habitat - activate to sort"&gt;
+      &lt;span role="columnheader" <span class="highlight">data-type="text"</span>&gt;
+        &lt;button type="button" <span class="highlight">aria-label="Habitat - activate to sort"</span>&gt;
           Habitat
           &lt;span aria-hidden="true"&gt;&lt;/span&gt;
         &lt;/button&gt;
       &lt;/span&gt;
-      &lt;span
-        <span class="highlight">role="columnheader"</span> 
-        <span class="highlight">aria-sort="none"</span> 
-        <span class="highlight">data-column="species"</span> 
-        data-type="number"
-      &gt;
-        &lt;button aria-label="Number of species - activate to sort"&gt;
-          Number of species 
+      &lt;span role="columnheader" <span class="highlight">data-type="number"</span>&gt;
+        &lt;button type="button" <span class="highlight">aria-label="Number of species - activate to sort"</span>&gt;
+          Number of species
           &lt;span aria-hidden="true"&gt;&lt;/span&gt;
         &lt;/button&gt;
       &lt;/span&gt;
-      &lt;span 
-        <span class="highlight">role="columnheader"</span> 
-        <span class="highlight">aria-sort="none"</span> 
-        <span class="highlight">data-column="temperature"</span> 
-        data-type="number"
-      &gt;
-        &lt;button aria-label="Average temp - activate to sort"&gt;
+      &lt;span role="columnheader" <span class="highlight">data-type="number"</span>&gt;
+        &lt;button type="button" <span class="highlight">aria-label="Average temp - activate to sort"</span>&gt;
           Average temp
           &lt;span aria-hidden="true"&gt;&lt;/span&gt;
         &lt;/button&gt;
       &lt;/span&gt;
     &lt;/div&gt;
   &lt;/div&gt;
-  &lt;div role="rowgroup" id="sortable-grid-body"&gt;
+  &lt;div role="rowgroup" id="sortable-table-body"&gt;
     &lt;div role="row"&gt;
       &lt;span role="rowheader"&gt;Forest&lt;/span&gt;
-      &lt;span <span class="highlight">role="gridcell"</span>&gt;120&lt;/span&gt;
-      &lt;span <span class="highlight">role="gridcell"</span>&gt;12&lt;/span&gt;
+      &lt;span role="cell"&gt;120&lt;/span&gt;
+      &lt;span role="cell"&gt;12&lt;/span&gt;
     &lt;/div&gt;
 
     <span class="comment">&lt;!-- remaining rows follow the same pattern --&gt;</span>
   &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+&lt;/div&gt;
+
+<span class="comment">&lt;!-- After sorting by Habitat, the active header gains aria-sort --&gt;</span>
+&lt;span role="columnheader" <span class="highlight">aria-sort="ascending"</span> data-type="text"&gt;...&lt;/span&gt;</code></pre>
 </details>
 
 <!-- subsection -->
@@ -366,26 +314,17 @@ h3 {
 <h3>Features demonstrated in this example</h3>
 
 <ul>
-
-
-
   <li>
     <p><b><code>aria-label</code> on the sort buttons</b>. The buttons used to sort rows include <code>aria-label</code> to provide additional context for screen reader users, for example <q>Habitat - activate to sort</q>. The visible text remains concise, while the accessible name explains that each button can be activated to sort the table.</p>
   </li>
   <li>
-    <p><b><code>role="grid"</code> instead of <code>role="table"</code></b>. A grid is used when a table contains interactive elements, such as sortable column headers. It tells assistive technologies that users can interact with the table, rather than simply read it.</p>
+    <p><b><code>aria-sort</code> on the sorted column only</b>. No header has <code>aria-sort</code> until the table is sorted. When a column is sorted, its header gets <code>aria-sort="ascending"</code> or <code>aria-sort="descending"</code>, and the attribute is removed from every other header. This follows the ARIA guidance that <code>aria-sort</code> should only be applied to one header at a time.</p>
   </li>
   <li>
-    <p><b><code>aria-sort</code></b>. Each sortable column header exposes its current sort state. Headers start with <code>aria-sort="none"</code>. When a column is sorted, its value changes to <code>"ascending"</code> or <code>"descending"</code>, while all other columns return to <code>"none"</code>. This allows assistive technologies to identify which column is currently sorted.</p>
+    <p><b><code>data-type</code> attributes for JavaScript</b>. The <code>data-type</code> attribute is used only by the JavaScript to decide whether to sort a column as text or as numbers. It provides no accessibility information and is never exposed to assistive technologies.</p>
   </li>
   <li>
-    <p><b><code>role="gridcell"</code> instead of <code>role="cell"</code></b>. Once a table becomes a grid, its cells should use the corresponding <code>gridcell</code> role so the accessibility semantics remain consistent.</p>
-  </li>
-  <li>
-    <p><b><code>data-*</code> attributes for JavaScript</b>. The <code>data-column</code> and <code>data-type</code> attributes are used only by the JavaScript to determine which column to sort and how to sort it. They provide no accessibility information and are never exposed to assistive technologies.</p>
-  </li>
-  <li>
-    <p><b>A live region <code>role="status"</code></b>. When the sort order changes, a live region announces the result, such as <q>Sorted by Name, ascending</q>. This provides immediate feedback without relying solely on changes to <code>aria-sort</code>.</p>
+    <p><b>A live region <code>role="status"</code></b>. When the sort order changes, a live region announces the result, such as <q>Table sorted by Habitat, ascending</q>. This provides immediate feedback, as many screen readers don't announce a change to <code>aria-sort</code> on its own.</p>
   </li>
   <li>
     <p><b>Reordering the DOM, not just the display</b>. The table rows are physically reordered in the document, so the reading order for screen reader users matches the visual order seen by sighted users.</p>
@@ -394,20 +333,24 @@ h3 {
 
 <!-- subsection -->
 
-<h3>Why this example uses an ARIA grid instead of a native <code>&lt;table&gt;</code></h3>
+<h3>Why this example uses <code>role="table"</code>, not <code>role="grid"</code></h3>
 
-<p>A native <code>&lt;table&gt;</code> provides built-in structure, relationships and behaviour. This makes it the best choice for displaying static tabular data. However, once a table becomes highly interactive, such as supporting sortable columns, developers often need greater control over its behaviour and presentation.</p>
+<p>Adding sort buttons doesn't turn a table into a grid. A <code>grid</code> is a composite widget: users are expected to move between individual cells with the arrow keys, and the grid manages focus as a single <kbd>Tab</kbd> stop. When a screen reader announces "grid", users expect that behaviour.</p>
 
-<p>An ARIA grid is built from generic elements, such as <code>&lt;div&gt;</code> and <code>&lt;span&gt;</code>, with ARIA roles providing the semantics. This makes it easier to add interactive features such as sorting, update states like <code>aria-sort</code>, and reorder rows using JavaScript without working against native table behaviour.</p>
+<p>A sortable table only needs a few buttons in the header row. Users still read the data with their screen reader's normal table navigation, and reach the buttons with <kbd>Tab</kbd>. That's a table with interactive headers, so <code>role="table"</code> is the right fit. This matches the <a href="https://www.w3.org/WAI/ARIA/apg/patterns/table/examples/sortable-table/" target="_blank">sortable table example in the ARIA Authoring Practices Guide</a>.</p>
 
-<p>The trade-off is that none of the accessibility provided by a native table comes for free. Developers must correctly recreate the table structure, relationships and states using ARIA. While ARIA grids offer greater flexibility, they also require much more care to implement and test correctly.</p>
+<p>Use <code>role="grid"</code> only when users need to move between and interact with individual cells, such as a spreadsheet or an editable data grid, and only when the full arrow-key navigation is implemented.</p>
+
+<div class="note">
+  <p><b>Native tables first.</b> These examples use ARIA roles to show what each role does. In production, a native <code>&lt;table&gt;</code> with <code>&lt;th&gt;</code> elements and buttons in the header cells provides the same result with far less to get wrong, and is what the APG sortable table example uses.</p>
+</div>
 
 <script>
 (function () {
-  const grid = document.getElementById('sortable-grid');
-  const body = document.getElementById('sortable-grid-body');
+  const table = document.getElementById('sortable-table');
+  const body = document.getElementById('sortable-table-body');
   const announcer = document.getElementById('sort-announcer');
-  const headers = grid.querySelectorAll('[role="columnheader"]');
+  const headers = table.querySelectorAll('[role="columnheader"]');
 
   headers.forEach((header, columnIndex) => {
     const button = header.querySelector('button');
@@ -418,9 +361,9 @@ h3 {
       const type = header.dataset.type;
       const columnLabel = button.textContent.trim();
 
-      // Reset every header to "none" before setting the active one,
-      // aria-sort should only ever be present on the currently sorted column
-      headers.forEach(h => h.setAttribute('aria-sort', 'none'));
+      // aria-sort should only be present on the currently sorted column,
+      // so remove it from every header before setting the active one
+      headers.forEach(h => h.removeAttribute('aria-sort'));
       header.setAttribute('aria-sort', newSort);
 
       // Sort the actual DOM rows, not just the visual display,

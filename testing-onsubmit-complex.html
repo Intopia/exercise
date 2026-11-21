@@ -16,7 +16,7 @@
   margin: 1em 0;
   padding: 1em;
   border: 1px solid rgb(200, 0, 0);
-  background: #fff;
+  /* No fixed background, so text and links stay readable in dark mode */
   font-size: .95em;
 }
 
@@ -87,7 +87,7 @@
   <div id="error-notification-container">
   </div>
 
-  <form action="#" id="contact-form">
+  <form action="#" id="contact-form" novalidate>
     <div class="form-group-small">
       <label class="label" for="name">Name <span class="required">(Required)</span></label>
       <input class="input" type="text" id="name">
@@ -134,13 +134,29 @@
 </ul>
 
 <script>
+const errorContainer = document.getElementById('error-notification-container');
+
 document.getElementById('contact-form').addEventListener('submit', function (event) {
   event.preventDefault();
 
+  // Step 1: add the error messages next to each field
+  // and mark each field as invalid
+  const nameInput = document.getElementById('name');
+  document.getElementById('name-error-container').innerHTML =
+    '<span class="error-message" id="name-error">You must include a name</span>';
+  nameInput.setAttribute('aria-describedby', 'name-error');
+  nameInput.setAttribute('aria-invalid', 'true');
+
+  const emailInput = document.getElementById('email');
+  document.getElementById('email-error-container').innerHTML =
+    '<span class="error-message" id="email-error">You must use a valid email address</span>';
+  emailInput.setAttribute('aria-describedby', 'email-error');
+  emailInput.setAttribute('aria-invalid', 'true');
+
+  // Step 2: add the error summary.
   // Replacing the container's content each time (rather than checking
   // for an existing #error node) means this works identically whether
   // it's the first submit attempt or the fifth.
-  const errorContainer = document.getElementById('error-notification-container');
   // This demo always produces exactly two errors, so the count below is
   // hardcoded. In a real implementation, calculate this from the actual
   // number of errors present (e.g. `Please fix the following ${errorCount}
@@ -154,19 +170,24 @@ document.getElementById('contact-form').addEventListener('submit', function (eve
       </ul>
     </div>
   `;
+
+  // Step 3: move focus to the summary last, once everything is in place
   document.getElementById('error').focus();
+});
 
-  const nameInput = document.getElementById('name');
-  nameInput.setAttribute('aria-describedby', 'name-error');
-  nameInput.setAttribute('aria-invalid', 'true');
-  document.getElementById('name-error-container').innerHTML =
-    '<span class="error-message" id="name-error">You must include a name</span>';
+// Make each summary link move focus to its field.
+// A fragment link on its own scrolls the field into view, but browsers
+// don't reliably move focus to it, so users could be left on the link.
+// Listening on the container means this works for links added later.
+errorContainer.addEventListener('click', function (event) {
+  const link = event.target.closest('a[href^="#"]');
+  if (!link) return;
 
-  const emailInput = document.getElementById('email');
-  emailInput.setAttribute('aria-describedby', 'email-error');
-  emailInput.setAttribute('aria-invalid', 'true');
-  document.getElementById('email-error-container').innerHTML =
-    '<span class="error-message" id="email-error">You must use a valid email address</span>';
+  const field = document.getElementById(link.getAttribute('href').slice(1));
+  if (!field) return;
+
+  event.preventDefault();
+  field.focus();
 });
 </script>
 

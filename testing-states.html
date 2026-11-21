@@ -25,7 +25,8 @@
       display: inline-block;
       width: 1.2em;
       height: 1.2em;
-      border: 2px solid #333;
+      /* currentColor follows the text colour, so the box stays visible in dark mode */
+      border: 2px solid currentColor;
       border-radius: 3px;
       background-color: #fff;
       flex-shrink: 0;
@@ -39,12 +40,13 @@
     }
 
     .testing-states-checkbox:focus-visible {
-      outline: 2px solid #000;
+      outline: 2px solid currentColor;
       outline-offset: 2px;
     }
 
     #pressed-button[aria-pressed="true"] {
       background: #1b5e20;
+      color: #fff;
     }
 
     [role="listbox"] {
@@ -65,7 +67,7 @@
     }
 
     [role="option"]:focus {
-      outline: 2px solid #000;
+      outline: 2px solid currentColor;
       outline-offset: -2px;
     }
 
@@ -161,7 +163,7 @@
 
 <h2>Example 3: <code>expanded/collapsed</code></h2>
 
-<p>Activating this button also changes its accessible name, worth checking alongside the state.</p>
+<p>The button's accessible name stays the same, "More information". Only the <code>aria-expanded</code> state changes, so screen reader users hear a consistent name followed by the current state.</p>
 
 <p><b>Action 1:</b> This example starts collapsed. What is its state in the "Computed Properties" panel?</p>
 <p><b>Answer:</b> <code>Expanded: false</code></p>
@@ -170,7 +172,7 @@
 <p><b>Answer:</b> <code>Expanded: true</code></p>
 
 <div class="example">
-  <button id="expand-button" aria-expanded="false" aria-controls="expand-content" aria-label="Show more information">
+  <button type="button" id="expand-button" aria-expanded="false" aria-controls="expand-content" aria-label="More information">
     <img src="assets/img/down-arrow-transparent.png" alt="" width="30" height="30">
   </button>
   <div id="expand-content" hidden>
@@ -191,7 +193,7 @@
 <p><b>Answer:</b> <code>Pressed: true</code></p>
 
 <div class="example">
-  <button id="pressed-button" aria-pressed="false">
+  <button type="button" id="pressed-button" aria-pressed="false">
     Bold
   </button>
   <p id="pressed-sample">The quick brown fox jumps over the lazy dog.</p>
@@ -240,19 +242,7 @@
 
 
 <script>
-  // Example 3: expand/collapse button
-  const expandButton = document.getElementById('expand-button');
-  const expandContent = document.getElementById('expand-content');
-
-  expandButton.addEventListener('click', () => {
-    const isExpanded = expandButton.getAttribute('aria-expanded') === 'true';
-
-    expandButton.setAttribute('aria-expanded', String(!isExpanded));
-    expandButton.setAttribute('aria-label', isExpanded ? 'Show more information' : 'Hide more information');
-    expandContent.hidden = isExpanded;
-  });
-
-  // Example 4: fake checkbox
+  // Example 2: fake checkbox
   const fakeCheckbox = document.getElementById('fake-checkbox');
 
   function toggleFakeCheckbox() {
@@ -272,6 +262,19 @@
     }
   });
 
+  // Example 3: expand/collapse button
+  // Only aria-expanded changes. The accessible name stays fixed,
+  // so the state isn't announced on top of a changing name.
+  const expandButton = document.getElementById('expand-button');
+  const expandContent = document.getElementById('expand-content');
+
+  expandButton.addEventListener('click', () => {
+    const isExpanded = expandButton.getAttribute('aria-expanded') === 'true';
+
+    expandButton.setAttribute('aria-expanded', String(!isExpanded));
+    expandContent.hidden = isExpanded;
+  });
+
   // Example 4: pressed button
   const pressedButton = document.getElementById('pressed-button');
   const pressedSample = document.getElementById('pressed-sample');
@@ -282,7 +285,7 @@
     pressedSample.style.fontWeight = isPressed ? 'normal' : 'bold';
   });
 
-  // Example 6: single-select listbox, select follows focus
+  // Example 5: single-select listbox, selection follows focus
   (function () {
     const listbox = document.getElementById('listbox-states');
     const options = Array.from(listbox.querySelectorAll('[role="option"]'));

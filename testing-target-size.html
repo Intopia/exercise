@@ -13,7 +13,6 @@
   <script src="assets/js/table-wrap.js" defer></script>
   <style>
 
-
     .btn-pass {
       width: 44px;
       height: 44px;
@@ -25,7 +24,7 @@
       height: 16px;
       font-size: 12px;
       padding: 0;
-        line-height: 1;
+      line-height: 1;
       cursor: pointer;
       margin-right: 200px;
     }
@@ -91,6 +90,13 @@
       margin: 0;
     }
 
+    /* Padding keeps the card's link at least 24px tall,
+       so it doesn't add its own warning to this example */
+    .card-link {
+      display: inline-block;
+      padding: 4px 0;
+    }
+
     .icon-btn {
       position: absolute;
       top: 8px;
@@ -107,7 +113,6 @@
       position: relative;
       width: 16px;
       height: 16px;
-      font-size: 12px;
       padding: 0;
       font-size: 12px;
       line-height: 1;
@@ -138,10 +143,9 @@
 
 <p>This page pairs with the "Highlight target size" bookmarklet, covering <a href="https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html" target="_blank">WCAG 2.2 2.5.8 Target Size (Minimum)</a>. The bookmarklet flags pointer targets smaller than 24 &times; 24 CSS pixels, draws a dashed 24px circle centred on each undersized target, and reports whether that circle overlaps another target.</p>
 
-<p>What the bookmarklet reports:</p>
-
 <div class="table-wrap">
 <table>
+  <caption>What the bookmarklet reports</caption>
   <thead>
     <tr>
       <th scope="col">Colour</th>
@@ -298,9 +302,9 @@
 <!-- section -->
 
 
-<h2>Example 7: native control, unlabelled</h2>
+<h2>Example 7: native control, no visible label</h2>
 
-<p>A plain checkbox at its native size, no label anywhere nearby.</p>
+<p>A plain checkbox at its native size, with no visible label anywhere nearby. It has an accessible name from <code>aria-label</code>, but nothing on screen to add to its target area.</p>
 
 <div class="example">
   <input class="checkbox-tiny" type="checkbox" aria-label="Subscribe to updates">
@@ -369,26 +373,28 @@
 <!-- section -->
 
 
-<h2>Example 10: nested targets don't conflict with each other</h2>
+<h2 id="example-10">Example 10: nested targets don't conflict with each other</h2>
 
-<p>A large clickable card, made interactive with <code>role="button"</code> and a click handler rather than a real <code>&lt;a&gt;</code> or <code>&lt;button&gt;</code>, specifically so it can validly contain a real nested <code>&lt;button&gt;</code> for a single action inside it.</p>
+<p>A clickable card that contains a smaller button. The card is a plain <code>&lt;div&gt;</code> with a click handler, so a mouse or touch user can click anywhere on it. Keyboard and screen reader users get the same action from the real link inside the card. The favourites button sits inside the card as a separate action, and stops its click from reaching the card.</p>
+
+<p>The card deliberately has no <code>role="button"</code>. A <code>button</code> role treats everything inside it as presentational, so a real <code>&lt;button&gt;</code> nested inside would be invalid, and could be flattened or hidden from screen reader users.</p>
 
 <div class="example">
-  <div class="card-target" role="button" tabindex="0" onclick="void(0)">
-    <p>Wireless keyboard</p>
+  <div class="card-target" onclick="this.querySelector('.card-link').click()">
+    <p><a class="card-link" href="#example-10">Wireless keyboard</a></p>
     <button class="icon-btn" type="button" aria-label="Add to favourites" onclick="event.stopPropagation()">&hearts;</button>
   </div>
 </div>
 
 <div class="note">
-  <p><b>Expected result:</b> the card itself passes silently, comfortably over 24 &times; 24. The icon button is undersized at 16 &times; 16, and its 24px circle does overlap the card underneath it, but since the card contains the button, that overlap isn't counted as a spacing conflict. Amber, not red, "Spacing clear".</p>
+  <p><b>Expected result:</b> the card itself passes silently, comfortably over 24 &times; 24. The "Wireless keyboard" link is at least 24px tall, so it also passes. The icon button is undersized at 16 &times; 16, and its 24px circle does overlap the card underneath it, but since the card contains the button, that overlap isn't counted as a spacing conflict. Amber, not red, "Spacing clear".</p>
 </div>
 
 <details>
   <summary>HTML markup</summary>
-<pre><code>&lt;div <span class="highlight">role="button"</span> tabindex="0" onclick="..."&gt;
-  &lt;p&gt;Wireless keyboard&lt;/p&gt;
-  &lt;button style="width: 16px; height: 16px;" aria-label="Add to favourites" onclick="event.stopPropagation()"&gt;
+<pre><code>&lt;div class="card-target" <span class="highlight">onclick="this.querySelector('.card-link').click()"</span>&gt;
+  &lt;p&gt;&lt;a class="card-link" href="..."&gt;Wireless keyboard&lt;/a&gt;&lt;/p&gt;
+  &lt;button style="width: 16px; height: 16px;" aria-label="Add to favourites" <span class="highlight">onclick="event.stopPropagation()"</span>&gt;
     &hearts;
   &lt;/button&gt;
 &lt;/div&gt;</code></pre>

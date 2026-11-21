@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Testing VoiceOver groups - Intopia</title>
-  <meta name="description" content="Test which elements VoiceOver treats as groups, including a data table, embedded iframes, a toolbar and a tab list, plus how to enter and leave them.">
+  <meta name="description" content="Test which elements VoiceOver treats as groups, including a data table, embedded iframes and a toolbar, plus how to enter and leave them.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="favicon.ico" sizes="32x32">
@@ -14,85 +14,6 @@
 <style>
 iframe {width:100%; height:12em; border:2px solid #546e7a}
 [role="toolbar"] {display:flex; gap:.5rem}
-
-:root {
-  --tab-bg: #aaa;
-  --tab-text: #000;
-  --tab-border: #000;
-  --tab-selected-bg: #000;
-  --tab-selected-text: #fff;
-  --panel-bg: #fff;
-  --panel-text: #000;
-  --focus: #005fcc;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --tab-bg: #555;
-    --tab-text: #fff;
-    --tab-border: #fff;
-    --tab-selected-bg: #fff;
-    --tab-selected-text: #000;
-    --panel-bg: #121212;
-    --panel-text: #eee;
-    --focus: #8ab4ff;
-  }
-}
-
-[role="tablist"] {
-  display: flex;
-  align-items: flex-end;
-  gap: .25rem;
-  margin: 0 0 -2px;
-}
-
-[role="tab"] {
-  position: relative;
-  padding: .4em .8em;
-  border: 2px solid var(--tab-border);
-  background: var(--tab-bg);
-  color: var(--tab-text);
-  font: inherit;
-  cursor: pointer;
-}
-
-[role="tab"]:hover {
-  text-decoration: underline;
-}
-
-[role="tab"]:focus-visible {
-  outline: 3px solid var(--focus);
-  outline-offset: 2px;
-  z-index: 1;
-}
-
-[role="tab"][aria-selected="true"] {
-  background: var(--tab-selected-bg);
-  color: var(--tab-selected-text);
-  border-top-width: 4px;
-  border-bottom-color: var(--panel-bg);
-  z-index: 1;
-}
-
-[role="tabpanel"] {
-  border: 2px solid var(--tab-border);
-  padding: 1em;
-  background: var(--panel-bg);
-  color: var(--panel-text);
-}
-
-[role="tabpanel"]:focus-visible {
-  outline: 3px solid var(--focus);
-  outline-offset: 2px;
-}
-
-@media (forced-colors: active) {
-  [role="tab"][aria-selected="true"] {
-    border-top-width: 4px;
-    border-color: Highlight;
-  }
-}
-
 </style>
 </head>
 <body>
@@ -221,88 +142,64 @@ iframe {width:100%; height:12em; border:2px solid #546e7a}
 
 <h2>Example 4: Toolbar</h2>
 
+<p>The toolbar is a single <kbd>Tab</kbd> stop. Once focus is in the toolbar, use <kbd>Left Arrow</kbd> and <kbd>Right Arrow</kbd> to move between buttons, and <kbd>Home</kbd> and <kbd>End</kbd> to jump to the first and last button.</p>
+
 <div class="example">
-  <div role="toolbar" aria-label="Text formatting">
-    <button type="button">Bold</button>
-    <button type="button">Italic</button>
-    <button type="button">Underline</button>
+  <div role="toolbar" aria-label="Text formatting" id="format-toolbar">
+    <button type="button" tabindex="0">Bold</button>
+    <button type="button" tabindex="-1">Italic</button>
+    <button type="button" tabindex="-1">Underline</button>
   </div>
 </div>
 
 <details>
   <summary>HTML markup</summary>
 <pre><code>&lt;div <span class="highlight">role="toolbar"</span> aria-label="Text formatting"&gt;
-  &lt;button type="button"&gt;Bold&lt;/button&gt;
-  &lt;button type="button"&gt;Italic&lt;/button&gt;
-  &lt;button type="button"&gt;Underline&lt;/button&gt;
+  &lt;button type="button" <span class="highlight">tabindex="0"</span>&gt;Bold&lt;/button&gt;
+  &lt;button type="button" <span class="highlight">tabindex="-1"</span>&gt;Italic&lt;/button&gt;
+  &lt;button type="button" <span class="highlight">tabindex="-1"</span>&gt;Underline&lt;/button&gt;
 &lt;/div&gt;</code></pre>
 </details>
 
-
-<!-- section -->
-
-
-<h2>Example 5: Tab list</h2>
-
-<div class="example">
-  <div role="tablist" aria-label="Course information">
-    <button role="tab" id="tab-one" aria-selected="true" aria-controls="panel-one">Overview</button>
-    <button role="tab" id="tab-two" aria-selected="false" aria-controls="panel-two" tabindex="-1">Schedule</button>
-    <button role="tab" id="tab-three" aria-selected="false" aria-controls="panel-three" tabindex="-1">Resources</button>
-  </div>
-  <div role="tabpanel" id="panel-one" aria-labelledby="tab-one">
-    <p>Tab one content: an overview of the course.</p>
-  </div>
-  <div role="tabpanel" id="panel-two" aria-labelledby="tab-two" hidden>
-    <p>Tab two content: the course schedule.</p>
-  </div>
-  <div role="tabpanel" id="panel-three" aria-labelledby="tab-three" hidden>
-    <p>Tab three content: links and resources.</p>
-  </div>
+<div class="note">
+  <p><b>Roving tabindex:</b> only one button in the toolbar has <code>tabindex="0"</code> at a time, so <kbd>Tab</kbd> enters and leaves the toolbar as one stop. When an arrow key moves focus, the newly focused button gets <code>tabindex="0"</code> and the others get <code>tabindex="-1"</code>. If you <kbd>Tab</kbd> away and back, focus returns to the last button you used.</p>
 </div>
-
-<details>
-  <summary>HTML markup</summary>
-<pre><code>&lt;div role="tablist" aria-label="Course information"&gt;
-  &lt;button role="tab" id="tab-one" aria-selected="true" aria-controls="panel-one"&gt;Overview&lt;/button&gt;
-  &lt;button role="tab" id="tab-two" aria-selected="false" aria-controls="panel-two" tabindex="-1"&gt;Schedule&lt;/button&gt;
-  &lt;button role="tab" id="tab-three" aria-selected="false" aria-controls="panel-three" tabindex="-1"&gt;Resources&lt;/button&gt;
-&lt;/div&gt;
-&lt;div role="tabpanel" id="panel-one" aria-labelledby="tab-one"&gt;
-  &lt;p&gt;Tab one content: an overview of the course.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div role="tabpanel" id="panel-two" aria-labelledby="tab-two" hidden&gt;
-  &lt;p&gt;Tab two content: the course schedule.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div role="tabpanel" id="panel-three" aria-labelledby="tab-three" hidden&gt;
-  &lt;p&gt;Tab three content: links and resources.&lt;/p&gt;
-&lt;/div&gt;</code></pre>
-</details>
 
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 </main>
 <script>
+// Example 4: toolbar with roving tabindex
 (function () {
-  var list = document.querySelector('[role="tablist"]');
-  var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
-  function select(tab) {
-    tabs.forEach(function (t) {
-      var on = t === tab;
-      t.setAttribute('aria-selected', on ? 'true' : 'false');
-      t.tabIndex = on ? 0 : -1;
-      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+  var toolbar = document.getElementById('format-toolbar');
+  var buttons = Array.prototype.slice.call(toolbar.querySelectorAll('button'));
+
+  function moveTo(index) {
+    buttons.forEach(function (b, i) {
+      b.tabIndex = i === index ? 0 : -1;
     });
-    tab.focus();
+    buttons[index].focus();
   }
-  tabs.forEach(function (t, i) {
-    t.addEventListener('click', function () { select(t); });
-    t.addEventListener('keydown', function (e) {
-      var n = null;
-      if (e.key === 'ArrowRight') n = tabs[(i + 1) % tabs.length];
-      if (e.key === 'ArrowLeft') n = tabs[(i + tabs.length - 1) % tabs.length];
-      if (n) { e.preventDefault(); select(n); }
-    });
+
+  toolbar.addEventListener('keydown', function (e) {
+    var current = buttons.indexOf(document.activeElement);
+    if (current === -1) return;
+
+    var next = null;
+    if (e.key === 'ArrowRight') next = (current + 1) % buttons.length;
+    if (e.key === 'ArrowLeft') next = (current - 1 + buttons.length) % buttons.length;
+    if (e.key === 'Home') next = 0;
+    if (e.key === 'End') next = buttons.length - 1;
+
+    if (next !== null) {
+      e.preventDefault();
+      moveTo(next);
+    }
+  });
+
+  // Keep the roving tabindex in sync when a button is clicked
+  buttons.forEach(function (b, i) {
+    b.addEventListener('click', function () { moveTo(i); });
   });
 })();
 </script>

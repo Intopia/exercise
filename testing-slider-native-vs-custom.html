@@ -45,10 +45,13 @@
       border-radius: 50%;
       transform: translate(-50%, -50%);
       cursor: grab;
+      /* Stop touch devices scrolling the page while the thumb is dragged */
+      touch-action: none;
     }
 
     .slider-thumb:focus {
-      outline: 2px solid #000;
+      /* currentColor follows the text colour, so it works in dark mode too */
+      outline: 2px solid currentColor;
       outline-offset: 2px;
     }
 
@@ -104,11 +107,12 @@
 <div class="example">
   <label class="label" for="volume-native">Volume</label>
   <input type="range" id="volume-native" min="0" max="100" value="40">
-  <output for="volume-native" id="volume-native-output">40</output>
+  <span class="slider-output" id="volume-native-output" aria-hidden="true">40</span>
 </div>
 
 <div class="note">
-  <p><b>Expected result:</b> Arrow keys, Home, End, and Page Up/Down should all work immediately, with no JavaScript. The <code>&lt;output&gt;</code> is a small, optional addition, purely visual, showing sighted users the numeric value, since a bare slider thumb position alone can be hard to read precisely. It has no effect on what's announced to AT, that comes from the input's own native state.</p>
+  <p><b>Expected result:</b> Arrow keys, Home, End, and Page Up/Down should all work immediately, with no JavaScript. The number beside the slider is a small, optional addition, showing sighted users the numeric value, since a bare slider thumb position alone can be hard to read precisely. It's hidden from AT with <code>aria-hidden="true"</code>, because the slider already announces its own value.</p>
+  <p>An <code>&lt;output&gt;</code> element is deliberately not used here. It has an implicit <code>status</code> role, which makes it a polite live region, so screen reader users could hear every value twice: once from the slider and again from the output.</p>
 </div>
 
 <details>
@@ -121,7 +125,7 @@
   max="100"
   value="40"
 &gt;
-&lt;output for="volume-native"&gt;40&lt;/output&gt;</code></pre>
+&lt;span <span class="highlight">aria-hidden="true"</span>&gt;40&lt;/span&gt;</code></pre>
 </details>
 
 <script>
@@ -140,7 +144,7 @@
 
 <p>Starting point, before anything is resolved:</p>
 
-<pre><code>&lt;div&gt;Volume&lt;/div&gt;
+<pre><code>&lt;span&gt;Volume&lt;/span&gt;
 &lt;div&gt;
   &lt;div&gt;&lt;/div&gt;
 &lt;/div&gt;</code></pre>
@@ -163,7 +167,7 @@
         aria-valuenow="40"
       ></div>
     </div>
-    <span class="slider-output" id="volume-custom-output">40</span>
+    <span class="slider-output" id="volume-custom-output" aria-hidden="true">40</span>
   </div>
 </div>
 
@@ -204,8 +208,12 @@
       <td>Hand-written keydown handling: Arrow keys, Home, End, Page Up/Down</td>
     </tr>
     <tr>
+      <td>How should touch dragging work?</td>
+      <td><code>touch-action: none</code> on the thumb, so dragging moves the thumb instead of scrolling the page</td>
+    </tr>
+    <tr>
       <td>What should be passed to assistive technology when the value changes?</td>
-      <td><b>Resolved: neither <code>aria-live</code> nor a hidden announcer element is needed.</b> Real keyboard focus stays on the slider itself the entire time, unlike the character counter or timer examples elsewhere on this site, where a <i>separate</i> element was being updated. A focused widget's own value change should be announced automatically once <code>aria-valuenow</code> updates, worth confirming directly with your own AT set rather than assumed.</td>
+      <td><b>Resolved: neither <code>aria-live</code> nor a hidden announcer element is needed.</b> Real keyboard focus stays on the slider itself the entire time, unlike the character counter or timer examples elsewhere on this site, where a <i>separate</i> element was being updated. A focused widget's own value change should be announced automatically once <code>aria-valuenow</code> updates, worth confirming directly with your own AT set rather than assumed. The visible number is hidden with <code>aria-hidden="true"</code>, as in Example 1, so it isn't read as a second, separate value.</td>
     </tr>
   </tbody>
 </table>
@@ -219,7 +227,7 @@
     <li>Page Up / Page Down: increase/decrease by 10</li>
     <li>Home / End: jump to minimum / maximum</li>
     <li>Clicking anywhere on the track: jump the thumb to that position</li>
-    <li>Dragging the thumb: move it with the mouse or touch, clamped between 0 and 100</li>
+    <li>Dragging the thumb: move it with the mouse or touch, clamped between 0 and 100, without scrolling the page</li>
     <li>All of the above should update the visible position, the visible number, and <code>aria-valuenow</code> together, in sync</li>
   </ul>
 </div>
@@ -240,7 +248,7 @@
     <span class="highlight">aria-valuenow="40"</span>
   &gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;span id="volume-custom-output"&gt;40&lt;/span&gt;</code></pre>
+&lt;span id="volume-custom-output" <span class="highlight">aria-hidden="true"</span>&gt;40&lt;/span&gt;</code></pre>
 </details>
 
 
@@ -326,10 +334,18 @@
     setValue(valueFromPointer(event.clientX));
   });
 
-  thumb.addEventListener('pointerup', (event) => {
+  function stopDragging(event) {
     isDragging = false;
-    thumb.releasePointerCapture(event.pointerId);
-  });
+    if (thumb.hasPointerCapture(event.pointerId)) {
+      thumb.releasePointerCapture(event.pointerId);
+    }
+  }
+
+  thumb.addEventListener('pointerup', stopDragging);
+
+  // If the browser interrupts the drag (for example, a system gesture
+  // on a touch device), stop dragging so the thumb doesn't get stuck
+  thumb.addEventListener('pointercancel', stopDragging);
 
   render();
 })();

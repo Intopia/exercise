@@ -57,7 +57,7 @@
 
 <p>This page compares two ways of jumping to a specific area further down a page: the CSS <a href="https://drafts.csswg.org/selectors/#the-target-pseudo" target="_blank"><code>:target</code></a> pseudo-class on its own, and the same pattern enhanced with JavaScript.</p>
 
-<p>The key difference is not visual, both examples scroll the target into view and apply the same highlight. The difference is whether keyboard focus actually moves to the target, or only the scroll position changes.</p>
+<p>Both examples scroll the target into view and apply the same highlight. The difference is whether keyboard focus actually moves to the target, or whether only the scroll position and the browser's Tab starting point change.</p>
 
 
 <!-- section -->
@@ -67,7 +67,9 @@
 
 <p>This example relies entirely on native browser fragment navigation and the <code>:target</code> pseudo-class. No JavaScript is involved.</p>
 
-<p><b>Important:</b> native fragment navigation scrolls the target into view, but it does not move keyboard focus there. After activating the link below, pressing Tab will move focus to whatever is next in the document after the link, not to the target area itself. This is a common misconception, adding <code>tabindex="-1"</code> to a target on its own does not fix this either, focus only moves if something explicitly calls <code>.focus()</code> on the target.</p>
+<p>The HTML specification says that fragment navigation should scroll the target into view and move the <a href="https://html.spec.whatwg.org/multipage/interaction.html#sequential-focus-navigation-starting-point" target="_blank">sequential focus navigation starting point</a> to the target. The target doesn't receive focus, but the next <kbd>Tab</kbd> press should start from the target. In this example, that means the next <kbd>Tab</kbd> should move to "Dummy link below target".</p>
+
+<p>Browser support for this has improved a lot, but it has had bugs, and behaviour can still vary. Screen readers also handle fragment navigation differently, and may not move their reading position to the target. Test this directly rather than assuming.</p>
 
 <p>Click the link below to see an example:</p>
 <p><a href="#target1"><b>Link to target (CSS only)</b></a></p>
@@ -85,7 +87,7 @@
 <p><a href="#">Dummy link above target</a></p>
 
 <div class="target-box" id="target1">
-  Hello world (CSS-only target, receives no keyboard focus)
+  Hello world (CSS-only target, does not receive focus)
 </div>
 
 <pre><code>&lt;a href="#target1"&gt;Link to target&lt;/a&gt;
@@ -105,6 +107,16 @@
 
 <p><a href="#">Dummy link below target</a></p>
 
+<div class="note">
+  <p><b>What to test:</b></p>
+  <ol>
+    <li>Press <kbd>Tab</kbd> to move to "Link to target (CSS only)" and press <kbd>Enter</kbd>.</li>
+    <li>Press <kbd>Tab</kbd> once.</li>
+    <li>Record which element receives focus. If the starting point moved to the target, it should be "Dummy link below target". If it's the element after "Link to target (CSS only)", or the first link on the page, the starting point didn't move.</li>
+    <li>Repeat with a screen reader running, and record whether the screen reader reads from the target or stays near the link.</li>
+  </ol>
+</div>
+
 <p>Pri at epicurei convenire, ut oratio liberavisse est. Ex his dolorum concludaturque, et mel solet soleat accumsan. In mollis ancillae intellegebat has. Sea congue cetero cu, ut mnesarchum vituperatoribus mel. Ne vix solet dicant possit, eos solet dictas facilisi ei.</p>
 
 <p>Vel ei quaeque definiebas. Ius no assum impedit. Ipsum efficiendi usu ei. Prima electram principes in pro, id pro dolores appellantur, at causae admodum voluptatum eam. Accusam percipit erroribus pro et. Brute option usu cu, alia enim mutat eum cu.</p>
@@ -122,13 +134,20 @@
 <ul>
   <li>The target element has <code>tabindex="-1"</code>, making it programmatically focusable without adding it to the normal tab order.</li>
   <li>A script listens for the page's <code>hashchange</code> event. When the fragment changes to <code>#target2</code>, it finds that element and calls <code>.focus()</code> on it directly.</li>
+  <li>A script also listens for clicks on the link itself. If the URL already ends in <code>#target2</code>, activating the link again doesn't fire <code>hashchange</code>, so the click handler moves focus instead. Without this, the link would only work once.</li>
   <li>The script also checks the URL on page load, in case someone arrives directly at a link containing <code>#target2</code> (for example, from a bookmark or another page), rather than only reacting to a click during the current visit.</li>
   <li>A visible focus outline and the same yellow flash animation used in Example 1 confirm where focus has landed, so the effect is not purely functional, it is also visually confirmable.</li>
 </ul>
 
 <h3>Why this matters for accessibility</h3>
 
-<p>Without this script, a keyboard user who activates the link would have their view scrolled to the target, but their actual keyboard focus would remain on the link, or jump to whatever happens to be next in the document. Pressing Tab afterwards would not continue naturally from the target area, it would continue from wherever focus was actually left, which can feel disorienting and unpredictable. Moving real focus to the target keeps the visual scroll position and the keyboard user's actual position in the document in sync.</p>
+<p>In browsers that support the sequential focus navigation starting point, a keyboard user's next <kbd>Tab</kbd> already continues from the target, so Example 1 may work well for <kbd>Tab</kbd> on its own. Moving real focus to the target adds a few things on top:</p>
+
+<ul>
+  <li>Screen readers announce the newly focused element, so users know the jump happened and where they've landed.</li>
+  <li>The screen reader's reading position moves with focus, rather than staying near the link.</li>
+  <li>It doesn't rely on every browser getting the starting point behaviour right.</li>
+</ul>
 
 <p><b>Note:</b> this is the same underlying technique demonstrated on <a href="testing-focus-management.html">the focus management testing page</a>, applied here to in-page fragment links rather than a multi-step single page app.</p>
 
@@ -162,23 +181,41 @@
 &lt;/div&gt;
 
 &lt;script&gt;
+  var link = document.getElementById('js-target-link');
+  var target = document.getElementById('target2');
+
   function focusTarget2() {
     if (window.location.hash === '#target2') {
-      var target = document.getElementById('target2');
-      if (target) {
-        target.focus();
-      }
+      target.focus();
     }
   }
 
   // Handle direct arrival at #target2 (bookmark, external link, page load)
   focusTarget2();
 
-  // Handle activation of the link during the current page visit
+  // Handle activation of the link when the hash changes
   window.addEventListener('hashchange', focusTarget2);
+
+  // Handle repeat activation. If the URL already ends in #target2,
+  // hashchange won't fire, so move focus from the click instead
+  link.addEventListener('click', function () {
+    if (window.location.hash === '#target2') {
+      target.focus();
+    }
+  });
 &lt;/script&gt;</code></pre>
 
 <p><a href="#">Dummy link below target</a></p>
+
+<div class="note">
+  <p><b>What to test:</b></p>
+  <ol>
+    <li>Press <kbd>Tab</kbd> to move to "Link to target (CSS + JavaScript)" and press <kbd>Enter</kbd>. Focus should move to the "Hello world" box, with a visible outline.</li>
+    <li>Press <kbd>Tab</kbd> once. Focus should move to "Dummy link below target".</li>
+    <li>Press <kbd>Shift</kbd> + <kbd>Tab</kbd> back to the link and press <kbd>Enter</kbd> again. Focus should move to the target a second time.</li>
+    <li>Repeat with a screen reader running, and record whether the target's text is announced when focus moves.</li>
+  </ol>
+</div>
 
 <p>Pri at epicurei convenire, ut oratio liberavisse est. Ex his dolorum concludaturque, et mel solet soleat accumsan. In mollis ancillae intellegebat has. Sea congue cetero cu, ut mnesarchum vituperatoribus mel. Ne vix solet dicant possit, eos solet dictas facilisi ei.</p>
 
@@ -186,20 +223,28 @@
 
 
 <script>
+  var link = document.getElementById('js-target-link');
+  var target = document.getElementById('target2');
+
   function focusTarget2() {
     if (window.location.hash === '#target2') {
-      var target = document.getElementById('target2');
-      if (target) {
-        target.focus();
-      }
+      target.focus();
     }
   }
 
   // Handle direct arrival at #target2 (bookmark, external link, page load)
   focusTarget2();
 
-  // Handle activation of the link during the current page visit
+  // Handle activation of the link when the hash changes
   window.addEventListener('hashchange', focusTarget2);
+
+  // Handle repeat activation. If the URL already ends in #target2,
+  // hashchange won't fire, so move focus from the click instead
+  link.addEventListener('click', function () {
+    if (window.location.hash === '#target2') {
+      target.focus();
+    }
+  });
 </script>
 
 

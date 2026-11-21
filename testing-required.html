@@ -26,6 +26,8 @@
 
 <h1>Testing the <code>required</code> attribute in Chrome</h1>
 
+<p class="page-meta">Updated: <time datetime="2026-11-21">21 November 2026</time> | Chrome: 158.0.8127.36</p>
+
 <p>Note: these results are specific to Chrome. Behaviour may differ in other browsers and browser/screen reader combinations.</p>
 
 <p>All form controls are defined using the <code>required</code> attribute. In Chrome's accessibility tree, all form controls:</p>
@@ -47,8 +49,18 @@
 </ul>
 
 <form action="#" class="example">
-  <label class="label" for="email">Email address</label>
-  <input class="input" id="email" type="email" required>
+  <label class="label" for="email1">Email address</label>
+  <input class="input" id="email1" type="email" required>
+</form>
+
+<ul>
+  <li><span class="pass">PASS</span>: Registers the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span>: Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
+
+<form action="#" class="example">
+  <label class="label" for="email2">Email address</label>
+  <input class="input" id="email2" type="email" aria-required="true">
 </form>
 
 
@@ -63,8 +75,18 @@
 </ul>
 
 <form action="#" class="example">
-  <label class="label" for="number">Choose a number</label>
-  <input class="input" id="number" type="number" required>
+  <label class="label" for="number1">Choose a number</label>
+  <input class="input" id="number1" type="number" required>
+</form>
+
+<ul>
+  <li><span class="pass">PASS</span>: Registers the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span>: Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
+
+<form action="#" class="example">
+  <label class="label" for="number2">Choose a number</label>
+  <input class="input" id="number2" type="number" aria-required="true">
 </form>
 
 
@@ -79,8 +101,18 @@
 </ul>
 
 <form action="#" class="example">
-  <label class="label" for="password">Choose a password</label>
-  <input class="input" id="password" type="password" required>
+  <label class="label" for="password1">Choose a password</label>
+  <input class="input" id="password1" type="password" required>
+</form>
+
+<ul>
+  <li><span class="pass">PASS</span>: Registers the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span>: Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
+
+<form action="#" class="example">
+  <label class="label" for="password2">Choose a password</label>
+  <input class="input" id="password2" type="password" aria-required="true">
 </form>
 
 
@@ -95,10 +127,19 @@
 </ul>
 
 <form action="#" class="example">
-  <label class="label" for="tel">Phone number</label>
-  <input class="input" id="tel" type="tel" required>
+  <label class="label" for="tel1">Phone number</label>
+  <input class="input" id="tel1" type="tel" required>
 </form>
 
+<ul>
+  <li><span class="pass">PASS</span>: Registers the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span>: Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
+
+<form action="#" class="example">
+  <label class="label" for="tel2">Phone number</label>
+  <input class="input" id="tel2" type="tel" aria-required="true">
+</form>
 
 <!-- section -->
 
@@ -111,8 +152,18 @@
 </ul>
 
 <form action="#" class="example">
-  <label class="label" for="text">Name</label>
-  <input class="input" id="text" type="text" required>
+  <label class="label" for="text1">Name</label>
+  <input class="input" id="text1" type="text" required>
+</form>
+
+<ul>
+  <li><span class="pass">PASS</span>: Registers the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span>: Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
+
+<form action="#" class="example">
+  <label class="label" for="text2">Name</label>
+  <input class="input" id="text2" type="text" aria-required="true">
 </form>
 
 
@@ -127,8 +178,18 @@
 </ul>
 
 <form action="#" class="example">
-  <label class="label" for="url">Web address</label>
-  <input class="input" id="url" type="url" required>
+  <label class="label" for="url1">Web address</label>
+  <input class="input" id="url1" type="url" required>
+</form>
+
+<ul>
+  <li><span class="pass">PASS</span>: Registers the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span>: Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
+
+<form action="#" class="example">
+  <label class="label" for="url2">Web address</label>
+  <input class="input" id="url2" type="url" aria-required="true">
 </form>
 
 
@@ -143,8 +204,18 @@
 </ul>
 
 <form action="#" class="example">
-  <label class="label" for="textarea">Add a comment</label>
-  <textarea class="input" id="textarea" rows="5" required></textarea>
+  <label class="label" for="textarea1">Add a comment</label>
+  <textarea class="input" id="textarea1" rows="5" required></textarea>
+</form>
+
+<ul>
+  <li><span class="pass">PASS</span>: Registers the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span>: Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
+
+<form action="#" class="example">
+  <label class="label" for="textarea2">Add a comment</label>
+  <textarea class="input" id="textarea2" rows="5" aria-required="true"></textarea>
 </form>
 
 
@@ -159,9 +230,20 @@
 </ul>
 
 <form action="#" class="example">
-  <input id="radio" type="radio" required>
-  <label for="radio">Yes</label>
+  <input id="radio1" type="radio" required>
+  <label for="radio1">Yes</label>
 </form>
+
+<ul>
+  <li><span class="fail">FAIL</span>: Does not register the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span>: Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
+
+<form action="#" class="example">
+  <input id="radio2" type="radio" aria-required="true">
+  <label for="radio2">Yes</label>
+</form>
+
 
 
 <!-- section -->
@@ -175,8 +257,18 @@
 </ul>
 
 <form action="#" class="example">
-  <label class="label" for="search">Search the site</label>
-  <input class="input" id="search" type="search" required>
+  <label class="label" for="search1">Search the site</label>
+  <input class="input" id="search1" type="search" required>
+</form>
+
+<ul>
+  <li><span class="fail">FAIL</span>: Does not register the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span>: Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
+
+<form action="#" class="example">
+  <label class="label" for="search2">Search the site</label>
+  <input class="input" id="search2" type="search" aria-required="true">
 </form>
 
 
@@ -187,14 +279,23 @@
 
 <ul>
   <li><span class="fail">FAIL</span>: Does not register the <code>required</code> attribute.</li>
-  <li><span class="fail">FAIL</span>: Incorrectly registers as <code>Invalid user entry: true</code>.</li>
+  <li><span class="pass">PASS</span>: Registers as <code>Invalid user entry: false</code>.</li>
 </ul>
 
 <form action="#" class="example">
-  <input id="checkbox" type="checkbox" required>
-  <label for="checkbox">Subscribe</label>
+  <input id="checkbox1" type="checkbox" required>
+  <label for="checkbox1">Subscribe</label>
 </form>
 
+<ul>
+  <li><span class="fail">FAIL</span>: Does not register the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span>: Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
+
+<form action="#" class="example">
+  <input id="checkbox2" type="checkbox" aria-required="true">
+  <label for="checkbox2">Subscribe</label>
+</form>
 
 <!-- section -->
 
@@ -203,13 +304,23 @@
 
 <ul>
   <li><span class="fail">FAIL</span>: Does not register the <code>required</code> attribute.</li>
-  <li><span class="fail">FAIL</span>: Incorrectly registers as <code>Invalid user entry: true</code>.</li>
+  <li><span class="pass">PASS</span>: Registers as <code>Invalid user entry: false</code>.</li>
 </ul>
+
 <form action="#" class="example">
-  <label class="label" for="date">Choose a date</label>
-  <input class="input" id="date" type="date" required>
+  <label class="label" for="date1">Choose a date</label>
+  <input class="input" id="date1" type="date" required>
 </form>
 
+<ul>
+  <li><span class="fail">FAIL</span>: Does not register the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span>: Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
+
+<form action="#" class="example">
+  <label class="label" for="date2">Choose a date</label>
+  <input class="input" id="date2" type="date" aria-required="true">
+</form>
 
 <!-- section -->
 
@@ -218,15 +329,23 @@
 
 <ul>
   <li><span class="fail">FAIL</span>: Does not register the <code>required</code> attribute.</li>
-  <li><span class="fail">FAIL</span>: Incorrectly registers as <code>Invalid user entry: true</code>.</li>
+  <li><span class="pass">PASS</span>: Registers as <code>Invalid user entry: false</code>.</li>
 </ul>
 
 <form action="#" class="example">
-  <label class="label" for="datetime">Choose a date and time</label>
-  <input class="input" id="datetime" type="datetime-local" required>
+  <label class="label" for="datetime1">Choose a date and time</label>
+  <input class="input" id="datetime1" type="datetime-local" required>
 </form>
 
+<ul>
+  <li><span class="fail">FAIL</span>: Does not register the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span>: Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
 
+<form action="#" class="example">
+  <label class="label" for="datetime2">Choose a date and time</label>
+  <input class="input" id="datetime2" type="datetime-local" aria-required="true">
+</form>
 <!-- section -->
 
 
@@ -234,12 +353,22 @@
 
 <ul>
   <li><span class="fail">FAIL</span>: Does not register the <code>required</code> attribute.</li>
-  <li><span class="fail">FAIL</span>: Incorrectly registers as <code>Invalid user entry: true</code>.</li>
+  <li><span class="pass">PASS</span>: Registers as <code>Invalid user entry: false</code>.</li>
 </ul>
 
 <form action="#" class="example">
-  <label class="label" for="file">Choose a file</label>
-  <input id="file" type="file" required>
+  <label class="label" for="file1">Choose a file</label>
+  <input id="file1" type="file" required>
+</form>
+
+<ul>
+  <li><span class="fail">FAIL</span>: Does not register the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span>: Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
+
+<form action="#" class="example">
+  <label class="label" for="file2">Choose a file</label>
+  <input id="file2" type="file" aria-required="true">
 </form>
 
 
@@ -250,12 +379,22 @@
 
 <ul>
   <li><span class="fail">FAIL</span>: Does not register the <code>required</code> attribute.</li>
-  <li><span class="fail">FAIL</span>: Incorrectly registers as <code>Invalid user entry: true</code>.</li>
+  <li><span class="pass">PASS</span>: Registers as <code>Invalid user entry: false</code>.</li>
 </ul>
 
 <form action="#" class="example">
-  <label class="label" for="month">Choose a month</label>
-  <input class="input" id="month" type="month" required>
+  <label class="label" for="month1">Choose a month</label>
+  <input class="input" id="month1" type="month" required>
+</form>
+
+<ul>
+  <li><span class="fail">FAIL</span>: Does not register the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span>: Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
+
+<form action="#" class="example">
+  <label class="label" for="month2">Choose a month</label>
+  <input class="input" id="month2" type="month" aria-required="true">
 </form>
 
 
@@ -266,14 +405,23 @@
 
 <ul>
   <li><span class="fail">FAIL</span>: Does not register the <code>required</code> attribute.</li>
-  <li><span class="fail">FAIL</span>: Incorrectly registers as <code>Invalid user entry: true</code>.</li>
+  <li><span class="pass">PASS</span>: Registers as <code>Invalid user entry: false</code>.</li>
 </ul>
 
 <form action="#" class="example">
-  <label class="label" for="time">Choose a time</label>
-  <input class="input" id="time" type="time" required>
+  <label class="label" for="time1">Choose a time</label>
+  <input class="input" id="time1" type="time" required>
 </form>
 
+<ul>
+  <li><span class="fail">FAIL</span>: Does not register the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span>: Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
+
+<form action="#" class="example">
+  <label class="label" for="time2">Choose a time</label>
+  <input class="input" id="time2" type="time" aria-required="true">
+</form>
 
 <!-- section -->
 
@@ -282,12 +430,22 @@
 
 <ul>
   <li><span class="fail">FAIL</span>: Does not register the <code>required</code> attribute.</li>
-  <li><span class="fail">FAIL</span>: Incorrectly registers as <code>Invalid user entry: true</code>.</li>
+  <li><span class="pass">PASS</span>: Registers as <code>Invalid user entry: false</code>.</li>
 </ul>
 
 <form action="#" class="example">
-  <label class="label" for="week">Choose a week</label>
-  <input class="input" id="week" type="week" required>
+  <label class="label" for="week1">Choose a week</label>
+  <input class="input" id="week1" type="week" required>
+</form>
+
+<ul>
+  <li><span class="fail">FAIL</span>: Does not register the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span>: Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
+
+<form action="#" class="example">
+  <label class="label" for="week2">Choose a week</label>
+  <input class="input" id="week2" type="week" aria-required="true">
 </form>
 
 
@@ -298,19 +456,29 @@
 
 <ul>
   <li><span class="fail">FAIL</span>: Does not register the <code>required</code> attribute.</li>
-  <li><span class="fail">FAIL</span>: Incorrectly registers as <code>Invalid user entry: true</code>.</li>
+  <li><span class="pass">PASS</span>: Registers as <code>Invalid user entry: false</code>.</li>
 </ul>
 
 <form action="#" class="example">
-  <label class="label" for="select">Choose a dinosaur:</label>
-  <select class="input" id="select" required>
+  <label class="label" for="select1">Choose a dinosaur:</label>
+  <select class="input" id="select1" required>
     <option value="">Choose</option>
     <option>Tyrannosaurus</option>
     <option>Velociraptor</option>
-    <option>Deinonychus</option>
-    <option>Diplodocus</option>
-    <option>Saltasaurus</option>
-    <option>Apatosaurus</option>
+  </select>
+</form>
+
+<ul>
+  <li><span class="fail">FAIL</span>: Does not register the <code>required</code> attribute.</li>
+  <li><span class="pass">PASS</span>: Registers as <code>Invalid user entry: false</code>.</li>
+</ul>
+
+<form action="#" class="example">
+  <label class="label" for="select2">Choose a dinosaur:</label>
+  <select class="input" id="select2" aria-required="true">
+    <option value="">Choose</option>
+    <option>Tyrannosaurus</option>
+    <option>Velociraptor</option>
   </select>
 </form>
 

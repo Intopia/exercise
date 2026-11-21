@@ -57,7 +57,7 @@ form {
 <div class="example">
   <h3 class="contact-details-heading">Login</h3>
 
-  <form action="#" class="unstyled" id="login-form">
+  <form action="#" class="unstyled" id="login-form" novalidate>
     <div class="form-group-small">
       <label class="label" for="name">Name <span class="required">(Required)</span></label>
       <input class="input" type="text" id="name">
@@ -70,7 +70,7 @@ form {
       <span id="email-error-container"></span>
     </div>
 
-    <button class="button" type="submit">Submit</button>  
+    <button class="button" type="submit">Submit</button>
   </form>
 </div>
 
@@ -96,31 +96,32 @@ form {
 <script>
   document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent form submission
-    
-    // Focus goes to the input with id="name"
+
+    // This demo always produces both errors, whatever is entered.
+    // In a real form, only fields that actually fail validation
+    // would be marked as invalid.
+
     const nameInput = document.getElementById('name');
-    nameInput.focus();
-    
-    // The input with id="name" receives aria-invalid="true"
-    nameInput.setAttribute('aria-invalid', 'true');
-    
-    // The input with id="name" receives aria-describedby="name-error"
-    nameInput.setAttribute('aria-describedby', 'name-error');
-    
-    // The element with id="name-error-container" receives the error message markup
-    const nameErrorContainer = document.getElementById('name-error-container');
-    nameErrorContainer.innerHTML = '<span class="error-message" id="name-error">You must include a name</span>';
-    
-    // The input with id="email" receives aria-invalid="true"
     const emailInput = document.getElementById('email');
+
+    // Step 1: add the error messages to the page first,
+    // so the elements they reference exist
+    document.getElementById('name-error-container').innerHTML =
+      '<span class="error-message" id="name-error">You must include a name</span>';
+    document.getElementById('email-error-container').innerHTML =
+      '<span class="error-message" id="email-error">You must use a valid email address</span>';
+
+    // Step 2: mark each field as invalid and link it to its error message
+    nameInput.setAttribute('aria-invalid', 'true');
+    nameInput.setAttribute('aria-describedby', 'name-error');
+
     emailInput.setAttribute('aria-invalid', 'true');
-    
-    // The input with id="email" receives aria-describedby="email-error"
     emailInput.setAttribute('aria-describedby', 'email-error');
-    
-    // The element with id="email-error-container" receives the error message markup
-    const emailErrorContainer = document.getElementById('email-error-container');
-    emailErrorContainer.innerHTML = '<span class="error-message" id="email-error">You must use a valid email address</span>';
+
+    // Step 3: move focus last. If focus moves before the error state
+    // and message exist, screen readers may announce the field
+    // without its error.
+    nameInput.focus();
   });
 </script>
 
