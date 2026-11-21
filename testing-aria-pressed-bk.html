@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing aria-pressed - Intopia</title>
+  <meta name="description" content="Test how aria-pressed communicates true, false and mixed states on toggle buttons, with an interactive example controlling multiple servers.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <script src="assets/js/table-wrap.js" defer></script>
+  <style>
+    button[aria-pressed="true"] {
+      background: #2e7d32;
+      color: #fff;
+    }
+    button[aria-pressed="false"] {
+      background: #555555;
+      color: #fff;
+    }
+    button[aria-pressed="mixed"] {
+      background: #e65100;
+      color: #fff;
+    }
+    .server-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5em;
+      max-width: 16em;
+    }
+  </style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo. The word 'intopia' in black, with the 'o' made from four curved brush strokes in pink, orange, yellow and turquoise." class="intopia-logo">
+  </picture>
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing <code>aria-pressed</code></h1>
+
+<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-pressed" target="_blank"><code>aria-pressed</code></a> indicates the current state of a toggle button. It supports <code>true</code>, <code>false</code> and <code>mixed</code>. It can be used on a native <code>&lt;button&gt;</code> or an element with <code>role="button"</code>.</p>
+
+<p>This page uses a set of server controls to demonstrate all three states, including how <code>mixed</code> can represent a group of controls with different states.</p>
+
+
+<!-- section -->
+
+
+<h2>Example: servers</h2>
+
+<p>This example has four buttons. The "All servers" button controls the three individual server buttons. Its <code>aria-pressed</code> state changes automatically based on their states:</p>
+
+<ul>
+  <li>All off: <code>aria-pressed="false"</code>, "Turn all servers on".</li>
+  <li>All on: <code>aria-pressed="true"</code>, "Turn all servers off".</li>
+  <li>Mixed: <code>aria-pressed="mixed"</code>, "Turn all servers off".</li>
+</ul>
+
+<p>There is no <code>aria-live</code> region. Screen readers may announce changes to a button's state or label while it has focus, or when focus returns to it.</p>
+
+<h3>Try this:</h3>
+
+<ol>
+  <li>Turn on a screen reader and Tab to "All servers". It should announce as <em>"not pressed"</em>.</li>
+  <li>Tab to Server 2 and activate it. Then use Shift+Tab to return to "All servers". It should announce as <em>"mixed"</em>.</li>
+  <li>Activate the remaining servers, then return to "All servers". It should announce as <em>"pressed"</em>.</li>
+  <li>Activate "All servers" to turn everything off. It should announce as <em>"not pressed"</em>.</li>
+</ol>
+
+<div class="example">
+  <div class="server-buttons">
+    <button id="all-servers" aria-pressed="false">Turn all servers on</button>
+    <button class="server-button" id="server-1" data-name="Server 1" aria-pressed="false">Turn Server 1 on</button>
+    <button class="server-button" id="server-2" data-name="Server 2" aria-pressed="false">Turn Server 2 on</button>
+    <button class="server-button" id="server-3" data-name="Server 3" aria-pressed="false">Turn Server 3 on</button>
+  </div>
+</div>
+
+<details>
+  <summary>HTML markup</summary>
+<pre><code>&lt;button id="all-servers" <span class="highlight">aria-pressed="false"</span>&gt;
+  Turn all servers on
+&lt;/button&gt;
+&lt;button id="server-1" data-name="Server 1" <span class="highlight">aria-pressed="false"</span>&gt;
+  Turn Server 1 on
+&lt;/button&gt;
+&lt;!-- Server 2 and Server 3 follow the same pattern --&gt;</code></pre>
+</details>
+
+<details>
+  <summary>JavaScript</summary>
+<pre><code>const allServers = document.getElementById('all-servers');
+const serverButtons = Array.from(document.querySelectorAll('.server-button'));
+
+function serverLabel(name, isPressed) {
+  return isPressed ? `Turn ${name} off` : `Turn ${name} on`;
+}
+
+function updateAllServers() {
+  const states = serverButtons.map(btn => btn.getAttribute('aria-pressed'));
+  const allOn = states.every(state => state === 'true');
+  const allOff = states.every(state => state === 'false');
+
+  if (allOff) {
+    allServers.setAttribute('aria-pressed', 'false');
+    allServers.textContent = 'Turn all servers on';
+  } else if (allOn) {
+    allServers.setAttribute('aria-pressed', 'true');
+    allServers.textContent = 'Turn all servers off';
+  } else {
+    // Mixed and all-on share the same label, turning off is always
+    // the offered action unless every server is already off.
+    // Colour, not text, is what distinguishes mixed from all-on here.
+    allServers.setAttribute('aria-pressed', 'mixed');
+    allServers.textContent = 'Turn all servers off';
+  }
+}
+
+serverButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const isPressed = btn.getAttribute('aria-pressed') === 'true';
+    const nextPressed = !isPressed;
+    btn.setAttribute('aria-pressed', String(nextPressed));
+    btn.textContent = serverLabel(btn.dataset.name, nextPressed);
+    updateAllServers();
+  });
+});
+
+allServers.addEventListener('click', () => {
+  const currentState = allServers.getAttribute('aria-pressed');
+  // Only turn everything on if every server is currently off.
+  // Otherwise (true or mixed), the action is always to turn everything off.
+  const turnOn = currentState === 'false';
+
+  serverButtons.forEach(btn => {
+    btn.setAttribute('aria-pressed', String(turnOn));
+    btn.textContent = serverLabel(btn.dataset.name, turnOn);
+  });
+
+  updateAllServers();
+});</code></pre>
+</details>
+
+<script>
+  const allServers = document.getElementById('all-servers');
+  const serverButtons = Array.from(document.querySelectorAll('.server-button'));
+
+  function serverLabel(name, isPressed) {
+    return isPressed ? `Turn ${name} off` : `Turn ${name} on`;
+  }
+
+  function updateAllServers() {
+    const states = serverButtons.map(btn => btn.getAttribute('aria-pressed'));
+    const allOn = states.every(state => state === 'true');
+    const allOff = states.every(state => state === 'false');
+
+    if (allOff) {
+      allServers.setAttribute('aria-pressed', 'false');
+      allServers.textContent = 'Turn all servers on';
+    } else if (allOn) {
+      allServers.setAttribute('aria-pressed', 'true');
+      allServers.textContent = 'Turn all servers off';
+    } else {
+      allServers.setAttribute('aria-pressed', 'mixed');
+      allServers.textContent = 'Turn all servers off';
+    }
+  }
+
+  serverButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const isPressed = btn.getAttribute('aria-pressed') === 'true';
+      const nextPressed = !isPressed;
+      btn.setAttribute('aria-pressed', String(nextPressed));
+      btn.textContent = serverLabel(btn.dataset.name, nextPressed);
+      updateAllServers();
+    });
+  });
+
+  allServers.addEventListener('click', () => {
+    const currentState = allServers.getAttribute('aria-pressed');
+    const turnOn = currentState === 'false';
+
+    serverButtons.forEach(btn => {
+      btn.setAttribute('aria-pressed', String(turnOn));
+      btn.textContent = serverLabel(btn.dataset.name, turnOn);
+    });
+
+    updateAllServers();
+  });
+</script>
+
+
+<!-- section -->
+
+
+
+<h2>Design notes</h2>
+
+<ul>
+  <li><b>Button labels:</b> The buttons use action-based labels such as "Turn Server 1 off". For toggle buttons using <code>aria-pressed</code>, a consistent label such as "Server 1" is generally recommended.</li>
+  <li><b>Mixed state:</b> The "All servers" button uses <code>aria-pressed="mixed"</code> when some servers are on and others are off.</li>
+  <li><b>Colour:</b> Different colours help show the states, but colour should not be the only way to distinguish them.</li>
+</ul>
+
+
+<!-- section -->
+
+
+<p><b>Note for testing:</b> confirm the mixed state announcement, and that "mixed" and "all on" are correctly distinguished by colour when they share the same button text, with your standard browser and screen reader combinations before treating them as settled.</p>
+
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+</body>
+</html>
