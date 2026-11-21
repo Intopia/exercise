@@ -114,9 +114,9 @@
   <h3 id="a2-title"><span class="case-id">A2</span> Decorative image with aria-label</h3>
   <p><code>alt=""</code> says the image is decorative, but the <code>aria-label</code> brings it back as an image called "Intopia".</p>
   <div class="example" data-case="a2" data-expected="fail">
-<img src="assets/images/intopia-logo.svg" alt="" aria-label="Intopia" width="120">
+<img src="assets/img/intopia.png" alt="" aria-label="Intopia" width="120">
   </div>
-  <pre><code class="language-html">&lt;img src=&quot;assets/images/intopia-logo.svg&quot; alt=&quot;&quot; aria-label=&quot;Intopia&quot; width=&quot;120&quot;&gt;</code></pre>
+  <pre><code class="language-html">&lt;img src=&quot;assets/img/intopia.png&quot; alt=&quot;&quot; aria-label=&quot;Intopia&quot; width=&quot;120&quot;&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
   <p class="route"><strong>Template routing:</strong> Check: <code>has-global-aria-attribute</code>, message key: none, data: <code>["aria-label"]</code>. Routes to: NEW-35, with [conflict] as "has the aria-label attribute".</p>
 </article><article class="case" id="a3" aria-labelledby="a3-title">
@@ -248,9 +248,9 @@
   <h3 id="b4-title"><span class="case-id">B4</span> Decorative image in the Tab order</h3>
   <p>Chrome shows a focusable image with no name.</p>
   <div class="example" data-case="b4" data-expected="fail">
-<img src="assets/images/intopia-logo.svg" alt="" tabindex="0" width="120">
+<img src="assets/img/intopia.png" alt="" tabindex="0" width="120">
   </div>
-  <pre><code class="language-html">&lt;img src=&quot;assets/images/intopia-logo.svg&quot; alt=&quot;&quot; tabindex=&quot;0&quot; width=&quot;120&quot;&gt;</code></pre>
+  <pre><code class="language-html">&lt;img src=&quot;assets/img/intopia.png&quot; alt=&quot;&quot; tabindex=&quot;0&quot; width=&quot;120&quot;&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
   <p class="route"><strong>Template routing:</strong> Check: <code>is-element-focusable</code>, message key: none, no data. Routes to: NEW-35, with [conflict] as "can receive focus".</p>
 </article>
@@ -340,9 +340,9 @@
 <article class="case" id="e1" aria-labelledby="e1-title">
   <h3 id="e1-title"><span class="case-id">E1</span> Decorative image</h3>
   <div class="example" data-case="e1" data-expected="pass">
-<img src="assets/images/intopia-logo.svg" alt="" width="120">
+<img src="assets/img/intopia.png" alt="" width="120">
   </div>
-  <pre><code class="language-html">&lt;img src=&quot;assets/images/intopia-logo.svg&quot; alt=&quot;&quot; width=&quot;120&quot;&gt;</code></pre>
+  <pre><code class="language-html">&lt;img src=&quot;assets/img/intopia.png&quot; alt=&quot;&quot; width=&quot;120&quot;&gt;</code></pre>
   <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
 </article><article class="case" id="e2" aria-labelledby="e2-title">
   <h3 id="e2-title"><span class="case-id">E2</span> List with role=&quot;none&quot; and only non-ARIA attributes</h3>
@@ -494,10 +494,10 @@
   <p>On load, the image is decorative. The button adds <code>tabindex="0"</code>, as a carousel script might.</p>
   <div class="example" data-case="g2" data-expected="dynamic">
 <button type="button" id="g2-button">Make focusable</button>
-<img src="assets/images/intopia-logo.svg" alt="" id="g2-img" width="120">
+<img src="assets/img/intopia.png" alt="" id="g2-img" width="120">
   </div>
   <pre><code class="language-html">&lt;button type=&quot;button&quot; id=&quot;g2-button&quot;&gt;Make focusable&lt;/button&gt;
-&lt;img src=&quot;assets/images/intopia-logo.svg&quot; alt=&quot;&quot; id=&quot;g2-img&quot; width=&quot;120&quot;&gt;</code></pre>
+&lt;img src=&quot;assets/img/intopia.png&quot; alt=&quot;&quot; id=&quot;g2-img&quot; width=&quot;120&quot;&gt;</code></pre>
   <p class="result"><span class="badge dynamic">On load: pass. After clicking: fail</span></p>
   <p class="note">After clicking, it routes to NEW-35 with [conflict] as "can receive focus".</p>
 </article>
