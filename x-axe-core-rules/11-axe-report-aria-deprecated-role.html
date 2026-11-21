@@ -1,0 +1,22 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<title>axe report: Testing the axe rule aria-deprecated-role</title>
+<style>
+  body { font-family: system-ui, sans-serif; line-height: 1.5; margin: 2rem; color: #1d1d1f; }
+  table { border-collapse: collapse; width: 100%; margin-bottom: 2rem; }
+  th, td { border: 1px solid #ccc; padding: .4rem .6rem; text-align: left; vertical-align: top; }
+  th { background: #f2f2f2; }
+  code { font-size: .85rem; word-break: break-word; }
+  h2 { border-top: 3px solid #1d1d1f; padding-top: 1rem; margin-top: 2.5rem; }
+</style></head><body>
+<h1>axe report</h1>
+<ul>
+  <li>Page: <a href="https://intopia.github.io/exercise/testing-axe-rule-aria-deprecated-role.html">Testing the axe rule aria-deprecated-role</a></li>
+  <li>Run: 21/11/2026, 20:20:35</li>
+  <li>axe-core 4.14.0</li>
+  <li>Rules passed: 39. Rules not applicable: 51.</li>
+</ul>
+<h2>Fails (6)</h2><h3>aria-deprecated-role: Deprecated ARIA roles must not be used (6)</h3>
+        <p>Impact: minor. <a href="https://dequeuniversity.com/rules/axe/4.14/aria-deprecated-role?application=axeAPI">Rule details on Deque University</a></p>
+        <table><thead><tr><th scope="col">#</th><th scope="col">Element</th><th scope="col">Selector</th><th scope="col">Problem</th></tr></thead><tbody><tr><td>1</td><td><code>&lt;div role=&quot;directory&quot;&gt;Staff list: Alex, Sam, Priya&lt;/div&gt;</code></td><td><code>div[role=&quot;directory&quot;]</code></td><td>The role used is deprecated: directory</td></tr><tr><td>2</td><td><code>&lt;div role=&quot;DIRECTORY&quot;&gt;Office locations&lt;/div&gt;</code></td><td><code>div[role=&quot;DIRECTORY&quot;]</code></td><td>The role used is deprecated: directory</td></tr><tr><td>3</td><td><code>&lt;li role=&quot;doc-endnote&quot;&gt;First published in 2019.&lt;/li&gt;</code></td><td><code>li[role=&quot;doc-endnote&quot;]</code></td><td>The role used is deprecated: doc-endnote</td></tr><tr><td>4</td><td><code>&lt;li role=&quot;doc-biblioentry&quot;&gt;Smith, J. (2024). Accessible forms.&lt;/li&gt;</code></td><td><code>li[role=&quot;doc-biblioentry&quot;]</code></td><td>The role used is deprecated: doc-biblioentry</td></tr><tr><td>5</td><td><code>&lt;div role=&quot;directory group&quot; aria-label=&quot;Teams&quot;&gt;Sales, Support&lt;/div&gt;</code></td><td><code>div[role=&quot;directory group&quot;]</code></td><td>The role used is deprecated: directory</td></tr><tr><td>6</td><td><code>&lt;div role=&quot;drectory directory&quot;&gt;Departments&lt;/div&gt;</code></td><td><code>div[role=&quot;drectory directory&quot;]</code></td><td>The role used is deprecated: directory</td></tr></tbody></table>
+<h2>Needs review (0)</h2><p>None.</p>
+</body></html>

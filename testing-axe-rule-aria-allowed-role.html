@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the axe rule aria-allowed-role</title>
+  <meta name="description" content="Test cases for the axe-core rule aria-allowed-role, showing what axe catches and what it misses.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <style>
+  .case { border: 1px solid #c8c8cc; border-radius: 6px; padding: 1rem 1.25rem; margin: 1.25rem 0; }
+  .case h3 { margin-top: 0; }
+  .case-id { display: inline-block; font-size: .8rem; font-weight: 700; background: #1d1d1f; color: #fff; padding: .1rem .45rem; border-radius: 3px; margin-right: .4rem; vertical-align: middle; }
+  .example { border: 1px dashed #a0a0a8; padding: .75rem 1rem; margin: .75rem 0; }
+  .example p { margin: .25rem 0; }
+  .badge { display: inline-block; font-weight: 600; font-size: .875rem; padding: .2rem .6rem; border-radius: 3px; border: 2px solid; }
+  .badge.fail { background: #fde8e8; border-color: #b3261e; color: #8a1c16; }
+  .badge.review { background: #fff4d6; border-color: #8a6100; color: #5e4200; }
+  .badge.other { background: #e0f4f4; border-color: #0b6b6b; color: #084f4f; }
+  .badge.miss { background: #ece6fb; border-color: #5b3cc4; color: #432a99; }
+  .badge.pass { background: #e3f4e8; border-color: #1e7b3a; color: #155c2b; }
+  .badge.dynamic { background: #e8eef9; border-color: #1a4f9c; color: #133b75; }
+  .note { font-size: .9375rem; }
+  .route { font-size: .875rem; border-left: 3px solid #a0a0a8; padding-left: .6rem; }
+</style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo. The word 'intopia' in black, with the 'o' made from four curved brush strokes in pink, orange, yellow and turquoise." class="intopia-logo">
+  </picture>
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing the axe rule <code>aria-allowed-role</code></h1>
+
+<p>Test cases for the axe-core rule <a href="https://dequeuniversity.com/rules/axe/4.14/aria-allowed-role"><code>aria-allowed-role</code></a> (axe-core 4.14). Each HTML element only allows some ARIA roles, as set out in ARIA in HTML. The rule checks that the <code>role</code> attribute uses a role the element allows. For example, a heading can be a tab, but not a button.</p>
+
+<p>Some things to know about this rule:</p>
+
+<ul>
+  <li>It's a best practice rule, not a WCAG requirement.</li>
+  <li>Giving an element its own role again, like <code>&lt;button role="button"&gt;</code>, is allowed.</li>
+  <li>If the element is hidden, a role that isn't allowed is needs review, not a fail, because it may never be shown.</li>
+  <li>In a list of roles, <em>every</em> valid role must be allowed on the element.</li>
+</ul>
+
+<p>Each case also shows the axe <strong>message key</strong> and which Intopia issue template the result would go to under the current assembly rules. Results on this page were checked in Chrome.</p>
+
+<p class="report-link"><strong>axe-core results:</strong> <a href="x-axe-core-rules/10-axe-report-aria-allowed-role.html">See the HTML report from running axe-core 4.14.0 over this page</a>.</p>
+
+<p>Every example is live in the page, so you can run the axe extension straight over it. The expected results were checked by running axe-core 4.14.1 over this page. Look in both the axe <strong>issues</strong> list and the <strong>needs review</strong> list.</p>
+
+<table>
+  <caption>Number of test cases by expected result</caption>
+  <thead><tr><th scope="col">Expected result</th><th scope="col">Cases</th></tr></thead>
+  <tbody>
+      <tr><td>Fail</td><td>12</td></tr>
+      <tr><td>Needs review</td><td>4</td></tr>
+      <tr><td>Passes, but broken (axe misses it)</td><td>2</td></tr>
+      <tr><td>Pass (valid control cases)</td><td>7</td></tr>
+      <tr><td>Changes after interaction</td><td>1</td></tr>
+  </tbody>
+</table>
+
+<h2 id="sections">Sections</h2>
+
+<ul>
+  <li><a href="#not-allowed">Roles the element doesn&#x27;t allow</a></li>
+  <li><a href="#presentational">Presentational roles on things people use</a></li>
+  <li><a href="#lists">Role lists</a></li>
+  <li><a href="#hidden">Hidden elements</a></li>
+  <li><a href="#allowed-but-wrong">Allowed, but it doesn&#x27;t behave that way</a></li>
+  <li><a href="#passing">Ways to pass</a></li>
+  <li><a href="#dynamic">Changes after interaction</a></li>
+</ul>
+
+<!-- section -->
+
+<h2 id="not-allowed">Roles the element doesn&#x27;t allow</h2>
+
+<p>These fail with "ARIA role ... is not allowed for given element".</p>
+<article class="case" id="a1" aria-labelledby="a1-title">
+  <h3 id="a1-title"><span class="case-id">A1</span> A heading turned into a button</h3>
+  <p>A very common pattern for accordions. Put a <code>&lt;button&gt;</code> inside the heading instead.</p>
+  <div class="example" data-case="a1" data-expected="fail">
+<h2 role="button" tabindex="0">Delivery and returns</h2>
+  </div>
+  <pre><code class="language-html">&lt;h2 role=&quot;button&quot; tabindex=&quot;0&quot;&gt;Delivery and returns&lt;/h2&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-31.</p>
+</article><article class="case" id="a2" aria-labelledby="a2-title">
+  <h3 id="a2-title"><span class="case-id">A2</span> A button turned into a heading</h3>
+  <div class="example" data-case="a2" data-expected="fail">
+<button type="button" role="heading" aria-level="2">Our team</button>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; role=&quot;heading&quot; aria-level=&quot;2&quot;&gt;Our team&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-31.</p>
+</article><article class="case" id="a3" aria-labelledby="a3-title">
+  <h3 id="a3-title"><span class="case-id">A3</span> A list turned into navigation</h3>
+  <p>Wrap the list in a <code>&lt;nav&gt;</code> instead.</p>
+  <div class="example" data-case="a3" data-expected="fail">
+<ul role="navigation">
+  <li><a href="#a3">Home</a></li>
+</ul>
+  </div>
+  <pre><code class="language-html">&lt;ul role=&quot;navigation&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#a3&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="note">This also fails the <code>listitem</code> rule, because the <code>&lt;li&gt;</code> is no longer inside a list.</p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-31.</p>
+</article><article class="case" id="a4" aria-labelledby="a4-title">
+  <h3 id="a4-title"><span class="case-id">A4</span> A text field turned into a button</h3>
+  <div class="example" data-case="a4" data-expected="fail">
+<input type="text" role="button" aria-label="Choose a date">
+  </div>
+  <pre><code class="language-html">&lt;input type=&quot;text&quot; role=&quot;button&quot; aria-label=&quot;Choose a date&quot;&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-31.</p>
+</article><article class="case" id="a5" aria-labelledby="a5-title">
+  <h3 id="a5-title"><span class="case-id">A5</span> A label turned into a button</h3>
+  <p>Labels don't allow any role.</p>
+  <div class="example" data-case="a5" data-expected="fail">
+<label role="button" tabindex="0">Upload a file</label>
+  </div>
+  <pre><code class="language-html">&lt;label role=&quot;button&quot; tabindex=&quot;0&quot;&gt;Upload a file&lt;/label&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-31.</p>
+</article><article class="case" id="a6" aria-labelledby="a6-title">
+  <h3 id="a6-title"><span class="case-id">A6</span> A main landmark given another role</h3>
+  <div class="example" data-case="a6" data-expected="fail">
+<main role="region" aria-label="Offers">This week's offers.</main>
+  </div>
+  <pre><code class="language-html">&lt;main role=&quot;region&quot; aria-label=&quot;Offers&quot;&gt;This week&#x27;s offers.&lt;/main&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-31.</p>
+</article><article class="case" id="a7" aria-labelledby="a7-title">
+  <h3 id="a7-title"><span class="case-id">A7</span> A heading in capitals</h3>
+  <p>Role names aren't case sensitive, so this is the same as A1.</p>
+  <div class="example" data-case="a7" data-expected="fail">
+<h2 role="BUTTON" tabindex="0">Show more</h2>
+  </div>
+  <pre><code class="language-html">&lt;h2 role=&quot;BUTTON&quot; tabindex=&quot;0&quot;&gt;Show more&lt;/h2&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-31.</p>
+</article><article class="case" id="a8" aria-labelledby="a8-title">
+  <h3 id="a8-title"><span class="case-id">A8</span> A checkbox turned into a button, without aria-pressed</h3>
+  <p>A checkbox can only be a button if it's a toggle button, with <code>aria-pressed</code>. Compare with E4.</p>
+  <div class="example" data-case="a8" data-expected="fail">
+<input type="checkbox" role="button" aria-label="Bold">
+  </div>
+  <pre><code class="language-html">&lt;input type=&quot;checkbox&quot; role=&quot;button&quot; aria-label=&quot;Bold&quot;&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-31.</p>
+</article><article class="case" id="a9" aria-labelledby="a9-title">
+  <h3 id="a9-title"><span class="case-id">A9</span> role=&quot;none&quot; on a label</h3>
+  <div class="example" data-case="a9" data-expected="fail">
+<label role="none">Name</label>
+  </div>
+  <pre><code class="language-html">&lt;label role=&quot;none&quot;&gt;Name&lt;/label&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-31.</p>
+</article>
+<!-- section -->
+
+<h2 id="presentational">Presentational roles on things people use</h2>
+
+<p>These fail this rule <em>and</em> <code>presentation-role-conflict</code>, because the element can still receive focus.</p>
+<article class="case" id="b1" aria-labelledby="b1-title">
+  <h3 id="b1-title"><span class="case-id">B1</span> role=&quot;presentation&quot; on a link</h3>
+  <div class="example" data-case="b1" data-expected="fail">
+<a href="#b1" role="presentation">Terms</a>
+  </div>
+  <pre><code class="language-html">&lt;a href=&quot;#b1&quot; role=&quot;presentation&quot;&gt;Terms&lt;/a&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-31. The <code>presentation-role-conflict</code> result routes to NEW-35, which wasn't in this review.</p>
+</article><article class="case" id="b2" aria-labelledby="b2-title">
+  <h3 id="b2-title"><span class="case-id">B2</span> A decorative image turned into a button</h3>
+  <p>An image with <code>alt=""</code> only allows <code>none</code> or <code>presentation</code>.</p>
+  <div class="example" data-case="b2" data-expected="fail">
+<img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" role="button" tabindex="0" width="20" height="20">
+  </div>
+  <pre><code class="language-html">&lt;img src=&quot;data:image/gif;base64,R0lGODlhAQABAAAAACw=&quot; alt=&quot;&quot; role=&quot;button&quot; tabindex=&quot;0&quot; width=&quot;20&quot; height=&quot;20&quot;&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-31. The <code>presentation-role-conflict</code> result routes to NEW-35, which wasn't in this review.</p>
+</article>
+<!-- section -->
+
+<h2 id="lists">Role lists</h2>
+
+<p></p>
+<article class="case" id="c1" aria-labelledby="c1-title">
+  <h3 id="c1-title"><span class="case-id">C1</span> Two valid roles, one not allowed</h3>
+  <p>Browsers would use <code>tab</code>, which a heading allows. But axe checks every valid role in the list, and a heading doesn't allow <code>button</code>.</p>
+  <div class="example" data-case="c1" data-expected="fail">
+<h2 role="tab button">Specifications</h2>
+  </div>
+  <pre><code class="language-html">&lt;h2 role=&quot;tab button&quot;&gt;Specifications&lt;/h2&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="note">Arguably a false positive, since the role browsers use is allowed.</p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-31.</p>
+</article><article class="case" id="c2" aria-labelledby="c2-title">
+  <h3 id="c2-title"><span class="case-id">C2</span> An invalid role, then an allowed one</h3>
+  <p>The invalid role is skipped, and <code>tab</code> is allowed on a heading.</p>
+  <div class="example" data-case="c2" data-expected="pass">
+<h2 role="buton tab">Reviews</h2>
+  </div>
+  <pre><code class="language-html">&lt;h2 role=&quot;buton tab&quot;&gt;Reviews&lt;/h2&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+  <p class="note"><code>aria-roles</code> doesn't flag the typo either, because one of the roles is valid.</p>
+</article>
+<!-- section -->
+
+<h2 id="hidden">Hidden elements</h2>
+
+<p>A role that isn't allowed on a hidden element is needs review, with the message "must be removed when the element is made visible".</p>
+<article class="case" id="d1" aria-labelledby="d1-title">
+  <h3 id="d1-title"><span class="case-id">D1</span> Hidden with the hidden attribute</h3>
+  <div class="example" data-case="d1" data-expected="review">
+<h2 role="button" tabindex="0" hidden>Hidden question</h2>
+  </div>
+  <pre><code class="language-html">&lt;h2 role=&quot;button&quot; tabindex=&quot;0&quot; hidden&gt;Hidden question&lt;/h2&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: none. Routes to: NEW-31.</p>
+</article><article class="case" id="d2" aria-labelledby="d2-title">
+  <h3 id="d2-title"><span class="case-id">D2</span> Hidden with display: none</h3>
+  <div class="example" data-case="d2" data-expected="review">
+<h2 role="button" tabindex="0" style="display: none;">Hidden answer</h2>
+  </div>
+  <pre><code class="language-html">&lt;h2 role=&quot;button&quot; tabindex=&quot;0&quot; style=&quot;display: none;&quot;&gt;Hidden answer&lt;/h2&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: none. Routes to: NEW-31.</p>
+</article><article class="case" id="d3" aria-labelledby="d3-title">
+  <h3 id="d3-title"><span class="case-id">D3</span> Hidden with aria-hidden</h3>
+  <div class="example" data-case="d3" data-expected="review">
+<h2 role="button" tabindex="0" aria-hidden="true">Hidden heading</h2>
+  </div>
+  <pre><code class="language-html">&lt;h2 role=&quot;button&quot; tabindex=&quot;0&quot; aria-hidden=&quot;true&quot;&gt;Hidden heading&lt;/h2&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="note">This also fails <code>aria-hidden-focus</code>, because it can still be reached with the Tab key.</p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: none. Routes to: NEW-31. The <code>aria-hidden-focus</code> result routes to NEW-48.</p>
+</article><article class="case" id="d4" aria-labelledby="d4-title">
+  <h3 id="d4-title"><span class="case-id">D4</span> A hidden input</h3>
+  <p>A hidden input is never shown, so this will stay needs review.</p>
+  <div class="example" data-case="d4" data-expected="review">
+<input type="hidden" role="button" value="1">
+  </div>
+  <pre><code class="language-html">&lt;input type=&quot;hidden&quot; role=&quot;button&quot; value=&quot;1&quot;&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: none. Routes to: NEW-31.</p>
+</article>
+<!-- section -->
+
+<h2 id="allowed-but-wrong">Allowed, but it doesn&#x27;t behave that way</h2>
+
+<p>This rule checks the role is <em>allowed</em>, not that the element behaves like it. Nothing in axe flags these.</p>
+<article class="case" id="e1" aria-labelledby="e1-title">
+  <h3 id="e1-title"><span class="case-id">E1</span> A link turned into a button</h3>
+  <p>Allowed, but a link only responds to Enter. A button should also respond to the Space bar, so this needs a script.</p>
+  <div class="example" data-case="e1" data-expected="miss">
+<a href="#e1" role="button">Add to cart</a>
+  </div>
+  <pre><code class="language-html">&lt;a href=&quot;#e1&quot; role=&quot;button&quot;&gt;Add to cart&lt;/a&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+</article><article class="case" id="e2" aria-labelledby="e2-title">
+  <h3 id="e2-title"><span class="case-id">E2</span> A paragraph turned into a button</h3>
+  <p>A paragraph allows any role. With no script, it can be reached with Tab, but nothing happens when you press Enter or Space.</p>
+  <div class="example" data-case="e2" data-expected="miss">
+<p role="button" tabindex="0">Read more</p>
+  </div>
+  <pre><code class="language-html">&lt;p role=&quot;button&quot; tabindex=&quot;0&quot;&gt;Read more&lt;/p&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+</article>
+<!-- section -->
+
+<h2 id="passing">Ways to pass</h2>
+
+<p>Control cases.</p>
+<article class="case" id="f1" aria-labelledby="f1-title">
+  <h3 id="f1-title"><span class="case-id">F1</span> A role the element already has</h3>
+  <div class="example" data-case="f1" data-expected="pass">
+<button type="button" role="button">Save</button>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; role=&quot;button&quot;&gt;Save&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="f2" aria-labelledby="f2-title">
+  <h3 id="f2-title"><span class="case-id">F2</span> A checkbox turned into a switch</h3>
+  <div class="example" data-case="f2" data-expected="pass">
+<label><input type="checkbox" role="switch"> Dark mode</label>
+  </div>
+  <pre><code class="language-html">&lt;label&gt;&lt;input type=&quot;checkbox&quot; role=&quot;switch&quot;&gt; Dark mode&lt;/label&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="f3" aria-labelledby="f3-title">
+  <h3 id="f3-title"><span class="case-id">F3</span> A div turned into a button</h3>
+  <p>A <code>&lt;div&gt;</code> allows any role.</p>
+  <div class="example" data-case="f3" data-expected="pass">
+<div role="button" tabindex="0">Apply</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button&quot; tabindex=&quot;0&quot;&gt;Apply&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="f4" aria-labelledby="f4-title">
+  <h3 id="f4-title"><span class="case-id">F4</span> A checkbox turned into a toggle button</h3>
+  <p>With <code>aria-pressed</code>, this is allowed. Compare with A8.</p>
+  <div class="example" data-case="f4" data-expected="pass">
+<input type="checkbox" role="button" aria-pressed="false" aria-label="Italic">
+  </div>
+  <pre><code class="language-html">&lt;input type=&quot;checkbox&quot; role=&quot;button&quot; aria-pressed=&quot;false&quot; aria-label=&quot;Italic&quot;&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="f5" aria-labelledby="f5-title">
+  <h3 id="f5-title"><span class="case-id">F5</span> A layout table</h3>
+  <div class="example" data-case="f5" data-expected="pass">
+<table role="presentation">
+  <tr><td>Name</td><td>Alex</td></tr>
+</table>
+  </div>
+  <pre><code class="language-html">&lt;table role=&quot;presentation&quot;&gt;
+  &lt;tr&gt;&lt;td&gt;Name&lt;/td&gt;&lt;td&gt;Alex&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="f6" aria-labelledby="f6-title">
+  <h3 id="f6-title"><span class="case-id">F6</span> role=&quot;list&quot; on a list</h3>
+  <p>Often added so Safari still reads a list with its bullets removed.</p>
+  <div class="example" data-case="f6" data-expected="pass">
+<ul role="list" style="list-style: none;">
+  <li>Fruit</li>
+</ul>
+  </div>
+  <pre><code class="language-html">&lt;ul role=&quot;list&quot; style=&quot;list-style: none;&quot;&gt;
+  &lt;li&gt;Fruit&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article>
+<!-- section -->
+
+<h2 id="dynamic">Changes after interaction</h2>
+
+<p>Axe only sees the page as it is when you run it. These pass on page load. Activate each button, then run axe again.</p>
+<article class="case" id="g1" aria-labelledby="g1-title">
+  <h3 id="g1-title"><span class="case-id">G1</span> An accordion heading that&#x27;s shown later</h3>
+  <p>On load, the heading is hidden, so axe only reports needs review. Show it, and the same role becomes a fail.</p>
+  <div class="example" data-case="g1" data-expected="dynamic">
+<button type="button" id="g1-button">Show the FAQ</button>
+<h2 role="button" tabindex="0" id="g1-heading" hidden>How long does delivery take?</h2>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; id=&quot;g1-button&quot;&gt;Show the FAQ&lt;/button&gt;
+&lt;h2 role=&quot;button&quot; tabindex=&quot;0&quot; id=&quot;g1-heading&quot; hidden&gt;How long does delivery take?&lt;/h2&gt;</code></pre>
+  <p class="result"><span class="badge dynamic">On load: needs review. After showing: fail</span></p>
+  <p class="note">After showing, it routes to NEW-31 as a fail rather than needs review.</p>
+</article>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+<script>
+  // G1: show the heading
+  document.getElementById('g1-button').addEventListener('click', function () {
+    document.getElementById('g1-heading').hidden = false;
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the axe rule aria-deprecated-role</title>
+  <meta name="description" content="Test cases for the axe-core rule aria-deprecated-role, showing what axe catches and what it misses.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <style>
+  .case { border: 1px solid #c8c8cc; border-radius: 6px; padding: 1rem 1.25rem; margin: 1.25rem 0; }
+  .case h3 { margin-top: 0; }
+  .case-id { display: inline-block; font-size: .8rem; font-weight: 700; background: #1d1d1f; color: #fff; padding: .1rem .45rem; border-radius: 3px; margin-right: .4rem; vertical-align: middle; }
+  .example { border: 1px dashed #a0a0a8; padding: .75rem 1rem; margin: .75rem 0; }
+  .example p { margin: .25rem 0; }
+  .badge { display: inline-block; font-weight: 600; font-size: .875rem; padding: .2rem .6rem; border-radius: 3px; border: 2px solid; }
+  .badge.fail { background: #fde8e8; border-color: #b3261e; color: #8a1c16; }
+  .badge.review { background: #fff4d6; border-color: #8a6100; color: #5e4200; }
+  .badge.other { background: #e0f4f4; border-color: #0b6b6b; color: #084f4f; }
+  .badge.miss { background: #ece6fb; border-color: #5b3cc4; color: #432a99; }
+  .badge.pass { background: #e3f4e8; border-color: #1e7b3a; color: #155c2b; }
+  .badge.dynamic { background: #e8eef9; border-color: #1a4f9c; color: #133b75; }
+  .note { font-size: .9375rem; }
+  .route { font-size: .875rem; border-left: 3px solid #a0a0a8; padding-left: .6rem; }
+</style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo. The word 'intopia' in black, with the 'o' made from four curved brush strokes in pink, orange, yellow and turquoise." class="intopia-logo">
+  </picture>
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing the axe rule <code>aria-deprecated-role</code></h1>
+
+<p>Test cases for the axe-core rule <a href="https://dequeuniversity.com/rules/axe/4.14/aria-deprecated-role"><code>aria-deprecated-role</code></a> (axe-core 4.14). Some roles have been removed from ARIA, or are being phased out. They may still work, but support is likely to drop away. Axe 4.14 treats three roles as deprecated:</p>
+
+<table>
+  <caption>Deprecated roles in axe-core 4.14</caption>
+  <thead><tr><th scope="col">Role</th><th scope="col">Use instead</th></tr></thead>
+  <tbody>
+    <tr><td><code>directory</code></td><td><code>list</code></td></tr>
+    <tr><td><code>doc-biblioentry</code></td><td><code>listitem</code> (inside <code>doc-bibliography</code>)</td></tr>
+    <tr><td><code>doc-endnote</code></td><td><code>listitem</code> (inside <code>doc-endnotes</code>)</td></tr>
+  </tbody>
+</table>
+
+<p>With a list of roles, axe checks the first valid one. Deprecated roles are still valid roles, so <code>aria-roles</code> doesn't flag them.</p>
+
+<p>Each case also shows the axe <strong>message key</strong> and which Intopia issue template the result would go to under the current assembly rules. Results on this page were checked in Chrome.</p>
+
+<p class="report-link"><strong>axe-core results:</strong> <a href="x-axe-core-rules/11-axe-report-aria-deprecated-role.html">See the HTML report from running axe-core 4.14.0 over this page</a>.</p>
+
+<p>Every example is live in the page, so you can run the axe extension straight over it. The expected results were checked by running axe-core 4.14.1 over this page. Look in both the axe <strong>issues</strong> list and the <strong>needs review</strong> list.</p>
+
+<table>
+  <caption>Number of test cases by expected result</caption>
+  <thead><tr><th scope="col">Expected result</th><th scope="col">Cases</th></tr></thead>
+  <tbody>
+      <tr><td>Fail</td><td>6</td></tr>
+      <tr><td>Pass (valid control cases)</td><td>3</td></tr>
+  </tbody>
+</table>
+
+<h2 id="sections">Sections</h2>
+
+<ul>
+  <li><a href="#deprecated">Deprecated roles</a></li>
+  <li><a href="#passing">Ways to pass</a></li>
+</ul>
+
+<!-- section -->
+
+<h2 id="deprecated">Deprecated roles</h2>
+
+<p>These fail with "The role used is deprecated".</p>
+<article class="case" id="a1" aria-labelledby="a1-title">
+  <h3 id="a1-title"><span class="case-id">A1</span> role=&quot;directory&quot;</h3>
+  <p>Deprecated in ARIA 1.2. Use <code>list</code>, or just a <code>&lt;ul&gt;</code>.</p>
+  <div class="example" data-case="a1" data-expected="fail">
+<div role="directory">Staff list: Alex, Sam, Priya</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;directory&quot;&gt;Staff list: Alex, Sam, Priya&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-32, which wasn't in this review.</p>
+</article><article class="case" id="a2" aria-labelledby="a2-title">
+  <h3 id="a2-title"><span class="case-id">A2</span> role=&quot;DIRECTORY&quot; in capitals</h3>
+  <div class="example" data-case="a2" data-expected="fail">
+<div role="DIRECTORY">Office locations</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;DIRECTORY&quot;&gt;Office locations&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-32, which wasn't in this review.</p>
+</article><article class="case" id="a3" aria-labelledby="a3-title">
+  <h3 id="a3-title"><span class="case-id">A3</span> role=&quot;doc-endnote&quot;</h3>
+  <p>The container role <code>doc-endnotes</code> is fine. Only the item role is deprecated.</p>
+  <div class="example" data-case="a3" data-expected="fail">
+<section role="doc-endnotes" aria-label="Notes">
+  <ol>
+    <li role="doc-endnote">First published in 2019.</li>
+  </ol>
+</section>
+  </div>
+  <pre><code class="language-html">&lt;section role=&quot;doc-endnotes&quot; aria-label=&quot;Notes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li role=&quot;doc-endnote&quot;&gt;First published in 2019.&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/section&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-32, which wasn't in this review.</p>
+</article><article class="case" id="a4" aria-labelledby="a4-title">
+  <h3 id="a4-title"><span class="case-id">A4</span> role=&quot;doc-biblioentry&quot;</h3>
+  <div class="example" data-case="a4" data-expected="fail">
+<section role="doc-bibliography" aria-label="References">
+  <ol>
+    <li role="doc-biblioentry">Smith, J. (2024). Accessible forms.</li>
+  </ol>
+</section>
+  </div>
+  <pre><code class="language-html">&lt;section role=&quot;doc-bibliography&quot; aria-label=&quot;References&quot;&gt;
+  &lt;ol&gt;
+    &lt;li role=&quot;doc-biblioentry&quot;&gt;Smith, J. (2024). Accessible forms.&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/section&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-32, which wasn't in this review.</p>
+</article><article class="case" id="a5" aria-labelledby="a5-title">
+  <h3 id="a5-title"><span class="case-id">A5</span> A deprecated role first in a list</h3>
+  <p>Axe checks the first valid role, which is <code>directory</code>.</p>
+  <div class="example" data-case="a5" data-expected="fail">
+<div role="directory group" aria-label="Teams">Sales, Support</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;directory group&quot; aria-label=&quot;Teams&quot;&gt;Sales, Support&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-32, which wasn't in this review.</p>
+</article><article class="case" id="a6" aria-labelledby="a6-title">
+  <h3 id="a6-title"><span class="case-id">A6</span> An invalid role, then a deprecated one</h3>
+  <p>The invalid role is skipped, so the first valid role is <code>directory</code>.</p>
+  <div class="example" data-case="a6" data-expected="fail">
+<div role="drectory directory">Departments</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;drectory directory&quot;&gt;Departments&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-32, which wasn't in this review.</p>
+</article>
+<!-- section -->
+
+<h2 id="passing">Ways to pass</h2>
+
+<p>Control cases.</p>
+<article class="case" id="b1" aria-labelledby="b1-title">
+  <h3 id="b1-title"><span class="case-id">B1</span> A deprecated role as the fallback</h3>
+  <p><code>group</code> comes first, so browsers use it and <code>directory</code> is never used.</p>
+  <div class="example" data-case="b1" data-expected="pass">
+<div role="group directory" aria-label="Branches">North, South</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;group directory&quot; aria-label=&quot;Branches&quot;&gt;North, South&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="b2" aria-labelledby="b2-title">
+  <h3 id="b2-title"><span class="case-id">B2</span> A list instead of directory</h3>
+  <div class="example" data-case="b2" data-expected="pass">
+<ul>
+  <li>Alex</li>
+  <li>Sam</li>
+</ul>
+  </div>
+  <pre><code class="language-html">&lt;ul&gt;
+  &lt;li&gt;Alex&lt;/li&gt;
+  &lt;li&gt;Sam&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="b3" aria-labelledby="b3-title">
+  <h3 id="b3-title"><span class="case-id">B3</span> Endnotes without the deprecated item role</h3>
+  <div class="example" data-case="b3" data-expected="pass">
+<section role="doc-endnotes" aria-label="Footnotes">
+  <ol>
+    <li>Prices include GST.</li>
+  </ol>
+</section>
+  </div>
+  <pre><code class="language-html">&lt;section role=&quot;doc-endnotes&quot; aria-label=&quot;Footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li&gt;Prices include GST.&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/section&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+
+</body>
+</html>
