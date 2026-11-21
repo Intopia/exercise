@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the axe rule aria-required-children</title>
+  <meta name="description" content="Test cases for the axe-core rule aria-required-children, showing what axe catches and what it misses.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <style>
+  .case { border: 1px solid #c8c8cc; border-radius: 6px; padding: 1rem 1.25rem; margin: 1.25rem 0; }
+  .case h3 { margin-top: 0; }
+  .case-id { display: inline-block; font-size: .8rem; font-weight: 700; background: #1d1d1f; color: #fff; padding: .1rem .45rem; border-radius: 3px; margin-right: .4rem; vertical-align: middle; }
+  .example { border: 1px dashed #a0a0a8; padding: .75rem 1rem; margin: .75rem 0; }
+  .example p { margin: .25rem 0; }
+  .badge { display: inline-block; font-weight: 600; font-size: .875rem; padding: .2rem .6rem; border-radius: 3px; border: 2px solid; }
+  .badge.fail { background: #fde8e8; border-color: #b3261e; color: #8a1c16; }
+  .badge.review { background: #fff4d6; border-color: #8a6100; color: #5e4200; }
+  .badge.other { background: #e0f4f4; border-color: #0b6b6b; color: #084f4f; }
+  .badge.miss { background: #ece6fb; border-color: #5b3cc4; color: #432a99; }
+  .badge.pass { background: #e3f4e8; border-color: #1e7b3a; color: #155c2b; }
+  .badge.dynamic { background: #e8eef9; border-color: #1a4f9c; color: #133b75; }
+  .note { font-size: .9375rem; }
+  .route { font-size: .875rem; border-left: 3px solid #a0a0a8; padding-left: .6rem; }
+</style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo. The word 'intopia' in black, with the 'o' made from four curved brush strokes in pink, orange, yellow and turquoise." class="intopia-logo">
+  </picture>
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing the axe rule <code>aria-required-children</code></h1>
+
+<p>Test cases for the axe-core rule <a href="https://dequeuniversity.com/rules/axe/4.14/aria-required-children"><code>aria-required-children</code></a> (axe-core 4.14). Some roles describe a group of items, such as a list, a menu or a set of tabs. The rule checks two things about the elements inside them:</p>
+
+<ul>
+  <li><strong>Required children</strong>: the group contains at least one element with a role it needs, such as <code>listitem</code> in a <code>list</code>.</li>
+  <li><strong>Children that aren't allowed</strong>: the group doesn't contain elements with other roles, or focusable elements with no role.</li>
+</ul>
+
+<p>The rule only looks at elements with an explicit <code>role</code> attribute. A native <code>&lt;ul&gt;</code> is checked by the separate <code>list</code> rule instead.</p>
+
+<p>These are the roles axe checks, and the children it accepts:</p>
+
+<table>
+  <caption>Roles checked by aria-required-children in axe-core 4.14</caption>
+  <thead><tr><th scope="col">Role</th><th scope="col">Needs at least one of</th></tr></thead>
+  <tbody>
+    <tr><td><code>list</code></td><td><code>listitem</code></td></tr>
+    <tr><td><code>listbox</code></td><td><code>option</code>, <code>group</code></td></tr>
+    <tr><td><code>menu</code>, <code>menubar</code></td><td><code>menuitem</code>, <code>menuitemcheckbox</code>, <code>menuitemradio</code>, <code>group</code>, <code>menu</code>, <code>separator</code></td></tr>
+    <tr><td><code>tablist</code></td><td><code>tab</code></td></tr>
+    <tr><td><code>tree</code></td><td><code>treeitem</code>, <code>group</code></td></tr>
+    <tr><td><code>grid</code>, <code>table</code>, <code>treegrid</code></td><td><code>row</code>, <code>rowgroup</code></td></tr>
+    <tr><td><code>rowgroup</code></td><td><code>row</code></td></tr>
+    <tr><td><code>row</code></td><td><code>cell</code>, <code>gridcell</code>, <code>columnheader</code>, <code>rowheader</code></td></tr>
+    <tr><td><code>feed</code></td><td><code>article</code></td></tr>
+  </tbody>
+</table>
+
+<p>Each case also shows the axe <strong>message key</strong> and which Intopia issue template the result would go to under the current assembly rules.</p>
+
+<p class="report-link"><strong>axe-core results:</strong> <a href="x-axe-core-rules/05-axe-report-aria-required-children.html">See the HTML report from running axe-core 4.14.0 over this page</a>.</p>
+
+<p>Every example is live in the page, so you can run the axe extension straight over it. The expected results were checked by running axe-core 4.14.1 over this page. Look in both the axe <strong>issues</strong> list and the <strong>needs review</strong> list.</p>
+
+<table>
+  <caption>Number of test cases by expected result</caption>
+  <thead><tr><th scope="col">Expected result</th><th scope="col">Cases</th></tr></thead>
+  <tbody>
+      <tr><td>Fail</td><td>16</td></tr>
+      <tr><td>Needs review</td><td>5</td></tr>
+      <tr><td>Flagged by a different rule instead</td><td>1</td></tr>
+      <tr><td>Passes, but broken (axe misses it)</td><td>1</td></tr>
+      <tr><td>Pass (valid control cases)</td><td>7</td></tr>
+      <tr><td>Changes after interaction</td><td>2</td></tr>
+  </tbody>
+</table>
+
+<h2 id="sections">Sections</h2>
+
+<ul>
+  <li><a href="#missing">Required children missing</a></li>
+  <li><a href="#unallowed">Children that aren&#x27;t allowed</a></li>
+  <li><a href="#review">Needs review</a></li>
+  <li><a href="#passing">Ways to pass</a></li>
+  <li><a href="#other-rules">Not checked by this rule</a></li>
+  <li><a href="#dynamic">Changes after interaction</a></li>
+</ul>
+
+<!-- section -->
+
+<h2 id="missing">Required children missing</h2>
+
+<p>These fail with "Required ARIA child role not present". Note that axe sends this result with <em>no</em> message key.</p>
+<article class="case" id="a1" aria-labelledby="a1-title">
+  <h3 id="a1-title"><span class="case-id">A1</span> List with plain div items</h3>
+  <p>The cards are inside the list, but none of them has <code>role="listitem"</code>.</p>
+  <div class="example" data-case="a1" data-expected="fail">
+<div role="list">
+  <div>Card one</div>
+  <div>Card two</div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;list&quot;&gt;
+  &lt;div&gt;Card one&lt;/div&gt;
+  &lt;div&gt;Card two&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: no template today, because NEW-45 expects <code>singular</code> or <code>plural</code>. NEW-45 once the mapping is fixed.</p>
+</article><article class="case" id="a2" aria-labelledby="a2-title">
+  <h3 id="a2-title"><span class="case-id">A2</span> Tablist with plain div tabs</h3>
+  <p>The divs aren't focusable, so axe ignores them and finds no <code>tab</code>.</p>
+  <div class="example" data-case="a2" data-expected="fail">
+<div role="tablist" aria-label="Help topics">
+  <div>Delivery</div>
+  <div>Returns</div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;tablist&quot; aria-label=&quot;Help topics&quot;&gt;
+  &lt;div&gt;Delivery&lt;/div&gt;
+  &lt;div&gt;Returns&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: no template today, because NEW-45 expects <code>singular</code> or <code>plural</code>. NEW-45 once the mapping is fixed.</p>
+</article><article class="case" id="a3" aria-labelledby="a3-title">
+  <h3 id="a3-title"><span class="case-id">A3</span> Menu with plain div items</h3>
+  <div class="example" data-case="a3" data-expected="fail">
+<div role="menu" aria-label="Edit">
+  <div>Cut</div>
+  <div>Copy</div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;menu&quot; aria-label=&quot;Edit&quot;&gt;
+  &lt;div&gt;Cut&lt;/div&gt;
+  &lt;div&gt;Copy&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: no template today, because NEW-45 expects <code>singular</code> or <code>plural</code>. NEW-45 once the mapping is fixed.</p>
+</article><article class="case" id="a4" aria-labelledby="a4-title">
+  <h3 id="a4-title"><span class="case-id">A4</span> Grid with no rows</h3>
+  <div class="example" data-case="a4" data-expected="fail">
+<div role="grid" aria-label="Orders">
+  <div>Order 1042</div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;grid&quot; aria-label=&quot;Orders&quot;&gt;
+  &lt;div&gt;Order 1042&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: no template today, because NEW-45 expects <code>singular</code> or <code>plural</code>. NEW-45 once the mapping is fixed.</p>
+</article><article class="case" id="a5" aria-labelledby="a5-title">
+  <h3 id="a5-title"><span class="case-id">A5</span> List that only contains text</h3>
+  <p>An empty list is only needs review (see C1), but text counts as content, so this one fails.</p>
+  <div class="example" data-case="a5" data-expected="fail">
+<div role="list">Apples, pears and plums</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;list&quot;&gt;Apples, pears and plums&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: no template today, because NEW-45 expects <code>singular</code> or <code>plural</code>. NEW-45 once the mapping is fixed.</p>
+</article><article class="case" id="a6" aria-labelledby="a6-title">
+  <h3 id="a6-title"><span class="case-id">A6</span> Empty row</h3>
+  <p><code>row</code> isn't on axe's list of roles allowed to be empty, so an empty row fails even though an empty table doesn't.</p>
+  <div class="example" data-case="a6" data-expected="fail">
+<div role="table" aria-label="Prices">
+  <div role="row"></div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;table&quot; aria-label=&quot;Prices&quot;&gt;
+  &lt;div role=&quot;row&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: no template today, because NEW-45 expects <code>singular</code> or <code>plural</code>. NEW-45 once the mapping is fixed.</p>
+</article><article class="case" id="a7" aria-labelledby="a7-title">
+  <h3 id="a7-title"><span class="case-id">A7</span> Empty feed</h3>
+  <p>Same again: <code>feed</code> isn't allowed to be empty.</p>
+  <div class="example" data-case="a7" data-expected="fail">
+<div role="feed" aria-label="Latest news"></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;feed&quot; aria-label=&quot;Latest news&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: no template today, because NEW-45 expects <code>singular</code> or <code>plural</code>. NEW-45 once the mapping is fixed.</p>
+</article><article class="case" id="a8" aria-labelledby="a8-title">
+  <h3 id="a8-title"><span class="case-id">A8</span> A ul with role=&quot;list&quot; and div children</h3>
+  <p>Adding <code>role="list"</code> to a <code>&lt;ul&gt;</code> (often done for Safari) moves the check from the <code>list</code> rule to this one. Compare with E1.</p>
+  <div class="example" data-case="a8" data-expected="fail">
+<ul role="list">
+  <div>First</div>
+</ul>
+  </div>
+  <pre><code class="language-html">&lt;ul role=&quot;list&quot;&gt;
+  &lt;div&gt;First&lt;/div&gt;
+&lt;/ul&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: no template today, because NEW-45 expects <code>singular</code> or <code>plural</code>. NEW-45 once the mapping is fixed.</p>
+</article>
+<!-- section -->
+
+<h2 id="unallowed">Children that aren&#x27;t allowed</h2>
+
+<p>These fail with "Element has children which are not allowed". Each has a message key.</p>
+<article class="case" id="b1" aria-labelledby="b1-title">
+  <h3 id="b1-title"><span class="case-id">B1</span> Tablist with focusable div tabs</h3>
+  <p>Once the divs have <code>tabindex</code>, axe treats them as interactive elements with no role, which aren't allowed in a tablist.</p>
+  <div class="example" data-case="b1" data-expected="fail">
+<div role="tablist" aria-label="Account">
+  <div tabindex="0">Profile</div>
+  <div tabindex="-1">Settings</div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;tablist&quot; aria-label=&quot;Account&quot;&gt;
+  &lt;div tabindex=&quot;0&quot;&gt;Profile&lt;/div&gt;
+  &lt;div tabindex=&quot;-1&quot;&gt;Settings&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>unallowed</code>. Routes to: NEW-49.</p>
+</article><article class="case" id="b2" aria-labelledby="b2-title">
+  <h3 id="b2-title"><span class="case-id">B2</span> Tablist with button tabs</h3>
+  <p>A common pattern. The buttons have the role <code>button</code>, not <code>tab</code>.</p>
+  <div class="example" data-case="b2" data-expected="fail">
+<div role="tablist" aria-label="Plans">
+  <button type="button">Monthly</button>
+  <button type="button">Yearly</button>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;tablist&quot; aria-label=&quot;Plans&quot;&gt;
+  &lt;button type=&quot;button&quot;&gt;Monthly&lt;/button&gt;
+  &lt;button type=&quot;button&quot;&gt;Yearly&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>unallowed</code>. Routes to: NEW-49.</p>
+</article><article class="case" id="b3" aria-labelledby="b3-title">
+  <h3 id="b3-title"><span class="case-id">B3</span> Heading inside a list</h3>
+  <p>A heading has its own role, so it isn't allowed between list items.</p>
+  <div class="example" data-case="b3" data-expected="fail">
+<div role="list">
+  <h4>Our team</h4>
+  <div role="listitem">Alex</div>
+  <div role="listitem">Sam</div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;list&quot;&gt;
+  &lt;h4&gt;Our team&lt;/h4&gt;
+  &lt;div role=&quot;listitem&quot;&gt;Alex&lt;/div&gt;
+  &lt;div role=&quot;listitem&quot;&gt;Sam&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>unallowed</code>. Routes to: NEW-49.</p>
+</article><article class="case" id="b4" aria-labelledby="b4-title">
+  <h3 id="b4-title"><span class="case-id">B4</span> Menu item with a global attribute but no role</h3>
+  <p>A global ARIA attribute makes axe treat the div as meaningful, so it isn't ignored.</p>
+  <div class="example" data-case="b4" data-expected="fail">
+<div role="menu" aria-label="Clipboard">
+  <div aria-describedby="b4-hint">Paste</div>
+</div>
+<p id="b4-hint">Pastes the last item you copied.</p>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;menu&quot; aria-label=&quot;Clipboard&quot;&gt;
+  &lt;div aria-describedby=&quot;b4-hint&quot;&gt;Paste&lt;/div&gt;
+&lt;/div&gt;
+&lt;p id=&quot;b4-hint&quot;&gt;Pastes the last item you copied.&lt;/p&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>unallowed</code>. Routes to: NEW-49.</p>
+</article><article class="case" id="b5" aria-labelledby="b5-title">
+  <h3 id="b5-title"><span class="case-id">B5</span> A ul between a listbox and its options</h3>
+  <p>The <code>&lt;ul&gt;</code> has the role <code>list</code>, which isn't allowed in a listbox.</p>
+  <div class="example" data-case="b5" data-expected="fail">
+<div role="listbox" aria-label="Colour">
+  <ul>
+    <li role="option" aria-selected="true">Red</li>
+  </ul>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;listbox&quot; aria-label=&quot;Colour&quot;&gt;
+  &lt;ul&gt;
+    &lt;li role=&quot;option&quot; aria-selected=&quot;true&quot;&gt;Red&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="note">This one element raises three results: this rule, <code>aria-required-parent</code> (the option isn't directly in the listbox) and <code>list</code> (the <code>&lt;li&gt;</code> no longer counts as a list item).</p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>unallowed</code>. Routes to: NEW-49, plus NEW-46 for the option.</p>
+</article><article class="case" id="b6" aria-labelledby="b6-title">
+  <h3 id="b6-title"><span class="case-id">B6</span> Focusable wrapper around a list item</h3>
+  <p>A plain wrapper is fine (see D3), but a focusable one isn't.</p>
+  <div class="example" data-case="b6" data-expected="fail">
+<div role="list">
+  <div tabindex="0">
+    <div role="listitem">Wrapped item</div>
+  </div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;list&quot;&gt;
+  &lt;div tabindex=&quot;0&quot;&gt;
+    &lt;div role=&quot;listitem&quot;&gt;Wrapped item&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>unallowed</code>. Routes to: NEW-49.</p>
+</article><article class="case" id="b7" aria-labelledby="b7-title">
+  <h3 id="b7-title"><span class="case-id">B7</span> Presentational child that can&#x27;t be ignored</h3>
+  <p><code>role="none"</code> would normally make the div disappear, but a global ARIA attribute cancels that.</p>
+  <div class="example" data-case="b7" data-expected="fail">
+<div role="list">
+  <div role="none" aria-describedby="b7-note">Featured</div>
+  <div role="listitem">Item one</div>
+</div>
+<p id="b7-note">Chosen by our staff.</p>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;list&quot;&gt;
+  &lt;div role=&quot;none&quot; aria-describedby=&quot;b7-note&quot;&gt;Featured&lt;/div&gt;
+  &lt;div role=&quot;listitem&quot;&gt;Item one&lt;/div&gt;
+&lt;/div&gt;
+&lt;p id=&quot;b7-note&quot;&gt;Chosen by our staff.&lt;/p&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>unallowedPresentational</code>. Routes to: NEW-49.</p>
+</article><article class="case" id="b8" aria-labelledby="b8-title">
+  <h3 id="b8-title"><span class="case-id">B8</span> aria-busy with a child that isn&#x27;t allowed</h3>
+  <p><code>aria-busy="true"</code> excuses missing children (see D5), but not ones that aren't allowed.</p>
+  <div class="example" data-case="b8" data-expected="fail">
+<div role="list" aria-busy="true">
+  <div tabindex="0">Loading</div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;list&quot; aria-busy=&quot;true&quot;&gt;
+  &lt;div tabindex=&quot;0&quot;&gt;Loading&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>aria-busy-fail</code>. Routes to: NEW-49.</p>
+</article>
+<!-- section -->
+
+<h2 id="review">Needs review</h2>
+
+<p>Axe isn't sure, usually because the group may be filled in later by a script.</p>
+<article class="case" id="c1" aria-labelledby="c1-title">
+  <h3 id="c1-title"><span class="case-id">C1</span> Empty list</h3>
+  <div class="example" data-case="c1" data-expected="review">
+<div role="list"></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;list&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: none. Routes to: no template (decided, because an empty element may be filled in later by a script).</p>
+</article><article class="case" id="c2" aria-labelledby="c2-title">
+  <h3 id="c2-title"><span class="case-id">C2</span> Empty tablist</h3>
+  <div class="example" data-case="c2" data-expected="review">
+<div role="tablist" aria-label="Sections"></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;tablist&quot; aria-label=&quot;Sections&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: none. Routes to: no template (decided, because an empty element may be filled in later by a script).</p>
+</article><article class="case" id="c3" aria-labelledby="c3-title">
+  <h3 id="c3-title"><span class="case-id">C3</span> Tablist whose only tab is hidden</h3>
+  <p>Axe ignores hidden children, so this counts as empty.</p>
+  <div class="example" data-case="c3" data-expected="review">
+<div role="tablist" aria-label="Steps">
+  <div role="tab" aria-selected="true" style="display: none;">Step one</div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;tablist&quot; aria-label=&quot;Steps&quot;&gt;
+  &lt;div role=&quot;tab&quot; aria-selected=&quot;true&quot; style=&quot;display: none;&quot;&gt;Step one&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: none. Routes to: no template (decided, because an empty element may be filled in later by a script).</p>
+</article><article class="case" id="c4" aria-labelledby="c4-title">
+  <h3 id="c4-title"><span class="case-id">C4</span> List whose only item is aria-hidden</h3>
+  <div class="example" data-case="c4" data-expected="review">
+<div role="list">
+  <div role="listitem" aria-hidden="true">Hidden item</div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;list&quot;&gt;
+  &lt;div role=&quot;listitem&quot; aria-hidden=&quot;true&quot;&gt;Hidden item&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: none. Routes to: no template (decided, because an empty element may be filled in later by a script).</p>
+</article><article class="case" id="c5" aria-labelledby="c5-title">
+  <h3 id="c5-title"><span class="case-id">C5</span> aria-busy=&quot;false&quot; on an empty list</h3>
+  <p>Only <code>aria-busy="true"</code> excuses missing children.</p>
+  <div class="example" data-case="c5" data-expected="review">
+<div role="list" aria-busy="false"></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;list&quot; aria-busy=&quot;false&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: none. Routes to: no template (decided, because an empty element may be filled in later by a script).</p>
+</article>
+<!-- section -->
+
+<h2 id="passing">Ways to pass</h2>
+
+<p>Control cases.</p>
+<article class="case" id="d1" aria-labelledby="d1-title">
+  <h3 id="d1-title"><span class="case-id">D1</span> List with list items</h3>
+  <div class="example" data-case="d1" data-expected="pass">
+<div role="list">
+  <div role="listitem">Apples</div>
+  <div role="listitem">Pears</div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;list&quot;&gt;
+  &lt;div role=&quot;listitem&quot;&gt;Apples&lt;/div&gt;
+  &lt;div role=&quot;listitem&quot;&gt;Pears&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="d2" aria-labelledby="d2-title">
+  <h3 id="d2-title"><span class="case-id">D2</span> A ul with role=&quot;list&quot; and li children</h3>
+  <div class="example" data-case="d2" data-expected="pass">
+<ul role="list">
+  <li>Plums</li>
+</ul>
+  </div>
+  <pre><code class="language-html">&lt;ul role=&quot;list&quot;&gt;
+  &lt;li&gt;Plums&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="d3" aria-labelledby="d3-title">
+  <h3 id="d3-title"><span class="case-id">D3</span> Plain wrapper around a list item</h3>
+  <p>A div with no role, no ARIA attributes and no <code>tabindex</code> is ignored.</p>
+  <div class="example" data-case="d3" data-expected="pass">
+<div role="list">
+  <div class="wrapper">
+    <div role="listitem">Wrapped item</div>
+  </div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;list&quot;&gt;
+  &lt;div class=&quot;wrapper&quot;&gt;
+    &lt;div role=&quot;listitem&quot;&gt;Wrapped item&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="d4" aria-labelledby="d4-title">
+  <h3 id="d4-title"><span class="case-id">D4</span> Group inside a listbox</h3>
+  <div class="example" data-case="d4" data-expected="pass">
+<div role="listbox" aria-label="Fruit">
+  <div role="group" aria-label="Citrus">
+    <div role="option" aria-selected="false">Lemon</div>
+  </div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;listbox&quot; aria-label=&quot;Fruit&quot;&gt;
+  &lt;div role=&quot;group&quot; aria-label=&quot;Citrus&quot;&gt;
+    &lt;div role=&quot;option&quot; aria-selected=&quot;false&quot;&gt;Lemon&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="d5" aria-labelledby="d5-title">
+  <h3 id="d5-title"><span class="case-id">D5</span> Empty but aria-busy=&quot;true&quot;</h3>
+  <p>Axe passes it with the message "allowed to omit required children". Remember to set it back to <code>false</code> once the items are added: see F1.</p>
+  <div class="example" data-case="d5" data-expected="pass">
+<div role="tablist" aria-label="Loading tabs" aria-busy="true"></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;tablist&quot; aria-label=&quot;Loading tabs&quot; aria-busy=&quot;true&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="d6" aria-labelledby="d6-title">
+  <h3 id="d6-title"><span class="case-id">D6</span> aria-owns pointing at items elsewhere</h3>
+  <p>The options are outside the listbox in the code, but <code>aria-owns</code> brings them in.</p>
+  <div class="example" data-case="d6" data-expected="pass">
+<div role="listbox" aria-label="Size" aria-owns="d6-small d6-large"></div>
+<div role="option" id="d6-small" aria-selected="false">Small</div>
+<div role="option" id="d6-large" aria-selected="false">Large</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;listbox&quot; aria-label=&quot;Size&quot; aria-owns=&quot;d6-small d6-large&quot;&gt;&lt;/div&gt;
+&lt;div role=&quot;option&quot; id=&quot;d6-small&quot; aria-selected=&quot;false&quot;&gt;Small&lt;/div&gt;
+&lt;div role=&quot;option&quot; id=&quot;d6-large&quot; aria-selected=&quot;false&quot;&gt;Large&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="d7" aria-labelledby="d7-title">
+  <h3 id="d7-title"><span class="case-id">D7</span> Text alongside the list items</h3>
+  <p>Text isn't counted as a child that isn't allowed.</p>
+  <div class="example" data-case="d7" data-expected="pass">
+<div role="list">
+  Our picks:
+  <div role="listitem">Kiwi</div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;list&quot;&gt;
+  Our picks:
+  &lt;div role=&quot;listitem&quot;&gt;Kiwi&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article>
+<!-- section -->
+
+<h2 id="other-rules">Not checked by this rule</h2>
+
+<p></p>
+<article class="case" id="e1" aria-labelledby="e1-title">
+  <h3 id="e1-title"><span class="case-id">E1</span> A native ul with div children</h3>
+  <p>No <code>role</code> attribute, so this rule doesn't look at it. The <code>list</code> rule catches it instead.</p>
+  <div class="example" data-case="e1" data-expected="other" data-other="list">
+<ul>
+  <div>First</div>
+</ul>
+  </div>
+  <pre><code class="language-html">&lt;ul&gt;
+  &lt;div&gt;First&lt;/div&gt;
+&lt;/ul&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>list</code> instead</span></p>
+  <p class="route"><strong>Template routing:</strong> Not an ARIA rule, so outside this template set.</p>
+</article><article class="case" id="e2" aria-labelledby="e2-title">
+  <h3 id="e2-title"><span class="case-id">E2</span> Empty radiogroup</h3>
+  <p>ARIA 1.2 expects a <code>radiogroup</code> to contain radios, but axe doesn't check <code>radiogroup</code> at all. Nothing flags it.</p>
+  <div class="example" data-case="e2" data-expected="miss">
+<div role="radiogroup" aria-label="Size"></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;radiogroup&quot; aria-label=&quot;Size&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+</article>
+<!-- section -->
+
+<h2 id="dynamic">Changes after interaction</h2>
+
+<p>Axe only sees the page as it is when you run it. These pass on page load. Activate each button, then run axe again.</p>
+<article class="case" id="f1" aria-labelledby="f1-title">
+  <h3 id="f1-title"><span class="case-id">F1</span> Tabs load, but they&#x27;re plain divs</h3>
+  <p>On load the tablist is empty and <code>aria-busy="true"</code>, so it passes. The button adds the tabs and sets <code>aria-busy="false"</code>, but the tabs have no role.</p>
+  <div class="example" data-case="f1" data-expected="dynamic">
+<button type="button" id="f1-load">Load tabs</button>
+<div role="tablist" aria-label="Topics" id="f1-tablist" aria-busy="true"></div>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; id=&quot;f1-load&quot;&gt;Load tabs&lt;/button&gt;
+&lt;div role=&quot;tablist&quot; aria-label=&quot;Topics&quot; id=&quot;f1-tablist&quot; aria-busy=&quot;true&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge dynamic">On load: pass. After loading: fail</span></p>
+  <p class="note">After loading, the message key is none, so it routes to NEW-45 once the mapping is fixed.</p>
+</article><article class="case" id="f2" aria-labelledby="f2-title">
+  <h3 id="f2-title"><span class="case-id">F2</span> Menu that&#x27;s hidden until opened</h3>
+  <p>Axe doesn't test hidden content. Open the menu and its focusable div items are found.</p>
+  <div class="example" data-case="f2" data-expected="dynamic">
+<button type="button" id="f2-button" aria-expanded="false" aria-controls="f2-menu">Options</button>
+<div role="menu" id="f2-menu" aria-label="Options" hidden>
+  <div tabindex="-1">Rename</div>
+  <div tabindex="-1">Delete</div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; id=&quot;f2-button&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;f2-menu&quot;&gt;Options&lt;/button&gt;
+&lt;div role=&quot;menu&quot; id=&quot;f2-menu&quot; aria-label=&quot;Options&quot; hidden&gt;
+  &lt;div tabindex=&quot;-1&quot;&gt;Rename&lt;/div&gt;
+  &lt;div tabindex=&quot;-1&quot;&gt;Delete&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge dynamic">On load: pass. After opening: fail</span></p>
+  <p class="note">After opening, the message key is <code>unallowed</code>, so it routes to NEW-49.</p>
+</article>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+<script>
+  // F1: add the tabs and finish loading (bug: the tabs have no role="tab")
+  document.getElementById('f1-load').addEventListener('click', function () {
+    var tablist = document.getElementById('f1-tablist');
+    tablist.innerHTML = '<div>Delivery</div><div>Returns</div>';
+    tablist.setAttribute('aria-busy', 'false');
+  });
+
+  // F2: show or hide the menu
+  document.getElementById('f2-button').addEventListener('click', function () {
+    var menu = document.getElementById('f2-menu');
+    var open = this.getAttribute('aria-expanded') === 'true';
+    this.setAttribute('aria-expanded', open ? 'false' : 'true');
+    menu.hidden = open;
+  });
+</script>
+</body>
+</html>

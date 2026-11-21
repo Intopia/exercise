@@ -25,6 +25,7 @@
   .badge.pass { background: #e3f4e8; border-color: #1e7b3a; color: #155c2b; }
   .badge.dynamic { background: #e8eef9; border-color: #1a4f9c; color: #133b75; }
   .note { font-size: .9375rem; }
+  .route { font-size: .875rem; border-left: 3px solid #a0a0a8; padding-left: .6rem; }
 </style>
 </head>
 <body>
@@ -54,6 +55,10 @@
 
 <p>Global attributes, like <code>aria-label</code>, <code>aria-describedby</code>, <code>aria-hidden</code> and <code>aria-haspopup</code>, are allowed on any role as far as this rule is concerned.</p>
 
+<p>Each case also shows the axe <strong>message key</strong> and which Intopia issue template the result would go to under the current assembly rules.</p>
+
+<p class="report-link"><strong>axe-core results:</strong> <a href="x-axe-core-rules/02-axe-report-aria-allowed-attr.html">See the HTML report from running axe-core 4.14.0 over this page</a>.</p>
+
 <p>Every example is live in the page, so you can run the axe extension straight over it. The expected results were checked by running axe-core 4.14.1 over this page. Look in both the axe <strong>issues</strong> list and the <strong>needs review</strong> list.</p>
 
 <table>
@@ -62,7 +67,7 @@
   <tbody>
       <tr><td>Fail</td><td>25</td></tr>
       <tr><td>Needs review</td><td>3</td></tr>
-      <tr><td>Passes this rule, flagged by a different rule</td><td>4</td></tr>
+      <tr><td>Flagged by a different rule instead</td><td>4</td></tr>
       <tr><td>Passes, but broken (axe misses it)</td><td>3</td></tr>
       <tr><td>Pass (valid control cases)</td><td>5</td></tr>
       <tr><td>Changes after interaction</td><td>2</td></tr>
@@ -78,7 +83,7 @@
   <li><a href="#ignored">Things axe ignores on purpose</a></li>
   <li><a href="#case">Uppercase values</a></li>
   <li><a href="#review">Needs review for other reasons</a></li>
-  <li><a href="#other-rules">Passes this rule, but another rule flags it</a></li>
+  <li><a href="#other-rules">Flagged by a different rule instead</a></li>
   <li><a href="#allowed-but-wrong">Allowed, but wrong</a></li>
   <li><a href="#dynamic">Changes after interaction</a></li>
 </ul>
@@ -96,6 +101,7 @@
   </div>
   <pre><code class="language-html">&lt;div aria-checked=&quot;true&quot;&gt;Remember me&lt;/div&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>singular</code>. Routes to: NEW-28.</p>
 </article><article class="case" id="a2" aria-labelledby="a2-title">
   <h3 id="a2-title"><span class="case-id">A2</span> aria-expanded on a div</h3>
   <p>The disclosure state is on the wrong element. It belongs on the button that controls the panel.</p>
@@ -104,6 +110,7 @@
   </div>
   <pre><code class="language-html">&lt;div aria-expanded=&quot;false&quot;&gt;Shipping details&lt;/div&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>singular</code>. Routes to: NEW-28.</p>
 </article><article class="case" id="a3" aria-labelledby="a3-title">
   <h3 id="a3-title"><span class="case-id">A3</span> aria-modal on a div</h3>
   <p>Missing <code>role="dialog"</code>.</p>
@@ -112,6 +119,7 @@
   </div>
   <pre><code class="language-html">&lt;div aria-modal=&quot;true&quot;&gt;Are you sure?&lt;/div&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>singular</code>. Routes to: NEW-28.</p>
 </article><article class="case" id="a4" aria-labelledby="a4-title">
   <h3 id="a4-title"><span class="case-id">A4</span> aria-pressed on a link</h3>
   <p>Links can't be toggle buttons. Use a <code>&lt;button&gt;</code> instead.</p>
@@ -120,6 +128,7 @@
   </div>
   <pre><code class="language-html">&lt;a href=&quot;#a4&quot; aria-pressed=&quot;true&quot;&gt;Favourite&lt;/a&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>singular</code>. Routes to: NEW-28.</p>
 </article><article class="case" id="a5" aria-labelledby="a5-title">
   <h3 id="a5-title"><span class="case-id">A5</span> aria-selected on a list item</h3>
   <p>The <code>listitem</code> role doesn't support selection. That needs <code>role="option"</code> inside a listbox.</p>
@@ -132,6 +141,7 @@
   &lt;li aria-selected=&quot;true&quot;&gt;Medium&lt;/li&gt;
 &lt;/ul&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>singular</code>. Routes to: NEW-28.</p>
 </article><article class="case" id="a6" aria-labelledby="a6-title">
   <h3 id="a6-title"><span class="case-id">A6</span> aria-required on a button</h3>
   <p>Buttons can't be required.</p>
@@ -140,6 +150,7 @@
   </div>
   <pre><code class="language-html">&lt;button type=&quot;button&quot; aria-required=&quot;true&quot;&gt;Choose a file&lt;/button&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>singular</code>. Routes to: NEW-28.</p>
 </article><article class="case" id="a7" aria-labelledby="a7-title">
   <h3 id="a7-title"><span class="case-id">A7</span> aria-readonly on a button</h3>
   <div class="example" data-case="a7" data-expected="fail">
@@ -147,6 +158,7 @@
   </div>
   <pre><code class="language-html">&lt;button type=&quot;button&quot; aria-readonly=&quot;true&quot;&gt;Edit&lt;/button&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>singular</code>. Routes to: NEW-28.</p>
 </article><article class="case" id="a8" aria-labelledby="a8-title">
   <h3 id="a8-title"><span class="case-id">A8</span> aria-checked on an image</h3>
   <div class="example" data-case="a8" data-expected="fail">
@@ -154,6 +166,7 @@
   </div>
   <pre><code class="language-html">&lt;img src=&quot;data:image/gif;base64,R0lGODlhAQABAAAAACw=&quot; alt=&quot;Tick&quot; width=&quot;20&quot; height=&quot;20&quot; aria-checked=&quot;true&quot;&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>singular</code>. Routes to: NEW-28.</p>
 </article><article class="case" id="a9" aria-labelledby="a9-title">
   <h3 id="a9-title"><span class="case-id">A9</span> aria-required on a label</h3>
   <p>Put <code>aria-required</code> (or better, <code>required</code>) on the input, not the label.</p>
@@ -164,6 +177,7 @@
   <pre><code class="language-html">&lt;label for=&quot;a9-input&quot; aria-required=&quot;true&quot;&gt;Email&lt;/label&gt;
 &lt;input type=&quot;email&quot; id=&quot;a9-input&quot;&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>singular</code>. Routes to: NEW-28.</p>
 </article><article class="case" id="a10" aria-labelledby="a10-title">
   <h3 id="a10-title"><span class="case-id">A10</span> aria-sort on a data cell</h3>
   <p>Only column and row headers can be sorted.</p>
@@ -178,6 +192,7 @@
   &lt;tr&gt;&lt;td aria-sort=&quot;ascending&quot;&gt;Alex&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>singular</code>. Routes to: NEW-28.</p>
 </article><article class="case" id="a11" aria-labelledby="a11-title">
   <h3 id="a11-title"><span class="case-id">A11</span> aria-sort on a header cell</h3>
   <p>Control case. A <code>&lt;th&gt;</code> is a column header, which allows <code>aria-sort</code>.</p>
@@ -206,6 +221,7 @@
   </div>
   <pre><code class="language-html">&lt;div role=&quot;button&quot; tabindex=&quot;0&quot; aria-checked=&quot;true&quot;&gt;Bold&lt;/div&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>singular</code>. Routes to: NEW-28.</p>
 </article><article class="case" id="b2" aria-labelledby="b2-title">
   <h3 id="b2-title"><span class="case-id">B2</span> aria-pressed on role=&quot;checkbox&quot;</h3>
   <p>The opposite mix-up. Checkboxes use <code>aria-checked</code>.</p>
@@ -214,6 +230,7 @@
   </div>
   <pre><code class="language-html">&lt;div role=&quot;checkbox&quot; tabindex=&quot;0&quot; aria-checked=&quot;false&quot; aria-pressed=&quot;true&quot;&gt;Subscribe&lt;/div&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>singular</code>. Routes to: NEW-28.</p>
 </article><article class="case" id="b3" aria-labelledby="b3-title">
   <h3 id="b3-title"><span class="case-id">B3</span> aria-selected on role=&quot;heading&quot;</h3>
   <div class="example" data-case="b3" data-expected="fail">
@@ -221,6 +238,7 @@
   </div>
   <pre><code class="language-html">&lt;div role=&quot;heading&quot; aria-level=&quot;2&quot; aria-selected=&quot;true&quot;&gt;Our services&lt;/div&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>singular</code>. Routes to: NEW-28.</p>
 </article><article class="case" id="b4" aria-labelledby="b4-title">
   <h3 id="b4-title"><span class="case-id">B4</span> aria-expanded on role=&quot;none&quot;</h3>
   <p><code>role="none"</code> removes the element's semantics, so there's nothing left to be expanded.</p>
@@ -229,6 +247,7 @@
   </div>
   <pre><code class="language-html">&lt;div role=&quot;none&quot; aria-expanded=&quot;true&quot;&gt;Menu&lt;/div&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>singular</code>. Routes to: NEW-28.</p>
 </article><article class="case" id="b5" aria-labelledby="b5-title">
   <h3 id="b5-title"><span class="case-id">B5</span> Misspelled role</h3>
   <p><code>buton</code> isn't a role, so axe falls back to the div's implicit role, <code>generic</code>.</p>
@@ -238,6 +257,7 @@
   <pre><code class="language-html">&lt;div role=&quot;buton&quot; tabindex=&quot;0&quot; aria-pressed=&quot;true&quot;&gt;Mute&lt;/div&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
   <p class="note">The <code>aria-roles</code> rule also fails this for the invalid role.</p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>singular</code>. Routes to: NEW-28. The <code>aria-roles</code> result also routes to NEW-30, which is the real cause. One mistake raises two issues, so the NEW-28 issue should be merged into NEW-30 or dropped.</p>
 </article><article class="case" id="b6" aria-labelledby="b6-title">
   <h3 id="b6-title"><span class="case-id">B6</span> Fallback role list</h3>
   <p>ARIA allows a list of roles, and browsers use the first one they recognise. Here that's <code>switch</code>, which allows both attributes.</p>
@@ -247,6 +267,7 @@
   <pre><code class="language-html">&lt;div role=&quot;switch checkbox&quot; tabindex=&quot;0&quot; aria-checked=&quot;true&quot; aria-required=&quot;true&quot;&gt;Dark mode&lt;/div&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
   <p class="note">Axe doesn't support fallback role lists, so it treats this as a generic div. In practice browsers would treat it as a switch, so this fail is arguably a false positive.</p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>plural</code>. Routes to: NEW-28. This is arguably a false positive, so an auditor should check whether the first role supports the attributes before raising it.</p>
 </article><article class="case" id="b7" aria-labelledby="b7-title">
   <h3 id="b7-title"><span class="case-id">B7</span> Same attributes on a single role</h3>
   <p>Control case. The same markup with just <code>role="switch"</code>.</p>
@@ -269,6 +290,7 @@
   </div>
   <pre><code class="language-html">&lt;p&gt;Level 3&lt;br aria-label=&quot;new line&quot;&gt;200 George Street&lt;/p&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>aria-allowed-attr-elm</code>. Message key: <code>singular</code>. Routes to: NEW-28.</p>
 </article><article class="case" id="c2" aria-labelledby="c2-title">
   <h3 id="c2-title"><span class="case-id">C2</span> aria-label on a picture element</h3>
   <p>A <code>&lt;picture&gt;</code> only allows <code>aria-hidden</code>. The alternative text belongs on the <code>&lt;img&gt;</code>.</p>
@@ -281,6 +303,7 @@
   &lt;img src=&quot;data:image/gif;base64,R0lGODlhAQABAAAAACw=&quot; alt=&quot;Sydney Harbour at dusk&quot; width=&quot;40&quot; height=&quot;40&quot;&gt;
 &lt;/picture&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>aria-allowed-attr-elm</code>. Message key: <code>singular</code>. Routes to: NEW-28.</p>
 </article>
 <!-- section -->
 
@@ -311,6 +334,7 @@
   </div>
   <pre><code class="language-html">&lt;div aria-multiline=&quot;false&quot;&gt;Some text&lt;/div&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>singular</code>. Routes to: NEW-28.</p>
 </article>
 <!-- section -->
 
@@ -327,6 +351,7 @@
   <pre><code class="language-html">&lt;label for=&quot;e1-input&quot;&gt;Given name&lt;/label&gt;
 &lt;input type=&quot;text&quot; id=&quot;e1-input&quot; aria-required=&quot;TRUE&quot;&gt;</code></pre>
   <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review. Message key: <code>caseSensitive</code>. Routes to: NEW-39.</p>
 </article><article class="case" id="e2" aria-labelledby="e2-title">
   <h3 id="e2-title"><span class="case-id">E2</span> aria-required=&quot;FALSE&quot;</h3>
   <p>If this isn't recognised, it falls back to <code>true</code>, so the field could be announced as required.</p>
@@ -337,6 +362,7 @@
   <pre><code class="language-html">&lt;label for=&quot;e2-input&quot;&gt;Middle name&lt;/label&gt;
 &lt;input type=&quot;text&quot; id=&quot;e2-input&quot; aria-required=&quot;FALSE&quot;&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>caseSensitive</code>. Routes to: NEW-39, not NEW-28, because NEW-39 names this message key.</p>
 </article><article class="case" id="e3" aria-labelledby="e3-title">
   <h3 id="e3-title"><span class="case-id">E3</span> aria-busy=&quot;TRUE&quot;</h3>
   <div class="example" data-case="e3" data-expected="fail">
@@ -344,6 +370,7 @@
   </div>
   <pre><code class="language-html">&lt;div aria-busy=&quot;TRUE&quot;&gt;Loading results.&lt;/div&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>caseSensitive</code>. Routes to: NEW-39, not NEW-28, because NEW-39 names this message key.</p>
 </article><article class="case" id="e4" aria-labelledby="e4-title">
   <h3 id="e4-title"><span class="case-id">E4</span> aria-current=&quot;Page&quot;</h3>
   <p>If this isn't recognised, it falls back to <code>true</code>, so it's announced as "current" instead of "current page".</p>
@@ -352,6 +379,7 @@
   </div>
   <pre><code class="language-html">&lt;a href=&quot;#e4&quot; aria-current=&quot;Page&quot;&gt;Home&lt;/a&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>caseSensitive</code>. Routes to: NEW-39, not NEW-28, because NEW-39 names this message key.</p>
 </article><article class="case" id="e5" aria-labelledby="e5-title">
   <h3 id="e5-title"><span class="case-id">E5</span> aria-checked=&quot;TRUE&quot;</h3>
   <div class="example" data-case="e5" data-expected="fail">
@@ -359,6 +387,7 @@
   </div>
   <pre><code class="language-html">&lt;div role=&quot;checkbox&quot; tabindex=&quot;0&quot; aria-checked=&quot;TRUE&quot;&gt;Accept terms&lt;/div&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>caseSensitive</code>. Routes to: NEW-39, not NEW-28, because NEW-39 names this message key.</p>
 </article><article class="case" id="e6" aria-labelledby="e6-title">
   <h3 id="e6-title"><span class="case-id">E6</span> aria-checked=&quot;Mixed&quot;</h3>
   <div class="example" data-case="e6" data-expected="fail">
@@ -366,6 +395,7 @@
   </div>
   <pre><code class="language-html">&lt;div role=&quot;checkbox&quot; tabindex=&quot;0&quot; aria-checked=&quot;Mixed&quot;&gt;Select all&lt;/div&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>caseSensitive</code>. Routes to: NEW-39, not NEW-28, because NEW-39 names this message key.</p>
 </article><article class="case" id="e7" aria-labelledby="e7-title">
   <h3 id="e7-title"><span class="case-id">E7</span> Lowercase values</h3>
   <p>Control case.</p>
@@ -388,6 +418,7 @@
   </div>
   <pre><code class="language-html">&lt;div aria-grabbed=&quot;false&quot;&gt;Drag me&lt;/div&gt;</code></pre>
   <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review. Check: <code>aria-no-deprecated-attr</code>. Routes to: NEW-40.</p>
 </article><article class="case" id="f2" aria-labelledby="f2-title">
   <h3 id="f2-title"><span class="case-id">F2</span> aria-pressed on a custom element</h3>
   <p>Axe can't tell what a custom element is, so it asks you to check that nothing breaks if the attribute is ignored.</p>
@@ -396,6 +427,7 @@
   </div>
   <pre><code class="language-html">&lt;fancy-toggle aria-pressed=&quot;true&quot;&gt;Shuffle&lt;/fancy-toggle&gt;</code></pre>
   <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review, message key: none. Routes to: NEW-28.</p>
 </article><article class="case" id="f3" aria-labelledby="f3-title">
   <h3 id="f3-title"><span class="case-id">F3</span> The same custom element, made focusable</h3>
   <p>Once it has <code>tabindex</code>, axe treats it as an interactive element with no role, and fails it.</p>
@@ -404,10 +436,11 @@
   </div>
   <pre><code class="language-html">&lt;fancy-toggle tabindex=&quot;0&quot; aria-pressed=&quot;true&quot;&gt;Repeat&lt;/fancy-toggle&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>singular</code>. Routes to: NEW-28.</p>
 </article>
 <!-- section -->
 
-<h2 id="other-rules">Passes this rule, but another rule flags it</h2>
+<h2 id="other-rules">Flagged by a different rule instead</h2>
 
 <p>These are allowed as far as <code>aria-allowed-attr</code> is concerned, but a different axe rule picks them up. Worth knowing when you're reading a report.</p>
 <article class="case" id="g1" aria-labelledby="g1-title">
@@ -417,7 +450,8 @@
 <p aria-label="Important">Applications close on Friday.</p>
   </div>
   <pre><code class="language-html">&lt;p aria-label=&quot;Important&quot;&gt;Applications close on Friday.&lt;/p&gt;</code></pre>
-  <p class="result"><span class="badge other">Expected result: passes this rule, flagged by <code>aria-prohibited-attr</code></span></p>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-prohibited-attr</code> instead</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review. Message key: <code>noRoleSingular</code>. Routes to: NEW-44.</p>
 </article><article class="case" id="g2" aria-labelledby="g2-title">
   <h3 id="g2-title"><span class="case-id">G2</span> aria-label on a span</h3>
   <p>Same again, with the <code>generic</code> role.</p>
@@ -425,7 +459,8 @@
 <span aria-label="Price">$25</span>
   </div>
   <pre><code class="language-html">&lt;span aria-label=&quot;Price&quot;&gt;$25&lt;/span&gt;</code></pre>
-  <p class="result"><span class="badge other">Expected result: passes this rule, flagged by <code>aria-prohibited-attr</code></span></p>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-prohibited-attr</code> instead</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review. Message key: <code>noRoleSingular</code>. Routes to: NEW-44.</p>
 </article><article class="case" id="g3" aria-labelledby="g3-title">
   <h3 id="g3-title"><span class="case-id">G3</span> role=&quot;none&quot; on a button</h3>
   <p>Because the button is focusable, browsers ignore <code>role="none"</code>, so it stays a button and <code>aria-pressed</code> is allowed.</p>
@@ -433,7 +468,9 @@
 <button type="button" role="none" aria-pressed="false">Like</button>
   </div>
   <pre><code class="language-html">&lt;button type=&quot;button&quot; role=&quot;none&quot; aria-pressed=&quot;false&quot;&gt;Like&lt;/button&gt;</code></pre>
-  <p class="result"><span class="badge other">Expected result: passes this rule, flagged by <code>presentation-role-conflict</code></span></p>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>presentation-role-conflict</code> instead</span></p>
+  <p class="note">It also fails <code>aria-allowed-role</code>. The <code>presentation-role-conflict</code> message says "Element is not focusable", which reads backwards: the button <em>is</em> focusable, and that's the problem.</p>
+  <p class="route"><strong>Template routing:</strong> <code>aria-allowed-role</code> routes to NEW-31. <code>presentation-role-conflict</code> routes to NEW-35, which wasn't in this review.</p>
 </article><article class="case" id="g4" aria-labelledby="g4-title">
   <h3 id="g4-title"><span class="case-id">G4</span> aria-checked that contradicts a native checkbox</h3>
   <p>Allowed on a checkbox, but it says checked when the checkbox isn't.</p>
@@ -443,7 +480,8 @@
   </div>
   <pre><code class="language-html">&lt;input type=&quot;checkbox&quot; id=&quot;g4-input&quot; aria-checked=&quot;true&quot;&gt;
 &lt;label for=&quot;g4-input&quot;&gt;Send me updates&lt;/label&gt;</code></pre>
-  <p class="result"><span class="badge other">Expected result: passes this rule, flagged by <code>aria-conditional-attr</code></span></p>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-conditional-attr</code> instead</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>checkbox</code>. Routes to: NEW-29.</p>
 </article>
 <!-- section -->
 
@@ -458,6 +496,7 @@
   </div>
   <pre><code class="language-html">&lt;p aria-haspopup=&quot;true&quot;&gt;Opening hours&lt;/p&gt;</code></pre>
   <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
 </article><article class="case" id="h2" aria-labelledby="h2-title">
   <h3 id="h2-title"><span class="case-id">H2</span> aria-multiline on a single line input</h3>
   <p>Allowed on a textbox, but an <code>&lt;input&gt;</code> can only ever hold one line.</p>
@@ -468,6 +507,7 @@
   <pre><code class="language-html">&lt;label for=&quot;h2-input&quot;&gt;Comments&lt;/label&gt;
 &lt;input type=&quot;text&quot; id=&quot;h2-input&quot; aria-multiline=&quot;true&quot;&gt;</code></pre>
   <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
 </article><article class="case" id="h3" aria-labelledby="h3-title">
   <h3 id="h3-title"><span class="case-id">H3</span> aria-readonly on an editable input</h3>
   <p>Announced as read only, but you can still type in it.</p>
@@ -478,6 +518,7 @@
   <pre><code class="language-html">&lt;label for=&quot;h3-input&quot;&gt;Company name&lt;/label&gt;
 &lt;input type=&quot;text&quot; id=&quot;h3-input&quot; aria-readonly=&quot;true&quot;&gt;</code></pre>
   <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
 </article>
 <!-- section -->
 
@@ -498,6 +539,7 @@
   &lt;button type=&quot;button&quot; class=&quot;i1-tab&quot;&gt;Yearly&lt;/button&gt;
 &lt;/div&gt;</code></pre>
   <p class="result"><span class="badge dynamic">On load: pass. After clicking a button: fail</span></p>
+  <p class="note">After the click, the message key is <code>singular</code>, so it routes to NEW-28.</p>
 </article><article class="case" id="i2" aria-labelledby="i2-title">
   <h3 id="i2-title"><span class="case-id">I2</span> Toggle that uses aria-checked instead of aria-pressed</h3>
   <p>The script toggles <code>aria-checked</code> on a button. A button should use <code>aria-pressed</code>.</p>
@@ -506,7 +548,9 @@
   </div>
   <pre><code class="language-html">&lt;button type=&quot;button&quot; id=&quot;i2-button&quot;&gt;Captions&lt;/button&gt;</code></pre>
   <p class="result"><span class="badge dynamic">On load: pass. After clicking: fail</span></p>
+  <p class="note">After the click, the message key is <code>singular</code>, so it routes to NEW-28.</p>
 </article>
+
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
 </main>

@@ -58,6 +58,17 @@
   background: #e3ecf9;
   border-color: #1a4f9c;
 }
+  
+.status-other {
+  background: #e0f4f4;
+  border-color: #0b6b6b;
+}
+
+.route {
+  font-size: .875rem;
+  border-left: 3px solid #a0a0a8;
+  padding-left: .6rem;
+}
   </style>
 </head>
 <body>
@@ -78,6 +89,10 @@
 
 <p>The expected results were checked by running axe-core 4.14.1 over this page. Look in both the axe <strong>issues</strong> list and the <strong>needs review</strong> list, because several missing ID cases only show up in needs review.</p>
 
+<p>Each case also shows the axe <strong>message key</strong> and which Intopia issue template the result would go to under the current assembly rules.</p>
+
+<p class="report-link"><strong>axe-core results:</strong> <a href="x-axe-core-rules/01-axe-report-aria-valid-attr-value.html">See the HTML report from running axe-core 4.14.0 over this page</a>.</p>
+
 <div class="table-wrap">
 <table>
   <caption>Number of test cases by expected axe result</caption>
@@ -85,8 +100,9 @@
   <tbody>
     <tr><td>Fail</td><td>31</td></tr>
     <tr><td>Needs review</td><td>12</td></tr>
+    <tr><td>Flagged by a different rule instead</td><td>1</td></tr>
     <tr><td>Pass, but broken (axe misses it)</td><td>5</td></tr>
-    <tr><td>Pass (valid control cases)</td><td>5</td></tr>
+    <tr><td>Pass (valid control cases)</td><td>4</td></tr>
     <tr><td>Changes after interaction</td><td>2</td></tr>
   </tbody>
 </table>
@@ -133,9 +149,13 @@
   <li><strong>A problem waiting to happen.</strong> A missing <code>aria-errormessage</code> ID is ignored while <code>aria-invalid="false"</code>, but it breaks as soon as a script marks the field invalid.</li>
 </ul>
 
-<h3>Pass, valid control cases (5 examples)</h3>
+<h3>Flagged by a different rule (1 example)</h3>
 
-<p>These are correct examples that should pass. They confirm that the rule does not flag everything. They include an ID that exists, <code>aria-required="TRUE"</code> (the case of a true or false value does not matter), <code>aria-setsize="-1"</code> (allowed, and means the total is unknown), an empty <code>aria-labelledby</code> (allowed), and a correctly built <code>aria-errormessage</code>.</p>
+<p><code>aria-required="TRUE"</code> passes this rule, because it ignores case. But the <code>aria-allowed-attr</code> rule flags it as needs review, because some assistive technologies may not recognise uppercase values.</p>
+
+<h3>Pass, valid control cases (4 examples)</h3>
+
+<p>These are correct examples that should pass. They confirm that the rule does not flag everything. They include an ID that exists, <code>aria-setsize="-1"</code> (allowed, and means the total is unknown), an empty <code>aria-labelledby</code> (allowed), and a correctly built <code>aria-errormessage</code>.</p>
 
 <h3>Changes after interaction (2 examples)</h3>
 
@@ -157,6 +177,7 @@
 <p class="status status-review"><strong>Expected axe result: needs review.</strong> Axe reports it in the needs review list.</p>
 <p class="status status-miss"><strong>Expected axe result: pass, but it's broken.</strong> Axe misses it, so check manually.</p>
 <p class="status status-pass"><strong>Expected axe result: pass (valid).</strong> A control case.</p>
+<p class="status status-other"><strong>Expected axe result: flagged by a different rule instead.</strong> This rule passes it, but another rule reports it.</p>
 <p class="status status-dynamic"><strong>Expected axe result: pass on load, fail after interaction.</strong> Activate the control, then run axe again.</p>
 
 <nav aria-label="Sections">
@@ -189,6 +210,8 @@
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
 
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
+
 <div class="example" data-case="a1">
 <div role="listbox" tabindex="0" aria-label="Fruit" aria-activedescendant="a1-apple">
   <div role="option" id="a1-banana">Banana</div>
@@ -209,6 +232,8 @@
 <p>Control case. The ID exists, so this passes.</p>
 
 <p class="status status-pass"><strong>Expected axe result: pass (valid).</strong></p>
+
+<p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
 
 <div class="example" data-case="a2">
 <div role="listbox" tabindex="0" aria-label="Vegetables" aria-activedescendant="a2-carrot">
@@ -239,6 +264,8 @@
 
 <p class="status status-review"><strong>Expected axe result: needs review.</strong> Axe doesn't fail missing <code>aria-labelledby</code> IDs. It reports them as needs review.</p>
 
+<p class="route"><strong>Template routing:</strong> Needs review. Message key: <code>noId</code>. Routes to: NEW-36.</p>
+
 <div class="example" data-case="b1">
 <button type="button" aria-labelledby="b1-label">Save</button>
 </div>
@@ -255,6 +282,8 @@
 <p>The first ID exists, the second doesn't.</p>
 
 <p class="status status-miss"><strong>Expected axe result: pass, but it's broken. Check manually.</strong> Axe passes this because at least one ID exists. The second part of the name is silently lost.</p>
+
+<p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
 
 <div class="example" data-case="b2">
 <span id="b2-first">Delivery</span>
@@ -274,6 +303,8 @@
 <p>The input points to <code>b3-hint</code> but the hint has the ID <code>b3-hints</code>.</p>
 
 <p class="status status-review"><strong>Expected axe result: needs review.</strong> Like <code>aria-labelledby</code>, a missing <code>aria-describedby</code> ID is needs review, not a fail.</p>
+
+<p class="route"><strong>Template routing:</strong> Needs review. Message key: <code>noId</code>. Routes to: NEW-36.</p>
 
 <div class="example" data-case="b3">
 <label for="b3-input">Postcode</label>
@@ -296,6 +327,8 @@
 
 <p class="status status-review"><strong>Expected axe result: needs review.</strong></p>
 
+<p class="route"><strong>Template routing:</strong> Needs review. Message key: <code>noId</code>. Routes to: NEW-36.</p>
+
 <div class="example" data-case="b4">
 <label for="b4-input">Phone</label>
 <input type="tel" id="b4-input" aria-describedby="b4-Hint">
@@ -317,6 +350,8 @@
 
 <p class="status status-review"><strong>Expected axe result: needs review.</strong></p>
 
+<p class="route"><strong>Template routing:</strong> Needs review. Message key: <code>noId</code>. Routes to: NEW-36.</p>
+
 <div class="example" data-case="b5">
 <label for="b5-input">Email</label>
 <input type="email" id="b5-input" aria-describedby="#b5-hint">
@@ -337,6 +372,8 @@
 <p>The list should be space separated. With a comma, the browser looks for a single ID called <code>b6-hint,b6-error</code>.</p>
 
 <p class="status status-review"><strong>Expected axe result: needs review.</strong></p>
+
+<p class="route"><strong>Template routing:</strong> Needs review. Message key: <code>noId</code>. Routes to: NEW-36.</p>
 
 <div class="example" data-case="b6">
 <label for="b6-input">Password</label>
@@ -361,6 +398,8 @@
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
 
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
+
 <div class="example" data-case="b7">
 <button type="button" aria-expanded="true" aria-controls="b7-panel">Filters</button>
 </div>
@@ -377,6 +416,8 @@
 <p>Same as above, but <code>aria-expanded="false"</code>.</p>
 
 <p class="status status-miss"><strong>Expected axe result: pass, but it's broken. Check manually.</strong> Axe deliberately skips this, because many scripts only add the panel to the DOM when it opens. Open it and check again.</p>
+
+<p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
 
 <div class="example" data-case="b8">
 <button type="button" aria-expanded="false" aria-controls="b8-panel">Sort options</button>
@@ -395,6 +436,8 @@
 
 <p class="status status-review"><strong>Expected axe result: needs review.</strong> With <code>aria-haspopup</code> set, axe assumes the popup may live elsewhere and asks you to check.</p>
 
+<p class="route"><strong>Template routing:</strong> Needs review. Message key: <code>controlsWithinPopup</code>. Routes to: no template. The rule map decided this on the basis that a missing target becomes a violation once the popup is open, but this button is already open and axe still only reports needs review.</p>
+
 <div class="example" data-case="b9">
 <button type="button" aria-haspopup="menu" aria-expanded="true" aria-controls="b9-menu">Account</button>
 </div>
@@ -411,6 +454,8 @@
 <p>The first panel exists, the second doesn't.</p>
 
 <p class="status status-miss"><strong>Expected axe result: pass, but it's broken. Check manually.</strong> One valid ID is enough for axe to pass it.</p>
+
+<p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
 
 <div class="example" data-case="b10">
 <button type="button" aria-expanded="true" aria-controls="b10-panel-1 b10-panel-2">Show all</button>
@@ -430,6 +475,8 @@
 <p>The list says it owns <code>b11-item</code>, which doesn't exist.</p>
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
 
 <div class="example" data-case="b11">
 <ul aria-owns="b11-item">
@@ -452,6 +499,8 @@
 
 <p class="status status-miss"><strong>Expected axe result: pass, but it's broken. Check manually.</strong> As with <code>aria-controls</code>, axe skips <code>aria-owns</code> when <code>aria-expanded="false"</code>.</p>
 
+<p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+
 <div class="example" data-case="b12">
 <input type="text" role="combobox" aria-label="City" aria-expanded="false" aria-owns="b12-list">
 </div>
@@ -468,6 +517,8 @@
 <p>The image points to a longer description that doesn't exist.</p>
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
 
 <div class="example" data-case="b13">
 <img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Sales chart" aria-details="b13-details" width="40" height="40">
@@ -486,6 +537,8 @@
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
 
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
+
 <div class="example" data-case="b14">
 <div aria-flowto="b14-next">Read this first.</div>
 </div>
@@ -501,7 +554,7 @@
 
 <h2 id="errormessage"><code>aria-errormessage</code></h2>
 
-<p>Axe checks <code>aria-errormessage</code> separately, and only when <code>aria-invalid</code> is set to something other than <code>false</code>.</p>
+<p>Axe checks <code>aria-errormessage</code> with a separate check inside this rule, and only when <code>aria-invalid</code> is set to something other than <code>false</code>.</p>
 
 <!-- sub-section -->
 
@@ -510,6 +563,8 @@
 <p>The field is invalid and points to <code>c1-error</code>, which doesn't exist.</p>
 
 <p class="status status-review"><strong>Expected axe result: needs review.</strong></p>
+
+<p class="route"><strong>Template routing:</strong> Needs review from the <code>aria-errormessage</code> check, with no message key. Routes to: no template, so a missing error message isn't raised.</p>
 
 <div class="example" data-case="c1">
 <label for="c1-input">Name</label>
@@ -526,9 +581,11 @@
 
 <h3 id="c2">Example C2: <code>aria-errormessage</code> with two IDs</h3>
 
-<p><code>aria-errormessage</code> only allows one ID.</p>
+<p>ARIA 1.2 allows only one ID in <code>aria-errormessage</code>. The ARIA 1.3 draft allows a list, but support is patchy, so axe fails it.</p>
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<p class="route"><strong>Template routing:</strong> Check: <code>aria-errormessage</code>. Message key: <code>unsupported</code>. Routes to: NEW-27, although NEW-27 doesn't cover <code>aria-errormessage</code>.</p>
 
 <div class="example" data-case="c2">
 <label for="c2-input">Suburb</label>
@@ -553,6 +610,8 @@
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
 
+<p class="route"><strong>Template routing:</strong> Check: <code>aria-errormessage</code>. Message key: <code>hidden</code>. Routes to: NEW-27, although NEW-27 doesn't cover <code>aria-errormessage</code>.</p>
+
 <div class="example" data-case="c3">
 <label for="c3-input">Age</label>
 <input type="text" id="c3-input" aria-invalid="true" aria-errormessage="c3-error">
@@ -573,6 +632,8 @@
 <p>The error exists and is visible, but it isn't a live region and isn't also referenced by <code>aria-describedby</code>.</p>
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<p class="route"><strong>Template routing:</strong> Check: <code>aria-errormessage</code>. Message key: none. Routes to: NEW-27, although NEW-27 doesn't cover <code>aria-errormessage</code>.</p>
 
 <div class="example" data-case="c4">
 <label for="c4-input">State</label>
@@ -595,6 +656,8 @@
 
 <p class="status status-miss"><strong>Expected axe result: pass, but it's broken. Check manually.</strong> This will break as soon as a script flips <code>aria-invalid</code> to <code>true</code>.</p>
 
+<p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+
 <div class="example" data-case="c5">
 <label for="c5-input">Country</label>
 <input type="text" id="c5-input" aria-invalid="false" aria-errormessage="c5-error">
@@ -613,6 +676,8 @@
 <p>Control case. One ID, visible, and a live region.</p>
 
 <p class="status status-pass"><strong>Expected axe result: pass (valid).</strong></p>
+
+<p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
 
 <div class="example" data-case="c6">
 <label for="c6-input">Town</label>
@@ -633,13 +698,15 @@
 
 <h2 id="boolean">True/false values</h2>
 
-<p>These attributes only accept <code>true</code> or <code>false</code> (some also accept <code>undefined</code>). Axe ignores case, so <code>TRUE</code> is fine.</p>
+<p>These attributes only accept <code>true</code> or <code>false</code> (some also accept <code>undefined</code>). This rule ignores case, but another rule doesn't: see D6.</p>
 
 <!-- sub-section -->
 
 <h3 id="d1">Example D1: <code>aria-hidden</code> misspelled</h3>
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
 
 <div class="example" data-case="d1">
 <p aria-hidden="rtue">Decorative text.</p>
@@ -657,6 +724,8 @@
 <p>A very common mix-up with the HTML <code>required</code> attribute.</p>
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
 
 <div class="example" data-case="d2">
 <label for="d2-input">Surname</label>
@@ -677,6 +746,8 @@
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
 
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
+
 <div class="example" data-case="d3">
 <button type="button" aria-disabled="disabled">Submit</button>
 </div>
@@ -694,6 +765,8 @@
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
 
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
+
 <div class="example" data-case="d4">
 <div aria-busy="1">Loading results.</div>
 </div>
@@ -709,6 +782,8 @@
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
 
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
+
 <div class="example" data-case="d5">
 <div role="dialog" aria-label="Confirm" aria-modal="yes">Are you sure?</div>
 </div>
@@ -722,9 +797,11 @@
 
 <h3 id="d6">Example D6: <code>aria-required="TRUE"</code></h3>
 
-<p>Control case. Uppercase is allowed.</p>
+<p>This rule ignores case, so it passes here. But <code>aria-allowed-attr</code> flags uppercase values on case-sensitive attributes, because some assistive technologies may not recognise them.</p>
 
-<p class="status status-pass"><strong>Expected axe result: pass (valid).</strong></p>
+<p class="status status-other"><strong>Expected axe result: flagged by <code>aria-allowed-attr</code> instead</strong>, as needs review.</p>
+
+<p class="route"><strong>Template routing:</strong> <code>aria-allowed-attr</code>, needs review. Message key: <code>caseSensitive</code>. Routes to: NEW-39.</p>
 
 <div class="example" data-case="d6">
 <label for="d6-input">Given name</label>
@@ -753,6 +830,8 @@
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
 
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
+
 <div class="example" data-case="e1">
 <div role="checkbox" tabindex="0" aria-checked="checked">Subscribe</div>
 </div>
@@ -767,6 +846,8 @@
 <h3 id="e2">Example E2: <code>aria-pressed="on"</code></h3>
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
 
 <div class="example" data-case="e2">
 <button type="button" aria-pressed="on">Bold</button>
@@ -783,6 +864,8 @@
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
 
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
+
 <div class="example" data-case="e3">
 <button type="button" aria-expanded="open">Menu</button>
 </div>
@@ -797,6 +880,8 @@
 <h3 id="e4">Example E4: <code>aria-selected="yes"</code></h3>
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
 
 <div class="example" data-case="e4">
 <div role="tablist" aria-label="Plans">
@@ -819,6 +904,8 @@
 
 <p class="status status-review"><strong>Expected axe result: needs review.</strong> Axe only flags invalid <code>aria-current</code> values as needs review, because browsers treat unknown values as <code>true</code>.</p>
 
+<p class="route"><strong>Template routing:</strong> Needs review. Message key: <code>ariaCurrent</code>. Routes to: NEW-37.</p>
+
 <div class="example" data-case="e5">
 <a href="#e5" aria-current="yes">Home</a>
 </div>
@@ -835,6 +922,8 @@
 <p><code>rude</code> was dropped from ARIA long ago.</p>
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
 
 <div class="example" data-case="e6">
 <div aria-live="rude">Status messages.</div>
@@ -853,6 +942,8 @@
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
 
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
+
 <div class="example" data-case="e7">
 <input type="text" role="combobox" aria-label="Search" aria-expanded="false" aria-autocomplete="on">
 </div>
@@ -867,6 +958,8 @@
 <h3 id="e8">Example E8: <code>aria-haspopup="popup"</code></h3>
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
 
 <div class="example" data-case="e8">
 <button type="button" aria-haspopup="popup">Options</button>
@@ -884,6 +977,8 @@
 <p>It must be the full word, <code>ascending</code>.</p>
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
 
 <div class="example" data-case="e9">
 <div class="table-wrap">
@@ -908,6 +1003,8 @@
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
 
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
+
 <div class="example" data-case="e10">
 <label for="e10-input">Code</label>
 <input type="text" id="e10-input" aria-invalid="error">
@@ -925,6 +1022,8 @@
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
 
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
+
 <div class="example" data-case="e11">
 <div role="separator" aria-orientation="landscape"></div>
 </div>
@@ -941,6 +1040,8 @@
 <p><code>additions</code> is fine, <code>removed</code> isn't (it should be <code>removals</code>).</p>
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
 
 <div class="example" data-case="e12">
 <div aria-live="polite" aria-relevant="additions removed">Chat log.</div>
@@ -965,6 +1066,8 @@
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
 
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
+
 <div class="example" data-case="f1">
 <div role="heading" aria-level="two">Contact us</div>
 </div>
@@ -982,6 +1085,8 @@
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
 
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
+
 <div class="example" data-case="f2">
 <div role="heading" aria-level="0">About us</div>
 </div>
@@ -997,7 +1102,11 @@
 
 <p>Valid in ARIA, but some screen readers don't support heading levels above 6.</p>
 
+<p>On this page it also fails <code>heading-order</code>, because it jumps from level 3 headings to level 7.</p>
+
 <p class="status status-review"><strong>Expected axe result: needs review.</strong></p>
+
+<p class="route"><strong>Template routing:</strong> Needs review from the <code>aria-level</code> check, with no message key. Routes to: no template, because this result isn't in the rule map.</p>
 
 <div class="example" data-case="f3">
 <div role="heading" aria-level="7">Fine print</div>
@@ -1013,6 +1122,8 @@
 <h3 id="f4">Example F4: <code>aria-valuenow="fifty"</code></h3>
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
 
 <div class="example" data-case="f4">
 <div role="slider" tabindex="0" aria-label="Volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="fifty"></div>
@@ -1031,6 +1142,8 @@
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
 
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
+
 <div class="example" data-case="f5">
 <div role="progressbar" aria-label="Upload" aria-valuenow="50%"></div>
 </div>
@@ -1048,6 +1161,8 @@
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
 
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
+
 <div class="example" data-case="f6">
 <div role="slider" tabindex="0" aria-label="Zoom" aria-valuemin="0,5" aria-valuemax="3" aria-valuenow="1"></div>
 </div>
@@ -1064,6 +1179,8 @@
 <p>Positions start at 1.</p>
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
 
 <div class="example" data-case="f7">
 <div role="listbox" aria-label="Sizes">
@@ -1085,6 +1202,8 @@
 <p>Must be a whole number.</p>
 
 <p class="status status-fail"><strong>Expected axe result: fail.</strong></p>
+
+<p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-27.</p>
 
 <div class="example" data-case="f8">
 <div role="grid" aria-label="Scores">
@@ -1110,6 +1229,8 @@
 <p>Control case. <code>-1</code> is allowed and means the total is unknown.</p>
 
 <p class="status status-pass"><strong>Expected axe result: pass (valid).</strong></p>
+
+<p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
 
 <div class="example" data-case="f9">
 <div role="listbox" aria-label="Results">
@@ -1138,6 +1259,8 @@
 
 <p class="status status-review"><strong>Expected axe result: needs review.</strong> Axe reports empty non-text values as needs review rather than a fail.</p>
 
+<p class="route"><strong>Template routing:</strong> Needs review. Message key: <code>empty</code>. Routes to: NEW-38.</p>
+
 <div class="example" data-case="g1">
 <button type="button" aria-expanded="">More</button>
 </div>
@@ -1153,6 +1276,8 @@
 
 <p class="status status-review"><strong>Expected axe result: needs review.</strong></p>
 
+<p class="route"><strong>Template routing:</strong> Needs review. Message key: <code>empty</code>. Routes to: NEW-38.</p>
+
 <div class="example" data-case="g2">
 <p aria-hidden="">Some text.</p>
 </div>
@@ -1167,6 +1292,8 @@
 <h3 id="g3">Example G3: <code>aria-valuenow=""</code></h3>
 
 <p class="status status-review"><strong>Expected axe result: needs review.</strong></p>
+
+<p class="route"><strong>Template routing:</strong> Needs review. Message key: <code>empty</code>. Routes to: NEW-38.</p>
 
 <div class="example" data-case="g3">
 <div role="progressbar" aria-label="Download" aria-valuenow=""></div>
@@ -1184,6 +1311,8 @@
 <p>An empty ID list is allowed, so this rule passes it. The button still has its text as a name.</p>
 
 <p class="status status-pass"><strong>Expected axe result: pass (valid).</strong></p>
+
+<p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
 
 <div class="example" data-case="g4">
 <button type="button" aria-labelledby="">Print</button>
@@ -1209,6 +1338,8 @@
 <p>The script reads the state from a variable that is never set, so after the first press <code>aria-pressed</code> becomes the text <code>null</code>.</p>
 
 <p class="status status-dynamic"><strong>Expected axe result: pass on load, fail after pressing.</strong></p>
+
+<p class="route"><strong>Template routing:</strong> After the interaction, the message key is none, so it routes to NEW-27.</p>
 
 <div class="example" data-case="h1">
 <button type="button" id="h1-button" aria-pressed="false">Italic</button>
@@ -1236,6 +1367,8 @@ document.getElementById('h1-button').addEventListener('click', function () {
 <p>The button starts collapsed, so axe skips the missing <code>aria-controls</code> target. When opened, the script adds the panel with the ID <code>h2-pannel</code> (typo) instead of <code>h2-panel</code>.</p>
 
 <p class="status status-dynamic"><strong>Expected axe result: pass on load, fail after opening.</strong></p>
+
+<p class="route"><strong>Template routing:</strong> After the interaction, the message key is none, so it routes to NEW-27.</p>
 
 <div class="example" data-case="h2">
 <button type="button" id="h2-button" aria-expanded="false" aria-controls="h2-panel">Shipping details</button>

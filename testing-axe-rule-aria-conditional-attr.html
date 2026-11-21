@@ -25,6 +25,7 @@
   .badge.pass { background: #e3f4e8; border-color: #1e7b3a; color: #155c2b; }
   .badge.dynamic { background: #e8eef9; border-color: #1a4f9c; color: #133b75; }
   .note { font-size: .9375rem; }
+  .route { font-size: .875rem; border-left: 3px solid #a0a0a8; padding-left: .6rem; }
 </style>
 </head>
 <body>
@@ -50,6 +51,10 @@
 </ul>
 
 <p>One thing to know up front: the rule doesn't fail every <code>aria-checked</code> on a native checkbox. It only fails when the value <em>disagrees</em> with the real state, at the moment axe runs.</p>
+
+<p>Each case also shows the axe <strong>message key</strong> and which Intopia issue template the result would go to under the current assembly rules.</p>
+
+<p class="report-link"><strong>axe-core results:</strong> <a href="x-axe-core-rules/x-axe-core-rules/04-axe-report-aria-conditional-attr.html">See the HTML report from running axe-core 4.14.0 over this page</a>.</p>
 
 <p>Every example is live in the page, so you can run the axe extension straight over it. The expected results were checked by running axe-core 4.14.1 over this page. Look in both the axe <strong>issues</strong> list and the <strong>needs review</strong> list.</p>
 
@@ -90,6 +95,7 @@
   </div>
   <pre><code class="language-html">&lt;label&gt;&lt;input type=&quot;checkbox&quot; aria-checked=&quot;true&quot;&gt; Send me updates&lt;/label&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>checkbox</code>. Routes to: NEW-29.</p>
 </article><article class="case" id="a2" aria-labelledby="a2-title">
   <h3 id="a2-title"><span class="case-id">A2</span> Ticked, but aria-checked=&quot;false&quot;</h3>
   <div class="example" data-case="a2" data-expected="fail">
@@ -97,6 +103,7 @@
   </div>
   <pre><code class="language-html">&lt;label&gt;&lt;input type=&quot;checkbox&quot; checked aria-checked=&quot;false&quot;&gt; Remember me&lt;/label&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>checkbox</code>. Routes to: NEW-29.</p>
 </article><article class="case" id="a3" aria-labelledby="a3-title">
   <h3 id="a3-title"><span class="case-id">A3</span> aria-checked=&quot;mixed&quot; on a normal checkbox</h3>
   <p>A native checkbox is only mixed when its <code>indeterminate</code> property is set with JavaScript.</p>
@@ -105,6 +112,7 @@
   </div>
   <pre><code class="language-html">&lt;label&gt;&lt;input type=&quot;checkbox&quot; aria-checked=&quot;mixed&quot;&gt; Select all&lt;/label&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>checkbox</code>. Routes to: NEW-29.</p>
 </article>
 <!-- section -->
 
@@ -126,6 +134,7 @@
   &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;b1&quot;&gt; Express&lt;/label&gt;
 &lt;/fieldset&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>radio</code>. Routes to: NEW-29.</p>
 </article>
 <!-- section -->
 
@@ -194,6 +203,7 @@
   &lt;tr aria-level=&quot;1&quot;&gt;&lt;td&gt;My downloads&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>rowSingular</code>. Routes to: NEW-41.</p>
 </article><article class="case" id="d2" aria-labelledby="d2-title">
   <h3 id="d2-title"><span class="case-id">D2</span> aria-expanded on a table row</h3>
   <div class="example" data-case="d2" data-expected="fail">
@@ -205,6 +215,7 @@
   &lt;tr aria-expanded=&quot;false&quot;&gt;&lt;td&gt;2025 invoices&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>rowSingular</code>. Routes to: NEW-41.</p>
 </article><article class="case" id="d3" aria-labelledby="d3-title">
   <h3 id="d3-title"><span class="case-id">D3</span> aria-posinset and aria-setsize on a table row</h3>
   <div class="example" data-case="d3" data-expected="fail">
@@ -216,6 +227,7 @@
   &lt;tr aria-posinset=&quot;1&quot; aria-setsize=&quot;3&quot;&gt;&lt;td&gt;Chapter one&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>rowPlural</code>. Routes to: NEW-41.</p>
 </article><article class="case" id="d4" aria-labelledby="d4-title">
   <h3 id="d4-title"><span class="case-id">D4</span> aria-level on a row in a grid table</h3>
   <div class="example" data-case="d4" data-expected="fail">
@@ -227,6 +239,7 @@
   &lt;tr aria-level=&quot;1&quot;&gt;&lt;td&gt;Reports&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>rowSingular</code>. Routes to: NEW-41.</p>
 </article><article class="case" id="d5" aria-labelledby="d5-title">
   <h3 id="d5-title"><span class="case-id">D5</span> aria-expanded on an ARIA grid row</h3>
   <div class="example" data-case="d5" data-expected="fail">
@@ -242,6 +255,7 @@
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>rowSingular</code>. Routes to: NEW-41.</p>
 </article><article class="case" id="d6" aria-labelledby="d6-title">
   <h3 id="d6-title"><span class="case-id">D6</span> aria-level on an ARIA table row</h3>
   <div class="example" data-case="d6" data-expected="fail">
@@ -257,6 +271,7 @@
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>rowSingular</code>. Routes to: NEW-41.</p>
 </article><article class="case" id="d7" aria-labelledby="d7-title">
   <h3 id="d7-title"><span class="case-id">D7</span> A table nested inside a treegrid</h3>
   <p>The outer treegrid doesn't help. Axe looks at the nearest table, which is the inner one.</p>
@@ -282,6 +297,7 @@
 &lt;/div&gt;</code></pre>
   <p class="result"><span class="badge fail">Expected result: fail</span></p>
   <p class="note">The outer row (inside the treegrid) passes. Only the inner one fails.</p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>rowSingular</code>. Routes to: NEW-41.</p>
 </article>
 <!-- section -->
 
@@ -329,6 +345,7 @@
   </div>
   <pre><code class="language-html">&lt;label&gt;&lt;input type=&quot;checkbox&quot; aria-checked=&quot;banana&quot;&gt; Fruit box&lt;/label&gt;</code></pre>
   <p class="result"><span class="badge other">Expected result: flagged by <code>aria-valid-attr-value</code> instead</span></p>
+  <p class="route"><strong>Template routing:</strong> <code>aria-valid-attr-value</code>, message key: none. Routes to: NEW-27.</p>
 </article><article class="case" id="f2" aria-labelledby="f2-title">
   <h3 id="f2-title"><span class="case-id">F2</span> Empty aria-checked</h3>
   <p>This rule ignores an empty value.</p>
@@ -337,6 +354,7 @@
   </div>
   <pre><code class="language-html">&lt;label&gt;&lt;input type=&quot;checkbox&quot; checked aria-checked=&quot;&quot;&gt; Newsletter&lt;/label&gt;</code></pre>
   <p class="result"><span class="badge other">Expected result: flagged by <code>aria-valid-attr-value</code> instead</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review from <code>aria-valid-attr-value</code>. Message key: <code>empty</code>. Routes to: NEW-38.</p>
 </article><article class="case" id="f3" aria-labelledby="f3-title">
   <h3 id="f3-title"><span class="case-id">F3</span> aria-checked=&quot;TRUE&quot; on a ticked checkbox</h3>
   <p>This rule ignores case, so it matches.</p>
@@ -345,6 +363,7 @@
   </div>
   <pre><code class="language-html">&lt;label&gt;&lt;input type=&quot;checkbox&quot; checked aria-checked=&quot;TRUE&quot;&gt; Terms&lt;/label&gt;</code></pre>
   <p class="result"><span class="badge other">Expected result: flagged by <code>aria-allowed-attr</code> instead</span></p>
+  <p class="route"><strong>Template routing:</strong> <code>aria-allowed-attr</code>. Message key: <code>caseSensitive</code>. Routes to: NEW-39.</p>
 </article><article class="case" id="f4" aria-labelledby="f4-title">
   <h3 id="f4-title"><span class="case-id">F4</span> A row with no table at all</h3>
   <p>With no table, grid or treegrid around it, this rule has nothing to compare against.</p>
@@ -357,6 +376,7 @@
   &lt;div role=&quot;cell&quot;&gt;Orphan row&lt;/div&gt;
 &lt;/div&gt;</code></pre>
   <p class="result"><span class="badge other">Expected result: flagged by <code>aria-required-parent</code> instead</span></p>
+  <p class="route"><strong>Template routing:</strong> <code>aria-required-parent</code>, message key: none. Routes to: NEW-46.</p>
 </article><article class="case" id="f5" aria-labelledby="f5-title">
   <h3 id="f5-title"><span class="case-id">F5</span> Row in a presentation table</h3>
   <p><code>role="presentation"</code> removes the table semantics, so the row isn't a row any more.</p>
@@ -369,6 +389,7 @@
   &lt;tr aria-level=&quot;1&quot;&gt;&lt;td&gt;Layout cell&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;</code></pre>
   <p class="result"><span class="badge other">Expected result: flagged by <code>aria-allowed-attr</code> instead</span></p>
+  <p class="route"><strong>Template routing:</strong> <code>aria-allowed-attr</code>. Message key: <code>singular</code>. Routes to: NEW-28.</p>
 </article>
 <!-- section -->
 
@@ -383,6 +404,7 @@
   </div>
   <pre><code class="language-html">&lt;label&gt;&lt;input type=&quot;checkbox&quot; role=&quot;switch&quot; aria-checked=&quot;true&quot;&gt; Dark mode&lt;/label&gt;</code></pre>
   <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
 </article><article class="case" id="g2" aria-labelledby="g2-title">
   <h3 id="g2-title"><span class="case-id">G2</span> aria-checked=&quot;mixed&quot; on a radio button</h3>
   <p>Radios can't be mixed. The rule quietly treats <code>mixed</code> as <code>false</code>, which matches the unselected radio.</p>
@@ -399,6 +421,7 @@
   &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;g2&quot;&gt; Blue&lt;/label&gt;
 &lt;/fieldset&gt;</code></pre>
   <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
 </article>
 <!-- section -->
 
@@ -413,6 +436,7 @@
   </div>
   <pre><code class="language-html">&lt;label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;h1-input&quot; aria-checked=&quot;false&quot;&gt; Email me a receipt&lt;/label&gt;</code></pre>
   <p class="result"><span class="badge dynamic">On load: pass. After ticking: fail</span></p>
+  <p class="note">After ticking, the message key is <code>checkbox</code>, so it routes to NEW-29.</p>
 </article><article class="case" id="h2" aria-labelledby="h2-title">
   <h3 id="h2-title"><span class="case-id">H2</span> Radio group goes stale</h3>
   <p>Both radios match on load. Choose "Pick up" and both are now wrong: the first still says <code>true</code> and the second still says <code>false</code>.</p>
@@ -429,6 +453,7 @@
   &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;h2&quot; id=&quot;h2-pickup&quot; aria-checked=&quot;false&quot;&gt; Pick up&lt;/label&gt;
 &lt;/fieldset&gt;</code></pre>
   <p class="result"><span class="badge dynamic">On load: pass. After choosing Pick up: fail</span></p>
+  <p class="note">After choosing Pick up, both radios fail with the message key <code>radio</code>, so they route to NEW-29: two issues.</p>
 </article>
 
 <p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>

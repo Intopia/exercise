@@ -12,8 +12,6 @@
   <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
   <script src="assets/js/table-wrap.js" defer></script>
 <style>
-
-
   /* card base styles, shared by every example */
   .card {
     border: 1px solid #ccc;
@@ -82,7 +80,6 @@
   .card-fake-button {
     cursor: pointer;
   }
-
 </style>
 </head>
 <body>
@@ -99,10 +96,11 @@
 
 <h1>Accessible Clickable Card options</h1>
 
-<p>Card components are one of the most common places where visual design and accessible markup pull in different directions. Designers want the whole card to feel clickable; accessibility and HTML semantics want one clear, single interactive element. Each method below uses the same basic card content, but changes how (and whether) the whole card responds to a click or tap.</p>
+<p>Cards can be challenging to make accessible. Designers often want the entire card to be clickable, but this can create accessibility issues.</p>
 
-<p>Every example card contains the same four things: a card container, an image, an <code>&lt;h3&gt;</code> heading, and a short paragraph.</p>
+<p>The examples below show different ways to make cards interactive.</p>
 
+<p>Each card contains a container, an image, an <code>&lt;h3&gt;</code> heading and a short paragraph.</p>
 
 <!-- section -->
 
@@ -119,18 +117,18 @@
 
 <h3>Accessibility features</h3>
 <ul>
-  <li>Only one interactive element on the card, so its accessible name is unambiguous.</li>
-  <li>Completely standard keyboard behaviour: Tab to focus, Enter to activate.</li>
-  <li>All native link behaviours work automatically &ndash; open in new tab, copy link address, drag to bookmark, browser status bar preview.</li>
-  <li>Nothing to build or maintain; works even if CSS or JavaScript fails to load.</li>
+  <li>Only one interactive element on the card, with a clear accessible name.</li>
+  <li>Standard keyboard behaviour: Tab to focus, Enter to activate.</li>
+  <li>Native link behaviours work automatically, including opening in a new tab, copying the link address and bookmarking.</li>
+  <li>Works even if CSS or JavaScript fails to load.</li>
 </ul>
 
 <div class="note note-warning">
   <h3>Possible issues</h3>
   <ul>
-    <li>The clickable target is small &ndash; just the heading text &ndash; even though the whole card looks like a single unit.</li>
-    <li>Users may click the image or the paragraph expecting to navigate, and nothing happens.</li>
-    <li>On touch devices especially, a bigger hit target is usually expected for a "card" pattern.</li>
+    <li>The clickable target is small, limited to the heading text.</li>
+    <li>Users may click the image or paragraph expecting to navigate, but nothing happens.</li>
+    <li>On touch devices, users may expect a larger clickable area.</li>
   </ul>
 </div>
 
@@ -144,7 +142,7 @@
 </details>
 
 <div class="status status-good">
-  <p><b>Recommended</b>: The simplest and most robust option. Valid, fully accessible and nothing to maintain. The only downside is the small click target.</p>
+  <p><b>Recommended:</b> The simplest and most reliable option. Uses standard HTML and needs no JavaScript. The main downside is the small clickable area.</p>
 </div>
 
 
@@ -153,7 +151,7 @@
 
 <h2>Method 2: A single link with no separate heading link</h2>
 
-<p>The whole card is placed inside one link, and that link is the only interactive element. The heading is plain text, not a link.</p>
+<p>The entire card is wrapped in a single link. The heading is plain text, not a separate link.</p>
 
 <a class="card-single-link" href="#">
   <div class="card">
@@ -165,17 +163,17 @@
 
 <h3>Accessibility features</h3>
 <ul>
-  <li>Valid markup with no nested interactive elements, and a single, predictable accessible name and tab stop.</li>
-  <li>Large click/tap target, full native link behaviour, no JavaScript required.</li>
-  <li>Nothing interactive sits inside the link, so there is no invalid nesting for the browser to silently &ldquo;fix&rdquo;.</li>
+  <li>Valid HTML with no nested interactive elements and only one tab stop.</li>
+  <li>Large click/tap target with standard link behaviour.</li>
+  <li>No JavaScript required.</li>
 </ul>
 
 <div class="note note-warning">
   <h3>Possible issues</h3>
   <ul>
-    <li>Only works cleanly for cards with a single destination. As soon as a card needs a second link or a button (e.g. "add to favourites"), that control has to be pulled outside the big link, which changes the visual layout.</li>
-    <li>The heading is no longer a link in its own right, so it can't be usefully listed in a screen reader's "links list" independently of the rest of the card content.</li>
-    <li>The whole card's accessible name is built from all of its content (image alt, heading, paragraph), which can be long-winded unless it is trimmed with <code>aria-label</code>.</li>
+    <li>Best suited to cards with a single destination. Additional links or buttons must sit outside the main link.</li>
+    <li>The link may have a long accessible name, as it can include the image alt text, heading and paragraph.</li>
+    <li>Screen reader users can find the link in a links list, but its name may contain more than just the heading.</li>
   </ul>
 </div>
 
@@ -191,7 +189,7 @@
 </details>
 
 <div class="status status-good">
-  <p><b>Recommended</b>: The best option when a card has a single destination. Valid HTML, one tab stop, a large click target and full native link behaviour, with no JavaScript.</p>
+  <p><b>Recommended:</b> A good option for cards with a single destination. Valid HTML, one tab stop, a large click target and standard link behaviour, with no JavaScript.</p>
 </div>
 
 
@@ -200,7 +198,7 @@
 
 <h2>Method 3: CSS used to expand the link to cover the card</h2>
 
-<p>Only the heading has a real link. CSS uses an absolutely-positioned <code>::after</code> pseudo-element on that link to visually stretch it across the whole card (sometimes called the "stretched link" pattern).</p>
+<p>Only the heading contains a link. CSS uses an absolutely positioned <code>::after</code> pseudo-element to extend the clickable area across the whole card. This is sometimes called the "stretched link" pattern.</p>
 
 <div class="card card-css-expand">
   <img src="https://placehold.co/300x120" alt="">
@@ -210,17 +208,17 @@
 
 <h3>Accessibility features</h3>
 <ul>
-  <li>Only one real link exists in the markup, so there is no nested-link problem and only one, clear accessible name.</li>
-  <li>Full native link behaviour (new tab, copy address, status bar preview) still works.</li>
-  <li>Large visual/click target without any JavaScript.</li>
+  <li>Only one link exists in the markup, with an accessible name based on the heading text.</li>
+  <li>Standard link behaviour, including opening in a new tab and copying the link address.</li>
+  <li>Large clickable area without JavaScript.</li>
 </ul>
 
 <div class="note note-warning">
   <h3>Possible issues</h3>
   <ul>
-    <li>The card container (or another ancestor of the link) needs <code>position: relative</code>, and the link itself needs an <code>::after</code> pseudo-element with <code>position: absolute</code> and <code>inset: 0</code>, which is easy to get wrong if the card is later restyled.</li>
-    <li>Any other interactive element added to the card later (a second link, a "share" button) will sit underneath the stretched pseudo-element and become unclickable unless it is explicitly given a higher <code>z-index</code>.</li>
-    <li>Text inside the card (other than the heading) cannot be selected with a mouse, because the invisible layer intercepts the click/drag.</li>
+    <li>The card needs <code>position: relative</code>, and the link's <code>::after</code> pseudo-element needs <code>position: absolute</code> and <code>inset: 0</code>. Changes to the CSS may break the clickable area.</li>
+    <li>Other interactive elements, such as links or buttons, may be covered by the invisible layer. They may need a higher <code>z-index</code> to remain clickable.</li>
+    <li>Users may be unable to select text inside the card with a mouse because the invisible layer intercepts mouse interactions.</li>
   </ul>
 </div>
 
@@ -234,7 +232,7 @@
 </details>
 
 <div class="status status-good">
-<p><b>Recommended</b>: The best option when you want to keep the heading as the link. One real link with a large click target and no JavaScript, as long as other controls in the card are given a higher <code>z-index</code>.</p>
+  <p><b>Recommended:</b> A good option when you want to keep the heading as the link while making the whole card clickable. No JavaScript required, but care is needed when adding other interactive elements.</p>
 </div>
 
 
@@ -243,7 +241,7 @@
 
 <h2>Method 4: A non-link element with a click handler (fake button/link)</h2>
 
-<p>The card container itself gets a click handler (and often <code>tabindex</code> and a keydown handler) so it behaves like a link, without ever using a real <code>&lt;a&gt;</code>.</p>
+<p>The card uses JavaScript to behave like a link, without using a real <code>&lt;a&gt;</code> element. Additional code is needed to support keyboard and screen reader users.</p>
 
 <div class="card card-fake-button" id="js-card-2" tabindex="0" role="link">
   <img src="https://placehold.co/300x120" alt="">
@@ -253,19 +251,19 @@
 
 <h3>Accessibility features</h3>
 <ul>
-  <li>Can be made to work with a screen reader if <code>role="link"</code> (or <code>role="button"</code>), <code>tabindex="0"</code>, and matching keydown handling are all added carefully.</li>
-  <li>Large click/tap target with full control over styling and behaviour.</li>
+  <li>Can be made accessible to keyboard and screen reader users with <code>role="link"</code>, <code>tabindex="0"</code>, a clear accessible name and keyboard support.</li>
+  <li>Large clickable area with control over styling and behaviour.</li>
 </ul>
 
 <div class="note note-warning">
   <h3>Possible issues</h3>
   <ul>
-    <li>None of the native link behaviours exist unless you reimplement them yourself: no "open in new tab", no "copy link address", no status bar URL preview, no drag-to-bookmark, no middle-click.</li>
-    <li>Like Method 2, the accessible name is built from all of the card's content (image alt, heading, paragraph), which can be long-winded unless it is trimmed with <code>aria-label</code>.</li>
-    <li>Search engines and other automated tools that only follow real <code>&lt;a href&gt;</code> links won't discover the destination.</li>
-    <li>Every keyboard interaction (Enter <em>and</em> Space for a button role, Enter only for a link role) has to be coded and tested by hand &ndash; it is very easy to only handle click and forget keyboard users entirely.</li>
-    <li>If JavaScript fails to load, the card is completely non-functional &ndash; there is no underlying href to fall back on.</li>
-    <li>This pattern reinvents something the browser already provides for free with a plain <code>&lt;a&gt;</code>, for no real benefit &ndash; generally best avoided in favour of Methods 2 or 3.</li>
+    <li>Native link features, such as opening in a new tab, copying the link address and middle-clicking, are not available by default.</li>
+    <li>The accessible name must be checked to make sure it is clear and not too long.</li>
+    <li>Search engines and other tools may not discover the destination because there is no real link.</li>
+    <li>Keyboard support must be added manually. A link should activate with Enter, while a button should activate with Enter or Space.</li>
+    <li>If JavaScript fails to load, the card will not work.</li>
+    <li>Requires more code and testing than a standard HTML link.</li>
   </ul>
 </div>
 
@@ -279,15 +277,16 @@
 </details>
 
 <div class="status status-invalid">
-  <p><b>Do not use</b>: It can be made to work with <code>role</code>, <code>tabindex</code> and keyboard handling, but it loses all native link behaviour and stops working entirely without JavaScript. Use a real <code>&lt;a&gt;</code> instead (Methods 2 or 3).</p>
+  <p><b>Do not use:</b> This approach requires extra code and testing, loses native link features and depends on JavaScript. Use a real <code>&lt;a href&gt;</code> instead.</p>
 </div>
+
 
 <!-- section -->
 
 
 <h2>Method 5: JavaScript finds the link and makes the whole card clickable</h2>
 
-<p>The heading keeps its own real link. A script listens for clicks anywhere on the card and, if the click didn't land on an interactive element, triggers the heading link instead.</p>
+<p>The heading contains a real link. JavaScript listens for clicks anywhere on the card and follows the heading link, unless the user clicks another interactive element.</p>
 
 <div class="card card-js" id="js-card-1">
   <img src="https://placehold.co/300x120" alt="">
@@ -297,18 +296,18 @@
 
 <h3>Accessibility features</h3>
 <ul>
-  <li>Only one real link in the markup &ndash; the card itself is not made focusable, so there are no duplicate tab stops.</li>
-  <li>Keyboard users tab straight to the real link and use it normally; nothing custom to get wrong.</li>
-  <li>If JavaScript fails to load, the heading link still works &ndash; the card just loses the "click anywhere" enhancement.</li>
-  <li>Can be written to ignore clicks on other interactive children, and to ignore click-drag text selection so it doesn't misfire.</li>
+  <li>Only one link in the markup. The card itself is not focusable, so there are no extra tab stops.</li>
+  <li>Keyboard users can focus and activate the link normally.</li>
+  <li>If JavaScript fails to load, the heading link still works.</li>
+  <li>The script can ignore other interactive elements and text selection.</li>
 </ul>
 
 <div class="note note-warning">
   <h3>Possible issues</h3>
   <ul>
-    <li>Entirely dependent on correct, defensive JavaScript. It's easy to forget an edge case (text selection, middle-click, modifier-key click) and end up with confusing or broken behaviour.</li>
-    <li>Middle-click / ctrl-click / cmd-click "open in new tab" on the empty part of the card won't work, only a real click on the actual link supports that &ndash; this can surprise users who expect the whole card to behave like a link.</li>
-    <li>Adds maintenance cost and a script dependency for something CSS alone can usually do (see Method 3).</li>
+    <li>JavaScript needs to handle edge cases, such as text selection, middle-clicks and clicks with modifier keys.</li>
+    <li>Middle-clicking or using Ctrl/Cmd-click on the card does not automatically open the link in a new tab. These actions still work on the actual link.</li>
+    <li>Requires additional JavaScript and testing.</li>
   </ul>
 </div>
 
@@ -341,9 +340,8 @@
 </details>
 
 <div class="status status-good">
-  <p><b>Recommended</b>: If you need JavaScript, this is the approach to use. It enhances a real link rather than replacing it, so keyboard, screen reader and native link behaviour all still work, and the heading link keeps working if the script fails.</p>
+  <p><b>Recommended:</b> A good option when JavaScript is needed. It extends the clickable area without replacing the real link. Standard keyboard and screen reader behaviour is preserved, and the link still works if JavaScript fails.</p>
 </div>
-
 
 <script>
 (function () {

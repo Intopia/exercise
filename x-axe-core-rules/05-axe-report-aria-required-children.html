@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<title>axe report: Testing the axe rule aria-required-children</title>
+<style>
+  body { font-family: system-ui, sans-serif; line-height: 1.5; margin: 2rem; color: #1d1d1f; }
+  table { border-collapse: collapse; width: 100%; margin-bottom: 2rem; }
+  th, td { border: 1px solid #ccc; padding: .4rem .6rem; text-align: left; vertical-align: top; }
+  th { background: #f2f2f2; }
+  code { font-size: .85rem; word-break: break-word; }
+  h2 { border-top: 3px solid #1d1d1f; padding-top: 1rem; margin-top: 2.5rem; }
+</style></head><body>
+<h1>axe report</h1>
+<ul>
+  <li>Page: <a href="https://intopia.github.io/exercise/testing-axe-rule-aria-required-children.html">Testing the axe rule aria-required-children</a></li>
+  <li>Run: 21/11/2026, 18:52:31</li>
+  <li>axe-core 4.14.0</li>
+  <li>Rules passed: 45. Rules not applicable: 45.</li>
+</ul>
+<h2>Fails (19)</h2><h3>aria-required-children: Certain ARIA roles must contain particular children (16)</h3>
+        <p>Impact: critical. <a href="https://dequeuniversity.com/rules/axe/4.14/aria-required-children?application=axeAPI">Rule details on Deque University</a></p>
+        <table><thead><tr><th scope="col">#</th><th scope="col">Element</th><th scope="col">Selector</th><th scope="col">Problem</th></tr></thead><tbody><tr><td>1</td><td><code>&lt;div role=&quot;list&quot;&gt;
+  &lt;div&gt;Card one&lt;/div&gt;
+  &lt;div&gt;Card two&lt;/div&gt;
+&lt;/div&gt;</code></td><td><code>div[data-case=&quot;a1&quot;] &gt; div[role=&quot;list&quot;]</code></td><td>Required ARIA child role not present: listitem</td></tr><tr><td>2</td><td><code>&lt;div role=&quot;tablist&quot; aria-label=&quot;Help topics&quot;&gt;
+  &lt;div&gt;Delivery&lt;/div&gt;
+  &lt;div&gt;Returns&lt;/div&gt;
+&lt;/div&gt;</code></td><td><code>div[aria-label=&quot;Help topics&quot;]</code></td><td>Required ARIA child role not present: tab</td></tr><tr><td>3</td><td><code>&lt;div role=&quot;menu&quot; aria-label=&quot;Edit&quot;&gt;
+  &lt;div&gt;Cut&lt;/div&gt;
+  &lt;div&gt;Copy&lt;/div&gt;
+&lt;/div&gt;</code></td><td><code>div[aria-label=&quot;Edit&quot;]</code></td><td>Required ARIA children role not present: group, menuitemradio, menuitem, menuitemcheckbox, menu, separator</td></tr><tr><td>4</td><td><code>&lt;div role=&quot;grid&quot; aria-label=&quot;Orders&quot;&gt;
+  &lt;div&gt;Order 1042&lt;/div&gt;
+&lt;/div&gt;</code></td><td><code>div[role=&quot;grid&quot;]</code></td><td>Required ARIA children role not present: rowgroup, row</td></tr><tr><td>5</td><td><code>&lt;div role=&quot;list&quot;&gt;Apples, pears and plums&lt;/div&gt;</code></td><td><code>div[data-case=&quot;a5&quot;] &gt; div[role=&quot;list&quot;]</code></td><td>Required ARIA child role not present: listitem</td></tr><tr><td>6</td><td><code>&lt;div role=&quot;row&quot;&gt;&lt;/div&gt;</code></td><td><code>div[role=&quot;row&quot;]</code></td><td>Required ARIA children role not present: cell, columnheader, gridcell, rowheader</td></tr><tr><td>7</td><td><code>&lt;div role=&quot;feed&quot; aria-label=&quot;Latest news&quot;&gt;&lt;/div&gt;</code></td><td><code>div[role=&quot;feed&quot;]</code></td><td>Required ARIA child role not present: article</td></tr><tr><td>8</td><td><code>&lt;ul role=&quot;list&quot;&gt;
+  &lt;div&gt;First&lt;/div&gt;
+&lt;/ul&gt;</code></td><td><code>div[data-case=&quot;a8&quot;] &gt; ul</code></td><td>Required ARIA child role not present: listitem</td></tr><tr><td>9</td><td><code>&lt;div role=&quot;tablist&quot; aria-label=&quot;Account&quot;&gt;
+  &lt;div tabindex=&quot;0&quot;&gt;Profile&lt;/div&gt;
+  &lt;div tabindex=&quot;-1&quot;&gt;Settings&lt;/div&gt;
+&lt;/div&gt;</code></td><td><code>div[aria-label=&quot;Account&quot;]</code></td><td>Element has children which are not allowed: div[tabindex]</td></tr><tr><td>10</td><td><code>&lt;div role=&quot;tablist&quot; aria-label=&quot;Plans&quot;&gt;
+  &lt;button type=&quot;button&quot;&gt;Monthly&lt;/button&gt;
+  &lt;button type=&quot;button&quot;&gt;Yearly&lt;/button&gt;
+&lt;/div&gt;</code></td><td><code>div[aria-label=&quot;Plans&quot;]</code></td><td>Element has children which are not allowed: button</td></tr><tr><td>11</td><td><code>&lt;div role=&quot;list&quot;&gt;
+  &lt;h4&gt;Our team&lt;/h4&gt;
+  &lt;div role=&quot;listitem&quot;&gt;Alex&lt;/div&gt;
+  &lt;div role=&quot;listitem&quot;&gt;Sam&lt;/div&gt;
+&lt;/div&gt;</code></td><td><code>div[data-case=&quot;b3&quot;] &gt; div[role=&quot;list&quot;]</code></td><td>Element has children which are not allowed: h4</td></tr><tr><td>12</td><td><code>&lt;div role=&quot;menu&quot; aria-label=&quot;Clipboard&quot;&gt;
+  &lt;div aria-describedby=&quot;b4-hint&quot;&gt;Paste&lt;/div&gt;
+&lt;/div&gt;</code></td><td><code>div[aria-label=&quot;Clipboard&quot;]</code></td><td>Element has children which are not allowed: div[aria-describedby]</td></tr><tr><td>13</td><td><code>&lt;div role=&quot;listbox&quot; aria-label=&quot;Colour&quot;&gt;
+  &lt;ul&gt;
+    &lt;li role=&quot;option&quot; aria-selected=&quot;true&quot;&gt;Red&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></td><td><code>div[aria-label=&quot;Colour&quot;]</code></td><td>Element has children which are not allowed: ul</td></tr><tr><td>14</td><td><code>&lt;div role=&quot;list&quot;&gt;
+  &lt;div tabindex=&quot;0&quot;&gt;
+    &lt;div role=&quot;listitem&quot;&gt;Wrapped item&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></td><td><code>div[data-case=&quot;b6&quot;] &gt; div[role=&quot;list&quot;]</code></td><td>Element has children which are not allowed: div[tabindex]</td></tr><tr><td>15</td><td><code>&lt;div role=&quot;list&quot;&gt;
+  &lt;div role=&quot;none&quot; aria-describedby=&quot;b7-note&quot;&gt;Featured&lt;/div&gt;
+  &lt;div role=&quot;listitem&quot;&gt;Item one&lt;/div&gt;
+&lt;/div&gt;</code></td><td><code>div[data-case=&quot;b7&quot;] &gt; div[role=&quot;list&quot;]</code></td><td>Element has presentational children which cannot be ignored because of [aria-describedby]</td></tr><tr><td>16</td><td><code>&lt;div role=&quot;list&quot; aria-busy=&quot;true&quot;&gt;
+  &lt;div tabindex=&quot;0&quot;&gt;Loading&lt;/div&gt;
+&lt;/div&gt;</code></td><td><code>div[data-case=&quot;b8&quot;] &gt; div[role=&quot;list&quot;]</code></td><td>Element has children which are not allowed: div[tabindex]; Having aria-busy=&quot;true&quot; does not allow children with roles that are not allowed</td></tr></tbody></table><h3>aria-required-parent: Certain ARIA roles must be contained by particular parents (1)</h3>
+        <p>Impact: critical. <a href="https://dequeuniversity.com/rules/axe/4.14/aria-required-parent?application=axeAPI">Rule details on Deque University</a></p>
+        <table><thead><tr><th scope="col">#</th><th scope="col">Element</th><th scope="col">Selector</th><th scope="col">Problem</th></tr></thead><tbody><tr><td>1</td><td><code>&lt;li role=&quot;option&quot; aria-selected=&quot;true&quot;&gt;Red&lt;/li&gt;</code></td><td><code>li[role=&quot;option&quot;]</code></td><td>Required ARIA parents role not present: group, listbox</td></tr></tbody></table><h3>list: &lt;ul&gt; and &lt;ol&gt; must only directly contain &lt;li&gt;, &lt;script&gt; or &lt;template&gt; elements (2)</h3>
+        <p>Impact: serious. <a href="https://dequeuniversity.com/rules/axe/4.14/list?application=axeAPI">Rule details on Deque University</a></p>
+        <table><thead><tr><th scope="col">#</th><th scope="col">Element</th><th scope="col">Selector</th><th scope="col">Problem</th></tr></thead><tbody><tr><td>1</td><td><code>&lt;ul&gt;
+    &lt;li role=&quot;option&quot; aria-selected=&quot;true&quot;&gt;Red&lt;/li&gt;
+  &lt;/ul&gt;</code></td><td><code>div[aria-label=&quot;Colour&quot;] &gt; ul</code></td><td>List element has direct children that are not allowed: [role=option]</td></tr><tr><td>2</td><td><code>&lt;ul&gt;
+  &lt;div&gt;First&lt;/div&gt;
+&lt;/ul&gt;</code></td><td><code>div[data-case=&quot;e1&quot;] &gt; ul</code></td><td>List element has direct children that are not allowed: div</td></tr></tbody></table>
+<h2>Needs review (5)</h2><h3>aria-required-children: Certain ARIA roles must contain particular children (5)</h3>
+        <p>Impact: critical. <a href="https://dequeuniversity.com/rules/axe/4.14/aria-required-children?application=axeAPI">Rule details on Deque University</a></p>
+        <table><thead><tr><th scope="col">#</th><th scope="col">Element</th><th scope="col">Selector</th><th scope="col">Problem</th></tr></thead><tbody><tr><td>1</td><td><code>&lt;div role=&quot;list&quot;&gt;&lt;/div&gt;</code></td><td><code>div[data-case=&quot;c1&quot;] &gt; div[role=&quot;list&quot;]</code></td><td>Expecting ARIA child role to be added: listitem</td></tr><tr><td>2</td><td><code>&lt;div role=&quot;tablist&quot; aria-label=&quot;Sections&quot;&gt;&lt;/div&gt;</code></td><td><code>div[aria-label=&quot;Sections&quot;]</code></td><td>Expecting ARIA child role to be added: tab</td></tr><tr><td>3</td><td><code>&lt;div role=&quot;tablist&quot; aria-label=&quot;Steps&quot;&gt;
+  &lt;div role=&quot;tab&quot; aria-selected=&quot;true&quot; style=&quot;display: none;&quot;&gt;Step one&lt;/div&gt;
+&lt;/div&gt;</code></td><td><code>div[aria-label=&quot;Steps&quot;]</code></td><td>Expecting ARIA child role to be added: tab</td></tr><tr><td>4</td><td><code>&lt;div role=&quot;list&quot;&gt;
+  &lt;div role=&quot;listitem&quot; aria-hidden=&quot;true&quot;&gt;Hidden item&lt;/div&gt;
+&lt;/div&gt;</code></td><td><code>div[data-case=&quot;c4&quot;] &gt; div[role=&quot;list&quot;]</code></td><td>Expecting ARIA child role to be added: listitem</td></tr><tr><td>5</td><td><code>&lt;div role=&quot;list&quot; aria-busy=&quot;false&quot;&gt;&lt;/div&gt;</code></td><td><code>div[data-case=&quot;c5&quot;] &gt; div[role=&quot;list&quot;]</code></td><td>Expecting ARIA child role to be added: listitem</td></tr></tbody></table>
+</body></html>

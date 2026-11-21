@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the axe rule aria-text</title>
+  <meta name="description" content="Test cases for the axe-core rule aria-text, showing what axe catches and what it misses.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <style>
+  .case { border: 1px solid #c8c8cc; border-radius: 6px; padding: 1rem 1.25rem; margin: 1.25rem 0; }
+  .case h3 { margin-top: 0; }
+  .case-id { display: inline-block; font-size: .8rem; font-weight: 700; background: #1d1d1f; color: #fff; padding: .1rem .45rem; border-radius: 3px; margin-right: .4rem; vertical-align: middle; }
+  .example { border: 1px dashed #a0a0a8; padding: .75rem 1rem; margin: .75rem 0; }
+  .example p { margin: .25rem 0; }
+  .badge { display: inline-block; font-weight: 600; font-size: .875rem; padding: .2rem .6rem; border-radius: 3px; border: 2px solid; }
+  .badge.fail { background: #fde8e8; border-color: #b3261e; color: #8a1c16; }
+  .badge.review { background: #fff4d6; border-color: #8a6100; color: #5e4200; }
+  .badge.other { background: #e0f4f4; border-color: #0b6b6b; color: #084f4f; }
+  .badge.miss { background: #ece6fb; border-color: #5b3cc4; color: #432a99; }
+  .badge.pass { background: #e3f4e8; border-color: #1e7b3a; color: #155c2b; }
+  .badge.dynamic { background: #e8eef9; border-color: #1a4f9c; color: #133b75; }
+  .note { font-size: .9375rem; }
+  .route { font-size: .875rem; border-left: 3px solid #a0a0a8; padding-left: .6rem; }
+</style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo. The word 'intopia' in black, with the 'o' made from four curved brush strokes in pink, orange, yellow and turquoise." class="intopia-logo">
+  </picture>
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing the axe rule <code>aria-text</code></h1>
+
+<p>Test cases for the axe-core rule <a href="https://dequeuniversity.com/rules/axe/4.14/aria-text"><code>aria-text</code></a> (axe-core 4.14). The rule checks that an element with <code>role="text"</code> doesn't contain anything that can receive focus, such as a link, button or form control.</p>
+
+<p><code>role="text"</code> isn't a WAI-ARIA role. Safari supports it, and uses it to read text that's split across several elements as one phrase. Chrome ignores it. Where it's supported, everything inside the element is read as plain text, including links and controls.</p>
+
+<p>The rule runs one check, <code>no-focusable-content</code>. It only counts elements that can receive focus <strong>and</strong> have an interactive role. This is a best practice rule, not a WCAG requirement.</p>
+
+<p>Some cases include results from testing with VoiceOver in Safari and Chrome on macOS.</p>
+
+<p>Every example is live in the page, so you can run the axe extension straight over it. The expected results were checked by running axe-core 4.14.1 over this page. Look in both the axe <strong>issues</strong> list and the <strong>needs review</strong> list.</p>
+
+<table>
+  <caption>Number of test cases by expected result</caption>
+  <thead><tr><th scope="col">Expected result</th><th scope="col">Cases</th></tr></thead>
+  <tbody>
+      <tr><td>Fail</td><td>10</td></tr>
+      <tr><td>Flagged by a different rule instead</td><td>2</td></tr>
+      <tr><td>Passes, but broken (axe misses it)</td><td>7</td></tr>
+      <tr><td>Pass (valid control cases)</td><td>4</td></tr>
+      <tr><td>Changes after interaction</td><td>2</td></tr>
+  </tbody>
+</table>
+
+<h2 id="sections">Sections</h2>
+
+<ul>
+  <li><a href="#focusable">Focusable content inside role=&quot;text&quot;</a></li>
+  <li><a href="#not-hidden">Focusable content with tabindex=&quot;-1&quot;</a></li>
+  <li><a href="#not-tested">Not tested at all</a></li>
+  <li><a href="#non-widget">Focusable, but not counted</a></li>
+  <li><a href="#other-rules">Flagged by a different rule instead</a></li>
+  <li><a href="#passing">Ways to pass</a></li>
+  <li><a href="#dynamic">Changes after interaction</a></li>
+</ul>
+
+<!-- section -->
+
+<h2 id="focusable">Focusable content inside role=&quot;text&quot;</h2>
+
+<p>These fail with "Element has focusable descendants".</p>
+<article class="case" id="a1" aria-labelledby="a1-title">
+  <h3 id="a1-title"><span class="case-id">A1</span> Link</h3>
+  <div class="example" data-case="a1" data-expected="fail">
+<span role="text">$24.99 per month. <a href="#a1">See all prices</a></span>
+  </div>
+  <pre><code class="language-html">&lt;span role=&quot;text&quot;&gt;$24.99 per month. &lt;a href=&quot;#a1&quot;&gt;See all prices&lt;/a&gt;&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="note">Tested with VoiceOver in Safari: reading reads "$24.99 per month. See all prices" as one phrase, with no "link". Pressing Tab announces "link, See all prices" correctly. So the link is only lost when reading.</p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-34.</p>
+</article><article class="case" id="a2" aria-labelledby="a2-title">
+  <h3 id="a2-title"><span class="case-id">A2</span> Button</h3>
+  <div class="example" data-case="a2" data-expected="fail">
+<span role="text">Your basket is empty. <button type="button">Browse products</button></span>
+  </div>
+  <pre><code class="language-html">&lt;span role=&quot;text&quot;&gt;Your basket is empty. &lt;button type=&quot;button&quot;&gt;Browse products&lt;/button&gt;&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-34.</p>
+</article><article class="case" id="a3" aria-labelledby="a3-title">
+  <h3 id="a3-title"><span class="case-id">A3</span> Text field</h3>
+  <div class="example" data-case="a3" data-expected="fail">
+<span role="text">Postcode: <input type="text" aria-label="Postcode"></span>
+  </div>
+  <pre><code class="language-html">&lt;span role=&quot;text&quot;&gt;Postcode: &lt;input type=&quot;text&quot; aria-label=&quot;Postcode&quot;&gt;&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-34.</p>
+</article><article class="case" id="a4" aria-labelledby="a4-title">
+  <h3 id="a4-title"><span class="case-id">A4</span> Checkbox</h3>
+  <div class="example" data-case="a4" data-expected="fail">
+<span role="text"><input type="checkbox" id="a4-input"> <label for="a4-input">Email me updates</label></span>
+  </div>
+  <pre><code class="language-html">&lt;span role=&quot;text&quot;&gt;&lt;input type=&quot;checkbox&quot; id=&quot;a4-input&quot;&gt; &lt;label for=&quot;a4-input&quot;&gt;Email me updates&lt;/label&gt;&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-34.</p>
+</article><article class="case" id="a5" aria-labelledby="a5-title">
+  <h3 id="a5-title"><span class="case-id">A5</span> Select</h3>
+  <div class="example" data-case="a5" data-expected="fail">
+<span role="text">Sort by <select aria-label="Sort by"><option>Price</option><option>Name</option></select></span>
+  </div>
+  <pre><code class="language-html">&lt;span role=&quot;text&quot;&gt;Sort by &lt;select aria-label=&quot;Sort by&quot;&gt;&lt;option&gt;Price&lt;/option&gt;&lt;option&gt;Name&lt;/option&gt;&lt;/select&gt;&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-34.</p>
+</article><article class="case" id="a6" aria-labelledby="a6-title">
+  <h3 id="a6-title"><span class="case-id">A6</span> Details and summary</h3>
+  <div class="example" data-case="a6" data-expected="fail">
+<div role="text">
+  <details>
+    <summary>Delivery options</summary>
+    Standard or express.
+  </details>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;text&quot;&gt;
+  &lt;details&gt;
+    &lt;summary&gt;Delivery options&lt;/summary&gt;
+    Standard or express.
+  &lt;/details&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-34.</p>
+</article><article class="case" id="a7" aria-labelledby="a7-title">
+  <h3 id="a7-title"><span class="case-id">A7</span> Custom button</h3>
+  <p>A focusable element with an interactive role counts, whether it's native or not.</p>
+  <div class="example" data-case="a7" data-expected="fail">
+<span role="text">Save for later <span role="button" tabindex="0">Save</span></span>
+  </div>
+  <pre><code class="language-html">&lt;span role=&quot;text&quot;&gt;Save for later &lt;span role=&quot;button&quot; tabindex=&quot;0&quot;&gt;Save&lt;/span&gt;&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-34.</p>
+</article><article class="case" id="a8" aria-labelledby="a8-title">
+  <h3 id="a8-title"><span class="case-id">A8</span> Link nested deeper inside</h3>
+  <div class="example" data-case="a8" data-expected="fail">
+<span role="text">
+  Terms apply.
+  <span class="small"><span class="link-wrap"><a href="#a8">Read the terms</a></span></span>
+</span>
+  </div>
+  <pre><code class="language-html">&lt;span role=&quot;text&quot;&gt;
+  Terms apply.
+  &lt;span class=&quot;small&quot;&gt;&lt;span class=&quot;link-wrap&quot;&gt;&lt;a href=&quot;#a8&quot;&gt;Read the terms&lt;/a&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-34.</p>
+</article>
+<!-- section -->
+
+<h2 id="not-hidden">Focusable content with tabindex=&quot;-1&quot;</h2>
+
+<p>These fail with a different message: a negative <code>tabindex</code> doesn't stop assistive technologies reaching the element.</p>
+<article class="case" id="b1" aria-labelledby="b1-title">
+  <h3 id="b1-title"><span class="case-id">B1</span> Link with tabindex=&quot;-1&quot;</h3>
+  <div class="example" data-case="b1" data-expected="fail">
+<span role="text">$19.99 per month. <a href="#b1" tabindex="-1">See all prices</a></span>
+  </div>
+  <pre><code class="language-html">&lt;span role=&quot;text&quot;&gt;$19.99 per month. &lt;a href=&quot;#b1&quot; tabindex=&quot;-1&quot;&gt;See all prices&lt;/a&gt;&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="note">Tested with VoiceOver in Safari: Tab skips the link, but reading still reaches it, as plain text. So <code>tabindex="-1"</code> makes things worse: keyboard users can't reach it either.</p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>notHidden</code>. Routes to: NEW-34.</p>
+</article><article class="case" id="b2" aria-labelledby="b2-title">
+  <h3 id="b2-title"><span class="case-id">B2</span> Button with tabindex=&quot;-1&quot;</h3>
+  <div class="example" data-case="b2" data-expected="fail">
+<span role="text">Out of stock. <button type="button" tabindex="-1">Notify me</button></span>
+  </div>
+  <pre><code class="language-html">&lt;span role=&quot;text&quot;&gt;Out of stock. &lt;button type=&quot;button&quot; tabindex=&quot;-1&quot;&gt;Notify me&lt;/button&gt;&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>notHidden</code>. Routes to: NEW-34.</p>
+</article>
+<!-- section -->
+
+<h2 id="not-tested">Not tested at all</h2>
+
+<p>The rule only matches the exact text <code>role="text"</code>. Nothing in axe flags these.</p>
+<article class="case" id="c1" aria-labelledby="c1-title">
+  <h3 id="c1-title"><span class="case-id">C1</span> role=&quot;Text&quot; with a capital T</h3>
+  <div class="example" data-case="c1" data-expected="miss">
+<span role="Text">$29.99 per month. <a href="#c1">See all prices</a></span>
+  </div>
+  <pre><code class="language-html">&lt;span role=&quot;Text&quot;&gt;$29.99 per month. &lt;a href=&quot;#c1&quot;&gt;See all prices&lt;/a&gt;&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="note">Tested with VoiceOver in Safari: <strong>exactly the same as A1</strong>. Safari ignores the capital, so the link is read as plain text, but axe doesn't test it.</p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+</article><article class="case" id="c2" aria-labelledby="c2-title">
+  <h3 id="c2-title"><span class="case-id">C2</span> Trailing space in the role</h3>
+  <div class="example" data-case="c2" data-expected="miss">
+<span role="text ">$39.99 per month. <a href="#c2">See all prices</a></span>
+  </div>
+  <pre><code class="language-html">&lt;span role=&quot;text &quot;&gt;$39.99 per month. &lt;a href=&quot;#c2&quot;&gt;See all prices&lt;/a&gt;&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="note">Not yet tested with VoiceOver.</p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+</article><article class="case" id="c3" aria-labelledby="c3-title">
+  <h3 id="c3-title"><span class="case-id">C3</span> Fallback role list</h3>
+  <div class="example" data-case="c3" data-expected="miss">
+<span role="text img" aria-label="Price">$49.99 per month. <a href="#c3">See all prices</a></span>
+  </div>
+  <pre><code class="language-html">&lt;span role=&quot;text img&quot; aria-label=&quot;Price&quot;&gt;$49.99 per month. &lt;a href=&quot;#c3&quot;&gt;See all prices&lt;/a&gt;&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="note">Not yet tested with VoiceOver.</p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+</article>
+<!-- section -->
+
+<h2 id="non-widget">Focusable, but not counted</h2>
+
+<p>These can receive focus, but they don't have an interactive role, so axe doesn't count them.</p>
+<article class="case" id="d1" aria-labelledby="d1-title">
+  <h3 id="d1-title"><span class="case-id">D1</span> Focusable span</h3>
+  <div class="example" data-case="d1" data-expected="miss">
+<span role="text">Read our <span tabindex="0">terms and conditions</span> before you buy.</span>
+  </div>
+  <pre><code class="language-html">&lt;span role=&quot;text&quot;&gt;Read our &lt;span tabindex=&quot;0&quot;&gt;terms and conditions&lt;/span&gt; before you buy.&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="note">Tested with VoiceOver in Safari: reading is fine ("Read our terms and conditions before you buy."), but Tab announces "terms and conditions, empty group" in both Safari and Chrome. That's a problem with <code>tabindex</code> on a span, not with <code>role="text"</code>.</p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+</article><article class="case" id="d2" aria-labelledby="d2-title">
+  <h3 id="d2-title"><span class="case-id">D2</span> Editable region</h3>
+  <div class="example" data-case="d2" data-expected="miss">
+<span role="text">Note: <span contenteditable="true">Type a note</span></span>
+  </div>
+  <pre><code class="language-html">&lt;span role=&quot;text&quot;&gt;Note: &lt;span contenteditable=&quot;true&quot;&gt;Type a note&lt;/span&gt;&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="note">Not yet tested with VoiceOver.</p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+</article><article class="case" id="d3" aria-labelledby="d3-title">
+  <h3 id="d3-title"><span class="case-id">D3</span> Focusable image</h3>
+  <div class="example" data-case="d3" data-expected="miss">
+<span role="text">Sales this year <span role="img" aria-label="Sales chart" tabindex="0">&#9650;</span></span>
+  </div>
+  <pre><code class="language-html">&lt;span role=&quot;text&quot;&gt;Sales this year &lt;span role=&quot;img&quot; aria-label=&quot;Sales chart&quot; tabindex=&quot;0&quot;&gt;&amp;#9650;&lt;/span&gt;&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="note">Not yet tested with VoiceOver.</p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+</article><article class="case" id="d4" aria-labelledby="d4-title">
+  <h3 id="d4-title"><span class="case-id">D4</span> Audio player</h3>
+  <div class="example" data-case="d4" data-expected="miss">
+<span role="text">Listen to the welcome message: <audio controls src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA="></audio></span>
+  </div>
+  <pre><code class="language-html">&lt;span role=&quot;text&quot;&gt;Listen to the welcome message: &lt;audio controls src=&quot;data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=&quot;&gt;&lt;/audio&gt;&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="note">Tested with VoiceOver in Safari: reading reads just "Listen to the welcome message: Audio Controls", without the play, time and volume controls. Tab still reaches them. This expected result is from a simulated browser, so it needs confirming with a live axe run.</p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+</article>
+<!-- section -->
+
+<h2 id="other-rules">Flagged by a different rule instead</h2>
+
+<p></p>
+<article class="case" id="e1" aria-labelledby="e1-title">
+  <h3 id="e1-title"><span class="case-id">E1</span> role=&quot;text&quot; on the link itself</h3>
+  <p>Nothing <em>inside</em> can receive focus, so this rule passes it. But the role replaces the link's own role.</p>
+  <div class="example" data-case="e1" data-expected="other" data-other="aria-allowed-role">
+<a href="#e1" role="text">Now <span>$24.99</span></a>
+  </div>
+  <pre><code class="language-html">&lt;a href=&quot;#e1&quot; role=&quot;text&quot;&gt;Now &lt;span&gt;$24.99&lt;/span&gt;&lt;/a&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-allowed-role</code> instead</span></p>
+  <p class="note">Not yet tested with VoiceOver.</p>
+  <p class="route"><strong>Template routing:</strong> Routes to: NEW-31.</p>
+</article><article class="case" id="e2" aria-labelledby="e2-title">
+  <h3 id="e2-title"><span class="case-id">E2</span> role=&quot;text&quot; on a button</h3>
+  <div class="example" data-case="e2" data-expected="other" data-other="aria-allowed-role">
+<button type="button" role="text">Buy <span>$24.99</span></button>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; role=&quot;text&quot;&gt;Buy &lt;span&gt;$24.99&lt;/span&gt;&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-allowed-role</code> instead</span></p>
+  <p class="route"><strong>Template routing:</strong> Routes to: NEW-31.</p>
+</article>
+<!-- section -->
+
+<h2 id="passing">Ways to pass</h2>
+
+<p>Control cases.</p>
+<article class="case" id="f1" aria-labelledby="f1-title">
+  <h3 id="f1-title"><span class="case-id">F1</span> Split text joined with role=&quot;text&quot;</h3>
+  <p>This is what <code>role="text"</code> is for.</p>
+  <div class="example" data-case="f1" data-expected="pass">
+<p><span role="text">Now <strong>$24.99</strong> per month</span></p>
+  </div>
+  <pre><code class="language-html">&lt;p&gt;&lt;span role=&quot;text&quot;&gt;Now &lt;strong&gt;$24.99&lt;/strong&gt; per month&lt;/span&gt;&lt;/p&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="f2" aria-labelledby="f2-title">
+  <h3 id="f2-title"><span class="case-id">F2</span> Link moved outside role=&quot;text&quot;</h3>
+  <div class="example" data-case="f2" data-expected="pass">
+<span role="text">$24.99 per month.</span> <a href="#f2">See all prices</a>
+  </div>
+  <pre><code class="language-html">&lt;span role=&quot;text&quot;&gt;$24.99 per month.&lt;/span&gt; &lt;a href=&quot;#f2&quot;&gt;See all prices&lt;/a&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+  <p class="note">Tested with VoiceOver in Safari: reading reads "$24.99 per month." then "link, See all prices".</p>
+</article><article class="case" id="f3" aria-labelledby="f3-title">
+  <h3 id="f3-title"><span class="case-id">F3</span> Link hidden with display: none</h3>
+  <p>A link that isn't displayed can't receive focus.</p>
+  <div class="example" data-case="f3" data-expected="pass">
+<span role="text">$9.99 per month. <a href="#f3" style="display: none;">See all prices</a></span>
+  </div>
+  <pre><code class="language-html">&lt;span role=&quot;text&quot;&gt;$9.99 per month. &lt;a href=&quot;#f3&quot; style=&quot;display: none;&quot;&gt;See all prices&lt;/a&gt;&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="f4" aria-labelledby="f4-title">
+  <h3 id="f4-title"><span class="case-id">F4</span> Empty element</h3>
+  <div class="example" data-case="f4" data-expected="pass">
+<span role="text"></span>
+  </div>
+  <pre><code class="language-html">&lt;span role=&quot;text&quot;&gt;&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article>
+<!-- section -->
+
+<h2 id="dynamic">Changes after interaction</h2>
+
+<p>Axe only sees the page as it is when you run it. These pass on page load. Activate each button, then run axe again.</p>
+<article class="case" id="g1" aria-labelledby="g1-title">
+  <h3 id="g1-title"><span class="case-id">G1</span> A link added by a script</h3>
+  <p>On load, the price has no link. The button adds an "offer" link inside the <code>role="text"</code> span.</p>
+  <div class="example" data-case="g1" data-expected="dynamic">
+<button type="button" id="g1-button">Show offer</button>
+<p><span role="text" id="g1-price">Now <strong>$24.99</strong> per month.</span></p>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; id=&quot;g1-button&quot;&gt;Show offer&lt;/button&gt;
+&lt;p&gt;&lt;span role=&quot;text&quot; id=&quot;g1-price&quot;&gt;Now &lt;strong&gt;$24.99&lt;/strong&gt; per month.&lt;/span&gt;&lt;/p&gt;</code></pre>
+  <p class="result"><span class="badge dynamic">On load: pass. After showing the offer: fail</span></p>
+  <p class="note">After the click, the message key is none, so it routes to NEW-34.</p>
+</article><article class="case" id="g2" aria-labelledby="g2-title">
+  <h3 id="g2-title"><span class="case-id">G2</span> A link revealed by a script</h3>
+  <p>On load, the link is hidden with <code>display: none</code>, so it can't receive focus. The button shows it.</p>
+  <div class="example" data-case="g2" data-expected="dynamic">
+<button type="button" id="g2-button">Show details link</button>
+<p><span role="text">Free delivery over $50. <a href="#g2" id="g2-link" style="display: none;">Details</a></span></p>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; id=&quot;g2-button&quot;&gt;Show details link&lt;/button&gt;
+&lt;p&gt;&lt;span role=&quot;text&quot;&gt;Free delivery over $50. &lt;a href=&quot;#g2&quot; id=&quot;g2-link&quot; style=&quot;display: none;&quot;&gt;Details&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;</code></pre>
+  <p class="result"><span class="badge dynamic">On load: pass. After showing the link: fail</span></p>
+  <p class="note">After the click, the message key is none, so it routes to NEW-34.</p>
+</article>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+<script>
+  // G1: add an offer link inside the role="text" span
+  document.getElementById('g1-button').addEventListener('click', function () {
+    var price = document.getElementById('g1-price');
+    if (!price.querySelector('a')) {
+      price.insertAdjacentHTML('beforeend', ' <a href="#g1">See the offer</a>');
+    }
+  });
+
+  // G2: show the hidden link
+  document.getElementById('g2-button').addEventListener('click', function () {
+    document.getElementById('g2-link').style.display = 'inline';
+  });
+</script>
+</body>
+</html>
