@@ -1,0 +1,26 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<title>axe report: Testing the axe rule aria-hidden-body: D1</title>
+<style>
+  body { font-family: system-ui, sans-serif; line-height: 1.5; margin: 2rem; color: #1d1d1f; }
+  table { border-collapse: collapse; width: 100%; margin-bottom: 2rem; }
+  th, td { border: 1px solid #ccc; padding: .4rem .6rem; text-align: left; vertical-align: top; }
+  th { background: #f2f2f2; }
+  code { font-size: .85rem; word-break: break-word; }
+  h2 { border-top: 3px solid #1d1d1f; padding-top: 1rem; margin-top: 2.5rem; }
+</style></head><body>
+<h1>axe report</h1>
+<ul>
+  <li>Page: <a href="https://intopia.github.io/exercise/testing-axe-rule-aria-hidden-body-d1.html">Testing the axe rule aria-hidden-body: D1</a></li>
+  <li>Run: 21/11/2026, 22:17:46</li>
+  <li>axe-core 4.14.0</li>
+  <li>Rules passed: 10. Rules not applicable: 77.</li>
+</ul>
+<h2>Fails (1)</h2><h3>aria-hidden-body: aria-hidden=&quot;true&quot; must not be present on the document body (1)</h3>
+        <p>Impact: critical. <a href="https://dequeuniversity.com/rules/axe/4.14/aria-hidden-body?application=axeAPI">Rule details on Deque University</a></p>
+        <table><thead><tr><th scope="col">#</th><th scope="col">Element</th><th scope="col">Selector</th><th scope="col">Problem</th></tr></thead><tbody><tr><td>1</td><td><code>&lt;body aria-hidden=&quot;true&quot;&gt;</code></td><td><code>body</code></td><td>aria-hidden=true should not be present on the document body</td></tr></tbody></table>
+<h2>Needs review (2)</h2><h3>aria-hidden-focus: ARIA hidden element must not be focusable or contain focusable elements (1)</h3>
+        <p>Impact: serious. <a href="https://dequeuniversity.com/rules/axe/4.14/aria-hidden-focus?application=axeAPI">Rule details on Deque University</a></p>
+        <table><thead><tr><th scope="col">#</th><th scope="col">Element</th><th scope="col">Selector</th><th scope="col">Problem</th></tr></thead><tbody><tr><td>1</td><td><code>&lt;body aria-hidden=&quot;true&quot;&gt;</code></td><td><code>body</code></td><td>Check that focusable elements are not tabbable in the current state</td></tr></tbody></table><h3>bypass: Page must have means to bypass repeated blocks (1)</h3>
+        <p>Impact: serious. <a href="https://dequeuniversity.com/rules/axe/4.14/bypass?application=axeAPI">Rule details on Deque University</a></p>
+        <table><thead><tr><th scope="col">#</th><th scope="col">Element</th><th scope="col">Selector</th><th scope="col">Problem</th></tr></thead><tbody><tr><td>1</td><td><code>&lt;html lang=&quot;en&quot;&gt;</code></td><td><code>html</code></td><td>No valid skip link found<br>Page does not have a heading<br>Page does not have a landmark region</td></tr></tbody></table>
+</body></html>

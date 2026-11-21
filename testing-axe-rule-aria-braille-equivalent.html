@@ -109,9 +109,9 @@
   <h3 id="a2-title"><span class="case-id">A2</span> Decorative image with a braille label</h3>
   <p><code>aria-braillelabel</code> counts as a global ARIA attribute, so it also cancels <code>alt=""</code> and Chrome shows an image with no name.</p>
   <div class="example" data-case="a2" data-expected="review">
-<img src="assets/images/intopia-logo.svg" alt="" aria-braillelabel="logo" width="120">
+<img src="assets/img/intopia.png" alt="" aria-braillelabel="logo" width="120">
   </div>
-  <pre><code class="language-html">&lt;img src=&quot;assets/images/intopia-logo.svg&quot; alt=&quot;&quot; aria-braillelabel=&quot;logo&quot; width=&quot;120&quot;&gt;</code></pre>
+  <pre><code class="language-html">&lt;img src=&quot;assets/img/intopia.png&quot; alt=&quot;&quot; aria-braillelabel=&quot;logo&quot; width=&quot;120&quot;&gt;</code></pre>
   <p class="result"><span class="badge review">Expected result: needs review</span></p>
   <p class="note">Also fails <code>presentation-role-conflict</code>.</p>
   <p class="route"><strong>Template routing:</strong> Needs review. Check: <code>braille-label-equivalent</code>, message key: none. Routes to: no template today, because the map sends every <code>braille-label-equivalent</code> needs review to "No template". Should be NEW-33.</p>
