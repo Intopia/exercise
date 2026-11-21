@@ -1,0 +1,24 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<title>axe report: Testing the axe rule aria-valid-attr</title>
+<style>
+  body { font-family: system-ui, sans-serif; line-height: 1.5; margin: 2rem; color: #1d1d1f; }
+  table { border-collapse: collapse; width: 100%; margin-bottom: 2rem; }
+  th, td { border: 1px solid #ccc; padding: .4rem .6rem; text-align: left; vertical-align: top; }
+  th { background: #f2f2f2; }
+  code { font-size: .85rem; word-break: break-word; }
+  h2 { border-top: 3px solid #1d1d1f; padding-top: 1rem; margin-top: 2.5rem; }
+</style></head><body>
+<h1>axe report</h1>
+<ul>
+  <li>Page: <a href="https://intopia.github.io/exercise/testing-axe-rule-aria-valid-attr.html">Testing the axe rule aria-valid-attr</a></li>
+  <li>Run: 21/11/2026, 20:12:47</li>
+  <li>axe-core 4.14.0</li>
+  <li>Rules passed: 46. Rules not applicable: 44.</li>
+</ul>
+<h2>Fails (11)</h2><h3>aria-valid-attr: ARIA attributes must conform to valid names (11)</h3>
+        <p>Impact: critical. <a href="https://dequeuniversity.com/rules/axe/4.14/aria-valid-attr?application=axeAPI">Rule details on Deque University</a></p>
+        <table><thead><tr><th scope="col">#</th><th scope="col">Element</th><th scope="col">Selector</th><th scope="col">Problem</th></tr></thead><tbody><tr><td>1</td><td><code>&lt;button type=&quot;button&quot; aria-labeledby=&quot;a1-label&quot;&gt;Save&lt;/button&gt;</code></td><td><code>button[aria-labeledby=&quot;a1-label&quot;]</code></td><td>Invalid ARIA attribute name: aria-labeledby</td></tr><tr><td>2</td><td><code>&lt;button type=&quot;button&quot; aria-lable=&quot;Close&quot;&gt;X&lt;/button&gt;</code></td><td><code>button[aria-lable=&quot;Close&quot;]</code></td><td>Invalid ARIA attribute name: aria-lable</td></tr><tr><td>3</td><td><code>&lt;input type=&quot;password&quot; id=&quot;a3-input&quot; aria-describeby=&quot;a3-hint&quot;&gt;</code></td><td><code>#a3-input</code></td><td>Invalid ARIA attribute name: aria-describeby</td></tr><tr><td>4</td><td><code>&lt;div role=&quot;region&quot; aria-labelled-by=&quot;a4-label&quot;&gt;12 Smith Street&lt;/div&gt;</code></td><td><code>div[aria-labelled-by=&quot;a4-label&quot;]</code></td><td>Invalid ARIA attribute name: aria-labelled-by</td></tr><tr><td>5</td><td><code>&lt;div aria-live=&quot;polite&quot; aria-relevent=&quot;additions&quot;&gt;Chat messages.&lt;/div&gt;</code></td><td><code>div[aria-live=&quot;polite&quot;]</code></td><td>Invalid ARIA attribute name: aria-relevent</td></tr><tr><td>6</td><td><code>&lt;div aria-=&quot;true&quot;&gt;Promotions&lt;/div&gt;</code></td><td><code>div[aria-=&quot;true&quot;]</code></td><td>Invalid ARIA attribute name: aria-</td></tr><tr><td>7</td><td><code>&lt;div aria-role=&quot;button&quot; tabindex=&quot;0&quot;&gt;Continue&lt;/div&gt;</code></td><td><code>div[aria-role=&quot;button&quot;]</code></td><td>Invalid ARIA attribute name: aria-role</td></tr><tr><td>8</td><td><code>&lt;span aria-tooltip=&quot;Opens in a new tab&quot;&gt;Help&lt;/span&gt;</code></td><td><code>span[aria-tooltip=&quot;Opens in a new tab&quot;]</code></td><td>Invalid ARIA attribute name: aria-tooltip</td></tr><tr><td>9</td><td><code>&lt;input type=&quot;email&quot; id=&quot;b3-input&quot; aria-mandatory=&quot;true&quot;&gt;</code></td><td><code>#b3-input</code></td><td>Invalid ARIA attribute name: aria-mandatory</td></tr><tr><td>10</td><td><code>&lt;button type=&quot;button&quot; aria-toggled=&quot;false&quot;&gt;Bold&lt;/button&gt;</code></td><td><code>button[aria-toggled=&quot;false&quot;]</code></td><td>Invalid ARIA attribute name: aria-toggled</td></tr><tr><td>11</td><td><code>&lt;button type=&quot;button&quot; aria-labelledby=&quot;b5-label&quot; aria-labeledby=&quot;b5-label&quot;&gt;Print&lt;/button&gt;</code></td><td><code>button[aria-labelledby=&quot;b5-label&quot;]</code></td><td>Invalid ARIA attribute name: aria-labeledby</td></tr></tbody></table>
+<h2>Needs review (1)</h2><h3>aria-allowed-attr: Elements must only use supported ARIA attributes (1)</h3>
+        <p>Impact: critical. <a href="https://dequeuniversity.com/rules/axe/4.14/aria-allowed-attr?application=axeAPI">Rule details on Deque University</a></p>
+        <table><thead><tr><th scope="col">#</th><th scope="col">Element</th><th scope="col">Selector</th><th scope="col">Problem</th></tr></thead><tbody><tr><td>1</td><td><code>&lt;div aria-grabbed=&quot;false&quot;&gt;Drag me&lt;/div&gt;</code></td><td><code>div[data-case=&quot;d1&quot;] &gt; div</code></td><td>The attribute is deprecated and should not be used: aria-grabbed</td></tr></tbody></table>
+</body></html>

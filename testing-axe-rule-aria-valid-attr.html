@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the axe rule aria-valid-attr</title>
+  <meta name="description" content="Test cases for the axe-core rule aria-valid-attr, showing what axe catches and what it misses.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <style>
+  .case { border: 1px solid #c8c8cc; border-radius: 6px; padding: 1rem 1.25rem; margin: 1.25rem 0; }
+  .case h3 { margin-top: 0; }
+  .case-id { display: inline-block; font-size: .8rem; font-weight: 700; background: #1d1d1f; color: #fff; padding: .1rem .45rem; border-radius: 3px; margin-right: .4rem; vertical-align: middle; }
+  .example { border: 1px dashed #a0a0a8; padding: .75rem 1rem; margin: .75rem 0; }
+  .example p { margin: .25rem 0; }
+  .badge { display: inline-block; font-weight: 600; font-size: .875rem; padding: .2rem .6rem; border-radius: 3px; border: 2px solid; }
+  .badge.fail { background: #fde8e8; border-color: #b3261e; color: #8a1c16; }
+  .badge.review { background: #fff4d6; border-color: #8a6100; color: #5e4200; }
+  .badge.other { background: #e0f4f4; border-color: #0b6b6b; color: #084f4f; }
+  .badge.miss { background: #ece6fb; border-color: #5b3cc4; color: #432a99; }
+  .badge.pass { background: #e3f4e8; border-color: #1e7b3a; color: #155c2b; }
+  .badge.dynamic { background: #e8eef9; border-color: #1a4f9c; color: #133b75; }
+  .note { font-size: .9375rem; }
+  .route { font-size: .875rem; border-left: 3px solid #a0a0a8; padding-left: .6rem; }
+</style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo. The word 'intopia' in black, with the 'o' made from four curved brush strokes in pink, orange, yellow and turquoise." class="intopia-logo">
+  </picture>
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing the axe rule <code>aria-valid-attr</code></h1>
+
+<p>Test cases for the axe-core rule <a href="https://dequeuniversity.com/rules/axe/4.14/aria-valid-attr"><code>aria-valid-attr</code></a> (axe-core 4.14). The rule checks that every attribute starting with <code>aria-</code> is a real ARIA attribute. Browsers ignore attributes they don't recognise, so a misspelled attribute does nothing at all.</p>
+
+<p>This rule only checks the attribute <strong>name</strong>. Whether the <strong>value</strong> is valid is checked by <code>aria-valid-attr-value</code>, and whether the attribute suits the role is checked by <code>aria-allowed-attr</code>.</p>
+
+<p>Each case also shows the axe <strong>message key</strong> and which Intopia issue template the result would go to under the current assembly rules. Results on this page were checked in Chrome.</p>
+
+<p class="report-link"><strong>axe-core results:</strong> <a href="x-axe-core-rules/08-axe-report-aria-valid-attr.html">See the HTML report from running axe-core 4.14.0 over this page</a>.</p>
+
+<p>Every example is live in the page, so you can run the axe extension straight over it. The expected results were checked by running axe-core 4.14.1 over this page. Look in both the axe <strong>issues</strong> list and the <strong>needs review</strong> list.</p>
+
+<table>
+  <caption>Number of test cases by expected result</caption>
+  <thead><tr><th scope="col">Expected result</th><th scope="col">Cases</th></tr></thead>
+  <tbody>
+      <tr><td>Fail</td><td>11</td></tr>
+      <tr><td>Flagged by a different rule instead</td><td>1</td></tr>
+      <tr><td>Passes, but broken (axe misses it)</td><td>2</td></tr>
+      <tr><td>Pass (valid control cases)</td><td>4</td></tr>
+      <tr><td>Changes after interaction</td><td>1</td></tr>
+  </tbody>
+</table>
+
+<h2 id="sections">Sections</h2>
+
+<ul>
+  <li><a href="#misspelled">Misspelled attributes</a></li>
+  <li><a href="#invented">Attributes that don&#x27;t exist</a></li>
+  <li><a href="#not-tested">Not tested at all</a></li>
+  <li><a href="#other-rules">Flagged by a different rule instead</a></li>
+  <li><a href="#passing">Ways to pass</a></li>
+  <li><a href="#dynamic">Changes after interaction</a></li>
+</ul>
+
+<!-- section -->
+
+<h2 id="misspelled">Misspelled attributes</h2>
+
+<p>These fail with "Invalid ARIA attribute name". Each one is ignored by browsers, so the name, description or state it was meant to give is missing.</p>
+<article class="case" id="a1" aria-labelledby="a1-title">
+  <h3 id="a1-title"><span class="case-id">A1</span> aria-labeledby (one l)</h3>
+  <p>The most common misspelling. The correct name is <code>aria-labelledby</code>.</p>
+  <div class="example" data-case="a1" data-expected="fail">
+<span id="a1-label">Save changes</span>
+<button type="button" aria-labeledby="a1-label">Save</button>
+  </div>
+  <pre><code class="language-html">&lt;span id=&quot;a1-label&quot;&gt;Save changes&lt;/span&gt;
+&lt;button type=&quot;button&quot; aria-labeledby=&quot;a1-label&quot;&gt;Save&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-26.</p>
+</article><article class="case" id="a2" aria-labelledby="a2-title">
+  <h3 id="a2-title"><span class="case-id">A2</span> aria-lable</h3>
+  <div class="example" data-case="a2" data-expected="fail">
+<button type="button" aria-lable="Close">X</button>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; aria-lable=&quot;Close&quot;&gt;X&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-26.</p>
+</article><article class="case" id="a3" aria-labelledby="a3-title">
+  <h3 id="a3-title"><span class="case-id">A3</span> aria-describeby</h3>
+  <p>The correct name is <code>aria-describedby</code>.</p>
+  <div class="example" data-case="a3" data-expected="fail">
+<label for="a3-input">Password</label>
+<input type="password" id="a3-input" aria-describeby="a3-hint">
+<p id="a3-hint">At least 12 characters.</p>
+  </div>
+  <pre><code class="language-html">&lt;label for=&quot;a3-input&quot;&gt;Password&lt;/label&gt;
+&lt;input type=&quot;password&quot; id=&quot;a3-input&quot; aria-describeby=&quot;a3-hint&quot;&gt;
+&lt;p id=&quot;a3-hint&quot;&gt;At least 12 characters.&lt;/p&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-26.</p>
+</article><article class="case" id="a4" aria-labelledby="a4-title">
+  <h3 id="a4-title"><span class="case-id">A4</span> aria-labelled-by</h3>
+  <p>An extra hyphen.</p>
+  <div class="example" data-case="a4" data-expected="fail">
+<span id="a4-label">Delivery address</span>
+<div role="region" aria-labelled-by="a4-label">12 Smith Street</div>
+  </div>
+  <pre><code class="language-html">&lt;span id=&quot;a4-label&quot;&gt;Delivery address&lt;/span&gt;
+&lt;div role=&quot;region&quot; aria-labelled-by=&quot;a4-label&quot;&gt;12 Smith Street&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-26.</p>
+</article><article class="case" id="a5" aria-labelledby="a5-title">
+  <h3 id="a5-title"><span class="case-id">A5</span> aria-relevent</h3>
+  <p>The correct name is <code>aria-relevant</code>.</p>
+  <div class="example" data-case="a5" data-expected="fail">
+<div aria-live="polite" aria-relevent="additions">Chat messages.</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-live=&quot;polite&quot; aria-relevent=&quot;additions&quot;&gt;Chat messages.&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-26.</p>
+</article><article class="case" id="a6" aria-labelledby="a6-title">
+  <h3 id="a6-title"><span class="case-id">A6</span> aria- with nothing after it</h3>
+  <div class="example" data-case="a6" data-expected="fail">
+<div aria-="true">Promotions</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-=&quot;true&quot;&gt;Promotions&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-26.</p>
+</article>
+<!-- section -->
+
+<h2 id="invented">Attributes that don&#x27;t exist</h2>
+
+<p>Some look reasonable, but aren't part of ARIA.</p>
+<article class="case" id="b1" aria-labelledby="b1-title">
+  <h3 id="b1-title"><span class="case-id">B1</span> aria-role</h3>
+  <p>Use the <code>role</code> attribute instead.</p>
+  <div class="example" data-case="b1" data-expected="fail">
+<div aria-role="button" tabindex="0">Continue</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-role=&quot;button&quot; tabindex=&quot;0&quot;&gt;Continue&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-26.</p>
+</article><article class="case" id="b2" aria-labelledby="b2-title">
+  <h3 id="b2-title"><span class="case-id">B2</span> aria-tooltip</h3>
+  <div class="example" data-case="b2" data-expected="fail">
+<span aria-tooltip="Opens in a new tab">Help</span>
+  </div>
+  <pre><code class="language-html">&lt;span aria-tooltip=&quot;Opens in a new tab&quot;&gt;Help&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-26.</p>
+</article><article class="case" id="b3" aria-labelledby="b3-title">
+  <h3 id="b3-title"><span class="case-id">B3</span> aria-mandatory</h3>
+  <p>The real attribute is <code>aria-required</code>.</p>
+  <div class="example" data-case="b3" data-expected="fail">
+<label for="b3-input">Email</label>
+<input type="email" id="b3-input" aria-mandatory="true">
+  </div>
+  <pre><code class="language-html">&lt;label for=&quot;b3-input&quot;&gt;Email&lt;/label&gt;
+&lt;input type=&quot;email&quot; id=&quot;b3-input&quot; aria-mandatory=&quot;true&quot;&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-26.</p>
+</article><article class="case" id="b4" aria-labelledby="b4-title">
+  <h3 id="b4-title"><span class="case-id">B4</span> aria-toggled</h3>
+  <p>The real attribute is <code>aria-pressed</code>.</p>
+  <div class="example" data-case="b4" data-expected="fail">
+<button type="button" aria-toggled="false">Bold</button>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; aria-toggled=&quot;false&quot;&gt;Bold&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-26.</p>
+</article><article class="case" id="b5" aria-labelledby="b5-title">
+  <h3 id="b5-title"><span class="case-id">B5</span> A misspelling next to the correct attribute</h3>
+  <p>The correct <code>aria-labelledby</code> still works. Only the misspelled one is ignored, but the element still fails.</p>
+  <div class="example" data-case="b5" data-expected="fail">
+<span id="b5-label">Print receipt</span>
+<button type="button" aria-labelledby="b5-label" aria-labeledby="b5-label">Print</button>
+  </div>
+  <pre><code class="language-html">&lt;span id=&quot;b5-label&quot;&gt;Print receipt&lt;/span&gt;
+&lt;button type=&quot;button&quot; aria-labelledby=&quot;b5-label&quot; aria-labeledby=&quot;b5-label&quot;&gt;Print&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Routes to: NEW-26.</p>
+</article>
+<!-- section -->
+
+<h2 id="not-tested">Not tested at all</h2>
+
+<p>The rule only looks at attributes that start with <code>aria-</code>. These slip past, and nothing in axe flags them.</p>
+<article class="case" id="c1" aria-labelledby="c1-title">
+  <h3 id="c1-title"><span class="case-id">C1</span> An underscore instead of a hyphen</h3>
+  <div class="example" data-case="c1" data-expected="miss">
+<button type="button" aria_label="Close">X</button>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; aria_label=&quot;Close&quot;&gt;X&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="note">Browsers ignore it, so the button's name is just "X".</p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+</article><article class="case" id="c2" aria-labelledby="c2-title">
+  <h3 id="c2-title"><span class="case-id">C2</span> No hyphen at all</h3>
+  <div class="example" data-case="c2" data-expected="miss">
+<button type="button" arialabel="Close">X</button>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; arialabel=&quot;Close&quot;&gt;X&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+</article>
+<!-- section -->
+
+<h2 id="other-rules">Flagged by a different rule instead</h2>
+
+<p></p>
+<article class="case" id="d1" aria-labelledby="d1-title">
+  <h3 id="d1-title"><span class="case-id">D1</span> A deprecated attribute</h3>
+  <p><code>aria-grabbed</code> is a real attribute name, so this rule passes it. It was deprecated in ARIA 1.1.</p>
+  <div class="example" data-case="d1" data-expected="other" data-other="aria-allowed-attr">
+<div aria-grabbed="false">Drag me</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-grabbed=&quot;false&quot;&gt;Drag me&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-allowed-attr</code> instead</span></p>
+  <p class="route"><strong>Template routing:</strong> <code>aria-allowed-attr</code>, check <code>aria-no-deprecated-attr</code>, needs review. Routes to: NEW-40.</p>
+</article>
+<!-- section -->
+
+<h2 id="passing">Ways to pass</h2>
+
+<p>Control cases.</p>
+<article class="case" id="e1" aria-labelledby="e1-title">
+  <h3 id="e1-title"><span class="case-id">E1</span> Correctly spelled attributes</h3>
+  <div class="example" data-case="e1" data-expected="pass">
+<span id="e1-label">Search the shop</span>
+<input type="search" aria-labelledby="e1-label" aria-describedby="e1-hint">
+<p id="e1-hint">Search by product name.</p>
+  </div>
+  <pre><code class="language-html">&lt;span id=&quot;e1-label&quot;&gt;Search the shop&lt;/span&gt;
+&lt;input type=&quot;search&quot; aria-labelledby=&quot;e1-label&quot; aria-describedby=&quot;e1-hint&quot;&gt;
+&lt;p id=&quot;e1-hint&quot;&gt;Search by product name.&lt;/p&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e2" aria-labelledby="e2-title">
+  <h3 id="e2-title"><span class="case-id">E2</span> An uppercase attribute name</h3>
+  <p>HTML attribute names aren't case sensitive, so <code>ARIA-LABEL</code> is read as <code>aria-label</code>.</p>
+  <div class="example" data-case="e2" data-expected="pass">
+<div role="region" ARIA-LABEL="Special offers">Free delivery this week.</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;region&quot; ARIA-LABEL=&quot;Special offers&quot;&gt;Free delivery this week.&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e3" aria-labelledby="e3-title">
+  <h3 id="e3-title"><span class="case-id">E3</span> Newer attributes</h3>
+  <p><code>aria-description</code> and <code>aria-braillelabel</code> are newer, but axe knows them.</p>
+  <div class="example" data-case="e3" data-expected="pass">
+<button type="button" aria-description="Removes the item from your cart" aria-braillelabel="del">Delete</button>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; aria-description=&quot;Removes the item from your cart&quot; aria-braillelabel=&quot;del&quot;&gt;Delete&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e4" aria-labelledby="e4-title">
+  <h3 id="e4-title"><span class="case-id">E4</span> A data attribute</h3>
+  <p><code>data-aria-label</code> isn't an ARIA attribute, it's a custom data attribute, so it's fine.</p>
+  <div class="example" data-case="e4" data-expected="pass">
+<button type="button" data-aria-label="close-button">Close</button>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; data-aria-label=&quot;close-button&quot;&gt;Close&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article>
+<!-- section -->
+
+<h2 id="dynamic">Changes after interaction</h2>
+
+<p>Axe only sees the page as it is when you run it. These pass on page load. Activate each button, then run axe again.</p>
+<article class="case" id="f1" aria-labelledby="f1-title">
+  <h3 id="f1-title"><span class="case-id">F1</span> A script writes a misspelled attribute</h3>
+  <p>The button starts correct. When pressed, the script sets <code>aria-expaned</code> instead of <code>aria-expanded</code>, so the state never changes for screen reader users.</p>
+  <div class="example" data-case="f1" data-expected="dynamic">
+<button type="button" id="f1-button" aria-expanded="false" aria-controls="f1-panel">Show filters</button>
+<div id="f1-panel" hidden>Price, size and colour.</div>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; id=&quot;f1-button&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;f1-panel&quot;&gt;Show filters&lt;/button&gt;
+&lt;div id=&quot;f1-panel&quot; hidden&gt;Price, size and colour.&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge dynamic">On load: pass. After pressing: fail</span></p>
+  <p class="note">After pressing, the message key is none, so it routes to NEW-26.</p>
+</article>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+<script>
+  // F1: show the panel (bug: the attribute name is misspelled)
+  document.getElementById('f1-button').addEventListener('click', function () {
+    var panel = document.getElementById('f1-panel');
+    panel.hidden = !panel.hidden;
+    this.setAttribute('aria-expaned', panel.hidden ? 'false' : 'true');
+  });
+</script>
+</body>
+</html>

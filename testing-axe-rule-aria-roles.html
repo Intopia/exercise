@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the axe rule aria-roles</title>
+  <meta name="description" content="Test cases for the axe-core rule aria-roles, showing what axe catches and what it misses.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <style>
+  .case { border: 1px solid #c8c8cc; border-radius: 6px; padding: 1rem 1.25rem; margin: 1.25rem 0; }
+  .case h3 { margin-top: 0; }
+  .case-id { display: inline-block; font-size: .8rem; font-weight: 700; background: #1d1d1f; color: #fff; padding: .1rem .45rem; border-radius: 3px; margin-right: .4rem; vertical-align: middle; }
+  .example { border: 1px dashed #a0a0a8; padding: .75rem 1rem; margin: .75rem 0; }
+  .example p { margin: .25rem 0; }
+  .badge { display: inline-block; font-weight: 600; font-size: .875rem; padding: .2rem .6rem; border-radius: 3px; border: 2px solid; }
+  .badge.fail { background: #fde8e8; border-color: #b3261e; color: #8a1c16; }
+  .badge.review { background: #fff4d6; border-color: #8a6100; color: #5e4200; }
+  .badge.other { background: #e0f4f4; border-color: #0b6b6b; color: #084f4f; }
+  .badge.miss { background: #ece6fb; border-color: #5b3cc4; color: #432a99; }
+  .badge.pass { background: #e3f4e8; border-color: #1e7b3a; color: #155c2b; }
+  .badge.dynamic { background: #e8eef9; border-color: #1a4f9c; color: #133b75; }
+  .note { font-size: .9375rem; }
+  .route { font-size: .875rem; border-left: 3px solid #a0a0a8; padding-left: .6rem; }
+</style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo. The word 'intopia' in black, with the 'o' made from four curved brush strokes in pink, orange, yellow and turquoise." class="intopia-logo">
+  </picture>
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing the axe rule <code>aria-roles</code></h1>
+
+<p>Test cases for the axe-core rule <a href="https://dequeuniversity.com/rules/axe/4.14/aria-roles"><code>aria-roles</code></a> (axe-core 4.14). The rule checks that the <code>role</code> attribute uses a real role. It runs three checks, and fails if any of them finds a problem:</p>
+
+<ul>
+  <li><code>invalidrole</code>: <strong>none</strong> of the roles in the attribute are real roles. If one of them is real, this check passes.</li>
+  <li><code>abstractrole</code>: one of the roles is an abstract role. These exist to organise the ARIA spec, and authors mustn't use them.</li>
+  <li><code>unsupportedrole</code>: the role isn't well supported. No roles are on that list in 4.14.</li>
+</ul>
+
+<p>Role names aren't case sensitive, and an empty <code>role</code> attribute isn't tested. Deprecated roles, such as <code>directory</code>, are checked by a different rule, <code>aria-deprecated-role</code>.</p>
+
+<p>Each case also shows the axe <strong>message key</strong> and which Intopia issue template the result would go to under the current assembly rules. Results on this page were checked in Chrome, including how Chrome exposes each role.</p>
+
+<p class="report-link"><strong>axe-core results:</strong> <a href="x-axe-core-rules/09-axe-report-aria-roles.html">See the HTML report from running axe-core 4.14.0 over this page</a>.</p>
+
+<p>Every example is live in the page, so you can run the axe extension straight over it. The expected results were checked by running axe-core 4.14.1 over this page. Look in both the axe <strong>issues</strong> list and the <strong>needs review</strong> list.</p>
+
+<table>
+  <caption>Number of test cases by expected result</caption>
+  <thead><tr><th scope="col">Expected result</th><th scope="col">Cases</th></tr></thead>
+  <tbody>
+      <tr><td>Fail</td><td>12</td></tr>
+      <tr><td>Flagged by a different rule instead</td><td>2</td></tr>
+      <tr><td>Pass (valid control cases)</td><td>9</td></tr>
+      <tr><td>Changes after interaction</td><td>1</td></tr>
+  </tbody>
+</table>
+
+<h2 id="sections">Sections</h2>
+
+<ul>
+  <li><a href="#invalid">Roles that don&#x27;t exist</a></li>
+  <li><a href="#abstract">Abstract roles</a></li>
+  <li><a href="#accepted">Accepted by axe, but worth knowing</a></li>
+  <li><a href="#other-rules">Flagged by a different rule instead</a></li>
+  <li><a href="#passing">Ways to pass</a></li>
+  <li><a href="#dynamic">Changes after interaction</a></li>
+</ul>
+
+<!-- section -->
+
+<h2 id="invalid">Roles that don&#x27;t exist</h2>
+
+<p>These fail with "Role must be one of the valid ARIA roles". Browsers fall back to the element's own role.</p>
+<article class="case" id="a1" aria-labelledby="a1-title">
+  <h3 id="a1-title"><span class="case-id">A1</span> A misspelled role</h3>
+  <div class="example" data-case="a1" data-expected="fail">
+<div role="buton" tabindex="0">Continue</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;buton&quot; tabindex=&quot;0&quot;&gt;Continue&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="note">In Chrome, this is exposed as a generic element.</p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>invalidrole</code>, message key: none. Routes to: NEW-30.</p>
+</article><article class="case" id="a2" aria-labelledby="a2-title">
+  <h3 id="a2-title"><span class="case-id">A2</span> A misspelled role in capitals</h3>
+  <p>Capitals don't matter, but the spelling is still wrong.</p>
+  <div class="example" data-case="a2" data-expected="fail">
+<div role="BUTON" tabindex="0">Next</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;BUTON&quot; tabindex=&quot;0&quot;&gt;Next&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>invalidrole</code>, message key: none. Routes to: NEW-30.</p>
+</article><article class="case" id="a3" aria-labelledby="a3-title">
+  <h3 id="a3-title"><span class="case-id">A3</span> An HTML element name</h3>
+  <p><code>nav</code> is an HTML element, not a role. The role is <code>navigation</code>.</p>
+  <div class="example" data-case="a3" data-expected="fail">
+<div role="nav">Home | Shop | Contact</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;nav&quot;&gt;Home | Shop | Contact&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="note">In Chrome, this is exposed as a generic element.</p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>invalidrole</code>, message key: none. Routes to: NEW-30.</p>
+</article><article class="case" id="a4" aria-labelledby="a4-title">
+  <h3 id="a4-title"><span class="case-id">A4</span> A heading level in the role</h3>
+  <p>Use <code>role="heading"</code> with <code>aria-level</code>.</p>
+  <div class="example" data-case="a4" data-expected="fail">
+<div role="heading1">Our story</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;heading1&quot;&gt;Our story&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>invalidrole</code>, message key: none. Routes to: NEW-30.</p>
+</article><article class="case" id="a5" aria-labelledby="a5-title">
+  <h3 id="a5-title"><span class="case-id">A5</span> presentational</h3>
+  <p>The role is <code>presentation</code>.</p>
+  <div class="example" data-case="a5" data-expected="fail">
+<div role="presentational">Decorative box</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;presentational&quot;&gt;Decorative box&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>invalidrole</code>, message key: none. Routes to: NEW-30.</p>
+</article><article class="case" id="a6" aria-labelledby="a6-title">
+  <h3 id="a6-title"><span class="case-id">A6</span> Roles separated by a comma</h3>
+  <p>A role list must be separated by spaces. With a comma, it's read as one role called <code>button,link</code>.</p>
+  <div class="example" data-case="a6" data-expected="fail">
+<div role="button,link" tabindex="0">Menu</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;button,link&quot; tabindex=&quot;0&quot;&gt;Menu&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>invalidrole</code>, message key: none. Routes to: NEW-30.</p>
+</article><article class="case" id="a7" aria-labelledby="a7-title">
+  <h3 id="a7-title"><span class="case-id">A7</span> role=&quot;generic&quot;</h3>
+  <p><code>generic</code> is a real role in ARIA 1.2, and Chrome exposes it. But the spec says authors shouldn't use it, and axe treats it as invalid.</p>
+  <div class="example" data-case="a7" data-expected="fail">
+<div role="generic">Wrapper</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;generic&quot;&gt;Wrapper&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="note">In Chrome, this is exposed as generic, so this fail is arguably a false positive. The fix is simply to remove the role.</p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>invalidrole</code>, message key: none. Routes to: NEW-30.</p>
+</article>
+<!-- section -->
+
+<h2 id="abstract">Abstract roles</h2>
+
+<p>These fail with "Abstract role cannot be directly used".</p>
+<article class="case" id="b1" aria-labelledby="b1-title">
+  <h3 id="b1-title"><span class="case-id">B1</span> role=&quot;widget&quot;</h3>
+  <div class="example" data-case="b1" data-expected="fail">
+<div role="widget" tabindex="0">Date picker</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;widget&quot; tabindex=&quot;0&quot;&gt;Date picker&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="note">In Chrome, this is exposed as a generic element.</p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>abstractrole</code>, message key: none. Routes to: NEW-30.</p>
+</article><article class="case" id="b2" aria-labelledby="b2-title">
+  <h3 id="b2-title"><span class="case-id">B2</span> role=&quot;landmark&quot;</h3>
+  <p>Use a specific landmark role, such as <code>region</code> or <code>navigation</code>.</p>
+  <div class="example" data-case="b2" data-expected="fail">
+<div role="landmark">Site links</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;landmark&quot;&gt;Site links&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>abstractrole</code>, message key: none. Routes to: NEW-30.</p>
+</article><article class="case" id="b3" aria-labelledby="b3-title">
+  <h3 id="b3-title"><span class="case-id">B3</span> role=&quot;input&quot;</h3>
+  <div class="example" data-case="b3" data-expected="fail">
+<div role="input" tabindex="0">Type here</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;input&quot; tabindex=&quot;0&quot;&gt;Type here&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>abstractrole</code>, message key: none. Routes to: NEW-30.</p>
+</article><article class="case" id="b4" aria-labelledby="b4-title">
+  <h3 id="b4-title"><span class="case-id">B4</span> role=&quot;structure&quot;</h3>
+  <div class="example" data-case="b4" data-expected="fail">
+<div role="structure">Page layout</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;structure&quot;&gt;Page layout&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>abstractrole</code>, message key: none. Routes to: NEW-30.</p>
+</article><article class="case" id="b5" aria-labelledby="b5-title">
+  <h3 id="b5-title"><span class="case-id">B5</span> An abstract role first, then a real one</h3>
+  <p>Unlike the invalid role check, one real role doesn't save it.</p>
+  <div class="example" data-case="b5" data-expected="fail">
+<div role="widget button" tabindex="0">Apply</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;widget button&quot; tabindex=&quot;0&quot;&gt;Apply&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Check: <code>abstractrole</code>, message key: none. Routes to: NEW-30.</p>
+</article>
+<!-- section -->
+
+<h2 id="accepted">Accepted by axe, but worth knowing</h2>
+
+<p>These pass, but each has a catch.</p>
+<article class="case" id="c1" aria-labelledby="c1-title">
+  <h3 id="c1-title"><span class="case-id">C1</span> A role in capitals</h3>
+  <div class="example" data-case="c1" data-expected="pass">
+<div role="Button" tabindex="0">Subscribe</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;Button&quot; tabindex=&quot;0&quot;&gt;Subscribe&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+  <p class="note">In Chrome, this is exposed as a button. Note that <code>aria-command-name</code> doesn't test it, because its selector only matches an exact <code>role="button"</code>.</p>
+</article><article class="case" id="c2" aria-labelledby="c2-title">
+  <h3 id="c2-title"><span class="case-id">C2</span> A misspelled role, then a real one</h3>
+  <p><code>invalidrole</code> only fails when <em>every</em> role is invalid, so the typo is never reported.</p>
+  <div class="example" data-case="c2" data-expected="pass">
+<div role="buton button" tabindex="0">Download</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;buton button&quot; tabindex=&quot;0&quot;&gt;Download&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+  <p class="note">In Chrome, this is exposed as a button, so it works.</p>
+</article><article class="case" id="c3" aria-labelledby="c3-title">
+  <h3 id="c3-title"><span class="case-id">C3</span> role=&quot;image&quot;</h3>
+  <p><code>image</code> is a new name for <code>img</code> in the ARIA 1.3 draft.</p>
+  <div class="example" data-case="c3" data-expected="pass">
+<span role="image" aria-label="Five stars">*****</span>
+  </div>
+  <pre><code class="language-html">&lt;span role=&quot;image&quot; aria-label=&quot;Five stars&quot;&gt;*****&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+  <p class="note">In Chrome, this is exposed as an image. Older browsers and screen readers may not know it.</p>
+</article><article class="case" id="c4" aria-labelledby="c4-title">
+  <h3 id="c4-title"><span class="case-id">C4</span> role=&quot;text&quot;</h3>
+  <p>Not a WAI-ARIA role at all, but axe accepts it because Safari supports it.</p>
+  <div class="example" data-case="c4" data-expected="pass">
+<span role="text">Now <strong>$24.99</strong></span>
+  </div>
+  <pre><code class="language-html">&lt;span role=&quot;text&quot;&gt;Now &lt;strong&gt;$24.99&lt;/strong&gt;&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+  <p class="note">In Chrome, this is exposed as a generic element. Safari reads the content as one phrase.</p>
+</article><article class="case" id="c5" aria-labelledby="c5-title">
+  <h3 id="c5-title"><span class="case-id">C5</span> role=&quot;mark&quot; and role=&quot;comment&quot;</h3>
+  <p>Both are in the ARIA 1.3 draft.</p>
+  <div class="example" data-case="c5" data-expected="pass">
+<p>Our <span role="mark">best seller</span> is back.</p>
+<div role="comment">Check this price.</div>
+  </div>
+  <pre><code class="language-html">&lt;p&gt;Our &lt;span role=&quot;mark&quot;&gt;best seller&lt;/span&gt; is back.&lt;/p&gt;
+&lt;div role=&quot;comment&quot;&gt;Check this price.&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+  <p class="note">Chrome exposes both. Support in screen readers varies.</p>
+</article>
+<!-- section -->
+
+<h2 id="other-rules">Flagged by a different rule instead</h2>
+
+<p></p>
+<article class="case" id="d1" aria-labelledby="d1-title">
+  <h3 id="d1-title"><span class="case-id">D1</span> A deprecated role</h3>
+  <p><code>directory</code> was deprecated in ARIA 1.2, but it's still a valid role, so this rule passes it.</p>
+  <div class="example" data-case="d1" data-expected="other" data-other="aria-deprecated-role">
+<div role="directory">Staff list</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;directory&quot;&gt;Staff list&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-deprecated-role</code> instead</span></p>
+  <p class="route"><strong>Template routing:</strong> <code>aria-deprecated-role</code>. Routes to: NEW-32.</p>
+</article><article class="case" id="d2" aria-labelledby="d2-title">
+  <h3 id="d2-title"><span class="case-id">D2</span> A deprecated DPUB role</h3>
+  <div class="example" data-case="d2" data-expected="other" data-other="aria-deprecated-role">
+<div role="doc-biblioentry">Smith, J. (2024). Accessible forms.</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;doc-biblioentry&quot;&gt;Smith, J. (2024). Accessible forms.&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-deprecated-role</code> instead</span></p>
+  <p class="note">This also fails <code>aria-allowed-role</code>.</p>
+  <p class="route"><strong>Template routing:</strong> <code>aria-deprecated-role</code> routes to NEW-32, and <code>aria-allowed-role</code> routes to NEW-31.</p>
+</article>
+<!-- section -->
+
+<h2 id="passing">Ways to pass</h2>
+
+<p>Control cases.</p>
+<article class="case" id="e1" aria-labelledby="e1-title">
+  <h3 id="e1-title"><span class="case-id">E1</span> A standard role</h3>
+  <div class="example" data-case="e1" data-expected="pass">
+<div role="navigation" aria-label="Footer">About | Careers</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;navigation&quot; aria-label=&quot;Footer&quot;&gt;About | Careers&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e2" aria-labelledby="e2-title">
+  <h3 id="e2-title"><span class="case-id">E2</span> A DPUB role</h3>
+  <p>Digital publishing roles start with <code>doc-</code>.</p>
+  <div class="example" data-case="e2" data-expected="pass">
+<div role="doc-chapter">Chapter 1</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;doc-chapter&quot;&gt;Chapter 1&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e3" aria-labelledby="e3-title">
+  <h3 id="e3-title"><span class="case-id">E3</span> A graphics role</h3>
+  <div class="example" data-case="e3" data-expected="pass">
+<div role="graphics-document" aria-label="Floor plan">Plan</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;graphics-document&quot; aria-label=&quot;Floor plan&quot;&gt;Plan&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e4" aria-labelledby="e4-title">
+  <h3 id="e4-title"><span class="case-id">E4</span> A fallback role list</h3>
+  <div class="example" data-case="e4" data-expected="pass">
+<div role="none presentation">Layout</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;none presentation&quot;&gt;Layout&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article>
+<!-- section -->
+
+<h2 id="dynamic">Changes after interaction</h2>
+
+<p>Axe only sees the page as it is when you run it. These pass on page load. Activate each button, then run axe again.</p>
+<article class="case" id="f1" aria-labelledby="f1-title">
+  <h3 id="f1-title"><span class="case-id">F1</span> A script sets the role from an empty variable</h3>
+  <p>The script means to turn the div into a tab, but the variable is never set, so the role becomes the text <code>undefined</code>.</p>
+  <div class="example" data-case="f1" data-expected="dynamic">
+<button type="button" id="f1-button">Make it a tab</button>
+<div id="f1-target">Delivery</div>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; id=&quot;f1-button&quot;&gt;Make it a tab&lt;/button&gt;
+&lt;div id=&quot;f1-target&quot;&gt;Delivery&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge dynamic">On load: pass. After pressing: fail</span></p>
+  <p class="note">After pressing, the check is <code>invalidrole</code>, so it routes to NEW-30.</p>
+</article>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+<script>
+  // F1: bug: tabRole is never set, so the role becomes "undefined"
+  var tabRole;
+  document.getElementById('f1-button').addEventListener('click', function () {
+    document.getElementById('f1-target').setAttribute('role', String(tabRole));
+  });
+</script>
+</body>
+</html>
