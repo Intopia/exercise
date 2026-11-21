@@ -1,0 +1,803 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the axe rule aria-required-parent</title>
+  <meta name="description" content="Test cases for the axe-core rule aria-required-parent, showing what axe catches and what it misses.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <style>
+  .case { border: 1px solid #c8c8cc; border-radius: 6px; padding: 1rem 1.25rem; margin: 1.25rem 0; }
+  .case h3 { margin-top: 0; }
+  .case-id { display: inline-block; font-size: .8rem; font-weight: 700; background: #1d1d1f; color: #fff; padding: .1rem .45rem; border-radius: 3px; margin-right: .4rem; vertical-align: middle; }
+  .example { border: 1px dashed #a0a0a8; padding: .75rem 1rem; margin: .75rem 0; }
+  .example p { margin: .25rem 0; }
+  .badge { display: inline-block; font-weight: 600; font-size: .875rem; padding: .2rem .6rem; border-radius: 3px; border: 2px solid; }
+  .badge.fail { background: #fde8e8; border-color: #b3261e; color: #8a1c16; }
+  .badge.review { background: #fff4d6; border-color: #8a6100; color: #5e4200; }
+  .badge.other { background: #e0f4f4; border-color: #0b6b6b; color: #084f4f; }
+  .badge.miss { background: #ece6fb; border-color: #5b3cc4; color: #432a99; }
+  .badge.pass { background: #e3f4e8; border-color: #1e7b3a; color: #155c2b; }
+  .badge.dynamic { background: #e8eef9; border-color: #1a4f9c; color: #133b75; }
+  .note { font-size: .9375rem; }
+  .route { font-size: .875rem; border-left: 3px solid #a0a0a8; padding-left: .6rem; }
+</style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo. The word 'intopia' in black, with the 'o' made from four curved brush strokes in pink, orange, yellow and turquoise." class="intopia-logo">
+  </picture>
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing the axe rule <code>aria-required-parent</code></h1>
+
+<p>Test cases for the axe-core rule <a href="https://dequeuniversity.com/rules/axe/4.14/aria-required-parent"><code>aria-required-parent</code></a> (axe-core 4.14). It's the other half of <code>aria-required-children</code>. That rule checks that a group contains the right items. This one checks that an item is inside the right group, such as a <code>tab</code> inside a <code>tablist</code>.</p>
+
+<p>The rule only looks at elements with an explicit <code>role</code> attribute. A native <code>&lt;li&gt;</code> outside a list is checked by the separate <code>listitem</code> rule instead.</p>
+
+<p>These are the roles axe checks, and the parents it accepts:</p>
+
+<table>
+  <caption>Roles checked by aria-required-parent in axe-core 4.14</caption>
+  <thead><tr><th scope="col">Role</th><th scope="col">Must be inside one of</th></tr></thead>
+  <tbody>
+    <tr><td><code>tab</code></td><td><code>tablist</code></td></tr>
+    <tr><td><code>listitem</code></td><td><code>list</code></td></tr>
+    <tr><td><code>option</code></td><td><code>listbox</code>, or a <code>group</code> inside one</td></tr>
+    <tr><td><code>menuitem</code>, <code>menuitemcheckbox</code>, <code>menuitemradio</code></td><td><code>menu</code>, <code>menubar</code>, or a <code>group</code> inside one</td></tr>
+    <tr><td><code>treeitem</code></td><td><code>tree</code>, or a <code>group</code> inside one</td></tr>
+    <tr><td><code>row</code></td><td><code>table</code>, <code>grid</code>, <code>treegrid</code>, <code>rowgroup</code></td></tr>
+    <tr><td><code>rowgroup</code></td><td><code>table</code>, <code>grid</code>, <code>treegrid</code></td></tr>
+    <tr><td><code>cell</code>, <code>gridcell</code>, <code>columnheader</code>, <code>rowheader</code></td><td><code>row</code></td></tr>
+    <tr><td><code>caption</code></td><td><code>figure</code>, <code>table</code>, <code>grid</code>, <code>treegrid</code></td></tr>
+  </tbody>
+</table>
+
+<p>Elements with no role and no meaning, such as a plain <code>&lt;div&gt;</code>, are skipped on the way up. So are elements with <code>role="none"</code> or <code>role="presentation"</code>, as long as the browser actually ignores that role.</p>
+
+<p>This rule has no message key. Instead, axe puts the list of parent roles it would accept in <code>data</code>, which NEW-46 uses for the <strong>[role name]</strong> placeholder. Each case shows that list.</p>
+
+<p class="report-link"><strong>axe-core results:</strong> <a href="x-axe-core-rules/14-axe-report-aria-required-parent.html">See the HTML report from running axe-core 4.14.0 over this page</a>.</p>
+
+<p>Every example is live in the page, so you can run the axe extension straight over it. The expected results were checked by running axe-core 4.14.1 over this page. Look in both the axe <strong>issues</strong> list and the <strong>needs review</strong> list.</p>
+
+<table>
+  <caption>Number of test cases by expected result</caption>
+  <thead><tr><th scope="col">Expected result</th><th scope="col">Cases</th></tr></thead>
+  <tbody>
+      <tr><td>Fail</td><td>26</td></tr>
+      <tr><td>Flagged by a different rule instead</td><td>3</td></tr>
+      <tr><td>Passes, but broken (axe misses it)</td><td>2</td></tr>
+      <tr><td>Pass (valid control cases)</td><td>12</td></tr>
+      <tr><td>Changes after interaction</td><td>2</td></tr>
+  </tbody>
+</table>
+
+<h2 id="sections">Sections</h2>
+
+<ul>
+  <li><a href="#missing">Parent missing</a></li>
+  <li><a href="#between">Something else in between</a></li>
+  <li><a href="#group">A group on its own isn&#x27;t enough</a></li>
+  <li><a href="#spelling">Spelling, case and odd roles</a></li>
+  <li><a href="#passing">Ways to pass</a></li>
+  <li><a href="#missed">Not caught by this rule</a></li>
+  <li><a href="#dynamic">Changes after interaction</a></li>
+</ul>
+
+<!-- section -->
+
+<h2 id="missing">Parent missing</h2>
+
+<p>These fail with "Required ARIA parent role not present". The item has no suitable parent anywhere above it.</p>
+<article class="case" id="a1" aria-labelledby="a1-title">
+  <h3 id="a1-title"><span class="case-id">A1</span> Tabs in a plain div</h3>
+  <p>The NEW-46 example. Each tab is reported separately.</p>
+  <div class="example" data-case="a1" data-expected="fail">
+<div class="tabs">
+  <button type="button" role="tab" aria-selected="true">Delivery</button>
+  <button type="button" role="tab" aria-selected="false">Returns</button>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div class=&quot;tabs&quot;&gt;
+  &lt;button type=&quot;button&quot; role=&quot;tab&quot; aria-selected=&quot;true&quot;&gt;Delivery&lt;/button&gt;
+  &lt;button type=&quot;button&quot; role=&quot;tab&quot; aria-selected=&quot;false&quot;&gt;Returns&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["tablist"]</code>. Routes to: NEW-46.</p>
+</article><article class="case" id="a2" aria-labelledby="a2-title">
+  <h3 id="a2-title"><span class="case-id">A2</span> Option on its own</h3>
+  <p>Often left behind when a custom select is taken apart. Notice <code>group</code> is in the list, even though a group on its own isn't enough (see C2).</p>
+  <div class="example" data-case="a2" data-expected="fail">
+<div role="option" aria-selected="false">Blue</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;option&quot; aria-selected=&quot;false&quot;&gt;Blue&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["group", "listbox"]</code>. Routes to: NEW-46.</p>
+</article><article class="case" id="a3" aria-labelledby="a3-title">
+  <h3 id="a3-title"><span class="case-id">A3</span> Menu items in site navigation</h3>
+  <p>A very common one. The links have <code>role="menuitem"</code>, but there's no menu.</p>
+  <div class="example" data-case="a3" data-expected="fail">
+<nav aria-label="Shop">
+  <a href="#a3" role="menuitem">New in</a>
+  <a href="#a3" role="menuitem">Sale</a>
+</nav>
+  </div>
+  <pre><code class="language-html">&lt;nav aria-label=&quot;Shop&quot;&gt;
+  &lt;a href=&quot;#a3&quot; role=&quot;menuitem&quot;&gt;New in&lt;/a&gt;
+  &lt;a href=&quot;#a3&quot; role=&quot;menuitem&quot;&gt;Sale&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["menu", "menubar", "group"]</code>. Routes to: NEW-46.</p>
+</article><article class="case" id="a4" aria-labelledby="a4-title">
+  <h3 id="a4-title"><span class="case-id">A4</span> List items in a plain div</h3>
+  <div class="example" data-case="a4" data-expected="fail">
+<div class="cards">
+  <div role="listitem">Card one</div>
+  <div role="listitem">Card two</div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div class=&quot;cards&quot;&gt;
+  &lt;div role=&quot;listitem&quot;&gt;Card one&lt;/div&gt;
+  &lt;div role=&quot;listitem&quot;&gt;Card two&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["list"]</code>. Routes to: NEW-46.</p>
+</article><article class="case" id="a5" aria-labelledby="a5-title">
+  <h3 id="a5-title"><span class="case-id">A5</span> Tree item on its own</h3>
+  <div class="example" data-case="a5" data-expected="fail">
+<div role="treeitem" aria-selected="false">Documents</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;treeitem&quot; aria-selected=&quot;false&quot;&gt;Documents&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["group", "tree"]</code>. Routes to: NEW-46.</p>
+</article><article class="case" id="a6" aria-labelledby="a6-title">
+  <h3 id="a6-title"><span class="case-id">A6</span> Row with no table</h3>
+  <p>Only the row fails. Its cell has a <code>row</code> as its parent, so the cell passes.</p>
+  <div class="example" data-case="a6" data-expected="fail">
+<div class="prices">
+  <div role="row">
+    <div role="cell">$20</div>
+  </div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div class=&quot;prices&quot;&gt;
+  &lt;div role=&quot;row&quot;&gt;
+    &lt;div role=&quot;cell&quot;&gt;$20&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["grid", "rowgroup", "table", "treegrid"]</code>. Routes to: NEW-46.</p>
+</article><article class="case" id="a7" aria-labelledby="a7-title">
+  <h3 id="a7-title"><span class="case-id">A7</span> Cell with no row</h3>
+  <div class="example" data-case="a7" data-expected="fail">
+<div class="prices">
+  <div role="cell">$30</div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div class=&quot;prices&quot;&gt;
+  &lt;div role=&quot;cell&quot;&gt;$30&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["row"]</code>. Routes to: NEW-46.</p>
+</article><article class="case" id="a8" aria-labelledby="a8-title">
+  <h3 id="a8-title"><span class="case-id">A8</span> Caption with no figure or table</h3>
+  <div class="example" data-case="a8" data-expected="fail">
+<div role="caption">Prices for 2026</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;caption&quot;&gt;Prices for 2026&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["figure", "table", "grid", "treegrid"]</code>. Routes to: NEW-46.</p>
+</article><article class="case" id="a9" aria-labelledby="a9-title">
+  <h3 id="a9-title"><span class="case-id">A9</span> aria-owns from an element with no role</h3>
+  <p><code>aria-owns</code> does move the tab, but into a div with no role, so it still has no tablist.</p>
+  <div class="example" data-case="a9" data-expected="fail">
+<div class="tabs" aria-owns="a9-tab"></div>
+<button type="button" role="tab" id="a9-tab" aria-selected="false">Returns</button>
+  </div>
+  <pre><code class="language-html">&lt;div class=&quot;tabs&quot; aria-owns=&quot;a9-tab&quot;&gt;&lt;/div&gt;
+&lt;button type=&quot;button&quot; role=&quot;tab&quot; id=&quot;a9-tab&quot; aria-selected=&quot;false&quot;&gt;Returns&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["tablist"]</code>. Routes to: NEW-46.</p>
+</article>
+<!-- section -->
+
+<h2 id="between">Something else in between</h2>
+
+<p>The right parent is there, but an element with its own role sits between it and the item. Many of these are also reported by <code>aria-required-children</code> on the parent, so the same problem can raise two issues: NEW-46 for the item and NEW-49 for the parent.</p>
+<article class="case" id="b1" aria-labelledby="b1-title">
+  <h3 id="b1-title"><span class="case-id">B1</span> A ul between a menu and its items</h3>
+  <p>The NEW-46 example. The <code>&lt;ul&gt;</code> has the role <code>list</code>.</p>
+  <div class="example" data-case="b1" data-expected="fail">
+<div role="menu" aria-label="Text formatting">
+  <ul>
+    <li role="menuitem">Bold</li>
+    <li role="menuitem">Italic</li>
+  </ul>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;menu&quot; aria-label=&quot;Text formatting&quot;&gt;
+  &lt;ul&gt;
+    &lt;li role=&quot;menuitem&quot;&gt;Bold&lt;/li&gt;
+    &lt;li role=&quot;menuitem&quot;&gt;Italic&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="note">Three rules fire: this one for each item, <code>aria-required-children</code> for the menu, and <code>list</code> for the <code>&lt;ul&gt;</code>.</p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["menu", "menubar", "group"]</code>. Routes to: NEW-46 for each item, plus NEW-49 for the menu.</p>
+</article><article class="case" id="b2" aria-labelledby="b2-title">
+  <h3 id="b2-title"><span class="case-id">B2</span> A group between a tablist and its tabs</h3>
+  <p>Unlike menus, a tablist doesn't allow a <code>group</code> in between.</p>
+  <div class="example" data-case="b2" data-expected="fail">
+<div role="tablist" aria-label="Plans">
+  <div role="group" aria-label="Billing">
+    <button type="button" role="tab" aria-selected="true">Monthly</button>
+  </div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;tablist&quot; aria-label=&quot;Plans&quot;&gt;
+  &lt;div role=&quot;group&quot; aria-label=&quot;Billing&quot;&gt;
+    &lt;button type=&quot;button&quot; role=&quot;tab&quot; aria-selected=&quot;true&quot;&gt;Monthly&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["tablist"]</code>. Routes to: NEW-46, plus NEW-49 for the tablist.</p>
+</article><article class="case" id="b3" aria-labelledby="b3-title">
+  <h3 id="b3-title"><span class="case-id">B3</span> A list between a listbox and its options</h3>
+  <div class="example" data-case="b3" data-expected="fail">
+<div role="listbox" aria-label="Colour">
+  <div role="list">
+    <div role="option" aria-selected="false">Red</div>
+  </div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;listbox&quot; aria-label=&quot;Colour&quot;&gt;
+  &lt;div role=&quot;list&quot;&gt;
+    &lt;div role=&quot;option&quot; aria-selected=&quot;false&quot;&gt;Red&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["group", "listbox"]</code>. Routes to: NEW-46, plus NEW-49 for the listbox and the list.</p>
+</article><article class="case" id="b4" aria-labelledby="b4-title">
+  <h3 id="b4-title"><span class="case-id">B4</span> List item inside a menu</h3>
+  <p>The parent has a role, just the wrong one.</p>
+  <div class="example" data-case="b4" data-expected="fail">
+<div role="menu" aria-label="Sort">
+  <div role="listitem">Newest</div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;menu&quot; aria-label=&quot;Sort&quot;&gt;
+  &lt;div role=&quot;listitem&quot;&gt;Newest&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["list"]</code>. Routes to: NEW-46, plus NEW-49 for the menu.</p>
+</article><article class="case" id="b5" aria-labelledby="b5-title">
+  <h3 id="b5-title"><span class="case-id">B5</span> role=&quot;none&quot; with aria-label</h3>
+  <p>This is the fix from NEW-46, but with an <code>aria-label</code> added. A global ARIA attribute cancels <code>role="none"</code>, so the <code>&lt;ul&gt;</code> is a list again.</p>
+  <div class="example" data-case="b5" data-expected="fail">
+<div role="menu" aria-label="Text formatting">
+  <ul role="none" aria-label="Styles">
+    <li role="menuitem">Bold</li>
+  </ul>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;menu&quot; aria-label=&quot;Text formatting&quot;&gt;
+  &lt;ul role=&quot;none&quot; aria-label=&quot;Styles&quot;&gt;
+    &lt;li role=&quot;menuitem&quot;&gt;Bold&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="note">Also flagged by <code>presentation-role-conflict</code>, <code>aria-required-children</code> and, as needs review, <code>aria-prohibited-attr</code>.</p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["menu", "menubar", "group"]</code>. Routes to: NEW-46, plus NEW-49 and NEW-35.</p>
+</article><article class="case" id="b6" aria-labelledby="b6-title">
+  <h3 id="b6-title"><span class="case-id">B6</span> role=&quot;none&quot; with tabindex</h3>
+  <p>Same again, but <code>tabindex</code> is what cancels <code>role="none"</code>.</p>
+  <div class="example" data-case="b6" data-expected="fail">
+<div role="menu" aria-label="Text formatting">
+  <ul role="none" tabindex="-1">
+    <li role="menuitem">Bold</li>
+  </ul>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;menu&quot; aria-label=&quot;Text formatting&quot;&gt;
+  &lt;ul role=&quot;none&quot; tabindex=&quot;-1&quot;&gt;
+    &lt;li role=&quot;menuitem&quot;&gt;Bold&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="note">Also flagged by <code>presentation-role-conflict</code> and <code>aria-required-children</code>.</p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["menu", "menubar", "group"]</code>. Routes to: NEW-46, plus NEW-49 and NEW-35.</p>
+</article><article class="case" id="b7" aria-labelledby="b7-title">
+  <h3 id="b7-title"><span class="case-id">B7</span> role=&quot;none&quot; on the list itself</h3>
+  <p>Sometimes <code>role="none"</code> is added to remove list styling or semantics, but the items keep <code>role="listitem"</code>. Now there's no list at all.</p>
+  <div class="example" data-case="b7" data-expected="fail">
+<ul role="none">
+  <li role="listitem">Apples</li>
+</ul>
+  </div>
+  <pre><code class="language-html">&lt;ul role=&quot;none&quot;&gt;
+  &lt;li role=&quot;listitem&quot;&gt;Apples&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["list"]</code>. Routes to: NEW-46.</p>
+</article><article class="case" id="b8" aria-labelledby="b8-title">
+  <h3 id="b8-title"><span class="case-id">B8</span> Div rows inside a native table</h3>
+  <p>This looks like it should pass, but browsers move <code>&lt;div&gt;</code> elements out of a <code>&lt;table&gt;</code> when they build the page. The rows end up just before the table.</p>
+  <div class="example" data-case="b8" data-expected="fail">
+<table>
+  <tbody>
+    <div role="row">
+      <div role="cell">Oranges</div>
+    </div>
+  </tbody>
+</table>
+  </div>
+  <pre><code class="language-html">&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;div role=&quot;row&quot;&gt;
+      &lt;div role=&quot;cell&quot;&gt;Oranges&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="note">View the live page's DOM in devtools to see where the row really ended up.</p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["grid", "rowgroup", "table", "treegrid"]</code>. Routes to: NEW-46.</p>
+</article>
+<!-- section -->
+
+<h2 id="group">A group on its own isn&#x27;t enough</h2>
+
+<p>Menus, listboxes and trees accept a <code>group</code> in between, but the group must still be inside the right parent.</p>
+<article class="case" id="c1" aria-labelledby="c1-title">
+  <h3 id="c1-title"><span class="case-id">C1</span> Menu item in a group with no menu</h3>
+  <p>Notice that <code>group</code> drops out of the list here, because axe found one but it wasn't enough.</p>
+  <div class="example" data-case="c1" data-expected="fail">
+<div role="group" aria-label="Clipboard">
+  <div role="menuitem">Cut</div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;group&quot; aria-label=&quot;Clipboard&quot;&gt;
+  &lt;div role=&quot;menuitem&quot;&gt;Cut&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["menu", "menubar"]</code>. Routes to: NEW-46.</p>
+</article><article class="case" id="c2" aria-labelledby="c2-title">
+  <h3 id="c2-title"><span class="case-id">C2</span> Option in a group with no listbox</h3>
+  <div class="example" data-case="c2" data-expected="fail">
+<div role="group" aria-label="Citrus">
+  <div role="option" aria-selected="false">Lemon</div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;group&quot; aria-label=&quot;Citrus&quot;&gt;
+  &lt;div role=&quot;option&quot; aria-selected=&quot;false&quot;&gt;Lemon&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["listbox"]</code>. Routes to: NEW-46.</p>
+</article><article class="case" id="c3" aria-labelledby="c3-title">
+  <h3 id="c3-title"><span class="case-id">C3</span> List item in a group</h3>
+  <div class="example" data-case="c3" data-expected="fail">
+<div role="group" aria-label="Team">
+  <div role="listitem">Alex</div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;group&quot; aria-label=&quot;Team&quot;&gt;
+  &lt;div role=&quot;listitem&quot;&gt;Alex&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["list"]</code>. Routes to: NEW-46.</p>
+</article><article class="case" id="c4" aria-labelledby="c4-title">
+  <h3 id="c4-title"><span class="case-id">C4</span> Nested list using a group</h3>
+  <p>A <code>group</code> works for nested tree items (see E5) but not nested list items. Axe has code meant to allow it, but <code>listitem</code> only accepts <code>list</code> as its parent, so that code never runs. Use a nested <code>role="list"</code> instead (see E6).</p>
+  <div class="example" data-case="c4" data-expected="fail">
+<div role="list">
+  <div role="listitem">Fruit
+    <div role="group">
+      <div role="listitem">Apples</div>
+    </div>
+  </div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;list&quot;&gt;
+  &lt;div role=&quot;listitem&quot;&gt;Fruit
+    &lt;div role=&quot;group&quot;&gt;
+      &lt;div role=&quot;listitem&quot;&gt;Apples&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["list"]</code>. Routes to: NEW-46.</p>
+</article>
+<!-- section -->
+
+<h2 id="spelling">Spelling, case and odd roles</h2>
+
+<p>Unlike several other ARIA rules, this one ignores case and spaces in the item's role, so these are caught.</p>
+<article class="case" id="d1" aria-labelledby="d1-title">
+  <h3 id="d1-title"><span class="case-id">D1</span> role=&quot;Tab&quot; in capitals</h3>
+  <div class="example" data-case="d1" data-expected="fail">
+<div role="Tab" tabindex="0" aria-selected="false">Capitals</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;Tab&quot; tabindex=&quot;0&quot; aria-selected=&quot;false&quot;&gt;Capitals&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["tablist"]</code>. Routes to: NEW-46.</p>
+</article><article class="case" id="d2" aria-labelledby="d2-title">
+  <h3 id="d2-title"><span class="case-id">D2</span> role=&quot;tab &quot; with a trailing space</h3>
+  <div class="example" data-case="d2" data-expected="fail">
+<div role="tab " tabindex="0" aria-selected="false">Trailing space</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;tab &quot; tabindex=&quot;0&quot; aria-selected=&quot;false&quot;&gt;Trailing space&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["tablist"]</code>. Routes to: NEW-46.</p>
+</article><article class="case" id="d3" aria-labelledby="d3-title">
+  <h3 id="d3-title"><span class="case-id">D3</span> Parent role spelled wrong</h3>
+  <p><code>tab-list</code> isn't a role, so the tab has no tablist.</p>
+  <div class="example" data-case="d3" data-expected="fail">
+<div role="tab-list" aria-label="Steps">
+  <button type="button" role="tab" aria-selected="true">Step one</button>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;tab-list&quot; aria-label=&quot;Steps&quot;&gt;
+  &lt;button type=&quot;button&quot; role=&quot;tab&quot; aria-selected=&quot;true&quot;&gt;Step one&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="note">The parent is also flagged by <code>aria-roles</code>, and <code>aria-prohibited-attr</code> asks for review of its <code>aria-label</code>.</p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["tablist"]</code>. Routes to: NEW-46, plus NEW-30 for the parent.</p>
+</article><article class="case" id="d4" aria-labelledby="d4-title">
+  <h3 id="d4-title"><span class="case-id">D4</span> Parent with a fallback role list</h3>
+  <p>Browsers skip <code>foo</code> and use <code>tablist</code>, so this tab is fine for users. Axe doesn't use fallback roles when it looks at the parent, so it fails the tab. This one is arguably a false alarm.</p>
+  <div class="example" data-case="d4" data-expected="fail">
+<div role="foo tablist" aria-label="Seasons">
+  <button type="button" role="tab" aria-selected="true">Summer</button>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;foo tablist&quot; aria-label=&quot;Seasons&quot;&gt;
+  &lt;button type=&quot;button&quot; role=&quot;tab&quot; aria-selected=&quot;true&quot;&gt;Summer&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["tablist"]</code>. Routes to: NEW-46.</p>
+</article><article class="case" id="d5" aria-labelledby="d5-title">
+  <h3 id="d5-title"><span class="case-id">D5</span> List item in a directory</h3>
+  <p><code>directory</code> is deprecated. Axe doesn't count it as a list.</p>
+  <div class="example" data-case="d5" data-expected="fail">
+<div role="directory">
+  <div role="listitem">Staff</div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;directory&quot;&gt;
+  &lt;div role=&quot;listitem&quot;&gt;Staff&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge fail">Expected result: fail</span></p>
+  <p class="note">The parent is also flagged by <code>aria-deprecated-role</code>.</p>
+  <p class="route"><strong>Template routing:</strong> Message key: none. Data: <code>["list"]</code>. Routes to: NEW-46, plus NEW-32 for the parent.</p>
+</article>
+<!-- section -->
+
+<h2 id="passing">Ways to pass</h2>
+
+<p>Control cases.</p>
+<article class="case" id="e1" aria-labelledby="e1-title">
+  <h3 id="e1-title"><span class="case-id">E1</span> Tabs in a tablist</h3>
+  <div class="example" data-case="e1" data-expected="pass">
+<div role="tablist" aria-label="Help">
+  <button type="button" role="tab" aria-selected="true">Delivery</button>
+  <button type="button" role="tab" aria-selected="false">Returns</button>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;tablist&quot; aria-label=&quot;Help&quot;&gt;
+  &lt;button type=&quot;button&quot; role=&quot;tab&quot; aria-selected=&quot;true&quot;&gt;Delivery&lt;/button&gt;
+  &lt;button type=&quot;button&quot; role=&quot;tab&quot; aria-selected=&quot;false&quot;&gt;Returns&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e2" aria-labelledby="e2-title">
+  <h3 id="e2-title"><span class="case-id">E2</span> role=&quot;none&quot; on the ul in between</h3>
+  <p>The fix for B1.</p>
+  <div class="example" data-case="e2" data-expected="pass">
+<div role="menu" aria-label="Text formatting">
+  <ul role="none">
+    <li role="menuitem">Bold</li>
+  </ul>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;menu&quot; aria-label=&quot;Text formatting&quot;&gt;
+  &lt;ul role=&quot;none&quot;&gt;
+    &lt;li role=&quot;menuitem&quot;&gt;Bold&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e3" aria-labelledby="e3-title">
+  <h3 id="e3-title"><span class="case-id">E3</span> Plain wrapper in between</h3>
+  <p>A div with no role and no ARIA attributes is skipped.</p>
+  <div class="example" data-case="e3" data-expected="pass">
+<div role="tablist" aria-label="Sizes">
+  <div class="scroller">
+    <button type="button" role="tab" aria-selected="true">Small</button>
+  </div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;tablist&quot; aria-label=&quot;Sizes&quot;&gt;
+  &lt;div class=&quot;scroller&quot;&gt;
+    &lt;button type=&quot;button&quot; role=&quot;tab&quot; aria-selected=&quot;true&quot;&gt;Small&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e4" aria-labelledby="e4-title">
+  <h3 id="e4-title"><span class="case-id">E4</span> Menu item radio in a group in a menu</h3>
+  <div class="example" data-case="e4" data-expected="pass">
+<div role="menu" aria-label="View">
+  <div role="group" aria-label="Zoom">
+    <div role="menuitemradio" aria-checked="true">100%</div>
+  </div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;menu&quot; aria-label=&quot;View&quot;&gt;
+  &lt;div role=&quot;group&quot; aria-label=&quot;Zoom&quot;&gt;
+    &lt;div role=&quot;menuitemradio&quot; aria-checked=&quot;true&quot;&gt;100%&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e5" aria-labelledby="e5-title">
+  <h3 id="e5-title"><span class="case-id">E5</span> Nested tree items using a group</h3>
+  <div class="example" data-case="e5" data-expected="pass">
+<div role="tree" aria-label="Files">
+  <div role="treeitem" aria-expanded="true" aria-selected="false">Photos
+    <div role="group">
+      <div role="treeitem" aria-selected="false">Beach</div>
+    </div>
+  </div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;tree&quot; aria-label=&quot;Files&quot;&gt;
+  &lt;div role=&quot;treeitem&quot; aria-expanded=&quot;true&quot; aria-selected=&quot;false&quot;&gt;Photos
+    &lt;div role=&quot;group&quot;&gt;
+      &lt;div role=&quot;treeitem&quot; aria-selected=&quot;false&quot;&gt;Beach&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e6" aria-labelledby="e6-title">
+  <h3 id="e6-title"><span class="case-id">E6</span> Nested list using a list</h3>
+  <div class="example" data-case="e6" data-expected="pass">
+<div role="list">
+  <div role="listitem">Fruit
+    <div role="list">
+      <div role="listitem">Apples</div>
+    </div>
+  </div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;list&quot;&gt;
+  &lt;div role=&quot;listitem&quot;&gt;Fruit
+    &lt;div role=&quot;list&quot;&gt;
+      &lt;div role=&quot;listitem&quot;&gt;Apples&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e7" aria-labelledby="e7-title">
+  <h3 id="e7-title"><span class="case-id">E7</span> Option in a group in a listbox</h3>
+  <div class="example" data-case="e7" data-expected="pass">
+<div role="listbox" aria-label="Fruit">
+  <div role="group" aria-label="Citrus">
+    <div role="option" aria-selected="false">Lime</div>
+  </div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;listbox&quot; aria-label=&quot;Fruit&quot;&gt;
+  &lt;div role=&quot;group&quot; aria-label=&quot;Citrus&quot;&gt;
+    &lt;div role=&quot;option&quot; aria-selected=&quot;false&quot;&gt;Lime&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e8" aria-labelledby="e8-title">
+  <h3 id="e8-title"><span class="case-id">E8</span> role=&quot;listitem&quot; inside a native ul</h3>
+  <p>The <code>&lt;ul&gt;</code> counts as a list without a role attribute.</p>
+  <div class="example" data-case="e8" data-expected="pass">
+<ul>
+  <li role="listitem">Pears</li>
+</ul>
+  </div>
+  <pre><code class="language-html">&lt;ul&gt;
+  &lt;li role=&quot;listitem&quot;&gt;Pears&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e9" aria-labelledby="e9-title">
+  <h3 id="e9-title"><span class="case-id">E9</span> Caption inside a figure</h3>
+  <div class="example" data-case="e9" data-expected="pass">
+<figure>
+  <div role="caption">Our office</div>
+  <img src="assets/images/intopia-logo.svg" alt="Intopia logo">
+</figure>
+  </div>
+  <pre><code class="language-html">&lt;figure&gt;
+  &lt;div role=&quot;caption&quot;&gt;Our office&lt;/div&gt;
+  &lt;img src=&quot;assets/images/intopia-logo.svg&quot; alt=&quot;Intopia logo&quot;&gt;
+&lt;/figure&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e10" aria-labelledby="e10-title">
+  <h3 id="e10-title"><span class="case-id">E10</span> Parent role in capitals</h3>
+  <div class="example" data-case="e10" data-expected="pass">
+<div role="TABLIST" aria-label="Days">
+  <button type="button" role="tab" aria-selected="true">Monday</button>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;TABLIST&quot; aria-label=&quot;Days&quot;&gt;
+  &lt;button type=&quot;button&quot; role=&quot;tab&quot; aria-selected=&quot;true&quot;&gt;Monday&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e11" aria-labelledby="e11-title">
+  <h3 id="e11-title"><span class="case-id">E11</span> aria-owns from the tablist</h3>
+  <p>The tab is elsewhere in the code, but the tablist owns it.</p>
+  <div class="example" data-case="e11" data-expected="pass">
+<div role="tablist" aria-label="Months" aria-owns="e11-tab"></div>
+<button type="button" role="tab" id="e11-tab" aria-selected="false">May</button>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;tablist&quot; aria-label=&quot;Months&quot; aria-owns=&quot;e11-tab&quot;&gt;&lt;/div&gt;
+&lt;button type=&quot;button&quot; role=&quot;tab&quot; id=&quot;e11-tab&quot; aria-selected=&quot;false&quot;&gt;May&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="e12" aria-labelledby="e12-title">
+  <h3 id="e12-title"><span class="case-id">E12</span> aria-owns pointing at a wrapper</h3>
+  <p>Axe also checks <code>aria-owns</code> on the item's ancestors, so owning the wrapper is enough.</p>
+  <div class="example" data-case="e12" data-expected="pass">
+<div id="e12-wrap">
+  <button type="button" role="tab" aria-selected="false">June</button>
+</div>
+<div role="tablist" aria-label="Months" aria-owns="e12-wrap"></div>
+  </div>
+  <pre><code class="language-html">&lt;div id=&quot;e12-wrap&quot;&gt;
+  &lt;button type=&quot;button&quot; role=&quot;tab&quot; aria-selected=&quot;false&quot;&gt;June&lt;/button&gt;
+&lt;/div&gt;
+&lt;div role=&quot;tablist&quot; aria-label=&quot;Months&quot; aria-owns=&quot;e12-wrap&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article>
+<!-- section -->
+
+<h2 id="missed">Not caught by this rule</h2>
+
+<p></p>
+<article class="case" id="f1" aria-labelledby="f1-title">
+  <h3 id="f1-title"><span class="case-id">F1</span> Tab with a fallback role list</h3>
+  <p>Browsers use the first role they know, so Chrome treats this as a tab with no tablist. Axe only checks a role attribute that holds exactly one role, so it skips this element. Nothing else flags it either.</p>
+  <div class="example" data-case="f1" data-expected="miss">
+<div role="tab button" tabindex="0">Delivery</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;tab button&quot; tabindex=&quot;0&quot;&gt;Delivery&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+</article><article class="case" id="f2" aria-labelledby="f2-title">
+  <h3 id="f2-title"><span class="case-id">F2</span> Menu item taken out of its menu by aria-owns</h3>
+  <p>In the code, Paste is inside the menu. But the toolbar div owns it, so browsers move it out of the menu. Axe checks the code, not where <code>aria-owns</code> puts the item, so it passes.</p>
+  <div class="example" data-case="f2" data-expected="miss">
+<div role="menu" aria-label="Edit">
+  <div role="menuitem" id="f2-paste">Paste</div>
+  <div role="menuitem">Cut</div>
+</div>
+<div class="toolbar" aria-owns="f2-paste"></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;menu&quot; aria-label=&quot;Edit&quot;&gt;
+  &lt;div role=&quot;menuitem&quot; id=&quot;f2-paste&quot;&gt;Paste&lt;/div&gt;
+  &lt;div role=&quot;menuitem&quot;&gt;Cut&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;toolbar&quot; aria-owns=&quot;f2-paste&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="note">Chrome's accessibility tree shows Paste under the toolbar, not the menu.</p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+</article><article class="case" id="f3" aria-labelledby="f3-title">
+  <h3 id="f3-title"><span class="case-id">F3</span> Tab taken out of its tablist by aria-owns</h3>
+  <p>Same idea, but this time the tab is moved into a list. This rule passes the tab, and the problem is reported on the list instead.</p>
+  <div class="example" data-case="f3" data-expected="other" data-other="aria-required-children">
+<div role="tablist" aria-label="Accounts">
+  <button type="button" role="tab" id="f3-tab" aria-selected="true">Personal</button>
+</div>
+<div role="list" aria-owns="f3-tab"></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;tablist&quot; aria-label=&quot;Accounts&quot;&gt;
+  &lt;button type=&quot;button&quot; role=&quot;tab&quot; id=&quot;f3-tab&quot; aria-selected=&quot;true&quot;&gt;Personal&lt;/button&gt;
+&lt;/div&gt;
+&lt;div role=&quot;list&quot; aria-owns=&quot;f3-tab&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-required-children</code> instead</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>unallowed</code>. Routes to: NEW-49, not NEW-46.</p>
+</article><article class="case" id="f4" aria-labelledby="f4-title">
+  <h3 id="f4-title"><span class="case-id">F4</span> Focusable wrapper in between</h3>
+  <p>This rule skips the wrapper because it has no role, so the menu item passes. <code>aria-required-children</code> flags the wrapper on the menu instead.</p>
+  <div class="example" data-case="f4" data-expected="other" data-other="aria-required-children">
+<div role="menu" aria-label="Share">
+  <div tabindex="0">
+    <div role="menuitem">Email</div>
+  </div>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;menu&quot; aria-label=&quot;Share&quot;&gt;
+  &lt;div tabindex=&quot;0&quot;&gt;
+    &lt;div role=&quot;menuitem&quot;&gt;Email&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-required-children</code> instead</span></p>
+  <p class="route"><strong>Template routing:</strong> Message key: <code>unallowed</code>. Routes to: NEW-49, not NEW-46.</p>
+</article><article class="case" id="f5" aria-labelledby="f5-title">
+  <h3 id="f5-title"><span class="case-id">F5</span> A native li with no list</h3>
+  <p>No <code>role</code> attribute, so this rule doesn't look at it. The <code>listitem</code> rule catches it instead.</p>
+  <div class="example" data-case="f5" data-expected="other" data-other="listitem">
+<li>Orphan item</li>
+  </div>
+  <pre><code class="language-html">&lt;li&gt;Orphan item&lt;/li&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>listitem</code> instead</span></p>
+  <p class="route"><strong>Template routing:</strong> Not an ARIA rule, so outside this template set.</p>
+</article>
+<!-- section -->
+
+<h2 id="dynamic">Changes after interaction</h2>
+
+<p>Axe only sees the page as it is when you run it. These pass on page load. Activate each button, then run axe again.</p>
+<article class="case" id="g1" aria-labelledby="g1-title">
+  <h3 id="g1-title"><span class="case-id">G1</span> Menu that&#x27;s hidden until opened</h3>
+  <p>Axe doesn't test hidden content. Open the menu and the <code>&lt;ul&gt;</code> between the menu and its items is found.</p>
+  <div class="example" data-case="g1" data-expected="dynamic">
+<button type="button" id="g1-button" aria-expanded="false" aria-controls="g1-menu">Options</button>
+<div role="menu" id="g1-menu" aria-label="Options" hidden>
+  <ul>
+    <li role="menuitem">Rename</li>
+    <li role="menuitem">Delete</li>
+  </ul>
+</div>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; id=&quot;g1-button&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;g1-menu&quot;&gt;Options&lt;/button&gt;
+&lt;div role=&quot;menu&quot; id=&quot;g1-menu&quot; aria-label=&quot;Options&quot; hidden&gt;
+  &lt;ul&gt;
+    &lt;li role=&quot;menuitem&quot;&gt;Rename&lt;/li&gt;
+    &lt;li role=&quot;menuitem&quot;&gt;Delete&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge dynamic">On load: pass. After opening: fail</span></p>
+  <p class="note">After opening, the items route to NEW-46 and the menu routes to NEW-49.</p>
+</article><article class="case" id="g2" aria-labelledby="g2-title">
+  <h3 id="g2-title"><span class="case-id">G2</span> New items added in the wrong place</h3>
+  <p>On load, the list is fine. The button adds a new item, but the script puts it after the list instead of inside it.</p>
+  <div class="example" data-case="g2" data-expected="dynamic">
+<div id="g2-wrap">
+  <div role="list" id="g2-list">
+    <div role="listitem">First result</div>
+  </div>
+</div>
+<button type="button" id="g2-more">Show more</button>
+  </div>
+  <pre><code class="language-html">&lt;div id=&quot;g2-wrap&quot;&gt;
+  &lt;div role=&quot;list&quot; id=&quot;g2-list&quot;&gt;
+    &lt;div role=&quot;listitem&quot;&gt;First result&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;button type=&quot;button&quot; id=&quot;g2-more&quot;&gt;Show more&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge dynamic">On load: pass. After adding: fail</span></p>
+  <p class="note">After adding, the new item routes to NEW-46 with data <code>["list"]</code>.</p>
+</article>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+<script>
+  // G1: show or hide the menu
+  document.getElementById('g1-button').addEventListener('click', function () {
+    var menu = document.getElementById('g1-menu');
+    var open = this.getAttribute('aria-expanded') === 'true';
+    this.setAttribute('aria-expanded', open ? 'false' : 'true');
+    menu.hidden = open;
+  });
+
+  // G2: add an item (bug: it goes after the list, not inside it)
+  document.getElementById('g2-more').addEventListener('click', function () {
+    var item = document.createElement('div');
+    item.setAttribute('role', 'listitem');
+    item.textContent = 'Second result';
+    document.getElementById('g2-wrap').appendChild(item);
+  });
+</script>
+</body>
+</html>
