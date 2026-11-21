@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the axe rule aria-hidden-body</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <style>
+  .case { border: 1px solid #c8c8cc; border-radius: 6px; padding: 1rem 1.25rem; margin: 1.25rem 0; }
+  .case h3 { margin-top: 0; }
+  .case-id { display: inline-block; font-size: .8rem; font-weight: 700; background: #1d1d1f; color: #fff; padding: .1rem .45rem; border-radius: 3px; margin-right: .4rem; vertical-align: middle; }
+  .example { border: 1px dashed #a0a0a8; padding: .75rem 1rem; margin: .75rem 0; }
+  .example p { margin: .25rem 0; }
+  .badge { display: inline-block; font-weight: 600; font-size: .875rem; padding: .2rem .6rem; border-radius: 3px; border: 2px solid; }
+  .badge.fail { background: #fde8e8; border-color: #b3261e; color: #8a1c16; }
+  .badge.review { background: #fff4d6; border-color: #8a6100; color: #5e4200; }
+  .badge.other { background: #e0f4f4; border-color: #0b6b6b; color: #084f4f; }
+  .badge.miss { background: #ece6fb; border-color: #5b3cc4; color: #432a99; }
+  .badge.pass { background: #e3f4e8; border-color: #1e7b3a; color: #155c2b; }
+  .badge.dynamic { background: #e8eef9; border-color: #1a4f9c; color: #133b75; }
+  .note { font-size: .9375rem; }
+  .route { font-size: .875rem; border-left: 3px solid #a0a0a8; padding-left: .6rem; }
+</style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo. The word 'intopia' in black, with the 'o' made from four curved brush strokes in pink, orange, yellow and turquoise." class="intopia-logo">
+  </picture>
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing the axe rule <code>aria-hidden-body</code></h1>
+
+<p>Test cases for the axe-core rule <a href="https://dequeuniversity.com/rules/axe/4.14/aria-hidden-body"><code>aria-hidden-body</code></a> (axe-core 4.14). The rule fails when <code>&lt;body&gt;</code> has <code>aria-hidden="true"</code>. It sets no message key and no data.</p>
+
+<p>Unlike the other pages in this set, each case here is its own page, because the attribute has to go on the page's own <code>&lt;html&gt;</code> or <code>&lt;body&gt;</code> element. Open a case, then run axe over that page. Each case has its own axe report.</p>
+
+<p><strong>Things to know before reading the results:</strong></p>
+
+<ul>
+  <li><strong>Chrome ignores <code>aria-hidden</code> on <code>&lt;body&gt;</code> and <code>&lt;html&gt;</code>.</strong> In A1 to A3 and B1, Chrome's accessibility tree still shows all the content. NEW-47 says "some browsers" hide everything, so it's worth testing Safari and Firefox with a screen reader to see which ones do.</li>
+  <li><strong>Axe treats the page as hidden even when Chrome doesn't.</strong> That's why <code>landmark-one-main</code> and <code>page-has-heading-one</code> also fail on A1 to A3, and <code>bypass</code> asks for review. Those extra issues would be raised alongside NEW-47.</li>
+  <li><strong>This rule ignores case and spaces</strong>, so <code>aria-hidden="TRUE"</code> and <code>aria-hidden="true "</code> are caught. <code>aria-hidden-focus</code> doesn't, so it only fires on A1.</li>
+  <li><strong><code>inert</code> on the body (B2) is the real problem, and nothing names it.</strong> Chrome hides the whole page, and the only clues are the two page-level rules above.</li>
+  <li><strong>Pages inside an <code>&lt;iframe&gt;</code> aren't checked.</strong> The rule only runs on the top-level page, so an embedded page with <code>aria-hidden="true"</code> on its body is never flagged. There's no case for this here, because the console snippet can't run axe inside frames.</li>
+</ul>
+
+<table>
+  <caption>Test cases for aria-hidden-body</caption>
+  <thead><tr><th scope="col">Case</th><th scope="col">What it tests</th><th scope="col">Expected result</th><th scope="col">axe-core results</th></tr></thead>
+  <tbody>
+    <tr>
+      <th scope="row"><a href="testing-axe-rule-aria-hidden-body-a1.html">A1</a></th>
+      <td>aria-hidden=&quot;true&quot; on the body</td>
+      <td>fail</td>
+      <td><a href="x-axe-core-rules/17-axe-report-aria-hidden-body-a1.html">Report A1</a></td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="testing-axe-rule-aria-hidden-body-a2.html">A2</a></th>
+      <td>aria-hidden=&quot;TRUE&quot; in capitals</td>
+      <td>fail</td>
+      <td><a href="x-axe-core-rules/17-axe-report-aria-hidden-body-a2.html">Report A2</a></td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="testing-axe-rule-aria-hidden-body-a3.html">A3</a></th>
+      <td>aria-hidden=&quot;true &quot; with a trailing space</td>
+      <td>fail</td>
+      <td><a href="x-axe-core-rules/17-axe-report-aria-hidden-body-a3.html">Report A3</a></td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="testing-axe-rule-aria-hidden-body-b1.html">B1</a></th>
+      <td>aria-hidden=&quot;true&quot; on the html element</td>
+      <td>flagged by <code>aria-hidden-focus</code> instead</td>
+      <td><a href="x-axe-core-rules/17-axe-report-aria-hidden-body-b1.html">Report B1</a></td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="testing-axe-rule-aria-hidden-body-b2.html">B2</a></th>
+      <td>inert on the body</td>
+      <td>flagged by <code>landmark-one-main</code> instead</td>
+      <td><a href="x-axe-core-rules/17-axe-report-aria-hidden-body-b2.html">Report B2</a></td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="testing-axe-rule-aria-hidden-body-c1.html">C1</a></th>
+      <td>aria-hidden=&quot;false&quot; on the body</td>
+      <td>pass (valid)</td>
+      <td><a href="x-axe-core-rules/17-axe-report-aria-hidden-body-c1.html">Report C1</a></td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="testing-axe-rule-aria-hidden-body-c2.html">C2</a></th>
+      <td>Empty aria-hidden on the body</td>
+      <td>pass (valid)</td>
+      <td><a href="x-axe-core-rules/17-axe-report-aria-hidden-body-c2.html">Report C2</a></td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="testing-axe-rule-aria-hidden-body-c3.html">C3</a></th>
+      <td>A modal dialog opened with showModal()</td>
+      <td>pass (valid)</td>
+      <td><a href="x-axe-core-rules/17-axe-report-aria-hidden-body-c3.html">Report C3</a></td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="testing-axe-rule-aria-hidden-body-d1.html">D1</a></th>
+      <td>Dialog script that hides the body</td>
+      <td>On load: pass. After opening: fail</td>
+      <td><a href="x-axe-core-rules/17-axe-report-aria-hidden-body-d1.html">Report D1</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The expected results were checked by running axe-core 4.14.1 over each page in Chrome. For D1, run axe once on load, then again after opening the dialog.</p>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+</body>
+</html>

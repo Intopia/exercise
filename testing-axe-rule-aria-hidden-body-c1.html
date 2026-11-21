@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the axe rule aria-hidden-body: C1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <style>
+  .case { border: 1px solid #c8c8cc; border-radius: 6px; padding: 1rem 1.25rem; margin: 1.25rem 0; }
+  .case h3 { margin-top: 0; }
+  .case-id { display: inline-block; font-size: .8rem; font-weight: 700; background: #1d1d1f; color: #fff; padding: .1rem .45rem; border-radius: 3px; margin-right: .4rem; vertical-align: middle; }
+  .example { border: 1px dashed #a0a0a8; padding: .75rem 1rem; margin: .75rem 0; }
+  .example p { margin: .25rem 0; }
+  .badge { display: inline-block; font-weight: 600; font-size: .875rem; padding: .2rem .6rem; border-radius: 3px; border: 2px solid; }
+  .badge.fail { background: #fde8e8; border-color: #b3261e; color: #8a1c16; }
+  .badge.review { background: #fff4d6; border-color: #8a6100; color: #5e4200; }
+  .badge.other { background: #e0f4f4; border-color: #0b6b6b; color: #084f4f; }
+  .badge.miss { background: #ece6fb; border-color: #5b3cc4; color: #432a99; }
+  .badge.pass { background: #e3f4e8; border-color: #1e7b3a; color: #155c2b; }
+  .badge.dynamic { background: #e8eef9; border-color: #1a4f9c; color: #133b75; }
+  .note { font-size: .9375rem; }
+  .route { font-size: .875rem; border-left: 3px solid #a0a0a8; padding-left: .6rem; }
+</style>
+</head>
+<body aria-hidden="false">
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo. The word 'intopia' in black, with the 'o' made from four curved brush strokes in pink, orange, yellow and turquoise." class="intopia-logo">
+  </picture>
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing-axe-rule-aria-hidden-body.html">Back to all aria-hidden-body cases</a></p>
+
+<h1>Testing the axe rule <code>aria-hidden-body</code>: C1</h1>
+
+<article class="case" data-case="c1" data-expected="pass">
+  <h2><span class="case-id">C1</span> aria-hidden=&quot;false&quot; on the body</h2>
+  
+  <pre><code class="language-html">&lt;html lang=&quot;en&quot;&gt;
+  ...
+  &lt;body aria-hidden=&quot;false&quot;&gt;
+    ...
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+  
+  
+</article>
+
+<p>This page has some plain content so there's something to hide: a heading, this paragraph, and the links back to the other cases.</p>
+
+<p class="report-link"><strong>axe-core results:</strong> <a href="x-axe-core-rules/17-axe-report-aria-hidden-body-c1.html">See the HTML report from running axe-core 4.14.0 over this page</a>.</p>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing-axe-rule-aria-hidden-body.html">Back to all aria-hidden-body cases</a></p>
+</main>
+
+</body>
+</html>
