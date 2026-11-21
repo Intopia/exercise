@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<title>axe report: Testing the axe rule presentation-role-conflict</title>
+<style>
+  body { font-family: system-ui, sans-serif; line-height: 1.5; margin: 2rem; color: #1d1d1f; }
+  table { border-collapse: collapse; width: 100%; margin-bottom: 2rem; }
+  th, td { border: 1px solid #ccc; padding: .4rem .6rem; text-align: left; vertical-align: top; }
+  th { background: #f2f2f2; }
+  code { font-size: .85rem; word-break: break-word; }
+  h2 { border-top: 3px solid #1d1d1f; padding-top: 1rem; margin-top: 2.5rem; }
+</style></head><body>
+<h1>axe report</h1>
+<ul>
+  <li>Page: <a href="https://intopia.github.io/exercise/testing-axe-rule-presentation-role-conflict.html">Testing the axe rule presentation-role-conflict</a></li>
+  <li>Run: 21/11/2026, 21:44:59</li>
+  <li>axe-core 4.14.0</li>
+  <li>Rules passed: 45. Rules not applicable: 44.</li>
+</ul>
+<h2>Fails (27)</h2><h3>aria-allowed-role: ARIA role should be appropriate for the element (5)</h3>
+        <p>Impact: minor. <a href="https://dequeuniversity.com/rules/axe/4.14/aria-allowed-role?application=axeAPI">Rule details on Deque University</a></p>
+        <table><thead><tr><th scope="col">#</th><th scope="col">Element</th><th scope="col">Selector</th><th scope="col">Problem</th></tr></thead><tbody><tr><td>1</td><td><code>&lt;button type=&quot;button&quot; role=&quot;none&quot;&gt;Save&lt;/button&gt;</code></td><td><code>div[data-case=&quot;b1&quot;] &gt; button</code></td><td>ARIA role none is not allowed for given element</td></tr><tr><td>2</td><td><code>&lt;a href=&quot;#b2&quot; role=&quot;presentation&quot;&gt;Home&lt;/a&gt;</code></td><td><code>a[href$=&quot;#b2&quot;]</code></td><td>ARIA role presentation is not allowed for given element</td></tr><tr><td>3</td><td><code>&lt;input type=&quot;text&quot; role=&quot;none&quot; aria-label=&quot;Search&quot;&gt;</code></td><td><code>input</code></td><td>ARIA role none is not allowed for given element</td></tr><tr><td>4</td><td><code>&lt;button type=&quot;button&quot; role=&quot;none&quot; aria-label=&quot;Close&quot;&gt;X&lt;/button&gt;</code></td><td><code>button[aria-label=&quot;Close&quot;]</code></td><td>ARIA role none is not allowed for given element</td></tr><tr><td>5</td><td><code>&lt;button type=&quot;button&quot; role=&quot;presentation none&quot;&gt;Go&lt;/button&gt;</code></td><td><code>button[role=&quot;presentation none&quot;]</code></td><td>ARIA roles presentation, none are not allowed for given element</td></tr></tbody></table><h3>aria-prohibited-attr: Elements must only use permitted ARIA attributes (2)</h3>
+        <p>Impact: serious. <a href="https://dequeuniversity.com/rules/axe/4.14/aria-prohibited-attr?application=axeAPI">Rule details on Deque University</a></p>
+        <table><thead><tr><th scope="col">#</th><th scope="col">Element</th><th scope="col">Selector</th><th scope="col">Problem</th></tr></thead><tbody><tr><td>1</td><td><code>&lt;svg role=&quot;none&quot; aria-label=&quot;Star&quot; width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot;&gt;
+  &lt;circle cx=&quot;8&quot; cy=&quot;8&quot; r=&quot;6&quot;&gt;&lt;/circle&gt;
+&lt;/svg&gt;</code></td><td><code>svg</code></td><td>aria-label attribute cannot be used on &quot;svg&quot; elements with no valid role attribute.</td></tr><tr><td>2</td><td><code>&lt;input type=&quot;text&quot; role=&quot;none&quot; aria-label=&quot;Search&quot;&gt;</code></td><td><code>input</code></td><td>aria-label attribute cannot be used with role &quot;textbox&quot;.</td></tr></tbody></table><h3>aria-valid-attr: ARIA attributes must conform to valid names (1)</h3>
+        <p>Impact: critical. <a href="https://dequeuniversity.com/rules/axe/4.14/aria-valid-attr?application=axeAPI">Rule details on Deque University</a></p>
+        <table><thead><tr><th scope="col">#</th><th scope="col">Element</th><th scope="col">Selector</th><th scope="col">Problem</th></tr></thead><tbody><tr><td>1</td><td><code>&lt;ul role=&quot;none&quot; aria-labeledby=&quot;f6-label&quot;&gt;
+  &lt;li&gt;Bold&lt;/li&gt;
+&lt;/ul&gt;</code></td><td><code>ul[aria-labeledby=&quot;f6-label&quot;]</code></td><td>Invalid ARIA attribute name: aria-labeledby</td></tr></tbody></table><h3>presentation-role-conflict: Elements marked as presentational should be consistently ignored (19)</h3>
+        <p>Impact: minor. <a href="https://dequeuniversity.com/rules/axe/4.14/presentation-role-conflict?application=axeAPI">Rule details on Deque University</a></p>
+        <table><thead><tr><th scope="col">#</th><th scope="col">Element</th><th scope="col">Selector</th><th scope="col">Problem</th></tr></thead><tbody><tr><td>1</td><td><code>&lt;ul role=&quot;none&quot; aria-label=&quot;Styles&quot;&gt;
+  &lt;li&gt;Bold&lt;/li&gt;
+  &lt;li&gt;Italic&lt;/li&gt;
+&lt;/ul&gt;</code></td><td><code>div[data-case=&quot;a1&quot;] &gt; ul[aria-label=&quot;Styles&quot;]</code></td><td>Element does not have global ARIA attribute</td></tr><tr><td>2</td><td><code>&lt;img src=&quot;assets/images/intopia-logo.svg&quot; alt=&quot;&quot; aria-label=&quot;Intopia&quot; width=&quot;120&quot;&gt;</code></td><td><code>img[aria-label=&quot;Intopia&quot;]</code></td><td>Element does not have global ARIA attribute</td></tr><tr><td>3</td><td><code>&lt;table role=&quot;presentation&quot; aria-describedby=&quot;a3-note&quot;&gt;
+  &lt;tbody&gt;&lt;tr&gt;&lt;td&gt;Name&lt;/td&gt;&lt;td&gt;Alex&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;</code></td><td><code>table[aria-describedby=&quot;a3-note&quot;]</code></td><td>Element does not have global ARIA attribute</td></tr><tr><td>4</td><td><code>&lt;h4 role=&quot;none&quot; aria-live=&quot;polite&quot;&gt;Order status&lt;/h4&gt;</code></td><td><code>h4</code></td><td>Element does not have global ARIA attribute</td></tr><tr><td>5</td><td><code>&lt;nav role=&quot;none&quot; aria-labelledby=&quot;a5-label&quot;&gt;
+  &lt;span id=&quot;a5-label&quot;&gt;Main&lt;/span&gt;
+&lt;/nav&gt;</code></td><td><code>nav</code></td><td>Element does not have global ARIA attribute</td></tr><tr><td>6</td><td><code>&lt;ul role=&quot;none&quot; aria-label=&quot;&quot;&gt;
+  &lt;li&gt;Small&lt;/li&gt;
+&lt;/ul&gt;</code></td><td><code>ul[aria-label=&quot;&quot;]</code></td><td>Element does not have global ARIA attribute</td></tr><tr><td>7</td><td><code>&lt;ul role=&quot;none&quot; aria-busy=&quot;true&quot;&gt;
+  &lt;li&gt;Loading&lt;/li&gt;
+&lt;/ul&gt;</code></td><td><code>div[data-case=&quot;a7&quot;] &gt; ul</code></td><td>Element does not have global ARIA attribute</td></tr><tr><td>8</td><td><code>&lt;ul role=&quot;none&quot; aria-roledescription=&quot;slides&quot;&gt;
+  &lt;li&gt;Slide one&lt;/li&gt;
+&lt;/ul&gt;</code></td><td><code>ul[aria-roledescription=&quot;slides&quot;]</code></td><td>Element does not have global ARIA attribute</td></tr><tr><td>9</td><td><code>&lt;svg role=&quot;none&quot; aria-label=&quot;Star&quot; width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot;&gt;
+  &lt;circle cx=&quot;8&quot; cy=&quot;8&quot; r=&quot;6&quot;&gt;&lt;/circle&gt;
+&lt;/svg&gt;</code></td><td><code>svg</code></td><td>Element does not have global ARIA attribute</td></tr><tr><td>10</td><td><code>&lt;button type=&quot;button&quot; role=&quot;none&quot;&gt;Save&lt;/button&gt;</code></td><td><code>div[data-case=&quot;b1&quot;] &gt; button</code></td><td>Element is not focusable.</td></tr><tr><td>11</td><td><code>&lt;a href=&quot;#b2&quot; role=&quot;presentation&quot;&gt;Home&lt;/a&gt;</code></td><td><code>a[href$=&quot;#b2&quot;]</code></td><td>Element is not focusable.</td></tr><tr><td>12</td><td><code>&lt;ul role=&quot;none&quot; tabindex=&quot;-1&quot;&gt;
+  &lt;li&gt;Bold&lt;/li&gt;
+&lt;/ul&gt;</code></td><td><code>div[data-case=&quot;b3&quot;] &gt; ul</code></td><td>Element is not focusable.</td></tr><tr><td>13</td><td><code>&lt;img src=&quot;assets/images/intopia-logo.svg&quot; alt=&quot;&quot; tabindex=&quot;0&quot; width=&quot;120&quot;&gt;</code></td><td><code>div[data-case=&quot;b4&quot;] &gt; img[src$=&quot;intopia-logo.svg&quot;][alt=&quot;&quot;][width=&quot;120&quot;]</code></td><td>Element is not focusable.</td></tr><tr><td>14</td><td><code>&lt;input type=&quot;text&quot; role=&quot;none&quot; aria-label=&quot;Search&quot;&gt;</code></td><td><code>input</code></td><td>Element is not focusable.<br>Element does not have global ARIA attribute</td></tr><tr><td>15</td><td><code>&lt;button type=&quot;button&quot; role=&quot;none&quot; aria-label=&quot;Close&quot;&gt;X&lt;/button&gt;</code></td><td><code>button[aria-label=&quot;Close&quot;]</code></td><td>Element is not focusable.<br>Element does not have global ARIA attribute</td></tr><tr><td>16</td><td><code>&lt;ul role=&quot;none&quot; aria-disabled=&quot;true&quot;&gt;
+  &lt;li&gt;Option&lt;/li&gt;
+&lt;/ul&gt;</code></td><td><code>div[data-case=&quot;d1&quot;] &gt; ul</code></td><td>Element does not have global ARIA attribute</td></tr><tr><td>17</td><td><code>&lt;ul role=&quot;none&quot; aria-invalid=&quot;true&quot;&gt;
+  &lt;li&gt;Option&lt;/li&gt;
+&lt;/ul&gt;</code></td><td><code>div[data-case=&quot;d2&quot;] &gt; ul</code></td><td>Element does not have global ARIA attribute</td></tr><tr><td>18</td><td><code>&lt;ul role=&quot;none&quot; aria-haspopup=&quot;true&quot;&gt;
+  &lt;li&gt;Option&lt;/li&gt;
+&lt;/ul&gt;</code></td><td><code>ul[aria-haspopup=&quot;true&quot;]</code></td><td>Element does not have global ARIA attribute</td></tr><tr><td>19</td><td><code>&lt;ul role=&quot;none&quot; aria-hidden=&quot;false&quot;&gt;
+  &lt;li&gt;Option&lt;/li&gt;
+&lt;/ul&gt;</code></td><td><code>ul[aria-hidden=&quot;false&quot;]</code></td><td>Element does not have global ARIA attribute</td></tr></tbody></table>
+<h2>Needs review (8)</h2><h3>aria-prohibited-attr: Elements must only use permitted ARIA attributes (7)</h3>
+        <p>Impact: serious. <a href="https://dequeuniversity.com/rules/axe/4.14/aria-prohibited-attr?application=axeAPI">Rule details on Deque University</a></p>
+        <table><thead><tr><th scope="col">#</th><th scope="col">Element</th><th scope="col">Selector</th><th scope="col">Problem</th></tr></thead><tbody><tr><td>1</td><td><code>&lt;ul role=&quot;none&quot; aria-label=&quot;Styles&quot;&gt;
+  &lt;li&gt;Bold&lt;/li&gt;
+  &lt;li&gt;Italic&lt;/li&gt;
+&lt;/ul&gt;</code></td><td><code>div[data-case=&quot;a1&quot;] &gt; ul[aria-label=&quot;Styles&quot;]</code></td><td>aria-label attribute is not well supported with role &quot;list&quot;.</td></tr><tr><td>2</td><td><code>&lt;nav role=&quot;none&quot; aria-labelledby=&quot;a5-label&quot;&gt;
+  &lt;span id=&quot;a5-label&quot;&gt;Main&lt;/span&gt;
+&lt;/nav&gt;</code></td><td><code>nav</code></td><td>aria-labelledby attribute is not well supported, but the elements referenced by aria-labelledby are visible in the page. Verify the label is not necessary.</td></tr><tr><td>3</td><td><code>&lt;button type=&quot;button&quot; role=&quot;none&quot; aria-label=&quot;Close&quot;&gt;X&lt;/button&gt;</code></td><td><code>button[aria-label=&quot;Close&quot;]</code></td><td>aria-label attribute is not well supported with role &quot;button&quot;.</td></tr><tr><td>4</td><td><code>&lt;ul role=&quot;None&quot; aria-label=&quot;Styles&quot;&gt;
+  &lt;li&gt;Bold&lt;/li&gt;
+&lt;/ul&gt;</code></td><td><code>ul[role=&quot;None&quot;]</code></td><td>aria-label attribute is not well supported with role &quot;list&quot;.</td></tr><tr><td>5</td><td><code>&lt;ul role=&quot;none &quot; aria-label=&quot;Styles&quot;&gt;
+  &lt;li&gt;Bold&lt;/li&gt;
+&lt;/ul&gt;</code></td><td><code>ul[role=&quot;none &quot;]</code></td><td>aria-label attribute is not well supported with role &quot;list&quot;.</td></tr><tr><td>6</td><td><code>&lt;ul role=&quot;none presentation&quot; aria-label=&quot;Styles&quot;&gt;
+  &lt;li&gt;Bold&lt;/li&gt;
+&lt;/ul&gt;</code></td><td><code>ul[role=&quot;none presentation&quot;]</code></td><td>aria-label attribute is not well supported with role &quot;list&quot;.</td></tr><tr><td>7</td><td><code>&lt;p role=&quot;none&quot; aria-label=&quot;Opening hours&quot;&gt;Monday to Friday, 9 to 5.&lt;/p&gt;</code></td><td><code>p[aria-label=&quot;Opening hours&quot;]</code></td><td>aria-label attribute is not well supported on &quot;p&quot; elements with no valid role attribute.</td></tr></tbody></table><h3>label-content-name-mismatch: Elements must have their visible text as part of their accessible name (1)</h3>
+        <p>Impact: serious. <a href="https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=axeAPI">Rule details on Deque University</a></p>
+        <table><thead><tr><th scope="col">#</th><th scope="col">Element</th><th scope="col">Selector</th><th scope="col">Problem</th></tr></thead><tbody><tr><td>1</td><td><code>&lt;button type=&quot;button&quot; role=&quot;none&quot; aria-label=&quot;Close&quot;&gt;X&lt;/button&gt;</code></td><td><code>button[aria-label=&quot;Close&quot;]</code></td><td>Unable to determine if the visible text is part of the accessible name</td></tr></tbody></table>
+</body></html>

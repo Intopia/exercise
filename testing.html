@@ -18,6 +18,12 @@ h3 {
   line-height: 1.1;
 }
 
+@media (prefers-color-scheme: dark) {
+  h3 {
+    color: #fff;
+  }
+}
+
 .badge-new {
   display: inline-block;
   font-size: .8em;
@@ -40,9 +46,6 @@ h3 {
   letter-spacing: .03em;
   text-decoration: none;
 }
-
-
-
   </style>
 </head>
 <body>
@@ -160,13 +163,6 @@ h3 {
   <li><a href="testing-charset-conflicting.html">Testing character encoding - conflicting example</a></li>
 </ul>
 
-<h3>Text style and box model:</h3>
-
-<ul>
-  <li><a href="testing-text-styles.html">Testing text styles</a></li>
-  <li><a href="testing-box-model.html">Testing the box model</a></li>
-</ul>
-
 
 <!-- section -->
 
@@ -182,7 +178,6 @@ h3 {
   <li><a href="testing-menu.html">Testing the <code>&lt;menu&gt;</code> element</a></li>
   <li><a href="testing-aria-level.html">Testing <code>aria-level</code></a></li>
   <li><a href="testing-aria-setsize-posinset.html">Testing <code>aria-setsize</code> and <code>aria-posinset</code></a></li>
-  <li><a href="testing-switch-attribute.html">Testing the switch attribute</a></li>
 </ul>
 
 
@@ -212,8 +207,6 @@ h3 {
   <li><a href="testing-links-creditcard.html">Testing credit card links</a></li>
   <li><a href="reviewing-links.html">Reviewing different link methods</a></li>
   <li><a href="testing-aria-current.html">Testing <code>aria-current</code></a></li>
-  <li><a href="testing-target.html">Testing the <code>:target</code> CSS selector</a></li>
-  <li><a href="testing-sticky-header.html">Testing sticky header</a></li>
   <li><a href="reviewing-clickable-cards.html">Reviewing different solutions for clickable cards</a></li>
 </ul>
 
@@ -242,7 +235,6 @@ h3 {
   <li><a href="testing-non-text-contrast.html">Testing non-text colour contrast</a></li>
   <li><a href="testing-form-colour-contrast.html">Testing colour contrast in forms</a></li>
   <li><a href="testing-use-of-color.html">Testing use of colour</a></li>
-  <li><a href="testing-css-color-methods.html">Testing CSS colour methods</a></li>
 </ul>
 
 
@@ -254,6 +246,18 @@ h3 {
 <ul>
   <li><a href="testing-phrasing-content.html">Testing phrasing content</a></li>
   <li><a href="testing-capitalisation.html">Testing capitalisation</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="tests-css-visual-styles">Tests: CSS and visual styles</h2>
+
+<ul>
+  <li><a href="testing-text-styles.html">Testing text styles</a></li>
+  <li><a href="testing-box-model.html">Testing the box model</a></li>
+  <li><a href="testing-css-color-methods.html">Testing CSS colour methods</a></li>
 </ul>
 
 
@@ -277,6 +281,8 @@ h3 {
   <li><a href="reviewing-tabindex.html">Reviewing different <code>tabindex</code> methods</a></li>
   <li><a href="testing-back-to-top.html">Testing a "back to top" pattern</a></li>
   <li><a href="testing-focus-indication.html">Testing focus indication</a></li>
+  <li><a href="testing-sticky-header.html">Testing sticky header</a></li>
+  <li><a href="testing-target.html">Targeting specific areas of a page</a></li>
   <li><a href="testing-onsubmit-simple.html">Testing focus management onsubmit - form with two form fields</a></li>
   <li><a href="testing-onsubmit-complex.html">Testing focus management onsubmit - form with more than two form fields</a></li>
   <li><a href="testing-focus-management.html">Testing focus management - single page app</a></li>
@@ -332,6 +338,7 @@ h3 {
   <li><a href="testing-placeholder.html">Testing the <code>placeholder</code> attribute</a></li>
   <li><a href="testing-input-name.html">Testing accessible name priority for an <code>&lt;input&gt;</code></a></li>
   <li><a href="testing-autocomplete.html">Testing <code>autocomplete</code></a></li>
+  <li><a href="testing-switch-attribute.html">Testing the switch attribute</a></li>
   <li><a href="testing-contact-form.html">Testing a contact form</a></li>
   <li><a href="reviewing-all-form-elements.html">Reviewing all form elements</a></li>
   <li><a href="reviewing-all-input-types.html">Reviewing all <code>&lt;input&gt;</code> types</a></li>
@@ -344,7 +351,7 @@ h3 {
 <ul>
   <li><a href="testing-required-fields.html">Testing required fields</a></li>
   <li><a href="testing-required-checkbox-groups.html">Testing required on checkbox groups</a> <span class="badge-new">NEW - <time datetime="2026-11-14">14 Nov 26</time></span></li>
-  <li><a href="testing-required-radio-groups.html">Testing required radio groups</a> <span class="badge-new">NEW - <time datetime="2026-11-14">14 Nov 26</time></span></li>
+  <li><a href="testing-required-radio-groups.html">Testing required on radio groups</a> <span class="badge-new">NEW - <time datetime="2026-11-14">14 Nov 26</time></span></li>
   <li><a href="testing-form-errors.html">Testing form field errors</a></li>
   <li><a href="testing-form-error-messaging.html">Testing form field error messaging</a></li>
   <li><a href="testing-aria-invalid.html">Testing <code>aria-invalid</code></a></li>
@@ -488,7 +495,7 @@ h3 {
 <!-- section -->
 
 
-<h2 id="checklists-screen-readers">Checklists for testing with screen readers</h2>
+<h2 id="checklists-screen-readers">Screen reader checklists and tests</h2>
 
 <ul>
   <li><a href="testing-with-nvda.html">Checklists for testing with NVDA</a> <span class="badge-new">NEW - <time datetime="2026-11-15">15 Nov 26</time></span></li>
@@ -505,19 +512,26 @@ h3 {
 <ul>
   <li><a href="testing-axe-rule-aria-valid-attr-value.html">Testing the axe rule <code>aria-valid-attr-value</code></a> <span class="badge-report"><a href="x-axe-core-rules/01-axe-report-aria-valid-attr-value.html">Report</a></span></li>
   <li><a href="testing-axe-rule-aria-allowed-attr.html">Testing the axe rule <code>aria-allowed-attr</code></a> <span class="badge-report"><a href="x-axe-core-rules/02-axe-report-aria-allowed-attr.html">Report</a></span></li>
-  <li><a href="testing-axe-rule-aria-command-name.html">Testign the axe rule <code>aria-command-name</code></a> <span class="badge-report"><a href="x-axe-core-rules/03-axe-report-aria-command-name.html">Report</a></span></li>
-  <li><a href="testing-axe-rule-aria-conditional-attr.html">Testign the axe rule <code>aria-conditional-attr</code></a> <span class="badge-report"><a href="x-axe-core-rules/04-axe-report-aria-conditional-attr.html">Report</a></span></li>
-  <li><a href="testing-axe-rule-aria-required-children.html">Testign the axe rule <code>aria-required-children</code></a> <span class="badge-report"><a href="x-axe-core-rules/05-axe-report-aria-required-children.html">Report</a></span></li>
-  <li><a href="testing-axe-rule-aria-text.html">Testign the axe rule <code>aria-text</code></a> <span class="badge-report"><a href="x-axe-core-rules/06-axe-report-aria-text.html">Report</a></span></li>
-  <li><a href="testing-axe-rule-aria-hidden-focus.html">Testign the axe rule <code>aria-hidden-focus</code></a> <span class="badge-report"><a href="x-axe-core-rules/07-axe-report-aria-hidden-focus.html">Report</a></span></li>
-  <li><a href="testing-axe-rule-aria-valid-attr.html">Testign the axe rule <code>aria-valid-attr</code></a> <span class="badge-report"><a href="x-axe-core-rules/08-axe-report-aria-valid-attr.html">Report</a></span></li>
-  <li><a href="testing-axe-rule-aria-roles.html">Testign the axe rule <code>aria-roles</code></a> <span class="badge-report"><a href="x-axe-core-rules/09-axe-report-aria-roles.html">Report</a></span></li>
-  <li><a href="testing-axe-rule-aria-allowed-role.html">Testign the axe rule <code>aria-allowed-role</code></a> <span class="badge-report"><a href="x-axe-core-rules/10-axe-report-aria-allowed-role.html">Report</a></span></li>
-  <li><a href="testing-axe-rule-aria-deprecated-role.html">Testign the axe rule <code>aria-deprecated-role</code></a> <span class="badge-report"><a href="x-axe-core-rules/11-axe-report-aria-deprecated-role.html">Report</a></span></li>
-  <li><a href="testing-axe-rule-aria-prohibited-attr.html">Testign the axe rule <code>aria-prohibited-attr</code></a> <span class="badge-report"><a href="x-axe-core-rules/13-axe-report-aria-prohibited-attr.html">Report</a></span></li>
-  <li><a href="testing-axe-rule-aria-required-attr.html">Testign the axe rule <code>aria-required-attr</code></a> <span class="badge-report"><a href="x-axe-core-rules/12-axe-report-aria-required-attr.html">Report</a></span></li>
-  <li><a href="testing-axe-rule-aria-required-parent.html">Testign the axe rule <code>aria-required-parent</code></a> <span class="badge-report"><a href="x-axe-core-rules/14-axe-report-aria-required-parent.html">Report</a></span></li>
-  <li><a href="testing-axe-rule-presentation-role-conflict.html">Testign the axe rule <code>presentation-role-conflict</code></a> <span class="badge-report"><a href="x-axe-core-rules/15-axe-report-presentation-role-conflict.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-command-name.html">Testing the axe rule <code>aria-command-name</code></a> <span class="badge-report"><a href="x-axe-core-rules/03-axe-report-aria-command-name.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-conditional-attr.html">Testing the axe rule <code>aria-conditional-attr</code></a> <span class="badge-report"><a href="x-axe-core-rules/04-axe-report-aria-conditional-attr.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-required-children.html">Testing the axe rule <code>aria-required-children</code></a> <span class="badge-report"><a href="x-axe-core-rules/05-axe-report-aria-required-children.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-text.html">Testing the axe rule <code>aria-text</code></a> <span class="badge-report"><a href="x-axe-core-rules/06-axe-report-aria-text.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-hidden-focus.html">Testing the axe rule <code>aria-hidden-focus</code></a> <span class="badge-report"><a href="x-axe-core-rules/07-axe-report-aria-hidden-focus.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-valid-attr.html">Testing the axe rule <code>aria-valid-attr</code></a> <span class="badge-report"><a href="x-axe-core-rules/08-axe-report-aria-valid-attr.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-roles.html">Testing the axe rule <code>aria-roles</code></a> <span class="badge-report"><a href="x-axe-core-rules/09-axe-report-aria-roles.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-allowed-role.html">Testing the axe rule <code>aria-allowed-role</code></a> <span class="badge-report"><a href="x-axe-core-rules/10-axe-report-aria-allowed-role.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-deprecated-role.html">Testing the axe rule <code>aria-deprecated-role</code></a> <span class="badge-report"><a href="x-axe-core-rules/11-axe-report-aria-deprecated-role.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-required-attr.html">Testing the axe rule <code>aria-required-attr</code></a> <span class="badge-report"><a href="x-axe-core-rules/12-axe-report-aria-required-attr.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-prohibited-attr.html">Testing the axe rule <code>aria-prohibited-attr</code></a> <span class="badge-report"><a href="x-axe-core-rules/13-axe-report-aria-prohibited-attr.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-required-parent.html">Testing the axe rule <code>aria-required-parent</code></a> <span class="badge-report"><a href="x-axe-core-rules/14-axe-report-aria-required-parent.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-presentation-role-conflict.html">Testing the axe rule <code>presentation-role-conflict</code></a> <span class="badge-report"><a href="x-axe-core-rules/15-axe-report-presentation-role-conflict.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-braille-equivalent.html">Testing the axe rule <code>aria-braille-equivalent</code></a> <span class="badge-report"><a href="x-axe-core-rules/16-axe-report-aria-braille-equivalent.html">Report</a></span></li>
+
+
+
+
+
+
 </ul>
 
 

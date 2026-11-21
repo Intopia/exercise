@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing the axe rule aria-braille-equivalent</title>
+  <meta name="description" content="Test cases for the axe-core rule aria-braille-equivalent, showing what axe catches and what it misses.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <style>
+  .case { border: 1px solid #c8c8cc; border-radius: 6px; padding: 1rem 1.25rem; margin: 1.25rem 0; }
+  .case h3 { margin-top: 0; }
+  .case-id { display: inline-block; font-size: .8rem; font-weight: 700; background: #1d1d1f; color: #fff; padding: .1rem .45rem; border-radius: 3px; margin-right: .4rem; vertical-align: middle; }
+  .example { border: 1px dashed #a0a0a8; padding: .75rem 1rem; margin: .75rem 0; }
+  .example p { margin: .25rem 0; }
+  .badge { display: inline-block; font-weight: 600; font-size: .875rem; padding: .2rem .6rem; border-radius: 3px; border: 2px solid; }
+  .badge.fail { background: #fde8e8; border-color: #b3261e; color: #8a1c16; }
+  .badge.review { background: #fff4d6; border-color: #8a6100; color: #5e4200; }
+  .badge.other { background: #e0f4f4; border-color: #0b6b6b; color: #084f4f; }
+  .badge.miss { background: #ece6fb; border-color: #5b3cc4; color: #432a99; }
+  .badge.pass { background: #e3f4e8; border-color: #1e7b3a; color: #155c2b; }
+  .badge.dynamic { background: #e8eef9; border-color: #1a4f9c; color: #133b75; }
+  .note { font-size: .9375rem; }
+  .route { font-size: .875rem; border-left: 3px solid #a0a0a8; padding-left: .6rem; }
+</style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo. The word 'intopia' in black, with the 'o' made from four curved brush strokes in pink, orange, yellow and turquoise." class="intopia-logo">
+  </picture>
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>Testing the axe rule <code>aria-braille-equivalent</code></h1>
+
+<p>Test cases for the axe-core rule <a href="https://dequeuniversity.com/rules/axe/4.14/aria-braille-equivalent"><code>aria-braille-equivalent</code></a> (axe-core 4.14). ARIA 1.3 adds two attributes that change what a braille display shows, without changing what a screen reader says:</p>
+
+<ul>
+  <li><code>aria-braillelabel</code>: a shorter braille version of the element's accessible name.</li>
+  <li><code>aria-brailleroledescription</code>: a shorter braille version of <code>aria-roledescription</code>.</li>
+</ul>
+
+<p>Both are meant to <em>replace</em> something that's already there. The rule checks that it is: the element must have an accessible name for <code>aria-braillelabel</code>, and a non-empty <code>aria-roledescription</code> for <code>aria-brailleroledescription</code>. It only runs on elements that have one of the two attributes.</p>
+
+<p><strong>This rule never fails.</strong> It's set up with <code>reviewOnFail</code>, so every problem it finds is reported as needs review, not as a violation. That has a big effect on the template routing:</p>
+
+<ul>
+  <li>NEW-33 and NEW-42 are both mapped to <em>violations</em>, which this rule never produces. Neither template can ever be used.</li>
+  <li>The map sends a <code>braille-label-equivalent</code> needs review to "No template", on the basis that it only happens when axe can't work out the name. In practice it's what every missing name looks like, so every braille label problem is dropped.</li>
+  <li>A <code>braille-roledescription-equivalent</code> needs review has no row at all.</li>
+</ul>
+
+<p>The "Unable to compute accessible text" message the map is describing only appears if axe hits an error while working out the name. None of these cases produce it.</p>
+
+<p class="report-link"><strong>axe-core results:</strong> <a href="x-axe-core-rules/16-axe-report-aria-braille-equivalent.html">See the HTML report from running axe-core 4.14.0 over this page</a>.</p>
+
+<p>Every example is live in the page, so you can run the axe extension straight over it. The expected results were checked by running axe-core 4.14.1 over this page. Look in both the axe <strong>issues</strong> list and the <strong>needs review</strong> list.</p>
+
+<table>
+  <caption>Number of test cases by expected result</caption>
+  <thead><tr><th scope="col">Expected result</th><th scope="col">Cases</th></tr></thead>
+  <tbody>
+      <tr><td>Needs review</td><td>14</td></tr>
+      <tr><td>Flagged by a different rule instead</td><td>1</td></tr>
+      <tr><td>Passes, but broken (axe misses it)</td><td>3</td></tr>
+      <tr><td>Pass (valid control cases)</td><td>6</td></tr>
+      <tr><td>Changes after interaction</td><td>2</td></tr>
+  </tbody>
+</table>
+
+<h2 id="sections">Sections</h2>
+
+<ul>
+  <li><a href="#label">Braille label with no accessible name</a></li>
+  <li><a href="#roledescription">Braille role description with no role description</a></li>
+  <li><a href="#passing">Ways to pass</a></li>
+  <li><a href="#missed">Not caught by this rule</a></li>
+  <li><a href="#dynamic">Changes after interaction</a></li>
+</ul>
+
+<!-- section -->
+
+<h2 id="label">Braille label with no accessible name</h2>
+
+<p>These are needs review, with the message "aria-braillelabel is used on an element with no accessible text". The check sets no message key and no data. Most are also caught by a naming rule such as <code>button-name</code>, which is where the real problem is.</p>
+<article class="case" id="a1" aria-labelledby="a1-title">
+  <h3 id="a1-title"><span class="case-id">A1</span> Icon button with a braille label</h3>
+  <p>The braille display would show "del", but a screen reader has nothing to say.</p>
+  <div class="example" data-case="a1" data-expected="review">
+<button type="button" aria-braillelabel="del">
+  <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"></circle></svg>
+</button>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; aria-braillelabel=&quot;del&quot;&gt;
+  &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; aria-hidden=&quot;true&quot;&gt;&lt;circle cx=&quot;8&quot; cy=&quot;8&quot; r=&quot;6&quot;&gt;&lt;/circle&gt;&lt;/svg&gt;
+&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="note">Also fails <code>button-name</code>.</p>
+  <p class="route"><strong>Template routing:</strong> Needs review. Check: <code>braille-label-equivalent</code>, message key: none. Routes to: no template today, because the map sends every <code>braille-label-equivalent</code> needs review to "No template". Should be NEW-33.</p>
+</article><article class="case" id="a2" aria-labelledby="a2-title">
+  <h3 id="a2-title"><span class="case-id">A2</span> Decorative image with a braille label</h3>
+  <p><code>aria-braillelabel</code> counts as a global ARIA attribute, so it also cancels <code>alt=""</code> and Chrome shows an image with no name.</p>
+  <div class="example" data-case="a2" data-expected="review">
+<img src="assets/images/intopia-logo.svg" alt="" aria-braillelabel="logo" width="120">
+  </div>
+  <pre><code class="language-html">&lt;img src=&quot;assets/images/intopia-logo.svg&quot; alt=&quot;&quot; aria-braillelabel=&quot;logo&quot; width=&quot;120&quot;&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="note">Also fails <code>presentation-role-conflict</code>.</p>
+  <p class="route"><strong>Template routing:</strong> Needs review. Check: <code>braille-label-equivalent</code>, message key: none. Routes to: no template today, because the map sends every <code>braille-label-equivalent</code> needs review to "No template". Should be NEW-33.</p>
+</article><article class="case" id="a3" aria-labelledby="a3-title">
+  <h3 id="a3-title"><span class="case-id">A3</span> role=&quot;img&quot; with only a braille label</h3>
+  <div class="example" data-case="a3" data-expected="review">
+<div role="img" aria-braillelabel="5 stars" class="stars"></div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;img&quot; aria-braillelabel=&quot;5 stars&quot; class=&quot;stars&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="note">Also fails <code>role-img-alt</code>.</p>
+  <p class="route"><strong>Template routing:</strong> Needs review. Check: <code>braille-label-equivalent</code>, message key: none. Routes to: no template today, because the map sends every <code>braille-label-equivalent</code> needs review to "No template". Should be NEW-33.</p>
+</article><article class="case" id="a4" aria-labelledby="a4-title">
+  <h3 id="a4-title"><span class="case-id">A4</span> aria-labelledby pointing at a missing id</h3>
+  <p>The name that was meant to come from <code>aria-labelledby</code> never arrives.</p>
+  <div class="example" data-case="a4" data-expected="review">
+<button type="button" aria-labelledby="a4-missing" aria-braillelabel="nxt"></button>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; aria-labelledby=&quot;a4-missing&quot; aria-braillelabel=&quot;nxt&quot;&gt;&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="note">Also fails <code>button-name</code>, and <code>aria-valid-attr-value</code> asks for review (<code>noId</code>).</p>
+  <p class="route"><strong>Template routing:</strong> Needs review. Check: <code>braille-label-equivalent</code>, message key: none. Routes to: no template today, because the map sends every <code>braille-label-equivalent</code> needs review to "No template". Should be NEW-33.</p>
+</article><article class="case" id="a5" aria-labelledby="a5-title">
+  <h3 id="a5-title"><span class="case-id">A5</span> Only text is aria-hidden</h3>
+  <div class="example" data-case="a5" data-expected="review">
+<button type="button" aria-braillelabel="cls">
+  <span aria-hidden="true">X</span>
+</button>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; aria-braillelabel=&quot;cls&quot;&gt;
+  &lt;span aria-hidden=&quot;true&quot;&gt;X&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="note">Also fails <code>button-name</code>.</p>
+  <p class="route"><strong>Template routing:</strong> Needs review. Check: <code>braille-label-equivalent</code>, message key: none. Routes to: no template today, because the map sends every <code>braille-label-equivalent</code> needs review to "No template". Should be NEW-33.</p>
+</article><article class="case" id="a6" aria-labelledby="a6-title">
+  <h3 id="a6-title"><span class="case-id">A6</span> Empty link</h3>
+  <div class="example" data-case="a6" data-expected="review">
+<a href="#a6" aria-braillelabel="hme"></a>
+  </div>
+  <pre><code class="language-html">&lt;a href=&quot;#a6&quot; aria-braillelabel=&quot;hme&quot;&gt;&lt;/a&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="note">Also fails <code>link-name</code>.</p>
+  <p class="route"><strong>Template routing:</strong> Needs review. Check: <code>braille-label-equivalent</code>, message key: none. Routes to: no template today, because the map sends every <code>braille-label-equivalent</code> needs review to "No template". Should be NEW-33.</p>
+</article><article class="case" id="a7" aria-labelledby="a7-title">
+  <h3 id="a7-title"><span class="case-id">A7</span> Text field with no label</h3>
+  <div class="example" data-case="a7" data-expected="review">
+<input type="text" aria-braillelabel="srch">
+  </div>
+  <pre><code class="language-html">&lt;input type=&quot;text&quot; aria-braillelabel=&quot;srch&quot;&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="note">Also fails <code>label</code>.</p>
+  <p class="route"><strong>Template routing:</strong> Needs review. Check: <code>braille-label-equivalent</code>, message key: none. Routes to: no template today, because the map sends every <code>braille-label-equivalent</code> needs review to "No template". Should be NEW-33.</p>
+</article><article class="case" id="a8" aria-labelledby="a8-title">
+  <h3 id="a8-title"><span class="case-id">A8</span> Empty div</h3>
+  <p>Nothing else flags this one, so this rule is the only clue.</p>
+  <div class="example" data-case="a8" data-expected="review">
+<div aria-braillelabel="new"></div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-braillelabel=&quot;new&quot;&gt;&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review. Check: <code>braille-label-equivalent</code>, message key: none. Routes to: no template today, because the map sends every <code>braille-label-equivalent</code> needs review to "No template". Should be NEW-33.</p>
+</article><article class="case" id="a9" aria-labelledby="a9-title">
+  <h3 id="a9-title"><span class="case-id">A9</span> Presentational list with a braille label</h3>
+  <p>The braille label cancels <code>role="none"</code>, so Chrome shows a list, and that list has no name.</p>
+  <div class="example" data-case="a9" data-expected="review">
+<ul role="none" aria-braillelabel="opts">
+  <li>Small</li>
+</ul>
+  </div>
+  <pre><code class="language-html">&lt;ul role=&quot;none&quot; aria-braillelabel=&quot;opts&quot;&gt;
+  &lt;li&gt;Small&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="note">Also fails <code>presentation-role-conflict</code>.</p>
+  <p class="route"><strong>Template routing:</strong> Needs review. Check: <code>braille-label-equivalent</code>, message key: none. Routes to: no template today, because the map sends every <code>braille-label-equivalent</code> needs review to "No template". Should be NEW-33.</p>
+</article><article class="case" id="a10" aria-labelledby="a10-title">
+  <h3 id="a10-title"><span class="case-id">A10</span> Attribute name in capitals</h3>
+  <p>HTML attribute names aren't case sensitive, so axe still finds it.</p>
+  <div class="example" data-case="a10" data-expected="review">
+<button type="button" ARIA-BRAILLELABEL="del"></button>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; ARIA-BRAILLELABEL=&quot;del&quot;&gt;&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="note">Also fails <code>button-name</code>.</p>
+  <p class="route"><strong>Template routing:</strong> Needs review. Check: <code>braille-label-equivalent</code>, message key: none. Routes to: no template today, because the map sends every <code>braille-label-equivalent</code> needs review to "No template". Should be NEW-33.</p>
+</article>
+<!-- section -->
+
+<h2 id="roledescription">Braille role description with no role description</h2>
+
+<p>These are needs review too, but this check does set a message key.</p>
+<article class="case" id="b1" aria-labelledby="b1-title">
+  <h3 id="b1-title"><span class="case-id">B1</span> No aria-roledescription</h3>
+  <div class="example" data-case="b1" data-expected="review">
+<div role="article" aria-label="Slide 1" aria-brailleroledescription="sld">
+  Welcome
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;article&quot; aria-label=&quot;Slide 1&quot; aria-brailleroledescription=&quot;sld&quot;&gt;
+  Welcome
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review. Check: <code>braille-roledescription-equivalent</code>, message key: <code>noRoleDescription</code>. Routes to: nothing today, because NEW-42 only matches violations. Should be NEW-42.</p>
+</article><article class="case" id="b2" aria-labelledby="b2-title">
+  <h3 id="b2-title"><span class="case-id">B2</span> Empty aria-roledescription</h3>
+  <div class="example" data-case="b2" data-expected="review">
+<div role="article" aria-label="Slide 2" aria-roledescription="" aria-brailleroledescription="sld">
+  Agenda
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;article&quot; aria-label=&quot;Slide 2&quot; aria-roledescription=&quot;&quot; aria-brailleroledescription=&quot;sld&quot;&gt;
+  Agenda
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review. Check: <code>braille-roledescription-equivalent</code>, message key: <code>emptyRoleDescription</code>. Routes to: nothing today, because NEW-42 only matches violations. Should be NEW-42.</p>
+</article><article class="case" id="b3" aria-labelledby="b3-title">
+  <h3 id="b3-title"><span class="case-id">B3</span> aria-roledescription of spaces</h3>
+  <p>Treated the same as empty.</p>
+  <div class="example" data-case="b3" data-expected="review">
+<div role="article" aria-label="Slide 3" aria-roledescription="   " aria-brailleroledescription="sld">
+  Questions
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;article&quot; aria-label=&quot;Slide 3&quot; aria-roledescription=&quot;   &quot; aria-brailleroledescription=&quot;sld&quot;&gt;
+  Questions
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="route"><strong>Template routing:</strong> Needs review. Check: <code>braille-roledescription-equivalent</code>, message key: <code>emptyRoleDescription</code>. Routes to: nothing today, because NEW-42 only matches violations. Should be NEW-42.</p>
+</article><article class="case" id="b4" aria-labelledby="b4-title">
+  <h3 id="b4-title"><span class="case-id">B4</span> Both problems on one button</h3>
+  <p>One result with both checks listed.</p>
+  <div class="example" data-case="b4" data-expected="review">
+<button type="button" aria-brailleroledescription="tgl" aria-braillelabel="snd"></button>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; aria-brailleroledescription=&quot;tgl&quot; aria-braillelabel=&quot;snd&quot;&gt;&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge review">Expected result: needs review</span></p>
+  <p class="note">Also fails <code>button-name</code>.</p>
+  <p class="route"><strong>Template routing:</strong> Needs review. Checks: <code>braille-roledescription-equivalent</code> (<code>noRoleDescription</code>) and <code>braille-label-equivalent</code>. Routes to: nothing today. Should be NEW-42 and NEW-33.</p>
+</article>
+<!-- section -->
+
+<h2 id="passing">Ways to pass</h2>
+
+<p>Control cases.</p>
+<article class="case" id="c1" aria-labelledby="c1-title">
+  <h3 id="c1-title"><span class="case-id">C1</span> Button with a name and a braille label</h3>
+  <div class="example" data-case="c1" data-expected="pass">
+<button type="button" aria-label="Delete" aria-braillelabel="del">
+  <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"></circle></svg>
+</button>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; aria-label=&quot;Delete&quot; aria-braillelabel=&quot;del&quot;&gt;
+  &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; aria-hidden=&quot;true&quot;&gt;&lt;circle cx=&quot;8&quot; cy=&quot;8&quot; r=&quot;6&quot;&gt;&lt;/circle&gt;&lt;/svg&gt;
+&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="c2" aria-labelledby="c2-title">
+  <h3 id="c2-title"><span class="case-id">C2</span> Labelled text field</h3>
+  <div class="example" data-case="c2" data-expected="pass">
+<label for="c2-name">Full name</label>
+<input type="text" id="c2-name" aria-braillelabel="nm">
+  </div>
+  <pre><code class="language-html">&lt;label for=&quot;c2-name&quot;&gt;Full name&lt;/label&gt;
+&lt;input type=&quot;text&quot; id=&quot;c2-name&quot; aria-braillelabel=&quot;nm&quot;&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="c3" aria-labelledby="c3-title">
+  <h3 id="c3-title"><span class="case-id">C3</span> Name from title</h3>
+  <p><code>title</code> counts as an accessible name.</p>
+  <div class="example" data-case="c3" data-expected="pass">
+<button type="button" title="Delete" aria-braillelabel="del">
+  <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"></circle></svg>
+</button>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; title=&quot;Delete&quot; aria-braillelabel=&quot;del&quot;&gt;
+  &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; aria-hidden=&quot;true&quot;&gt;&lt;circle cx=&quot;8&quot; cy=&quot;8&quot; r=&quot;6&quot;&gt;&lt;/circle&gt;&lt;/svg&gt;
+&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="c4" aria-labelledby="c4-title">
+  <h3 id="c4-title"><span class="case-id">C4</span> Slide with both role descriptions</h3>
+  <div class="example" data-case="c4" data-expected="pass">
+<div role="article" aria-label="Slide 4" aria-roledescription="slide" aria-brailleroledescription="sld">
+  Thanks
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;article&quot; aria-label=&quot;Slide 4&quot; aria-roledescription=&quot;slide&quot; aria-brailleroledescription=&quot;sld&quot;&gt;
+  Thanks
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="c5" aria-labelledby="c5-title">
+  <h3 id="c5-title"><span class="case-id">C5</span> Braille label of spaces</h3>
+  <p>An empty or blank braille label is ignored, so there's nothing to check.</p>
+  <div class="example" data-case="c5" data-expected="pass">
+<button type="button" aria-braillelabel="   ">Save</button>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; aria-braillelabel=&quot;   &quot;&gt;Save&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article><article class="case" id="c6" aria-labelledby="c6-title">
+  <h3 id="c6-title"><span class="case-id">C6</span> Empty braille role description</h3>
+  <div class="example" data-case="c6" data-expected="pass">
+<div role="article" aria-label="Slide 5" aria-brailleroledescription="">
+  Notes
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;article&quot; aria-label=&quot;Slide 5&quot; aria-brailleroledescription=&quot;&quot;&gt;
+  Notes
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge pass">Expected result: pass (valid)</span></p>
+</article>
+<!-- section -->
+
+<h2 id="missed">Not caught by this rule</h2>
+
+<p></p>
+<article class="case" id="d1" aria-labelledby="d1-title">
+  <h3 id="d1-title"><span class="case-id">D1</span> Braille label that says something else</h3>
+  <p>The rule only checks that a name exists, not that the braille label matches it. A screen reader says "Delete account" and the braille display shows "ok".</p>
+  <div class="example" data-case="d1" data-expected="miss">
+<button type="button" aria-braillelabel="ok">Delete account</button>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; aria-braillelabel=&quot;ok&quot;&gt;Delete account&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+</article><article class="case" id="d2" aria-labelledby="d2-title">
+  <h3 id="d2-title"><span class="case-id">D2</span> Braille label on a span with text</h3>
+  <p>Axe counts the text as the span's accessible name. Browsers don't, because a plain <code>&lt;span&gt;</code> can't be named, so Chrome shows it with no name and the braille label has nothing to replace.</p>
+  <div class="example" data-case="d2" data-expected="miss">
+<span aria-braillelabel="nw">New</span>
+  </div>
+  <pre><code class="language-html">&lt;span aria-braillelabel=&quot;nw&quot;&gt;New&lt;/span&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+</article><article class="case" id="d3" aria-labelledby="d3-title">
+  <h3 id="d3-title"><span class="case-id">D3</span> Role description on a div with no role</h3>
+  <p><code>aria-roledescription</code> isn't supported on an element with no role, so Chrome ignores it, and the braille version goes with it. Axe's <code>aria-roledescription</code> rule would catch this, but it's off by default.</p>
+  <div class="example" data-case="d3" data-expected="miss">
+<div aria-roledescription="slide" aria-brailleroledescription="sld">
+  Slide 6
+</div>
+  </div>
+  <pre><code class="language-html">&lt;div aria-roledescription=&quot;slide&quot; aria-brailleroledescription=&quot;sld&quot;&gt;
+  Slide 6
+&lt;/div&gt;</code></pre>
+  <p class="result"><span class="badge miss">Expected result: passes, but it's broken (check manually)</span></p>
+  <p class="route"><strong>Template routing:</strong> No result, so nothing to route.</p>
+</article><article class="case" id="d4" aria-labelledby="d4-title">
+  <h3 id="d4-title"><span class="case-id">D4</span> Misspelled aria-braille-label</h3>
+  <p>Axe doesn't know the attribute, so this rule doesn't run. <code>aria-valid-attr</code> catches the spelling.</p>
+  <div class="example" data-case="d4" data-expected="other" data-other="aria-valid-attr">
+<button type="button" aria-braille-label="del">Delete</button>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; aria-braille-label=&quot;del&quot;&gt;Delete&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge other">Expected result: flagged by <code>aria-valid-attr</code> instead</span></p>
+  <p class="route"><strong>Template routing:</strong> Routes to: NEW-26, not NEW-33.</p>
+</article>
+<!-- section -->
+
+<h2 id="dynamic">Changes after interaction</h2>
+
+<p>Axe only sees the page as it is when you run it. These pass on page load. Activate each button, then run axe again.</p>
+<article class="case" id="e1" aria-labelledby="e1-title">
+  <h3 id="e1-title"><span class="case-id">E1</span> Button text replaced by an icon</h3>
+  <p>On load, the button has text. The button below swaps the text for an icon, as a responsive script might, but leaves the braille label behind.</p>
+  <div class="example" data-case="e1" data-expected="dynamic">
+<button type="button" id="e1-target" aria-braillelabel="sv">Save</button>
+<button type="button" id="e1-shrink">Switch to icon</button>
+  </div>
+  <pre><code class="language-html">&lt;button type=&quot;button&quot; id=&quot;e1-target&quot; aria-braillelabel=&quot;sv&quot;&gt;Save&lt;/button&gt;
+&lt;button type=&quot;button&quot; id=&quot;e1-shrink&quot;&gt;Switch to icon&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge dynamic">On load: pass. After clicking: needs review</span></p>
+  <p class="note">After clicking, the button has no name, so it also fails <code>button-name</code>.</p>
+</article><article class="case" id="e2" aria-labelledby="e2-title">
+  <h3 id="e2-title"><span class="case-id">E2</span> Role description removed</h3>
+  <p>On load, the slide has both role descriptions. The button removes <code>aria-roledescription</code> but forgets the braille one.</p>
+  <div class="example" data-case="e2" data-expected="dynamic">
+<div role="article" id="e2-slide" aria-label="Slide 7" aria-roledescription="slide" aria-brailleroledescription="sld">
+  Summary
+</div>
+<button type="button" id="e2-button">Remove role description</button>
+  </div>
+  <pre><code class="language-html">&lt;div role=&quot;article&quot; id=&quot;e2-slide&quot; aria-label=&quot;Slide 7&quot; aria-roledescription=&quot;slide&quot; aria-brailleroledescription=&quot;sld&quot;&gt;
+  Summary
+&lt;/div&gt;
+&lt;button type=&quot;button&quot; id=&quot;e2-button&quot;&gt;Remove role description&lt;/button&gt;</code></pre>
+  <p class="result"><span class="badge dynamic">On load: pass. After clicking: needs review</span></p>
+  <p class="note">After clicking, the message key is <code>noRoleDescription</code>.</p>
+</article>
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+<script>
+  // E1: replace the button text with an icon (bug: no accessible name left)
+  document.getElementById('e1-shrink').addEventListener('click', function () {
+    document.getElementById('e1-target').innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"></circle></svg>';
+  });
+
+  // E2: remove aria-roledescription (bug: aria-brailleroledescription is left behind)
+  document.getElementById('e2-button').addEventListener('click', function () {
+    document.getElementById('e2-slide').removeAttribute('aria-roledescription');
+  });
+</script>
+</body>
+</html>
