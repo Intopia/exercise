@@ -242,13 +242,10 @@ allServers.addEventListener('click', () =&gt; {
 <h2>Design notes</h2>
 
 <ul>
-  <li><b>Consistent button names:</b> Each button keeps the same name, such as "Server 1", in every state. Only <code>aria-pressed</code> changes. This follows the WAI-ARIA Authoring Practices advice that a toggle button's label should not change when its state changes. If the name changed as well, for example from "Turn Server 1 on" to "Turn Server 1 off", the name and the state would both describe the situation, which can be confusing.</li>
-  <li><b>Visible state badge:</b> The "On", "Off" and "Mixed" badges show the state in text, so colour is not the only way to tell the states apart (<a href="https://www.w3.org/TR/WCAG22/#use-of-color" target="_blank">WCAG 1.4.1 Use of Color</a>). This matters most for "Mixed", which would otherwise look like "On" or "Off" in a different colour.</li>
-  <li><b>Badge hidden from assistive technology:</b> The badge has <code>aria-hidden="true"</code>, so the accessible name stays "Server 1". Screen reader users get the state from <code>aria-pressed</code> instead. Without <code>aria-hidden</code>, they would hear the state twice, for example "Server 1 Off, toggle button, not pressed", and the name would change with every state change.</li>
-  <li><b>Label in Name:</b> The visible text is "Server 1 Off", while the accessible name is "Server 1". The badge shows state rather than being part of the label, so the name still matches the visible label, and voice control users can say "click Server 1".</li>
-  <li><b>Different words for the same state:</b> Sighted users see "On" and "Off", while screen reader users hear words such as "pressed" and "not pressed". The exact wording varies between screen readers. This only matters when people compare notes, for example during team testing or a support call.</li>
-  <li><b>An alternative:</b> Some teams prefer to include the state in the accessible name, so visible and spoken words match. If you do this, keep the state at the end, such as "Server 1 Off", so the stable part of the name comes first.</li>
-  <li><b>Mixed state behaviour:</b> When "All servers" is mixed, activating it turns every server on. This matches how a mixed checkbox behaves in the WAI-ARIA Authoring Practices.</li>
+  <li><b>Consistent button names:</b> Each button keeps the same name while <code>aria-pressed</code> communicates its state. This follows the WAI-ARIA Authoring Practices recommendation for toggle buttons.</li>
+  <li><b>Visible states:</b> The "On", "Off" and "Mixed" badges make the states clear without relying on colour alone (WCAG 1.4.1 Use of Colour).</li>
+  <li><b>Screen reader support:</b> The badges use <code>aria-hidden="true"</code> so they are not included in the accessible names. Screen readers get the state from <code>aria-pressed</code> instead.</li>
+  <li><b>Mixed state:</b> When "All servers" is mixed, activating it turns every server on. This is a design choice, not a requirement of <code>aria-pressed</code>.</li>
 </ul>
 
 
