@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testing examples - Intopia</title>
+  <meta name="description" content="A collection of HTML examples and resources for testing web accessibility, including page structure, forms, ARIA, keyboard navigation and screen readers.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <script src="assets/js/table-wrap.js" defer></script>
+  <style>
+h3 {
+  color: #000;
+  font-size: 1rem;
+  line-height: 1.1;
+}
+
+@media (prefers-color-scheme: dark) {
+  h3 {
+    color: #fff;
+  }
+}
+
+.badge-new {
+  display: inline-block;
+  font-size: .8em;
+  color: #fff;
+  background: #000;
+  border-radius: .3em;
+  padding: .2em .6em;
+  line-height: 1;
+  letter-spacing: .03em;
+}
+
+.badge-report a {
+  display: inline-block;
+  background: #eee;
+  font-size: .8em;
+  border-radius: .3em;
+  margin: 0 0 0 .5em;
+  padding: .2em .6em;
+  line-height: 1;
+  letter-spacing: .03em;
+}
+
+@media (prefers-color-scheme: dark) {
+  .badge-report a {
+  background: #333;
+  }
+}
+  </style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo" class="intopia-logo">
+  </picture>
+</a>
+
+<h1 style="margin-top: 1em;">Intopia testing examples</h1>
+
+<p class="page-meta">Updated: <time datetime="2026-11-21">21 November 2026</time> | Author: Russ Weakley</p>
+
+<p>A series of pages that can be used to test or review specific aspects about HTML markup and accessibility features.</p>
+
+
+<!-- section -->
+
+
+<h2 id="resources-testing-course">Resources: "Testing web accessibility for teams" course</h2>
+
+<ul>
+  <li><a href="index.html" class="external" target="_blank">All about mammals</a></li>
+  <li><a href="index-bad.html" class="external" target="_blank">All about mammals - bad example</a></li>
+  <li><a href="index-zoom.html" class="external" target="_blank">All about mammals - zoom bad example</a></li>
+  <li><a href="testing-bookmarklets.html">"Testing web accessibility for teams" bookmarklets</a></li>
+  <li><a href="testing-browser-extensions.html">Installing browser extensions and add-ons</a></li>
+  <li><a href="testing-tools.html">Different types of accessibility testing tools</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="resources-intopia-bookmarklets">Resources: Intopia bookmarklets</h2>
+
+<h3>Full list:</h3>
+
+<ul>
+  <li><a href="testing-bookmarklets-intopia.html">Intopia's accessibility testing bookmarklets</a></li>
+</ul>
+
+<h3>Bookmarklets explained:</h3>
+
+<ul>
+  <li><a href="bookmarklets-01-page-structure.html">Page structure bookmarklets explained</a></li>
+  <li><a href="bookmarklets-02-tables.html">Table bookmarklets explained</a></li>
+  <li><a href="bookmarklets-03-focus-navigation.html">Focus and navigation bookmarklets explained</a></li>
+  <li><a href="bookmarklets-04-names-descriptions.html">Names and descriptions bookmarklets explained</a></li>
+  <li><a href="bookmarklets-05-forms.html">Form bookmarklets explained</a></li>
+  <li><a href="bookmarklets-06-states.html">States bookmarklets explained</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="resources-advanced-testing">Resources: Advanced testing</h2>
+
+<h3>Tutorials:</h3>
+
+<ol>
+  <li><a href="axe-core-playwright-introduction.html">Introduction to axe-core and Playwright: A tutorial series</a></li>
+  <li><a href="axe-core-and-playwright-what.html">What are axe-core and Playwright?</a></li>
+  <li><a href="axe-core-in-the-browser-console.html">Running axe-core in the browser console</a></li>
+  <li><a href="axe-setting-up-nodejs.html">Setting up Node.js</a></li>
+  <li><a href="axe-core-from-the-command-line.html">Running axe-core from the command line</a></li>
+  <li><a href="axe-core-with-a-playwright-script.html">Running axe-core with a Playwright script</a></li>
+  <li><a href="accessibility-testing-with-playwright.html">Accessibility testing with Playwright</a></li>
+</ol>
+
+<h3>Test pages:</h3>
+
+<ul>
+  <li><a href="axe-core-test-page.html">axe test page - broken</a></li>
+  <li><a href="axe-core-test-page-fixed.html">axe test page - fixed</a></li>
+  <li><a href="axe-core-code-samples.html">axe-core code samples</a></li>
+  <li><a href="testing-console.html">Testing with the console</a></li>
+</ul>
+
+
+
+<!-- section -->
+
+
+<h2 id="tests-page-title-language-encoding">Tests: Page title, language, encoding</h2>
+
+<h3>Document title:</h3>
+
+<ul>
+  <li><a href="testing-title-correct.html">Testing document title - good example</a></li>
+  <li><a href="testing-title-missing.html">Testing document title - missing example</a></li>
+  <li><a href="testing-title-empty.html">Testing document title - empty example</a></li>
+  <li><a href="testing-title-multiple.html">Testing document title - multiple example</a></li>
+</ul>
+
+<h3>Page language:</h3>
+
+<ul>
+  <li><a href="testing-lang-good.html">Testing page language - good example</a></li>
+  <li><a href="testing-lang-missing.html">Testing page language - missing example</a></li>
+  <li><a href="testing-lang-invalid.html">Testing page language - invalid example</a></li>
+</ul>
+
+<h3>Character encoding:</h3>
+
+<ul>
+  <li><a href="testing-charset-correct.html">Testing character encoding - good example</a></li>
+  <li><a href="testing-charset-missing.html">Testing character encoding - missing example</a></li>
+  <li><a href="testing-charset-non-utf8.html">Testing character encoding - invalid example</a></li>
+  <li><a href="testing-charset-empty.html">Testing character encoding - empty example</a></li>
+  <li><a href="testing-charset-conflicting.html">Testing character encoding - conflicting example</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="tests-page-structure-semantics">Tests: Page structure and semantics</h2>
+
+<ul>
+  <li><a href="testing-headings.html">Testing headings</a></li>
+  <li><a href="reviewing-lists.html">Reviewing lists</a></li>
+  <li><a href="reviewing-landmarks.html">Reviewing the different landmarks</a></li>
+  <li><a href="testing-roles.html">Testing roles</a></li>
+  <li><a href="testing-aria-roledescription.html">Testing <code>aria-roledescription</code></a></li>
+  <li><a href="testing-menu.html">Testing the <code>&lt;menu&gt;</code> element</a></li>
+  <li><a href="testing-aria-level.html">Testing <code>aria-level</code></a></li>
+  <li><a href="testing-aria-setsize-posinset.html">Testing <code>aria-setsize</code> and <code>aria-posinset</code></a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="tests-images-graphics">Tests: Images, graphics and non-text content</h2>
+
+<ul>
+  <li><a href="testing-images.html">Testing images</a></li>
+  <li><a href="reviewing-image-types.html">Reviewing the four image types</a></li>
+  <li><a href="image-controls.html">Testing image controls</a></li>
+  <li><a href="testing-svg.html">Testing <code>&lt;svg&gt;</code></a></li>
+  <li><a href="testing-svg-inside-links.html">Testing <code>&lt;svg&gt;</code> inside links</a></li>
+  <li><a href="testing-canvas.html">Testing the <code>&lt;canvas&gt;</code> element</a></li>
+  <li><a href="testing-back-arrow-options.html">Testing back arrow options</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="tests-links-navigation">Tests: Links and navigation</h2>
+
+<ul>
+  <li><a href="testing-links.html">Testing links</a></li>
+  <li><a href="testing-links-creditcard.html">Testing credit card links</a></li>
+  <li><a href="reviewing-links.html">Reviewing different link methods</a></li>
+  <li><a href="testing-aria-current.html">Testing <code>aria-current</code></a></li>
+  <li><a href="reviewing-clickable-cards.html">Reviewing different solutions for clickable cards</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="tests-tables">Tests: Tables</h2>
+
+<ul>
+  <li><a href="testing-tables.html">Testing tables</a></li>
+  <li><a href="testing-tables-scope.html">Testing tables - scope</a></li>
+  <li><a href="testing-tables-complex.html">Testing tables - complex</a></li>
+  <li><a href="testing-tables-aria.html">Testing tables - ARIA</a></li>
+  <li><a href="testing-tables-scrollable.html">Testing scrollable tables</a> <span class="badge-new">NEW - <time datetime="2026-11-20">20 Nov 26</time></span></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="tests-colour">Tests: Colour</h2>
+
+<ul>
+  <li><a href="testing-text-contrast.html">Testing text colour contrast</a></li>
+  <li><a href="testing-non-text-contrast.html">Testing non-text colour contrast</a></li>
+  <li><a href="testing-form-colour-contrast.html">Testing colour contrast in forms</a></li>
+  <li><a href="testing-use-of-color.html">Testing use of colour</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="tests-text-formatting">Tests: Text formatting</h2>
+
+<ul>
+  <li><a href="testing-phrasing-content.html">Testing phrasing content</a></li>
+  <li><a href="testing-capitalisation.html">Testing capitalisation</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="tests-css-visual-styles">Tests: CSS and visual styles</h2>
+
+<ul>
+  <li><a href="testing-text-styles.html">Testing text styles</a></li>
+  <li><a href="testing-box-model.html">Testing the box model</a></li>
+  <li><a href="testing-css-color-methods.html">Testing CSS colour methods</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="tests-motion-animation">Tests: Motion and animation</h2>
+
+<ul>
+  <li><a href="testing-movement.html">Testing movement</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="tests-keyboard-focus">Tests: Keyboard, focus and focus management</h2>
+
+<ul>
+  <li><a href="testing-focus-order.html">Testing focus order</a></li>
+  <li><a href="reviewing-tabindex.html">Reviewing different <code>tabindex</code> methods</a></li>
+  <li><a href="testing-back-to-top.html">Testing a "back to top" pattern</a></li>
+  <li><a href="testing-focus-indication.html">Testing focus indication</a></li>
+  <li><a href="testing-sticky-header.html">Testing sticky header</a></li>
+  <li><a href="testing-target.html">Targeting specific areas of a page</a></li>
+  <li><a href="testing-onsubmit-simple.html">Testing focus management onsubmit - form with two form fields</a></li>
+  <li><a href="testing-onsubmit-complex.html">Testing focus management onsubmit - form with more than two form fields</a></li>
+  <li><a href="testing-focus-management.html">Testing focus management - single page app</a></li>
+  <li><a href="testing-aria-activedescendant.html">Testing <code>aria-activedescendant</code></a></li>
+</ul>
+
+<h3>Testing :focus vs :focus-visible</h3>
+
+<ul>
+  <li><a class="external" href="https://www.maxdesign.com.au/articles/testing-focus-focus-visible.html" target="_blank">Testing :focus vs :focus-visible</a></li>
+  <li><a href="test-page-1-default.html">Test page 1: browser defaults</a>
+    <ul>
+      <li><a href="results-browser-defaults-clicking.html">Clicking results for "Test page 1: browser defaults"</a></li>
+      <li><a href="results-browser-defaults-tabbing.html">Tabbing results for "Test page 1: browser defaults"</a></li>
+    </ul>
+  </li>
+  <li><a href="test-page-2-focus-visible.html">Test page 2: using :focus-visible</a>
+    <ul>
+      <li><a href="results-focus-visible-clicking.html">Clicking results for "Test page 2: focus-visible"</a></li>
+      <li><a href="results-focus-visible-tabbing.html">Tabbing results for "Test page 2: focus-visible"</a></li>
+    </ul>
+  </li>
+  <li><a href="test-page-3-focus.html">Test page 3: using :focus</a>
+    <ul>
+      <li><a href="results-focus-clicking.html">Clicking results for "Test page 3: focus"</a></li>
+      <li><a href="results-focus-tabbing.html">Tabbing results for "Test page 3: focus"</a></li>
+    </ul>
+  </li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="tests-pointer-target-size">Tests: Pointer and target size</h2>
+
+<ul>
+  <li><a href="testing-target-size.html">Testing target size</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="tests-forms">Tests: Forms and form controls</h2>
+
+<h3>Form controls and labelling</h3>
+
+<ul>
+  <li><a href="testing-form-labels.html">Testing form labels</a></li>
+  <li><a href="testing-form-instructions.html">Testing form field instructions</a></li>
+  <li><a href="testing-buttons.html">Testing buttons</a></li>
+  <li><a href="testing-placeholder.html">Testing the <code>placeholder</code> attribute</a></li>
+  <li><a href="testing-input-name.html">Testing accessible name priority for an <code>&lt;input&gt;</code></a></li>
+  <li><a href="testing-autocomplete.html">Testing <code>autocomplete</code></a></li>
+  <li><a href="testing-switch-attribute.html">Testing the switch attribute</a></li>
+  <li><a href="testing-contact-form.html">Testing a contact form</a></li>
+  <li><a href="reviewing-all-form-elements.html">Reviewing all form elements</a></li>
+  <li><a href="reviewing-all-input-types.html">Reviewing all <code>&lt;input&gt;</code> types</a></li>
+  <li><a href="reviewing-all-form-controls.html">Reviewing all form controls</a></li>
+  <li><a href="reviewing-form-controls-labels.html">Reviewing form controls that do not require labels</a></li>
+</ul>
+
+<h3>Validation, errors and submission</h3>
+
+<ul>
+  <li><a href="testing-required-fields.html">Testing required fields</a></li>
+  <li><a href="testing-required-checkbox-groups.html">Testing required on checkbox groups</a> <span class="badge-new">NEW - <time datetime="2026-11-14">14 Nov 26</time></span></li>
+  <li><a href="testing-required-radio-groups.html">Testing required on radio groups</a> <span class="badge-new">NEW - <time datetime="2026-11-14">14 Nov 26</time></span></li>
+  <li><a href="testing-form-errors.html">Testing form field errors</a></li>
+  <li><a href="testing-form-error-messaging.html">Testing form field error messaging</a></li>
+  <li><a href="testing-aria-invalid.html">Testing <code>aria-invalid</code></a></li>
+  <li><a href="testing-required.html">Testing the <code>required</code> attribute in Chrome</a></li>
+  <li><a href="reviewing-example-form-bad.html">Reviewing a form example - bad</a></li>
+  <li><a href="reviewing-example-form-good.html">Reviewing a form example - good</a></li>
+</ul>
+
+<h3>Fieldsets and groups</h3>
+
+<ul>
+  <li><a href="testing-fieldsets.html">Testing fieldsets and legends</a></li>
+  <li><a href="testing-hints-checkbox-groups.html">Testing hints on checkbox groups</a> <span class="badge-new">NEW - <time datetime="2026-11-15">15 Nov 26</time></span></li>
+  <li><a href="testing-hints-radio-groups.html">Testing hints on radio groups</a> <span class="badge-new">NEW - <time datetime="2026-11-15">15 Nov 26</time></span></li>
+  <li><a href="testing-errors-checkbox-groups.html">Testing errors on checkbox groups</a> <span class="badge-new">NEW - <time datetime="2026-11-15">15 Nov 26</time></span></li>
+  <li><a href="testing-errors-radio-groups.html">Testing errors on radio groups</a> <span class="badge-new">NEW - <time datetime="2026-11-15">15 Nov 26</time></span></li>
+  <li><a href="testing-invalid-checkbox-groups.html">Testing <code>aria-invalid</code> checkbox groups</a> <span class="badge-new">NEW - <time datetime="2026-11-15">15 Nov 26</time></span></li>
+  <li><a href="testing-invalid-radio-groups.html">Testing <code>aria-invalid</code> radio groups</a> <span class="badge-new">NEW - <time datetime="2026-11-15">15 Nov 26</time></span></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="tests-accessible-names">Tests: Accessible names and descriptions</h2>
+
+<ul>
+  <li><a href="testing-accessible-names.html">Testing accessible names</a></li>
+  <li><a href="testing-aria-label.html">Testing <code>aria-label</code></a> — practice exercise</li>
+  <li><a href="reviewing-aria-label.html">Reviewing <code>aria-label</code></a> — full test results across browsers</li>
+  <li><a href="reviewing-aria-labelledby.html">Reviewing <code>aria-labelledby</code></a></li>
+  <li><a href="testing-aria-describedby.html">Testing <code>aria-describedby</code></a></li>
+  <li><a href="testing-name-mismatches.html">Testing name mismatches</a></li>
+  <li><a href="testing-name-prohibited-roles.html">Testing name prohibited roles</a></li>
+  <li><a href="testing-aria-details.html">Testing <code>aria-details</code></a></li>
+  <li><a href="reviewing-accessible-names.html">Reviewing methods of applying accessible names</a></li>
+  <li><a href="reviewing-concatenated-accessible-name.html">Reviewing a concatenated accessible name</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="tests-states-properties">Tests: States, properties and widget behaviour</h2>
+
+<h3>Basic states</h3>
+
+<ul>
+  <li><a href="testing-states.html">Testing states</a></li>
+  <li><a href="testing-aria-checked.html">Testing <code>aria-checked</code></a></li>
+  <li><a href="testing-aria-expanded.html">Testing <code>aria-expanded</code></a></li>
+  <li><a href="testing-aria-pressed.html">Testing <code>aria-pressed</code></a></li>
+  <li><a href="testing-aria-selected.html">Testing <code>aria-selected</code></a></li>
+  <li><a href="testing-disabled-button.html">Testing an <code>aria-disabled</code> button</a></li>
+  <li><a href="testing-aria-readonly.html">Testing <code>aria-readonly</code></a></li>
+</ul>
+
+<h3>Values and popups</h3>
+
+<ul>
+  <li><a href="testing-aria-controls.html">Testing <code>aria-controls</code></a></li>
+  <li><a href="testing-aria-valuetext.html">Testing <code>aria-valuetext</code></a></li>
+  <li><a href="testing-aria-valuenow.html">Testing <code>aria-valuenow</code></a></li>
+  <li><a href="testing-aria-valuemin-valuemax.html">Testing <code>aria-valuemin</code> and <code>aria-valuemax</code></a></li>
+  <li><a href="testing-slider-native-vs-custom.html">Testing native vs custom sliders</a></li>
+  <li><a href="testing-aria-haspopup.html">Testing <code>aria-haspopup</code></a></li>
+  <li><a href="testing-aria-autocomplete.html">Testing <code>aria-autocomplete</code></a></li>
+  <li><a href="reviewing-aria-owns.html">Reviewing <code>aria-owns</code></a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="tests-dynamic-content">Tests: Dynamic content and live regions</h2>
+
+<h3>Elements and dynamic values</h3>
+
+<ul>
+  <li><a href="testing-output.html">Testing the <code>&lt;output&gt;</code> element</a></li>
+  <li><a href="testing-progress.html">Testing the <code>&lt;progress&gt;</code> element</a></li>
+  <li><a href="testing-timer1.html">Testing the <code>timer</code> role, version 1</a></li>
+  <li><a href="testing-timer2.html">Testing the <code>timer</code> role, version 2</a></li>
+  <li><a href="testing-character-counter.html">Testing a character counter</a></li>
+</ul>
+
+<h3>aria-live, aria-atomic, aria-busy, aria-relevant</h3>
+
+<ul>
+  <li><a href="reviewing-aria-live-off.html">Reviewing <code>aria-live="off"</code></a></li>
+  <li><a href="reviewing-aria-live-polite.html">Reviewing <code>aria-live="polite"</code></a></li>
+  <li><a href="reviewing-aria-live-assertive.html">Reviewing <code>aria-live="assertive"</code></a></li>
+  <li><a href="reviewing-aria-live-nothing.html">Reviewing no <code>aria-live</code></a></li>
+  <li><a href="reviewing-aria-atomic-true.html">Reviewing <code>aria-atomic="true"</code></a></li>
+  <li><a href="reviewing-aria-atomic-false.html">Reviewing <code>aria-atomic="false"</code></a></li>
+  <li><a href="reviewing-aria-busy.html">Reviewing <code>aria-busy</code></a></li>
+  <li><a href="reviewing-aria-relevant-additions.html">Reviewing <code>aria-relevant="additions"</code></a></li>
+  <li><a href="reviewing-aria-relevant-removals.html">Reviewing <code>aria-relevant="removals"</code></a></li>
+  <li><a href="reviewing-aria-relevant-all.html">Reviewing <code>aria-relevant="all"</code></a></li>
+</ul>
+
+<h3>Live region roles</h3>
+
+<ul>
+  <li><a href="reviewing-aria-role-alert.html">Reviewing <code>role="alert"</code></a></li>
+  <li><a href="reviewing-aria-role-status.html">Reviewing <code>role="status"</code></a></li>
+  <li><a href="reviewing-aria-role-log.html">Reviewing <code>role="log"</code></a></li>
+</ul>
+
+<h3>Programmatic announcements</h3>
+
+<ul>
+  <li><a href="testing-aria-notify.html">Testing <code>ariaNotify()</code></a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="tests-dialogs-overlays">Tests: Dialogs and overlays</h2>
+
+<ul>
+  <li><a href="testing-modal-minimal.html">A minimal viable modal - option 1</a></li>
+  <li><a href="testing-modal-enhanced.html">A minimal viable modal - option 2</a></li>
+  <li><a href="testing-modal-traditional.html">An ARIA modal - option 3</a></li>
+  <li><a href="testing-tooltip-css.html">Testing CSS-only tooltip</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="tests-dom-components">Tests: DOM and component architecture</h2>
+
+<ul>
+  <li><a href="testing-slot.html">Testing the <code>&lt;slot&gt;</code> element</a></li>
+  <li><a href="testing-shadow-dom.html">Testing shadow DOM elements</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="checklists-screen-readers">Screen reader checklists and tests</h2>
+
+<ul>
+  <li><a href="testing-with-nvda.html">Checklists for testing with NVDA</a> <span class="badge-new">NEW - <time datetime="2026-11-15">15 Nov 26</time></span></li>
+  <li><a href="testing-with-voiceover.html">Checklists for testing with VoiceOver</a> <span class="badge-new">NEW - <time datetime="2026-11-15">15 Nov 26</time></span></li>
+  <li><a href="testing-voiceover-groups.html">Testing VoiceOver groups</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="testing-axe-core-rules">Testing axe-core rules</h2>
+
+<ul>
+  <li><a href="testing-axe-rule-aria-valid-attr-value.html">Testing the axe rule <code>aria-valid-attr-value</code></a> <span class="badge-report"><a href="x-axe-core-rules/01-axe-report-aria-valid-attr-value.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-allowed-attr.html">Testing the axe rule <code>aria-allowed-attr</code></a> <span class="badge-report"><a href="x-axe-core-rules/02-axe-report-aria-allowed-attr.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-command-name.html">Testing the axe rule <code>aria-command-name</code></a> <span class="badge-report"><a href="x-axe-core-rules/03-axe-report-aria-command-name.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-conditional-attr.html">Testing the axe rule <code>aria-conditional-attr</code></a> <span class="badge-report"><a href="x-axe-core-rules/04-axe-report-aria-conditional-attr.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-required-children.html">Testing the axe rule <code>aria-required-children</code></a> <span class="badge-report"><a href="x-axe-core-rules/05-axe-report-aria-required-children.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-text.html">Testing the axe rule <code>aria-text</code></a> <span class="badge-report"><a href="x-axe-core-rules/06-axe-report-aria-text.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-hidden-focus.html">Testing the axe rule <code>aria-hidden-focus</code></a> <span class="badge-report"><a href="x-axe-core-rules/07-axe-report-aria-hidden-focus.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-valid-attr.html">Testing the axe rule <code>aria-valid-attr</code></a> <span class="badge-report"><a href="x-axe-core-rules/08-axe-report-aria-valid-attr.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-roles.html">Testing the axe rule <code>aria-roles</code></a> <span class="badge-report"><a href="x-axe-core-rules/09-axe-report-aria-roles.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-allowed-role.html">Testing the axe rule <code>aria-allowed-role</code></a> <span class="badge-report"><a href="x-axe-core-rules/10-axe-report-aria-allowed-role.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-deprecated-role.html">Testing the axe rule <code>aria-deprecated-role</code></a> <span class="badge-report"><a href="x-axe-core-rules/11-axe-report-aria-deprecated-role.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-required-attr.html">Testing the axe rule <code>aria-required-attr</code></a> <span class="badge-report"><a href="x-axe-core-rules/12-axe-report-aria-required-attr.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-prohibited-attr.html">Testing the axe rule <code>aria-prohibited-attr</code></a> <span class="badge-report"><a href="x-axe-core-rules/13-axe-report-aria-prohibited-attr.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-required-parent.html">Testing the axe rule <code>aria-required-parent</code></a> <span class="badge-report"><a href="x-axe-core-rules/14-axe-report-aria-required-parent.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-presentation-role-conflict.html">Testing the axe rule <code>presentation-role-conflict</code></a> <span class="badge-report"><a href="x-axe-core-rules/15-axe-report-presentation-role-conflict.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-braille-equivalent.html">Testing the axe rule <code>aria-braille-equivalent</code></a> <span class="badge-report"><a href="x-axe-core-rules/16-axe-report-aria-braille-equivalent.html">Report</a></span></li>
+  <li><a href="testing-axe-rule-aria-hidden-body.html">Testing the axe rule <code>aria-hidden-body</code></a></li>
+</ul>
+
+
+<p><a href="testing-xtemplate.html">Template</a></p>
+</main>
+</body>
+</html>
