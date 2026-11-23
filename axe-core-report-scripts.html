@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>axe-core accessibility report scripts - Intopia</title>
+  <meta name="description" content="Download four axe-core scripts to generate accessibility testing reports in HTML or JSON, with detailed and simplified options for reviewing results.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-a11y-dark.min.css" rel="stylesheet">
+  <link href="assets/css/testing.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/testing-darkmode.css" media="(prefers-color-scheme: dark)">
+  <script src="assets/js/table-wrap.js" defer></script>
+<style>
+/* ---------------------
+Download button
+Same order as the template links: link, visited, hover, focus, active.
+Every state uses the same specificity, so the later state always wins.
+----------------------*/
+
+a.download {
+  display: inline-flex;
+  align-items: center;
+  gap: .5em;
+  padding: .6em 1.1em;
+  border: 1px solid transparent; /* visible in forced colours */
+  border-radius: .4em;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a.download:is(:link, :visited) {
+  background: #003194;            /* 11.25:1 with white */
+  color: var(--colour-white);
+}
+
+a.download:hover {
+  background: var(--colour-green); /* 5.14:1 with white */
+  color: var(--colour-white);
+}
+
+a.download:focus-visible {
+  background: var(--colour-black);
+  color: var(--colour-white);
+  outline: 3px solid var(--colour-black);
+  outline-offset: 2px;
+}
+
+a.download:active {
+  background: var(--colour-active); /* 7.75:1 with white */
+  color: var(--colour-white);
+}
+
+a.download code {
+  color: inherit;
+  font-size: .9em;
+  font-weight: normal;
+}
+
+/* Download button: dark mode */
+@media (prefers-color-scheme: dark) {
+  a.download:is(:link, :visited) {
+    background: #8ab4f8;
+    color: #121212;
+  }
+
+  a.download:hover {
+    background: #b5f0a0;
+    color: #121212;
+  }
+
+  a.download:focus-visible {
+    background: var(--colour-white);
+    color: var(--colour-black);
+    outline-color: var(--colour-white);
+  }
+
+  a.download:active {
+    background: #ff9e9e;
+    color: #121212;
+  }
+}
+</style>
+</head>
+<body>
+<main>
+
+<a class="intopia-home-link" href="https://intopia.digital/" aria-label="Intopia home">
+  <picture>
+    <source srcset="assets/img/intopia-logo-white.png" media="(prefers-color-scheme: dark)">
+    <img src="assets/img/intopia.png" alt="Intopia logo. The word 'intopia' in black, with the 'o' made from four curved brush strokes in pink, orange, yellow and turquoise." class="intopia-logo">
+  </picture>
+</a>
+
+<p class="header-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+
+<h1>axe-core accessibility report scripts</h1>
+
+<p>These four scripts let you run axe-core accessibility tests in your browser console and download the results as HTML or JSON reports.</p>
+
+<p>Each format has two options: a detailed report with more information about the results, and a simpler report with less detail. Choose the format that suits how you want to review or use the results.</p>
+
+<p>You can download the scripts below or copy them directly into the browser console on the page you want to test.</p>
+
+<ul>
+  <li><a href="#axe-core-html-report-detailed">1. Axe-core HTML report detailed</a></li>
+  <li><a href="#axe-core-html-report-simple">2. Axe-core HTML report simple</a></li>
+  <li><a href="#axe-core-json-report-complete">3. Axe-core JSON report complete</a></li>
+  <li><a href="#axe-core-json-report-simple">4. Axe-core JSON report simple</a></li>
+</ul>
+
+
+<!-- section -->
+
+
+<h2 id="axe-core-html-report-detailed">1. Axe-core HTML report detailed</h2>
+
+<h3>What it does</h3>
+
+<ol>
+  <li>Loads axe-core if it isn&#8217;t already on the page.</li>
+  <li>Runs axe on the page.</li>
+  <li>Sets up small helpers.</li>
+  <li>Sorts both lists so the most severe rules come first.</li>
+  <li>Builds the headline summary lines.</li>
+  <li>Turns each element&#8217;s problems into readable HTML, grouped into &#8220;Fix any&#8221; and &#8220;Fix all&#8221;.</li>
+  <li>Builds one section for fails and one for needs review.</li>
+  <li>Builds a file name from the page title and today&#8217;s date.</li>
+  <li>Puts the whole page together.</li>
+  <li>Downloads it as a file.</li>
+</ol>
+
+<h3>What it delivers</h3>
+
+<p>An HTML report with a headline summary of fails by impact. Each rule includes its description, impact, tags and a link to Deque University, plus a table of every affected element with its selector and what needs fixing. It&#8217;s best for auditors, or for anyone who wants the full context behind each issue.</p>
+
+<h3>The script</h3>
+
+<p><a class="download" href="assets/js/axe-core-html-report-detailed.js" download><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg> Download <code>axe-core-html-report-detailed.js</code></a></p>
+
+<details>
+<summary>Script</summary>
+<pre tabindex="0"><code>(async () =&gt; {
+  try {
+    // 0. Load axe-core if it isn't already on the page
+    if (!window.axe) {
+      await new Promise((resolve, reject) =&gt; {
+        const s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/axe-core@4.14.0/axe.min.js';
+        s.onload = resolve;
+        s.onerror = () =&gt; reject(new Error('Could not load axe-core. The site may block outside scripts.'));
+        document.head.appendChild(s);
+      });
+    }
+
+    // 1. Run axe on the page
+    const r = await axe.run();
+
+    // 2. Small helpers
+    // Make text safe to put inside HTML
+    const esc = (s) =&gt; String(s ?? '').replace(/[&amp;&lt;&gt;"]/g, (c) =&gt;
+      ({ '&amp;': '&amp;amp;', '&lt;': '&amp;lt;', '&gt;': '&amp;gt;', '"': '&amp;quot;' }[c]));
+    // "1 rule", "2 rules"
+    const plural = (n, word) =&gt; `${n} ${word}${n === 1 ? '' : 's'}`;
+    // Impact order, most severe first
+    const order = ['critical', 'serious', 'moderate', 'minor'];
+    const rank = (impact) =&gt; (order.includes(impact) ? order.indexOf(impact) : order.length);
+    const sortByImpact = (rules) =&gt; [...rules].sort((a, b) =&gt; rank(a.impact) - rank(b.impact));
+    // Total number of elements across a set of rules
+    const nodeCount = (rules) =&gt; rules.reduce((n, rule) =&gt; n + rule.nodes.length, 0);
+    // "2 critical, 7 serious, 3 moderate"
+    const breakdown = (rules) =&gt; {
+      const counts = {};
+      rules.forEach((rule) =&gt; rule.nodes.forEach((n) =&gt; {
+        const key = n.impact || rule.impact || 'not set';
+        counts[key] = (counts[key] || 0) + 1;
+      }));
+      return [...order, 'not set'].filter((k) =&gt; counts[k]).map((k) =&gt; `${counts[k]} ${k}`).join(', ');
+    };
+
+    // 3. Sort both lists so the most severe rules come first
+    const fails = sortByImpact(r.violations);
+    const review = sortByImpact(r.incomplete);
+
+    // 4. Headline summary lines
+    const failsLine = nodeCount(fails)
+      ? `${nodeCount(fails)} across ${plural(fails.length, 'rule')} (${breakdown(fails)})`
+      : 'none';
+    const reviewLine = nodeCount(review)
+      ? `${nodeCount(review)} across ${plural(review.length, 'rule')}`
+      : 'none';
+
+    // 5. Turn a node's problems into readable HTML.
+    //    Heading lines ("Fix any of the following:") are bold; the indented
+    //    lines under them are the individual checks.
+    //    "Fix any" means fixing one of the checks is enough.
+    //    "Fix all" means every check listed must be fixed.
+    const problems = (n) =&gt; {
+      let lines;
+      if (n.failureSummary) {
+        lines = n.failureSummary.split('\n');
+      } else {
+        // Fallback if axe gave no summary for this element
+        lines = [];
+        if (n.any.length) lines.push('Fix any of the following:', ...n.any.map((c) =&gt; '  ' + c.message));
+        const all = [...n.all, ...n.none];
+        if (all.length) lines.push('Fix all of the following:', ...all.map((c) =&gt; '  ' + c.message));
+      }
+      return lines.filter((line) =&gt; line.trim()).map((line) =&gt;
+        /^\s/.test(line)
+          ? `&lt;span class="check"&gt;${esc(line.trim())}&lt;/span&gt;`
+          : `&lt;strong&gt;${esc(line.trim())}&lt;/strong&gt;`
+      ).join('&lt;br&gt;');
+    };
+
+    // 6. Build one section (fails or needs review)
+    const section = (title, rules) =&gt; {
+      let out = `&lt;h2&gt;${title} (${nodeCount(rules)})&lt;/h2&gt;`;
+      if (!rules.length) return out + '&lt;p&gt;None.&lt;/p&gt;';
+      for (const rule of rules) {
+        out += `&lt;h3&gt;${esc(rule.id)}: ${esc(rule.help)} (${rule.nodes.length})&lt;/h3&gt;
+          &lt;p&gt;${esc(rule.description)}&lt;/p&gt;
+          &lt;p&gt;Impact: ${esc(rule.impact || 'not set')}. &lt;a href="${esc(rule.helpUrl)}"&gt;Rule details on Deque University&lt;/a&gt;&lt;/p&gt;
+          &lt;p&gt;Tags: ${rule.tags.map((t) =&gt; `&lt;code&gt;${esc(t)}&lt;/code&gt;`).join(', ')}&lt;/p&gt;
+          &lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;#&lt;/th&gt;&lt;th scope="col"&gt;Element&lt;/th&gt;&lt;th scope="col"&gt;Selector&lt;/th&gt;&lt;th scope="col"&gt;Problem&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;`;
+        rule.nodes.forEach((n, i) =&gt; {
+          out += `&lt;tr&gt;&lt;td&gt;${i + 1}&lt;/td&gt;&lt;td&gt;&lt;code&gt;${esc(n.html)}&lt;/code&gt;&lt;/td&gt;&lt;td&gt;&lt;code&gt;${esc(n.target.join(' '))}&lt;/code&gt;&lt;/td&gt;&lt;td&gt;${problems(n)}&lt;/td&gt;&lt;/tr&gt;`;
+        });
+        out += '&lt;/tbody&gt;&lt;/table&gt;';
+      }
+      return out;
+    };
+
+    // 7. Build a file name from the page title and today's date
+    const slug = (document.title || location.hostname || 'page')
+      .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 50) || 'page';
+    const d = new Date();
+    const date = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    const fileName = `axe-report-detailed-${slug}-${date}.html`;
+
+    // 8. Put the whole page together
+    const html = `&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt;&lt;meta charset="utf-8"&gt;
+&lt;title&gt;axe report: ${esc(document.title)}&lt;/title&gt;
+&lt;style&gt;
+  body { font-family: system-ui, sans-serif; line-height: 1.5; margin: 2rem; color: #1d1d1f; }
+  table { border-collapse: collapse; width: 100%; margin-bottom: 2rem; }
+  th, td { border: 1px solid #ccc; padding: .4rem .6rem; text-align: left; vertical-align: top; }
+  th { background: #f2f2f2; }
+  code { font-size: .85rem; word-break: break-word; }
+  h2 { border-top: 3px solid #1d1d1f; padding-top: 1rem; margin-top: 2.5rem; }
+  .check { display: inline-block; padding-left: 1.25rem; }
+&lt;/style&gt;&lt;/head&gt;&lt;body&gt;
+&lt;main&gt;
+&lt;h1&gt;axe report&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;Page: &lt;a href="${esc(r.url.replace(/^file:\/\/.*?\/exercise\//, 'https://intopia.github.io/exercise/'))}"&gt;${esc(document.title)}&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Fails: ${failsLine}&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Needs review: ${reviewLine}&lt;/li&gt;
+  &lt;li&gt;Run: ${new Date(r.timestamp).toLocaleString()}&lt;/li&gt;
+  &lt;li&gt;axe-core ${esc(r.testEngine.version)}&lt;/li&gt;
+  &lt;li&gt;Rules passed: ${r.passes.length}. Rules not applicable: ${r.inapplicable.length}.&lt;/li&gt;
+&lt;/ul&gt;
+${section('Fails', fails)}
+${section('Needs review', review)}
+&lt;/main&gt;
+&lt;/body&gt;&lt;/html&gt;`;
+
+    // 9. Download it as a file
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+    a.download = fileName;
+    a.click();
+    setTimeout(() =&gt; URL.revokeObjectURL(a.href), 1000);
+    console.log(`axe report saved as ${fileName}`);
+  } catch (e) {
+    console.error(`axe report failed: ${e.message}`);
+  }
+})();</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2 id="axe-core-html-report-simple">2. Axe-core HTML report simple</h2>
+
+<h3>What it does</h3>
+
+<ol>
+  <li>Loads axe-core if it isn&#8217;t already on the page.</li>
+  <li>Runs axe on the page.</li>
+  <li>Sets up small helpers.</li>
+  <li>Sorts both lists so the most severe rules come first.</li>
+  <li>Builds the headline summary lines.</li>
+  <li>Turns each element&#8217;s problems into readable HTML, grouped into &#8220;Fix any&#8221; and &#8220;Fix all&#8221;.</li>
+  <li>Builds one section for fails and one for needs review.</li>
+  <li>Builds a file name from the page title and today&#8217;s date.</li>
+  <li>Puts the whole page together.</li>
+  <li>Downloads it as a file.</li>
+</ol>
+
+<h3>What it delivers</h3>
+
+<p>A shorter HTML report with the same headline summary and tables, but without the rule descriptions and tags. Each rule shows just its impact, a link to Deque University and the affected elements. It&#8217;s best for developers who want a quick list of what to fix.</p>
+
+<h3>The script</h3>
+
+<p><a class="download" href="assets/js/axe-core-html-report-simple.js" download><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg> Download <code>axe-core-html-report-simple.js</code></a></p>
+
+<details>
+<summary>Script</summary>
+<pre tabindex="0"><code>(async () =&gt; {
+  try {
+    // 0. Load axe-core if it isn't already on the page
+    if (!window.axe) {
+      await new Promise((resolve, reject) =&gt; {
+        const s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/axe-core@4.14.0/axe.min.js';
+        s.onload = resolve;
+        s.onerror = () =&gt; reject(new Error('Could not load axe-core. The site may block outside scripts.'));
+        document.head.appendChild(s);
+      });
+    }
+
+    // 1. Run axe on the page
+    const r = await axe.run();
+
+    // 2. Small helpers
+    // Make text safe to put inside HTML
+    const esc = (s) =&gt; String(s ?? '').replace(/[&amp;&lt;&gt;"]/g, (c) =&gt;
+      ({ '&amp;': '&amp;amp;', '&lt;': '&amp;lt;', '&gt;': '&amp;gt;', '"': '&amp;quot;' }[c]));
+    // "1 rule", "2 rules"
+    const plural = (n, word) =&gt; `${n} ${word}${n === 1 ? '' : 's'}`;
+    // Impact order, most severe first
+    const order = ['critical', 'serious', 'moderate', 'minor'];
+    const rank = (impact) =&gt; (order.includes(impact) ? order.indexOf(impact) : order.length);
+    const sortByImpact = (rules) =&gt; [...rules].sort((a, b) =&gt; rank(a.impact) - rank(b.impact));
+    // Total number of elements across a set of rules
+    const nodeCount = (rules) =&gt; rules.reduce((n, rule) =&gt; n + rule.nodes.length, 0);
+    // "2 critical, 7 serious, 3 moderate"
+    const breakdown = (rules) =&gt; {
+      const counts = {};
+      rules.forEach((rule) =&gt; rule.nodes.forEach((n) =&gt; {
+        const key = n.impact || rule.impact || 'not set';
+        counts[key] = (counts[key] || 0) + 1;
+      }));
+      return [...order, 'not set'].filter((k) =&gt; counts[k]).map((k) =&gt; `${counts[k]} ${k}`).join(', ');
+    };
+
+    // 3. Sort both lists so the most severe rules come first
+    const fails = sortByImpact(r.violations);
+    const review = sortByImpact(r.incomplete);
+
+    // 4. Headline summary lines
+    const failsLine = nodeCount(fails)
+      ? `${nodeCount(fails)} across ${plural(fails.length, 'rule')} (${breakdown(fails)})`
+      : 'none';
+    const reviewLine = nodeCount(review)
+      ? `${nodeCount(review)} across ${plural(review.length, 'rule')}`
+      : 'none';
+
+    // 5. Turn a node's problems into readable HTML.
+    //    "Fix any" means fixing one of the checks is enough.
+    //    "Fix all" means every check listed must be fixed.
+    const problems = (n) =&gt; {
+      let lines;
+      if (n.failureSummary) {
+        lines = n.failureSummary.split('\n');
+      } else {
+        // Fallback if axe gave no summary for this element
+        lines = [];
+        if (n.any.length) lines.push('Fix any of the following:', ...n.any.map((c) =&gt; '  ' + c.message));
+        const all = [...n.all, ...n.none];
+        if (all.length) lines.push('Fix all of the following:', ...all.map((c) =&gt; '  ' + c.message));
+      }
+      return lines.filter((line) =&gt; line.trim()).map((line) =&gt;
+        /^\s/.test(line)
+          ? `&lt;span class="check"&gt;${esc(line.trim())}&lt;/span&gt;`
+          : `&lt;strong&gt;${esc(line.trim())}&lt;/strong&gt;`
+      ).join('&lt;br&gt;');
+    };
+
+    // 6. Build one section (fails or needs review)
+    const section = (title, rules) =&gt; {
+      let out = `&lt;h2&gt;${title} (${nodeCount(rules)})&lt;/h2&gt;`;
+      if (!rules.length) return out + '&lt;p&gt;None.&lt;/p&gt;';
+      for (const rule of rules) {
+        out += `&lt;h3&gt;${esc(rule.id)}: ${esc(rule.help)} (${rule.nodes.length})&lt;/h3&gt;
+          &lt;p&gt;Impact: ${esc(rule.impact || 'not set')}. &lt;a href="${esc(rule.helpUrl)}"&gt;Rule details on Deque University&lt;/a&gt;&lt;/p&gt;
+          &lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;#&lt;/th&gt;&lt;th scope="col"&gt;Element&lt;/th&gt;&lt;th scope="col"&gt;Selector&lt;/th&gt;&lt;th scope="col"&gt;Problem&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;`;
+        rule.nodes.forEach((n, i) =&gt; {
+          out += `&lt;tr&gt;&lt;td&gt;${i + 1}&lt;/td&gt;&lt;td&gt;&lt;code&gt;${esc(n.html)}&lt;/code&gt;&lt;/td&gt;&lt;td&gt;&lt;code&gt;${esc(n.target.join(' '))}&lt;/code&gt;&lt;/td&gt;&lt;td&gt;${problems(n)}&lt;/td&gt;&lt;/tr&gt;`;
+        });
+        out += '&lt;/tbody&gt;&lt;/table&gt;';
+      }
+      return out;
+    };
+
+    // 7. Build a file name from the page title and today's date
+    const slug = (document.title || location.hostname || 'page')
+      .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 50) || 'page';
+    const d = new Date();
+    const date = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    const fileName = `axe-report-simple-${slug}-${date}.html`;
+
+    // 8. Put the whole page together
+    const html = `&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt;&lt;meta charset="utf-8"&gt;
+&lt;title&gt;axe report: ${esc(document.title)}&lt;/title&gt;
+&lt;style&gt;
+  body { font-family: system-ui, sans-serif; line-height: 1.5; margin: 2rem; color: #1d1d1f; }
+  table { border-collapse: collapse; width: 100%; margin-bottom: 2rem; }
+  th, td { border: 1px solid #ccc; padding: .4rem .6rem; text-align: left; vertical-align: top; }
+  th { background: #f2f2f2; }
+  code { font-size: .85rem; word-break: break-word; }
+  h2 { border-top: 3px solid #1d1d1f; padding-top: 1rem; margin-top: 2.5rem; }
+  .check { display: inline-block; padding-left: 1.25rem; }
+&lt;/style&gt;&lt;/head&gt;&lt;body&gt;
+&lt;main&gt;
+&lt;h1&gt;axe report&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;Page: &lt;a href="${esc(r.url.replace(/^file:\/\/.*?\/exercise\//, 'https://intopia.github.io/exercise/'))}"&gt;${esc(document.title)}&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Fails: ${failsLine}&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Needs review: ${reviewLine}&lt;/li&gt;
+  &lt;li&gt;Run: ${new Date(r.timestamp).toLocaleString()}&lt;/li&gt;
+  &lt;li&gt;axe-core ${esc(r.testEngine.version)}&lt;/li&gt;
+  &lt;li&gt;Rules passed: ${r.passes.length}. Rules not applicable: ${r.inapplicable.length}.&lt;/li&gt;
+&lt;/ul&gt;
+${section('Fails', fails)}
+${section('Needs review', review)}
+&lt;/main&gt;
+&lt;/body&gt;&lt;/html&gt;`;
+
+    // 9. Download it as a file
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+    a.download = fileName;
+    a.click();
+    setTimeout(() =&gt; URL.revokeObjectURL(a.href), 1000);
+    console.log(`axe report saved as ${fileName}`);
+  } catch (e) {
+    console.error(`axe report failed: ${e.message}`);
+  }
+})();</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2 id="axe-core-json-report-complete">3. Axe-core JSON report complete</h2>
+
+<h3>What it does</h3>
+<ol>
+  <li>Loads axe-core if it isn&#8217;t already on the page.</li>
+  <li>Runs axe on the page.</li>
+  <li>Swaps local exercise file paths for the public URL.</li>
+  <li>Builds a file name from the page title and today&#8217;s date.</li>
+  <li>Downloads the results as a file.</li>
+</ol>
+
+<h3>What it delivers</h3>
+<p>A JSON file with everything axe returns, unchanged: fails, needs review, passes and inapplicable rules, with every check and all the engine details. It&#8217;s best for digging into exactly what axe found, or for feeding into other tools.</p>
+
+<h3>The script</h3>
+
+<p><a class="download" href="assets/js/axe-core-json-report-complete.js" download><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg> Download <code>axe-core-json-report-complete.js</code></a></p>
+
+<details>
+<summary>Script</summary>
+<pre tabindex="0"><code>(async () =&gt; {
+  try {
+    // 0. Load axe-core if it isn't already on the page
+    if (!window.axe) {
+      await new Promise((resolve, reject) =&gt; {
+        const s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/axe-core@4.14.0/axe.min.js';
+        s.onload = resolve;
+        s.onerror = () =&gt; reject(new Error('Could not load axe-core. The site may block outside scripts.'));
+        document.head.appendChild(s);
+      });
+    }
+
+    // 1. Run axe on the page
+    const r = await axe.run();
+
+    // 2. Swap local exercise file paths for the public URL, as the other reports do
+    r.url = r.url.replace(/^file:\/\/.*?\/exercise\//, 'https://intopia.github.io/exercise/');
+
+    // 3. Build a file name from the page title and today's date
+    const slug = (document.title || location.hostname || 'page')
+      .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 50) || 'page';
+    const d = new Date();
+    const date = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    const fileName = `axe-report-complete-${slug}-${date}.json`;
+
+    // 4. Download the complete results as a file (left exactly as axe returns them)
+    const json = JSON.stringify(r, null, 2);
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([json], { type: 'application/json' }));
+    a.download = fileName;
+    a.click();
+    setTimeout(() =&gt; URL.revokeObjectURL(a.href), 1000);
+    console.log(`axe report saved as ${fileName}`);
+  } catch (e) {
+    console.error(`axe report failed: ${e.message}`);
+  }
+})();</code></pre>
+</details>
+
+
+<!-- section -->
+
+
+<h2 id="axe-core-json-report-simple">4. Axe-core JSON report simple</h2>
+
+<h3>What it does</h3>
+
+<ol>
+  <li>Loads axe-core if it isn&#8217;t already on the page.</li>
+  <li>Runs axe on the page.</li>
+  <li>Sets up small helpers.</li>
+  <li>Builds one section for fails and one for needs review, with the most severe rules first.</li>
+  <li>Puts the whole report together.</li>
+  <li>Builds a file name from the page title and today&#8217;s date.</li>
+  <li>Downloads it as a file.</li>
+</ol>
+
+<h3>What it delivers</h3>
+
+<p>A trimmed JSON file with only the fails and needs review results, plus counts by impact. Each element lists its selector, its HTML and what needs fixing, split into <code>fixAny</code> (fixing one is enough) and <code>fixAll</code> (every one must be fixed). It&#8217;s best for tracking issues over time or importing into a spreadsheet or issue tracker.</p>
+
+<h3>The script</h3>
+
+<p><a class="download" href="assets/js/axe-core-json-report-simple.js" download><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg> Download <code>axe-core-json-report-simple.js</code></a></p>
+
+<details>
+<summary>Script</summary>
+<pre tabindex="0"><code>(async () =&gt; {
+  try {
+    // 0. Load axe-core if it isn't already on the page
+    if (!window.axe) {
+      await new Promise((resolve, reject) =&gt; {
+        const s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/axe-core@4.14.0/axe.min.js';
+        s.onload = resolve;
+        s.onerror = () =&gt; reject(new Error('Could not load axe-core. The site may block outside scripts.'));
+        document.head.appendChild(s);
+      });
+    }
+
+    // 1. Run axe on the page
+    const r = await axe.run();
+
+    // 2. Small helpers
+    // Impact order, most severe first
+    const order = ['critical', 'serious', 'moderate', 'minor'];
+    const rank = (impact) =&gt; (order.includes(impact) ? order.indexOf(impact) : order.length);
+    const sortByImpact = (rules) =&gt; [...rules].sort((a, b) =&gt; rank(a.impact) - rank(b.impact));
+    // { critical: 2, serious: 7, moderate: 3 }
+    const byImpact = (rules) =&gt; {
+      const counts = {};
+      rules.forEach((rule) =&gt; rule.nodes.forEach((n) =&gt; {
+        const key = n.impact || rule.impact || 'not set';
+        counts[key] = (counts[key] || 0) + 1;
+      }));
+      const sorted = {};
+      [...order, 'not set'].filter((k) =&gt; counts[k]).forEach((k) =&gt; { sorted[k] = counts[k]; });
+      return sorted;
+    };
+
+    // 3. Build one section (fails or needs review), most severe rules first.
+    //    fixAny: fixing one of these is enough.
+    //    fixAll: every one of these must be fixed.
+    const section = (rules) =&gt; {
+      const sorted = sortByImpact(rules);
+      return {
+        count: sorted.reduce((n, rule) =&gt; n + rule.nodes.length, 0),
+        ruleCount: sorted.length,
+        byImpact: byImpact(sorted),
+        rules: sorted.map((rule) =&gt; ({
+          id: rule.id,
+          help: rule.help,
+          description: rule.description,
+          impact: rule.impact || null,
+          tags: rule.tags,
+          helpUrl: rule.helpUrl,
+          count: rule.nodes.length,
+          nodes: rule.nodes.map((n, i) =&gt; ({
+            number: i + 1,
+            html: n.html,
+            selector: n.target.join(' '),
+            impact: n.impact || null,
+            fixAny: n.any.map((c) =&gt; c.message),
+            fixAll: [...n.all, ...n.none].map((c) =&gt; c.message),
+          })),
+        })),
+      };
+    };
+
+    // 4. Put the whole report together
+    const report = {
+      page: {
+        title: document.title,
+        url: r.url.replace(/^file:\/\/.*?\/exercise\//, 'https://intopia.github.io/exercise/'),
+      },
+      run: r.timestamp,
+      runLocal: new Date(r.timestamp).toLocaleString(),
+      axeVersion: r.testEngine.version,
+      rulesPassed: r.passes.length,
+      rulesNotApplicable: r.inapplicable.length,
+      fails: section(r.violations),
+      needsReview: section(r.incomplete),
+    };
+
+    // 5. Build a file name from the page title and today's date
+    const slug = (document.title || location.hostname || 'page')
+      .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 50) || 'page';
+    const d = new Date();
+    const date = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    const fileName = `axe-report-simple-${slug}-${date}.json`;
+
+    // 6. Download it as a file
+    const json = JSON.stringify(report, null, 2);
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([json], { type: 'application/json' }));
+    a.download = fileName;
+    a.click();
+    setTimeout(() =&gt; URL.revokeObjectURL(a.href), 1000);
+    console.log(`axe report saved as ${fileName}`);
+  } catch (e) {
+    console.error(`axe report failed: ${e.message}`);
+  }
+})();</code></pre>
+</details>
+
+
+<p class="footer-link"><span aria-hidden="true" class="arrow">&laquo;</span> <a href="testing.html">Back to home</a></p>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+</body>
+</html>
