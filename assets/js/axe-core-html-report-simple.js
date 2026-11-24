@@ -23,32 +23,30 @@
     // Impact order, most severe first
     const order = ['critical', 'serious', 'moderate', 'minor'];
     const rank = (impact) => (order.includes(impact) ? order.indexOf(impact) : order.length);
-    const sortByImpact = (rules) => [...rules].sort((a, b) => rank(a.impact) - rank(b.impact));
-    // Total number of elements across a set of rules
-    const nodeCount = (rules) => rules.reduce((n, rule) => n + rule.nodes.length, 0);
-    // "2 critical, 7 serious, 3 moderate"
-    const breakdown = (rules) => {
-      const counts = {};
-      rules.forEach((rule) => rule.nodes.forEach((n) => {
-        const key = n.impact || rule.impact || 'not set';
-        counts[key] = (counts[key] || 0) + 1;
-      }));
-      return [...order, 'not set'].filter((k) => counts[k]).map((k) => `${counts[k]} ${k}`).join(', ');
-    };
 
-    // 3. Sort both lists so the most severe rules come first
-    const fails = sortByImpact(r.violations);
-    const review = sortByImpact(r.incomplete);
+    // 3. Flatten each list into one row per element, most severe first.
+    //    Rows with the same impact stay grouped by rule.
+    const flatten = (rules) => rules
+      .flatMap((rule) => rule.nodes.map((n) => ({ rule, n, impact: n.impact || rule.impact || 'not set' })))
+      .sort((a, b) => rank(a.impact) - rank(b.impact) || a.rule.id.localeCompare(b.rule.id));
+    const fails = flatten(r.violations);
+    const review = flatten(r.incomplete);
 
     // 4. Headline summary lines
-    const failsLine = nodeCount(fails)
-      ? `${nodeCount(fails)} across ${plural(fails.length, 'rule')} (${breakdown(fails)})`
+    // "2 critical, 7 serious, 3 moderate"
+    const breakdown = (rows) => {
+      const counts = {};
+      rows.forEach((row) => { counts[row.impact] = (counts[row.impact] || 0) + 1; });
+      return [...order, 'not set'].filter((k) => counts[k]).map((k) => `${counts[k]} ${k}`).join(', ');
+    };
+    const failsLine = fails.length
+      ? `${fails.length} across ${plural(r.violations.length, 'rule')} (${breakdown(fails)})`
       : 'none';
-    const reviewLine = nodeCount(review)
-      ? `${nodeCount(review)} across ${plural(review.length, 'rule')}`
+    const reviewLine = review.length
+      ? `${review.length} across ${plural(r.incomplete.length, 'rule')}`
       : 'none';
 
-    // 5. Turn a node's problems into readable HTML.
+    // 5. Turn an element's problems into readable HTML.
     //    "Fix any" means fixing one of the checks is enough.
     //    "Fix all" means every check listed must be fixed.
     const problems = (n) => {
@@ -69,20 +67,22 @@
       ).join('<br>');
     };
 
-    // 6. Build one section (fails or needs review)
-    const section = (title, rules) => {
-      let out = `<h2>${title} (${nodeCount(rules)})</h2>`;
-      if (!rules.length) return out + '<p>None.</p>';
-      for (const rule of rules) {
-        out += `<h3>${esc(rule.id)}: ${esc(rule.help)} (${rule.nodes.length})</h3>
-          <p>Impact: ${esc(rule.impact || 'not set')}. <a href="${esc(rule.helpUrl)}">Rule details on Deque University</a></p>
-          <table><thead><tr><th scope="col">#</th><th scope="col">Element</th><th scope="col">Selector</th><th scope="col">Problem</th></tr></thead><tbody>`;
-        rule.nodes.forEach((n, i) => {
-          out += `<tr><td>${i + 1}</td><td><code>${esc(n.html)}</code></td><td><code>${esc(n.target.join(' '))}</code></td><td>${problems(n)}</td></tr>`;
-        });
-        out += '</tbody></table>';
-      }
-      return out;
+    // 6. Build one table (fails or needs review), one row per element
+    const section = (title, rows) => {
+      let out = `<h2>${title} (${rows.length})</h2>`;
+      if (!rows.length) return out + '<p>None.</p>';
+      out += `<table><thead><tr><th scope="col">#</th><th scope="col">Impact</th><th scope="col">Rule</th><th scope="col">Element</th><th scope="col">Selector</th><th scope="col">How to fix</th></tr></thead><tbody>`;
+      rows.forEach(({ rule, n, impact }, i) => {
+        out += `<tr>
+          <td>${i + 1}</td>
+          <td>${esc(impact)}</td>
+          <td><a href="${esc(rule.helpUrl)}">${esc(rule.id)}</a><br>${esc(rule.help)}</td>
+          <td><code>${esc(n.html)}</code></td>
+          <td><code>${esc(n.target.join(' '))}</code></td>
+          <td>${problems(n)}</td>
+        </tr>`;
+      });
+      return out + '</tbody></table>';
     };
 
     // 7. Build a file name from the page title and today's date
