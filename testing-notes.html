@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notes test page: wombats</title>
+<style>
+/*
+VOICE: calm test page, readable first
+IDEA: a field notebook with margin notes
+PICTURE: the reading column with notes in the margin
+COLOUR and TYPE: earthy brown and eucalypt green, Source Serif body, system sans for UI
+LAYOUT: one reading column, notes in a margin column above 860px, inline below
+*/
+:root{
+  color-scheme:light dark;
+  --bg:light-dark(#fbfaf7,#171512);
+  --ink:light-dark(#1f1b16,#ece7df);
+  --muted:light-dark(#5b5248,#b9afa3);
+  --rule:light-dark(#d9d1c5,#3b352e);
+  --accent:light-dark(#2f5d46,#8fc7a8);
+  --note-bg:light-dark(#eef3ee,#1f2a23);
+  --mark-bg:light-dark(#f6e3a8,#5a4a17);
+  --focus:light-dark(#1a4fd6,#9bb8ff);
+}
+:root[data-theme=light]{color-scheme:light}
+:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 Georgia,"Times New Roman",serif;overflow-x:clip}
+.wrap{max-width:1040px;margin:0 auto;padding:clamp(24px,4vw,56px) max(5vw,16px)}
+h1{font-size:clamp(32px,5vw,44px);line-height:1.1;margin:0 0 .4em;text-wrap:balance}
+h2{font-size:22px;margin:2em 0 .5em}
+.intro{color:var(--muted);max-width:65ch;margin:0 0 1.5em}
+.sample{font:14px/1.4 system-ui,sans-serif;color:var(--muted)}
+
+/* Features section */
+.features{max-width:70ch;margin-top:3em;padding-top:1.5em;border-top:1px solid var(--rule)}
+.features h2{font-size:clamp(26px,3.5vw,32px);margin:0 0 .5em}
+.features h3{font-size:20px;margin:1.8em 0 .5em}
+.features li{margin-bottom:.4em}
+.features code{font:15px/1.4 ui-monospace,Menlo,Consolas,monospace;background:var(--note-bg);padding:.05em .3em;border-radius:3px}
+.features pre{background:var(--note-bg);border-left:4px solid var(--accent);padding:14px 16px;overflow-x:auto;border-radius:0 6px 6px 0}
+.features pre code{background:none;padding:0;font-size:14px}
+
+/* Toolbar */
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:14px 0;border-block:1px solid var(--rule);margin-bottom:2em}
+button{font:600 16px/1.2 system-ui,sans-serif;min-height:44px;padding:10px 16px;border-radius:6px;border:2px solid var(--accent);background:var(--bg);color:var(--accent);cursor:pointer}
+button:hover{background:var(--note-bg)}
+button[aria-pressed=true]{background:var(--accent);color:var(--bg)}
+.notes-toggle::before{content:"";display:inline-block;width:.8em;height:.8em;margin-right:.5em;border:2px solid currentColor;border-radius:2px;vertical-align:-.05em}
+.notes-toggle[aria-pressed=true]::before{background:currentColor;box-shadow:inset 0 0 0 2px var(--accent)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+[tabindex="-1"]:focus{outline:none}
+[tabindex="-1"]:focus-visible{outline:3px dashed var(--focus);outline-offset:4px}
+
+/* Reading layout */
+.article{display:grid;grid-template-columns:minmax(0,1fr);gap:0 40px}
+.block{margin:0 0 1.4em}
+.block>p{max-width:65ch;margin:0 0 .4em}
+.add-para{font-size:14px;font-weight:600;min-height:36px;padding:6px 12px;border:1px dashed var(--accent);background:transparent}
+.add-para::before,.float-add::before{content:"+";margin-right:.35em;font-weight:700}
+.float-add{position:absolute;z-index:2;font-size:15px;min-height:40px;padding:8px 14px;background:var(--accent);color:var(--bg);box-shadow:0 4px 14px rgb(0 0 0/.25)}
+.float-add:hover{background:var(--accent);filter:brightness(1.1)}
+mark{background:var(--mark-bg);color:inherit;padding:0 .15em;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:.2em}
+
+/* Notes */
+.note{font:15px/1.5 system-ui,sans-serif;background:var(--note-bg);border-left:4px solid var(--accent);padding:12px 14px;margin:0 0 1.5em;border-radius:0 6px 6px 0}
+.note p{margin:0 0 .5em}
+.note p:last-child{margin:0}
+.note-label{font-weight:700}
+.note-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.note-actions button{font-size:15px;padding:8px 12px}
+.note textarea{display:block;width:100%;font:16px/1.4 system-ui,sans-serif;padding:8px;border:2px solid var(--muted);border-radius:4px;background:var(--bg);color:var(--ink);margin:6px 0 0}
+.note label{font-weight:600}
+
+/* Hover relationship */
+.article{position:relative}
+.links{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.links path{fill:none;stroke:var(--accent);stroke-width:2}
+.links circle{fill:var(--accent)}
+mark,.note{transition:background-color .15s,box-shadow .15s}
+mark.is-linked{background:var(--accent);color:var(--bg);text-decoration-color:var(--bg)}
+.note.is-linked{box-shadow:0 0 0 2px var(--accent)}
+.block>p.is-linked{background:var(--note-bg);box-shadow:0 0 0 8px var(--note-bg);border-radius:2px}
+@media (prefers-reduced-motion:reduce){mark,.note{transition:none}}
+
+@media (min-width:860px){
+  .article{grid-template-columns:minmax(0,1fr) 260px}
+  .article>.block{grid-column:1;grid-row:span var(--rows,1)}
+  .article>.note{grid-column:2;align-self:start;margin-top:.2em}
+}
+
+.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+@media (forced-colors:active){
+  mark{border:1px solid CanvasText;forced-color-adjust:none;background:Mark;color:MarkText}
+  .note{border:1px solid CanvasText;border-left-width:4px}
+  button[aria-pressed=true]{border-width:4px}
+  mark.is-linked{background:Highlight;color:HighlightText}
+  .note.is-linked{outline:3px solid Highlight}
+  .block>p.is-linked{outline:3px solid Highlight;outline-offset:6px}
+  .float-add{border:2px solid ButtonText}
+  .links path{stroke:Highlight}
+  .links circle{fill:Highlight}
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <h1>All about wombats</h1>
+  <p class="intro">A test page for in-context notes. Each note sits in the DOM directly after the paragraph it relates to, uses <code>role="note"</code>, and is linked to its highlighted phrase with <code>aria-details</code>. Notes 2 and 4 include edit and delete buttons. To add a note, select some text and choose the Add note button that appears beside it, or use the Add note button under any paragraph. With no text selected, the note applies to the whole paragraph.</p>
+
+  <div class="toolbar">
+    <button type="button" class="notes-toggle" id="notes-toggle" aria-pressed="true">Show notes (<span id="note-count">5</span>)</button>
+  </div>
+
+  <div id="status" class="visually-hidden" role="status"></div>
+
+  <div class="article" id="article">
+    <svg class="links" id="links" aria-hidden="true" focusable="false"></svg>
+    <div class="block">
+    <p id="para-1">
+      Wombats are short-legged, muscular marsupials found only in Australia. There are
+      <mark aria-details="note-1" data-note="note-1">three living species</mark>:
+      the common wombat, the southern hairy-nosed wombat and the northern hairy-nosed wombat.
+      Adults usually weigh between 20 and 35 kilograms and can grow to around a metre long.
+    </p>
+      <button type="button" class="add-para" data-action="add-para">Add note<span class="visually-hidden"></span></button>
+    </div>
+    <aside role="note" id="note-1" class="note">
+      <p><span class="note-label">Note on 'three living species':</span> <span class="note-text">Check the current conservation status of each species.</span></p>
+    </aside>
+
+    <div class="block">
+    <p id="para-2">
+      Wombats are well known for producing
+      <mark aria-details="note-2" data-note="note-2">cube-shaped droppings</mark>.
+      They leave these on rocks, logs and other raised spots to mark their territory and
+      communicate with other wombats. The flat sides stop the droppings from rolling away.
+    </p>
+      <button type="button" class="add-para" data-action="add-para">Add note<span class="visually-hidden"></span></button>
+    </div>
+    <aside role="note" id="note-2" class="note" data-label="cube-shaped droppings">
+      <p><span class="note-label">Note on 'cube-shaped droppings':</span> <span class="note-text">Find the research that explained how the intestine forms the cube shape.</span></p>
+      <div class="note-actions">
+        <button type="button" data-action="edit">Edit<span class="visually-hidden"> note on 'cube-shaped droppings'</span></button>
+        <button type="button" data-action="delete">Delete<span class="visually-hidden"> note on 'cube-shaped droppings'</span></button>
+      </div>
+    </aside>
+
+    <div class="block">
+    <p id="para-3">
+      Like all marsupials, female wombats carry their young in a pouch. A wombat's pouch has a
+      <mark aria-details="note-3" data-note="note-3">backward-facing opening</mark>,
+      so dirt doesn't get flung inside while the mother is digging. A joey stays in the pouch
+      for around six months before it starts to venture out.
+    </p>
+      <button type="button" class="add-para" data-action="add-para">Add note<span class="visually-hidden"></span></button>
+    </div>
+    <aside role="note" id="note-3" class="note">
+      <p><span class="note-label">Note on 'backward-facing opening':</span> <span class="note-text">Confirm whether koalas also have a backward-facing pouch.</span></p>
+    </aside>
+
+    <div class="block">
+    <p id="para-4">
+      Despite their stocky build, wombats can run surprisingly fast. Over short distances they can reach speeds of
+      <mark aria-details="note-4" data-note="note-4">up to 40 kilometres per hour</mark>.
+      When threatened, a wombat may dive into its burrow and block the entrance with its tough rump,
+      which is reinforced with a thick plate of cartilage.
+    </p>
+      <button type="button" class="add-para" data-action="add-para">Add note<span class="visually-hidden"></span></button>
+    </div>
+    <aside role="note" id="note-4" class="note" data-label="up to 40 kilometres per hour">
+      <p><span class="note-label">Note on 'up to 40 kilometres per hour':</span> <span class="note-text">Find a reliable source for this speed figure.</span></p>
+      <div class="note-actions">
+        <button type="button" data-action="edit">Edit<span class="visually-hidden"> note on 'up to 40 kilometres per hour'</span></button>
+        <button type="button" data-action="delete">Delete<span class="visually-hidden"> note on 'up to 40 kilometres per hour'</span></button>
+      </div>
+    </aside>
+
+    <div class="block">
+    <p id="para-5">
+      Wombats face a number of threats, including habitat loss, vehicle strikes and disease.
+      One of the most serious is
+      <mark aria-details="note-5" data-note="note-5">sarcoptic mange</mark>,
+      a skin disease caused by mites that can be fatal if left untreated. Wildlife carers across
+      Australia work to treat affected wombats in the wild.
+    </p>
+      <button type="button" class="add-para" data-action="add-para">Add note<span class="visually-hidden"></span></button>
+    </div>
+    <aside role="note" id="note-5" class="note">
+      <p><span class="note-label">Note on 'sarcoptic mange':</span> <span class="note-text">Add links to wildlife rescue groups that treat mange.</span></p>
+    </aside>
+  </div>
+
+  <section class="features" aria-labelledby="features-heading">
+    <h2 id="features-heading">How this page works</h2>
+    <p>This section outlines each feature on the page, starting with the core markup and building up to the interactive parts.</p>
+
+    <h3>1. Core markup: mark and note</h3>
+    <p>Each note has two parts: the highlighted text it refers to, and the note itself.</p>
+    <ul>
+      <li>The highlighted text is wrapped in a <code>mark</code> element.</li>
+      <li>The note is an <code>aside</code> with <code>role="note"</code>. The role overrides the implicit <code>complementary</code> role, so the page isn't flooded with landmarks.</li>
+      <li>The <code>mark</code> points to its note using <code>aria-details</code>. Some screen readers announce this as "has details" and offer a command to jump to the note.</li>
+      <li>Each note starts with a visible label, such as "Note on 'cube-shaped droppings':", so the relationship is clear even when <code>aria-details</code> isn't supported.</li>
+    </ul>
+<pre><code>&lt;p&gt;
+  Wombats are well known for producing
+  &lt;mark aria-details="note-2"&gt;cube-shaped droppings&lt;/mark&gt;.
+&lt;/p&gt;
+
+&lt;aside role="note" id="note-2" class="note"&gt;
+  &lt;p&gt;Note on 'cube-shaped droppings': Find the research...&lt;/p&gt;
+&lt;/aside&gt;</code></pre>
+
+    <h3>2. Note placement in the DOM</h3>
+    <ul>
+      <li>Each note sits in the DOM directly after the paragraph it relates to, never inside the sentence. This keeps sentences intact for screen reader users, reader mode and copy and paste.</li>
+      <li>If a paragraph has more than one note, the notes follow each other after that paragraph.</li>
+      <li>On screens 860px and wider, CSS places the notes in a margin column beside their paragraph. Below 860px, notes sit directly under their paragraph.</li>
+    </ul>
+
+    <h3>3. Whole-paragraph notes</h3>
+    <ul>
+      <li>A note can apply to a whole paragraph instead of a phrase. In this case there is no <code>mark</code>.</li>
+      <li>The <code>aria-details</code> attribute goes on the <code>p</code> element instead. If a paragraph has more than one whole-paragraph note, it lists all of the IDs.</li>
+      <li>The visible label names the paragraph using its first few words, such as "Note on paragraph 'Like all marsupials, female…':".</li>
+    </ul>
+<pre><code>&lt;p aria-details="note-7"&gt;Like all marsupials, female wombats...&lt;/p&gt;
+
+&lt;aside role="note" id="note-7" class="note"&gt;...&lt;/aside&gt;</code></pre>
+
+    <h3>4. Showing and hiding notes</h3>
+    <ul>
+      <li>The "Show notes" button at the top of the page is a toggle button using <code>aria-pressed</code>. The label stays the same and the pressed state changes.</li>
+      <li>The label includes a count of notes, such as "Show notes (5)", so users know notes exist even when they're hidden. The count updates when notes are added or deleted.</li>
+      <li>Hidden notes use the <code>hidden</code> attribute, so they're removed for screen reader users too, not just visually.</li>
+      <li>When notes are hidden, <code>aria-details</code> is removed from the highlighted text, so screen readers don't announce details that aren't there.</li>
+      <li>The page remembers the user's choice using browser storage, where available.</li>
+    </ul>
+<pre><code>&lt;button type="button" aria-pressed="true"&gt;Show notes (5)&lt;/button&gt;</code></pre>
+
+    <h3>5. Hover relationship</h3>
+    <ul>
+      <li>Hovering over highlighted text, or over a note, lights up both the text and its note.</li>
+      <li>On screens 860px and wider, a thin line connects the end of the highlighted text to its note. The line runs under the text rather than through it.</li>
+      <li>Keyboard users get the same effect when focus is on a button inside a note.</li>
+      <li>The line is drawn in an SVG with <code>aria-hidden="true"</code>, as it's purely visual. The relationship is already conveyed by the visible label and <code>aria-details</code>.</li>
+      <li>In forced colours mode, the highlight and line use the system <code>Highlight</code> colour.</li>
+    </ul>
+
+    <h3>6. Adding notes</h3>
+    <p>There are two ways to add a note.</p>
+    <ol>
+      <li><strong>Select text, then use the floating button.</strong> When text is selected within a paragraph, an "Add note" button appears just below the selection. In the DOM, the button is inserted directly after the paragraph, so pressing Tab after selecting text moves focus straight to it without losing the selection. Its accessible name includes the selected text, such as "Add note on selected text 'muscular'".</li>
+      <li><strong>Use the "Add note" button under a paragraph.</strong> Every paragraph has its own button, which is always visible. If text in that paragraph is selected, the note applies to the selection. If not, the note applies to the whole paragraph. This option doesn't rely on selecting text, which many screen reader users find difficult.</li>
+    </ol>
+    <p>After choosing either button:</p>
+    <ol>
+      <li>The new note opens in edit mode, with focus in a labelled textarea, such as "Add note on 'muscular'".</li>
+      <li>Choosing Save adds the note, moves focus back to the parent paragraph and announces "Note on '…' added".</li>
+      <li>Choosing Cancel, pressing Escape, or saving an empty note removes the new note and its highlight, moves focus back to the parent paragraph and announces "Note not added".</li>
+    </ol>
+    <p>A selection must sit within a single paragraph and can't overlap an existing highlight.</p>
+
+    <h3>7. Editing notes</h3>
+    <ul>
+      <li>Choosing Edit replaces the note text with a labelled textarea containing the current text, plus Save and Cancel buttons.</li>
+      <li>After saving or cancelling, focus returns to the note's Edit button, as the user is still working with that note.</li>
+      <li>Saving announces "Note on '…' saved".</li>
+    </ul>
+
+    <h3>8. Deleting notes</h3>
+    <ul>
+      <li>Choosing Delete removes the note and also removes its highlight from the text, in the same way deleting a comment works in Word.</li>
+      <li>Focus moves to the parent paragraph, as the button that had focus no longer exists.</li>
+      <li>Paragraphs aren't focusable by default. The script adds <code>tabindex="-1"</code> to the paragraph only at the moment of deletion, then removes it as soon as focus moves away. This avoids every paragraph being focusable all the time.</li>
+      <li>Deleting announces "Note on '…' deleted".</li>
+    </ul>
+
+    <h3>9. Unique button names</h3>
+    <ul>
+      <li>With many notes on a page, buttons like "Edit" and "Delete" would all sound the same in a screen reader's list of buttons.</li>
+      <li>Each button includes visually hidden text that names its note, such as "Delete note on 'cube-shaped droppings'".</li>
+    </ul>
+<pre><code>&lt;button type="button"&gt;
+  Delete&lt;span class="visually-hidden"&gt; note on 'cube-shaped droppings'&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+
+    <h3>10. Status messages</h3>
+    <ul>
+      <li>Confirmation messages for adding, saving and deleting notes are sent to a visually hidden <code>role="status"</code> element, so screen readers announce them without moving focus.</li>
+    </ul>
+
+    <h3>11. Known limitations</h3>
+    <ul>
+      <li>Support for <code>role="note"</code> is inconsistent. Many screen readers don't announce the role at all, so the visible "Note on" label does most of the work.</li>
+      <li>Support for <code>aria-details</code> varies across browser and screen reader combinations.</li>
+      <li>Selecting text with a screen reader is possible but awkward, and may not set the starting point for the Tab key. The "Add note" button under each paragraph is the reliable option.</li>
+      <li>Moving from a selection to the floating button with Tab has only been confirmed in Chrome so far.</li>
+      <li>Notes you add are not saved. They disappear when the page is reloaded.</li>
+    </ul>
+  </section>
+
+  <p class="sample">Sample content for testing purposes. Facts are general and should be checked before reuse.</p>
+</main>
+
+<script>
+{
+  const article = document.getElementById('article');
+  const toggle = document.getElementById('notes-toggle');
+  const countEl = document.getElementById('note-count');
+  const status = document.getElementById('status');
+  const links = document.getElementById('links');
+  const wide = window.matchMedia('(min-width: 860px)');
+  const KEY = 'wombat-notes-visible';
+  let activeId = null;
+  let savedRange = null;
+  let nextId = 6;
+
+  const notes = () => Array.from(article.querySelectorAll('.note'));
+  const notesVisible = () => toggle.getAttribute('aria-pressed') === 'true';
+
+  // A note is anchored either to a highlighted phrase (mark) or to a whole paragraph
+  const anchorFor = id =>
+    article.querySelector('mark[data-note="' + id + '"]') ||
+    article.querySelector('p[data-para-notes~="' + id + '"]');
+
+  const paraFor = note => {
+    const a = anchorFor(note.id);
+    return a ? a.closest('p') : null;
+  };
+
+  // How a note describes what it's attached to, e.g. 'cube-shaped droppings' or paragraph 'Wombats are short-legged...'
+  const describe = note =>
+    note.dataset.kind === 'para'
+      ? "paragraph '" + note.dataset.label + "'"
+      : "'" + note.dataset.label + "'";
+
+  const announce = msg => {
+    status.textContent = '';
+    setTimeout(() => { status.textContent = msg; }, 50);
+  };
+
+  // Each paragraph block spans as many grid rows as it has notes, so extra notes stack in the margin
+  const layoutBlocks = () => {
+    article.querySelectorAll('.block').forEach(block => {
+      let n = 0, el = block.nextElementSibling;
+      while (el && el.classList.contains('note')) { n++; el = el.nextElementSibling; }
+      block.style.setProperty('--rows', Math.max(1, n));
+    });
+  };
+
+  const updateCount = () => { countEl.textContent = notes().length; layoutBlocks(); };
+
+  const shorten = text => {
+    const t = text.replace(/\s+/g, ' ').trim();
+    return t.length > 40 ? t.slice(0, 37).trim() + '…' : t;
+  };
+
+  const paraWords = p => p.textContent.replace(/\s+/g, ' ').trim().split(' ').slice(0, 4).join(' ') + '…';
+
+  // Make the paragraph focusable only for this moment, then clean up
+  const focusParagraph = para => {
+    if (!para) return;
+    para.setAttribute('tabindex', '-1');
+    para.addEventListener('blur', () => para.removeAttribute('tabindex'), { once: true });
+    para.focus();
+  };
+
+  /* ---------- aria-details on paragraphs with whole-paragraph notes ---------- */
+
+  const syncParaDetails = p => {
+    const ids = (p.dataset.paraNotes || '').split(' ').filter(Boolean);
+    if (!ids.length) delete p.dataset.paraNotes;
+    if (ids.length && notesVisible()) p.setAttribute('aria-details', ids.join(' '));
+    else p.removeAttribute('aria-details');
+  };
+
+  const removeAnchor = id => {
+    const a = anchorFor(id);
+    if (!a) return;
+    if (a.tagName === 'MARK') {
+      // Remove the highlight but keep its text
+      const parent = a.parentNode;
+      a.replaceWith(...a.childNodes);
+      parent.normalize();
+    } else {
+      a.dataset.paraNotes = a.dataset.paraNotes.split(' ').filter(x => x !== id).join(' ');
+      syncParaDetails(a);
+    }
+  };
+
+  /* ---------- Show / hide all notes ---------- */
+
+  const setVisible = (visible, save) => {
+    toggle.setAttribute('aria-pressed', String(visible));
+    notes().forEach(n => {
+      n.hidden = !visible;
+      const mark = article.querySelector('mark[data-note="' + n.id + '"]');
+      if (mark) {
+        if (visible) mark.setAttribute('aria-details', n.id);
+        else mark.removeAttribute('aria-details');
+      }
+    });
+    article.querySelectorAll('p[data-para-notes]').forEach(syncParaDetails);
+    if (save) { try { localStorage.setItem(KEY, visible ? '1' : '0'); } catch (e) {} }
+  };
+
+  /* ---------- Hover relationship ---------- */
+
+  const clearLink = () => {
+    article.querySelectorAll('.is-linked').forEach(el => el.classList.remove('is-linked'));
+    links.innerHTML = '';
+    activeId = null;
+  };
+
+  const drawLine = (anchor, note) => {
+    links.innerHTML = '';
+    if (!wide.matches) return;
+    const a = article.getBoundingClientRect();
+    const rects = anchor.getClientRects();
+    if (!rects.length) return;
+    const r = rects[rects.length - 1];
+    const n = note.getBoundingClientRect();
+    // Start under the end of the phrase, run along the line gap to the gutter, then curve to the note
+    const x1 = r.right - a.left;
+    const y1 = r.bottom - a.top + 2;
+    const x2 = n.left - a.left;
+    const y2 = n.top - a.top + 22;
+    const gx = x2 - 24;
+    const d = 'M' + x1 + ' ' + y1 + ' H' + gx + ' C' + (gx + 14) + ' ' + y1 + ' ' + (gx + 10) + ' ' + y2 + ' ' + x2 + ' ' + y2;
+    links.innerHTML =
+      '<path d="' + d + '"></path>' +
+      '<circle cx="' + x1 + '" cy="' + y1 + '" r="3"></circle>' +
+      '<circle cx="' + x2 + '" cy="' + y2 + '" r="3"></circle>';
+  };
+
+  const showLink = id => {
+    const anchor = anchorFor(id);
+    const note = document.getElementById(id);
+    clearLink();
+    if (!anchor || !note || note.hidden) return;
+    activeId = id;
+    anchor.classList.add('is-linked');
+    note.classList.add('is-linked');
+    drawLine(anchor, note);
+  };
+
+  const hideLink = id => { if (activeId === id) clearLink(); };
+
+  const wireMark = mark => {
+    const id = mark.dataset.note;
+    mark.addEventListener('pointerenter', () => showLink(id));
+    mark.addEventListener('pointerleave', () => hideLink(id));
+  };
+
+  const wireNote = note => {
+    note.addEventListener('pointerenter', () => showLink(note.id));
+    note.addEventListener('pointerleave', () => {
+      if (!note.contains(document.activeElement)) hideLink(note.id);
+    });
+    // Keyboard users get the same highlight when focus is inside a note
+    note.addEventListener('focusin', () => showLink(note.id));
+    note.addEventListener('focusout', e => {
+      if (!note.contains(e.relatedTarget)) hideLink(note.id);
+    });
+  };
+
+  /* ---------- Building notes ---------- */
+
+  const makeButton = (action, word, hiddenText) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.dataset.action = action;
+    b.textContent = word;
+    const s = document.createElement('span');
+    s.className = 'visually-hidden';
+    s.textContent = hiddenText;
+    b.appendChild(s);
+    return b;
+  };
+
+  const buildNote = (id, label, kind) => {
+    const note = document.createElement('aside');
+    note.setAttribute('role', 'note');
+    note.id = id;
+    note.className = 'note';
+    note.dataset.label = label;
+    note.dataset.kind = kind;
+    const what = describe(note);
+
+    const p = document.createElement('p');
+    const l = document.createElement('span');
+    l.className = 'note-label';
+    l.textContent = 'Note on ' + what + ':';
+    const t = document.createElement('span');
+    t.className = 'note-text';
+    p.append(l, ' ', t);
+
+    const actions = document.createElement('div');
+    actions.className = 'note-actions';
+    actions.append(
+      makeButton('edit', 'Edit', ' note on ' + what),
+      makeButton('delete', 'Delete', ' note on ' + what)
+    );
+
+    note.append(p, actions);
+    return note;
+  };
+
+  /* ---------- Edit mode (used for both adding and editing) ---------- */
+
+  const startEdit = (note, isNew) => {
+    const what = describe(note);
+    const fieldId = note.id + '-field';
+    const form = document.createElement('div');
+    form.className = 'note-edit';
+
+    const lab = document.createElement('label');
+    lab.htmlFor = fieldId;
+    lab.textContent = (isNew ? 'Add note on ' : 'Edit note on ') + what;
+    const ta = document.createElement('textarea');
+    ta.id = fieldId;
+    ta.rows = 3;
+    ta.value = isNew ? '' : note.querySelector('.note-text').textContent;
+
+    const actions = document.createElement('div');
+    actions.className = 'note-actions';
+    actions.append(
+      makeButton('save', 'Save', ' note on ' + what),
+      makeButton('cancel', 'Cancel', ' note on ' + what)
+    );
+
+    form.append(lab, ta, actions);
+    if (isNew) note.dataset.isNew = 'true';
+    note.querySelector('p').hidden = true;
+    note.querySelector('.note-actions').hidden = true;
+    note.appendChild(form);
+    ta.focus();
+    if (!isNew) ta.select();
+  };
+
+  const endEdit = (note, save) => {
+    const form = note.querySelector('.note-edit');
+    const value = form.querySelector('textarea').value.trim();
+    const isNew = note.dataset.isNew === 'true';
+    const what = describe(note);
+
+    // New note cancelled, or saved empty: remove it and its anchor
+    if (isNew && (!save || !value)) {
+      const para = paraFor(note);
+      removeAnchor(note.id);
+      note.remove();
+      updateCount();
+      clearLink();
+      focusParagraph(para);
+      announce('Note not added');
+      return;
+    }
+
+    if (save && value) note.querySelector('.note-text').textContent = value;
+    form.remove();
+    delete note.dataset.isNew;
+    note.querySelector('p').hidden = false;
+    const actions = note.querySelector('.note-actions');
+    actions.hidden = false;
+
+    if (isNew) {
+      focusParagraph(paraFor(note));
+      announce('Note on ' + what + ' added');
+    } else {
+      actions.querySelector('[data-action="edit"]').focus();
+      if (save) announce('Note on ' + what + ' saved');
+    }
+  };
+
+  /* ---------- Delete ---------- */
+
+  const deleteNote = note => {
+    const what = describe(note);
+    const para = paraFor(note);
+    removeAnchor(note.id);
+    note.remove();
+    updateCount();
+    clearLink();
+    focusParagraph(para);
+    announce('Note on ' + what + ' deleted');
+  };
+
+  /* ---------- Selection and the floating Add note button ---------- */
+
+  // A valid selection sits inside one run of plain text in a paragraph, not inside an existing highlight
+  const validRange = sel => {
+    if (!sel || !sel.rangeCount || sel.isCollapsed) return null;
+    const r = sel.getRangeAt(0);
+    const node = r.startContainer;
+    if (node !== r.endContainer || node.nodeType !== 3) return null;
+    const parent = node.parentElement;
+    if (!parent || !parent.matches('#article .block > p')) return null;
+    let s = r.startOffset;
+    let e = r.endOffset;
+    while (s < e && /\s/.test(node.data[s])) s++;
+    while (e > s && /\s/.test(node.data[e - 1])) e--;
+    if (s === e) return null;
+    const clean = document.createRange();
+    clean.setStart(node, s);
+    clean.setEnd(node, e);
+    return clean;
+  };
+
+  const floatBtn = makeButton('add-selection', 'Add note', '');
+  floatBtn.className = 'float-add';
+
+  const hideFloat = () => { if (floatBtn.isConnected) floatBtn.remove(); };
+
+  const showFloat = range => {
+    const p = range.startContainer.parentElement;
+    floatBtn.querySelector('.visually-hidden').textContent = " on selected text '" + shorten(range.toString()) + "'";
+    // Directly after the paragraph in the DOM, so Tab from the selection reaches it next
+    if (floatBtn.previousElementSibling !== p) p.after(floatBtn);
+    const a = article.getBoundingClientRect();
+    const rects = range.getClientRects();
+    const r = rects[rects.length - 1];
+    const maxLeft = article.clientWidth - floatBtn.offsetWidth;
+    floatBtn.style.top = (r.bottom - a.top + 8) + 'px';
+    floatBtn.style.left = Math.max(0, Math.min(r.right - a.left - floatBtn.offsetWidth / 2, maxLeft)) + 'px';
+  };
+
+  // Don't change the DOM while a mouse drag is still selecting text
+  let dragging = false;
+
+  const checkSelection = () => {
+    if (dragging) return;
+    const range = validRange(window.getSelection());
+    if (range) {
+      savedRange = range;
+      showFloat(range);
+    } else if (document.activeElement !== floatBtn) {
+      savedRange = null;
+      hideFloat();
+    }
+  };
+
+  document.addEventListener('selectionchange', checkSelection);
+  document.addEventListener('pointerdown', e => {
+    if (!e.target.closest('.float-add, .add-para')) dragging = true;
+  });
+  document.addEventListener('pointerup', () => {
+    if (!dragging) return;
+    dragging = false;
+    setTimeout(checkSelection, 0);
+  });
+
+  // Wait a tick: removing the button can itself cause this blur
+  floatBtn.addEventListener('blur', () => {
+    setTimeout(() => {
+      if (!validRange(window.getSelection())) { savedRange = null; hideFloat(); }
+    }, 0);
+  });
+
+  /* ---------- Add ---------- */
+
+  const addNote = (p, range) => {
+    const id = 'note-' + nextId++;
+    let label, kind;
+
+    if (range) {
+      kind = 'mark';
+      label = shorten(range.toString());
+      const mark = document.createElement('mark');
+      mark.dataset.note = id;
+      mark.setAttribute('aria-details', id);
+      range.surroundContents(mark);
+      wireMark(mark);
+    } else {
+      kind = 'para';
+      label = paraWords(p);
+      p.dataset.paraNotes = ((p.dataset.paraNotes || '') + ' ' + id).trim();
+    }
+
+    window.getSelection().removeAllRanges();
+    savedRange = null;
+    hideFloat();
+
+    if (!notesVisible()) setVisible(true, true);
+    syncParaDetails(p);
+
+    // Place the new note after the paragraph block and any notes already attached to it
+    let after = p.closest('.block');
+    while (after.nextElementSibling && after.nextElementSibling.classList.contains('note')) {
+      after = after.nextElementSibling;
+    }
+    const note = buildNote(id, label, kind);
+    after.after(note);
+
+    wireNote(note);
+    updateCount();
+    startEdit(note, true);
+  };
+
+  /* ---------- Events ---------- */
+
+  let initial = true;
+  try { if (localStorage.getItem(KEY) === '0') initial = false; } catch (e) {}
+  setVisible(initial, false);
+  layoutBlocks();
+
+  // Give each paragraph button a unique accessible name
+  article.querySelectorAll('.add-para').forEach(btn => {
+    const p = btn.closest('.block').querySelector('p');
+    btn.querySelector('.visually-hidden').textContent = " to paragraph '" + paraWords(p) + "'";
+  });
+
+  toggle.addEventListener('click', () => {
+    clearLink();
+    setVisible(!notesVisible(), true);
+  });
+
+  article.querySelectorAll('mark[data-note]').forEach(wireMark);
+  notes().forEach(wireNote);
+
+  // Stop a mouse click on an add button from clearing the selection
+  article.addEventListener('mousedown', e => {
+    if (e.target.closest('.add-para, .float-add')) e.preventDefault();
+  });
+
+  article.addEventListener('click', e => {
+    const btn = e.target.closest('button[data-action]');
+    if (!btn) return;
+    const action = btn.dataset.action;
+
+    if (action === 'add-selection') {
+      const range = validRange(window.getSelection()) || savedRange;
+      if (range && range.startContainer.isConnected) addNote(range.startContainer.parentElement, range);
+      return;
+    }
+    if (action === 'add-para') {
+      const p = btn.closest('.block').querySelector('p');
+      const range = validRange(window.getSelection()) || savedRange;
+      // Use the selection only if it's in this paragraph; otherwise note the whole paragraph
+      addNote(p, range && p.contains(range.startContainer) ? range : null);
+      return;
+    }
+
+    const note = btn.closest('.note');
+    if (action === 'edit') startEdit(note, false);
+    else if (action === 'delete') deleteNote(note);
+    else if (action === 'save') endEdit(note, true);
+    else if (action === 'cancel') endEdit(note, false);
+  });
+
+  article.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && e.target.matches('.note-edit textarea')) {
+      endEdit(e.target.closest('.note'), false);
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (activeId) showLink(activeId);
+    const range = validRange(window.getSelection());
+    if (range) showFloat(range);
+  });
+}
+</script>
+</body>
+</html>
